@@ -1,0 +1,18 @@
+.containerLista{
+    display: flex;
+    margin-top: 70px;
+    background-color: #14365C;
+    justify-content: space-around;
+    color: #FFD51E;
+    height: 70px;
+    align-items: center;
+}
+.nombList{
+    padding-left: 150px;
+}
+.tipoList{
+    padding-left: 150px;
+}
+.imgList{
+    padding-left: 30px;
+}

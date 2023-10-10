@@ -1,0 +1,23 @@
+.containerEvents{
+    display: flex;
+    justify-content: space-around;
+    background-color: #f6f6f6;
+    margin: 20px 0;
+    min-height: 200px;
+    align-items: center;
+    border-radius: 50px;
+}
+.imageEvent{
+    width: 140px;
+    height: auto;
+}
+h4{
+    font-size: 30px;
+    text-align: center;
+}
+.nombreEvento{
+    width: 300px;
+}
+.tipoEv{
+    width: 300px;
+}

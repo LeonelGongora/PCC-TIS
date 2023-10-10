@@ -1,0 +1,23 @@
+.contenedor{
+    display: flex;
+
+}
+h2{
+    display: flex;
+    font-family: 'Roboto';
+    color: #f6f6f6;
+    font-size: 2.1rem;
+    background-color: #14365C;
+    height: 50px;
+    width: 600px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px 50px 0 0px;
+}
+.noticias{
+    width: 600px;
+    background-color: #f6f6f6;
+    min-height: 450px;
+    border-radius: 0 0 50px 50px;
+    text-align: center;
+}
