@@ -16,9 +16,9 @@ class EventoAbiertoController extends Controller
      */
     public function index()
     {
-        return DB::table('eventos')
-        ->where('eventos.fecha_ini', '<=', Carbon::now()->format('Y-m-d'))
-        ->where('eventos.fecha_fin', '>=', Carbon::now()->format('Y-m-d'))
+        return DB::table('events')
+        ->where('events.fecha_inicio', '<=', Carbon::now()->format('Y-m-d'))
+        ->where('events.fecha_fin', '>=', Carbon::now()->format('Y-m-d'))
         ->get();
     }
 
