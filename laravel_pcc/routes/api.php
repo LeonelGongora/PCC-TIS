@@ -5,6 +5,11 @@ use App\Http\Controllers\EventTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventoUserController;
+use App\Http\Controllers\ArchivoController;
+use App\Http\Controllers\EventoAbiertoController;
+use App\Http\Controllers\EventoCerradoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +30,10 @@ Route::post('/add-event_type', [EventTypeController::class, 'store']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('usuarios', UserController::class);
+Route::resource('eventousuarios', EventoUserController::class);
+Route::post('upload', [ArchivoController::class, 'upload']);
+Route::post('download', [ArchivoController::class, 'download']);
+Route::resource('eventoabiertos', EventoAbiertoController::class);
+Route::resource('eventocerrados', EventoCerradoController::class);
