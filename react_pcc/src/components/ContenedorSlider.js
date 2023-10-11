@@ -1,6 +1,9 @@
-import React from 'react';
+
 import "../stylesheets/ContenedorSliderStyles.css";
 import TipoDeEvento from './TipoDeEvento';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
+//import { dataSlider } from '../dataSlider';
 
 function ContenedorSlider(){
     return(

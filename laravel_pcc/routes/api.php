@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('type-events', [EventTypeController::class, 'get']);
+
 Route::get('events', [EventController::class, 'get']);
 
 Route::post('/add-event', [EventController::class, 'store']);

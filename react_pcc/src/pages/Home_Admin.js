@@ -29,8 +29,10 @@ class Home_Admin extends Component{
         const events = await axios.get(this.state.url);
         this.eventos = Array.from(events.data.events)
         console.log(events)
+        
 
         this.setState({ events: events.data, loader:false});
+        console.log(this.eventos)
 
     };
 
@@ -56,9 +58,9 @@ class Home_Admin extends Component{
                                 { this.eventos.map((evento,id) => {
                                     
                                      return (<><div className='containerEvents'>
-                                     <img className='imageEvent' src={require('./Csharp.png')} alt='Logo del evento' />
+                                     <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
-                                     <h4 className='tipoEv'>{evento.event_type_id}</h4>
+                                     <h4 className='tipoEv'>{evento.event_type.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_fin}</h4>
                                      </div></>);
