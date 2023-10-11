@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.AppManu{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.background-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('images/backgroundImage.jpg'); /* Ruta de la imagen de fondo */
+  background-size: cover;
+  filter: brightness(0.4); 
+}
+.content{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column ;
+}
+.contenido{
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin-top: 6vh;
+}
