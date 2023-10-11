@@ -10,13 +10,7 @@ function NewsSide(){
                 Noticias
             </h2>
             <div className='noticias'>
-                <News/>
-                <News/>
-                <News/>
-                <News/>
-                <News/>
-                <News/>
-                <News/>
+                
             </div>
         </div>
     )

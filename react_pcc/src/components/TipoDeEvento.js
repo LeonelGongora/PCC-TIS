@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "../stylesheets/TipoDeEventoStyles.css";
 
-function TipoDeEvento(){
+function TipoDeEvento(props){
     return(
         <div>
             <button className='tipoEvento'>
-                Talleres de entrenamiento
+                {props.nombre}
             </button>
         </div>
     )

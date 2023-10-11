@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "../stylesheets/NavbarStyles.css";
 
-import {Link} from 'react-router-dom';
-
 function NavbarAdmin(){
     return(
         <>
@@ -19,7 +17,6 @@ function NavbarAdmin(){
             <div>
                 <ul id='navbar'>
                 <li><a href=''> Reportes</a></li>
-                <li><Link to = {'add-event'}> Añadir Evento</Link></li>
                 </ul>
             </div>
         </nav>

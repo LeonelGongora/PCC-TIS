@@ -12,9 +12,9 @@ function ListaEventos(){
                 <h1 className='fechIniList'>Fecha de Inicio</h1>
                 <h1 className='fechFinList'>Fecha de Fin</h1>
             </div>
-
+            
         </div>
-
+        
     )
 }
 
