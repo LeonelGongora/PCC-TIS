@@ -11,8 +11,8 @@
     width: 5vw;
     height: auto;
 }
-h4{
-    font-size: 1.9rem;
+.containerEvents h4{
+    font-size: 1.3rem;
     text-align: center;
 }
 .nombreEvento{

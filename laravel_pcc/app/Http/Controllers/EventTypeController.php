@@ -7,6 +7,18 @@ use App\Models\EventType;
 
 class EventTypeController extends Controller
 {
+
+    public function get(){
+
+        $event_types = EventType::all();
+        return response()->json([
+            'status' => 200,
+            'events' => $event_types,
+
+        ]);
+
+    }
+
     public function store(Request $request){
 
         $tipo_evento = new EventType();

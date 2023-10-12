@@ -7,12 +7,16 @@
     min-height: 6vh;
     align-items: center;
 }
+.containerLista h1{
+    text-align: center;
+    padding-left: 1.5vw;
+}   
 .nombList{
-    padding-left: 5vw;
+    width: 11vw;
 }
 .tipoList{
-    padding-left: 5vw;
+    width: 11vw;
 }
-.imgList{
-    padding-left: 1vw;
+.rec{
+    padding-left: 3vw;
 }

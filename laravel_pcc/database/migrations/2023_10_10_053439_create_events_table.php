@@ -24,6 +24,7 @@ class CreateEventsTable extends Migration
             $table->date('fecha_limite');
             $table->date('fecha_fin');
             $table->integer('participantes_equipo');
+            $table->string('name');
 
             $table->unsignedBigInteger('event_type_id');
 

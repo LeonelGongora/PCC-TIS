@@ -1,0 +1,33 @@
+
+.contBotones{
+    width: 23vw;
+    background-color: #f6f6f6;
+    min-height: 80vh;
+    border-radius: 3rem;
+    text-align: center;
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+}
+.buttonAdmin{
+    margin: 2vh;
+    background-color: #FFD51D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    justify-content: space-around;
+    text-align: center;
+    min-height: 15vh;
+}
+.buttonIcon{
+    font-size: 4vw;
+}
+.buttonAdmin h1{
+    font-family: 'Roboto';
+    font-size: 1.5vw;
+    width: 7vw;
+    text-align: center;
+}

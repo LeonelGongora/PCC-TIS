@@ -12,4 +12,12 @@ class EventType extends Model
     protected $fillable = [
         'nombre_tipo_evento',
     ];
+
+    public function evento(){
+        //$evento = Evento::where('evento_id', $this->id) -> first();
+
+        //return $evento;
+
+        return $this->hasMany('App\Models\Evento');
+    }
 }
