@@ -16,8 +16,8 @@ class CreateEventoUserTable extends Migration
         Schema::create('evento_user', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('evento_id');
-            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade');
+            $table->unsignedBigInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
