@@ -6,9 +6,9 @@ import ModalWindow from './components/ModalWindow';
 function AppManu() {
   return (
     <div className="AppManu">
+      <ModalWindow/>
       <div className="background-image"></div>
       <div className="content">
-        {/* <ModalWindow/> */}
         <div className='navegacion'>
           <NavbarCreateEvent/>          
         </div>

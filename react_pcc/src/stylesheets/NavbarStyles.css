@@ -5,6 +5,9 @@ nav{
     background-color: #14365C;
     padding: 2px 40px;
 }
+.navegacion{
+    width: 100%;
+}
 .logoName{
     display: flex;
     align-items: center;
