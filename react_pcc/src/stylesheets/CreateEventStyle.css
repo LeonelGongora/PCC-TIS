@@ -25,6 +25,17 @@
     border-radius: 5px;
     height: 36px;
 }
+
+#error{
+    border: 2px solid red;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    border-radius: 5px;
+    height: 36px;
+
+}
 .botonRegistrar{
     background-color: rgb(255, 213, 30);
     padding: 10px 15px;
@@ -61,6 +72,7 @@ input{
     padding: 2px;
     transform: translateY(-12px);
 }
+
 .tipoEvento2{
     display: flex;
     flex-direction: column;

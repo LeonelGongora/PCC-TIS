@@ -1,12 +1,14 @@
 import './AppManu.css';
 import NavbarCreateEvent from './components/NavBarCreateEvent';
 import CreateEvents from './components/CreateEvents'; 
+import ModalWindow from './components/ModalWindow';
 
 function AppManu() {
   return (
     <div className="AppManu">
-      <div className="background-image"></div> {/* Componente de fondo */}
+      <div className="background-image"></div>
       <div className="content">
+        <ModalWindow/>
         <div className='navegacion'>
           <NavbarCreateEvent/>          
         </div>
