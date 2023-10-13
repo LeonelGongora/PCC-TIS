@@ -8,7 +8,7 @@ function AppManu() {
     <div className="AppManu">
       <div className="background-image"></div>
       <div className="content">
-        <ModalWindow/>
+        {/* <ModalWindow/> */}
         <div className='navegacion'>
           <NavbarCreateEvent/>          
         </div>
