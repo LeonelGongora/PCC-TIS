@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
+
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalWindow(){
@@ -11,10 +12,11 @@ function ModalWindow(){
             <Overlay>
                 <ContenedorModal>
                     <EncabezadoModal>
-                        <h1>Tipo de evento</h1>
+                        <Titulo>Tipo de evento</Titulo>
                         <BotonSalir>{salir}</BotonSalir>
                     </EncabezadoModal>
-                    
+                    <input></input>
+                    <BotonRegistrar>Registrar</BotonRegistrar>
                 </ContenedorModal>
             </Overlay>
         </>
@@ -24,10 +26,19 @@ function ModalWindow(){
 
 export default ModalWindow; 
 
-
+const BotonRegistrar = styled.div`
+    background-color: rgb(255, 213, 30);
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-weight: bolder;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+    margin: 50px;
+`;
 const BotonSalir = styled.div`
     color: white;
-    font-size: larger;
+    font-size: 1.9em;  
 `; 
 
 const Overlay = styled.div`
@@ -62,4 +73,7 @@ const EncabezadoModal = styled.div`
     color: white;
     font-size: small;
 `;
-const
+const Titulo = styled.div`
+    font-size: large;
+    padding-left: 35%;
+`;
