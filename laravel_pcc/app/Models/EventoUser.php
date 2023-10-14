@@ -11,6 +11,6 @@ class EventoUser extends Model
     protected $table = 'evento_user';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'evento_id', 'user_id',
+        'event_id', 'user_id',
     ];
 }

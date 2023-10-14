@@ -10,6 +10,7 @@ use App\Http\Controllers\EventoUserController;
 use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\EventoAbiertoController;
 use App\Http\Controllers\EventoCerradoController;
+use App\Http\Controllers\EventoCController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,4 @@ Route::post('upload', [ArchivoController::class, 'upload']);
 Route::post('download', [ArchivoController::class, 'download']);
 Route::resource('eventoabiertos', EventoAbiertoController::class);
 Route::resource('eventocerrados', EventoCerradoController::class);
+Route::resource('eventos', EventoCController::class);

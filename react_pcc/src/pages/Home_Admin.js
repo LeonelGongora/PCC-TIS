@@ -1,5 +1,5 @@
 import React, {Component, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import ContenedorSlider from '../components/ContenedorSlider';
 import NavbarAdmin from '../components/NavbarAdmin';
 import Eventos from '../components/Eventos';
@@ -11,9 +11,13 @@ import Loader from './Loader';
 
 import '../App.css';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+// const navigate = useNavigate();
 
 class Home_Admin extends Component{
-
+    
+    // navigate = useNavigate();
     eventos = []
 
     state = {
@@ -36,6 +40,14 @@ class Home_Admin extends Component{
 
     componentDidMount(){
         this.getEvents();
+    }
+
+    masDetalles(id){
+        console.log("clik");
+        // console.log(id);
+        cookies.set('idauxiliar', id, {path: "/"});
+        // console.log(cookies.get('idauxiliar'));
+        window.location.href='./ContenedorUser';
     }
 
     render(){
@@ -61,8 +73,10 @@ class Home_Admin extends Component{
                                      <h4 className='tipoEv'>{evento.event_type_id}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_fin}</h4>
+                                     <button onClick={()=>this.masDetalles(evento.id)} className='btn btn-danger'>Mas Detalles</button>
+
                                      </div></>);
-                                     
+                                    
                                 })}
 
                         </div>

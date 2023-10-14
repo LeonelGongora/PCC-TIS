@@ -7,5 +7,6 @@ export default{
     "EVENTO_USUARIO_API_URL": `${iniURL}api/eventousuarios`,
     "IMAGENSTORAGE_API_URL": `${iniURL}api/upload`,
     "EVENTOABIERTOS_USUARIO_API_URL": `${iniURL}api/eventoabiertos`,
-    "EVENTOCERRADOS_USUARIO_API_URL": `${iniURL}api/eventocerrados`
+    "EVENTOCERRADOS_USUARIO_API_URL": `${iniURL}api/eventocerrados`,
+    "EVENTOC_API_URL": `${iniURL}api/eventos`,
 }
