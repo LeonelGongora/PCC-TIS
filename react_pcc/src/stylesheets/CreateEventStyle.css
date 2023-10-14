@@ -14,7 +14,7 @@
     padding: 15px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    font-size: x-large;
+    font-size: 1.7rem;
 }
 #entrada{
     border: 1px solid rgb(175, 175, 175);
@@ -40,6 +40,7 @@
     background-color: rgb(255, 213, 30);
     padding: 10px 15px;
     font-weight: bolder;
+    font-size: 0.9rem;
     border: none;
     margin-left: 10vw;
     margin-right: 10vw;
@@ -56,7 +57,7 @@
 
 #textoCuadro{
     position: relative;
-    font-size: small;
+    font-size: 0.85rem;
     text-align: left;
     width: fit-content;
     margin-left: 1vw;
@@ -65,8 +66,8 @@
     background-color: white;
 }
 
-input{
-    font-size: small;
+#inputRegistro{
+    font-size: 0.8rem;
     margin: 3px;
     width: 95%;
     padding: 2px;
