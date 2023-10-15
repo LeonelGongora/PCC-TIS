@@ -42,13 +42,6 @@ class CreateEvents extends Component{
         console.log("Datos enviados:", this.state);
     };
 
-    handleFocus = () => {
-        this.setState({ isFocused: true });
-    }
-
-    handleBlur = () => {
-        this.setState({ isFocused: false });
-    }
     render(){
         const { estado, cambiarEstado } = this.props;
         return (
@@ -60,10 +53,9 @@ class CreateEvents extends Component{
             <div className='entradasDatos'>
                 <div className='datoNombre' id= {this.state.errorNombre ? 'error' : 'entrada'}>
                     <p id='textoCuadro'>Nombre</p>
-                        <input id='inputRegistro' type='text' name='nombre' value={this.state.nombre} onChange={this.handleChange} placeholder={this.state.errorNombre || "Ingrese el nombre"}
-                        onFocus={this.handleFocus} onBlur={this.handleBlur}
-                        />
+                        <input id='inputRegistro' type='text' name='nombre' value={this.state.nombre} onChange={this.handleChange} placeholder={this.state.errorNombre || "Ingrese el nombre"}/>
                 </div>
+                <p className='advertencia'>El nombre es obligatorio</p> 
                 <div className='datoRequisitos' id='entrada'>
                     <p id='textoCuadro'>Requisitos</p>
                     <input id='inputRegistro'  type='text' name='requisito' value={this.state.requisito} onChange={this.handleChange} placeholder="Ingrese requisitos"/>
