@@ -15,7 +15,7 @@ function ModalWindow({estado1, cambiarEstado1}) {
                     <button onClick={() => cambiarEstado1(false)} className='BotonSalir'>{salir}</button>
                 </div>
                 <div className='registroModal'>
-                    <input className='inputEvento' placeholder='Ingrese nombre'></input>
+                    <input className='inputEvento' type='text' placeholder='Ingrese nombre'></input>
                     <button className='BotonRegistrar'>Registrar</button>
                 </div>
             </div>
