@@ -65,14 +65,14 @@
     color: white;
 }
     
-h1{
+#textoTipoEvent{
     font-size: large;
 }
 .tituloEvento{
     text-align: center;
     width: 100%;
 }
-.registro{
+.registroModal{
     display: flex;
     flex-direction: column;
     align-items: center;

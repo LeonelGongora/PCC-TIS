@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import "../stylesheets/Boton.css"
 
 function Boton({ texto, esBotonDeRegistro, manejarClic }){
     return(
-      <button 
+      <button id='botonRegistrarRai'
         className={ esBotonDeRegistro ? 'boton-registro' : 'boton-subirArchivo' }
         onClick={ manejarClic }>
         {texto}
