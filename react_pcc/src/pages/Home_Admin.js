@@ -67,14 +67,12 @@ class Home_Admin extends Component{
 
                                 { this.eventos.map((evento,id) => {
                                     
-                                     return (<><div className='containerEvents'>
+                                     return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
                                      <img className='imageEvent' src={require('./Csharp.png')} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
                                      <h4 className='tipoEv'>{evento.event_type_id}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_fin}</h4>
-                                     <button onClick={()=>this.masDetalles(evento.id)} className='btn btn-danger'>Mas Detalles</button>
-
                                      </div></>);
                                     
                                 })}
