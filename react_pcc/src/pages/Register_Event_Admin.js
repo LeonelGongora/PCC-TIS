@@ -8,7 +8,7 @@ import "../stylesheets/RegisterEventAdminStyles.css";
 function Register_Event_Admin() {
   return (
     <div className="AppManu">
-      <ModalWindow/>
+      {/* <ModalWindow/> */}
       <div className="background-image-Manu"></div>
       <div className="content-Manu">
         <div className='navegacion'>
