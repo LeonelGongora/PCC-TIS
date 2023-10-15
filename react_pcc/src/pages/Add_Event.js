@@ -168,96 +168,69 @@ in my web page:
                     <form onSubmit={this.saveEvent}>
                         <div className='datoNombre' id='entrada'>
                             <p id='textoCuadro'>Nombre</p>
-                            <input id ="input"type="text" name="nombre_evento" placeholder="Ingrese nombre" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="text" name="nombre_evento" placeholder="Ingrese nombre" onChange={this.handleInput}  />
                         </div>
-                        
                         <div id='entrada'>
                             <p id='textoCuadro'>Requisitos</p>
-                            <input id ="input" type="text" name="requisitos" placeholder="requisitos" onChange={this.handleInput} />
-                        
+                            <input id='inputRegistro' type="text" name="requisitos" placeholder="requisitos" onChange={this.handleInput} />
                         </div>
-
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha de Inicio</p>
-                            <input id ="input" type="date" name="fecha_inicio" placeholder="Ingrese fecha" onChange={this.handleInput} />
-                        </div>
-                        
+                            <input id='inputRegistro' type="date" name="fecha_inicio" placeholder="Ingrese fecha" onChange={this.handleInput} />
+                        </div>                       
                         <div id='entrada'>
                             <p id='textoCuadro'>Numero de Contacto</p>
-                            <input type="number" name="numero_contacto" placeholder="65487898" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="number" name="numero_contacto" placeholder="65487898" onChange={this.handleInput}  />
                         </div>
-
                         <div id='entrada'>
                             <p id='textoCuadro'>Descripcion</p>
-                            <input type="text" name="descripcion" placeholder="Descripcion" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="text" name="descripcion" placeholder="Descripcion" onChange={this.handleInput}  />
                         </div>
-
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha limite de inscripcion</p>
-                            <input type="date" name="fecha_limite" onChange={this.handleInput} />
+                            <input id='inputRegistro' type="date" name="fecha_limite" onChange={this.handleInput} />
                         </div>
-
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha fin del evento</p>
-                            <input type="date" name="fecha_fin" onChange={this.handleInput} />
-                        </div>
-                        
+                            <input id='inputRegistro' type="date" name="fecha_fin" onChange={this.handleInput} />
+                        </div>                 
                         <div id='entrada'>
                             <p id='textoCuadro'>Participantes por equipo</p>
-                            <input type="number" name="participantes_equipo" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type='tel' name="participantes_equipo" maxLength={2} placeholder="Ingrese un numero de participantes" onChange={this.handleInput}  />
                         </div>
-
-                        <div id='entrada'>
+                        {/* <div id='entrada'>
                             <p id='textoCuadro'>Afiche</p>
-                            <input type='file' name="image" onChange={this.handleChange}/>
-                        </div>
-
+                            <input id='inputRegistro' type='file' name="image" onChange={this.handleChange}/>
+                        </div> */}
                         <div id='entrada'>
                             <p id='textoCuadro'>Tipo de evento</p>
-                            <select id = "desplegable"onChange={this.myFunction} >
-
-                                { this.eventos.map((evento,id) => {
-                                    return (
-                                        
-                                        <option>{evento.nombre_tipo_evento}</option>
-                                        
-                                    );
-                                    
-                                })}
+                            <div id='interiorTipo'>
+                                <select id='option' onChange={this.myFunction} >
+                                    <option value="" disabled selected>Seleccione un tipo</option>
+                                    { this.eventos.map((evento,id) => {
+                                        return (
+                                            <option>{evento.nombre_tipo_evento}</option>
+                                        );
+                                    })}
                                 </select>
-                                <input type="hidden" name="event_type_id" id='event_type_id' onChange={this.handleInput} />
-                        </div>
-
-                        
-
-
-                        <div className='Patrocinadores' id='entrada'>
+                                <input type="hidden" name="event_type_id" id='event_type_id' onChange={this.handleInput} />    
+                            </div>   
+                        </div> 
+                        {/* <div className='Patrocinadores' id='entrada'>
                             <p id='textoCuadro'>Patrocinadores</p>
                        </div>
                         <div className='Organizadores' id='entrada'>
                             <p id='textoCuadro'>Organizadores</p>
-                        </div>   
-                        
-
-
-                        <Link to={'add-type-event'}> Añadir Tipo de Evento</Link>
-
+                        </div>    */}
+                        {/* <Link to={'add-type-event'}> Añadir Tipo de Evento</Link> */}
                         <div className='botonEnviar'>
-                            <button className='botonRegistrar' type="submit"> Registrar evento</button>
+                            <button className='botonRegistrar' type="submit"> Registrarse</button>
                         </div>
-                        
-
-                        
-
                     </form>
                     {this.state.loader ? <Loader/> : ""}
-
-
                 </div>
             </div>
-    
             </>
-
         );
     }
 }

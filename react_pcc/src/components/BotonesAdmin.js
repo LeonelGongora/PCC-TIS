@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React,{useState} from 'react';
 import "../stylesheets/BotonesAdminStyles.css";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,13 +7,11 @@ import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 
 
 
-function BotonesAdmin(){
+function BotonesAdmin({estado,cambiarEstado}){
 
     function doThis() {
         console.log("Noosasoa")
       }
-
-
     return(
         <div className='contenedorNoticias'>
             <div className='contBotones'>
@@ -22,7 +19,7 @@ function BotonesAdmin(){
                     <FontAwesomeIcon className='buttonIcon' icon={faCalendarCheck} />
                     <h1>Nuevo Evento</h1>
                 </div>
-                <div className='buttonAdmin' onClick={() => doThis()}>
+                <div className='buttonAdmin' onClick={() => cambiarEstado(!estado)}>
                     <FontAwesomeIcon className='buttonIcon' icon={faCalendarCheck} />
                     <h1>Nuevo Tipo De Evento</h1>
                 </div>
