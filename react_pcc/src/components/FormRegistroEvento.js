@@ -26,8 +26,8 @@ function FormRegistroEvento(){
     requisito: '',
   });
 
-  const [errorNombre, setErrorNombre] = useState(false); 
-  const [errorRequisito, setErrorRequisito] = useState(false);
+  const [errorNombre, setErrorNombre] = useState('');
+  const [errorRequisito, setErrorRequisito] = useState('');
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,18 +35,23 @@ function FormRegistroEvento(){
       ...state,
       [name]: value,
     });
-    setErrorNombre('');
+    if (name === 'nombre') {
+      setErrorNombre('');
+    } else if (name === 'requisito') {
+      setErrorRequisito('');
+    }
   };
 
   const registrar = () => {
-    const nombreError = !state.nombre.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    const requisitoError = !state.requisito.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    setErrorNombre(nombreError);
-    setErrorRequisito(requisitoError);
-    if (nombreError || requisitoError) {
-      return;
+    if (!state.nombre.trim()) {
+      setErrorNombre('Este campo es obligatorio, no puede dejarlo vacío');
     }
-    console.log('Registrarse');
+    if (!state.requisito.trim()) {
+      setErrorRequisito('Este campo es obligatorio, no puede dejarlo vacío');
+    }
+    if (state.nombre.trim() && state.requisito.trim()) {
+      console.log('Registrarse');
+    }
   }
     
   return(
@@ -76,19 +81,21 @@ function FormRegistroEvento(){
           
       </div>
       <div className='registro'>
-        <div className='entradasDatos'>
+        <div className='campoYError'>
           <div className='datoNombre' id='entrada' tabindex='0'>
             <p id='textoCuadro'>Nombre</p>
             <input id='input' type='text' name='nombre' value={state.nombre} onChange={handleChange} placeholder="Ingrese el nombre" />
-            <p className="errorMensaje">{errorNombre}</p>
-          </div>
-          <div className='datoRequisitos' id='entrada' tabindex='0'>
+            </div>
+            {errorNombre && <p className="errorMensaje">{errorNombre}</p>}
+        </div>
+
+        <div className='campoYError'> 
+          <div className='datoRequisito' id='entrada' tabindex='0'>
             <p id='textoCuadro'>Requisitos</p>
             <input id='input' type='text' name='requisito' value={state.requisito} onChange={handleChange} placeholder="Ingrese requisitos" />
-            <p className="errorMensaje">{errorRequisito}</p>
           </div>
+          {errorRequisito && <p className="errorMensaje">{errorRequisito}</p>}
         </div>  
-    
       </div>
       <Boton
         texto='Registrarse'

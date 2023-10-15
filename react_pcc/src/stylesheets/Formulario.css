@@ -48,7 +48,7 @@ h2{
   font-size: 15.5px;
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
-  padding: 16px;
+  padding: 13px;
 }
 
 .signoDePregunta{
@@ -69,6 +69,7 @@ h2{
   margin-bottom: 10px;
   color: black;
   font-family: 'Roboto', sans-serif;
+  padding-bottom: 12px;
 }
 
 #entrada{
@@ -83,7 +84,7 @@ h2{
 }
 
 #entrada:focus-within{
-  border: 1px solid #054a99;
+  border: 1px solid #073d7a;
 }
 
 #textoCuadro{
@@ -100,7 +101,7 @@ h2{
 }
 
 #entrada:focus-within #textoCuadro {
-  color: #054a99;
+  color: #073d7a;
 }
 
 input{
@@ -112,14 +113,14 @@ input{
   outline: none;
 }
 
-.errorMensaje {
-  color: rgb(223, 20, 20);
-  font-size: 0.8em;
-  text-align: left;
-}
-
-.entradasDatos{
+.campoYError {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  position: relative;
+}
+
+.errorMensaje{
+  color: rgb(211, 8, 8);
+  font-size: 0.8em;
+  text-align: left;
 }
