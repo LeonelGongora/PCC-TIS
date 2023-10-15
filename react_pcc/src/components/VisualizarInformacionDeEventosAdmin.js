@@ -32,12 +32,12 @@ function VisualizarInformacionDeEventosAdmin({props}){
     return(
         <div className='visualizadorDeEventos'>
 
-            <h1>{event.nombre_evento}</h1>
+            <h1 className='Titulo'>{event.nombre_evento}</h1>
 
             <div className='content1'>
 
-                <div className='logo'><img src={Logo}></img></div>
-                {/* <div className='logo'><img src={event.imagen_evento}></img></div> */}
+                <div className='logo'><img className="logoimg" src={Logo}></img></div>
+                {/* <div className='logo'><img className="logoimg" src={event.imagen_evento}></img></div> */}
 
                 <div className='informacion'>
                 <div className='descripcion'>{event.descripcion} </div>

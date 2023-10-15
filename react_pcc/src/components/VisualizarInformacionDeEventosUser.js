@@ -35,12 +35,12 @@ function VisualizarInformacionDeEventosUser ({props}) {
     return(
         <div className='visualizadorDeEventos'>
 
-            <h1>{event.nombre_evento}</h1>
+            <h1 className='Titulo'>{event.nombre_evento}</h1>
 
             <div className='content1'>
 
-                <div className='logo'><img src={"http://127.0.0.1:8000/images/" + event.name}></img></div>
-                {/* <div className='logo'><img src={event.name}></img></div> */}
+                <div className='logo'><img className="logoimg" src={"http://127.0.0.1:8000/images/" + event.name}></img></div>
+                {/* <div className='logo'><img className="logoimg" src={event.name}></img></div> */}
 
                 <div className='informacion'>
                     <div className='descripcion'>{event.descripcion} </div>
