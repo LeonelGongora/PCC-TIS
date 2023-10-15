@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../stylesheets/VisualizarInformacionDeEventos.css'
+import Logo from '../images/Csharp.png'
 function VisualizarInformacionDeEventosAdmin(){
     return(
         <div className='visualizadorDeEventos'>
-            <h1>Taller sobre capacitacion sobre lenguaje C#</h1>
+            <h1 className='Titulo'>Taller sobre capacitacion sobre lenguaje C#</h1>
             <div className='content'>
-                <div className='logo'>logo</div>
+                <div className='logo'><img className="logoimg" src={Logo}></img></div>
                 <div className='informacion'>
                     <div className='descripcion'>Este taller contendra diferentes </div>
                     <div className='requerimientos'>req</div>

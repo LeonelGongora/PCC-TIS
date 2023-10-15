@@ -1,11 +1,21 @@
 .visualizadorDeEventos{
     font-size: 1.2rem;
+    font-family: "Roboto";
+
+}
+.Titulo{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
 }
 .content{
     display: flex;
     justify-content: space-between;
     margin: 0;
     margin-top: 50px;
+    padding-top: 150px;
 }
 .buttons{
     margin-top: 50px;
@@ -44,17 +54,23 @@
     border: 1px solid #7D7D7D;
 }
 .logo{
-    min-width: 15%; 
-    max-height: 350px;
-    margin: 0 auto;
-    margin-right: 0;
-    margin-top: 50px;
+    margin-left: 5%;
+    
+}
+.logoimg{
+    min-width: 250px; 
+    min-height: 400px;
+    max-width: 381px;
+    max-height: 470px;
+    margin: 10px auto; 
     padding: 20px; 
-    border: 1px solid #7D7D7D;
+    margin-right: 0;
+    justify-content: center;
 }
 .informacion{
     min-width: 30%; 
     margin: 10px auto; 
+    margin-left: 50px auto;
     padding: 20px; 
     border: 1px solid #7D7D7D;
     background-color: #7D7D7D;
