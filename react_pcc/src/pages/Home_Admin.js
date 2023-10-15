@@ -15,16 +15,13 @@ const cookies = new Cookies();
 
 
 class Home_Admin extends Component{
-
     constructor(props) {
         super(props);
-        this.cambiarEstadoModal = this.cambiarEstadoModal.bind(this);
         this.state  = {
             events: [],
             loader:false,
             url: "http://127.0.0.1:8000/api/events",
             estadoModal: false
-    
         };
         this.eventos = []
         console.log("Isuuuas");
@@ -59,16 +56,16 @@ class Home_Admin extends Component{
         // console.log(cookies.get('idauxiliar'));
         window.location.href='./event-user';
     }
-    cambiarEstadoModal = () => {
-        this.setState({ estadoModal: !this.estadoModal });
+    cambiarEstadoModal = (nuevoEstado) => {
+        this.setState({ estadoModal: nuevoEstado });
     };
     render(){
         return (
             <div className="App">
-                {this.state.estadoModal && (<ModalWindow estado={this.estadoModal} cambiarEstado={this.cambiarEstadoModal} />)}
+                <ModalWindow estado1={ this.state.estadoModal} cambiarEstado1={this.cambiarEstadoModal}/>
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin/>
+                   <NavbarAdmin />
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>
@@ -89,7 +86,7 @@ class Home_Admin extends Component{
                         </div>
 
                         <div className="columna2">
-                        <BotonesAdmin estado={this.estadoModal} cambiarEstado={this.cambiarEstadoModal}/>
+                            <BotonesAdmin estado1={ this.estadoModal} cambiarEstado1={this.cambiarEstadoModal} />
 
                         </div>
 

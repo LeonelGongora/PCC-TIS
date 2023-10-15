@@ -7,7 +7,7 @@ import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 
 
 
-function BotonesAdmin({estado,cambiarEstado}){
+function BotonesAdmin({estado1,cambiarEstado1}){
 
     function doThis() {
         console.log("Noosasoa")
@@ -19,7 +19,7 @@ function BotonesAdmin({estado,cambiarEstado}){
                     <FontAwesomeIcon className='buttonIcon' icon={faCalendarCheck} />
                     <h1>Nuevo Evento</h1>
                 </div>
-                <div className='buttonAdmin' onClick={() => cambiarEstado(!estado)}>
+                <div className='buttonAdmin' onClick={() => cambiarEstado1(!estado1)}>
                     <FontAwesomeIcon className='buttonIcon' icon={faCalendarCheck} />
                     <h1>Nuevo Tipo De Evento</h1>
                 </div>
