@@ -4,6 +4,8 @@ import '../stylesheets/Formulario.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
 import Pregunta from '../images/Pregunta.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 
 function FormRegistroEvento(){
@@ -13,7 +15,8 @@ function FormRegistroEvento(){
   const manejarCargaDeArchivo = (event) => {
     const archivo = event.target.files[0];
     if (archivo) {
-      console.log('Archivo ZIP seleccionado:', archivo.name);
+      document.getElementById('nombreArchivo').textContent = `  ${archivo.name}`;
+      console.log(' ', archivo.name);
     }
   };
 
@@ -64,6 +67,10 @@ function FormRegistroEvento(){
         <p>- Haber aprobado la materia de Elementos de Programación</p>
         <p>- Tener un promedio mayor a "60"</p>
       </div>
+      <div className='archivoZip'>
+        <p> Archivo seleccionado:  </p>
+        <span id="nombreArchivo"></span> {/* zip seleccionado */}  
+      </div>
       <div className='botonesContainer'> 
         <input
           id='archivoZip'
@@ -76,9 +83,10 @@ function FormRegistroEvento(){
         <Boton
           texto='Requisitos'
           esBotonDeRegistro={false}
-          manejarClic={subirArchivo} />
+          manejarClic={subirArchivo}
+          icono={faArrowUpFromBracket}
+          />
         <img className='signoDePregunta' src={Pregunta} alt='Signo de interrogacion'/>
-          
       </div>
       <div className='registro'>
         <div className='campoYError'>

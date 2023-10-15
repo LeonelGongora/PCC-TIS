@@ -44,7 +44,7 @@ h2{
   flex-wrap: wrap;
   align-items: flex-start;
   background-color: white;
-  border-radius: 20px; 
+  border-radius: 18px; 
   font-size: 15.5px;
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
@@ -63,7 +63,7 @@ h2{
   flex-wrap: wrap;
   align-items: center;
   background-color: white; 
-  border-radius: 20px;
+  border-radius: 18px;
   min-height: 10px;
   width: 450px;
   margin-bottom: 10px;
@@ -123,4 +123,22 @@ input{
   color: rgb(211, 8, 8);
   font-size: 0.8em;
   text-align: left;
+}
+
+.archivoZip{
+  display: flex;
+  background-color: white;
+  width: 450px;
+  min-height: 15px;
+  margin-top: 15px;
+  padding: 6px;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px; 
+  font-size: 0.9em;
+  font-family: 'Roboto', sans-serif;
+}
+
+#nombreArchivo{
+  font-weight: lighter;
 }
