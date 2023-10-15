@@ -2,7 +2,7 @@
     display: flex;
 
 }
-h2{
+.title-contenedorNoticias{
     display: flex;
     font-family: 'Roboto';
     color: #f6f6f6;

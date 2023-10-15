@@ -7,10 +7,10 @@ function ListaEventos(){
         <div>
             <div className='containerLista'>
                 <h1 className='imgList'>Imagen</h1>
-                <h1 className='nombList'>Nombre</h1>
-                <h1 className='tipoList'>Tipo De Evento</h1>
-                <h1 className='fechIniList'>Fecha de Inicio</h1>
-                <h1 className='fechFinList'>Fecha de Fin</h1>
+                <h1 className='nombList rec'>Nombre</h1>
+                <h1 className='tipoList rec'>Tipo De Evento</h1>
+                <h1 className='fechIniList rec'>Fecha Inicio</h1>
+                <h1 className='fechFinList'>Fecha Fin</h1>
             </div>
 
         </div>

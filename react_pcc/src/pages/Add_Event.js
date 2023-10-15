@@ -4,6 +4,13 @@ import {Link} from 'react-router-dom';
 import "../stylesheets/CreateEventStyle.css";
 import Loader from './Loader';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {faArrowUpFromBracket} from '@fortawesome/free-solid-svg-icons';
+
+const plus = <FontAwesomeIcon icon={faPlus} />
+const addBrac = <FontAwesomeIcon icon={faArrowUpFromBracket} />
+
 class Add_Event extends Component{
 
     eventos = []
@@ -33,6 +40,8 @@ in my web page:
 
         this.setState({ events: events.data, loader:false});
         console.log(this.eventos)
+
+        
 
     };
 
@@ -74,7 +83,7 @@ in my web page:
             fecha_limite: '',
             fecha_fin: '',
             participantes_equipo: '',
-            event_type_id: ''
+            event_type_id: '',
         }
 
     }
@@ -82,7 +91,9 @@ in my web page:
     handleInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
+            
         });
+        
     }
 
     handleChange = (e) => {
@@ -94,6 +105,7 @@ in my web page:
 
 
     saveEvent = async (e) => {
+        let valor = document.getElementById("event_type_id").value
 
         e.preventDefault();
         
@@ -109,12 +121,40 @@ in my web page:
         data.append('fecha_limite', this.state.fecha_limite)
         data.append('fecha_fin', this.state.fecha_fin)
         data.append('participantes_equipo', this.state.participantes_equipo)
-        data.append('event_type_id', this.state.event_type_id)
+        data.append('event_type_id', valor)
 
         axios.post(url, data).then(res => {
             console.log(res)
         })
 
+    }
+
+    myFunction() {
+
+        let id_tipo_eventos = []
+        let nombre_tipo_eventos = []
+        var x = document.getElementById("desplegable");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            nombre_tipo_eventos.push(x.options[i].value);
+            id_tipo_eventos.push(i+1);
+        }
+        //console.log(id_tipo_eventos);
+        //console.log(nombre_tipo_eventos);
+
+        //console.log(x)
+
+        
+        var y = document.getElementById("desplegable").value;
+        var indice;
+        for (indice = 0; indice < x.length; indice++) {
+            if(y === nombre_tipo_eventos[indice]){
+                document.getElementById("event_type_id").value = id_tipo_eventos[indice];
+                break;
+            }
+        }
+        //console.log(y)
+        //document.getElementById("demo").innerHTML = x;
     }
 
     render(){
@@ -174,19 +214,22 @@ in my web page:
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Tipo de evento</p>
-                            <select name="event_type_id" onChange={this.handleInput} >
+                            <select id = "desplegable"onChange={this.myFunction} >
 
                                 { this.eventos.map((evento,id) => {
                                     return (
-                                        <option>{evento.id}</option>
+                                        
+                                        <option>{evento.nombre_tipo_evento}</option>
+                                        
                                     );
+                                    
                                 })}
                                 </select>
-                                <input type="number" name="event_type_id" onChange={this.handleInput} />
-                                <script>
-                                    
-                                </script>
+                                <input type="hidden" name="event_type_id" id='event_type_id' onChange={this.handleInput} />
                         </div>
+
+                        
+
 
                         <div className='Patrocinadores' id='entrada'>
                             <p id='textoCuadro'>Patrocinadores</p>
@@ -218,9 +261,6 @@ in my web page:
         );
     }
 }
-
-
-
 
 
 export default Add_Event;

@@ -1,32 +1,36 @@
 import React, {Component, useEffect} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import NavbarAdmin from '../components/NavbarAdmin';
 import Eventos from '../components/Eventos';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
+
 import Loader from './Loader';
 import '../App.css';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-import BotonesAdmin from '../components/BotonesAdmin';
-
-const cookies = new Cookies();
 
 
-class Home_Admin extends Component{
+class Home_Admin_Prueba extends Component{
 
     constructor(props) {
         super(props);
         this.state  = {
             events: [],
             loader:false,
-            url: "http://127.0.0.1:8000/api/events"
+            url: "http://127.0.0.1:8000/api/events",
+            submitted : false
     
         };
         this.eventos = []
         console.log("Isuuuas");
+        
 
       }
+
+    onSubmit(){
+        // Navigate to Another Component
+        this.setState({submitted: true});
+    }
 
     
 
@@ -49,14 +53,6 @@ class Home_Admin extends Component{
         this.getEvents();
     }
 
-    masDetalles(id){
-        console.log("clik");
-        // console.log(id);
-        cookies.set('idauxiliar', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
-        window.location.href='./event-user';
-    }
-
     render(){
 
         return(
@@ -71,12 +67,14 @@ class Home_Admin extends Component{
 
                                 { this.eventos.map((evento,id) => {
                                     
-                                    return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
+                                     return (<><div className='containerEvents'>
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
                                      <h4 className='tipoEv'>{evento.event_type.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_fin}</h4>
+
+                                     <Link to={`/home-participant/id?nombre_evento=${evento.nombre_evento}&id=${evento.id}`}>Ir a avento</Link>
                                      
                                      </div></>);
                                      
@@ -85,11 +83,12 @@ class Home_Admin extends Component{
                         </div>
 
                         <div className="columna2">
-                        <BotonesAdmin/>
+                            
 
                         </div>
 
                         {this.state.loader ? <Loader/> : ""}
+                    
 
                     </div>
                 </div>
@@ -101,4 +100,5 @@ class Home_Admin extends Component{
     }
 }
 
-export default Home_Admin;
+
+export default Home_Admin_Prueba;

@@ -15,10 +15,6 @@ function NavbarUser(){
             </div> 
             <div>
                 <ul id='navbar'>
-                <li><a className='active' href=''> Eventos</a></li>
-                    <li><a href=''> Notificaciones </a></li>
-                    <li><a href=''> Mis eventos</a></li>
-                    <li><a href=''> Perfil</a></li>
                 </ul>
             </div>
         </nav>

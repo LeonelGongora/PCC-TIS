@@ -1,0 +1,107 @@
+.visualizadorDeEventos{
+    font-size: 1.2rem;
+}
+.content1{
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    margin-top: 50px;
+}
+.buttons{
+    margin-top: 50px;
+}
+.miButtonEdit{
+    background-color: #FFD51E;
+    color: #000000;
+    border: none;
+    padding: 10px 30px;
+    margin-left: 150px;
+    margin-right: 50px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #7D7D7D;
+}
+.miButtonVer{
+    background-color: #FFD51E;
+    color: #000000;
+    border: none;
+    padding: 10px 10px;
+    margin-left: 50px;
+    margin-right: 150px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #7D7D7D;
+}
+.miButtonRegistrar{
+    background-color: #FFD51E;
+    color: #000000;
+    border: none;
+    padding: 10px 10px;
+    margin-left: 50px;
+    margin-right: 150px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #7D7D7D;
+}
+.logo{
+    min-width: 15%; 
+    max-height: 350px;
+    margin: 0 auto;
+    margin-right: 0;
+    margin-top: 50px;
+    padding: 20px; 
+    border: 1px solid #7D7D7D;
+}
+.informacion{
+    min-width: 30%; 
+    margin: 10px auto; 
+    padding: 20px; 
+    border: 1px solid #7D7D7D;
+    background-color: #7D7D7D;
+    border-radius: 10px;
+}
+.descripcion{
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+}
+.requerimientos{
+    background-color: white;
+    margin: 10px;
+    border-radius: 10px;
+    min-height: 200px;
+    max-height: 300px;
+}
+.patOrg{
+    min-width: 20%; 
+    margin: 10px auto; 
+    padding: 20px; 
+    margin-left: 0;
+    justify-content: center;
+}
+.inscripciones1{
+    background-color: red;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #7D7D7D;
+    color: white;
+}
+
+.Patrocinadores1{
+    display: flex;
+    justify-content: center;
+    margin: 70px;
+    color: #14365C;
+}
+.Organizadores1{
+    display: flex;
+    justify-content: center;
+    margin: 70px;
+    color: #14365C;
+}
+
+.edit{
+    fill: #000000;
+}

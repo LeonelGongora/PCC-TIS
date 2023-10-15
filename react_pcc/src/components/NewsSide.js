@@ -5,8 +5,8 @@ import News from './News';
 
 function NewsSide(){
     return(
-        <div className='contenedorNoticias'>
-            <h2>
+        <div className='contenedor-Noticias'>
+            <h2 className='title-contenedorNoticias'>
                 Noticias
             </h2>
             <div className='noticias'>
