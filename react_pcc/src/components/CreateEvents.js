@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import "../stylesheets/CreateEventStyle.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -21,7 +21,8 @@ class CreateEvents extends Component{
             fechaFinEvent: '2024-10-10',
             participantesEquip: "",
             seleccionTipo: "",
-            errorNombre: ""
+            errorNombre: "",
+            mostrarAdvertencia: false
         };
     }
     handleChange = (event) => {
@@ -30,20 +31,25 @@ class CreateEvents extends Component{
 
         if (name == "nombre" && value.trim() !== "") {
             this.setState({ errorNombre: "" });
+            this.setState({ mostrarAdvertencia: false });
         }
     };
+    setAdvertencia = () => {
+        this.setState({ mostrarAdvertencia: !this.mostrarAdvertencia });
+    }
     handleSubmit = (event) => {
         event.preventDefault(); 
 
         if (this.state.nombre.trim() == "") {
             this.setState({ errorNombre: "El nombre es obligatorio" });
+            this.setState({ mostrarAdvertencia: !this.mostrarAdvertencia });
         }
-
         console.log("Datos enviados:", this.state);
     };
-
+    
     render(){
         const { estado, cambiarEstado } = this.props;
+        
         return (
         
         <div className='crearEventos'>
@@ -53,9 +59,9 @@ class CreateEvents extends Component{
             <div className='entradasDatos'>
                 <div className='datoNombre' id= {this.state.errorNombre ? 'error' : 'entrada'}>
                     <p id='textoCuadro'>Nombre</p>
-                        <input id='inputRegistro' type='text' name='nombre' value={this.state.nombre} onChange={this.handleChange} placeholder={this.state.errorNombre || "Ingrese el nombre"}/>
+                        <input id='inputRegistro' type='text' name='nombre' value={this.state.nombre} onChange={this.handleChange} placeholder="Ingrese el nombre"/>
                 </div>
-                <p className='advertencia'>El nombre es obligatorio</p> 
+                {this.state.mostrarAdvertencia && (<p className='advertencia'>El nombre es obligatorio</p>)}
                 <div className='datoRequisitos' id='entrada'>
                     <p id='textoCuadro'>Requisitos</p>
                     <input id='inputRegistro'  type='text' name='requisito' value={this.state.requisito} onChange={this.handleChange} placeholder="Ingrese requisitos"/>
