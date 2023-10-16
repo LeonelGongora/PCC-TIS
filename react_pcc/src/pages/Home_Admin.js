@@ -9,6 +9,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import BotonesAdmin from '../components/BotonesAdmin';
+import ModalWindow from '../components/ModalWindow';
 
 const cookies = new Cookies();
 
@@ -20,7 +21,8 @@ class Home_Admin extends Component{
         this.state  = {
             events: [],
             loader:false,
-            url: "http://127.0.0.1:8000/api/events"
+            url: "http://127.0.0.1:8000/api/events",
+            estadoModal: false
     
         };
         this.eventos = []
@@ -57,11 +59,15 @@ class Home_Admin extends Component{
         window.location.href='./event-user';
     }
 
+    cambiarEstadoModal = (nuevoEstado) => {
+        this.setState({ estadoModal: nuevoEstado });
+    };
     render(){
 
         return(
 
             <div className="App">
+                <ModalWindow estado1={ this.state.estadoModal} cambiarEstado1={this.cambiarEstadoModal}/>
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
                    <NavbarAdmin/>
@@ -85,7 +91,7 @@ class Home_Admin extends Component{
                         </div>
 
                         <div className="columna2">
-                        <BotonesAdmin/>
+                        <BotonesAdmin estado1={ this.estadoModal} cambiarEstado1={this.cambiarEstadoModal} />
 
                         </div>
 

@@ -14,6 +14,7 @@ const addBrac = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 class Add_Event extends Component{
 
     eventos = []
+    errores = []
 
    // state = {
        // events: [],
@@ -35,11 +36,11 @@ in my web page:
         this.setState({loader:true});
         const events = await axios.get(url);
         this.eventos = Array.from(events.data.events)
-        console.log(events)
+        //console.log(events)
         
 
         this.setState({ events: events.data, loader:false});
-        console.log(this.eventos)
+        //console.log(this.eventos)
 
         
 
@@ -69,6 +70,8 @@ in my web page:
         image: ''
     }
     */
+    
+    //const [errors, setErrors] = useState({});
 
     constructor(props){
         super(props)
@@ -84,6 +87,7 @@ in my web page:
             fecha_fin: '',
             participantes_equipo: '',
             event_type_id: '',
+            errors : {},
         }
 
     }
@@ -108,24 +112,94 @@ in my web page:
         let valor = document.getElementById("event_type_id").value
 
         e.preventDefault();
-        
-        const url = "http://127.0.0.1:8000/api/add-event"; 
-        const data = new FormData();
-        data.append('image', this.state.image)
+        const validationErrors = {};
 
-        data.append('nombre_evento', this.state.nombre_evento)
-        data.append('requisitos', this.state.requisitos)
-        data.append('fecha_inicio', this.state.fecha_inicio)
-        data.append('numero_contacto', this.state.numero_contacto)
-        data.append('descripcion', this.state.descripcion)
-        data.append('fecha_limite', this.state.fecha_limite)
-        data.append('fecha_fin', this.state.fecha_fin)
-        data.append('participantes_equipo', this.state.participantes_equipo)
-        data.append('event_type_id', valor)
+        if(!this.state.nombre_evento.trim()){
+            validationErrors.nombre_evento = "Este campo es obligatorio"
+            console.log("Imagen")
+            console.log(this.state.image)
 
-        axios.post(url, data).then(res => {
-            console.log(res)
-        })
+        }else if(!/^\S[A-Z|a-z|`|&|.|'|Ñ|ñ|áéíóú|\s]{3,60}\S$/.test(this.state.nombre_evento)){
+            validationErrors.nombre_evento = "Ingrese un nombre valido"
+        }
+
+
+        if(!this.state.requisitos.trim()){
+            validationErrors.requisitos = "Este campo es obligatorio"
+
+        }else if(!/^\S[A-Z|a-z|`|&|.|'|0-9|Ñ|ñ|áéíóú|\s|!|-|,]{3,60}\S$/.test(this.state.requisitos)){
+            validationErrors.requisitos = "Ingrese requisitos validos"
+        }
+
+        if(!this.state.fecha_inicio.trim()){
+            validationErrors.fecha_inicio = "Este campo es obligatorio"
+
+        }
+
+        if(!this.state.numero_contacto.trim()){
+            validationErrors.numero_contacto = "Este campo es obligatorio"
+
+        }else if(!/[7|6][0-9]{7}$/.test(this.state.numero_contacto)){
+            validationErrors.numero_contacto = "Ingrese un numero de contacto valido"
+        }
+
+
+        if(!this.state.descripcion.trim()){
+            validationErrors.descripcion = "Este campo es obligatorio"
+
+        }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,120}\S$/.test(this.state.descripcion)){
+            validationErrors.descripcion = "Ingrese una descripcion valido"
+        }
+
+        if(!this.state.fecha_limite.trim()){
+            validationErrors.fecha_limite = "Este campo es obligatorio"
+
+        }
+
+        if(!this.state.fecha_fin.trim()){
+            validationErrors.fecha_fin = "Este campo es obligatorio"
+
+        }
+
+
+        if(!this.state.participantes_equipo.trim()){
+            validationErrors.participantes_equipo = "Este campo es obligatorio"
+
+        }else if(!/[1-9]{1}$/.test(this.state.participantes_equipo)){
+            validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
+        }
+
+        if(!this.state.image.name){
+            validationErrors.image = "Debe subir una imagen"
+
+        }
+
+
+        this.setState({ errors: validationErrors });
+
+        if(Object.keys(validationErrors).length === 0){
+            const url = "http://127.0.0.1:8000/api/add-event"; 
+            const data = new FormData();
+
+            
+
+            data.append('image', this.state.image)
+
+            data.append('nombre_evento', this.state.nombre_evento)
+            data.append('requisitos', this.state.requisitos)
+            data.append('fecha_inicio', this.state.fecha_inicio)
+            data.append('numero_contacto', this.state.numero_contacto)
+            data.append('descripcion', this.state.descripcion)
+            data.append('fecha_limite', this.state.fecha_limite)
+            data.append('fecha_fin', this.state.fecha_fin)
+            data.append('participantes_equipo', this.state.participantes_equipo)
+            data.append('event_type_id', valor)
+
+            axios.post(url, data).then(res => {
+                console.log(res)
+                window.location.href = './';
+            })
+        }
 
     }
 
@@ -139,12 +213,7 @@ in my web page:
             nombre_tipo_eventos.push(x.options[i].value);
             id_tipo_eventos.push(i+1);
         }
-        //console.log(id_tipo_eventos);
-        //console.log(nombre_tipo_eventos);
 
-        //console.log(x)
-
-        
         var y = document.getElementById("desplegable").value;
         var indice;
         for (indice = 0; indice < x.length; indice++) {
@@ -153,8 +222,6 @@ in my web page:
                 break;
             }
         }
-        //console.log(y)
-        //document.getElementById("demo").innerHTML = x;
     }
 
     render(){
@@ -168,49 +235,58 @@ in my web page:
                     <form onSubmit={this.saveEvent}>
                         <div className='datoNombre' id='entrada'>
                             <p id='textoCuadro'>Nombre</p>
-                            <input id ="input"type="text" name="nombre_evento" placeholder="Ingrese nombre" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="text" name="nombre_evento" placeholder="Ingrese nombre" onChange={this.handleInput}  />
                         </div>
+                        {this.state.errors.nombre_evento && <span className='advertencia'>{this.state.errors.nombre_evento}</span>}
                         
                         <div id='entrada'>
                             <p id='textoCuadro'>Requisitos</p>
-                            <input id ="input" type="text" name="requisitos" placeholder="requisitos" onChange={this.handleInput} />
-                        
+                            <input id='inputRegistro' type="text" name="requisitos" placeholder="requisitos" onChange={this.handleInput} />
                         </div>
+                        {this.state.errors.requisitos && <span className='advertencia'>{this.state.errors.requisitos}</span>}
+
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha de Inicio</p>
-                            <input id ="input" type="date" name="fecha_inicio" placeholder="Ingrese fecha" onChange={this.handleInput} />
+                            <input id='inputRegistro' type="date" name="fecha_inicio" placeholder="Ingrese fecha" onChange={this.handleInput} />
                         </div>
+                        {this.state.errors.fecha_inicio && <span className='advertencia'>{this.state.errors.fecha_inicio}</span>}
                         
                         <div id='entrada'>
                             <p id='textoCuadro'>Numero de Contacto</p>
-                            <input type="number" name="numero_contacto" placeholder="65487898" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="number" name="numero_contacto" placeholder="65487898" onChange={this.handleInput}  />
                         </div>
+                        {this.state.errors.numero_contacto && <span className='advertencia'>{this.state.errors.numero_contacto}</span>}
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Descripcion</p>
-                            <input type="text" name="descripcion" placeholder="Descripcion" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type="text" name="descripcion" placeholder="Descripcion" onChange={this.handleInput}  />
                         </div>
+                        {this.state.errors.descripcion && <span className='advertencia'>{this.state.errors.descripcion}</span>}
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha limite de inscripcion</p>
-                            <input type="date" name="fecha_limite" onChange={this.handleInput} />
+                            <input id='inputRegistro' type="date" name="fecha_limite" onChange={this.handleInput} />
                         </div>
+                        {this.state.errors.fecha_limite && <span className='advertencia'>{this.state.errors.fecha_limite}</span>}
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Fecha fin del evento</p>
-                            <input type="date" name="fecha_fin" onChange={this.handleInput} />
+                            <input id='inputRegistro' type="date" name="fecha_fin" onChange={this.handleInput} />
                         </div>
+                        {this.state.errors.fecha_fin && <span className='advertencia'>{this.state.errors.fecha_fin}</span>}
                         
                         <div id='entrada'>
                             <p id='textoCuadro'>Participantes por equipo</p>
-                            <input type="number" name="participantes_equipo" onChange={this.handleInput}  />
+                            <input id='inputRegistro' type='tel' name="participantes_equipo" maxLength={2} placeholder="Ingrese un numero de participantes" onChange={this.handleInput}  />
                         </div>
+                        {this.state.errors.participantes_equipo && <span className='advertencia'>{this.state.errors.participantes_equipo}</span>}
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Afiche</p>
                             <input type='file' name="image" onChange={this.handleChange}/>
                         </div>
+                        {this.state.errors.image && <span className='advertencia'>{this.state.errors.image}</span>}
 
                         <div id='entrada'>
                             <p id='textoCuadro'>Tipo de evento</p>
@@ -229,18 +305,6 @@ in my web page:
                         </div>
 
                         
-
-
-                        <div className='Patrocinadores' id='entrada'>
-                            <p id='textoCuadro'>Patrocinadores</p>
-                       </div>
-                        <div className='Organizadores' id='entrada'>
-                            <p id='textoCuadro'>Organizadores</p>
-                        </div>   
-                        
-
-
-                        <Link to={'add-type-event'}> Añadir Tipo de Evento</Link>
 
                         <div className='botonEnviar'>
                             <button className='botonRegistrar' type="submit"> Registrar evento</button>

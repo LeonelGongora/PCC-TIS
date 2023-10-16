@@ -35,7 +35,7 @@ function VisualizarInformacionDeEventosUser ({props}) {
     return(
         <div className='visualizadorDeEventos'>
 
-            <h1>{event.nombre_evento}</h1>
+            <h1 className='Titulo'>{event.nombre_evento}</h1>
 
             <div className='content1'>
 

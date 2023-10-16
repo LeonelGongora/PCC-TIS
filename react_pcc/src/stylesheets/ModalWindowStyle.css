@@ -1,0 +1,99 @@
+.BotonRegistrar{
+    background-color: rgb(255, 213, 30);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bolder;
+    border: none;
+    margin: 15px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.BotonRegistrar:hover {
+    background-color: rgb(219, 179, 0);
+}
+
+.BotonRegistrar:active {
+    background-color: rgb(255, 213, 0);
+}
+
+.BotonSalir{
+    background-color: rgb(20, 54, 92);
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.BotonSalir:hover{
+    background-color: rgb(28, 71, 124);
+}
+.BotonSalir:active {
+    background-color: rgb(29, 76, 134);
+}
+.Overlay{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ContenedorModal{
+    min-height: 200px;
+    min-width: 300px;
+    background: white;
+    /* position: relative; */
+    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+    
+.EncabezadoModal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(20,54,92);
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: white;
+}
+    
+h1{
+    font-size: large;
+}
+.tituloEvento{
+    text-align: center;
+    width: 100%;
+}
+.registro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: auto;
+
+}
+.inputEvento{
+    border: 1px solid rgb(175, 175, 175);
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+}
+
+.span1{
+    font-size: 0.75rem;
+    margin-left: 5vw;
+    margin-right: 4vw;
+    margin-top: 4px;
+    text-align: start;
+    color: red;
+}

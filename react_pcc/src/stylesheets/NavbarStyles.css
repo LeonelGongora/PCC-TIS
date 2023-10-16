@@ -3,8 +3,13 @@ nav{
     align-items: center;
     justify-content: space-between;
     background-color: #14365C;
-    padding: 5px 60px; /**/
+    padding: 5px 40px; 
 }
+
+.navegacion{
+    width: 100%;
+}
+
 .logoName{
     display: flex;
     align-items: center;

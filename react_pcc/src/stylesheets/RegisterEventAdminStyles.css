@@ -28,4 +28,10 @@
     height: 100vh;
     width: 100vw;
     margin-top: 6vh;
+    z-index: 1;
+  }
+
+  .navegacion{
+    z-index: 1;
+    width: 100%;
   }

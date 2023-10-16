@@ -32,7 +32,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
     return(
         <div className='visualizadorDeEventos'>
 
-            <h1>{event.nombre_evento}</h1>
+            <h1 className='Titulo'>{event.nombre_evento}</h1>
 
             <div className='content1'>
 
@@ -44,30 +44,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                     <div className='requerimientos'>{event.requisitos}</div>
                 </div>
 
-                <div className='patOrg'>
-                    <div className='inscripciones'>inscripciones cerradas</div>
-                    <div className='Patrocinadores1'>
-                        <table>
-                            <thead><tr><th>Patrocinadores</th></tr></thead>
-                            <tbody>
-                                <tr>
-                                    <td>a</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div className='Organizadores1'>
-                        <table>
-                            <thead><tr><th>Organizadores</th></tr></thead>
-                            <tbody>
-                                <tr>
-                                    <td>a</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                
 
             </div>
             {/* <div className='buttons'>
