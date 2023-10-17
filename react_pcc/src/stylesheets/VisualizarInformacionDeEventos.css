@@ -4,23 +4,26 @@
 
 }
 .Titulo{
-    position: absolute;
+    padding-top: 50px;
     width: 100%;
     text-align: center;
     font-size: 3rem;
     margin: 0;
 }
-.content{
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    margin-top: 50px;
-    padding-top: 150px;
+.grid-layout{
+    display: grid;
+    grid-template-columns: 25% auto 25%;
+    width: 90%;
+    margin: 5% auto;
+    padding: 10px;
 }
 .buttons{
     margin-top: 50px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
-.miButtonEdit{
+/* .miButtonEdit{
     background-color: #FFD51E;
     color: #000000;
     border: none;
@@ -41,81 +44,57 @@
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #7D7D7D;
-}
+} */
 .miButtonRegistrar{
     background-color: #FFD51E;
     color: #000000;
     border: none;
     padding: 10px 10px;
-    margin-left: 50px;
-    margin-right: 150px;
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #7D7D7D;
+    display: flex;
+    align-items: center;
 }
 .logo{
-    margin-left: 5%;
-    
+    align-self: center;
 }
 .logoimg{
-    min-width: 250px; 
-    min-height: 400px;
-    max-width: 381px;
-    max-height: 470px;
-    margin: 10px auto; 
-    padding: 20px; 
-    margin-right: 0;
-    justify-content: center;
+    width: 90%; 
+    height: auto; 
+    max-width: 400px;
 }
-.informacion{
-    min-width: 30%; 
-    margin: 10px auto; 
-    margin-left: 50px auto;
+.informacion{  
     padding: 20px; 
     border: 1px solid #7D7D7D;
     background-color: #7D7D7D;
     border-radius: 10px;
+    height: auto;
+    align-self: center;
 }
 .descripcion{
+    width: 100%;
     background-color: white;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
-    min-height: 200px;
-    max-height: 300px;
+    height: 50%;
 }
 .requerimientos{
+    width: 100%;
     background-color: white;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
-    min-height: 200px;
-    max-height: 300px;
-}
-.patOrg{
-    min-width: 20%; 
-    margin: 10px auto; 
-    padding: 20px; 
-    margin-left: 0;
-    justify-content: center;
+    height: 50%;
 }
 .inscripciones{
-    background-color: red;
-    border-radius: 10px;
-    padding: 10px;
+    background-color: #D73B3B;
+    padding: 15px;
+    width: 80%;
+    margin: 5%;
+    height: 10%;
     border: 1px solid #7D7D7D;
     color: white;
-}
-
-.Patrocinadores{
-    display: flex;
-    justify-content: center;
-    margin: 70px;
-    color: #14365C;
-}
-.Organizadores{
-    display: flex;
-    justify-content: center;
-    margin: 70px;
-    color: #14365C;
+    align-self: center;
 }
 
 .edit{
