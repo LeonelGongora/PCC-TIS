@@ -1,0 +1,21 @@
+get /adminsion/index.php http/1.1
+host:fcyt.umss.edu.bo
+
+
+//comandos para gmail.com 
+HELO //saludo para entrar 
+MAIL FROM //mensaje de quien recibira inventarse 
+RCPT TO  //enviar a 
+DATA	 //el mensaje para enviar  
+<ctrl>.<ctrl> //enter . enter para terminar el mensaje 
+QUIT  	//para salir de todo 
+///////////protocolo POP para recibir los correos o recuperarlos 
+
+1.- autenticacion //si o si necesitamos cuenta para eso 
+LIST //recupera o enlista los comandos que 
+RETRY 1 //recupera el mensaje 1 (puede ser otro numero )
+DELE 1  //borra el mensaje 1 (puede ser otro numero )
+
+
+//que protocolo utlizo para entrar a un correo por web--RESP.- IMAP 
+// si ultilizo el cliente se usa POP y SMTP  //pop para enviar y SMTP ()

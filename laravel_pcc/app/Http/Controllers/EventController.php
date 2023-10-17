@@ -19,65 +19,6 @@ class EventController extends Controller
 
     }
 
-    public function upload(Request $request){
-        //if($request -> has ('image')){
-           // $image = $request->file('image');
-
-            //$name = time().'.'.$image->getClientOriginalExtension();
-            //$image->move('images/', $name);
-
-            //Image::create(['name' => $name]);
-
-            //return response()->json(['success' => 'Uploaded successfully']);
-
-        //}
-        //return response()->json(['plz try again']);
-
-    }
-    /*
-    public function store(Request $request){
-        if($request -> has ('image')){
-
-            $evento = new Event();
-
-            $image = $request->file('image');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $image->move('images/', $name);
-
-
-
-            $evento -> nombre_evento = $request -> nombre_evento;
-            $evento -> requisitos = $request -> requisitos;
-            $evento -> fecha_inicio = $request -> fecha_inicio;
-            $evento -> numero_contacto = $request -> numero_contacto;
-            $evento -> descripcion = $request -> descripcion;
-            $evento -> fecha_limite = $request -> fecha_limite;
-            $evento -> fecha_fin = $request -> fecha_fin;
-            $evento -> participantes_equipo = $request -> participantes_equipo;
-            $evento -> event_type_id = $request -> event_type_id;
-            $evento -> name = $name;
-
-            $evento -> save();
-
-            return response()->json([
-                'status' => 200,
-                'message' => 'Evento añadido exitosamente',
-                'success' => 'Uploaded successfully'
-
-            ]);
-
-        }
-        return response()->json(['plz try again']);
-
-        
-
-        
-
-    }
-
-
-    */
-
     public function store(Request $request){
         if($request -> has ('image')){
 
@@ -112,5 +53,30 @@ class EventController extends Controller
         }
         return response()->json(['plz try again']);
 
+    }
+
+    public function show($id)
+    {
+        return Event::find($id);
+    }
+
+    public function index()
+    {
+        return Event::all();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $evento = Event::find($id);
+        if(!is_null($evento)){
+        $evento->update($request->all());
+        return $evento;
+       }  
+    }
+
+    public function destroy($id)
+    {
+        $evento=Event::find($id);
+        $evento->delete();
     }
 }
