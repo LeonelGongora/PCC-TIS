@@ -6,7 +6,8 @@ import '../stylesheets/Boton.css';
 import Pregunta from '../images/Pregunta.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-
+import ModalWindow from './ModalWarning';
+import ModalWindowStyle from '../stylesheets/ModalWarningStyle.css'
 
 function FormRegistroEvento(){
 
@@ -15,9 +16,23 @@ function FormRegistroEvento(){
   const manejarCargaDeArchivo = (event) => {
     const archivo = event.target.files[0];
     if (archivo) {
+    if (!archivo.name.endsWith('.zip')) {
+      setErrorArchivo('Debe subir un archivo .zip');
+      setShowModal(true); 
+      document.getElementById('nombreArchivo').textContent = '';
+    } else if (archivo.size > 10485760) {
+      setErrorArchivo('Su archivo excede el tamaño máximo');
+      setShowModal(true);
+      document.getElementById('nombreArchivo').textContent = '';
+    } else {
+      setErrorArchivo(''); 
       document.getElementById('nombreArchivo').textContent = `  ${archivo.name}`;
       console.log(' ', archivo.name);
+      setShowModal(false);
     }
+  } else {
+    setShowModal(false); 
+  }
   };
 
   const subirArchivo = () => {
@@ -31,6 +46,8 @@ function FormRegistroEvento(){
 
   const [errorNombre, setErrorNombre] = useState('');
   const [errorRequisito, setErrorRequisito] = useState('');
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad de la ventana modal.
+  const [errorArchivo, setErrorArchivo] = useState(''); // Mensaje de error para el archivo.
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -51,6 +68,13 @@ function FormRegistroEvento(){
     }
     if (!state.requisito.trim()) {
       setErrorRequisito('Este campo es obligatorio, no puede dejarlo vacío');
+    }
+    if (archivoInput.current && archivoInput.current.files.length === 0) {
+      setErrorArchivo('Debe subir un archivo .zip');
+      setShowModal(true);
+    } else {
+      setErrorArchivo(''); 
+      setShowModal(false);
     }
     if (state.nombre.trim() && state.requisito.trim()) {
       console.log('Registrarse');
@@ -109,6 +133,7 @@ function FormRegistroEvento(){
         texto='Registrarse'
         esBotonDeRegistro={true}
         manejarClic={registrar} /> 
+      {showModal && <ModalWindow estado1={showModal} cambiarEstado1={setShowModal} errorMessage={errorArchivo} />} {/* Pasa el mensaje de error a ModalWindow */}
     </div>
   )
 }
