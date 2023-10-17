@@ -78,6 +78,8 @@
     margin: 5px;
     border-radius: 10px;
     height: 50%;
+    box-sizing: border-box;
+    padding: 10px; 
 }
 .requerimientos{
     width: 100%;
@@ -85,6 +87,8 @@
     margin: 5px;
     border-radius: 10px;
     height: 50%;
+    box-sizing: border-box;
+    padding: 10px; 
 }
 .inscripciones{
     background-color: #D73B3B;
