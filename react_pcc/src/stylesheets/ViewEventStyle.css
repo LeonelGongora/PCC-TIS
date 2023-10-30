@@ -1,16 +1,37 @@
 .visualizadorDeEventos{
     font-size: 1.2rem;
 }
+<<<<<<< Updated upstream
 .content1{
     display: flex;
     justify-content: space-between;
     margin: 0;
     margin-top: 50px;
+=======
+
+.Titulo{
+    padding-top: 50px;
+    width: 100%;
+    text-align: center;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.grid-layout{
+    display: grid;
+    grid-template-columns: 25% auto 25%;
+    width: 90%;
+    margin: 5% auto;
+    padding: 10px;
+>>>>>>> Stashed changes
 }
 .buttons{
     margin-top: 50px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
-.miButtonEdit{
+/* .miButtonEdit{
     background-color: #FFD51E;
     color: #000000;
     border: none;
@@ -20,7 +41,7 @@
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #7D7D7D;
-}
+} */
 .miButtonVer{
     background-color: #FFD51E;
     color: #000000;
@@ -42,7 +63,10 @@
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #7D7D7D;
+    display: flex;
+    align-items: center;
 }
+<<<<<<< Updated upstream
 .logo{
     min-width: 15%; 
     max-height: 350px;
@@ -55,51 +79,55 @@
 .informacion{
     min-width: 30%; 
     margin: 10px auto; 
+=======
+
+.logo{
+    align-self: center;
+}
+
+.logo img{
+
+    width: 90%; 
+    height: auto; 
+    max-width: 400px;
+
+}
+.informacion{
+
+>>>>>>> Stashed changes
     padding: 20px; 
     border: 1px solid #7D7D7D;
     background-color: #7D7D7D;
     border-radius: 10px;
+    height: auto;
+    align-self: center;
 }
 .descripcion{
+    width: 100%;
     background-color: white;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
-    min-height: 200px;
-    max-height: 300px;
+    height: 50%;
 }
 .requerimientos{
+    width: 100%;
     background-color: white;
-    margin: 10px;
+    margin: 5px;
     border-radius: 10px;
-    min-height: 200px;
-    max-height: 300px;
-}
-.patOrg{
-    min-width: 20%; 
-    margin: 10px auto; 
-    padding: 20px; 
-    margin-left: 0;
-    justify-content: center;
-}
-.inscripciones1{
-    background-color: red;
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid #7D7D7D;
-    color: white;
+    height: 50%;
 }
 
-.Patrocinadores1{
-    display: flex;
-    justify-content: center;
-    margin: 70px;
-    color: #14365C;
-}
-.Organizadores1{
-    display: flex;
-    justify-content: center;
-    margin: 70px;
-    color: #14365C;
+
+.inscripciones{
+    background-color: #D73B3B;
+    padding: 15px;
+    width: 80%;
+    margin: 5% auto; /* Cambiado para centrar horizontalmente */
+    border: 1px solid #7D7D7D;
+    color: white;
+    display: flex; /* Usar flexbox para centrar verticalmente */
+    align-items: center; /* Centrar verticalmente */
+    text-align: center; /* Centrar horizontalmente */
 }
 
 .edit{

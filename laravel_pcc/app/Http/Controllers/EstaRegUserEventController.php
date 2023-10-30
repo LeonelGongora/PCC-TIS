@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Event;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
-class EventoAbiertoController extends Controller
+class EstaRegUserEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,18 +14,7 @@ class EventoAbiertoController extends Controller
      */
     public function index()
     {
-        $events = DB::table('events')
-        ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
-        // ->where('events.fecha_limite', '<=', Carbon::now()->format('Y-m-d'))
-        ->where('events.fecha_fin', '>=', Carbon::now()->format('Y-m-d'))
-        ->select('events.*', 'event_types.nombre_tipo_evento')
-        ->get();
-
-        return response()->json([
-            'status' => 200,
-            'events' => $events,
-
-        ]);
+        //
     }
 
     /**
@@ -48,7 +35,10 @@ class EventoAbiertoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return DB::table('evento_user')
+        ->where('evento_user.user_id', $request->user_id)
+        ->where('evento_user.event_id', $request->event_id)
+        ->get();
     }
 
     /**
@@ -60,16 +50,6 @@ class EventoAbiertoController extends Controller
     public function show($id)
     {
         //
-        $res=false;
-        $event = Event::find($id);
-        if($event->fecha_limite < Carbon::now()->format('Y-m-d')){
-            $res=true;
-        }
-        return response()->json([
-            'status' => 200,
-            'pasoInscripcion' => $res,
-
-        ]);
     }
 
     /**

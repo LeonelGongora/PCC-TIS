@@ -1,0 +1,69 @@
+.BotonSalir{
+    background-color: rgb(20, 54, 92);
+    color: white;
+    font-size: 1.8em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.BotonSalir:hover{
+    background-color: rgb(28, 71, 124);
+}
+.BotonSalir:active {
+    background-color: rgb(29, 76, 134);
+}
+
+.OverlayRaisa{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ContenedorModalRaisa{
+    min-height: 200px;
+    min-width: 300px;
+    background: white;
+    /* position: relative; */
+    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.EncabezadoModal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(20,54,92);
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: white;
+}
+
+
+.Advertencia{
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+}
+.contenedorMensaje{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: auto;
+}
+
+.mensajeError {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 1rem;
+}
