@@ -69,7 +69,7 @@
     background-color: white;
 }
 
-input{
+#inputRegistro{
     font-size: small;
     margin: 3px;
     width: 95%;
@@ -78,6 +78,14 @@ input{
     outline: none;
 }
 
+#desplegable{
+    font-size: small;
+    margin: 3px;
+    width: 95%;
+    padding: 2px;
+    transform: translateY(-12px);
+    outline: none;
+}
 .tipoEvento2 {
     display: flex;
     flex-direction: column;
@@ -119,10 +127,12 @@ input{
 }
 
 .advertencia {
+    display: block;
     font-size: 0.75rem;
     margin-left: 5vw;
     margin-right: 4vw;
     margin-top: 4px;
     text-align: start;
     color: red;
+    width: 100%;
 }

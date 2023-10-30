@@ -3,7 +3,8 @@ nav{
     align-items: center;
     justify-content: space-between;
     background-color: #14365C;
-    padding: 5px 40px; 
+    padding: 5px 40px;
+    z-index: 100; 
 }
 
 .navegacion{

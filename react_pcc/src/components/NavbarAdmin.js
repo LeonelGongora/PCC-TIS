@@ -18,7 +18,6 @@ function NavbarAdmin(){
             </div> 
             <div>
                 <ul id='navbar'>
-                <li><Link to = {'add-event'}> Añadir Evento</Link></li>
                 </ul>
             </div>
         </nav>

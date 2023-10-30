@@ -123,3 +123,57 @@
     flex-direction: column;
     margin-bottom: 15px;
   }
+
+  .signoDePregunta:hover {
+    filter: brightness(85%);
+  }
+
+  .archivoZip{
+    display: flex;
+    background-color: white;
+    width: 450px;
+    min-height: 15px;
+    margin-top: 15px;
+    padding: 6px;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px; 
+    font-size: 0.9em;
+    font-family: 'Roboto', sans-serif;
+  }
+
+
+  #nombreArchivo{
+    font-weight: lighter;
+  }
+
+  .buttonInfo {
+    position: relative; 
+    background-color: #7D7D7D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px; 
+    height: 30px; 
+    margin-top: 5px;
+  }
+
+  .textoInfo {
+    opacity: 0;
+    position: absolute;
+    background-color: #EFEFEF;
+    color: #14365C;
+    padding: 20px;
+    border-radius: 3px;
+    transition: opacity 0.3s;
+    border-radius: 20px;
+    width: 260px;
+    height: 50px;
+    border: 1px solid #7D7D7D;
+    z-index: 999;
+  }
+
+  .buttonInfo:hover .textoInfo {
+    opacity: 1; 
+  }

@@ -6,10 +6,12 @@
     min-height: 17vh;
     align-items: center;
     border-radius: 3rem;
+    cursor: pointer;
 }
 .imageEvent{
     width: 5vw;
     height: auto;
+    margin: 1vh 0;
 }
 .containerEvents h4{
     font-size: 1.3rem;

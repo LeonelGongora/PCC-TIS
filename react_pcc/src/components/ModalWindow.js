@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 
+
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalWindow({estado1, cambiarEstado1}){
@@ -34,7 +35,7 @@ function ModalWindow({estado1, cambiarEstado1}){
         if(!values.nombre_tipo_evento.trim()){
             validationErrors.nombre_tipo_evento = "Este campo es obligatorio es requerido"
 
-        }else if(!/^\S[A-Z|a-z|Ñ|ñ|áéíóú|\s]{3,60}\S$/.test(values.nombre_tipo_evento)){
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_tipo_evento)){
             validationErrors.nombre_tipo_evento = "Ingrese un nombre valido"
         }
 
@@ -52,31 +53,38 @@ function ModalWindow({estado1, cambiarEstado1}){
 
     return (
         estado1 && (
-            <div className='Overlay'>
-            <div className='ContenedorModal'>
-                <div className='EncabezadoModal'>
-                    <div className='tituloEvento'><h1>Tipo de evento</h1></div>
-                    <button onClick={() => cambiarEstado1(false)} className='BotonSalir'>{salir}</button>
+            <div className="Overlay">
+              <div className="ContenedorModal">
+                <div className="EncabezadoModal">
+                  <div className="tituloEvento">
+                    <h1>Tipo de evento</h1>
+                  </div>
+                  <button
+                    onClick={() => cambiarEstado1(false)}
+                    className="BotonSalir"
+                  >
+                    {salir}
+                  </button>
                 </div>
-                <div className='registro'>
+                <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
-                        <input type="text" 
-                        name="nombre_tipo_evento" 
-                        className='inputEvento' 
-                        placeholder='Ingrese nombre'
+                        <input
+                        type="text"
+                        name="nombre_tipo_evento"
+                        className="inputEvento"
+                        placeholder="Ingrese nombre"
                         onChange={handleInput}
                         />
-                        {errors.nombre_tipo_evento && <span className='span1'>{errors.nombre_tipo_evento}</span>}
-                    </form>
-                    
-                </div>
-                <div className='registro'>
-                    <button form="form1" type="submit" className='BotonRegistrar'>Registrar</button>
-                </div>
-                
-                
-            </div>
-            </div>
+                        </form>
+                        {errors.nombre_tipo_evento && (
+                <span className="span1Modal">{errors.nombre_tipo_evento}</span>
+              )}
+              <button form="form1" type="submit" className="BotonRegistrar">
+                Registrar
+              </button>
+              </div>
+              </div>
+        </div>
         )
     );
 }

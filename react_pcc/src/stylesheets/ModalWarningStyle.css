@@ -1,22 +1,3 @@
-.BotonRegistrar{
-    background-color: rgb(255, 213, 30);
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bolder;
-    border: none;
-    margin: 15px;
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.BotonRegistrar:hover {
-    background-color: rgb(219, 179, 0);
-}
-
-.BotonRegistrar:active {
-    background-color: rgb(255, 213, 0);
-}
-
 .BotonSalir{
     background-color: rgb(20, 54, 92);
     color: white;
@@ -31,10 +12,10 @@
     background-color: rgb(29, 76, 134);
 }
 
-.Overlay{
+.OverlayRaisa{
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     background: rgba(0,0,0,.5);
@@ -42,10 +23,9 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    background-repeat: repeat-y;
 }
 
-.ContenedorModal{
+.ContenedorModalRaisa{
     min-height: 200px;
     min-width: 300px;
     background: white;
@@ -54,9 +34,8 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    
 }
-    
+
 .EncabezadoModal{
     display: flex;
     align-items: center;
@@ -67,39 +46,24 @@
     border-top-right-radius: 8px;
     color: white;
 }
-    
-h1{
-    font-size: large;
-}
-.tituloEvento{
+
+
+.Advertencia{
     text-align: center;
     width: 100%;
     font-size: 0.8rem;
 }
-.registroTipoEvento{
+.contenedorMensaje{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     flex: auto;
-
-}
-.inputEvento{
-    border: 1px solid rgb(175, 175, 175);
-    outline: none;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 10px;
-    margin-top: 20px;
-    font-size: 0.85rem;
 }
 
-.span1Modal{
-    font-size: 0.75rem;
-    margin-left: 5vw;
-    margin-right: 4vw;
-    text-align: start;
-    color: red;
+.mensajeError {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 1rem;
 }
-
-
