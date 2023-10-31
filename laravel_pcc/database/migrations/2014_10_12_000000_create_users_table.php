@@ -17,11 +17,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->integer('dni')->nullable();
-            $table->string('telefono')->nullable();
-            $table->string('email')->unique();
             $table->string('password');
-            $table->string('password_confirmed');
+            $table->integer('telefono')->nullable();
+            $table->string('email');
+            
+
             $table->integer('tipo_usuario')->default(0); //0 admi, 1 participante, 2 encargado, 3 secretario, 4 instructor
             $table->timestamps();
         });
