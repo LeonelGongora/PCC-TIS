@@ -31,12 +31,15 @@ Route::post('/add-event', [EventController::class, 'store']);
 
 Route::post('/add-event_type', [EventTypeController::class, 'store']);
 
+Route::post('/add-user-information', [UserController::class, 'store']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
 Route::resource('usuarios', UserController::class);
+
 Route::resource('eventousuarios', EventoUserController::class);
 Route::post('upload', [ArchivoController::class, 'upload']);
 Route::post('download', [ArchivoController::class, 'download']);

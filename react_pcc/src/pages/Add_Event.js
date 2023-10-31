@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import "../stylesheets/CreateEventStyle.css";
 import Loader from './Loader';
 
@@ -313,6 +312,7 @@ in my web page:
                         onChange={this.handleInput}
                       />
                     </div>
+
                     {this.state.errors.nombre_evento && (
                       <span className="advertencia">
                         {this.state.errors.nombre_evento}
