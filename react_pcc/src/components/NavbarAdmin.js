@@ -1,28 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
 import "../stylesheets/NavbarStyles.css";
+import "./Dropdown.js";
 
-import {Link} from 'react-router-dom';
+import Dropdown from "./Dropdown";
 
-function NavbarAdmin(){
-    return(
+function NavbarAdmin() {
+    return (
         <>
-        <nav>
-            <div className='logoName'> 
-            <h1 className='name'>
-                PCC
-            </h1>
-            <a href=''>   
-                <img className='imageNav' src = {require('../images/Logopng.png')} alt='Logo del sistema'/>
-            </a>
-            </div> 
-            <div>
-                <ul id='navbar'>
-                </ul>
-            </div>
-        </nav>
+            <nav>
+                <div className="logoName">
+                    <h1 className="name">PCC</h1>
+                    <a href="">
+                        <img
+                            className="imageNav"
+                            src={require("../images/logo512.png")}
+                            alt="Logo del sistema"
+                        />
+                    </a>
+                </div>
+                <div className="desplegable1">
+                    <Dropdown/>
+                </div>
+            </nav>
         </>
-    )
+    );
 }
 
 export default NavbarAdmin;
