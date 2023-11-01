@@ -1,0 +1,42 @@
+.contenedorSolicitudes{
+    flex: 3;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.containerUserSol{
+    display: flex;
+    justify-content: space-around;
+    background-color: #f6f6f6;
+    width: 70vw;
+    margin: 20px 0;
+    min-height: 17vh;
+    align-items: center;
+    border-radius: 3rem;
+}
+.containerUserSol h4{
+    font-size: 2rem;
+    text-align: center;
+}
+.buttonAcceptUser{
+    width: 10vw;
+    padding: 1.5vw 4vh;
+    text-align: center;
+    background: #78E0A1;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+    font-weight: 600;
+}
+.buttonIconUser{
+    font-size: 4vw;
+}
+.buttonIconDownload{
+    font-size: 2vw;
+}
+.tituloPagAcept{
+    font-size: 5rem;
+    color: #f6f6f6;
+    font-weight: 200;
+    text-align: center;
+}

@@ -11,6 +11,7 @@ import ContenedorSliderAdmin from "./pages/ContenedorSliderAdmin.js";
 import ContenedorSliderUser from "./components/ContenedorSliderUser.js";
 
 import FormRegistroUsuario from "./components/FormRegistroUsuario.js";
+import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
 
 
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
@@ -30,6 +31,8 @@ function App() {
         <Route path='/add-event' element={<Register_Event_Admin/>} />
 
         <Route path='/formUsuario' element={<FormRegistroUsuario/>} />
+
+        <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
         
             
       </Routes>
