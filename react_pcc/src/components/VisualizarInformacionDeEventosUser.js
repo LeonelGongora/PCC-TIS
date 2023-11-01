@@ -2,7 +2,6 @@
 import React, { useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import '../stylesheets/ViewEventStyle.css'
-import Logo from '../images/Csharp.png'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';

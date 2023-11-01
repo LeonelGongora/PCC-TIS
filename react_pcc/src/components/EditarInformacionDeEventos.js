@@ -1,17 +1,21 @@
-import axios from 'axios';
-import React, {Component} from 'react';
-import "../stylesheets/CreateEventStyle.css";
+import React, { useState, useEffect, Component} from 'react';
+import '../stylesheets/ViewEventStyle.css'
+import configApi from '../configApi/configApi'
+import axios from 'axios'
+import Cookies from 'universal-cookie';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import {faArrowUpFromBracket} from '@fortawesome/free-solid-svg-icons';
+const cookies = new Cookies();
 
-const plus = <FontAwesomeIcon icon={faPlus} />
-const addBrac = <FontAwesomeIcon icon={faArrowUpFromBracket} />
+const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
-class Add_Event extends Component{
 
-    eventos = []
+
+//const [event, setEvent] = useState ( [] );
+
+class EditarInformacionDeEventos extends Component{
+
+  eventos = []
+  id = cookies.get('idauxiliar');
 
     getEventTypes = async () => {
         const url = "http://127.0.0.1:8000/api/type-events"; 
@@ -22,10 +26,23 @@ class Add_Event extends Component{
         this.eventos = Array.from(events.data.events)
         //console.log(events)
         this.setState({ loader:false});
+
+        
     };
 
     componentDidMount(){
         this.getEventTypes();
+        this.getEvent();
+
+    }
+    
+    getEvent=async()=>{
+      console.log(this.id)
+      const url = `${Eventos_Api_Url}/${this.id}`;
+      const response = await axios.get(url)
+      console.log(response)
+      this.setState({ event: response.data})
+      console.log()
     }
     
     
@@ -46,7 +63,8 @@ class Add_Event extends Component{
             participantes_equipo: '',
             event_type_id: '',
             errors : {},
-            contador : 0
+            contador : 0,
+            event : []
         }
 
     }
@@ -257,7 +275,7 @@ class Add_Event extends Component{
             <>
               <div className="crearEventos">
                 <div className="textoEvento">
-                  <p className="textoRegistro"> Registro de Evento</p>
+                  <p className="textoRegistro"> {this.state.event.nombre_evento}</p>
                 </div>
                 <div className="entradasDatos">
                   <form onSubmit={this.saveEvent}>
@@ -268,6 +286,7 @@ class Add_Event extends Component{
                         type="text"
                         name="nombre_evento"
                         placeholder="Ingrese nombre"
+                        value={this.state.event.nombre_evento}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -285,6 +304,7 @@ class Add_Event extends Component{
                         type="text"
                         name="requisitos"
                         placeholder="requisitos"
+                        value={this.state.event.requisitos}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -301,6 +321,7 @@ class Add_Event extends Component{
                         type="date"
                         name="fecha_inicio"
                         placeholder="Ingrese fecha"
+                        value={this.state.event.fecha_inicio}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -317,6 +338,7 @@ class Add_Event extends Component{
                         type="number"
                         name="numero_contacto"
                         placeholder="65487898"
+                        value={this.state.event.numero_contacto}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -333,6 +355,7 @@ class Add_Event extends Component{
                         type="text"
                         name="descripcion"
                         placeholder="Descripcion"
+                        value={this.state.event.descripcion}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -348,6 +371,7 @@ class Add_Event extends Component{
                         id="inputRegistro"
                         type="date"
                         name="fecha_limite"
+                        value={this.state.event.fecha_limite}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -363,6 +387,7 @@ class Add_Event extends Component{
                         id="inputRegistro"
                         type="date"
                         name="fecha_fin"
+                        value={this.state.event.fecha_fin}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -380,6 +405,7 @@ class Add_Event extends Component{
                         name="participantes_equipo"
                         maxLength={2}
                         placeholder="Ingrese un numero de participantes"
+                        value={this.state.event.participantes_equipo}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -444,5 +470,4 @@ class Add_Event extends Component{
     }
 }
 
-
-export default Add_Event;
+export default EditarInformacionDeEventos;

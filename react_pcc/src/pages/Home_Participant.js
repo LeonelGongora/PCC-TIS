@@ -1,11 +1,7 @@
 import React, {Component, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import NavbarUser from '../components/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
-
-import NewsSide from '../components/NewsSide';
-import Loader from './Loader';
 
 import '../App.css';
 import axios from 'axios';
@@ -75,7 +71,6 @@ class Home_Participant extends Component{
                                 })}
 
                         </div>
-                        {this.state.loader ? <Loader/> : ""}
 
                     </div>
                 </div>
