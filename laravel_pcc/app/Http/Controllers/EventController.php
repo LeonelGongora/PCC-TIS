@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -20,7 +21,8 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-        if($request -> has ('image')){
+        
+        if($request -> hasFile ('image')){
 
             $nombre_evento = $request -> nombre_evento;
             $requisitos = $request -> requisitos;
@@ -67,11 +69,38 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
+        
         $evento = Event::find($id);
-        if(!is_null($evento)){
-        $evento->update($request->all());
-        return $evento;
-       }  
+
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $image->move('images/', $name);
+
+            $evento-> nombre_evento = $request -> nombre_evento;
+            $evento-> requisitos = $request -> requisitos;
+            $evento-> fecha_inicio = $request -> fecha_inicio;
+            $evento-> numero_contacto = $request -> numero_contacto;
+            $evento-> descripcion = $request -> descripcion;
+            $evento-> fecha_limite = $request -> fecha_limite;
+            $evento-> fecha_fin = $request -> fecha_fin;
+            $evento-> participantes_equipo = $request -> participantes_equipo;
+            $evento-> event_type_id = $request -> event_type_id;
+            $evento-> name = $name;
+            $evento-> update();
+
+            return response()->json([
+                'status' => 200,
+                'message' =>'Evento editado exitosamente']);
+        }else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'No hay archivo',
+            ]);
+
+        }
+      
     }
 
     public function destroy($id)

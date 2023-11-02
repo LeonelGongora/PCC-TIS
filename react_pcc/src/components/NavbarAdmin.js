@@ -4,7 +4,7 @@ import "./Dropdown.js";
 
 import Dropdown from "./Dropdown";
 
-function NavbarAdmin() {
+function NavbarAdmin({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrganizador,  estadoPatrocinador, cambiarEstadoPatrocinador}) {
     return (
         <>
             <nav>
@@ -19,7 +19,9 @@ function NavbarAdmin() {
                     </a>
                 </div>
                 <div className="desplegable1">
-                    <Dropdown/>
+                    <Dropdown estado1={ estado1} cambiarEstado1={cambiarEstado1} 
+                    estadoOrganizador = {estadoOrganizador} cambiarEstadoOrganizador = {cambiarEstadoOrganizador} 
+                    estadoPatrocinador = {estadoPatrocinador} cambiarEstadoPatrocinador = {cambiarEstadoPatrocinador} />
                 </div>
             </nav>
         </>

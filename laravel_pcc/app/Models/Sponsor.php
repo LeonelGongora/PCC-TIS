@@ -9,6 +9,11 @@ class Sponsor extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre_patrocinador',
+        'imagen_patrocinador',
+    ];
+
     public function eventos(){
 
         return $this->belongsToMany('App\Models\Evento');

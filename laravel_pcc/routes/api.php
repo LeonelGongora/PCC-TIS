@@ -11,7 +11,8 @@ use App\Http\Controllers\ArchivoController;
 use App\Http\Controllers\EventoAbiertoController;
 use App\Http\Controllers\EventoCerradoController;
 use App\Http\Controllers\EstaRegUserEventController;
-
+use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +25,13 @@ use App\Http\Controllers\EstaRegUserEventController;
 |
 */
 Route::get('type-events', [EventTypeController::class, 'get']);
-
 Route::get('events', [EventController::class, 'get']);
 
 Route::post('/add-event', [EventController::class, 'store']);
-
+Route::post('/update-event/{id}', [EventController::class, 'update']);
+Route::post('/add-organizador', [OrganizerController::class, 'store']);
+Route::post('/add-patrocinador', [SponsorController::class, 'store']);
 Route::post('/add-event_type', [EventTypeController::class, 'store']);
-
 Route::post('/add-user-information', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

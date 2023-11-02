@@ -7,6 +7,8 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import BotonesAdmin from '../components/BotonesAdmin';
 import ModalWindow from '../components/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
 
 const cookies = new Cookies();
 
@@ -19,7 +21,9 @@ class Home_Admin extends Component{
             events: [],
             loader:false,
             url: "http://127.0.0.1:8000/api/events",
-            estadoModal: false
+            estadoModal: false,
+            estadoModalOrganizador:false,
+            estadoModalPatrocinador: false,
     
         };
         this.eventos = []
@@ -71,15 +75,32 @@ class Home_Admin extends Component{
     cambiarEstadoModal = (nuevoEstado) => {
         this.setState({ estadoModal: nuevoEstado });
     };
+
+    cambiarEstadoModalOrganizador = (nuevoEstado) => {
+        this.setState({ estadoModalOrganizador: nuevoEstado });
+    };
+
+    cambiarEstadoModalPatrocinador = (nuevoEstado) => {
+        this.setState({ estadoModalPatrocinador: nuevoEstado });
+    };
+    
     render(){
 
         return(
 
             <div className="App">
+
                 <ModalWindow estado1={ this.state.estadoModal} cambiarEstado1={this.cambiarEstadoModal}/>
+
+                <ModalWindowOrganizadores estadoOrganizador={ this.state.estadoModalOrganizador} cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}/>
+
+                <ModalWindowPatrocinadores estadoPatrocinador={ this.state.estadoModalPatrocinador} cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}/>
+
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin/>
+                   <NavbarAdmin estado1={ this.estadoModal} cambiarEstado1={this.cambiarEstadoModal} 
+                   estadoOrganizador={ this.estadoModalOrganizador} cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+                   estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>
@@ -98,12 +119,6 @@ class Home_Admin extends Component{
                                 })}
 
                         </div>
-
-                        <div className="columna2">
-                        <BotonesAdmin estado1={ this.estadoModal} cambiarEstado1={this.cambiarEstadoModal} />
-
-                        </div>
-
 
                     </div>
                 </div>

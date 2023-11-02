@@ -9,6 +9,11 @@ class Organizer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre_organizador',
+        'imagen_organizador',
+    ];
+
     public function eventos(){
 
         return $this->belongsToMany('App\Models\Evento');

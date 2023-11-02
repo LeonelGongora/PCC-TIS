@@ -27,12 +27,14 @@ class EditarInformacionDeEventos extends Component{
         //console.log(events)
         this.setState({ loader:false});
 
-        
+
     };
 
     componentDidMount(){
         this.getEventTypes();
         this.getEvent();
+
+        
 
     }
     
@@ -42,15 +44,33 @@ class EditarInformacionDeEventos extends Component{
       const response = await axios.get(url)
       console.log(response)
       this.setState({ event: response.data})
-      console.log()
+
+      if(response.request.status === 200){
+        this.setState({
+          nombre_evento: response.data.nombre_evento,
+          requisitos: response.data.requisitos,
+          fecha_inicio: response.data.fecha_inicio,
+          numero_contacto: response.data.numero_contacto,
+          descripcion: response.data.descripcion,
+          fecha_limite: response.data.fecha_limite,
+          fecha_fin: response.data.fecha_fin,
+          participantes_equipo: response.data.participantes_equipo,
+          event_type_id: response.data.event_type_id,
+          nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
+
+        });
+      }
+
+
     }
-    
     
     //const [errors, setErrors] = useState({});
 
     constructor(props){
         super(props)
         this.state = {
+
+            nombre_tipo_evento : '',
             
             image: '',
             nombre_evento: '',
@@ -85,7 +105,7 @@ class EditarInformacionDeEventos extends Component{
 
 
 
-    saveEvent = async (e) => {
+    updateEvent = async (e) => {
         let valor = document.getElementById("event_type_id").value
         //this.setState({ event_type_id: valor });
 
@@ -155,7 +175,9 @@ class EditarInformacionDeEventos extends Component{
 
         }
 
-        if(!this.state.numero_contacto.trim()){
+
+
+        if(!this.state.numero_contacto){
             validationErrors.numero_contacto = "Este campo es obligatorio"
 
         }else if(!/[7|6][0-9]{7}$/.test(this.state.numero_contacto)){
@@ -180,7 +202,7 @@ class EditarInformacionDeEventos extends Component{
 
         }
 
-        if(!this.state.participantes_equipo.trim()){
+        if(!this.state.participantes_equipo){
             validationErrors.participantes_equipo = "Este campo es obligatorio"
 
         }else if(!/[1-9]{1}$/.test(this.state.participantes_equipo)){
@@ -212,9 +234,10 @@ class EditarInformacionDeEventos extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
+
+
             
-            
-            const url = "http://127.0.0.1:8000/api/add-event"; 
+            const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
             const data = new FormData();
 
             data.append('image', this.state.image)
@@ -229,9 +252,13 @@ class EditarInformacionDeEventos extends Component{
             data.append('participantes_equipo', this.state.participantes_equipo)
             data.append('event_type_id', valor)
 
+            //console.log(this.state)
+            console.log(valor)
+
             axios.post(url, data).then(res => {
-                console.log(res)
-                window.location.href = './';
+              if(res.data.status === 200){
+                console.log(res);
+              }
             })
         }
 
@@ -278,7 +305,7 @@ class EditarInformacionDeEventos extends Component{
                   <p className="textoRegistro"> {this.state.event.nombre_evento}</p>
                 </div>
                 <div className="entradasDatos">
-                  <form onSubmit={this.saveEvent}>
+                  <form onSubmit={this.updateEvent} enctype="multipart/form-data">
                     <div className="datoNombre" id="entrada">
                       <p id="textoCuadro">Nombre*</p>
                       <input
@@ -286,7 +313,7 @@ class EditarInformacionDeEventos extends Component{
                         type="text"
                         name="nombre_evento"
                         placeholder="Ingrese nombre"
-                        value={this.state.event.nombre_evento}
+                        value={this.state.nombre_evento}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -304,7 +331,7 @@ class EditarInformacionDeEventos extends Component{
                         type="text"
                         name="requisitos"
                         placeholder="requisitos"
-                        value={this.state.event.requisitos}
+                        value={this.state.requisitos}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -321,7 +348,7 @@ class EditarInformacionDeEventos extends Component{
                         type="date"
                         name="fecha_inicio"
                         placeholder="Ingrese fecha"
-                        value={this.state.event.fecha_inicio}
+                        value={this.state.fecha_inicio}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -338,7 +365,7 @@ class EditarInformacionDeEventos extends Component{
                         type="number"
                         name="numero_contacto"
                         placeholder="65487898"
-                        value={this.state.event.numero_contacto}
+                        value={this.state.numero_contacto}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -355,7 +382,7 @@ class EditarInformacionDeEventos extends Component{
                         type="text"
                         name="descripcion"
                         placeholder="Descripcion"
-                        value={this.state.event.descripcion}
+                        value={this.state.descripcion}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -371,7 +398,7 @@ class EditarInformacionDeEventos extends Component{
                         id="inputRegistro"
                         type="date"
                         name="fecha_limite"
-                        value={this.state.event.fecha_limite}
+                        value={this.state.fecha_limite}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -387,7 +414,7 @@ class EditarInformacionDeEventos extends Component{
                         id="inputRegistro"
                         type="date"
                         name="fecha_fin"
-                        value={this.state.event.fecha_fin}
+                        value={this.state.fecha_fin}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -405,7 +432,7 @@ class EditarInformacionDeEventos extends Component{
                         name="participantes_equipo"
                         maxLength={2}
                         placeholder="Ingrese un numero de participantes"
-                        value={this.state.event.participantes_equipo}
+                        value={this.state.participantes_equipo}
                         onChange={this.handleInput}
                       />
                     </div>
@@ -435,7 +462,7 @@ class EditarInformacionDeEventos extends Component{
                       <p id="textoCuadro">Tipo de evento*</p>
                       <select id="desplegable" onChange={this.myFunction}>
 
-                        <option disabled selected > Seleccione un tipo</option>
+                        <option disabled selected > {this.state.nombre_tipo_evento}</option>
                         {this.eventos.map((evento, id) => {
                           return <option>{evento.nombre_tipo_evento}</option>;
                         })}
@@ -446,6 +473,7 @@ class EditarInformacionDeEventos extends Component{
                         name="event_type_id"
                         id="event_type_id"
                         onChange={this.handleInput}
+                        value={this.state.event_type_id}
                       />
                     </div>
                     {this.state.errors.event_type_id && (

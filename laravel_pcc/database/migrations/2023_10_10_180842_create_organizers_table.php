@@ -15,8 +15,8 @@ class CreateOrganizersTable extends Migration
     {
         Schema::create('organizers', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_organizador', 120);
-            $table->integer('numero_organizador');
+            $table->string('nombre_organizador');
+            $table->string('imagen_organizador');
             $table->timestamps();
         });
     }

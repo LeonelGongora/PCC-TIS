@@ -211,10 +211,12 @@ class Add_Event extends Component{
             data.append('participantes_equipo', this.state.participantes_equipo)
             data.append('event_type_id', valor)
 
-            axios.post(url, data).then(res => {
-                console.log(res)
-                window.location.href = './';
-            })
+            console.log(valor)
+
+            //axios.post(url, data).then(res => {
+                //console.log(res)
+                //window.location.href = './';
+            //})
         }
 
     }
@@ -399,6 +401,7 @@ class Add_Event extends Component{
                         className="imagen_input"
                       />
                     </div>
+
                     {this.state.errors.image && (
                       <span className="advertencia">
                         {this.state.errors.image}
