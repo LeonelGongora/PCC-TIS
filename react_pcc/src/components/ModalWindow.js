@@ -33,7 +33,7 @@ function ModalWindow({estado1, cambiarEstado1}){
         const validationErrors = {};
 
         if(!values.nombre_tipo_evento.trim()){
-            validationErrors.nombre_tipo_evento = "Este campo es obligatorio es requerido"
+            validationErrors.nombre_tipo_evento = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_tipo_evento)){
             validationErrors.nombre_tipo_evento = "Ingrese un nombre valido"
