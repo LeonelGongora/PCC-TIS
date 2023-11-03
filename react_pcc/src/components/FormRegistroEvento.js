@@ -1,9 +1,7 @@
 import React , { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import '../stylesheets/Formulario.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
-import Pregunta from '../images/Pregunta.png';
 
 import configApi from '../configApi/configApi'
 import axios from 'axios'
@@ -63,7 +61,6 @@ function FormRegistroEvento(){
     requisito: '',
   });
 
-  //const [errorNombre, setErrorNombre] = useState(false); 
   //const [errorRequisito, setErrorRequisito] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errorArchivo, setErrorArchivo] = useState('');
@@ -74,21 +71,26 @@ function FormRegistroEvento(){
       ...state,
       [name]: value,
     });
-    //setErrorNombre('');
   };
 
   const [errors, setErrors] = useState({});
 
   const registrar = async(e) => {
     e.preventDefault();
-
+    const form = document.forms["form_name"].getElementsByTagName("input");
+    var atributosInput = Array.from(form);
     const validationErrors = {};
-    console.log("Atributos")
-    console.log(atributos)
-    console.log(atributos.length)
+    var i;
+
+    for (i = 0; i < atributos.length; i++) {
+      
+      if(!atributosInput[i].value.trim()){
+        validationErrors[atributosInput[i].name] = "Este campo es obligatorio";
+      }
+    }
 
     if(!state.nombre.trim()){
-      validationErrors.nombre = "Este campo es obligatorio es requerido"
+      validationErrors.nombre = "Este campo es obligatorio"
     }
 
     setErrors(validationErrors);
@@ -96,15 +98,6 @@ function FormRegistroEvento(){
     if(Object.keys(validationErrors).length === 0){
 
     }
-
-    //const nombreError = !state.nombre.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    // const requisitoError = !state.requisito.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    //setErrorNombre(nombreError);
-    // setErrorRequisito(requisitoError);
-    // if (nombreError || requisitoError) {
-    //if (nombreError) {
-      //return;
-    //}
 
     if (archivoInput.current && archivoInput.current.files.length === 0) {
       setErrorArchivo('Debe subir un archivo .zip');
@@ -206,34 +199,32 @@ function FormRegistroEvento(){
       </div>
       <div className='registro'>
         <div className='entradasDatos'>
-            {atributos.map((atributo,id) => {
-                
-                             
-                return (<><div>
+
+             <form class="form_name" id='form_name'>
+
+                {atributos.map((atributo,id) => {
+                return (<><div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
                   <p id="textoCuadro">{atributo.nombre_atributo}</p>
                   <input
-                  id="inputRegistro"
+                  id="input"
+                  className="input-Formulario-Registro-Evento"
                   type="text"
-                  name="nombre_evento"
+                  name={atributo.nombre_atributo}
                   placeholder="Ingrese nombre"
                   />
-                </div></>);
-                })}
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            <p id='textoCuadro'>Seleccioneeeeee</p>
-            <select className="input-Formulario-Registro-Evento" id='input' type='text' name='nombre' value={state.nombre} onChange={handleChange} placeholder="Ingrese la talla">
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option></select>
-              
-              {errors.nombre && (
+                </div>
+                {errors[atributo.nombre_atributo] && (
                 <span className="advertencia">
-                  {errors.nombre}
+                  {errors[atributo.nombre_atributo]}
                 </span>
-              )}
-          </div>
+                )}
+
+                </>);
+                })}
+
+             </form>
+            
+          
           {/* <div className='datoRequisitos' id='entrada-Formulario-Registro-Evento' tabindex='0'>
             <p id='textoCuadro'>Requisitos</p>
             <input className="input-Formulario-Registro-Evento" id='input' type='text' name='requisito' value={state.requisito} onChange={handleChange} placeholder="Ingrese requisitos" />
