@@ -1,0 +1,166 @@
+
+.crearEventos-user {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.textoEvento-user{
+    background-color: #14365C;
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-size: 1.7rem;
+	font-weight: 700;
+}
+#entrada-user{
+    border: 1px solid rgb(175, 175, 175);
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 3vh;
+	margin-bottom: 4vh;
+    border-radius: 5px;
+	width: 400px;
+    height: 36px;
+}
+#entradaNom-user{
+    border: 1px solid rgb(175, 175, 175);
+    margin-left: 4vw;
+    margin-right:1vw;
+    margin-top: 4vh;
+	margin-bottom: 2vh;
+    border-radius: 5px;
+	width: 55%;
+    height: 36px;
+}
+#entradaAp-user{
+    border: 1px solid rgb(175, 175, 175);
+    margin-left: 1vw;
+    margin-right: 4vw;
+    margin-top: 4vh;
+	margin-bottom: 2vh;
+    border-radius: 5px;
+	width: 55%;
+    height: 36px;
+}
+
+#error-user {
+    border: 2px solid red;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 2vh;
+    border-radius: 5px;
+    height: 36px;
+    color: red;
+
+}
+
+
+.nombreAp-user{
+	display: flex;
+	flex-direction: row;
+}
+
+.botonRegistrar-user{
+    background-color: rgb(255, 213, 30);
+    padding: 10px 15px;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    border: none;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 4vh;
+    margin-top: 2vh;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.botonRegistrar-user:hover{
+    background-color: rgb(219, 179, 0) ;
+}
+.botonRegistrar-user:active{
+    background-color: rgb(255, 213, 0);
+}
+
+#textoCuadro-user {
+    position: relative;
+    font-size: 0.83rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(-12px);
+    background-color: white;
+}
+
+#inputRegistro-user{
+    font-size: small;
+    margin: 3px;
+    width: 95%;
+    padding: 2px;
+    transform: translateY(-12px);
+    outline: none;
+}
+
+#desplegable-user{
+    font-size: small;
+    margin: 3px;
+    width: 95%;
+    padding: 2px;
+    transform: translateY(-12px);
+    outline: none;
+}
+.tipoEvento2-user {
+    display: flex;
+    flex-direction: column;
+}
+
+#interiorTipo-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transform: translateY(-12px);
+}
+
+#option-user {
+    margin: 4px;
+    width: 100%;
+    outline: none;
+}
+
+.patrocinadores-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.organizadores-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#iconsImp-user {
+    background-color: white;
+    margin-right: 6px;
+}
+
+#entrada-user:focus-within {
+    border: 2px solid blue;
+    color: blue;
+}
+
+.advertencia-user {
+    display: block;
+    font-size: 0.75rem;
+    margin-left: 5vw;
+    margin-right: 4vw;
+    margin-top: 4px;
+    text-align: start;
+    color: red;
+    width: 100%;
+}

@@ -1,0 +1,37 @@
+
+  .AppManu-user{
+    width: 100vw;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  
+  .background-image-Manu-user{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/backgroundImage.jpg');
+    background-size: cover;
+    filter: brightness(0.4); 
+  }
+  .content-Manu-user{
+    z-index: 1;
+    display: flex;
+    flex-direction: column ;
+  }
+  .contenido-Manu-user{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 6vh;
+    z-index: 1;
+  }
+
+  .navegacion-user{
+    z-index: 1;
+    width: 100%;
+  }

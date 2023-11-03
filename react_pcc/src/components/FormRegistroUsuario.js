@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
+import "../stylesheets/FormUserInput.css";
 function FormRegistroUsuario(){
 
     const [formData, setFormData] = useState({
@@ -100,120 +101,117 @@ function FormRegistroUsuario(){
     }
 
 
-    return(
-        <form onSubmit={saveUser}>
-
-            <div id="entrada">
-                <p id="textoCuadro">Nombres*</p>
+    return (
+      <div className="crearEventos-user">
+        <div className="textoEvento-user">
+          <p className="textoRegistro-user">Registrarse</p>
+        </div>
+        <div className="entradaDatos-user">
+          <form onSubmit={saveUser}>
+            <div className="nombreAp-user">
+              <div id="entradaNom-user">
+                <p id="textoCuadro-user">Nombres*</p>
                 <input
-                    id="inputRegistro"
-                    type="text"
-                    name="nombre"
-                    placeholder="Ingrese nombre"
-                    onChange={handleChange}
+                  id="inputRegistro-user"
+                  type="text"
+                  name="nombre"
+                  placeholder="Ingrese nombre"
+                  onChange={handleChange}
                 />
+              </div>
+
+              {errors.nombre && (
+                <span className="advertencia-user">{errors.nombre}</span>
+              )}
+
+              <div id="entradaAp-user">
+                <p id="textoCuadro-user">Apellidos*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="text"
+                  name="apellido"
+                  placeholder="Ingrese nombre"
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errors.apellido && (
+                <span className="advertencia-user">{errors.apellido}</span>
+              )}
             </div>
 
-            {errors.nombre && (
-                <span className="advertencia">
-                {errors.nombre}
-                </span>
-            )}
-
-            <div id="entrada">
-                <p id="textoCuadro">Apellidos*</p>
-                <input
-                    id="inputRegistro"
-                    type="text"
-                    name="apellido"
-                    placeholder="Ingrese nombre"
-                    onChange={handleChange}
-                />
-            </div>
-
-            {errors.apellido && (
-                <span className="advertencia">
-                {errors.apellido}
-                </span>
-            )}
-
-            <div id="entrada">
-                <p id="textoCuadro">Email*</p>
-                <input
-                    id="inputRegistro"
-                    type="text"
-                    name="email"
-                    placeholder="Ingrese nombre"
-                    onChange={handleChange}
-                />
+            <div id="entrada-user">
+              <p id="textoCuadro-user">Email*</p>
+              <input
+                id="inputRegistro-user"
+                type="text"
+                name="email"
+                placeholder="Ingrese nombre"
+                onChange={handleChange}
+              />
             </div>
 
             {errors.email && (
-                <span className="advertencia">
-                {errors.email}
-                </span>
+              <span className="advertencia-user">{errors.email}</span>
             )}
 
-            <div id="entrada">
-                <p id="textoCuadro">Contraseña*</p>
-                <input
-                    id="inputRegistro"
-                    type="password"
-                    name="password"
-                    placeholder="Ingrese una contraseña"
-                    onChange={handleChange}
-                />
+            <div id="entrada-user">
+              <p id="textoCuadro-user">Contraseña*</p>
+              <input
+                id="inputRegistro-user"
+                type="password"
+                name="password"
+                placeholder="Ingrese una contraseña"
+                onChange={handleChange}
+              />
             </div>
 
             {errors.password && (
-                <span className="advertencia">
-                {errors.password}
-                </span>
+              <span className="advertencia-user">{errors.password}</span>
             )}
 
-            <div id="entrada">
-                <p id="textoCuadro">Confirmar Contraseña*</p>
-                <input
-                    id="inputRegistro"
-                    type="password"
-                    name="confirmarPassword"
-                    placeholder="Repita la contraseña ingresada"
-                    onChange={handleChange}
-                />
+            <div id="entrada-user">
+              <p id="textoCuadro-user">Confirmar Contraseña*</p>
+              <input
+                id="inputRegistro-user"
+                type="password"
+                name="confirmarPassword"
+                placeholder="Repita la contraseña ingresada"
+                onChange={handleChange}
+              />
             </div>
 
             {errors.confirmarPassword && (
-                <span className="advertencia">
+              <span className="advertencia-user">
                 {errors.confirmarPassword}
-                </span>
+              </span>
             )}
 
-            <div id="entrada">
-                <p id="textoCuadro">Telefono*</p>
-                <input
-                    id="inputRegistro"
-                    type="number"
-                    name="telefono"
-                    placeholder="Repita la contraseña ingresada"
-                    onChange={handleChange}
-                />
+            <div id="entrada-user">
+              <p id="textoCuadro-user">Telefono*</p>
+              <input
+                id="inputRegistro-user"
+                type="number"
+                name="telefono"
+                placeholder="Repita la contraseña ingresada"
+                onChange={handleChange}
+              />
             </div>
 
             {errors.telefono && (
-                <span className="advertencia">
-                {errors.telefono}
-                </span>
+              <span className="advertencia-user">{errors.telefono}</span>
             )}
 
-            <div className="botonEnviar">
-                <button className="botonRegistrar" type="submit">
+            <div className="botonEnviar-user">
+              <button className="botonRegistrar-user" type="submit">
                 {" "}
-                    Registrar evento
-                </button>
+                Registrar evento
+              </button>
             </div>
-
-        </form>
-    )
+          </form>
+        </div>
+      </div>
+    );
 }
 
 export default FormRegistroUsuario;
