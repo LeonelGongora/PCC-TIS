@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventType;
+use App\Models\Attribute;
 
 class Event extends Model
 {
@@ -22,17 +23,20 @@ class Event extends Model
         'event_type_id'
     ];
 
-    protected $with = ['event_type'];
-
+    
+    protected $with = ['event_type', 'attributes'];
     public function event_type(){
 
         return $this->belongsTo(EventType::class, 'event_type_id', 'id');
 
     }
 
-    public function attributes(){
+    
 
-        return $this->hasMany('App\Models\Atributo');
+    public function attributes(){
+        //'App\Models\Atributo'
+
+        return $this->hasMany(Attribute::class, 'event_id', 'id');
 
     }
 

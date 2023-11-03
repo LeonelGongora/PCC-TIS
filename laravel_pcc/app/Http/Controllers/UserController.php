@@ -46,10 +46,12 @@ class UserController extends Controller
 
 
         $user -> save();
+        $user->id;
 
         return response()->json([
             'status' => 200,
             'message' => 'Usuario añadido exitosamente',
+            'ultimo_id' => $user->id,
         ]);
     }
 

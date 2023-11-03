@@ -14,6 +14,7 @@ import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
+import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 
 
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
@@ -33,6 +34,8 @@ function App() {
         <Route path='/add-event' element={<Register_Event_Admin/>} />
 
 
+
+        <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos/>} />
 
         <Route path='/formUsuario' element={<FormRegisterUser/>} />
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />

@@ -9,11 +9,11 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalWindow({estado1, cambiarEstado1}){
+function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento}){
 
-    
     const [values, setValues] = useState({
-        nombre_tipo_evento : "",
+        nombre_atributo : "",
+
     });
 
     const [errors, setErrors] = useState({});
@@ -32,35 +32,40 @@ function ModalWindow({estado1, cambiarEstado1}){
 
         const validationErrors = {};
 
-        if(!values.nombre_tipo_evento.trim()){
-            validationErrors.nombre_tipo_evento = "Este campo es obligatorio"
+        if(!values.nombre_atributo.trim()){
+            validationErrors.nombre_atributo = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_tipo_evento)){
-            validationErrors.nombre_tipo_evento = "Ingrese un nombre valido"
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
+            validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }
 
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
-            const res = await axios.post('http://127.0.0.1:8000/api/add-event_type', values);
+
+            const data = new FormData();
+
+            data.append('nombre_atributo', values.nombre_atributo)
+            data.append('event_id', id_evento)
+
+            const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
+            
             if(res.data.status === 200){
-                console.log(values.nombre_tipo_evento);
+                console.log(res);
             }
         }
-
-        
     }
 
     return (
-        estado1 && (
+        estadoAtributo && (
             <div className="Overlay">
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Tipo de evento</h1>
+                    <h1>Añadir Atributo a Evento</h1>
                   </div>
                   <button
-                    onClick={() => cambiarEstado1(false)}
+                    onClick={() => cambiarEstadoModalAtributo(false)}
                     className="BotonSalir"
                   >
                     {salir}
@@ -68,25 +73,27 @@ function ModalWindow({estado1, cambiarEstado1}){
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
+
                         <input
                         type="text"
-                        name="nombre_tipo_evento"
+                        name="nombre_atributo"
                         className="inputEvento"
                         placeholder="Ingrese nombre"
                         onChange={handleInput}
                         />
-                        </form>
-                        {errors.nombre_tipo_evento && (
-                <span className="span1Modal">{errors.nombre_tipo_evento}</span>
-              )}
-              <button form="form1" type="submit" className="BotonRegistrar">
-                Registrar
-              </button>
+                        {errors.nombre_atributo && (
+                        <span className="span1Modal">{errors.nombre_atributo}</span>
+                        )}
+
+                    </form>
+                    <button form="form1" type="submit" className="BotonRegistrar">
+                        Registrar
+                    </button>
+                </div>
               </div>
-              </div>
-        </div>
+            </div>
         )
     );
 }
 
-export default ModalWindow; 
+export default ModalWindowAtributo; 

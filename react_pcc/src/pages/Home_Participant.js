@@ -62,7 +62,7 @@ class Home_Participant extends Component{
                                     
                                     return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
-                                     <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
+                                     <h4 className='nombreEvento'>{evento.nombre_evento} {cookies.get('id_usuario')}</h4>
                                      <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_limite}</h4>

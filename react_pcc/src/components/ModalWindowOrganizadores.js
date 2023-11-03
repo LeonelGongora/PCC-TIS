@@ -4,10 +4,11 @@ import axios from 'axios';
 import '../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-
+import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
+const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 
 function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganizador}){
 
@@ -29,6 +30,8 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
         });
     }
 
+    
+
     const handleChange = (e) => {
         setValues({
             ...values,
@@ -43,7 +46,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
         const validationErrors = {};
 
         if(!values.nombre_organizador.trim()){
-            validationErrors.nombre_organizador = "Este campo es obligatorio es requerido"
+            validationErrors.nombre_organizador = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_organizador)){
             validationErrors.nombre_organizador = "Ingrese un nombre valido"
@@ -98,19 +101,27 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                         <span className="span1Modal">{errors.nombre_organizador}</span>
                         )}
 
-
-                      <p id="textoCuadro">Imagen*</p>
+                      <label htmlFor="imagen_organizador" className="inputEvento-label">
                       <input
                         type="file"
                         name="imagen_organizador"
-                        onChange={handleChange}
+                        id="imagen_organizador"
                         className="inputEvento"
+                        onChange={handleChange}
                       />
+                      {values.imagen_organizador ? (
+                          <img
+                              src={URL.createObjectURL(values.imagen_organizador)}
+                              alt="Imagen subida"
+                              className="imagenSubida"
+                          />
+                      ) : (
+                          <span>Agregar imagen {subir}</span>
+                      )}
+                      </label>
  
                         {errors.imagen_organizador && (
-                            <span className="advertencia">
-                            {errors.imagen_organizador}
-                            </span>
+                        <span className="span1Modal">{errors.imagen_organizador}</span>
                         )}
 
                     </form>

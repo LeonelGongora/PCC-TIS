@@ -13,6 +13,7 @@ use App\Http\Controllers\EventoCerradoController;
 use App\Http\Controllers\EstaRegUserEventController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\AttributeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('type-events', [EventTypeController::class, 'get']);
 Route::get('events', [EventController::class, 'get']);
 
 Route::post('/add-event', [EventController::class, 'store']);
+Route::post('/add-attribute', [AttributeController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
@@ -39,12 +41,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('usuarios', UserController::class);
 
+Route::resource('eventos', EventController::class);
 Route::resource('eventousuarios', EventoUserController::class);
+
+
 Route::post('upload', [ArchivoController::class, 'upload']);
+
+Route::resource('usuarios', UserController::class);
 Route::post('download', [ArchivoController::class, 'download']);
 Route::resource('eventoabiertos', EventoAbiertoController::class);
 Route::resource('eventocerrados', EventoCerradoController::class);
-Route::resource('eventos', EventController::class);
 Route::resource('estareguserevent', EstaRegUserEventController::class);

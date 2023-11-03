@@ -1,5 +1,5 @@
 import React, {Component, useEffect} from 'react';
-import NavbarAdmin from '../components/NavbarAdmin';
+import NavbarUser from '../components/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 
@@ -9,7 +9,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 
-class PaginaEditarEventos extends Component{
+class PaginaRegistrarseEventos extends Component{
 
     eventos = []
 
@@ -37,10 +37,10 @@ class PaginaEditarEventos extends Component{
         this.getEvents();
     }
 
-    masDetalles(id){
+    irRegistro(id){
         cookies.set('idauxiliar', id, {path: "/"});
         // console.log(cookies.get('idauxiliar'));
-        window.location.href='./editar-evento';
+        window.location.href='./register-to-event';
     }
 
     render(){
@@ -50,19 +50,17 @@ class PaginaEditarEventos extends Component{
             <div className="App">
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin/>
+                   <NavbarUser/>
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>
-                            <p>
-                                Editar Eventos
-                            </p>
+                            
 
                                 { this.eventos.map((evento,id) => {
                                     
-                                    return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
+                                    return (<><div className='containerEvents' onClick={()=>this.irRegistro(evento.id)}>
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
-                                     <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
+                                     <h4 className='nombreEvento'>{evento.nombre_evento}   {cookies.get('id_usuario')}  </h4>
                                      <h4 className='tipoEv'>{evento.event_type.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_limite}</h4>
@@ -80,4 +78,4 @@ class PaginaEditarEventos extends Component{
     }
 }
 
-export default PaginaEditarEventos ;
+export default PaginaRegistrarseEventos ;

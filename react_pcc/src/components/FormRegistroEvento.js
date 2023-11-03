@@ -1,9 +1,7 @@
 import React , { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import '../stylesheets/Formulario.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
-import Pregunta from '../images/Pregunta.png';
 
 import configApi from '../configApi/configApi'
 import axios from 'axios'
@@ -13,6 +11,7 @@ import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWarning';
 
 const cookies = new Cookies();
+
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 const EventoUsuario_Api_Url = configApi.EVENTO_USUARIO_API_URL;
 const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
@@ -62,8 +61,7 @@ function FormRegistroEvento(){
     requisito: '',
   });
 
-  const [errorNombre, setErrorNombre] = useState(false); 
-  const [errorRequisito, setErrorRequisito] = useState(false);
+  //const [errorRequisito, setErrorRequisito] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errorArchivo, setErrorArchivo] = useState('');
 
@@ -73,18 +71,34 @@ function FormRegistroEvento(){
       ...state,
       [name]: value,
     });
-    setErrorNombre('');
   };
 
-  const registrar = async() => {
-    const nombreError = !state.nombre.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    // const requisitoError = !state.requisito.trim() ? 'Este campo es obligatorio, no puede dejarlo vacío' : '';
-    setErrorNombre(nombreError);
-    // setErrorRequisito(requisitoError);
-    // if (nombreError || requisitoError) {
-    if (nombreError) {
-      return;
+  const [errors, setErrors] = useState({});
+
+  const registrar = async(e) => {
+    e.preventDefault();
+    const form = document.forms["form_name"].getElementsByTagName("input");
+    var atributosInput = Array.from(form);
+    const validationErrors = {};
+    var i;
+
+    for (i = 0; i < atributos.length; i++) {
+      
+      if(!atributosInput[i].value.trim()){
+        validationErrors[atributosInput[i].name] = "Este campo es obligatorio";
+      }
     }
+
+    if(!state.nombre.trim()){
+      validationErrors.nombre = "Este campo es obligatorio"
+    }
+
+    setErrors(validationErrors);
+
+    if(Object.keys(validationErrors).length === 0){
+
+    }
+
     if (archivoInput.current && archivoInput.current.files.length === 0) {
       setErrorArchivo('Debe subir un archivo .zip');
       setShowModal(true);
@@ -113,7 +127,8 @@ function FormRegistroEvento(){
       TallaPolera: state.nombre
     })
     .then(response=>{
-      window.location.href='./home-participant';
+      //window.location.href='./home-participant';
+      console.log(response)
     })
     })
     }
@@ -122,15 +137,15 @@ function FormRegistroEvento(){
   //subida imagen
   const initialValues ={
     file:null,
-    nombre: ''
   }
   const [archivo, setArchivo] = useState(initialValues);
   //fin subida imagen
 
   //
   const [event, setEvent] = useState ( [] );
-  const idUsuario = '1';
   const idevento = cookies.get('idauxiliar');
+  const idUsuario = cookies.get('id_usuario');
+  const [atributos, setAtributos] = useState ( [] );
 
   useEffect(()=>{
     getEvent()
@@ -140,7 +155,10 @@ function FormRegistroEvento(){
       const url = `${Eventos_Api_Url}/${idevento}`;
       const response = await axios.get(url)
       setEvent(response.data)
-      // console.log(response.data);
+      console.log(response.data.attributes);
+
+      setAtributos(response.data.attributes)
+      console.log(atributos)
   }
   //
   return(
@@ -149,7 +167,6 @@ function FormRegistroEvento(){
         <h2 className='titulo-Formulario-Registro-Evento'>Registro al evento</h2>
       </div>
       <div className='containerRequisito'>  
-
         <p>{event.requisitos}</p>
         {}
       </div>
@@ -182,16 +199,32 @@ function FormRegistroEvento(){
       </div>
       <div className='registro'>
         <div className='entradasDatos'>
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            <p id='textoCuadro'>Talla de Polera</p>
-            <select className="input-Formulario-Registro-Evento" id='input' type='text' name='nombre' value={state.nombre} onChange={handleChange} placeholder="Ingrese la talla">
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option></select>
-            <p className="errorMensaje">{errorNombre}</p>
-          </div>
+
+             <form class="form_name" id='form_name'>
+
+                {atributos.map((atributo,id) => {
+                return (<><div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+                  <p id="textoCuadro">{atributo.nombre_atributo}</p>
+                  <input
+                  id="input"
+                  className="input-Formulario-Registro-Evento"
+                  type="text"
+                  name={atributo.nombre_atributo}
+                  placeholder="Ingrese nombre"
+                  />
+                </div>
+                {errors[atributo.nombre_atributo] && (
+                <span className="advertencia">
+                  {errors[atributo.nombre_atributo]}
+                </span>
+                )}
+
+                </>);
+                })}
+
+             </form>
+            
+          
           {/* <div className='datoRequisitos' id='entrada-Formulario-Registro-Evento' tabindex='0'>
             <p id='textoCuadro'>Requisitos</p>
             <input className="input-Formulario-Registro-Evento" id='input' type='text' name='requisito' value={state.requisito} onChange={handleChange} placeholder="Ingrese requisitos" />
