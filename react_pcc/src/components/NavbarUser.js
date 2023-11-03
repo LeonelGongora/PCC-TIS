@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import ReactDOM from 'react-dom';
 import "../stylesheets/NavbarStyles.css";
+import DropdownUser from './DropDownUser';
 
 function NavbarUser(){
     return (
@@ -15,8 +16,9 @@ function NavbarUser(){
             />
           </a>
         </div>
-        <div>
-          <ul id="navbar"></ul>
+        <div className="desplegable1">
+          <DropdownUser/>
+
         </div>
       </nav>
     );

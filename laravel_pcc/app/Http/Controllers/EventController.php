@@ -50,10 +50,17 @@ class EventController extends Controller
             'name' => $name,
             'event_type_id' => $event_type_id]);
 
-            return response()->json(['success' => 'Uploaded successfully']);
+            return response()->json([
+                'status' => 200,
+                'message' =>'Evento añadido exitosamente']);
+
+        }else{
+            return response()->json([
+                'status' => 200,
+                'message' => 'No hay archivo',
+            ]);
 
         }
-        return response()->json(['plz try again']);
 
     }
 

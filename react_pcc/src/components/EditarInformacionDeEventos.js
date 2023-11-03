@@ -3,6 +3,7 @@ import '../stylesheets/ViewEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
+import ModalWindowAtributo from './ModalWindowAtributo';
 
 const cookies = new Cookies();
 
@@ -39,7 +40,6 @@ class EditarInformacionDeEventos extends Component{
     }
     
     getEvent=async()=>{
-      console.log(this.id)
       const url = `${Eventos_Api_Url}/${this.id}`;
       const response = await axios.get(url)
       console.log(response)
@@ -57,9 +57,12 @@ class EditarInformacionDeEventos extends Component{
           participantes_equipo: response.data.participantes_equipo,
           event_type_id: response.data.event_type_id,
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
+          id_evento: response.data.id,
 
         });
       }
+
+      
 
 
     }
@@ -71,6 +74,7 @@ class EditarInformacionDeEventos extends Component{
         this.state = {
 
             nombre_tipo_evento : '',
+            id_evento: '',
             
             image: '',
             nombre_evento: '',
@@ -84,9 +88,14 @@ class EditarInformacionDeEventos extends Component{
             event_type_id: '',
             errors : {},
             contador : 0,
-            event : []
+            event : [],
+            estadoModal: false,
         }
 
+    }
+
+    cambiarEstadoModal = (nuevoEstado) => {
+      this.setState({ estadoModal: nuevoEstado });
     }
 
     handleInput = (e) => {
@@ -238,6 +247,8 @@ class EditarInformacionDeEventos extends Component{
 
             
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
+
+            //const urlAdd = "http://127.0.0.1:8000/api/add-event"; 
             const data = new FormData();
 
             data.append('image', this.state.image)
@@ -253,13 +264,20 @@ class EditarInformacionDeEventos extends Component{
             data.append('event_type_id', valor)
 
             //console.log(this.state)
-            console.log(valor)
+            //console.log(valor)
 
             axios.post(url, data).then(res => {
               if(res.data.status === 200){
                 console.log(res);
               }
             })
+
+            //axios.post(urlAdd, data).then(res => {
+              //if(res.data.status === 200){
+                //console.log(res);
+             //}
+            //})
+
         }
 
     }
@@ -297,10 +315,15 @@ class EditarInformacionDeEventos extends Component{
         }
     }
 
+
+
     render(){
         return (
             <>
               <div className="crearEventos">
+              <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
+              cambiarEstadoModalAtributo={this.cambiarEstadoModal}
+              id_evento = {this.state.id_evento}/>
                 <div className="textoEvento">
                   <p className="textoRegistro"> {this.state.event.nombre_evento}</p>
                 </div>
@@ -489,6 +512,12 @@ class EditarInformacionDeEventos extends Component{
                       </button>
                     </div>
                   </form>
+                  <button className="botonRegistrar" 
+                  onClick={() => this.cambiarEstadoModal(!this.estado1)}>
+                    Añadir atributo
+                  </button>
+
+                  
                 </div>
             </div>
     

@@ -213,10 +213,10 @@ class Add_Event extends Component{
 
             console.log(valor)
 
-            //axios.post(url, data).then(res => {
-                //console.log(res)
-                //window.location.href = './';
-            //})
+            axios.post(url, data).then(res => {
+                console.log(res)
+                window.location.href = './';
+            })
         }
 
     }

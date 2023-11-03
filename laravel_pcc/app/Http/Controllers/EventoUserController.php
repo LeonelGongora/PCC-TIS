@@ -37,7 +37,10 @@ class EventoUserController extends Controller
     {
         $eventouser = new EventoUser($request->all());
         $eventouser->save();
-        return $eventouser;
+        return response()->json([
+            'status' => 200,
+            'message' =>'Usuario registrado exitosamente']);
+
     }
 
     /**

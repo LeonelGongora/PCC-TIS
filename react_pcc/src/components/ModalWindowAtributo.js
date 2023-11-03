@@ -9,12 +9,10 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganizador}){
+function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento}){
 
-    
     const [values, setValues] = useState({
-        nombre_organizador : "",
-        imagen_organizador : ""
+        nombre_atributo : "",
 
     });
 
@@ -29,30 +27,16 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
         });
     }
 
-    
-
-    const handleChange = (e) => {
-        setValues({
-            ...values,
-            imagen_organizador: e.target.files[0]
-          });
-
-    }
-
     const saveTypeEvent = async (e) => {
         e.preventDefault();
 
         const validationErrors = {};
 
-        if(!values.nombre_organizador.trim()){
-            validationErrors.nombre_organizador = "Este campo es obligatorio"
+        if(!values.nombre_atributo.trim()){
+            validationErrors.nombre_atributo = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_organizador)){
-            validationErrors.nombre_organizador = "Ingrese un nombre valido"
-        }
-
-        if(!values.imagen_organizador.name){
-            validationErrors.imagen_organizador = "Debe subir una imagen"
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
+            validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }
 
         setErrors(validationErrors);
@@ -61,10 +45,10 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
 
             const data = new FormData();
 
-            data.append('nombre_organizador', values.nombre_organizador)
-            data.append('imagen_organizador', values.imagen_organizador)
+            data.append('nombre_atributo', values.nombre_atributo)
+            data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-organizador', data);
+            const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
             
             if(res.data.status === 200){
                 console.log(res);
@@ -73,15 +57,15 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
     }
 
     return (
-        estadoOrganizador && (
+        estadoAtributo && (
             <div className="Overlay">
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Registrar Organizador</h1>
+                    <h1>Añadir Atributo a Evento</h1>
                   </div>
                   <button
-                    onClick={() => cambiarEstadoModalOrganizador(false)}
+                    onClick={() => cambiarEstadoModalAtributo(false)}
                     className="BotonSalir"
                   >
                     {salir}
@@ -89,30 +73,16 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
+
                         <input
                         type="text"
-                        name="nombre_organizador"
+                        name="nombre_atributo"
                         className="inputEvento"
                         placeholder="Ingrese nombre"
                         onChange={handleInput}
                         />
-                        {errors.nombre_organizador && (
-                        <span className="span1Modal">{errors.nombre_organizador}</span>
-                        )}
-
-
-                      <p id="textoCuadro">Imagen*</p>
-                      <input
-                        type="file"
-                        name="imagen_organizador"
-                        onChange={handleChange}
-                        className="inputEvento"
-                      />
- 
-                        {errors.imagen_organizador && (
-                            <span className="advertencia">
-                            {errors.imagen_organizador}
-                            </span>
+                        {errors.nombre_atributo && (
+                        <span className="span1Modal">{errors.nombre_atributo}</span>
                         )}
 
                     </form>
@@ -126,4 +96,4 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
     );
 }
 
-export default ModalWindowOrganizadores; 
+export default ModalWindowAtributo; 

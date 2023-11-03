@@ -34,12 +34,14 @@ class Home_Admin extends Component{
 
         this.setState({loader:true});
         const events = await axios.get(this.state.url);
+        console.log(events)
+        console.log(events.data.events)
         this.eventos = Array.from(events.data.events)
-        //console.log(events)
+        console.log(this.eventos)
         
 
         this.setState({ events: events.data, loader:false});
-        console.log(this.eventos)
+        //console.log(this.eventos)
         var i;
         var fecha;
         var fecha1;

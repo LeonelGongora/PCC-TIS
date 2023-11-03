@@ -1,5 +1,10 @@
 import { useState } from "react";
 import axios from 'axios';
+
+
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 function FormRegistroUsuario(){
 
     const [formData, setFormData] = useState({
@@ -11,6 +16,12 @@ function FormRegistroUsuario(){
         telefono: '',
 
     })
+
+    const getUser =async()=>{
+        //const url = `${Eventos_Api_Url}/${id}`;
+        //const response = await axios.get(url)
+        //setEvent(response.data)
+    }
 
     const [errors, setErrors] = useState({})
 
@@ -94,7 +105,12 @@ function FormRegistroUsuario(){
 
             axios.post(url, data).then(res => {
                 console.log(res)
+                console.log(res.data.ultimo_id)
+                cookies.set('id_usuario', res.data.ultimo_id, {path: "/"});
+                window.location.href='./home-participant';
             })
+
+            
         }
 
     }

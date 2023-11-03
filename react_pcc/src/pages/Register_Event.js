@@ -1,5 +1,4 @@
 import "../stylesheets/RegisterEventStyles.css";
-//import NavbarUser from './components/NavBarCreateEvent';
 import FormRegistroEvento from '../components/FormRegistroEvento';
 
 import React , { useState, useEffect } from 'react';
@@ -44,7 +43,6 @@ function Register_Event() {
           </div>
       </div>
     </div>
-
     </div>
   );
 }
