@@ -4,10 +4,11 @@ import axios from 'axios';
 import '../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-
+import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
+const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 
 function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatrocinador}){
 
@@ -100,16 +101,27 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                             <span className="span1Modal">{errors.nombre_patrocinador}</span>
                         )}
 
-                        <p id="textoCuadro">Imagen*</p>
+                        <label htmlFor="imagen_patrocinador" className="inputEvento-label">
                         <input
                         type="file"
                         name="imagen_patrocinador"
-                        onChange={handleChange}
+                        id="imagen_patrocinador"
                         className="inputEvento"
+                        onChange={handleChange}
                         />
+                        {values.imagen_patrocinador ? (
+                          <img
+                              src={URL.createObjectURL(values.imagen_patrocinador)}
+                              alt="Imagen subida"
+                              className="imagenSubida"
+                          />
+                        ) : (
+                            <span>Agregar imagen {subir}</span>
+                        )}
+                        </label>
  
                         {errors.imagen_patrocinador && (
-                            <span className="advertencia">
+                            <span className="span1Modal">
                             {errors.imagen_patrocinador}
                             </span>
                         )}
