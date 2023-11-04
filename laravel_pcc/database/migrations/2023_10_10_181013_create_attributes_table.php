@@ -17,7 +17,6 @@ class CreateAttributesTable extends Migration
         Schema::create('attributes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_atributo');
-            $table->string('dato_atributo')-> nullable();
             $table->string('tipo_dato_atributo') -> default('text');
 
             $table->unsignedBigInteger('event_id');

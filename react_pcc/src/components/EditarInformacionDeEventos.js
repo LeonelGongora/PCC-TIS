@@ -38,7 +38,7 @@ class EditarInformacionDeEventos extends Component{
         
 
     }
-    
+
     getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${this.id}`;
       const response = await axios.get(url)
@@ -58,6 +58,7 @@ class EditarInformacionDeEventos extends Component{
           event_type_id: response.data.event_type_id,
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
           id_evento: response.data.id,
+          atributos: response.data.attributes
 
         });
       }
@@ -302,18 +303,13 @@ class EditarInformacionDeEventos extends Component{
             //console.log(this.state)
             //console.log(valor)
 
-            axios.post(url, data).then(res => {
-              if(res.data.status === 200){
-                console.log(res);
-              }
-            })
+            console.log(this.state.atributos)
 
-            //axios.post(urlAdd, data).then(res => {
+            //axios.post(url, data).then(res => {
               //if(res.data.status === 200){
                 //console.log(res);
-             //}
+              //}
             //})
-
         }
 
     }
@@ -336,8 +332,8 @@ class EditarInformacionDeEventos extends Component{
             nombre_tipo_eventos.push(x.options[i].value);
             id_tipo_eventos.push(i+1);
         }
-        console.log(id_tipo_eventos)
-        console.log(nombre_tipo_eventos)
+        //console.log(id_tipo_eventos)
+        //console.log(nombre_tipo_eventos)
 
         var y = document.getElementById("desplegable").value;
         var indice;
@@ -364,7 +360,7 @@ class EditarInformacionDeEventos extends Component{
                   <p className="textoRegistro"> Edicion eventos{this.state.event.nombre_evento}</p>
                 </div>
                 <div className="entradasDatos">
-                  <form onSubmit={this.updateEvent} enctype="multipart/form-data">
+                  <form onSubmit={this.updateEvent} encType="multipart/form-data">
                     <div className="datoNombre" id="entrada">
                       <p id="textoCuadro">Nombre*</p>
                       <input

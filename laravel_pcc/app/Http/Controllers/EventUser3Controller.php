@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventoUser;
 use Illuminate\Http\Request;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
-class EventoUserController extends Controller
+class EventUser3Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,14 @@ class EventoUserController extends Controller
      */
     public function index()
     {
-        return EventoUser::all();
+        return DB::table('evento_user')
+        ->join('users', 'evento_user.user_id', '=', 'users.id')
+        ->join('events', 'evento_user.event_id', '=', 'events.id')
+        // ->where('evento_user.event_id')
+        ->select('users.*', 'evento_user.event_id', 'evento_user.id as eventuserid','evento_user.solicitud', 'evento_user.requisitoZip', 'events.nombre_evento')
+        ->orderBy('evento_user.event_id', 'asc')
+        // ->where('boletas.estado', 1)
+        ->get();
     }
 
     /**
@@ -35,13 +43,7 @@ class EventoUserController extends Controller
      */
     public function store(Request $request)
     {
-        $eventouser = new EventoUser($request->all());
-        $eventouser->save();
-
-        return response()->json([
-            'status' => 200,
-            'message' =>'Evento-Usuario exitosamente']);
-
+        //
     }
 
     /**
@@ -52,7 +54,15 @@ class EventoUserController extends Controller
      */
     public function show($id)
     {
-        return EventoUser::find($id);
+        return DB::table('evento_user')
+        ->join('users', 'evento_user.user_id', '=', 'users.id')
+        ->join('events', 'evento_user.event_id', '=', 'events.id')
+        ->where('evento_user.event_id', $id)
+        ->where('evento_user.solicitud', 0)
+        ->select('users.*', 'evento_user.event_id', 'evento_user.id as eventuserid','evento_user.solicitud', 'evento_user.requisitoZip', 'events.nombre_evento')
+        ->orderBy('evento_user.event_id', 'asc')
+        // ->where('boletas.estado', 1)
+        ->get();
     }
 
     /**
@@ -75,11 +85,7 @@ class EventoUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $eventouser = EventoUser::find($id);
-        if(!is_null($eventouser)){
-        $eventouser->update($request->all());
-        return $eventouser;
-       } 
+        //
     }
 
     /**
@@ -90,7 +96,6 @@ class EventoUserController extends Controller
      */
     public function destroy($id)
     {
-        $evento=EventoUser::find($id);
-        $evento->delete();
+        //
     }
 }
