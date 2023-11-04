@@ -10,4 +10,6 @@ export default{
     "EVENTOCERRADOS_USUARIO_API_URL": `${iniURL}api/eventocerrados`,
     "EVENTOC_API_URL": `${iniURL}api/eventos`,
     "ESTAREGUSEREVENT_API_URL": `${iniURL}api/estareguserevent`,
+    "EVENTUSER2_API_URL": `${iniURL}api/eventuser2`,
+    "EVENTUSER3_API_URL": `${iniURL}api/eventuser3`,
 }

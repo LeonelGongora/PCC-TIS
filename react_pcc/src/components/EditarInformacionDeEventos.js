@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
-import '../stylesheets/ViewEventStyle.css'
+import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
@@ -93,7 +93,10 @@ class EditarInformacionDeEventos extends Component{
             event : [],
             estadoModal: false,
             atributos: [],
-            seCargoArchivo: 0
+            seCargoArchivo: 0,
+            camposAdicionales: [],
+            nuevoCampo: '',
+            mostrarCampoNuevo: false,
         }
 
     }
@@ -117,16 +120,39 @@ class EditarInformacionDeEventos extends Component{
         });
     }
 
-    eliminarAtributo(id){
-      //cookies.set('idauxiliar', id, {path: "/"});
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
-      console.log(id);
-      axios.delete(url).then(res => {
-              if(res.data.status === 200){
-                console.log(res);
-              }
-      })
-      //window.location.href='./event-admin';
+    handleNuevoCampoChange = (e) => {
+      this.setState({ nuevoCampo: e.target.value });
+    }
+  
+    agregarCampo = () => {
+      if (this.state.nuevoCampo) {
+        const nuevoCampo = {
+          titulo: this.state.nuevoCampo,
+          valor: '', 
+        };
+  
+        this.setState((prevState) => ({
+          camposAdicionales: [...prevState.camposAdicionales, nuevoCampo],
+          nuevoCampo: '', 
+        }));
+      }
+    }
+  
+    handleCampoChange = (index, e) => {
+      const { name, value } = e.target;
+      this.setState((prevState) => {
+        const camposActualizados = [...prevState.camposAdicionales];
+        camposActualizados[index][name] = value;
+        return { camposAdicionales: camposActualizados };
+      });
+    }
+  
+    eliminarCampo = (index) => {
+      this.setState((prevState) => {
+        const camposActualizados = [...prevState.camposAdicionales];
+        camposActualizados.splice(index, 1);
+        return { camposAdicionales: camposActualizados };
+      });
     }
 
     updateEvent = async (e) => {
@@ -342,13 +368,13 @@ class EditarInformacionDeEventos extends Component{
 
     render(){
         return (
-            <>
-              <div className="crearEventos">
-              <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
+            <><div className='contenedorMaximo'></div>
+              <div className="editarEventos">
+              {/* <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
               cambiarEstadoModalAtributo={this.cambiarEstadoModal}
-              id_evento = {this.state.id_evento}/>
+              id_evento = {this.state.id_evento}/> */}
                 <div className="textoEvento">
-                  <p className="textoRegistro"> {this.state.event.nombre_evento}</p>
+                  <p className="textoRegistro"> Edicion eventos{this.state.event.nombre_evento}</p>
                 </div>
                 <div className="entradasDatos">
                   <form onSubmit={this.updateEvent} encType="multipart/form-data">
@@ -527,41 +553,51 @@ class EditarInformacionDeEventos extends Component{
                         {this.state.errors.event_type_id}
                       </span>
                     )}
-  
+                    {this.state.camposAdicionales.map((campo, index) => (
+                     <div key={index} className="campo-container">
+                       <div id="entrada">
+                         <p id="textoCuadro">{campo.titulo}*</p>
+                         <input
+                           id="inputRegistro"
+                           type="text"
+                           name="valor"
+                           placeholder={`Ingrese ${campo.titulo}`}
+                           value={campo.valor}
+                           onChange={(e) => this.handleCampoChange(index, e)}
+                         />
+                       </div>
+                       <button className="botonEliminar" onClick={() => this.eliminarCampo(index)}>X</button>
+                     </div>
+                   ))}
+
+                   
+                   <div id="entrada">
+                     <input
+                       id="inputRegistro"
+                       type="text"
+                       placeholder="Título del nuevo Requerimiento"
+                       value={this.state.nuevoCampo}
+                       onChange={this.handleNuevoCampoChange}
+                     />
+
+                   </div>
+                   <button className="botonRegistrarEdit" onClick={this.agregarCampo}>Agregar Campo +</button>
                     <div className="botonEnviar">
-                      <button className="botonRegistrar" type="submit">
+                      <button className="botonRegistrarEdit" type="submit">
                         {" "}
                         Registrar
                       </button>
                     </div>
                   </form>
-
-                  <p>
-                    Requerimientos Adicionales
-                  </p>
-                  <br/>
-                  
-
-                  <div id='Atributos'>
-                    {this.state.atributos.map((atributo) => {
-                          return (<>
-                            <p>{atributo.nombre_atributo}</p>
-                            <button className="botonRegistrar"
-                            onClick={() => this.eliminarAtributo(atributo.id)}>
-                                Eliminar
-                            </button>
-                          </>);
-                    })}
-                  </div>
-
-                  <button className="botonRegistrar" 
+                  {/* <button className="botonRegistrar" 
                   onClick={() => this.cambiarEstadoModal(!this.estado1)}>
                     Añadir atributo
-                  </button>
+                  </button> */}
 
+                  
                 </div>
             </div>
-    
+            
             </>
 
         );

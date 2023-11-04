@@ -14,6 +14,8 @@ use App\Http\Controllers\EstaRegUserEventController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AttributeController;
+use App\Http\Controllers\EventUser2Controller;
+use App\Http\Controllers\EventUser3Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,3 +62,6 @@ Route::resource('eventoabiertos', EventoAbiertoController::class);
 Route::resource('eventocerrados', EventoCerradoController::class);
 
 Route::resource('estareguserevent', EstaRegUserEventController::class);
+Route::resource('eventuser2', EventUser2Controller::class);
+Route::resource('eventuser3', EventUser3Controller::class);
+

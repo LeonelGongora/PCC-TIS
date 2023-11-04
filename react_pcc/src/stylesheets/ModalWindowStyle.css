@@ -98,6 +98,8 @@ h1{
     font-size: 0.75rem;
     display: block;
     color: red;
+    max-width: 180px;
+    word-wrap: break-word;
 }
 
 .inputEvento[type="file"] {
