@@ -15,7 +15,7 @@ import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
-
+import VisualizarEventoAccepUserToEvent from "./pages/VisualizarEventoAccepUserToEvent.js";
 
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 
@@ -45,7 +45,8 @@ function App() {
 
         <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
         
-            
+        <Route path='/eventacceptUser' element={<VisualizarEventoAccepUserToEvent/>} />
+
       </Routes>
     </Router>
   );

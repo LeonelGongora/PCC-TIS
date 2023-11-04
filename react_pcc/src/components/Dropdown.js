@@ -13,7 +13,7 @@ function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrgan
 	};
 
   const aceptarUsuarioRedireccionar = () => {
-		window.location.href='./acceptUser';
+		window.location.href='./eventacceptUser';
 	};
 
   const editarEventoRedireccionar = () => {
