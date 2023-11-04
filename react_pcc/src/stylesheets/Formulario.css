@@ -112,10 +112,10 @@
     outline: none;
   }
   
-  .errorMensaje {
-    color: rgb(223, 20, 20);
-    font-size: 0.8em;
-    text-align: left;
+  .advertencia {
+    font-size: 0.75rem;
+    display: block;
+    color: red;
   }
   
   .entradasDatos{
