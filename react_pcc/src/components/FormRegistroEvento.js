@@ -125,7 +125,7 @@ function FormRegistroEvento(){
       requisitoZip: urli
     })
     .then(response=>{
-      //window.location.href='./home-participant';
+      window.location.href='./paginaRegistrarseEventos';
       console.log(response)
     })
     })

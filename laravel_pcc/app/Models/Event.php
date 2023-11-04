@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventType;
 use App\Models\Attribute;
+use App\Models\User;
 
 class Event extends Model
 {
     use HasFactory;
+
+    protected $table = 'events';
+
     protected $fillable = [
         'nombre_evento',
         'requisitos',
@@ -31,7 +35,10 @@ class Event extends Model
 
     }
 
-    
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'evento_user', 'event_id', 'user_id');
+    }
 
     public function attributes(){
         //'App\Models\Atributo'

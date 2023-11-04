@@ -17,8 +17,23 @@ class EventController extends Controller
             'events' => $events,
 
         ]);
-
     }
+
+    public function getNo($id){
+
+       $eventosNoInscritos = Event::whereDoesntHave('users', function ($query) use ($id) {
+        $query->where('user_id', $id);
+       })->get();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Eventos No Inscritos correctamente',
+            'events' => $eventosNoInscritos
+        ]);
+    }
+
+
+
+    
 
     public function store(Request $request){
         
@@ -78,12 +93,9 @@ class EventController extends Controller
     {
         
         $evento = Event::find($id);
+        $seCargoArchivo = $request -> seCargoArchivo;
 
-        if ($request->hasFile('image')) {
-
-            $image = $request->file('image');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $image->move('images/', $name);
+        if($seCargoArchivo == 0){
 
             $evento-> nombre_evento = $request -> nombre_evento;
             $evento-> requisitos = $request -> requisitos;
@@ -94,19 +106,46 @@ class EventController extends Controller
             $evento-> fecha_fin = $request -> fecha_fin;
             $evento-> participantes_equipo = $request -> participantes_equipo;
             $evento-> event_type_id = $request -> event_type_id;
-            $evento-> name = $name;
             $evento-> update();
 
             return response()->json([
                 'status' => 200,
-                'message' =>'Evento editado exitosamente']);
-        }else{
-            return response()->json([
-                'status' => 200,
-                'message' => 'No hay archivo',
-            ]);
+                'message' =>'No se cargo una nueva imagen']);
+            
 
+        }else{
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $name = time().'.'.$image->getClientOriginalExtension();
+                $image->move('images/', $name);
+
+                $evento-> nombre_evento = $request -> nombre_evento;
+                $evento-> requisitos = $request -> requisitos;
+                $evento-> fecha_inicio = $request -> fecha_inicio;
+                $evento-> numero_contacto = $request -> numero_contacto;
+                $evento-> descripcion = $request -> descripcion;
+                $evento-> fecha_limite = $request -> fecha_limite;
+                $evento-> fecha_fin = $request -> fecha_fin;
+                $evento-> participantes_equipo = $request -> participantes_equipo;
+                $evento-> event_type_id = $request -> event_type_id;
+                $evento-> name = $name;
+                $evento-> update();
+
+                return response()->json([
+                    'status' => 200,
+                    'message' =>'Se cargo una nueva imagen']);
+
+            }else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'No hay archivo',
+                ]);
+    
+            }
+            
         }
+
+        
       
     }
 

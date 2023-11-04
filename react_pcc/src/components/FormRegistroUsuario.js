@@ -19,12 +19,6 @@ function FormRegistroUsuario() {
 
   })
 
-  const getUser = async () => {
-    //const url = `${Eventos_Api_Url}/${id}`;
-    //const response = await axios.get(url)
-    //setEvent(response.data)
-  }
-
   const [errors, setErrors] = useState({})
 
   const handleChange = (e) => {

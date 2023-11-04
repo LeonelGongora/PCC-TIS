@@ -30,14 +30,21 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
         });
     }
 
-    
-
     const handleChange = (e) => {
         setValues({
             ...values,
             imagen_organizador: e.target.files[0]
           });
 
+    }
+
+    const salirVentanaModal = (e) => {
+        cambiarEstadoModalOrganizador(false);
+        setValues({
+            nombre_organizador : '',
+            imagen_organizador: ''
+        });
+        setErrors({});
     }
 
     const saveTypeEvent = async (e) => {
@@ -101,12 +108,12 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                   <div className="tituloEvento">
                     <h1>Registrar Organizador</h1>
                   </div>
-                  <button
-                    onClick={() => cambiarEstadoModalOrganizador(false)}
-                    className="BotonSalir"
-                  >
+
+                  <button className="BotonSalir"
+                  onClick={salirVentanaModal}>
                     {salir}
                   </button>
+
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">

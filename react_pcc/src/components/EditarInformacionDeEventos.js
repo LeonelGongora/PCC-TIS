@@ -58,7 +58,8 @@ class EditarInformacionDeEventos extends Component{
           event_type_id: response.data.event_type_id,
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
           id_evento: response.data.id,
-          atributos: response.data.attributes
+          atributos: response.data.attributes,
+          image: response.data.name
 
         });
       }
@@ -91,8 +92,8 @@ class EditarInformacionDeEventos extends Component{
             contador : 0,
             event : [],
             estadoModal: false,
-            atributos: []
-
+            atributos: [],
+            seCargoArchivo: 0
         }
 
     }
@@ -111,7 +112,8 @@ class EditarInformacionDeEventos extends Component{
 
     handleChange = (e) => {
         this.setState({
-            image: e.target.files[0]
+            image: e.target.files[0],
+            seCargoArchivo: 1
         });
     }
 
@@ -130,6 +132,8 @@ class EditarInformacionDeEventos extends Component{
     updateEvent = async (e) => {
         let valor = document.getElementById("event_type_id").value
         //this.setState({ event_type_id: valor });
+        console.log("Se Cargo")
+        console.log(this.state.seCargoArchivo)
 
         e.preventDefault();
         const validationErrors = {};
@@ -231,10 +235,14 @@ class EditarInformacionDeEventos extends Component{
             validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
         }
 
-        if(!this.state.image.name){
+        if(this.state.seCargoArchivo === 0){
+          console.log("NO SE CARGO")
+
+        }else{
+          if(!this.state.image.name){
             validationErrors.image = "Debe subir una imagen"
 
-        }else if(this.state.image.name){
+          }else if(this.state.image.name){
             const extensiones = ["png","PNG" ,"jpg", "jpeg"];
 
                 var nombreArchivo = this.state.image.name;
@@ -246,7 +254,10 @@ class EditarInformacionDeEventos extends Component{
                     validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
 
                 }
+          }
         }
+
+        
 
         if(!this.state.event_type_id){
             validationErrors.event_type_id = "Debe seleccionar un tipo de evento"
@@ -261,7 +272,6 @@ class EditarInformacionDeEventos extends Component{
             
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
 
-            //const urlAdd = "http://127.0.0.1:8000/api/add-event"; 
             const data = new FormData();
 
             data.append('image', this.state.image)
@@ -275,11 +285,16 @@ class EditarInformacionDeEventos extends Component{
             data.append('fecha_fin', this.state.fecha_fin)
             data.append('participantes_equipo', this.state.participantes_equipo)
             data.append('event_type_id', valor)
+            data.append('seCargoArchivo', this.state.seCargoArchivo)
+
+            //console.log("File")
+            //var file = document.files[0];
+            //console.log(file)
+            //console.log(valorFile)
 
             //console.log(this.state)
             //console.log(valor)
 
-            console.log(this.state.atributos)
 
             //axios.post(url, data).then(res => {
               //if(res.data.status === 200){

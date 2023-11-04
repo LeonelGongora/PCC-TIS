@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Event;
 
 class User extends Authenticatable
 {
@@ -17,10 +18,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+
     protected $fillable = [
         'nombre', 'apellido', 'dni', 'telefono','email', 'password',
         'tipo_usuario',
     ];
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'evento_user', 'user_id','event_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -37,6 +37,15 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
 
     }
 
+    const salirVentanaModal = (e) => {
+        cambiarEstadoModalPatrocinador(false);
+        setValues({
+            nombre_patrocinador : '',
+            imagen_patrocinador: ''
+        });
+        setErrors({});
+    }
+
     const saveTypeEvent = async (e) => {
         e.preventDefault();
 
@@ -101,7 +110,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                     <h1>Registrar Patrocinador</h1>
                   </div>
                   <button
-                    onClick={() => cambiarEstadoModalPatrocinador(false)}
+                    onClick={salirVentanaModal}
                     className="BotonSalir"
                   >
                     {salir}

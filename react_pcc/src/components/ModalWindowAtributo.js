@@ -27,6 +27,14 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
         });
     }
 
+    const salirVentanaModal = (e) => {
+        cambiarEstadoModalAtributo(false);
+        setValues({
+            nombre_atributo : '',
+        });
+        setErrors({});
+    }
+
     const saveTypeEvent = async (e) => {
         e.preventDefault();
 
@@ -52,6 +60,9 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
             
             if(res.data.status === 200){
                 console.log(res);
+                setValues({
+                    nombre_atributo : '',
+                });
             }
         }
     }
@@ -65,7 +76,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
                     <h1>Añadir Atributo a Evento</h1>
                   </div>
                   <button
-                    onClick={() => cambiarEstadoModalAtributo(false)}
+                    onClick={salirVentanaModal}
                     className="BotonSalir"
                   >
                     {salir}
