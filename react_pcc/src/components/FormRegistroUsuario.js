@@ -34,7 +34,7 @@ function FormRegistroUsuario() {
     })
   }
 
-  saveEvent = async (e) => {
+  const saveUser = async (e) => {
     e.preventDefault();
 
     const validationErrors = {};
