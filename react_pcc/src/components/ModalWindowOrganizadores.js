@@ -54,6 +54,22 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
 
         if(!values.imagen_organizador.name){
             validationErrors.imagen_organizador = "Debe subir una imagen"
+        }else if(values.imagen_organizador.name){
+            const extensiones = ["png","PNG" ,"jpg", "jpeg"];
+
+                var nombreArchivo = values.imagen_organizador.name;
+                const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
+                if (!extensiones.includes(extension)){
+                    document.getElementById("imagen_organizador").value = "";
+
+                    setValues({
+                        ...values,
+                        imagen_organizador: ''
+                    });
+                
+                    validationErrors.imagen_organizador = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
+
+                }
         }
 
         setErrors(validationErrors);
@@ -69,6 +85,10 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
             
             if(res.data.status === 200){
                 console.log(res);
+                setValues({
+                    nombre_organizador : '',
+                    imagen_organizador: ''
+                });
             }
         }
     }

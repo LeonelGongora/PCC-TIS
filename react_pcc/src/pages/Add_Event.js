@@ -149,7 +149,7 @@ class Add_Event extends Component{
             validationErrors.descripcion = "Este campo es obligatorio"
 
         }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(this.state.descripcion)){
-            validationErrors.descripcion = "Ingrese una descripcion valido"
+            validationErrors.descripcion = "Ingrese una descripción válida"
         }
 
         if(!this.state.fecha_limite.trim()){
@@ -286,7 +286,7 @@ class Add_Event extends Component{
                         id="inputRegistro"
                         type="text"
                         name="requisitos"
-                        placeholder="requisitos"
+                        placeholder="Ingrese requisitos"
                         onChange={this.handleInput}
                       />
                     </div>
@@ -297,7 +297,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Fecha de Inicio*</p>
+                      <p id="textoCuadro">Fecha Inicio de Evento*</p>
                       <input
                         id="inputRegistro"
                         type="date"
@@ -313,7 +313,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Numero de Contacto*</p>
+                      <p id="textoCuadro">Número de Contacto*</p>
                       <input
                         id="inputRegistro"
                         type="number"
@@ -329,7 +329,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Descripcion*</p>
+                      <p id="textoCuadro">Descripcion de Evento*</p>
                       <input
                         id="inputRegistro"
                         type="text"
@@ -345,7 +345,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Fecha limite de inscripcion*</p>
+                      <p id="textoCuadro">Fecha Limite de inscripcion*</p>
                       <input
                         id="inputRegistro"
                         type="date"
@@ -360,7 +360,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Fecha fin del evento*</p>
+                      <p id="textoCuadro">Fecha Fin del evento*</p>
                       <input
                         id="inputRegistro"
                         type="date"

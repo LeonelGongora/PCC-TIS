@@ -54,9 +54,7 @@ class PaginaRegistrarseEventos extends Component{
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>
-                            <p>
-                                Registrarse A Eventos Eventos
-                            </p>
+                            
 
                                 { this.eventos.map((evento,id) => {
                                     

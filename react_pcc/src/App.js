@@ -10,7 +10,7 @@ import Register_Event_Admin from "./pages/Register_Event_Admin.js";
 import ContenedorSliderAdmin from "./pages/ContenedorSliderAdmin.js";
 import ContenedorSliderUser from "./components/ContenedorSliderUser.js";
 
-import FormRegistroUsuario from "./components/FormRegistroUsuario.js";
+import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
@@ -35,9 +35,9 @@ function App() {
 
 
 
-        <Route path='/formUsuario' element={<FormRegistroUsuario/>} />
         <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos/>} />
 
+        <Route path='/formUsuario' element={<FormRegisterUser/>} />
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />
 
         <Route path='/editar-evento' element={<EditarEvento/>} />

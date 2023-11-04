@@ -11,7 +11,6 @@ class Attribute extends Model
 
     protected $fillable = [
         'nombre_atributo',
-        'dato_atributo',
         'tipo_dato_atributo',
         'event_id',
     ];

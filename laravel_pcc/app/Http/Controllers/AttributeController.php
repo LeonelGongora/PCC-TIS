@@ -21,5 +21,13 @@ class AttributeController extends Controller
             'message' => 'Atributo añadido exitosamente',
         ]);
     }
-    
+
+    public function destroy($id)
+    {
+        $evento=Attribute::find($id);
+        $evento->delete();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Atributo eliminado exitosamentes exitosamente']);
+    }
 }
