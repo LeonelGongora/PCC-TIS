@@ -1,0 +1,63 @@
+.editarEventos{
+    max-width: 700px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5% 15%;
+    width: 100%;
+    text-align: center;
+}
+.contenedorMaximo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../images/backgroundImage.jpg');
+    background-size: cover;
+    filter: brightness(0.4);
+    z-index: -1;
+}
+.campo-container{
+    display: flex;
+}
+.campo-container #entrada{
+    width: 80%;
+}
+.botonEliminar{
+    background-color: rgb(167, 14, 14);
+    padding: 10px 10px;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    border: none;
+    margin-right: 4vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white
+}
+
+.entradasDatos{
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.botonRegistrarEdit{
+    background-color: rgb(255, 213, 30);
+    padding: 10px 15px;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    border: none;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.botonEnviar .botonRegistrarEdit{
+    background-color: rgb(255, 213, 30);
+    width: 90%;
+    margin:1px 10px;
+    margin-bottom: 10px;
+}
