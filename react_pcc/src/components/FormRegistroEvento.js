@@ -79,6 +79,7 @@ function FormRegistroEvento(){
     e.preventDefault();
     const form = document.forms["form_name"].getElementsByTagName("input");
     var atributosInput = Array.from(form);
+    console.log(atributosInput)
     const validationErrors = {};
     var i;
 
@@ -89,9 +90,7 @@ function FormRegistroEvento(){
       }
     }
 
-    if(!state.nombre.trim()){
-      validationErrors.nombre = "Este campo es obligatorio"
-    }
+    console.log(validationErrors)
 
     setErrors(validationErrors);
 
@@ -123,8 +122,7 @@ function FormRegistroEvento(){
     axios.post(EventoUsuario_Api_Url, {
       event_id: idevento,
       user_id: idUsuario,
-      requisitoZip: urli,
-      TallaPolera: state.nombre
+      requisitoZip: urli
     })
     .then(response=>{
       //window.location.href='./home-participant';

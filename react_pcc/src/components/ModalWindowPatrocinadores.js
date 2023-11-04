@@ -51,6 +51,22 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
 
         if(!values.imagen_patrocinador.name){
             validationErrors.imagen_patrocinador = "Debe subir una imagen"
+        }else if(values.imagen_patrocinador.name){
+            const extensiones = ["png","PNG" ,"jpg", "jpeg"];
+
+                var nombreArchivo = values.imagen_patrocinador.name;
+                const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
+                if (!extensiones.includes(extension)){
+                    document.getElementById("imagen_organizador").value = "";
+
+                    setValues({
+                        ...values,
+                        imagen_patrocinador: ''
+                    });
+                
+                    validationErrors.imagen_patrocinador = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
+
+                }
         }
 
         setErrors(validationErrors);
@@ -67,10 +83,13 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
             const res = await axios.post('http://127.0.0.1:8000/api/add-patrocinador', data);
             if(res.data.status === 200){
                 console.log(res);
+                setValues({
+                    nombre_patrocinador : '',
+                    imagen_patrocinador: ''
+                });
             }
         }
 
-        
     }
 
     return (

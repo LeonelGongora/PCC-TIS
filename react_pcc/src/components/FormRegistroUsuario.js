@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from 'axios';
 
+import FormUserInput from "../stylesheets/FormUserInput.css";
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-import "../stylesheets/FormUserInput.css";
+
+
 function FormRegistroUsuario(){
 
     const [formData, setFormData] = useState({
@@ -17,12 +19,6 @@ function FormRegistroUsuario(){
         telefono: '',
 
     })
-
-    const getUser =async()=>{
-        //const url = `${Eventos_Api_Url}/${id}`;
-        //const response = await axios.get(url)
-        //setEvent(response.data)
-    }
 
     const [errors, setErrors] = useState({})
 
@@ -42,25 +38,22 @@ function FormRegistroUsuario(){
         if(!formData.nombre.trim()){
             validationErrors.nombre = "Este campo es obligatorio"
             
-            
         }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(formData.nombre)){
-            validationErrors.nombre = "Ingrese nombre(s) valido"
+            validationErrors.nombre = "Ingrese nombre(s) valido(s)"
         }
 
 
         if(!formData.apellido.trim()){
             validationErrors.apellido = "Este campo es obligatorio"
             
-            
         }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(formData.apellido)){
-            validationErrors.apellido = "Ingrese apellido(s) valido"
+            validationErrors.apellido = "Ingrese apellido(s) valido(s)"
         }
 
 
 
         if(!formData.email.trim()){
             validationErrors.email = "Este campo es obligatorio"
-            
             
         }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(formData.email)){
             validationErrors.email = "Ingrese correo valido"
@@ -70,7 +63,6 @@ function FormRegistroUsuario(){
 
         if(!formData.password.trim()){
             validationErrors.password = "Este campo es obligatorio"
-            
             
         }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(formData.password)){
             validationErrors.password = "Ingrese una contraseña valida"
@@ -221,7 +213,7 @@ function FormRegistroUsuario(){
             <div className="botonEnviar-user">
               <button className="botonRegistrar-user" type="submit">
                 {" "}
-                Registrar evento
+                Registrar
               </button>
             </div>
           </form>
