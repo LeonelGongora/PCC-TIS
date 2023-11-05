@@ -375,7 +375,7 @@ class Add_Event extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Participantes por equipo*</p>
+                      <p id="textoCuadro">Cantidad de participantes por equipo*</p>
                       <input
                         id="inputRegistro"
                         type="tel"

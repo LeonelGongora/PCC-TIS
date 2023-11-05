@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component} from 'react';
-import '../stylesheets/ViewEventStyle.css'
+import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
@@ -58,7 +58,8 @@ class EditarInformacionDeEventos extends Component{
           event_type_id: response.data.event_type_id,
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
           id_evento: response.data.id,
-          atributos: response.data.attributes
+          atributos: response.data.attributes,
+          image: response.data.name
 
         });
       }
@@ -91,8 +92,11 @@ class EditarInformacionDeEventos extends Component{
             contador : 0,
             event : [],
             estadoModal: false,
-            atributos: []
-
+            atributos: [],
+            seCargoArchivo: 0,
+            camposAdicionales: [],
+            nuevoCampo: '',
+            mostrarCampoNuevo: false,
         }
 
     }
@@ -111,25 +115,51 @@ class EditarInformacionDeEventos extends Component{
 
     handleChange = (e) => {
         this.setState({
-            image: e.target.files[0]
+            image: e.target.files[0],
+            seCargoArchivo: 1
         });
     }
 
-    eliminarAtributo(id){
-      //cookies.set('idauxiliar', id, {path: "/"});
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
-      console.log(id);
-      axios.delete(url).then(res => {
-              if(res.data.status === 200){
-                console.log(res);
-              }
-      })
-      //window.location.href='./event-admin';
+    handleNuevoCampoChange = (e) => {
+      this.setState({ nuevoCampo: e.target.value });
+    }
+  
+    agregarCampo = () => {
+      if (this.state.nuevoCampo) {
+        const nuevoCampo = {
+          titulo: this.state.nuevoCampo,
+          valor: '', 
+        };
+  
+        this.setState((prevState) => ({
+          camposAdicionales: [...prevState.camposAdicionales, nuevoCampo],
+          nuevoCampo: '', 
+        }));
+      }
+    }
+  
+    handleCampoChange = (index, e) => {
+      const { name, value } = e.target;
+      this.setState((prevState) => {
+        const camposActualizados = [...prevState.camposAdicionales];
+        camposActualizados[index][name] = value;
+        return { camposAdicionales: camposActualizados };
+      });
+    }
+  
+    eliminarCampo = (index) => {
+      this.setState((prevState) => {
+        const camposActualizados = [...prevState.camposAdicionales];
+        camposActualizados.splice(index, 1);
+        return { camposAdicionales: camposActualizados };
+      });
     }
 
     updateEvent = async (e) => {
         let valor = document.getElementById("event_type_id").value
         //this.setState({ event_type_id: valor });
+        console.log("Se Cargo")
+        console.log(this.state.seCargoArchivo)
 
         e.preventDefault();
         const validationErrors = {};
@@ -231,10 +261,14 @@ class EditarInformacionDeEventos extends Component{
             validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
         }
 
-        if(!this.state.image.name){
+        if(this.state.seCargoArchivo === 0){
+          console.log("NO SE CARGO")
+
+        }else{
+          if(!this.state.image.name){
             validationErrors.image = "Debe subir una imagen"
 
-        }else if(this.state.image.name){
+          }else if(this.state.image.name){
             const extensiones = ["png","PNG" ,"jpg", "jpeg"];
 
                 var nombreArchivo = this.state.image.name;
@@ -246,7 +280,10 @@ class EditarInformacionDeEventos extends Component{
                     validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
 
                 }
+          }
         }
+
+        
 
         if(!this.state.event_type_id){
             validationErrors.event_type_id = "Debe seleccionar un tipo de evento"
@@ -261,7 +298,6 @@ class EditarInformacionDeEventos extends Component{
             
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
 
-            //const urlAdd = "http://127.0.0.1:8000/api/add-event"; 
             const data = new FormData();
 
             data.append('image', this.state.image)
@@ -275,17 +311,22 @@ class EditarInformacionDeEventos extends Component{
             data.append('fecha_fin', this.state.fecha_fin)
             data.append('participantes_equipo', this.state.participantes_equipo)
             data.append('event_type_id', valor)
+            data.append('seCargoArchivo', this.state.seCargoArchivo)
+
+            //console.log("File")
+            //var file = document.files[0];
+            //console.log(file)
+            //console.log(valorFile)
 
             //console.log(this.state)
             //console.log(valor)
 
-            console.log(this.state.atributos)
 
-            //axios.post(url, data).then(res => {
-              //if(res.data.status === 200){
-                //console.log(res);
-              //}
-            //})
+            axios.post(url, data).then(res => {
+              if(res.data.status === 200){
+                console.log(res);
+              }
+            })
         }
 
     }
@@ -327,13 +368,13 @@ class EditarInformacionDeEventos extends Component{
 
     render(){
         return (
-            <>
-              <div className="crearEventos">
-              <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
+            <><div className='contenedorMaximo'></div>
+              <div className="editarEventos">
+              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
               cambiarEstadoModalAtributo={this.cambiarEstadoModal}
-              id_evento = {this.state.id_evento}/>
+              id_evento = {this.state.id_evento}/> }
                 <div className="textoEvento">
-                  <p className="textoRegistro"> {this.state.event.nombre_evento}</p>
+                  <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
                 <div className="entradasDatos">
                   <form onSubmit={this.updateEvent} encType="multipart/form-data">
@@ -512,41 +553,52 @@ class EditarInformacionDeEventos extends Component{
                         {this.state.errors.event_type_id}
                       </span>
                     )}
-  
+
+                    {this.state.camposAdicionales.map((campo, index) => (
+                     <div key={index} className="campo-container">
+                       <div id="entrada">
+                         <p id="textoCuadro">{campo.titulo}*</p>
+                         <input
+                           id="inputRegistro"
+                           type="text"
+                           name="valor"
+                           placeholder={`Ingrese ${campo.titulo}`}
+                           value={campo.valor}
+                           onChange={(e) => this.handleCampoChange(index, e)}
+                         />
+                       </div>
+                       <button className="botonEliminar" onClick={() => this.eliminarCampo(index)}>X</button>
+                     </div>
+                   ))}
+
+                   
+                   <div id="entrada">
+                     <input
+                       id="inputRegistro"
+                       type="text"
+                       placeholder="Título del nuevo Requerimiento"
+                       value={this.state.nuevoCampo}
+                       onChange={this.handleNuevoCampoChange}
+                     />
+
+                   </div>
+                   <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
-                      <button className="botonRegistrar" type="submit">
+                      <button className="botonRegistrarEdit" type="submit">
                         {" "}
-                        Registrar
+                        Guardar
                       </button>
                     </div>
                   </form>
-
-                  <p>
-                    Requerimientos Adicionales
-                  </p>
-                  <br/>
-                  
-
-                  <div id='Atributos'>
-                    {this.state.atributos.map((atributo) => {
-                          return (<>
-                            <p>{atributo.nombre_atributo}</p>
-                            <button className="botonRegistrar"
-                            onClick={() => this.eliminarAtributo(atributo.id)}>
-                                Eliminar
-                            </button>
-                          </>);
-                    })}
-                  </div>
-
-                  <button className="botonRegistrar" 
+                  {/* <button className="botonRegistrar" 
                   onClick={() => this.cambiarEstadoModal(!this.estado1)}>
                     Añadir atributo
-                  </button>
+                  </button> */}
 
+                  
                 </div>
             </div>
-    
+            
             </>
 
         );

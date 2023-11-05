@@ -33,6 +33,8 @@ Route::post('/add-event_type', [EventTypeController::class, 'store']);
 Route::get('events', [EventController::class, 'get']);
 Route::post('/add-event', [EventController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
+Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
+
 
 Route::post('/add-attribute', [AttributeController::class, 'store']);
 Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
@@ -58,6 +60,7 @@ Route::resource('usuarios', UserController::class);
 Route::post('download', [ArchivoController::class, 'download']);
 Route::resource('eventoabiertos', EventoAbiertoController::class);
 Route::resource('eventocerrados', EventoCerradoController::class);
+
 Route::resource('estareguserevent', EstaRegUserEventController::class);
 Route::resource('eventuser2', EventUser2Controller::class);
 Route::resource('eventuser3', EventUser3Controller::class);

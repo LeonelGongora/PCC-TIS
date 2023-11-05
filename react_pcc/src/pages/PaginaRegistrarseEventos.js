@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component} from 'react';
 import NavbarUser from '../components/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
@@ -12,25 +12,31 @@ const cookies = new Cookies();
 class PaginaRegistrarseEventos extends Component{
 
     eventos = []
+    id = cookies.get('id_usuario')
+    
+
 
     state = {
         events: [],
         loader:false,
-        url: "http://127.0.0.1:8000/api/events"
+        url: "http://127.0.0.1:8000/api/events",
+        
 
     };
 
     getEvents = async () => {
 
+        var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
+
         this.setState({loader:true});
-        const events = await axios.get(this.state.url);
-        this.eventos = Array.from(events.data.events)
+        //const events = await axios.get(this.state.url);
+        const events = await axios.get(url2);
         console.log(events)
-        
 
-        this.setState({ events: events.data, loader:false});
+        this.eventos = Array.from(events.data.events)
         console.log(this.eventos)
-
+        
+        this.setState({ events: events.data, loader:false});
     };
 
     componentDidMount(){

@@ -51,12 +51,13 @@ class PaginaEditarEventos extends Component{
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
                    <NavbarAdmin/>
+                   
+                   <h1>
+                        Editar Eventos
+                    </h1>
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>
-                            <p>
-                                Editar Eventos
-                            </p>
 
                                 { this.eventos.map((evento,id) => {
                                     

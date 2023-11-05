@@ -33,7 +33,7 @@ function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrgan
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
-          <li onClick={crearEventoRedireccionar}>Crear evento</li>
+          <li onClick={crearEventoRedireccionar}>Registrar evento</li>
           <li onClick={() => cambiarEstado1(!estado1)}>Crear tipo de evento</li>
           <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>Registrar organizador</li>
           <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>Registrar patrocinador</li>

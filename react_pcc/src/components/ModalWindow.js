@@ -27,6 +27,14 @@ function ModalWindow({estado1, cambiarEstado1}){
         });
     }
 
+    const salirVentanaModal = (e) => {
+      cambiarEstado1(false);
+      setValues({
+        nombre_tipo_evento : '',
+      });
+      setErrors({});
+  }
+
     const saveTypeEvent = async (e) => {
         e.preventDefault();
 
@@ -45,6 +53,9 @@ function ModalWindow({estado1, cambiarEstado1}){
             const res = await axios.post('http://127.0.0.1:8000/api/add-event_type', values);
             if(res.data.status === 200){
                 console.log(values.nombre_tipo_evento);
+                setValues({
+                  nombre_tipo_evento : '',
+                });
             }
         }
 
@@ -57,10 +68,10 @@ function ModalWindow({estado1, cambiarEstado1}){
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Tipo de evento</h1>
+                    <h1>Crear tipo de evento</h1>
                   </div>
                   <button
-                    onClick={() => cambiarEstado1(false)}
+                    onClick={salirVentanaModal}
                     className="BotonSalir"
                   >
                     {salir}
