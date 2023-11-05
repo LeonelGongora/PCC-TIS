@@ -26,6 +26,8 @@
 .contenedor {
   display: flex;
   margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .columna1{
@@ -41,4 +43,16 @@
   flex: 1;
   padding: 1rem;
   margin-top: 1rem;
+}
+.tituloEvento-home{
+  white-space: nowrap;
+  color: white;
+  font-size: 1.7rem;
+  font-weight:550;
+  height: fit-content;
+}
+.contenedorTitulo-home{
+  height: fit-content;
+  text-align: center;
+  margin-top: 2vh;
 }

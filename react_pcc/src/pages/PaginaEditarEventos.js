@@ -45,38 +45,46 @@ class PaginaEditarEventos extends Component{
 
     render(){
 
-        return(
-
-            <div className="App">
-                <div className="background-image"></div> {/* Componente de fondo */}
-                <div className="content">
-                   <NavbarAdmin/>
-                   
-                   <h1>
-                        Editar Eventos
-                    </h1>
-                   <div className="contenedor">
-                        <div className="columna1">
-                            <ListaEventos/>
-
-                                { this.eventos.map((evento,id) => {
-                                    
-                                    return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
-                                     <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
-                                     <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
-                                     <h4 className='tipoEv'>{evento.event_type.nombre_tipo_evento}</h4>
-                                     <h4>{evento.fecha_inicio}</h4>
-                                     <h4>{evento.fecha_limite}</h4>
-                                     </div></>);
-                                     
-                                })}
-
-                        </div>
-
-                    </div>
+        return (
+          <div className="App">
+            <div className="background-image"></div> {/* Componente de fondo */}
+            <div className="content">
+              <NavbarAdmin />
+              <div className="contenedor">
+                <div className="contenedorTitulo-home">
+                  <p className="tituloEvento-home">EDITAR EVENTO</p>
                 </div>
-           </div>
+                <div className="columna1">
+                  <ListaEventos />
 
+                  {this.eventos.map((evento, id) => {
+                    return (
+                      <>
+                        <div
+                          className="containerEvents"
+                          onClick={() => this.masDetalles(evento.id)}
+                        >
+                          <img
+                            className="imageEvent"
+                            src={"http://127.0.0.1:8000/images/" + evento.name}
+                            alt="Logo del evento"
+                          />
+                          <h4 className="nombreEvento">
+                            {evento.nombre_evento}
+                          </h4>
+                          <h4 className="tipoEv">
+                            {evento.event_type.nombre_tipo_evento}
+                          </h4>
+                          <h4>{evento.fecha_inicio}</h4>
+                          <h4>{evento.fecha_limite}</h4>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
         );
     }
 }
