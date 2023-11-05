@@ -68,7 +68,7 @@ function ModalWindow({estado1, cambiarEstado1}){
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Tipo de evento</h1>
+                    <h1>Crear tipo de evento</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}

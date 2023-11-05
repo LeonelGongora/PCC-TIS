@@ -104,14 +104,6 @@ function VisualizarInformacionDeEventosUser ({props}) {
                     null
                 )} */}  
             </div>
-            <div className='buttons'>
-                {/* <button className='miButtonRegistrar'>Registrarse</button> */}
-                {cookies.get('estaRegistrado') == true || cookies.get('pasoInscripcion') == true ? (
-                    null
-                ) : (
-                    <button onClick={()=>irRegistro()} className='miButtonRegistrar'>Registrarse</button>
-                )}
-            </div>
 
         </div>
 

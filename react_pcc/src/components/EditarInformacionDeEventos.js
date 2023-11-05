@@ -322,11 +322,11 @@ class EditarInformacionDeEventos extends Component{
             //console.log(valor)
 
 
-            //axios.post(url, data).then(res => {
-              //if(res.data.status === 200){
-                //console.log(res);
-              //}
-            //})
+            axios.post(url, data).then(res => {
+              if(res.data.status === 200){
+                console.log(res);
+              }
+            })
         }
 
     }
@@ -370,11 +370,11 @@ class EditarInformacionDeEventos extends Component{
         return (
             <><div className='contenedorMaximo'></div>
               <div className="editarEventos">
-              {/* <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
+              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
               cambiarEstadoModalAtributo={this.cambiarEstadoModal}
-              id_evento = {this.state.id_evento}/> */}
+              id_evento = {this.state.id_evento}/> }
                 <div className="textoEvento">
-                  <p className="textoRegistro"> Edicion eventos{this.state.event.nombre_evento}</p>
+                  <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
                 <div className="entradasDatos">
                   <form onSubmit={this.updateEvent} encType="multipart/form-data">
@@ -553,6 +553,7 @@ class EditarInformacionDeEventos extends Component{
                         {this.state.errors.event_type_id}
                       </span>
                     )}
+
                     {this.state.camposAdicionales.map((campo, index) => (
                      <div key={index} className="campo-container">
                        <div id="entrada">
@@ -581,11 +582,11 @@ class EditarInformacionDeEventos extends Component{
                      />
 
                    </div>
-                   <button className="botonRegistrarEdit" onClick={this.agregarCampo}>Agregar Campo +</button>
+                   <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
                       <button className="botonRegistrarEdit" type="submit">
                         {" "}
-                        Registrar
+                        Guardar
                       </button>
                     </div>
                   </form>
