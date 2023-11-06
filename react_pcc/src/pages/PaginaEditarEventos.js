@@ -117,8 +117,35 @@ class PaginaEditarEventos extends Component{
 
                     </div>
                 </div>
-           </div>
+                <div className="columna1">
+                  <ListaEventos />
 
+                  {this.eventos.map((evento, id) => {
+                    return (
+                      <>
+                        <div
+                          className="containerEvents"
+                          onClick={() => this.masDetalles(evento.id)}
+                        >
+                          <img
+                            className="imageEvent"
+                            src={"http://127.0.0.1:8000/images/" + evento.name}
+                            alt="Logo del evento"
+                          />
+                          <h4 className="nombreEvento">
+                            {evento.nombre_evento}
+                          </h4>
+                          <h4 className="tipoEv">
+                            {evento.event_type.nombre_tipo_evento}
+                          </h4>
+                          <h4>{evento.fecha_inicio}</h4>
+                          <h4>{evento.fecha_limite}</h4>
+                        </div>
+                      </>
+                    );
+                  })}
+                </div>
+              </div>
         );
     }
 }

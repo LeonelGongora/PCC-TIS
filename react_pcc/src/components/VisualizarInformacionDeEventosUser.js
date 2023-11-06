@@ -19,6 +19,7 @@ function VisualizarInformacionDeEventosUser ({props}) {
     const id = cookies.get('idauxiliar');
     const [registrado, setRegistrado] = useState(false);
     const [cerrado, setCerrado] = useState(false);
+    const idusersession = cookies.get('id_usuario');
 
     useEffect(()=>{
         getEvent()
@@ -36,7 +37,7 @@ function VisualizarInformacionDeEventosUser ({props}) {
         const url = `${EstaResUserEvent_Api_Url}`;
         await axios.post(url, {
             event_id: id,
-            user_id: "1"
+            user_id: idusersession
         })
         .then(response=>{
             if(response.data[0].user_id){
@@ -103,6 +104,14 @@ function VisualizarInformacionDeEventosUser ({props}) {
                  ) : (
                     null
                 )} */}  
+            </div>
+            <div className='buttons'>
+                {/* <button className='miButtonRegistrar'>Registrarse</button> */}
+                {/* {cookies.get('estaRegistrado') == true || cookies.get('pasoInscripcion') == true ? (
+                    null
+                ) : (
+                    <button onClick={()=>irRegistro()} className='miButtonRegistrar'>Registrarse</button>
+                )} */}
             </div>
 
         </div>

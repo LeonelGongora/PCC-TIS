@@ -2,11 +2,9 @@ import React , { useState, useRef, useEffect } from 'react';
 import '../stylesheets/Formulario.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
-
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWarning';
 
@@ -64,14 +62,6 @@ function FormRegistroEvento(){
   //const [errorRequisito, setErrorRequisito] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errorArchivo, setErrorArchivo] = useState('');
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
 
   const [errors, setErrors] = useState({});
 
@@ -189,7 +179,6 @@ function FormRegistroEvento(){
           esBotonDeRegistro={false}
           manejarClic={subirArchivo} 
           icono={faArrowUpFromBracket}/>
-        {/* <img className='signoDePregunta' src={Pregunta} alt='Signo de interrogacion'/> */}
         <button className="buttonInfo">
               ?
         <span className="textoInfo">Toda la información requerida comprimir en un archivo Zip y subirlo en este apartado</span>
@@ -221,13 +210,6 @@ function FormRegistroEvento(){
                 })}
 
              </form>
-            
-          
-          {/* <div className='datoRequisitos' id='entrada-Formulario-Registro-Evento' tabindex='0'>
-            <p id='textoCuadro'>Requisitos</p>
-            <input className="input-Formulario-Registro-Evento" id='input' type='text' name='requisito' value={state.requisito} onChange={handleChange} placeholder="Ingrese requisitos" />
-            <p className="errorMensaje">{errorRequisito}</p>
-          </div> */}
         </div>  
       </div>
       <Boton

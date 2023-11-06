@@ -11,6 +11,7 @@
 .imageEvent{
     width: 5vw;
     height: auto;
+    max-height: 12vh;
     margin: 1vh 0;
 }
 .containerEvents h4{
