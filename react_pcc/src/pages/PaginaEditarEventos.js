@@ -98,6 +98,9 @@ class PaginaEditarEventos extends Component{
                    estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    
                    <div className="contenedor">
+                        <div className="contenedorTitulo-home">
+                            <p className="tituloEvento-home">EDITAR EVENTOS</p>
+                        </div>
                         <div className="columna1">
                             <ListaEventos/>
 

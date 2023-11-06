@@ -185,7 +185,7 @@ class Add_Event extends Component{
           console.log(fecha_Actual)
           axios.post(url, data).then(res => {
             console.log(res)
-            //window.location.href = './';
+            window.location.href = './';
           })
         }
 

@@ -31,11 +31,12 @@ class AcceptUserToEvent extends Component{
 
     getAllEvents = async () => {
         const idevent = cookies.get('auteId');
+        console.log(idevent)
         // this.setState({loader:true});
         const events = await axios.get(`${this.EventUser2_Url_Api}/${idevent}`);
-        // console.log(events)
+        console.log(events)
         this.eventos = Array.from(events.data)
-        // console.log(this.eventos)
+        console.log(this.eventos)
         this.setState({ events: events.data, loader:false});
         // console.log(this.state.events)
     };

@@ -272,11 +272,12 @@ class EditarInformacionDeEventos extends Component{
             data.append('event_type_id', valor)
             data.append('seCargoArchivo', this.state.seCargoArchivo)
 
-            //axios.post(url, data).then(res => {
-              //if(res.data.status === 200){
-                //console.log(res);
-              //}
-            //})
+            axios.post(url, data).then(res => {
+              if(res.data.status === 200){
+                console.log(res);
+                window.location.href = './paginaEditarEventos';
+              }
+            })
         }
 
     }

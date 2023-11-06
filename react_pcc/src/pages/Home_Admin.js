@@ -110,7 +110,7 @@ class Home_Admin extends Component{
               />
               <div className="contenedor">
                 <div className="contenedorTitulo-home">
-                  <p className="tituloEvento-home">EDITAR EVENTO</p>
+                  <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
                 </div>
                 <div className="columna1">
                   <ListaEventos />

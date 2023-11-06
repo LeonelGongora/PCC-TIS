@@ -94,6 +94,9 @@ class VisualizarEventoAccepUserToEvent extends Component{
                    estadoOrganizador={ this.estadoModalOrganizador} cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
                    estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    <div className="contenedor">
+                        <div className="contenedorTitulo-home">
+                          <p className="tituloEvento-home">ACEPTAR SOLICITUDES A EVENTOS</p>
+                        </div>
                         <div className="columna1">
                             <ListaEventos/>
 
