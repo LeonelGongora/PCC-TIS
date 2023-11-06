@@ -112,7 +112,8 @@ function FormRegistroEvento(){
     axios.post(EventoUsuario_Api_Url, {
       event_id: idevento,
       user_id: idUsuario,
-      requisitoZip: urli
+      requisitoZip: urli,
+      solicitud : "0"
     })
     .then(response=>{
       window.location.href='./paginaRegistrarseEventos';
