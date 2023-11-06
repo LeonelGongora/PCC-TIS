@@ -120,7 +120,6 @@ class Home_Admin extends Component{
                 </div>
                 <div className="columna1">
                   <ListaEventos />
-
                   {this.eventos.map((evento, id) => {
                     return (
                       <>
