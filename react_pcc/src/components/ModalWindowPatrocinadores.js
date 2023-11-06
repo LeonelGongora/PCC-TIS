@@ -66,7 +66,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                 var nombreArchivo = values.imagen_patrocinador.name;
                 const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
                 if (!extensiones.includes(extension)){
-                    document.getElementById("imagen_organizador").value = "";
+                    document.getElementById("imagen_patrocinador").value = "";
 
                     setValues({
                         ...values,
