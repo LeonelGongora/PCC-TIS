@@ -6,8 +6,11 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-const cookies = new Cookies();
+import ModalWindow from '../components/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
 
+const cookies = new Cookies();
 
 class PaginaEditarEventos extends Component{
 
@@ -16,7 +19,10 @@ class PaginaEditarEventos extends Component{
     state = {
         events: [],
         loader:false,
-        url: "http://127.0.0.1:8000/api/events"
+        url: "http://127.0.0.1:8000/api/events",
+        estadoModal: false,
+        estadoModalOrganizador:false,
+        estadoModalPatrocinador: false,
 
     };
 
@@ -30,6 +36,24 @@ class PaginaEditarEventos extends Component{
 
         this.setState({ events: events.data, loader:false});
         console.log(this.eventos)
+        var i;
+        var fecha;
+        var fecha1;
+
+        for (i = 0; i < this.eventos.length; i++) {
+            fecha = new Date(this.eventos[i].fecha_inicio)
+            var dia = fecha.getDate() + 1
+            var mes = fecha.getMonth() + 1
+            let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
+            this.eventos[i].fecha_inicio = format4
+
+            fecha1 = new Date(this.eventos[i].fecha_limite)
+            var dia1 = fecha1.getDate() + 1
+            var mes1 = fecha1.getMonth() + 1
+            let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
+            this.eventos[i].fecha_limite = format5
+            
+        }
 
     };
 
@@ -43,18 +67,36 @@ class PaginaEditarEventos extends Component{
         window.location.href='./editar-evento';
     }
 
+    cambiarEstadoModal = (nuevoEstado) => {
+        this.setState({ estadoModal: nuevoEstado });
+    };
+
+    cambiarEstadoModalOrganizador = (nuevoEstado) => {
+        this.setState({ estadoModalOrganizador: nuevoEstado });
+    };
+
+    cambiarEstadoModalPatrocinador = (nuevoEstado) => {
+        this.setState({ estadoModalPatrocinador: nuevoEstado });
+    };
+
     render(){
 
         return(
 
             <div className="App">
+
+                <ModalWindow estado1={ this.state.estadoModal} cambiarEstado1={this.cambiarEstadoModal}/>
+
+                <ModalWindowOrganizadores estadoOrganizador={ this.state.estadoModalOrganizador} cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}/>
+
+                <ModalWindowPatrocinadores estadoPatrocinador={ this.state.estadoModalPatrocinador} cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}/>
+
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin/>
+                   <NavbarAdmin estado1={ this.estadoModal} cambiarEstado1={this.cambiarEstadoModal} 
+                   estadoOrganizador={ this.estadoModalOrganizador} cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+                   estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    
-                   <h1>
-                        Editar Eventos
-                    </h1>
                    <div className="contenedor">
                         <div className="columna1">
                             <ListaEventos/>

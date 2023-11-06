@@ -37,6 +37,26 @@ class PaginaRegistrarseEventos extends Component{
         console.log(this.eventos)
         
         this.setState({ events: events.data, loader:false});
+        var i;
+        var fecha;
+        var fecha1;
+
+        for (i = 0; i < this.eventos.length; i++) {
+            fecha = new Date(this.eventos[i].fecha_inicio)
+            var dia = fecha.getDate() + 1
+            var mes = fecha.getMonth() + 1
+            let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
+            this.eventos[i].fecha_inicio = format4
+
+            fecha1 = new Date(this.eventos[i].fecha_limite)
+            var dia1 = fecha1.getDate() + 1
+            var mes1 = fecha1.getMonth() + 1
+            let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
+            this.eventos[i].fecha_limite = format5
+            
+        }
+
+        
     };
 
     componentDidMount(){

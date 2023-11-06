@@ -222,7 +222,7 @@ function FormRegistroUsuario() {
           <div className="botonEnviar-user">
             <button className="botonRegistrar-user" type="submit">
               {" "}
-              Registrar evento
+              Registrar
             </button>
           </div>
         </form>

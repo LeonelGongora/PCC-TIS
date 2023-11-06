@@ -38,7 +38,6 @@ class Add_Event extends Component{
             image: '',
             nombre_evento: '',
             requisitos: '',
-            fecha_inicio: '',
             numero_contacto: '',
             descripcion: '',
             fecha_limite: '',
@@ -69,38 +68,14 @@ class Add_Event extends Component{
 
     saveEvent = async (e) => {
         let valor = document.getElementById("event_type_id").value
-        //this.setState({ event_type_id: valor });
+
+        let date_Actual = new Date();
+        let dia = date_Actual.getDate();
+        let mes = date_Actual.getMonth() + 1;
+        let fecha_Actual = dia + "-" + mes + "-" + date_Actual.getFullYear();
 
         e.preventDefault();
         const validationErrors = {};
-
-
-        if(this.state.fecha_inicio && this.state.fecha_limite){
-            var d1 = new Date(this.state.fecha_inicio);
-            var d2 = new Date(this.state.fecha_limite);
-
-            var fecha1= d1.getTime()
-            var fecha2= d2.getTime()
-
-            if(fecha2 > fecha1){
-                validationErrors.fecha_inicio = "La Fecha de Limite no puede ser superior a la Fecha de Inicio ";
-                validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Inicio";
-            }
-        }
-
-        if(this.state.fecha_inicio && this.state.fecha_fin){
-            var d1 = new Date(this.state.fecha_inicio);
-            var d2 = new Date(this.state.fecha_fin);
-
-            var fecha1= d1.getTime()
-            var fecha2= d2.getTime()
-
-            if(fecha1 > fecha2){
-                validationErrors.fecha_inicio = "La Fecha de Inicio no puede ser superior a la Fecha de Fin ";
-                validationErrors.fecha_fin = "La Fecha de Inicio no puede ser superior a la Fecha de Fin";
-            }
-
-        }
 
         if(this.state.fecha_limite && this.state.fecha_fin){
             var d1 = new Date(this.state.fecha_limite);
@@ -130,11 +105,6 @@ class Add_Event extends Component{
 
         }else if(!/^\S[A-Z|a-z|`|&|.|'|"|0-9|Ñ|ñ|áéíóú|\s|(|)|!|-|,]{3,150}\S$/.test(this.state.requisitos)){
             validationErrors.requisitos = "Ingrese requisitos validos"
-        }
-
-        if(!this.state.fecha_inicio.trim()){
-            validationErrors.fecha_inicio = "Este campo es obligatorio"
-
         }
 
         if(!this.state.numero_contacto.trim()){
@@ -194,29 +164,29 @@ class Add_Event extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
-            
-            
-            const url = "http://127.0.0.1:8000/api/add-event"; 
-            const data = new FormData();
 
-            data.append('image', this.state.image)
+          
 
-            data.append('nombre_evento', this.state.nombre_evento)
-            data.append('requisitos', this.state.requisitos)
-            data.append('fecha_inicio', this.state.fecha_inicio)
-            data.append('numero_contacto', this.state.numero_contacto)
-            data.append('descripcion', this.state.descripcion)
-            data.append('fecha_limite', this.state.fecha_limite)
-            data.append('fecha_fin', this.state.fecha_fin)
-            data.append('participantes_equipo', this.state.participantes_equipo)
-            data.append('event_type_id', valor)
+          const url = "http://127.0.0.1:8000/api/add-event"; 
+          const data = new FormData();
 
-            console.log(valor)
+          data.append('image', this.state.image)
 
-            axios.post(url, data).then(res => {
-                console.log(res)
-                window.location.href = './';
-            })
+          data.append('nombre_evento', this.state.nombre_evento)
+          data.append('requisitos', this.state.requisitos)
+          data.append('fecha_inicio', fecha_Actual)
+          data.append('numero_contacto', this.state.numero_contacto)
+          data.append('descripcion', this.state.descripcion)
+          data.append('fecha_limite', this.state.fecha_limite)
+          data.append('fecha_fin', this.state.fecha_fin)
+          data.append('participantes_equipo', this.state.participantes_equipo)
+          data.append('event_type_id', valor)
+
+          console.log(fecha_Actual)
+          axios.post(url, data).then(res => {
+            console.log(res)
+            //window.location.href = './';
+          })
         }
 
     }
@@ -293,22 +263,6 @@ class Add_Event extends Component{
                     {this.state.errors.requisitos && (
                       <span className="advertencia">
                         {this.state.errors.requisitos}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha Inicio de Evento*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_inicio"
-                        placeholder="Ingrese fecha"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_inicio && (
-                      <span className="advertencia">
-                        {this.state.errors.fecha_inicio}
                       </span>
                     )}
   

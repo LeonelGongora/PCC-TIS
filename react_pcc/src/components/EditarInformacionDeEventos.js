@@ -63,13 +63,7 @@ class EditarInformacionDeEventos extends Component{
 
         });
       }
-
-      
-
-
     }
-    
-    //const [errors, setErrors] = useState({});
 
     constructor(props){
         super(props)
@@ -147,12 +141,14 @@ class EditarInformacionDeEventos extends Component{
       });
     }
   
-    eliminarCampo = (index) => {
-      this.setState((prevState) => {
-        const camposActualizados = [...prevState.camposAdicionales];
-        camposActualizados.splice(index, 1);
-        return { camposAdicionales: camposActualizados };
-      });
+    eliminarAtributo = (id) => {
+      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      axios.delete(url).then(res => {
+        if(res.data.status === 200){
+          console.log(res);
+          window.location.reload();
+        }
+      })
     }
 
     updateEvent = async (e) => {
@@ -163,34 +159,6 @@ class EditarInformacionDeEventos extends Component{
 
         e.preventDefault();
         const validationErrors = {};
-
-
-        if(this.state.fecha_inicio && this.state.fecha_limite){
-            var d1 = new Date(this.state.fecha_inicio);
-            var d2 = new Date(this.state.fecha_limite);
-
-            var fecha1= d1.getTime()
-            var fecha2= d2.getTime()
-
-            if(fecha2 > fecha1){
-                validationErrors.fecha_inicio = "La Fecha de Limite no puede ser superior a la Fecha de Inicio ";
-                validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Inicio";
-            }
-        }
-
-        if(this.state.fecha_inicio && this.state.fecha_fin){
-            var d1 = new Date(this.state.fecha_inicio);
-            var d2 = new Date(this.state.fecha_fin);
-
-            var fecha1= d1.getTime()
-            var fecha2= d2.getTime()
-
-            if(fecha1 > fecha2){
-                validationErrors.fecha_inicio = "La Fecha de Inicio no puede ser superior a la Fecha de Fin ";
-                validationErrors.fecha_fin = "La Fecha de Inicio no puede ser superior a la Fecha de Fin";
-            }
-
-        }
 
         if(this.state.fecha_limite && this.state.fecha_fin){
             var d1 = new Date(this.state.fecha_limite);
@@ -221,13 +189,6 @@ class EditarInformacionDeEventos extends Component{
         }else if(!/^\S[A-Z|a-z|`|&|.|'|"|0-9|Ñ|ñ|áéíóú|\s|(|)|!|-|,]{3,150}\S$/.test(this.state.requisitos)){
             validationErrors.requisitos = "Ingrese requisitos validos"
         }
-
-        if(!this.state.fecha_inicio.trim()){
-            validationErrors.fecha_inicio = "Este campo es obligatorio"
-
-        }
-
-
 
         if(!this.state.numero_contacto){
             validationErrors.numero_contacto = "Este campo es obligatorio"
@@ -283,8 +244,6 @@ class EditarInformacionDeEventos extends Component{
           }
         }
 
-        
-
         if(!this.state.event_type_id){
             validationErrors.event_type_id = "Debe seleccionar un tipo de evento"
 
@@ -313,20 +272,11 @@ class EditarInformacionDeEventos extends Component{
             data.append('event_type_id', valor)
             data.append('seCargoArchivo', this.state.seCargoArchivo)
 
-            //console.log("File")
-            //var file = document.files[0];
-            //console.log(file)
-            //console.log(valorFile)
-
-            //console.log(this.state)
-            //console.log(valor)
-
-
-            axios.post(url, data).then(res => {
-              if(res.data.status === 200){
-                console.log(res);
-              }
-            })
+            //axios.post(url, data).then(res => {
+              //if(res.data.status === 200){
+                //console.log(res);
+              //}
+            //})
         }
 
     }
@@ -349,8 +299,6 @@ class EditarInformacionDeEventos extends Component{
             nombre_tipo_eventos.push(x.options[i].value);
             id_tipo_eventos.push(i+1);
         }
-        //console.log(id_tipo_eventos)
-        //console.log(nombre_tipo_eventos)
 
         var y = document.getElementById("desplegable").value;
         var indice;
@@ -363,8 +311,6 @@ class EditarInformacionDeEventos extends Component{
             }
         }
     }
-
-
 
     render(){
         return (
@@ -410,23 +356,6 @@ class EditarInformacionDeEventos extends Component{
                     {this.state.errors.requisitos && (
                       <span className="advertencia">
                         {this.state.errors.requisitos}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha de Inicio*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_inicio"
-                        placeholder="Ingrese fecha"
-                        value={this.state.fecha_inicio}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_inicio && (
-                      <span className="advertencia">
-                        {this.state.errors.fecha_inicio}
                       </span>
                     )}
   
@@ -497,7 +426,7 @@ class EditarInformacionDeEventos extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Participantes por equipo*</p>
+                      <p id="textoCuadro">Cantidad de participantes por equipo*</p>
                       <input
                         id="inputRegistro"
                         type="tel"
@@ -554,34 +483,22 @@ class EditarInformacionDeEventos extends Component{
                       </span>
                     )}
 
-                    {this.state.camposAdicionales.map((campo, index) => (
-                     <div key={index} className="campo-container">
+                    {this.state.atributos.map((atributo) => (
+                     <div className="campo-container">
                        <div id="entrada">
-                         <p id="textoCuadro">{campo.titulo}*</p>
+                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
                          <input
                            id="inputRegistro"
                            type="text"
                            name="valor"
-                           placeholder={`Ingrese ${campo.titulo}`}
-                           value={campo.valor}
-                           onChange={(e) => this.handleCampoChange(index, e)}
+                           placeholder="Campo Adicional"
+                           readOnly
                          />
                        </div>
-                       <button className="botonEliminar" onClick={() => this.eliminarCampo(index)}>X</button>
+                       <button className="botonEliminar" onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
                      </div>
                    ))}
 
-                   
-                   <div id="entrada">
-                     <input
-                       id="inputRegistro"
-                       type="text"
-                       placeholder="Título del nuevo Requerimiento"
-                       value={this.state.nuevoCampo}
-                       onChange={this.handleNuevoCampoChange}
-                     />
-
-                   </div>
                    <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
                       <button className="botonRegistrarEdit" type="submit">

@@ -63,6 +63,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
                 setValues({
                     nombre_atributo : '',
                 });
+                window.location.reload();
             }
         }
     }

@@ -35,10 +35,8 @@ Route::post('/add-event', [EventController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
 
-
 Route::post('/add-attribute', [AttributeController::class, 'store']);
 Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
-
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
