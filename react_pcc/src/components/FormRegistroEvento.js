@@ -17,6 +17,7 @@ const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 function FormRegistroEvento(){
 
   const archivoInput = useRef(null);
+  const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
 
   const manejarCargaDeArchivo = (event) => {
     setArchivo({file: event.target.files[0]})
@@ -87,16 +88,22 @@ function FormRegistroEvento(){
     if(Object.keys(validationErrors).length === 0){
 
     }
-
-    if (archivoInput.current && archivoInput.current.files.length === 0) {
+    
+    if (archivoInput.current && archivoInput.current.files.length > 0) {
+      const archivo = archivoInput.current.files[0];
+      if (!archivo.name.endsWith('.zip')) {
+        setErrorArchivo('Debe subir un archivo .zip');
+        setShowModal(true);
+      } else if (archivo.size > 10485760) {
+        setErrorArchivo('Su archivo excede el tamaño máximo');
+        setShowModal(true);
+      }
+    } else if (!archivo.file && mostrarRequisitos) {
       setErrorArchivo('Debe subir un archivo .zip');
       setShowModal(true);
     } else {
-      setErrorArchivo(''); 
+      setErrorArchivo('');
       setShowModal(false);
-    }
-    if (state.nombre.trim() && state.requisito.trim()) {
-      console.log('Registrarse');//
     }
     
     if(archivo.file != null){
@@ -156,15 +163,23 @@ function FormRegistroEvento(){
         <h2 className='titulo-Formulario-Registro-Evento'>Registro al evento</h2>
       </div>
       <div className='containerRequisito'>  
-        <p>{event.requisitos}</p>
-        {}
+        {mostrarRequisitos ? (
+          <p>{event.requisitos}</p>
+        ) : (
+          <p>No se requiere subir ningún archivo o documento para registrarse a este evento.</p>
+        )}
       </div>
       <div className='archivoZip'>
+        {mostrarRequisitos && (
+        <>
         <p> Archivo seleccionado:  </p>
         <span id="nombreArchivo"></span> {/* zip seleccionado */}  
-
+        </>
+        )}
       </div>
-      <div className='botonesContainer'> 
+      <div className='botonesContainer'>
+        {mostrarRequisitos && (
+        <> 
         <input
           className="input-Formulario-Registro-Evento"
           id='archivoZip'
@@ -184,34 +199,33 @@ function FormRegistroEvento(){
               ?
         <span className="textoInfo">Toda la información requerida comprimir en un archivo Zip y subirlo en este apartado</span>
         </button>
+        </>
+        )}
       </div>
       <div className='registro'>
-        <div className='entradasDatos'>
+        <form class="form_name" id='form_name'>
 
-             <form class="form_name" id='form_name'>
+          {atributos.map((atributo,id) => {
+          return (<><div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+            <p id="textoCuadro">{atributo.nombre_atributo}</p>
+            <input
+            id="input"
+            className="input-Formulario-Registro-Evento"
+            type="text"
+            name={atributo.nombre_atributo}
+            placeholder="Ingrese nombre"
+            />
+          </div>
+          {errors[atributo.nombre_atributo] && (
+          <span className="advertencia">
+            {errors[atributo.nombre_atributo]}
+          </span>
+          )}
 
-                {atributos.map((atributo,id) => {
-                return (<><div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-                  <p id="textoCuadro">{atributo.nombre_atributo}</p>
-                  <input
-                  id="input"
-                  className="input-Formulario-Registro-Evento"
-                  type="text"
-                  name={atributo.nombre_atributo}
-                  placeholder="Ingrese nombre"
-                  />
-                </div>
-                {errors[atributo.nombre_atributo] && (
-                <span className="advertencia">
-                  {errors[atributo.nombre_atributo]}
-                </span>
-                )}
+          </>);
+          })}
 
-                </>);
-                })}
-
-             </form>
-        </div>  
+        </form>
       </div>
       <Boton
         texto='Registrarse'
