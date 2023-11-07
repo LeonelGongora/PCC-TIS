@@ -98,7 +98,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
-
+                        <p id="textoCuadroAtributo">Nombre*</p>
                         <input
                         type="text"
                         name="nombre_atributo"

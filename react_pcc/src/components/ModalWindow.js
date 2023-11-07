@@ -101,6 +101,7 @@ function ModalWindow({estado1, cambiarEstado1}){
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
+                    <p id="textoCuadroAtributo">Nombre*</p>
                         <input
                         type="text"
                         name="nombre_tipo_evento"

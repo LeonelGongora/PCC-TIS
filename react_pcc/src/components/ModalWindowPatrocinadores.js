@@ -141,6 +141,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
+                    <p id="textoCuadroAtributo">Nombre*</p>
                         <input
                         type="text"
                         name="nombre_patrocinador"
@@ -152,6 +153,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                             <span className="span1Modal">{errors.nombre_patrocinador}</span>
                         )}
 
+                        <p id="textoCuadroImg">Imagen*</p>
                         <label htmlFor="imagen_patrocinador" className="inputEvento-label">
                         <input
                         type="file"
