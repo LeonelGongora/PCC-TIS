@@ -1,5 +1,4 @@
-import React, {Component, useEffect} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, {Component} from 'react';
 import NavbarAdmin from '../components/NavbarAdmin';
 import "../stylesheets/AcceptUserToEventStyles.css";
 import '../App.css';

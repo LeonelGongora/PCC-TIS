@@ -14,8 +14,8 @@ class Add_Event extends Component{
     eventos = []
 
     getEventTypes = async () => {
+        
         const url = "http://127.0.0.1:8000/api/type-events"; 
-
 
         this.setState({loader:true});
         const events = await axios.get(url);

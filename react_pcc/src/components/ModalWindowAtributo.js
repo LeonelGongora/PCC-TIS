@@ -9,7 +9,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento}){
+function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento, atributos}){
 
     const [values, setValues] = useState({
         nombre_atributo : "",
@@ -45,6 +45,19 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
+        }else{
+            for (let index = 0; index < atributos.length; index++) {
+
+                let atributo = atributos[index].nombre_atributo.trim()
+                let nuevo_atributo = values.nombre_atributo.trim()
+                console.log(atributo)
+                console.log(nuevo_atributo)
+
+                if(atributo === nuevo_atributo){
+                    validationErrors.nombre_atributo = "Ya existe un atributo con este nombre"
+                    break;
+                }
+            }
         }
 
         setErrors(validationErrors);

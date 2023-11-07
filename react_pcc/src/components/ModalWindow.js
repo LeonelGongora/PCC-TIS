@@ -1,4 +1,4 @@
-import React, {useState} from  'react';
+import React, {useState, useEffect} from  'react';
 import axios from 'axios';
 //import React, {Component} from 'react';
 import '../stylesheets/ModalWindowStyle.css'
@@ -17,6 +17,7 @@ function ModalWindow({estado1, cambiarEstado1}){
     });
 
     const [errors, setErrors] = useState({});
+    const [tipo_eventos, setTipo_eventos] = useState([]);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -25,6 +26,16 @@ function ModalWindow({estado1, cambiarEstado1}){
             ...values,
             [name]:value,
         });
+    }
+
+    useEffect(()=>{
+      getTipos_Evento();
+    }, []);
+
+    const getTipos_Evento = async (e) => {
+      const url = "http://127.0.0.1:8000/api/type-events"; 
+      const respuesta = await axios.get(url);
+      setTipo_eventos(respuesta.data.events);
     }
 
     const salirVentanaModal = (e) => {
@@ -45,6 +56,17 @@ function ModalWindow({estado1, cambiarEstado1}){
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_tipo_evento)){
             validationErrors.nombre_tipo_evento = "Ingrese un nombre valido"
+        }else{
+          for (let index = 0; index < tipo_eventos.length; index++) {
+
+            let tipo_evento = tipo_eventos[index].nombre_tipo_evento.trim()
+            let nuevo_tipo_evento = values.nombre_tipo_evento.trim()
+
+            if(tipo_evento === nuevo_tipo_evento){
+                validationErrors.nombre_tipo_evento = "Ya existe un tipo de evento con este nombre"
+                break;
+            }
+          } 
         }
 
         setErrors(validationErrors);
@@ -56,10 +78,10 @@ function ModalWindow({estado1, cambiarEstado1}){
                 setValues({
                   nombre_tipo_evento : '',
                 });
+                window.location.reload();
             }
         }
 
-        
     }
 
     return (

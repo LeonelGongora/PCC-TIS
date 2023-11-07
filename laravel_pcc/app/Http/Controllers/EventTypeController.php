@@ -14,7 +14,6 @@ class EventTypeController extends Controller
         return response()->json([
             'status' => 200,
             'events' => $event_types,
-
         ]);
 
     }

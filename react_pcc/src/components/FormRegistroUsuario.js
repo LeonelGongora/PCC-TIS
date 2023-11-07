@@ -68,14 +68,13 @@ function FormRegistroUsuario() {
       validationErrors.email = "Ingrese correo valido";
     }
 
-
-
     if (!formData.password.trim()) {
       validationErrors.password = "Este campo es obligatorio"
 
-
-    } else if (!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(formData.password)) {
+    } else if (!/^\S[A-Z|a-z|0-9|áéíóú]{3,70}\S$/.test(formData.password)) {
       validationErrors.password = "Ingrese una contraseña valida"
+    }else{
+      
     }
 
     if (!formData.confirmarPassword.trim()) {
@@ -83,11 +82,9 @@ function FormRegistroUsuario() {
     }
 
     if (formData.password !== formData.confirmarPassword) {
-      validationErrors.password = "La contraseña debe coincidir"
-      validationErrors.confirmarPassword = "La contraseña debe coincidir"
+      validationErrors.password = "Las contraseñas debe coincidir"
+      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
     }
-
-
 
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
@@ -115,8 +112,6 @@ function FormRegistroUsuario() {
         cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
         window.location.href = './home-participant';
       })
-
-
     }
 
   }
@@ -125,7 +120,7 @@ function FormRegistroUsuario() {
   return (
     <div className="crearEventos-user">
       <div className="textoEvento-user">
-        <p className="textoRegistro-user">Registrarse</p>
+        <p className="textoRegistro-user">Registro de Informacion</p>
       </div>
       <div className="entradaDatos-user">
         <form onSubmit={saveUser}>
@@ -210,7 +205,7 @@ function FormRegistroUsuario() {
               id="inputRegistro-user"
               type="number"
               name="telefono"
-              placeholder="Repita la contraseña ingresada"
+              placeholder="Ingrese su telefono"
               onChange={handleChange}
             />
           </div>

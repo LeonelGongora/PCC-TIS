@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component} from 'react';
+import React, { useState, ffectuseE, Component} from 'react';
 import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
@@ -25,7 +25,6 @@ class EditarInformacionDeEventos extends Component{
         this.setState({loader:true});
         const events = await axios.get(url);
         this.eventos = Array.from(events.data.events)
-        //console.log(events)
         this.setState({ loader:false});
 
 
@@ -34,9 +33,6 @@ class EditarInformacionDeEventos extends Component{
     componentDidMount(){
         this.getEventTypes();
         this.getEvent();
-
-        
-
     }
 
     getEvent=async()=>{
@@ -92,7 +88,6 @@ class EditarInformacionDeEventos extends Component{
             nuevoCampo: '',
             mostrarCampoNuevo: false,
         }
-
     }
 
     cambiarEstadoModal = (nuevoEstado) => {
@@ -152,8 +147,8 @@ class EditarInformacionDeEventos extends Component{
     }
 
     updateEvent = async (e) => {
+
         let valor = document.getElementById("event_type_id").value
-        //this.setState({ event_type_id: valor });
         console.log("Se Cargo")
         console.log(this.state.seCargoArchivo)
 
@@ -171,7 +166,6 @@ class EditarInformacionDeEventos extends Component{
                 validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Fin ";
                 validationErrors.fecha_fin = "La Fecha de Limite no puede ser superior a la Fecha de Fin";
             }
-
         }
 
         if(!this.state.nombre_evento.trim()){
@@ -292,7 +286,6 @@ class EditarInformacionDeEventos extends Component{
         if(this.state.contador == 0){
           x.remove(0)
           this.setState({ contador: 1 });
-
         }
 
         for (i = 0; i < x.length; i++) {
@@ -319,7 +312,8 @@ class EditarInformacionDeEventos extends Component{
               <div className="editarEventos">
               { <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
               cambiarEstadoModalAtributo={this.cambiarEstadoModal}
-              id_evento = {this.state.id_evento}/> }
+              id_evento = {this.state.id_evento}
+              atributos = {this.state.atributos}/> }
                 <div className="textoEvento">
                   <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
@@ -378,7 +372,7 @@ class EditarInformacionDeEventos extends Component{
                     )}
   
                     <div id="entrada">
-                      <p id="textoCuadro">Descripcion*</p>
+                      <p id="textoCuadro">Descripcion de Evento*</p>
                       <input
                         id="inputRegistro"
                         type="text"
@@ -500,7 +494,6 @@ class EditarInformacionDeEventos extends Component{
                      </div>
                    ))}
 
-                   <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
                       <button className="botonRegistrarEdit" type="submit">
                         {" "}
@@ -508,6 +501,8 @@ class EditarInformacionDeEventos extends Component{
                       </button>
                     </div>
                   </form>
+
+                  <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
                   {/* <button className="botonRegistrar" 
                   onClick={() => this.cambiarEstadoModal(!this.estado1)}>
                     Añadir atributo

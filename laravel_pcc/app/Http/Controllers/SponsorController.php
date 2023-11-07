@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class SponsorController extends Controller
 {
+    public function get(){
+
+        $patrocinadores = Sponsor::all();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Patrocinadores obtenidos exitosamente',
+            'patrocinadores' => $patrocinadores,
+
+        ]);
+    }
+
     public function store(Request $request){
 
         if($request -> hasFile ('imagen_patrocinador')){
@@ -25,7 +36,7 @@ class SponsorController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Organizador añadido exitosamente',
+                'message' => 'Patocinador añadido exitosamente',
             ]);
             
         }else{

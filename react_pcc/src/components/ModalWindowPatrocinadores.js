@@ -1,4 +1,4 @@
-import React, {useState} from  'react';
+import React, {useState, useEffect} from  'react';
 import axios from 'axios';
 //import React, {Component} from 'react';
 import '../stylesheets/ModalWindowStyle.css'
@@ -19,6 +19,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
     });
 
     const [errors, setErrors] = useState({});
+    const [patrocinadores, setPatrocinadores] = useState([]);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -35,6 +36,16 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
             imagen_patrocinador: e.target.files[0]
           });
 
+    }
+
+    useEffect(()=>{
+        getPatrocinadores();
+    }, []);
+
+    const getPatrocinadores = async (e) => {
+        const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+        const respuesta = await axios.get(url);
+        setPatrocinadores(respuesta.data.patrocinadores);
     }
 
     const salirVentanaModal = (e) => {
@@ -56,6 +67,17 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_patrocinador)){
             validationErrors.nombre_patrocinador = "Ingrese un nombre valido"
+        }else{
+            for (let index = 0; index < patrocinadores.length; index++) {
+
+                let patrocinador = patrocinadores[index].nombre_patrocinador.trim()
+                let nuevo_patrocinador = values.nombre_patrocinador.trim()
+
+                if(patrocinador === nuevo_patrocinador){
+                    validationErrors.nombre_patrocinador = "Ya existe un patrocinador con este nombre"
+                    break;
+                }
+            }
         }
 
         if(!values.imagen_patrocinador.name){
@@ -96,6 +118,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                     nombre_patrocinador : '',
                     imagen_patrocinador: ''
                 });
+                window.location.reload();
             }
         }
 

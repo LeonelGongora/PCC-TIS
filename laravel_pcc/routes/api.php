@@ -39,7 +39,11 @@ Route::post('/add-attribute', [AttributeController::class, 'store']);
 Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
+Route::get('/get-organizador', [OrganizerController::class, 'get']);
+
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
+Route::get('/get-patrocinador', [SponsorController::class, 'get']);
+
 Route::post('/add-user-information', [UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

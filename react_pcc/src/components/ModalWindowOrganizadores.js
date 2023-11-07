@@ -1,4 +1,4 @@
-import React, {useState} from  'react';
+import React, {useState, useEffect} from  'react';
 import axios from 'axios';
 //import React, {Component} from 'react';
 import '../stylesheets/ModalWindowStyle.css'
@@ -20,6 +20,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
     });
 
     const [errors, setErrors] = useState({});
+    const [organizadores, setOrganizadores] = useState([]);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -35,7 +36,17 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
             ...values,
             imagen_organizador: e.target.files[0]
           });
+    }
 
+    useEffect(()=>{
+        getOrganizadores();
+    }, []);
+
+      
+    const getOrganizadores = async (e) => {
+        const url = "http://127.0.0.1:8000/api/get-organizador"; 
+        const respuesta = await axios.get(url);
+        setOrganizadores(respuesta.data.organizadores);
     }
 
     const salirVentanaModal = (e) => {
@@ -57,6 +68,17 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_organizador)){
             validationErrors.nombre_organizador = "Ingrese un nombre valido"
+        }else{
+            for (let index = 0; index < organizadores.length; index++) {
+
+                let organizador = organizadores[index].nombre_organizador.trim()
+                let nuevo_organizador = values.nombre_organizador.trim()
+
+                if(organizador === nuevo_organizador){
+                    validationErrors.nombre_organizador = "Ya existe un organizador con este nombre"
+                    break;
+                }
+            }
         }
 
         if(!values.imagen_organizador.name){
@@ -96,6 +118,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                     nombre_organizador : '',
                     imagen_organizador: ''
                 });
+                window.location.reload();
             }
         }
     }

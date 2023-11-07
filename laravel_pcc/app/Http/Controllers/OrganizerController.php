@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class OrganizerController extends Controller
 {
+    public function get(){
+
+        $organizadores = Organizer::all();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Organizadores obtenidos exitosamente',
+            'organizadores' => $organizadores,
+
+        ]);
+    }
+
     public function store(Request $request){
 
         if($request -> hasFile ('imagen_organizador')){

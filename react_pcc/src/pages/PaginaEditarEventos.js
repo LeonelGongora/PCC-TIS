@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from 'react';
+import React, {Component} from 'react';
 import NavbarAdmin from '../components/NavbarAdmin';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
