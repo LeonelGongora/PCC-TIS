@@ -21,12 +21,10 @@ class EditarInformacionDeEventos extends Component{
     getEventTypes = async () => {
         const url = "http://127.0.0.1:8000/api/type-events"; 
 
-
         this.setState({loader:true});
         const events = await axios.get(url);
         this.eventos = Array.from(events.data.events)
         this.setState({ loader:false});
-
 
     };
 
@@ -56,7 +54,6 @@ class EditarInformacionDeEventos extends Component{
           id_evento: response.data.id,
           atributos: response.data.attributes,
           image: response.data.name
-
         });
       }
     }
@@ -109,33 +106,6 @@ class EditarInformacionDeEventos extends Component{
         });
     }
 
-    handleNuevoCampoChange = (e) => {
-      this.setState({ nuevoCampo: e.target.value });
-    }
-  
-    agregarCampo = () => {
-      if (this.state.nuevoCampo) {
-        const nuevoCampo = {
-          titulo: this.state.nuevoCampo,
-          valor: '', 
-        };
-  
-        this.setState((prevState) => ({
-          camposAdicionales: [...prevState.camposAdicionales, nuevoCampo],
-          nuevoCampo: '', 
-        }));
-      }
-    }
-  
-    handleCampoChange = (index, e) => {
-      const { name, value } = e.target;
-      this.setState((prevState) => {
-        const camposActualizados = [...prevState.camposAdicionales];
-        camposActualizados[index][name] = value;
-        return { camposAdicionales: camposActualizados };
-      });
-    }
-  
     eliminarAtributo = (id) => {
       const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
@@ -202,11 +172,39 @@ class EditarInformacionDeEventos extends Component{
         if(!this.state.fecha_limite.trim()){
             validationErrors.fecha_limite = "Este campo es obligatorio"
 
+        }else{
+          let d2 = new Date(this.state.fecha_limite);
+          d2.setDate(d2.getDate() + 1);
+          d2.setUTCHours(0, 0, 0, 0);
+
+          let date_Actual1 = new Date();
+          date_Actual1.setDate(date_Actual1.getDate() + 1);
+          date_Actual1.setUTCHours(0, 0, 0, 0);
+          
+          let fecha1= d2.getTime()
+          let fecha2= date_Actual1.getTime()
+          if(fecha1 < fecha2){
+            validationErrors.fecha_limite = "Esta fecha no es valida"
+          }
         }
 
         if(!this.state.fecha_fin.trim()){
             validationErrors.fecha_fin = "Este campo es obligatorio"
 
+        }else{
+          let d2 = new Date(this.state.fecha_fin);
+          d2.setDate(d2.getDate() + 1);
+          d2.setUTCHours(0, 0, 0, 0);
+
+          let date_Actual1 = new Date();
+          date_Actual1.setDate(date_Actual1.getDate() + 1);
+          date_Actual1.setUTCHours(0, 0, 0, 0);
+          
+          let fecha1= d2.getTime()
+          let fecha2= date_Actual1.getTime()
+          if(fecha1 < fecha2){
+            validationErrors.fecha_fin = "Esta fecha no es valida"
+          }
         }
 
         if(!this.state.participantes_equipo){

@@ -6,6 +6,7 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import configApi from '../configApi/configApi';
 const cookies = new Cookies();
 
 
@@ -14,14 +15,10 @@ class PaginaRegistrarseEventos extends Component{
     eventos = []
     id = cookies.get('id_usuario')
     
-
-
     state = {
         events: [],
         loader:false,
-        url: "http://127.0.0.1:8000/api/events",
-        
-
+        url: "http://127.0.0.1:8000/api/events"
     };
 
     getEvents = async () => {
@@ -42,11 +39,11 @@ class PaginaRegistrarseEventos extends Component{
         var fecha1;
 
         for (i = 0; i < this.eventos.length; i++) {
-            fecha = new Date(this.eventos[i].fecha_inicio)
+            fecha = new Date(this.eventos[i].fecha_fin)
             var dia = fecha.getDate() + 1
             var mes = fecha.getMonth() + 1
             let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-            this.eventos[i].fecha_inicio = format4
+            this.eventos[i].fecha_fin = format4
 
             fecha1 = new Date(this.eventos[i].fecha_limite)
             var dia1 = fecha1.getDate() + 1
@@ -101,8 +98,8 @@ class PaginaRegistrarseEventos extends Component{
                           <h4 className="tipoEv">
                             {evento.event_type.nombre_tipo_evento}
                           </h4>
-                          <h4>{evento.fecha_inicio}</h4>
                           <h4>{evento.fecha_limite}</h4>
+                          <h4>{evento.fecha_fin}</h4>
                         </div>
                       </>
                     );

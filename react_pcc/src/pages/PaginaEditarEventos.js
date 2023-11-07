@@ -6,6 +6,7 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import configApi from '../configApi/configApi';
 import ModalWindow from '../components/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
@@ -23,29 +24,29 @@ class PaginaEditarEventos extends Component{
         estadoModal: false,
         estadoModalOrganizador:false,
         estadoModalPatrocinador: false,
-
+        EventoAbierto_Api_Url : configApi.EVENTOABIERTOS_USUARIO_API_URL
     };
 
     getEvents = async () => {
 
         this.setState({loader:true});
-        const events = await axios.get(this.state.url);
+        const events = await axios.get(this.state.EventoAbierto_Api_Url);
         this.eventos = Array.from(events.data.events)
         console.log(events)
         
 
         this.setState({ events: events.data, loader:false});
-        console.log(this.eventos)
+        console.log(this.eventos[0].nombre_tipo_evento)
         var i;
         var fecha;
         var fecha1;
 
         for (i = 0; i < this.eventos.length; i++) {
-            fecha = new Date(this.eventos[i].fecha_inicio)
+            fecha = new Date(this.eventos[i].fecha_fin)
             var dia = fecha.getDate() + 1
             var mes = fecha.getMonth() + 1
             let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-            this.eventos[i].fecha_inicio = format4
+            this.eventos[i].fecha_fin = format4
 
             fecha1 = new Date(this.eventos[i].fecha_limite)
             var dia1 = fecha1.getDate() + 1
@@ -109,9 +110,9 @@ class PaginaEditarEventos extends Component{
                                     return (<><div className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
-                                     <h4 className='tipoEv'>{evento.event_type.nombre_tipo_evento}</h4>
-                                     <h4>{evento.fecha_inicio}</h4>
+                                     <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_limite}</h4>
+                                     <h4>{evento.fecha_fin}</h4>
                                      </div></>);
                                      
                                 })}
@@ -119,34 +120,6 @@ class PaginaEditarEventos extends Component{
                         </div>
 
                     </div>
-                </div>
-                <div className="columna1">
-                  <ListaEventos />
-
-                  {this.eventos.map((evento, id) => {
-                    return (
-                      <>
-                        <div
-                          className="containerEvents"
-                          onClick={() => this.masDetalles(evento.id)}
-                        >
-                          <img
-                            className="imageEvent"
-                            src={"http://127.0.0.1:8000/images/" + evento.name}
-                            alt="Logo del evento"
-                          />
-                          <h4 className="nombreEvento">
-                            {evento.nombre_evento}
-                          </h4>
-                          <h4 className="tipoEv">
-                            {evento.event_type.nombre_tipo_evento}
-                          </h4>
-                          <h4>{evento.fecha_inicio}</h4>
-                          <h4>{evento.fecha_limite}</h4>
-                        </div>
-                      </>
-                    );
-                  })}
                 </div>
               </div>
         );

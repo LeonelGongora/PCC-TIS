@@ -2,13 +2,6 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import "../stylesheets/CreateEventStyle.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import {faArrowUpFromBracket} from '@fortawesome/free-solid-svg-icons';
-
-const plus = <FontAwesomeIcon icon={faPlus} />
-const addBrac = <FontAwesomeIcon icon={faArrowUpFromBracket} />
-
 class Add_Event extends Component{
 
     eventos = []
@@ -69,10 +62,7 @@ class Add_Event extends Component{
     saveEvent = async (e) => {
         let valor = document.getElementById("event_type_id").value
 
-        let date_Actual = new Date();
-        let dia = date_Actual.getDate();
-        let mes = date_Actual.getMonth() + 1;
-        let fecha_Actual = dia + "-" + mes + "-" + date_Actual.getFullYear();
+        
 
         e.preventDefault();
         const validationErrors = {};
@@ -125,11 +115,39 @@ class Add_Event extends Component{
         if(!this.state.fecha_limite.trim()){
             validationErrors.fecha_limite = "Este campo es obligatorio"
 
+        }else{
+          let d2 = new Date(this.state.fecha_limite);
+          d2.setDate(d2.getDate() + 1);
+          d2.setUTCHours(0, 0, 0, 0);
+
+          let date_Actual1 = new Date();
+          date_Actual1.setDate(date_Actual1.getDate() + 1);
+          date_Actual1.setUTCHours(0, 0, 0, 0);
+          
+          let fecha1= d2.getTime()
+          let fecha2= date_Actual1.getTime()
+          if(fecha1 < fecha2){
+            validationErrors.fecha_limite = "Esta fecha no es valida"
+          }
         }
 
         if(!this.state.fecha_fin.trim()){
             validationErrors.fecha_fin = "Este campo es obligatorio"
 
+        }else{
+          let d2 = new Date(this.state.fecha_fin);
+          d2.setDate(d2.getDate() + 1);
+          d2.setUTCHours(0, 0, 0, 0);
+
+          let date_Actual1 = new Date();
+          date_Actual1.setDate(date_Actual1.getDate() + 1);
+          date_Actual1.setUTCHours(0, 0, 0, 0);
+          
+          let fecha1= d2.getTime()
+          let fecha2= date_Actual1.getTime()
+          if(fecha1 < fecha2){
+            validationErrors.fecha_fin = "Esta fecha no es valida"
+          }
         }
 
         if(!this.state.participantes_equipo.trim()){
@@ -164,8 +182,10 @@ class Add_Event extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
-
-          
+          let date_Actual = new Date();
+          let dia = date_Actual.getDate();
+          let mes = date_Actual.getMonth() + 1;
+          let fecha_Actual = dia + "-" + mes + "-" + date_Actual.getFullYear();
 
           const url = "http://127.0.0.1:8000/api/add-event"; 
           const data = new FormData();
@@ -198,7 +218,7 @@ class Add_Event extends Component{
         var x = document.getElementById("desplegable");
         var i;
 
-        if(this.state.contador == 0){
+        if(this.state.contador === 0){
           x.remove(0)
           this.setState({ contador: 1 });
 

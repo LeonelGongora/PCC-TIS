@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 
 import FormUserInput from "../stylesheets/FormUserInput.css";
@@ -12,6 +12,7 @@ function FormRegistroUsuario() {
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
+    ci : '',
     email: '',
     password: '',
     confirmarPassword: '',
@@ -20,6 +21,18 @@ function FormRegistroUsuario() {
   })
 
   const [errors, setErrors] = useState({})
+  const [usuarios, setUsuarios] = useState({})
+
+  useEffect(()=>{
+    getUsuarios();
+  }, []);
+
+  
+  const getUsuarios = async (e) => {
+    const url = "http://127.0.0.1:8000/api/get-user-information"; 
+    const respuesta = await axios.get(url);
+    setUsuarios(respuesta.data.usuarios);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +43,7 @@ function FormRegistroUsuario() {
 
   const saveUser = async (e) => {
     e.preventDefault();
+    console.log(usuarios)
 
     const validationErrors = {};
 
@@ -37,35 +51,57 @@ function FormRegistroUsuario() {
       validationErrors.nombre = "Este campo es obligatorio"
 
 
-    } else if (
-      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(
-        formData.nombre
-      )
-    ) {
+    } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.nombre)) {
       validationErrors.nombre = "Ingrese nombre(s) valido";
     }
-
 
     if (!formData.apellido.trim()) {
       validationErrors.apellido = "Este campo es obligatorio"
 
-
     } else if (
-      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(
-        formData.apellido
-      )
+      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.apellido)
     ) {
       validationErrors.apellido = "Ingrese apellido(s) valido";
     }
 
+    if (!formData.ci.trim()) {
+      validationErrors.ci = "Este campo es obligatorio"
+    } else if (!/^[7|6][0-9]{7}$/.test(formData.ci)) {
+      validationErrors.ci = "Ingrese un CI valido";
+    }else{
+      for (let index = 0; index < usuarios.length; index++) {
 
+        let ci = usuarios[index].ci
+        let nuevo_ci = formData.ci
+
+        console.log(ci)
+        console.log(nuevo_ci)
+        console.log(typeof(ci))
+        console.log(typeof(nuevo_ci))
+
+        if(ci == nuevo_ci){
+            validationErrors.ci = "Ya existe un usuario registrado con este CI"
+            break;
+        }
+      }
+    }
 
     if (!formData.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
-
     } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(formData.email)) {
       validationErrors.email = "Ingrese correo valido";
+    }else{
+      for (let index = 0; index < usuarios.length; index++) {
+
+        let email = usuarios[index].email.trim()
+        let nuevo_email = formData.email.trim()
+
+        if(email === nuevo_email){
+            validationErrors.email = "Ya existe un usuario registrado con este email"
+            break;
+        }
+      }
     }
 
     if (!formData.password.trim()) {
@@ -102,6 +138,7 @@ function FormRegistroUsuario() {
       const data = new FormData();
       data.append('nombre', formData.nombre)
       data.append('apellido', formData.apellido)
+      data.append('ci', formData.ci)
       data.append('email', formData.email)
       data.append('password', formData.password)
       data.append('telefono', formData.telefono)
@@ -155,12 +192,26 @@ function FormRegistroUsuario() {
           </div>
 
           <div id="entrada-user">
+            <p id="textoCuadro-user">CI (Carnet de Identidad)*</p>
+            <input
+              id="inputRegistro-user"
+              type="number"
+              name="ci"
+              placeholder="Ingrese su carnet de identidad"
+              onChange={handleChange}
+            />
+          </div>
+          {errors.ci && (
+            <span className="advertencia-user">{errors.ci}</span>
+          )}
+
+          <div id="entrada-user">
             <p id="textoCuadro-user">Email*</p>
             <input
               id="inputRegistro-user"
               type="text"
               name="email"
-              placeholder="Ingrese nombre"
+              placeholder="Ingrese su correo"
               onChange={handleChange}
             />
           </div>

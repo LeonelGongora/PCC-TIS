@@ -33,6 +33,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function get(){
+
+        $usuarios = User::all();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Usuarios obtenidos exitosamente',
+            'usuarios' => $usuarios,
+
+        ]);
+    }
+
     public function store(Request $request)
     {
 
@@ -40,10 +52,10 @@ class UserController extends Controller
         $user = new User();
         $user-> nombre = $request -> nombre;
         $user-> apellido = $request -> apellido;
+        $user-> ci = $request -> ci;
         $user-> telefono = $request -> telefono;
         $user-> email = $request -> email;
         $user-> password = $request -> password;
-
 
         $user -> save();
         $user->id;

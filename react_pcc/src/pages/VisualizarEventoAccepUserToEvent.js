@@ -38,11 +38,11 @@ class VisualizarEventoAccepUserToEvent extends Component{
         var fecha1;
 
         for (i = 0; i < this.eventos.length; i++) {
-            fecha = new Date(this.eventos[i].fecha_inicio)
+            fecha = new Date(this.eventos[i].fecha_fin)
             var dia = fecha.getDate() + 1
             var mes = fecha.getMonth() + 1
             let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-            this.eventos[i].fecha_inicio = format4
+            this.eventos[i].fecha_fin = format4
 
             fecha1 = new Date(this.eventos[i].fecha_limite)
             var dia1 = fecha1.getDate() + 1
@@ -106,10 +106,9 @@ class VisualizarEventoAccepUserToEvent extends Component{
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento} {cookies.get('id_usuario')}</h4>
                                      <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
-                                     <h4>{evento.fecha_inicio}</h4>
                                      <h4>{evento.fecha_limite}</h4>
+                                     <h4>{evento.fecha_fin}</h4>
                                      </div></>);
-                                     
                                 })}
                         </div>
                     </div>

@@ -45,6 +45,7 @@ Route::post('/add-patrocinador', [SponsorController::class, 'store']);
 Route::get('/get-patrocinador', [SponsorController::class, 'get']);
 
 Route::post('/add-user-information', [UserController::class, 'store']);
+Route::get('/get-user-information', [UserController::class, 'get']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
