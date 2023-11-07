@@ -1,6 +1,5 @@
 .editarEventos{
     max-width: 700px;
-    max-width: 700px;
     margin: 0 auto;
     padding: 5% 15%;
     width: 100%;
@@ -41,23 +40,55 @@
     background-color: white;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    padding-top: 10px;
+    position: relative;
 }
-.botonRegistrarEdit{
+.botonGuardarEdit{
     background-color: rgb(255, 213, 30);
-    padding: 10px 15px;
+    padding: 10px 55px;
     font-weight: bolder;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border: none;
     margin-left: 10vw;
     margin-right: 10vw;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     margin-top: 2vh;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
 }
-.botonEnviar .botonRegistrarEdit{
+.botonGuardarEdit:hover{
+    background-color: rgb(219, 179, 0) ;
+}
+.botonGuardarEdit:active{
+    background-color: rgb(255, 213, 0);
+}
+.botonAgregarEdit{
     background-color: rgb(255, 213, 30);
-    width: 90%;
-    margin:1px 10px;
-    margin-bottom: 10px;
+    padding: 10px 15px;
+    font-weight: bolder;
+    font-size: 1rem;
+    border: none;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 2vh;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+}
+.botonAgregarEdit:hover{
+    background-color: rgb(219, 179, 0) ;
+}
+.botonAgregarEdit:active{
+    background-color: rgb(255, 213, 0);
+}
+.advertenciaEdit{
+    display: block;
+    font-size: 0.75rem;
+    margin-left: 5vw;
+    margin-right: 4vw;
+    margin-top: 4px;
+    text-align: start;
+    color: red;
+    width: 100%;
 }

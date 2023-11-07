@@ -330,7 +330,7 @@ class EditarInformacionDeEventos extends Component{
                     </div>
 
                     {this.state.errors.nombre_evento && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.nombre_evento}
                       </span>
                     )}
@@ -347,7 +347,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.requisitos && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.requisitos}
                       </span>
                     )}
@@ -364,7 +364,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.numero_contacto && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.numero_contacto}
                       </span>
                     )}
@@ -381,7 +381,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.descripcion && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.descripcion}
                       </span>
                     )}
@@ -397,7 +397,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.fecha_limite && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.fecha_limite}
                       </span>
                     )}
@@ -413,7 +413,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.fecha_fin && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.fecha_fin}
                       </span>
                     )}
@@ -431,7 +431,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.participantes_equipo && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.participantes_equipo}
                       </span>
                     )}
@@ -447,7 +447,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.image && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.image}
                       </span>
                     )}
@@ -471,7 +471,7 @@ class EditarInformacionDeEventos extends Component{
                       />
                     </div>
                     {this.state.errors.event_type_id && (
-                      <span className="advertencia">
+                      <span className="advertenciaEdit">
                         {this.state.errors.event_type_id}
                       </span>
                     )}
@@ -491,16 +491,16 @@ class EditarInformacionDeEventos extends Component{
                        <button className="botonEliminar" onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
                      </div>
                    ))}
-
+                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
-                      <button className="botonRegistrarEdit" type="submit">
+                      <button className="botonGuardarEdit" type="submit">
                         {" "}
                         Guardar
                       </button>
                     </div>
                   </form>
 
-                  <button className="botonRegistrarEdit" onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
+                  
                   {/* <button className="botonRegistrar" 
                   onClick={() => this.cambiarEstadoModal(!this.estado1)}>
                     Añadir atributo

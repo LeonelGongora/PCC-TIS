@@ -12,7 +12,7 @@
 }
 .buttonAdmin{
     margin: 2vh;
-    background-color: #FFD51D;
+    background-color: rgb(255, 213, 30);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +21,7 @@
     text-align: center;
     min-height: 15vh;
     cursor: pointer;
+    
 }
 .buttonIcon{
     font-size: 4vw;
