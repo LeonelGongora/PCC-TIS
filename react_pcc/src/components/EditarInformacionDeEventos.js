@@ -493,7 +493,7 @@ class EditarInformacionDeEventos extends Component{
                        <button className="botonEliminar" onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
                      </div>
                    ))}
-
+                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
                       <button className="botonGuardarEdit" type="submit">
                         {" "}
@@ -502,7 +502,7 @@ class EditarInformacionDeEventos extends Component{
                     </div>
                   </form>
 
-                  <button className="botonAgregarEdit" onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
+                  
                   {/* <button className="botonRegistrar" 
                   onClick={() => this.cambiarEstadoModal(!this.estado1)}>
                     Añadir atributo

@@ -27,12 +27,14 @@
     font-size: 1.3rem;
     border-radius: 1rem;
     font-weight: 600;
+    cursor: pointer;
 }
 .buttonIconUser{
     font-size: 4vw;
 }
 .buttonIconDownload{
     font-size: 2vw;
+    cursor: pointer;
 }
 .tituloPagAcept{
     font-size: 3.5rem;
