@@ -93,7 +93,7 @@ class Add_Event extends Component{
         if(!this.state.requisitos.trim()){
             validationErrors.requisitos = "Este campo es obligatorio"
 
-        }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|-|áéíóú|\s|,]{3,150}\S$/.test(this.state.requisitos)){
+        }else if(!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.requisitos)){
             validationErrors.requisitos = "Ingrese requisitos validos"
         }
 
@@ -108,8 +108,8 @@ class Add_Event extends Component{
         if(!this.state.descripcion.trim()){
             validationErrors.descripcion = "Este campo es obligatorio"
 
-        }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(this.state.descripcion)){
-            validationErrors.descripcion = "Ingrese una descripción válida"
+        }else if (!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)) {
+          validationErrors.descripcion = "Ingrese una descripción válida";
         }
 
         if(!this.state.fecha_limite.trim()){
@@ -246,177 +246,178 @@ class Add_Event extends Component{
 
     render(){
         return (
-            <>
-              <div className="crearEventos">
-                <div className="textoEvento">
-                  <p className="textoRegistro"> Registro de Evento</p>
-                </div>
-                <div className="entradasDatos">
-                  <form onSubmit={this.saveEvent}>
-                    <div className="datoNombre" id="entrada">
-                      <p id="textoCuadro">Nombre*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="nombre_evento"
-                        placeholder="Ingrese nombre"
-                        onChange={this.handleInput}
-                      />
-                    </div>
+          <>
+            <div className="crearEventos">
+              <div className="textoEvento">
+                <p className="textoRegistro"> Registro de Evento</p>
+              </div>
+              <div className="entradasDatos">
+                <form onSubmit={this.saveEvent}>
+                  <div className="datoNombre" id="entrada">
+                    <p id="textoCuadro">Nombre*</p>
+                    <input
+                      id="inputRegistro"
+                      type="text"
+                      name="nombre_evento"
+                      placeholder="Ingrese nombre"
+                      onChange={this.handleInput}
+                    />
+                  </div>
 
-                    {this.state.errors.nombre_evento && (
-                      <span className="advertencia">
-                        {this.state.errors.nombre_evento}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Requisitos*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="requisitos"
-                        placeholder="Ingrese requisitos"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.requisitos && (
-                      <span className="advertencia">
-                        {this.state.errors.requisitos}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Número de Contacto*</p>
-                      <input
-                        id="inputRegistro"
-                        type="number"
-                        name="numero_contacto"
-                        placeholder="65487898"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.numero_contacto && (
-                      <span className="advertencia">
-                        {this.state.errors.numero_contacto}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Descripcion de Evento*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="descripcion"
-                        placeholder="Descripcion"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.descripcion && (
-                      <span className="advertencia">
-                        {this.state.errors.descripcion}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha Limite de inscripcion*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_limite"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_limite && (
-                      <span className="advertencia">
-                        {this.state.errors.fecha_limite}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha Fin del evento*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_fin"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_fin && (
-                      <span className="advertencia">
-                        {this.state.errors.fecha_fin}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Cantidad de participantes por equipo*</p>
-                      <input
-                        id="inputRegistro"
-                        type="number"
-                        name="participantes_equipo"
-                        maxLength={2}
-                        placeholder="Ingrese un numero de participantes"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.participantes_equipo && (
-                      <span className="advertencia">
-                        {this.state.errors.participantes_equipo}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Afiche*</p>
-                      <input
-                        id="inputRegistro"
-                        type="file"
-                        name="image"
-                        onChange={this.handleChange}
-                        className="imagen_input"
-                      />
-                    </div>
+                  {this.state.errors.nombre_evento && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.nombre_evento}
+                    </span>
+                  )}
 
-                    {this.state.errors.image && (
-                      <span className="advertencia">
-                        {this.state.errors.image}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Tipo de evento*</p>
-                      <select id="desplegable" onChange={this.myFunction}>
+                  <div id="entrada">
+                    <p id="textoCuadro">Requisitos*</p>
+                    <input
+                      id="inputRegistro"
+                      type="text"
+                      name="requisitos"
+                      placeholder="Ingrese requisitos"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.requisitos && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.requisitos}
+                    </span>
+                  )}
 
-                        <option disabled selected > Seleccione un tipo</option>
-                        {this.eventos.map((evento, id) => {
-                          return <option>{evento.nombre_tipo_evento}</option>;
-                        })}
+                  <div id="entrada">
+                    <p id="textoCuadro">Número de Contacto*</p>
+                    <input
+                      id="inputRegistro"
+                      type="number"
+                      name="numero_contacto"
+                      placeholder="65487898"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.numero_contacto && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.numero_contacto}
+                    </span>
+                  )}
 
-                      </select>
-                      <input
-                        type="hidden"
-                        name="event_type_id"
-                        id="event_type_id"
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.event_type_id && (
-                      <span className="advertencia">
-                        {this.state.errors.event_type_id}
-                      </span>
-                    )}
-  
-                    <div className="botonEnviar">
-                      <button className="botonRegistrar" type="submit">
+                  <div id="entrada">
+                    <p id="textoCuadro">Descripcion de Evento*</p>
+                    <input
+                      id="inputRegistro"
+                      type="text"
+                      name="descripcion"
+                      placeholder="Descripcion"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.descripcion && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.descripcion}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Fecha Limite de inscripcion*</p>
+                    <input
+                      id="inputRegistro"
+                      type="date"
+                      name="fecha_limite"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.fecha_limite && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.fecha_limite}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Fecha Fin del evento*</p>
+                    <input
+                      id="inputRegistro"
+                      type="date"
+                      name="fecha_fin"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.fecha_fin && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.fecha_fin}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">
+                      Cantidad de participantes por equipo*
+                    </p>
+                    <input
+                      id="inputRegistro"
+                      type="number"
+                      name="participantes_equipo"
+                      maxLength={2}
+                      placeholder="Ingrese un numero de participantes"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.participantes_equipo && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.participantes_equipo}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Afiche*</p>
+                    <input
+                      id="inputRegistro"
+                      type="file"
+                      name="image"
+                      onChange={this.handleChange}
+                      className="imagen_input"
+                    />
+                  </div>
+
+                  {this.state.errors.image && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.image}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Tipo de evento*</p>
+                    <select id="desplegable" onChange={this.myFunction}>
+                      <option disabled selected>
                         {" "}
-                        Registrar
-                      </button>
-                    </div>
-                  </form>
-                </div>
-            </div>
-    
-            </>
+                        Seleccione un tipo
+                      </option>
+                      {this.eventos.map((evento, id) => {
+                        return <option>{evento.nombre_tipo_evento}</option>;
+                      })}
+                    </select>
+                    <input
+                      type="hidden"
+                      name="event_type_id"
+                      id="event_type_id"
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.event_type_id && (
+                    <span className="advertencia-creEve">
+                      {this.state.errors.event_type_id}
+                    </span>
+                  )}
 
+                  <div className="botonEnviar">
+                    <button className="botonRegistrar" type="submit">
+                      {" "}
+                      Registrar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </>
         );
     }
 }
