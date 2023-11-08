@@ -104,7 +104,6 @@ class Add_Event extends Component{
             validationErrors.numero_contacto = "Ingrese un numero de contacto valido"
         }
 
-
         if(!this.state.descripcion.trim()){
             validationErrors.descripcion = "Este campo es obligatorio"
 
