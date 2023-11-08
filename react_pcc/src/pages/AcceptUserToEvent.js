@@ -7,6 +7,9 @@ import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
+import ModalWindow from '../components/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
 import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();
@@ -19,6 +22,9 @@ class AcceptUserToEvent extends Component{
             events: [],
             user: [],
             loader:false,
+            estadoModal: false,
+            estadoModalOrganizador:false,
+            estadoModalPatrocinador: false,
         };
         this.EventUser2_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
@@ -27,6 +33,18 @@ class AcceptUserToEvent extends Component{
         this.url = ''
         this.nameEvent = []
     }
+
+    cambiarEstadoModal = (nuevoEstado) => {
+        this.setState({ estadoModal: nuevoEstado });
+    };
+
+    cambiarEstadoModalOrganizador = (nuevoEstado) => {
+        this.setState({ estadoModalOrganizador: nuevoEstado });
+    };
+
+    cambiarEstadoModalPatrocinador = (nuevoEstado) => {
+        this.setState({ estadoModalPatrocinador: nuevoEstado });
+    };
 
     getAllEvents = async () => {
         const idevent = cookies.get('auteId');
@@ -58,9 +76,30 @@ class AcceptUserToEvent extends Component{
         return(
 
             <div className="App">
+                <ModalWindow
+                estado1={this.state.estadoModal}
+                cambiarEstado1={this.cambiarEstadoModal}
+                />
+                <ModalWindowOrganizadores
+                estadoOrganizador={this.state.estadoModalOrganizador}
+                cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
+                />
+                <ModalWindowPatrocinadores
+                estadoPatrocinador={this.state.estadoModalPatrocinador}
+                cambiarEstadoModalPatrocinador={
+                this.cambiarEstadoModalPatrocinador
+                }
+                />
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin/>
+                   <NavbarAdmin
+                   estado1={this.estadoModal}
+                   cambiarEstado1={this.cambiarEstadoModal}
+                   estadoOrganizador={this.estadoModalOrganizador}
+                   cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+                   estadoPatrocinador={this.estadoModalPatrocinador}
+                   cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
+                   />
                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
 

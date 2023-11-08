@@ -3,6 +3,9 @@ import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
+import ModalWindow from '../components/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
 import ModalWindowAtributo from './ModalWindowAtributo';
 
 const cookies = new Cookies();
@@ -78,7 +81,12 @@ class EditarInformacionDeEventos extends Component{
             errors : {},
             contador : 0,
             event : [],
+            estadoModalAtributo: false,
+
             estadoModal: false,
+            estadoModalOrganizador:false,
+            estadoModalPatrocinador: false,
+
             atributos: [],
             seCargoArchivo: 0,
             camposAdicionales: [],
@@ -87,8 +95,8 @@ class EditarInformacionDeEventos extends Component{
         }
     }
 
-    cambiarEstadoModal = (nuevoEstado) => {
-      this.setState({ estadoModal: nuevoEstado });
+    cambiarEstadoModalAtributo = (nuevoEstado) => {
+      this.setState({ estadoModalAtributo: nuevoEstado });
     }
 
     handleInput = (e) => {
@@ -150,7 +158,7 @@ class EditarInformacionDeEventos extends Component{
         if(!this.state.requisitos.trim()){
             validationErrors.requisitos = "Este campo es obligatorio"
 
-        }else if(!/^\S[A-Z|a-z|`|&|.|'|"|0-9|Ñ|ñ|áéíóú|\s|(|)|!|-|,]{3,150}\S$/.test(this.state.requisitos)){
+        }else if(!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.requisitos)){
             validationErrors.requisitos = "Ingrese requisitos validos"
         }
 
@@ -165,7 +173,7 @@ class EditarInformacionDeEventos extends Component{
         if(!this.state.descripcion.trim()){
             validationErrors.descripcion = "Este campo es obligatorio"
 
-        }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|áéíóú|\s|,]{3,150}\S$/.test(this.state.descripcion)){
+        }else if(!/^[ .:;,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)){
             validationErrors.descripcion = "Ingrese una descripcion valido"
         }
 
@@ -210,7 +218,7 @@ class EditarInformacionDeEventos extends Component{
         if(!this.state.participantes_equipo){
             validationErrors.participantes_equipo = "Este campo es obligatorio"
 
-        }else if(!/[1-9]{1}$/.test(this.state.participantes_equipo)){
+        }else if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
             validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
         }
 
@@ -308,10 +316,13 @@ class EditarInformacionDeEventos extends Component{
         return (
             <><div className='contenedorMaximo'></div>
               <div className="editarEventos">
-              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModal} 
-              cambiarEstadoModalAtributo={this.cambiarEstadoModal}
+              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModalAtributo} 
+              
+              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
               id_evento = {this.state.id_evento}
               atributos = {this.state.atributos}/> }
+
+              
                 <div className="textoEvento">
                   <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
@@ -491,7 +502,7 @@ class EditarInformacionDeEventos extends Component{
                        <button className="botonEliminar" onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
                      </div>
                    ))}
-                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModal(!this.state.estadoModal)}>Agregar Campo +</button>
+                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalAtributo(!this.state.estadoModal)}>Agregar Campo +</button>
                     <div className="botonEnviar">
                       <button className="botonGuardarEdit" type="submit">
                         {" "}

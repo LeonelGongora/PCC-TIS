@@ -107,7 +107,7 @@ class Add_Event extends Component{
         if(!this.state.descripcion.trim()){
             validationErrors.descripcion = "Este campo es obligatorio"
 
-        }else if (!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)) {
+        }else if (!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)) {
           validationErrors.descripcion = "Ingrese una descripción válida";
         }
 
@@ -115,6 +115,19 @@ class Add_Event extends Component{
             validationErrors.fecha_limite = "Este campo es obligatorio"
 
         }else{
+          let d2 = new Date(this.state.fecha_limite);
+          d2.setDate(d2.getDate() + 1);
+          d2.setUTCHours(0, 0, 0, 0);
+
+          let date_Actual1 = new Date();
+          date_Actual1.setDate(date_Actual1.getDate() + 1);
+          date_Actual1.setUTCHours(0, 0, 0, 0);
+          
+          let fecha1= d2.getTime()
+          let fecha2= date_Actual1.getTime()
+          if(fecha1 < fecha2){
+            validationErrors.fecha_limite = "Esta fecha no es válida"
+          }
         }
 
         if(!this.state.fecha_fin.trim()){
@@ -139,7 +152,7 @@ class Add_Event extends Component{
         if(!this.state.participantes_equipo.trim()){
             validationErrors.participantes_equipo = "Este campo es obligatorio"
 
-        }else if(!/^(?!-)[1-9][0-9]$/.test(this.state.participantes_equipo)){
+        }else if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
             validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
         }
 

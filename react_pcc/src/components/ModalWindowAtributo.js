@@ -112,7 +112,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
 
                     </form>
                     <button form="form1" type="submit" className="BotonRegistrar">
-                        Registrar
+                        Agregar
                     </button>
                 </div>
               </div>

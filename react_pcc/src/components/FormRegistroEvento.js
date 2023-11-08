@@ -197,7 +197,7 @@ function FormRegistroEvento(){
           icono={faArrowUpFromBracket}/>
         <button className="buttonInfo">
               ?
-        <span className="textoInfo">Toda la información requerida comprimir en un archivo Zip y subirlo en este apartado</span>
+        <span className="textoInfo">Toda la información requerida debe estar comprimida en un archivo .ZIP y subirlo en este apartado</span>
         </button>
         </>
         )}

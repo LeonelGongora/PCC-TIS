@@ -25,7 +25,6 @@ class CreateEventoUserTable extends Migration
             
             $table->string('requisitoZip')->nullable();
             $table->integer('solicitud')->nullable(); //0 pendiente, 1 aceptado, 2 rechazado
-            $table->string('TallaPolera')->nullable();
 
             $table->timestamps();
         });
