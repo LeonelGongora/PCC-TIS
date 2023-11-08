@@ -5,7 +5,7 @@ function ListaEventos(){
     return(
         <div>
             <div className='containerLista'>
-                <h1 className='imgList'>Imagen</h1>
+                <h1 className='imgList'>Afiche</h1>
                 <h1 className='nombList rec'>Nombre</h1>
                 <h1 className='tipoList rec'>Tipo De Evento</h1>
                 <h1 className='fechIniList rec'>Fecha Limite</h1>

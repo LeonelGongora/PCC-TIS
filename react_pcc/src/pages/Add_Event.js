@@ -115,19 +115,6 @@ class Add_Event extends Component{
             validationErrors.fecha_limite = "Este campo es obligatorio"
 
         }else{
-          let d2 = new Date(this.state.fecha_limite);
-          d2.setDate(d2.getDate() + 1);
-          d2.setUTCHours(0, 0, 0, 0);
-
-          let date_Actual1 = new Date();
-          date_Actual1.setDate(date_Actual1.getDate() + 1);
-          date_Actual1.setUTCHours(0, 0, 0, 0);
-          
-          let fecha1= d2.getTime()
-          let fecha2= date_Actual1.getTime()
-          if(fecha1 < fecha2){
-            validationErrors.fecha_limite = "Esta fecha no es válida"
-          }
         }
 
         if(!this.state.fecha_fin.trim()){
