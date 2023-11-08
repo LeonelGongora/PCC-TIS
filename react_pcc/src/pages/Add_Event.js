@@ -86,14 +86,14 @@ class Add_Event extends Component{
             
             
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(this.state.nombre_evento)){
-            validationErrors.nombre_evento = "Ingrese un nombre valido"
+            validationErrors.nombre_evento = "Ingrese un nombre válido"
         }
 
 
         if(!this.state.requisitos.trim()){
             validationErrors.requisitos = "Este campo es obligatorio"
 
-        }else if(!/^\S[A-Z|a-z|`|&|.|'|"|0-9|Ñ|ñ|áéíóú|\s|(|)|!|-|,]{3,150}\S$/.test(this.state.requisitos)){
+        }else if(!/^\S[A-Z|a-z|.|0-9|Ñ|ñ|-|áéíóú|\s|,]{3,150}\S$/.test(this.state.requisitos)){
             validationErrors.requisitos = "Ingrese requisitos validos"
         }
 
@@ -127,7 +127,7 @@ class Add_Event extends Component{
           let fecha1= d2.getTime()
           let fecha2= date_Actual1.getTime()
           if(fecha1 < fecha2){
-            validationErrors.fecha_limite = "Esta fecha no es valida"
+            validationErrors.fecha_limite = "Esta fecha no es válida"
           }
         }
 
@@ -146,7 +146,7 @@ class Add_Event extends Component{
           let fecha1= d2.getTime()
           let fecha2= date_Actual1.getTime()
           if(fecha1 < fecha2){
-            validationErrors.fecha_fin = "Esta fecha no es valida"
+            validationErrors.fecha_fin = "Esta fecha no es válida"
           }
         }
 
@@ -352,7 +352,7 @@ class Add_Event extends Component{
                       <p id="textoCuadro">Cantidad de participantes por equipo*</p>
                       <input
                         id="inputRegistro"
-                        type="tel"
+                        type="number"
                         name="participantes_equipo"
                         maxLength={2}
                         placeholder="Ingrese un numero de participantes"
