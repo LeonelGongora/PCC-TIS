@@ -80,7 +80,9 @@ function VisualizarInformacionDeEventosUser ({props}) {
                 {/* <div className='logo'><img src={event.name}></img></div> */}
 
                 <div className='informacion'>
+                    <p id="textoCuadroDescripcion">Descripcion</p>
                     <div className='descripcion'>{event.descripcion} </div>
+                    <p id="textoCuadroRequerimientos">Requerimientos</p>
                     <div className='requerimientos'>{event.requisitos}</div>
                  </div>
                  {cookies.get('estaRegistrado') == true && cookies.get('pasoInscripcion') == true ? (
