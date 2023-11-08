@@ -102,7 +102,7 @@ class AcceptUserToEvent extends Component{
                    />
                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
-
+                            
                             {this.eventos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (
