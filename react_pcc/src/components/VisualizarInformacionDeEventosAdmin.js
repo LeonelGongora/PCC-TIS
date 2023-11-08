@@ -39,7 +39,9 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 {/* <div className='logo'><img src={event.imagen_evento}></img></div> */}
 
                 <div className='informacion'>
-                <div className='descripcion'>{event.descripcion} </div>
+                    <p id="textoCuadroDescripcion">Descripcion</p>
+                    <div className='descripcion'>{event.descripcion} </div>
+                    <p id="textoCuadroRequerimientos">Requerimientos</p>
                     <div className='requerimientos'>{event.requisitos}</div>
                 </div>
                 

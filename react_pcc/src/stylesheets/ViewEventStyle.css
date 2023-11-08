@@ -107,7 +107,7 @@
     min-height: 130px;
     padding-left: 10px;
     padding-top: 10px;
-    margin-top: 15px;
+    margin-top: 8px;
 }
 
 
@@ -126,4 +126,26 @@
 
 .edit{
     fill: #000000;
+}
+#textoCuadroDescripcion{
+    position: relative;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(1px);
+    color: white;
+}
+#textoCuadroRequerimientos{
+    position: relative;
+    font-size: 1rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 8px;
+    transform: translateY(1px);
+    color: white;
 }
