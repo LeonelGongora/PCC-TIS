@@ -16,6 +16,9 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\EventUser2Controller;
 use App\Http\Controllers\EventUser3Controller;
+use App\Http\Controllers\RequirementController;
+use App\Http\Controllers\Event_OrganizerController;
+use App\Http\Controllers\Event_SponsorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,14 +38,20 @@ Route::post('/add-event', [EventController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
 
-Route::post('/add-attribute', [AttributeController::class, 'store']);
-Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
+Route::post('/add-event_organizer', [Event_OrganizerController::class, 'store']);
+
+Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::get('/get-organizador', [OrganizerController::class, 'get']);
 
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
 Route::get('/get-patrocinador', [SponsorController::class, 'get']);
+
+Route::post('/add-attribute', [AttributeController::class, 'store']);
+Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
+
+Route::post('/add-requirement', [RequirementController::class, 'store']);
 
 Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);

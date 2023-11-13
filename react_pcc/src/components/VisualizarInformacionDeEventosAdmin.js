@@ -54,7 +54,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                     <p id="textoCuadroDescripcion">Descripcion</p>
                     <div className='descripcion'>{event.descripcion} </div>
                     <p id="textoCuadroRequerimientos">Requerimientos</p>
-                    <div className='requerimientos'>{event.requisitos}</div>
+                    <div className='requerimientos'>Requsitos</div>
                 </div>
                 {cerrado == true ? (
                 // {cookies.get('pasoInscripcion') == true ? (

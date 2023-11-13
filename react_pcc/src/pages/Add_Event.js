@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 import "../stylesheets/CreateEventStyle.css";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class Add_Event extends Component{
 
@@ -27,10 +30,8 @@ class Add_Event extends Component{
     constructor(props){
         super(props)
         this.state = {
-            
             image: '',
             nombre_evento: '',
-            requisitos: '',
             numero_contacto: '',
             descripcion: '',
             fecha_limite: '',
@@ -40,15 +41,12 @@ class Add_Event extends Component{
             errors : {},
             contador : 0
         }
-
     }
 
     handleInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-            
         });
-        
     }
 
     handleChange = (e) => {
@@ -57,13 +55,9 @@ class Add_Event extends Component{
         });
     }
 
-
-
     saveEvent = async (e) => {
+
         let valor = document.getElementById("event_type_id").value
-
-        
-
         e.preventDefault();
         const validationErrors = {};
 
@@ -78,23 +72,13 @@ class Add_Event extends Component{
                 validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Fin ";
                 validationErrors.fecha_fin = "La Fecha de Limite no puede ser superior a la Fecha de Fin";
             }
-
         }
 
         if(!this.state.nombre_evento.trim()){
             validationErrors.nombre_evento = "Este campo es obligatorio"
             
-            
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(this.state.nombre_evento)){
             validationErrors.nombre_evento = "Ingrese un nombre válido"
-        }
-
-
-        if(!this.state.requisitos.trim()){
-            validationErrors.requisitos = "Este campo es obligatorio"
-
-        }else if(!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.requisitos)){
-            validationErrors.requisitos = "Ingrese requisitos validos"
         }
 
         if(!this.state.numero_contacto.trim()){
@@ -192,7 +176,6 @@ class Add_Event extends Component{
           data.append('image', this.state.image)
 
           data.append('nombre_evento', this.state.nombre_evento)
-          data.append('requisitos', this.state.requisitos)
           data.append('fecha_inicio', fecha_Actual)
           data.append('numero_contacto', this.state.numero_contacto)
           data.append('descripcion', this.state.descripcion)
@@ -204,7 +187,8 @@ class Add_Event extends Component{
           console.log(fecha_Actual)
           axios.post(url, data).then(res => {
             console.log(res)
-            window.location.href = './';
+            cookies.set('ultimo_id_evento', res.data.ultimo_id_evento, { path: "/" });
+            window.location.href = './add-event-next';
           })
         }
 
@@ -266,22 +250,6 @@ class Add_Event extends Component{
                   {this.state.errors.nombre_evento && (
                     <span className="advertencia-creEve">
                       {this.state.errors.nombre_evento}
-                    </span>
-                  )}
-
-                  <div id="entrada">
-                    <p id="textoCuadro">Requisitos*</p>
-                    <input
-                      id="inputRegistro"
-                      type="text"
-                      name="requisitos"
-                      placeholder="Ingrese requisitos"
-                      onChange={this.handleInput}
-                    />
-                  </div>
-                  {this.state.errors.requisitos && (
-                    <span className="advertencia-creEve">
-                      {this.state.errors.requisitos}
                     </span>
                   )}
 

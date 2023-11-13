@@ -8,6 +8,8 @@ import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWarning';
 
+import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
+
 const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
@@ -55,10 +57,10 @@ function FormRegistroEvento(){
   }
   const [file, setRequisitoNull] = useState(null);
 
-  const [state, setState] = useState({
-    nombre: '',
-    requisito: '',
-  });
+  const [formData, setFormData] = useState({
+    ci : '',
+    estadoModal: false
+  })
 
   //const [errorRequisito, setErrorRequisito] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -67,10 +69,12 @@ function FormRegistroEvento(){
   const [errors, setErrors] = useState({});
 
   const registrar = async(e) => {
+
     e.preventDefault();
     const form = document.forms["form_name"].getElementsByTagName("input");
     var atributosInput = Array.from(form);
     console.log(atributosInput)
+
     const validationErrors = {};
     var i;
 
@@ -81,11 +85,34 @@ function FormRegistroEvento(){
       }
     }
 
-    console.log(validationErrors)
+    if (!formData.ci.trim()) {
+      validationErrors.ci = "Este campo es obligatorio"
+    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
+      validationErrors.ci = "Ingrese un CI valido";
+    }
 
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
+      let nuevo_ci = formData.ci;
+      let seEncontro = 0;
+      for (let index = 0; index < usuarios.length; index++) {
+
+        let ci = usuarios[index].ci
+        console.log(ci)
+        console.log(nuevo_ci)
+
+        if(ci == nuevo_ci){
+            console.log("Ya existe un usuario registrado con este CI")
+            cambiarEstadoModal(!formData.estadoModal)
+            seEncontro = 1;
+            break;
+        }
+      }
+
+      if(seEncontro === 0){
+        window.location.href='./formUsuario';
+      }
 
     }
     
@@ -110,25 +137,38 @@ function FormRegistroEvento(){
 
 
     // registro DB con usuario id=1
+    /*
     const fd = new FormData();
     fd.append('file', archivo.file);
     axios.post(Imagen_Api_Url, fd)
     .then(response=>{ 
       var urli= response.data.urlimagen;
 
-    axios.post(EventoUsuario_Api_Url, {
-      event_id: idevento,
-      user_id: idUsuario,
-      requisitoZip: urli,
-      solicitud : "0"
+      axios.post(EventoUsuario_Api_Url, {
+        event_id: idevento,
+        user_id: 1,
+        requisitoZip: urli,
+        solicitud : "0"
+      })
+      .then(response=>{
+        window.location.href='./paginaRegistrarseEventos';
+        console.log(response)
+      })
     })
-    .then(response=>{
-      window.location.href='./paginaRegistrarseEventos';
-      console.log(response)
-    })
-    })
+    */
+    
+
     }
   }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData, [name]: value
+    })
+  }
+
+  
  
   //subida imagen
   const initialValues ={
@@ -140,11 +180,12 @@ function FormRegistroEvento(){
   //
   const [event, setEvent] = useState ( [] );
   const idevento = cookies.get('idauxiliar');
-  const idUsuario = cookies.get('id_usuario');
   const [atributos, setAtributos] = useState ( [] );
+  const [usuarios, setUsuarios] = useState({})
 
   useEffect(()=>{
-    getEvent()
+    getEvent();
+    getUsuarios();
   }, [])
 
   const getEvent=async()=>{
@@ -156,9 +197,25 @@ function FormRegistroEvento(){
       setAtributos(response.data.attributes)
       console.log(atributos)
   }
+
+  const getUsuarios=async()=>{
+    let url = "http://127.0.0.1:8000/api/get-user-information"
+    //get-user-information
+    const respuesta = await axios.get(url);
+    setUsuarios(respuesta.data.usuarios);
+  } 
+
+  const cambiarEstadoModal = (nuevoEstado) => {
+    setFormData({ estadoModal: nuevoEstado });
+  }
+
   //
   return(
     <div className='containerForm'>
+      <ModalAutentificacion
+        estado1={formData.estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+      />
       <div className='header'>
         <h2 className='titulo-Formulario-Registro-Evento'>Registro al evento</h2>
       </div>
@@ -205,8 +262,28 @@ function FormRegistroEvento(){
       <div className='registro'>
         <form class="form_name" id='form_name'>
 
+
+          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+            <p id="textoCuadro">CI</p>
+            <input
+            id="input"
+            className="input-Formulario-Registro-Evento"
+            type="text"
+            name="ci"
+            placeholder="Ingrese su CI"
+            onChange={handleChange}
+            />
+          </div>
+
+          {errors.ci && (
+          <span className="advertencia">
+            {errors.ci}
+          </span>
+          )}
+
           {atributos.map((atributo,id) => {
-          return (<><div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+          return (<>
+          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
             <p id="textoCuadro">{atributo.nombre_atributo}</p>
             <input
             id="input"

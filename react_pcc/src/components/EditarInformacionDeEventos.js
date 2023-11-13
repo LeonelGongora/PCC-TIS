@@ -12,10 +12,6 @@ const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
-
-
-//const [event, setEvent] = useState ( [] );
-
 class EditarInformacionDeEventos extends Component{
 
   eventos = []
@@ -28,7 +24,6 @@ class EditarInformacionDeEventos extends Component{
         const events = await axios.get(url);
         this.eventos = Array.from(events.data.events)
         this.setState({ loader:false});
-
     };
 
     componentDidMount(){
@@ -45,7 +40,6 @@ class EditarInformacionDeEventos extends Component{
       if(response.request.status === 200){
         this.setState({
           nombre_evento: response.data.nombre_evento,
-          requisitos: response.data.requisitos,
           fecha_inicio: response.data.fecha_inicio,
           numero_contacto: response.data.numero_contacto,
           descripcion: response.data.descripcion,
@@ -70,7 +64,6 @@ class EditarInformacionDeEventos extends Component{
             
             image: '',
             nombre_evento: '',
-            requisitos: '',
             fecha_inicio: '',
             numero_contacto: '',
             descripcion: '',
@@ -152,14 +145,6 @@ class EditarInformacionDeEventos extends Component{
             
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(this.state.nombre_evento)){
             validationErrors.nombre_evento = "Ingrese un nombre valido"
-        }
-
-
-        if(!this.state.requisitos.trim()){
-            validationErrors.requisitos = "Este campo es obligatorio"
-
-        }else if(!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.requisitos)){
-            validationErrors.requisitos = "Ingrese requisitos validos"
         }
 
         if(!this.state.numero_contacto){
@@ -345,24 +330,7 @@ class EditarInformacionDeEventos extends Component{
                         {this.state.errors.nombre_evento}
                       </span>
                     )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Requisitos*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="requisitos"
-                        placeholder="requisitos"
-                        value={this.state.requisitos}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.requisitos && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.requisitos}
-                      </span>
-                    )}
-  
+
                     <div id="entrada">
                       <p id="textoCuadro">Numero de Contacto*</p>
                       <input
@@ -499,7 +467,7 @@ class EditarInformacionDeEventos extends Component{
                            readOnly
                          />
                        </div>
-                       <button className="botonEliminar" onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
+                       <button className="botonEliminar" type='button' onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
                      </div>
                    ))}
                     <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalAtributo(!this.state.estadoModal)}>Agregar Campo +</button>
@@ -510,13 +478,6 @@ class EditarInformacionDeEventos extends Component{
                       </button>
                     </div>
                   </form>
-
-                  
-                  {/* <button className="botonRegistrar" 
-                  onClick={() => this.cambiarEstadoModal(!this.estado1)}>
-                    Añadir atributo
-                  </button> */}
-
                   
                 </div>
             </div>

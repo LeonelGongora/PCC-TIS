@@ -2,10 +2,10 @@ import React from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Home_Admin from "./pages/Home_Admin.js";
-import Add_Event from "./pages/Add_Event.js";
 import Home_Participant from "./pages/Home_Participant.js";
 import Register_Event from "./pages/Register_Event.js";
 import Register_Event_Admin from "./pages/Register_Event_Admin.js";
+import Register_Event_Admin_Next from "./pages/Register_Event_Admin_Next.js";
 
 import ContenedorSliderAdmin from "./pages/ContenedorSliderAdmin.js";
 import ContenedorSliderUser from "./components/ContenedorSliderUser.js";
@@ -32,8 +32,7 @@ function App() {
         <Route path='/register-to-event' element={<Register_Event/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
-
-
+        <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />
 
         <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos/>} />
 
