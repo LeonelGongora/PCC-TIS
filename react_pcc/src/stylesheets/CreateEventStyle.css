@@ -137,3 +137,54 @@
     color: red;
     width: 100%;
 }
+.lineaCategoria{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 2vh;
+}
+.categoriaGrupal{
+    display: inline-block;
+    
+}
+.categoriaIndividual{
+    display: inline-block;
+    
+}
+#entradaEsp{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+    height: 36px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.advertencia-creEveEsp{
+    font-size: 0.75rem;
+    text-align: start;
+    margin-left: 6px;
+    margin-top: 4px;
+    color: red;
+    width: 100%;
+}
+.entradaCantidadEqui{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.4vw;
+}
+
+#checkBoxAddEvent{
+    height: 15px;
+    width: 15px;
+    margin-right: 3px;
+    transform: translateY(2px);
+    
+}
+#checkBoxAddEvent:checked{
+    accent-color: blue;
+}
+#titulosCheckbox{
+    margin-right: 1rem;
+}
