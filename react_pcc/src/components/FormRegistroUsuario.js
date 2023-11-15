@@ -61,12 +61,12 @@ function FormRegistroUsuario() {
     } else if (
       !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.apellido)
     ) {
-      validationErrors.apellido = "Ingrese apellido(s) valido";
+      validationErrors.apellido = "Ingrese apellido(s) valido(s)";
     }
 
     if (!formData.ci.trim()) {
       validationErrors.ci = "Este campo es obligatorio"
-    } else if (!/^[7|6][0-9]{7}$/.test(formData.ci)) {
+    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
       validationErrors.ci = "Ingrese un CI valido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
@@ -104,6 +104,11 @@ function FormRegistroUsuario() {
       }
     }
 
+    if (formData.password !== formData.confirmarPassword) {
+      validationErrors.password = "Las contraseñas debe coincidir"
+      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
+    }
+
     if (!formData.password.trim()) {
       validationErrors.password = "Este campo es obligatorio"
 
@@ -117,10 +122,7 @@ function FormRegistroUsuario() {
       validationErrors.confirmarPassword = "Este campo es obligatorio"
     }
 
-    if (formData.password !== formData.confirmarPassword) {
-      validationErrors.password = "Las contraseñas debe coincidir"
-      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
-    }
+    
 
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
@@ -168,7 +170,7 @@ function FormRegistroUsuario() {
                 id="inputRegistro-user"
                 type="text"
                 name="nombre"
-                placeholder="Ingrese nombre"
+                placeholder="Ingrese nombre(s)"
                 onChange={handleChange}
               />
               {errors.nombre && (
@@ -182,7 +184,7 @@ function FormRegistroUsuario() {
                 id="inputRegistro-user"
                 type="text"
                 name="apellido"
-                placeholder="Ingrese nombre"
+                placeholder="Ingrese apellido(s)"
                 onChange={handleChange}
               />
               {errors.apellido && (

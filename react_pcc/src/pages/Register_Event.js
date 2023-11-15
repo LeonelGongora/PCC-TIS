@@ -15,6 +15,7 @@ const cookies = new Cookies();
 function Register_Event() {
 
   const [event, setEvent] = useState ( [] );
+  
   const idevento = cookies.get('idauxiliar');
 
   useEffect(()=>{

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\EventType;
 use App\Models\Attribute;
 use App\Models\User;
+use App\Models\Requirement;
 
 class Event extends Model
 {
@@ -16,7 +17,6 @@ class Event extends Model
 
     protected $fillable = [
         'nombre_evento',
-        'requisitos',
         'fecha_inicio',
         'numero_contacto',
         'descripcion',
@@ -27,8 +27,8 @@ class Event extends Model
         'event_type_id'
     ];
 
-    
-    protected $with = ['event_type', 'attributes'];
+    protected $with = ['event_type', 'attributes', 'requirements'];
+
     public function event_type(){
 
         return $this->belongsTo(EventType::class, 'event_type_id', 'id');
@@ -41,9 +41,14 @@ class Event extends Model
     }
 
     public function attributes(){
-        //'App\Models\Atributo'
 
         return $this->hasMany(Attribute::class, 'event_id', 'id');
+
+    }
+
+    public function requirements(){
+
+        return $this->hasMany(Requirement::class, 'event_id', 'id');
 
     }
 

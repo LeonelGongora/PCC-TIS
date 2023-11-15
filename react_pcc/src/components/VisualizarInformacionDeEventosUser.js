@@ -83,7 +83,7 @@ function VisualizarInformacionDeEventosUser ({props}) {
                     <p id="textoCuadroDescripcion">Descripcion</p>
                     <div className='descripcion'>{event.descripcion} </div>
                     <p id="textoCuadroRequerimientos">Requerimientos</p>
-                    <div className='requerimientos'>{event.requisitos}</div>
+                    <div className='requerimientos'>Requisitos</div>
                  </div>
                  {cookies.get('estaRegistrado') == true && cookies.get('pasoInscripcion') == true ? (
                  <div className='inscripciones'>Ya esta Registrado en este Evento</div>  

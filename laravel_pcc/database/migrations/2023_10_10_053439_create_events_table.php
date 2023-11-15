@@ -17,7 +17,6 @@ class CreateEventsTable extends Migration
 
             $table->id();
             $table->string('nombre_evento', 120);
-            $table->text('requisitos');
             $table->date('fecha_inicio');
             $table->integer('numero_contacto');
             $table->text('descripcion');

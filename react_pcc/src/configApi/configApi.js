@@ -1,6 +1,6 @@
 const iniURL = "http://localhost:8000/";
 //const iniURL = ""; //deployado
-
+//http://blackcloud.tis.cs.umss.edu.bo
 export default{
     "BASIC_API_URL": `${iniURL}`,
     "USUARIO_API_URL": `${iniURL}api/usuarios`,

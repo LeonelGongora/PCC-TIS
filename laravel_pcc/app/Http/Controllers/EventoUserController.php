@@ -41,7 +41,6 @@ class EventoUserController extends Controller
         return response()->json([
             'status' => 200,
             'message' =>'Evento-Usuario exitosamente']);
-
     }
 
     /**

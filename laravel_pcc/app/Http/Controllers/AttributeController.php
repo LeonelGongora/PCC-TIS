@@ -24,7 +24,7 @@ class AttributeController extends Controller
 
     public function destroy($id)
     {
-        $evento=Attribute::find($id);
+        $evento = Attribute::find($id);
         $evento->delete();
         return response()->json([
             'status' => 200,

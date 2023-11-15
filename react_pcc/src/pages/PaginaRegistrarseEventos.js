@@ -13,7 +13,7 @@ const cookies = new Cookies();
 class PaginaRegistrarseEventos extends Component{
 
     eventos = []
-    id = cookies.get('id_usuario')
+    //id = cookies.get('id_usuario')
     
     state = {
         events: [],
@@ -23,11 +23,11 @@ class PaginaRegistrarseEventos extends Component{
 
     getEvents = async () => {
 
-        var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
+        //var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
 
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
-        const events = await axios.get(url2);
+        const events = await axios.get(this.state.url);
         console.log(events)
 
         this.eventos = Array.from(events.data.events)
@@ -93,7 +93,7 @@ class PaginaRegistrarseEventos extends Component{
                             alt="Logo del evento"
                           />
                           <h4 className="nombreEvento">
-                            {evento.nombre_evento} {cookies.get("id_usuario")}{" "}
+                            {evento.nombre_evento}{" "}
                           </h4>
                           <h4 className="tipoEv">
                             {evento.event_type.nombre_tipo_evento}
