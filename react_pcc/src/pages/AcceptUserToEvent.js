@@ -20,18 +20,22 @@ class AcceptUserToEvent extends Component{
         super(props);
         this.state  = {
             events: [],
+            e: [],
             user: [],
             loader:false,
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
         };
-        this.EventUser2_Url_Api = configApi.EVENTUSER3_API_URL;
+        this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
+        this.Event_Url_Api= configApi.EVENTOC_API_URL;
         this.eventos = []
+        this.requisitos = []
         this.usuarios = []
         this.url = ''
         this.nameEvent = []
+        this.reqEvent = []
     }
 
     cambiarEstadoModal = (nuevoEstado) => {
@@ -46,20 +50,25 @@ class AcceptUserToEvent extends Component{
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
 
-    getAllEvents = async () => {
+    getAllUsers = async () => {
         const idevent = cookies.get('auteId');
-        console.log(idevent)
-        // this.setState({loader:true});
-        const events = await axios.get(`${this.EventUser2_Url_Api}/${idevent}`);
-        console.log(events)
+        const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
         this.eventos = Array.from(events.data)
-        console.log(this.eventos)
+        // console.log(.eventos)
         this.setState({ events: events.data, loader:false});
         // console.log(this.state.events)
     };
 
+    getInfoEvent = async () => {
+        const idevent = cookies.get('auteId');
+        const e = await axios.get(`${this.Event_Url_Api}/${idevent}`);
+        this.requisitos = Array.from(e.data.requirements)
+        // console.log(this.es)
+    };
+
     componentDidMount(){
-        this.getAllEvents();
+        this.getInfoEvent();
+        this.getAllUsers();
     }
 
     aceptarParticipante = async (id) =>{
@@ -107,9 +116,8 @@ class AcceptUserToEvent extends Component{
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (
 
-
                             <>
-                            { this.eventos.map((evento,id) => {  
+                            { this.eventos.map((evento) => {  
                                 return (<div key={evento.eventuserid}>
 
                                     {this.nameEvent.includes(evento.nombre_evento) ? (
@@ -121,13 +129,22 @@ class AcceptUserToEvent extends Component{
                                         </>
                                     )}
                                         <div className='containerReqSol'>
+
                                             <div className='requisitosDeEvento'>
-                                                <>
-                                                {this.nameEvent.push(evento.nombre_evento)}
-                                                <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                                <p className='requisitosTexto'>{evento.nombre_evento}</p>
-                                                </>
+                                                
+                                            {this.reqEvent.includes("1") ? (
+                                                null
+                                            ) : (<>
+                                                {this.requisitos.map((r) => {  
+                                                    return (<div key={r.id}>
+                                                        {this.reqEvent.push("1")}
+                                                        <h3 className='subtitleRequisitos'>{r.contenido_requisito}</h3>
+                                                        {/* <p className='requisitosTexto'>{evento.nombre_evento}</p> */}
+                                                    </div>);
+                                                })}
+                                            </>)}
                                             </div>
+
                                             <div className='containerUserSol'>
                                                 <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
                                                 <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
@@ -147,8 +164,7 @@ class AcceptUserToEvent extends Component{
                                 </div>);
                             })}
                             </>
-                        )}
-
+                            )}
                         </div>
                     </div>
                 </div>

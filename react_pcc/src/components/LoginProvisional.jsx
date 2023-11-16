@@ -47,6 +47,7 @@ function LoginProvisional(){
           window.location.href='./';
           break;
         case "Participante" :
+          cookies.set('id_usuario', response.data[0].id, {path: "/"});
           window.location.href='./home-participant';
           break; 
         default :
