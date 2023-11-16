@@ -332,25 +332,32 @@ class Add_Event extends Component{
                     </span>
                   )}
 
-                  <input type="checkbox" id="myCheck" onclick="myFunction()"/>Evento Que requiere Coach
-                  <div id="entrada">
-                    <p id="textoCuadro">
-                      Cantidad de participantes por equipo
-                    </p>
-                    <input
-                      id="inputRegistro"
-                      type="number"
-                      name="participantes_equipo"
-                      maxLength={2}
-                      placeholder="Ingrese un numero de participantes"
-                      onChange={this.handleInput}
-                    />
+                  <div className="lineaCategoria">
+                    <div className="categoriaIndividual">
+                      <input type="checkbox" id="checkBoxIndividual" />
+                      <span id="tituloIndividualAdd">Individual</span>
+                    </div>
+                    <div className='entradaCantidadEqui'>
+                      <div id="entradaEsp">
+                        <p id="textoCuadro">
+                          Cantidad de participantes por equipo*
+                        </p>
+                        <input
+                          id="inputRegistro"
+                          type="number"
+                          name="participantes_equipo"
+                          maxLength={2}
+                          placeholder="Ingrese un numero de participantes"
+                          onChange={this.handleInput}
+                        />
+                      </div>
+                      {this.state.errors.participantes_equipo && (
+                        <span className="advertencia-creEveEsp">
+                          {this.state.errors.participantes_equipo}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  {this.state.errors.participantes_equipo && (
-                    <span className="advertencia-creEve">
-                      {this.state.errors.participantes_equipo}
-                    </span>
-                  )}
 
                   <div id="entrada">
                     <p id="textoCuadro">Afiche*</p>

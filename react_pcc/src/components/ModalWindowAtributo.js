@@ -43,7 +43,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
         if(!values.nombre_atributo.trim()){
             validationErrors.nombre_atributo = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }else{
             for (let index = 0; index < atributos.length; index++) {
