@@ -106,6 +106,8 @@ class AcceptUserToEvent extends Component{
                             {this.eventos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (
+
+
                             <>
                             { this.eventos.map((evento,id) => {  
                                 return (<div key={evento.eventuserid}>
@@ -118,21 +120,30 @@ class AcceptUserToEvent extends Component{
                                         <h1 className='tituloPagAcept'>{evento.nombre_evento}</h1>
                                         </>
                                     )}
+                                        <div className='containerReqSol'>
+                                            <div className='requisitosDeEvento'>
+                                                <>
+                                                {this.nameEvent.push(evento.nombre_evento)}
+                                                <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                                <p className='requisitosTexto'>{evento.nombre_evento}</p>
+                                                </>
+                                            </div>
+                                            <div className='containerUserSol'>
+                                                <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
 
-                                    <div className='containerUserSol'>
-                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
-                                        <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
+                                                {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
+                                                <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
+                                                {evento.solicitud == 1 ? (
+                                                    null
+                                                ) : (
 
-                                        {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
-                                        <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
-                                        {evento.solicitud == 1 ? (
-                                            null
-                                        ) : (
-                                            <button onClick={()=>this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <><button onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <button onClick={() => this.aceptarParticipante(evento.eventuserid) }className='buttonDenyUser'> Rechazar </button></>
 
-                                        )}
-                                    </div>
-
+                                                )}
+                                            </div>
+                                        </div>           
                                 </div>);
                             })}
                             </>

@@ -1,4 +1,4 @@
-import React, { useState, ffectuseE, Component} from 'react';
+import React, {Component} from 'react';
 import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
@@ -29,6 +29,8 @@ class EditarInformacionDeEventos extends Component{
     componentDidMount(){
         this.getEventTypes();
         this.getEvent();
+        this.getOrganizadores();
+        this.getPatrocinadores();
     }
 
     getEvent=async()=>{
@@ -50,9 +52,24 @@ class EditarInformacionDeEventos extends Component{
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
           id_evento: response.data.id,
           atributos: response.data.attributes,
+          requisitos: response.data.requirements,
+          organizadores_de_evento : response.data.organizers,
+          patrocinadores_de_evento : response.data.sponsors,
           image: response.data.name
         });
       }
+    }
+
+    getOrganizadores = async()=>{
+      const url = "http://127.0.0.1:8000/api/get-organizador"; 
+      const respuesta = await axios.get(url);
+      this.setState({ organizadores: respuesta.data.organizadores})
+    }
+
+    getPatrocinadores = async()=>{
+      const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+      const respuesta = await axios.get(url);
+      this.setState({ patrocinadores: respuesta.data.patrocinadores})
     }
 
     constructor(props){
@@ -73,7 +90,6 @@ class EditarInformacionDeEventos extends Component{
             event_type_id: '',
             errors : {},
             contador : 0,
-            event : [],
             estadoModalAtributo: false,
 
             estadoModal: false,
@@ -81,10 +97,12 @@ class EditarInformacionDeEventos extends Component{
             estadoModalPatrocinador: false,
 
             atributos: [],
+            requisitos: [],
             seCargoArchivo: 0,
-            camposAdicionales: [],
-            nuevoCampo: '',
-            mostrarCampoNuevo: false,
+            organizadores_de_evento: [],
+            organizadores : [],
+            patrocinadores_de_evento: [],
+            patrocinadores : [],
         }
     }
 
@@ -137,14 +155,6 @@ class EditarInformacionDeEventos extends Component{
                 validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Fin ";
                 validationErrors.fecha_fin = "La Fecha de Limite no puede ser superior a la Fecha de Fin";
             }
-        }
-
-        if(!this.state.nombre_evento.trim()){
-            validationErrors.nombre_evento = "Este campo es obligatorio"
-            
-            
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(this.state.nombre_evento)){
-            validationErrors.nombre_evento = "Ingrese un nombre valido"
         }
 
         if(!this.state.numero_contacto){
@@ -200,13 +210,6 @@ class EditarInformacionDeEventos extends Component{
           }
         }
 
-        if(!this.state.participantes_equipo){
-            validationErrors.participantes_equipo = "Este campo es obligatorio"
-
-        }else if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
-            validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
-        }
-
         if(this.state.seCargoArchivo === 0){
           console.log("NO SE CARGO")
 
@@ -216,16 +219,14 @@ class EditarInformacionDeEventos extends Component{
 
           }else if(this.state.image.name){
             const extensiones = ["png","PNG" ,"jpg", "jpeg"];
-
-                var nombreArchivo = this.state.image.name;
-                const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
-                if (!extensiones.includes(extension)){
-                    document.getElementsByClassName("imagen_input").value = "";
+              var nombreArchivo = this.state.image.name;
+              const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
+              if (!extensiones.includes(extension)){
+                document.getElementsByClassName("imagen_input").value = "";
                     
-                    this.setState({ image: '' });
-                    validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
-
-                }
+                this.setState({ image: '' });
+                validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
+              }
           }
         }
 
@@ -237,17 +238,13 @@ class EditarInformacionDeEventos extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
-
-
             
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
 
             const data = new FormData();
 
             data.append('image', this.state.image)
-
             data.append('nombre_evento', this.state.nombre_evento)
-            data.append('requisitos', this.state.requisitos)
             data.append('fecha_inicio', this.state.fecha_inicio)
             data.append('numero_contacto', this.state.numero_contacto)
             data.append('descripcion', this.state.descripcion)
@@ -260,7 +257,7 @@ class EditarInformacionDeEventos extends Component{
             axios.post(url, data).then(res => {
               if(res.data.status === 200){
                 console.log(res);
-                window.location.href = './paginaEditarEventos';
+                window.location.href = './editar-evento-next';
               }
             })
         }
@@ -307,7 +304,6 @@ class EditarInformacionDeEventos extends Component{
               id_evento = {this.state.id_evento}
               atributos = {this.state.atributos}/> }
 
-              
                 <div className="textoEvento">
                   <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
@@ -322,6 +318,7 @@ class EditarInformacionDeEventos extends Component{
                         placeholder="Ingrese nombre"
                         value={this.state.nombre_evento}
                         onChange={this.handleInput}
+                        readOnly
                       />
                     </div>
 
@@ -401,12 +398,13 @@ class EditarInformacionDeEventos extends Component{
                       <p id="textoCuadro">Cantidad de participantes por equipo*</p>
                       <input
                         id="inputRegistro"
-                        type="tel"
+                        type="number"
                         name="participantes_equipo"
                         maxLength={2}
                         placeholder="Ingrese un numero de participantes"
                         value={this.state.participantes_equipo}
                         onChange={this.handleInput}
+                        readOnly
                       />
                     </div>
                     {this.state.errors.participantes_equipo && (
@@ -471,6 +469,27 @@ class EditarInformacionDeEventos extends Component{
                      </div>
                    ))}
                     <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalAtributo(!this.state.estadoModal)}>Agregar Campo +</button>
+
+                    <h1>
+                        Requisitos
+                    </h1>
+                    {this.state.requisitos.map((requisito) => (
+                     <div className="campo-container">
+                       <div id="entrada">
+                         <p id="textoCuadro">{requisito.contenido_requisito}*</p>
+                         <input
+                           id="inputRegistro"
+                           type="text"
+                           name="valor"
+                           placeholder="Campo Adicional"
+                           readOnly
+                         />
+                       </div>
+                       <button className="botonEliminar" type='button' onClick={() => this.eliminarRequisito(requisito.id)}>X</button>
+                     </div>
+                    ))}
+                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalRequisito(!this.state.estadoModal)}>Agregar Requisito +</button>
+
                     <div className="botonEnviar">
                       <button className="botonGuardarEdit" type="submit">
                         {" "}
@@ -481,9 +500,7 @@ class EditarInformacionDeEventos extends Component{
                   
                 </div>
             </div>
-            
             </>
-
         );
     }
 }

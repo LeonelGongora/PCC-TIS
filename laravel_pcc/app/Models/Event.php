@@ -8,6 +8,8 @@ use App\Models\EventType;
 use App\Models\Attribute;
 use App\Models\User;
 use App\Models\Requirement;
+use App\Models\Organizer;
+use App\Models\Sponsor;
 
 class Event extends Model
 {
@@ -27,7 +29,7 @@ class Event extends Model
         'event_type_id'
     ];
 
-    protected $with = ['event_type', 'attributes', 'requirements'];
+    protected $with = ['event_type', 'attributes', 'requirements', 'organizers', 'sponsors'];
 
     public function event_type(){
 
@@ -54,13 +56,13 @@ class Event extends Model
 
     public function organizers(){
 
-        return $this->belongsToMany('App\Models\Organizador');
+        return $this->belongsToMany(Organizer::class, 'event_organizer', 'event_id', 'organizer_id');
 
     }
 
     public function sponsors(){
 
-        return $this->belongsToMany('App\Models\Patrocinador');
+        return $this->belongsToMany(Sponsor::class, 'event_sponsor', 'event_id', 'sponsor_id');
 
     }
 }
