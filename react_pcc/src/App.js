@@ -16,11 +16,11 @@ import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 import VisualizarEventoAccepUserToEvent from "./pages/VisualizarEventoAccepUserToEvent.js";
+import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
 import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 import LoginProvisional from "./components/LoginProvisional.jsx";
 import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
-
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />
 
         <Route path='/editar-evento' element={<EditarEvento/>} />
-
+        <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
 
         <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
         

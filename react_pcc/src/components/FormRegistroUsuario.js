@@ -9,10 +9,10 @@ const cookies = new Cookies();
 
 function FormRegistroUsuario() {
 
+  const ci = cookies.get('ci_nuevo_usuario');
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
-    ci : '',
     email: '',
     password: '',
     confirmarPassword: '',
@@ -25,6 +25,7 @@ function FormRegistroUsuario() {
 
   useEffect(()=>{
     getUsuarios();
+    console.log(ci)
   }, []);
 
   
@@ -64,28 +65,6 @@ function FormRegistroUsuario() {
       validationErrors.apellido = "Ingrese apellido(s) valido(s)";
     }
 
-    if (!formData.ci.trim()) {
-      validationErrors.ci = "Este campo es obligatorio"
-    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
-      validationErrors.ci = "Ingrese un CI valido";
-    }else{
-      for (let index = 0; index < usuarios.length; index++) {
-
-        let ci = usuarios[index].ci
-        let nuevo_ci = formData.ci
-
-        console.log(ci)
-        console.log(nuevo_ci)
-        console.log(typeof(ci))
-        console.log(typeof(nuevo_ci))
-
-        if(ci == nuevo_ci){
-            validationErrors.ci = "Ya existe un usuario registrado con este CI"
-            break;
-        }
-      }
-    }
-
     if (!formData.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
@@ -121,9 +100,7 @@ function FormRegistroUsuario() {
     if (!formData.confirmarPassword.trim()) {
       validationErrors.confirmarPassword = "Este campo es obligatorio"
     }
-
     
-
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
@@ -140,7 +117,7 @@ function FormRegistroUsuario() {
       const data = new FormData();
       data.append('nombre', formData.nombre)
       data.append('apellido', formData.apellido)
-      data.append('ci', formData.ci)
+      data.append('ci', ci)
       data.append('email', formData.email)
       data.append('password', formData.password)
       data.append('telefono', formData.telefono)
@@ -149,7 +126,7 @@ function FormRegistroUsuario() {
         console.log(res)
         console.log(res.data.ultimo_id)
         cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
-        window.location.href = './home-participant';
+        window.location.href = './register-to-event';
       })
     }
 
@@ -192,20 +169,6 @@ function FormRegistroUsuario() {
               )}
             </div>
           </div>
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">CI (Carnet de Identidad)*</p>
-            <input
-              id="inputRegistro-user"
-              type="number"
-              name="ci"
-              placeholder="Ingrese su carnet de identidad"
-              onChange={handleChange}
-            />
-          </div>
-          {errors.ci && (
-            <span className="advertencia-user">{errors.ci}</span>
-          )}
 
           <div id="entrada-user">
             <p id="textoCuadro-user">Email*</p>

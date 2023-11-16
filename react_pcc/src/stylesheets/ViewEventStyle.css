@@ -1,115 +1,364 @@
 .visualizadorDeEventos{
     font-size: 1.2rem;
     font-family: "Roboto";
+    margin: 0;
+    
+}
+.containerSlider{
+    background-image: url(../images/fondo3.jpeg.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+    background-attachment: fixed;
 }
 
-.Titulo{
-    padding-top: 50px;
-    width: 100%;
-    text-align: center;
-    font-size: 2.8rem;
-    margin: 0;
-}
 
 .grid-layout{
     display: grid;
-    grid-template-columns: 25% auto 25%;
     width: 90%;
-    margin: 5% auto;
+    margin: 3% auto;
     padding: 10px;
-}
-.buttons{
-    margin-top: 50px;
-    display: flex; 
+    grid-template-areas: 'titulo titulo titulo titulo titulo titulo titulo titulo titulo'
+                         'logo logo logo logo descrip descrip descrip descrip descrip'
+                         'requisitos requisitos requisitos requisitos requisitos tipoEvento tipoEvento tipoEvento tipoEvento'
+                         'requisitos requisitos requisitos requisitos requisitos participantes participantes participantes participantes'
+                         'limite limite limite inicio inicio inicio final final final'
+                         'org org org org org org org org org'
+                         'pat pat pat pat pat pat pat pat pat'
+                         'contacto contacto contacto contacto contacto contacto contacto contacto contacto'
+                         'telf telf telf telf vacio email email email email';
+    grid-template-rows: auto auto auto auto auto auto auto auto; 
     justify-content: center; 
-    align-items: center; 
+    align-items: center;
+}
+.gTitulo{
+    text-align: center;
+    grid-area: titulo;
+}
+.gTitulo h1{
+    font-size: 2.8rem;
+    color: white
 }
 
-
-.logo{
-    align-self: center;
+.gLogo{
+    grid-area: logo;
+    text-align: center;
 }
-
-.logo img{
-
+.gLogo img{
     width: 90%; 
     height: auto; 
     max-height: 400px;
     max-width: 350px;
     min-height: 200px;
     min-width: 150px;
+    margin-right: 150px;
+    margin-left: 10%;
+    margin-top: 80px;
+    border-radius: 20px;
 }
-.informacion{
-
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 30px; 
-    border: 1px solid #7D7D7D;
-    background-color: #7D7D7D;
-    border-radius: 10px;
-    height: auto;
-    align-self: center;
-    
+.gDescripcion{
+    max-width: 700px;
+    grid-area: descrip;
+    text-align: center;
+}
+.gDescripcion p{
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 1.7rem;
+    color: white;
 }
 .descripcion{
-    width: 100%;
+    font-size: 1.2rem;
     background-color: white;
-    margin: 5px;
-    border-radius: 10px;
-    height: 50%;
-    min-height: 130px;
-    padding-left: 10px;
-    padding-top: 10px;
+    color: black;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 20px;
+    
+    margin-top: 15px;
+    text-align: center;
+  
+}
+.gRequisitos{
+    grid-area: requisitos;
+    font-size: 1.4rem;
+    color: white;
+}
+.gRequisitos p{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 30px;
 }
 .requerimientos{
-    width: 100%;
-    background-color: white;
-    margin: 5px;
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10%;
+    margin-top: 15px;
+    min-height: 300px;
+    /* background-color: white; */
+}
+.gTipoEvento{
+    grid-area: tipoEvento;
+    justify-content: center; 
+    align-items: center;
+    margin-top: 20%;
+    font-size: 1.4rem;
+    
+}
+.gTipoEvento p{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    color: white;
+}
+.tipoDeEvento{
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10%;
+    margin-top: 15px;
+    text-align: center;
+    color: white;
+    /* background-color: white; */
+}
+.gNParticipantes{
+    grid-area: participantes;
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 20%;
+    font-size: 1.4rem;
+}
+.gNParticipantes p{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+    color: white;
+}
+.participantes{
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10%;
+    margin-top: 15px;
+    text-align: center;
+    /* background-color: white; */
+    color: white;
+}
+.gFecLim{
+    grid-area: limite; 
+    justify-content: center; 
+    align-items: center;   
+    max-width: 300px;
+    min-width: 290px;
+    margin-left: 20%;
+    margin-right: 2%;
+}
+.gFecLim p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+    color: white;
+}
+.fechaLimite{
+    font-size: 1.2rem;
+    border: 1px solid;
     border-radius: 10px;
-    height: 50%;
-    min-height: 130px;
-    padding-left: 10px;
-    padding-top: 10px;
-    margin-top: 8px;
-}
-
-
-.inscripciones{
+    border-color: black;
+    padding: 10px;
+    margin: 10%;
+    margin-top: 15px;
+    text-align: center;
     background-color: #D73B3B;
-    padding: 15px;
-    width: 80%;
-    margin: 50% auto; 
-    border: 1px solid #7D7D7D;
     color: white;
-    display: flex; 
-    align-items: center; 
-    text-align: center; 
-    max-height: 100px;
 }
+.gFecIni{
+    grid-area: inicio; 
+    justify-content: center; 
+    align-items: center;
+    max-width: 300px;
+    min-width: 250px;
+    margin-left: 10%;
+}
+.gFecIni p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+    color: white;
+}
+.fechaInicio{
+    font-size: 1.2rem;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: black;
+    padding: 10px;
+    margin: 10%;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #1B3C61;
+    color: white;
+}
+.gFecFin{
+    grid-area: final; 
+    justify-content: center; 
+    align-items: center;
+    max-width: 300px;
+    min-width: 250px;
+}
+.gFecFin p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+    color: white;
+}
+.fechaFinal{
+    font-size: 1.2rem;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: black;
+    padding: 10px;
+    margin: 10%;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #1B3C61;
+    color: white;
+}
+.gOrg{
+    grid-area: org;
+    max-width: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: rgb(255, 255, 255);
+    color: white;
+    /* background-color: white; */
+    margin-bottom: 5%;
+    margin-top: 5%;
+    font-size: 1.4rem;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.gOrg p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+    margin-top: 50px;
+    
+}
+.gOrg img{
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 10%;
+}
+.organizadores{
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gPat{
+    grid-area: pat;
+    max-width: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: rgb(255, 255, 255);
+    /* background-color: white; */
+    font-size: 1.4rem;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: white;
+}
+.gPat img{
+    max-width: 150px;
+    max-height: 150px;
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 10%;
+}
+.gPat p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+    margin-top: 30px;
+}
+.patrocinadores{
+    margin-left: 5%;
+    margin-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gContacto {
+    grid-area: contacto;
+    margin-top: 30px;
+    color: white;
+}
+.gContacto p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+.gTelf{
+    grid-area: telf;
+    justify-self: center;
+    color: white;
+    
+}
+.gTelf p{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 35px;
+}
+.telefono{
+    font-size: 1.2rem;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: black;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #1B3C61;
+    color: white;
+    min-width: 250px;
 
-.edit{
-    fill: #000000;
 }
-#textoCuadroDescripcion{
-    position: relative;
-    font-size: 1rem;
-    text-align: left;
-    font-weight: bold;
-    width: fit-content;
-    margin-left: 1vw;
-    margin-top: 4px;
-    transform: translateY(1px);
+.gEmail{
+    grid-area: email;
+    justify-self: center;
     color: white;
 }
-#textoCuadroRequerimientos{
-    position: relative;
-    font-size: 1rem;
-    text-align: left;
+.gEmail p{
+    text-align: center;
     font-weight: bold;
-    width: fit-content;
-    margin-left: 1vw;
-    margin-top: 8px;
-    transform: translateY(1px);
+    margin-bottom: 35px;
+}
+.email{
+    font-size: 1.2rem;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: black;
+    padding: 10px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #1B3C61;
     color: white;
+    min-width: 250px;
+}
+.vacio{
+    grid-area: vacio;
 }

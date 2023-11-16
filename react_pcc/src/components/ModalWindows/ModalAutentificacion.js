@@ -4,8 +4,9 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import Cookies from 'universal-cookie';
 
-
+const cookies = new Cookies();
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
@@ -13,11 +14,12 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
 
     
     const [values, setValues] = useState({
-        nombre_tipo_evento : "",
+      ci : "",
     });
 
     const [errors, setErrors] = useState({});
     const [tipo_eventos, setTipo_eventos] = useState([]);
+    const [usuarios, setUsuarios] = useState({})
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -30,7 +32,16 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
 
     useEffect(()=>{
       getTipos_Evento();
+      getUsuarios();
     }, []);
+
+    const getUsuarios=async()=>{
+      let url = "http://127.0.0.1:8000/api/get-user-information"
+      //get-user-information
+      const respuesta = await axios.get(url);
+      console.log(respuesta)
+      setUsuarios(respuesta.data.usuarios);
+    }
 
     const getTipos_Evento = async (e) => {
       const url = "http://127.0.0.1:8000/api/type-events"; 
@@ -51,37 +62,36 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
 
         const validationErrors = {};
 
-        if(!values.nombre_tipo_evento.trim()){
-            validationErrors.nombre_tipo_evento = "Este campo es obligatorio"
+        if(!values.ci.trim()){
+            validationErrors.ci = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_tipo_evento)){
-            validationErrors.nombre_tipo_evento = "Ingrese un nombre valido"
-        }else{
-          for (let index = 0; index < tipo_eventos.length; index++) {
-
-            let tipo_evento = tipo_eventos[index].nombre_tipo_evento.trim()
-            let nuevo_tipo_evento = values.nombre_tipo_evento.trim()
-
-            if(tipo_evento === nuevo_tipo_evento){
-                validationErrors.nombre_tipo_evento = "Ya existe un tipo de evento con este nombre"
-                break;
-            }
-          } 
+        }else if(!/^(?!-)[1-9][0-9]{6,8}$/.test(values.ci)){
+            validationErrors.ci = "Ingrese un nombre valido"
         }
 
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
-            const res = await axios.post('http://127.0.0.1:8000/api/add-event_type', values);
-            if(res.data.status === 200){
-                console.log(values.nombre_tipo_evento);
-                setValues({
-                  nombre_tipo_evento : '',
-                });
-                window.location.reload();
-            }
-        }
 
+          let nuevo_ci = values.ci;
+          let seEncontro = 0;
+          for (let index = 0; index < usuarios.length; index++) {
+    
+            let ci = usuarios[index].ci
+    
+            if(ci == nuevo_ci){
+              
+              cambiarEstado1(false)
+              seEncontro = 1;
+              break;
+            }
+          }
+    
+          if(seEncontro === 0){
+            cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
+            window.location.href='./formUsuario';
+          }
+        }
     }
 
     return (
@@ -92,15 +102,26 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                   <div className="tituloEvento">
                     <h1>Autentificacion</h1>
                   </div>
-                  <button
-                    onClick={salirVentanaModal}
-                    className="BotonSalir"
-                  >
-                    {salir}
-                  </button>
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
+
+                    <p id="textoCuadro">CI</p>
+                    <input
+                    id="input"
+                    className="inputEvento"
+                    type="text"
+                    name="ci"
+                    placeholder="Ingrese su CI"
+                    onChange={handleInput}
+                    />
+
+                    {errors.ci && (
+                    <span className="advertencia">
+                    {errors.ci}
+                    </span>
+                    )}
+
                     <p id="textoCuadroAtributo">Contraseña*</p>
                         <input
                         type="text"
@@ -111,8 +132,8 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                         />
                         </form>
                         {errors.nombre_tipo_evento && (
-                <span className="span1Modal">{errors.nombre_tipo_evento}</span>
-              )}
+                    <span className="span1Modal">{errors.nombre_tipo_evento}</span>
+                    )}
               <button form="form1" type="submit" className="BotonRegistrar">
                 Registrar
               </button>

@@ -8,6 +8,7 @@ const cookies = new Cookies();
 class Add_Event extends Component{
 
     eventos = []
+    
 
     getEventTypes = async () => {
         
@@ -21,11 +22,18 @@ class Add_Event extends Component{
     };
 
     componentDidMount(){
-        this.getEventTypes();
+      this.getEventTypes();
+      this.ocultarCampoParticipantes();
     }
-    
-    
-    //const [errors, setErrors] = useState({});
+
+    ocultarCampoParticipantes = async () => {
+      //document.getElementsByName("participantes_equipo").type = "hidden";
+
+      //let inputParticipantes = document.getElementsByName("participantes_equipo");
+      //console.log(inputParticipantes)
+      //inputParticipantes.type = 'hidden';
+      //console.log(inputParticipantes)
+    };
 
     constructor(props){
         super(props)
@@ -39,7 +47,7 @@ class Add_Event extends Component{
             participantes_equipo: '',
             event_type_id: '',
             errors : {},
-            contador : 0
+            contador : 0,
         }
     }
 
@@ -134,11 +142,13 @@ class Add_Event extends Component{
         }
 
         if(!this.state.participantes_equipo.trim()){
-            validationErrors.participantes_equipo = "Este campo es obligatorio"
-
-        }else if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
+            //validationErrors.participantes_equipo = "Este campo es obligatorio"
+        }else{
+          if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
             validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
+          }
         }
+
 
         if(!this.state.image.name){
             validationErrors.image = "Debe subir una imagen"
@@ -181,10 +191,17 @@ class Add_Event extends Component{
           data.append('descripcion', this.state.descripcion)
           data.append('fecha_limite', this.state.fecha_limite)
           data.append('fecha_fin', this.state.fecha_fin)
-          data.append('participantes_equipo', this.state.participantes_equipo)
+          if(this.state.participantes_equipo.trim().length === 0){
+            data.append('participantes_equipo', 0)
+
+          }else{
+            data.append('participantes_equipo', this.state.participantes_equipo)
+          }
+          
           data.append('event_type_id', valor)
 
-          console.log(fecha_Actual)
+          console.log(this.state.participantes_equipo)
+
           axios.post(url, data).then(res => {
             console.log(res)
             cookies.set('ultimo_id_evento', res.data.ultimo_id_evento, { path: "/" });
@@ -315,24 +332,32 @@ class Add_Event extends Component{
                     </span>
                   )}
 
-                  <div id="entrada">
-                    <p id="textoCuadro">
-                      Cantidad de participantes por equipo*
-                    </p>
-                    <input
-                      id="inputRegistro"
-                      type="number"
-                      name="participantes_equipo"
-                      maxLength={2}
-                      placeholder="Ingrese un numero de participantes"
-                      onChange={this.handleInput}
-                    />
+                  <div className="lineaCategoria">
+                    <div className="categoriaIndividual">
+                      <input type="checkbox" id="checkBoxIndividual" />
+                      <span id="tituloIndividualAdd">Individual</span>
+                    </div>
+                    <div className='entradaCantidadEqui'>
+                      <div id="entradaEsp">
+                        <p id="textoCuadro">
+                          Cantidad de participantes por equipo*
+                        </p>
+                        <input
+                          id="inputRegistro"
+                          type="number"
+                          name="participantes_equipo"
+                          maxLength={2}
+                          placeholder="Ingrese un numero de participantes"
+                          onChange={this.handleInput}
+                        />
+                      </div>
+                      {this.state.errors.participantes_equipo && (
+                        <span className="advertencia-creEveEsp">
+                          {this.state.errors.participantes_equipo}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  {this.state.errors.participantes_equipo && (
-                    <span className="advertencia-creEve">
-                      {this.state.errors.participantes_equipo}
-                    </span>
-                  )}
 
                   <div id="entrada">
                     <p id="textoCuadro">Afiche*</p>
@@ -388,6 +413,5 @@ class Add_Event extends Component{
         );
     }
 }
-
 
 export default Add_Event;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Event;
 
 class Organizer extends Model
 {
@@ -14,9 +15,9 @@ class Organizer extends Model
         'imagen_organizador',
     ];
 
-    public function eventos(){
-
-        return $this->belongsToMany('App\Models\Evento');
-
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_organizer', 'organizer_id','event_id');
     }
+
 }
