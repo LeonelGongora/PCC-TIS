@@ -1,9 +1,7 @@
 import React from 'react';
 import "../stylesheets/ContenedorSliderStyles.css";
-import NavbarUser from '../components/NavbarUser';
 import EditarInformacionDeEventos from '../components/EditarInformacionDeEventos';
-import NavbarCreateEvent from '../components/NavBarCreateEvent';
-
+import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 
 function EditarEvento(){
     return(
@@ -13,5 +11,4 @@ function EditarEvento(){
         </div>
     )
 }
-
 export default EditarEvento;

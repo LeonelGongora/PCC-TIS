@@ -1,6 +1,6 @@
 import React from 'react';
-import "../stylesheets/NavbarStyles.css";
-import DropdownUser from './DropDownUser';
+import "../../stylesheets/NavbarStyles.css";
+import DropdownUser from '../DropDownUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,8 +11,8 @@ function NavbarUser(){
           <h1 className='name'>PCC</h1>
           <a href="">
             <img
-              className='imageNav'
-              src={require("../images/logo512.png")}
+              className="imageNav"
+              src={require("../../images/logo512.png")}
               alt="Logo del sistema"
             />
           </a>

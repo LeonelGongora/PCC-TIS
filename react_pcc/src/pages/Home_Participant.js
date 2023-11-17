@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavbarUser from '../components/NavbarUser';
+import NavbarUser from '../components/NavBars/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 
@@ -61,7 +61,7 @@ class Home_Participant extends Component{
         // console.log(id);
         cookies.set('idauxiliar', id, {path: "/"});
         // console.log(cookies.get('idauxiliar'));
-        window.location.href='./event-user';
+        window.location.href='./event-admin';
     }
 
 

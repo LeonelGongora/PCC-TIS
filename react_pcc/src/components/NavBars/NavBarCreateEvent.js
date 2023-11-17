@@ -1,6 +1,5 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
-import "../stylesheets/NavbarStyles.css";
+import "../../stylesheets/NavbarStyles.css";
 
 function NavbarCreateEvent(){
     return (
@@ -10,7 +9,7 @@ function NavbarCreateEvent(){
           <a>
             <img
               className="imageNav"
-              src={require("../images/logo512.png")}
+              src={require("../../images/logo512.png")}
               alt="Logo del sistema"
             />
           </a>

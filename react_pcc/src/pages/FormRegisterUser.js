@@ -1,6 +1,6 @@
 import React from "react";
 import "../stylesheets/RegisterFormUser.css";
-import NavbarCreateEvent from "../components/NavBarCreateEvent";
+import NavbarCreateEvent from "../components/NavBars/NavBarCreateEvent";
 import FormRegistroUsuario from "../components/FormRegistroUsuario";
 
 function FormRegisterUser() {

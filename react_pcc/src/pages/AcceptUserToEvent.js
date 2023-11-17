@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavbarAdmin from '../components/NavbarAdmin';
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import "../stylesheets/AcceptUserToEventStyles.css";
 import '../App.css';
 import axios from 'axios';

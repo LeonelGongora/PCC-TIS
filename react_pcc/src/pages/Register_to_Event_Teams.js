@@ -4,14 +4,13 @@ import React , { useState, useEffect } from 'react';
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import NavbarUser from '../components/NavbarUser';
-
+import NavbarUser from "../components/NavBars/NavbarUser";
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 const cookies = new Cookies();
 
-function Register_Event() {
+function Register_to_Event_Teams() {
 
   const [event, setEvent] = useState ( [] );
   
@@ -47,4 +46,4 @@ function Register_Event() {
   );
 }
 
-export default Register_Event;
+export default Register_to_Event_Teams;

@@ -4,11 +4,11 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home_Admin from "./pages/Home_Admin.js";
 import Home_Participant from "./pages/Home_Participant.js";
 import Register_to_Event from "./pages/Register_to_Event.js";
+import Register_to_Event_Teams from "./pages/Register_to_Event_Teams.js";
 import Register_Event_Admin from "./pages/Register_Event_Admin.js";
 import Register_Event_Admin_Next from "./pages/Register_Event_Admin_Next.js";
 
 import ContenedorSliderAdmin from "./pages/ContenedorSliderAdmin.js";
-import ContenedorSliderUser from "./components/ContenedorSliderUser.js";
 
 import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
@@ -33,9 +33,9 @@ function App() {
       <Route path='/home' element={<Home_User_Dinamico/>} />
       
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
-        <Route path='/event-user' element={<ContenedorSliderUser/>} />
 
         <Route path='/register-to-event' element={<Register_to_Event/>}/>
+        <Route path='/register-to-event-teams' element={<Register_to_Event/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />

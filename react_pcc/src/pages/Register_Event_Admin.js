@@ -1,6 +1,6 @@
 
 import React from 'react';
-import NavbarCreateEvent from '../components/NavBarCreateEvent';
+import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Add_Event from './Add_Event';
 import "../stylesheets/RegisterEventAdminStyles.css";
 

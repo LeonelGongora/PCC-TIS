@@ -1,7 +1,8 @@
 import React from "react";
-import "../stylesheets/NavbarStyles.css";
-import "./Dropdown.js";
-import DropdownUserDinamico from "./DropdownUserDinamico";
+import "../../stylesheets/NavbarStyles.css";
+import "../Dropdown.js";
+
+import DropdownUserDinamico from "../DropdownUserDinamico.js";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -17,7 +18,7 @@ function NavbarUserDinamico({estado1,cambiarEstado1, estadoOrganizador, cambiarE
                     <a href="">
                         <img
                             className="imageNav"
-                            src={require("../images/logo512.png")}
+                            src={require("../../images/logo512.png")}
                             alt="Logo del sistema"
                         />
                     </a>

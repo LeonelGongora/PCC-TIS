@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavbarUser from '../components/NavbarUser';
+import NavbarUser from '../components/NavBars/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 
