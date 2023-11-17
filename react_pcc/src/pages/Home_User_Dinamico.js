@@ -5,9 +5,9 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import ModalWindow from '../components/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
+import ModalWindow from '../components/ModalWindows/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import NavbarUserDinamico from '../components/NavbarUserDinamico';
 
 const cookies = new Cookies();

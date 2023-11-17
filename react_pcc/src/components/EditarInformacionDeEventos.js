@@ -296,15 +296,6 @@ class EditarInformacionDeEventos extends Component{
           <>
             <div className="contenedorMaximo"></div>
             <div className="editarEventos">
-              {
-                <ModalWindowAtributo
-                  estadoAtributo={this.state.estadoModalAtributo}
-                  cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
-                  id_evento={this.state.id_evento}
-                  atributos={this.state.atributos}
-                />
-              }
-
               <div className="textoEvento">
                 <p className="textoRegistro"> Edicion de eventos</p>
               </div>
