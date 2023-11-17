@@ -7,9 +7,9 @@ import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
-import ModalWindow from '../components/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
+import ModalWindow from '../components/ModalWindows/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();

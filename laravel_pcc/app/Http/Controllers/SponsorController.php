@@ -44,8 +44,15 @@ class SponsorController extends Controller
                 'status' => 200,
                 'message' => 'No hay archivo',
             ]);
-
         }
+    }
 
+    public function destroy($id)
+    {
+        $patrocinador = Sponsor::find($id);
+        $patrocinador->delete();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Patocinador eliminado exitosamente']);
     }
 }

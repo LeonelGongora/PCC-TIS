@@ -1,7 +1,6 @@
 import React, {useState} from  'react';
-import axios from 'axios';
 //import React, {Component} from 'react';
-import '../stylesheets/ModalWarningStyle.css'
+import '../../stylesheets/ModalWarningStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';

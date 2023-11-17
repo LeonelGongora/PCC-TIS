@@ -3,8 +3,7 @@ import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import ModalWindowAtributo from '../components/ModalWindowAtributo';
-
+import ModalWindowAtributo from '../components/ModalWindows/ModalWindowAtributo';
 import ModalWindowRequisito from '../components/ModalWindows/ModalWindowRequisito';
 
 const cookies = new Cookies();

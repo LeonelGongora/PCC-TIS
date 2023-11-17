@@ -6,7 +6,7 @@ import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-import ModalWarning from './ModalWindows/ModalWarning';
+import ModalWarning from './ModalWarning';
 
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 
@@ -16,7 +16,7 @@ const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 const EventoUsuario_Api_Url = configApi.EVENTO_USUARIO_API_URL;
 const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 
-function FormRegistroEvento(){
+function FormRegistroEvento_Equipos(){
 
   const id_usuario = cookies.get('id_usuario');
   const archivoInput = useRef(null);
@@ -83,7 +83,6 @@ function FormRegistroEvento(){
       console.log(archivo.file)
       console.log(archivo)
       
-
       const fd = new FormData();
       fd.append('file', archivo);
       axios.post(Imagen_Api_Url, fd).then(response=>{ 
@@ -100,9 +99,7 @@ function FormRegistroEvento(){
         console.log(response)
       })
       })
-      
     }
-    
   }
 
   const handleChange = (e) => {
@@ -215,4 +212,4 @@ function FormRegistroEvento(){
     </div>
   )
 }
-export default FormRegistroEvento;
+export default FormRegistroEvento_Equipos;

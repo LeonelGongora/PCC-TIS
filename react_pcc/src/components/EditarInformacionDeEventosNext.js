@@ -3,7 +3,7 @@ import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import ModalWindowAtributo from './ModalWindowAtributo';
+import ModalWindowAtributo from './ModalWindows/ModalWindowAtributo';
 import ModalWindowRequisito from './ModalWindows/ModalWindowRequisito';
 
 const cookies = new Cookies();
@@ -234,23 +234,21 @@ class EditarInformacionDeEventosNext extends Component{
             console.log("Eliminar")
             console.log(patrocinadores_eliminar)
 
-            const urlOrganizador = `http://127.0.0.1:8000/api/add-event_organizer`; 
-            const urlPatrocinador = `http://127.0.0.1:8000/api/add-event_sponsor`; 
+            const url_Organizador_agregar = `http://127.0.0.1:8000/api/add-event_organizer`; 
+            const url_Organizador_eliminar = `http://127.0.0.1:8000/api/delete-event_organizer`; 
+            
+            const url_Patrocinador_agregar = `http://127.0.0.1:8000/api/add-event_sponsor`; 
+            const url_Patrocinador_eliminar = `http://127.0.0.1:8000/api/delete-event_sponsor`; 
 
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
-            ;//add-event-organizer
 
-            /*
-            
-            
-
-            for (let index = 0; index < this.state.organizadores_id.length; index++) {
+            for (let index = 0; index < organizadores_agregar.length; index++) {
               const data = new FormData()
-              let organizador = this.state.organizadores_id[index]
+              let organizador = organizadores_agregar[index]
               data.append("organizador", organizador)
               data.append("evento", this.id)
 
-              axios.post(urlOrganizador, data).then(res => {
+              axios.post(url_Organizador_agregar, data).then(res => {
                 if(res.data.status === 200){
                   console.log(res);
                   //window.location.href = './paginaEditarEventos';
@@ -258,23 +256,48 @@ class EditarInformacionDeEventosNext extends Component{
               })
             }
 
-            for (let index = 0; index < this.state.patrocinadores_id.length; index++) {
+            for (let index = 0; index < organizadores_eliminar.length; index++) {
+              
               const data = new FormData()
-              let patrocinador = this.state.patrocinadores_id[index]
+              let organizador = organizadores_eliminar[index]
+              data.append("organizador", organizador)
+              data.append("evento", this.id)
+
+              axios.post(url_Organizador_eliminar, data).then(res => {
+                if(res.data.status === 200){
+                  console.log(res);
+                }
+              })
+            }
+
+            for (let index = 0; index < patrocinadores_agregar.length; index++) {
+              const data = new FormData()
+              let patrocinador = patrocinadores_agregar[index]
               data.append("patrocinador", patrocinador)
               data.append("evento", this.id)
 
-              axios.post(urlPatrocinador, data).then(res => {
+              axios.post(url_Patrocinador_agregar, data).then(res => {
                 if(res.data.status === 200){
                   console.log(res);
                   //window.location.href = './paginaEditarEventos';
                 }
               })
-              
             }
 
-            */
+            for (let index = 0; index < patrocinadores_eliminar.length; index++) {
 
+              const data = new FormData()
+              let patrocinador = patrocinadores_eliminar[index]
+              data.append("patrocinador", patrocinador)
+              data.append("evento", this.id)
+
+              axios.post(url_Patrocinador_eliminar, data).then(res => {
+                if(res.data.status === 200){
+                  console.log(res);
+                }
+              })
+            }
+            
             //axios.post(url, data).then(res => {
               //if(res.data.status === 200){
                 //console.log(res);

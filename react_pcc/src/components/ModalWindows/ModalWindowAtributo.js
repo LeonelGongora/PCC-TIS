@@ -1,6 +1,6 @@
 import React, {useState} from  'react';
 import axios from 'axios';
-import '../stylesheets/ModalWindowStyle.css'
+import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 

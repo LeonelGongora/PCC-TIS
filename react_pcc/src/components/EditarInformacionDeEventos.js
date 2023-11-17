@@ -3,10 +3,6 @@ import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import ModalWindow from '../components/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
-import ModalWindowAtributo from './ModalWindowAtributo';
 
 const cookies = new Cookies();
 
@@ -104,10 +100,6 @@ class EditarInformacionDeEventos extends Component{
             patrocinadores_de_evento: [],
             patrocinadores : [],
         }
-    }
-
-    cambiarEstadoModalAtributo = (nuevoEstado) => {
-      this.setState({ estadoModalAtributo: nuevoEstado });
     }
 
     handleInput = (e) => {
@@ -298,12 +290,6 @@ class EditarInformacionDeEventos extends Component{
         return (
             <><div className='contenedorMaximo'></div>
               <div className="editarEventos">
-              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModalAtributo} 
-              
-              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
-              id_evento = {this.state.id_evento}
-              atributos = {this.state.atributos}/> }
-
                 <div className="textoEvento">
                   <p className="textoRegistro"> Edicion de eventos</p>
                 </div>
@@ -488,7 +474,6 @@ class EditarInformacionDeEventos extends Component{
                        <button className="botonEliminar" type='button' onClick={() => this.eliminarRequisito(requisito.id)}>X</button>
                      </div>
                     ))}
-                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalRequisito(!this.state.estadoModal)}>Agregar Requisito +</button>
 
                     <div className="botonEnviar">
                       <button className="botonGuardarEdit" type="submit">

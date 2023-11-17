@@ -12,7 +12,7 @@ const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 const cookies = new Cookies();
 
-function Register_Event() {
+function Register_to_Event() {
 
   const [event, setEvent] = useState ( [] );
   
@@ -48,4 +48,4 @@ function Register_Event() {
   );
 }
 
-export default Register_Event;
+export default Register_to_Event;
