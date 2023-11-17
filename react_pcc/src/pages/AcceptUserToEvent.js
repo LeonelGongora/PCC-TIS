@@ -22,6 +22,8 @@ class AcceptUserToEvent extends Component{
             events: [],
             e: [],
             user: [],
+            nombre_evento: '',
+            requisitos: [],
             loader:false,
             estadoModal: false,
             estadoModalOrganizador:false,
@@ -59,15 +61,22 @@ class AcceptUserToEvent extends Component{
         // console.log(this.state.events)
     };
 
-    getInfoEvent = async () => {
+    getEvent=async()=>{
         const idevent = cookies.get('auteId');
-        const e = await axios.get(`${this.Event_Url_Api}/${idevent}`);
-        this.requisitos = Array.from(e.data.requirements)
-        // console.log(this.es)
-    };
+        const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
+        // console.log(response)
+        this.setState({ event: response.data})
+  
+        if(response.request.status === 200){
+          this.setState({
+            nombre_evento: response.data.nombre_evento,
+            requisitos: response.data.requirements
+          });
+        }
+      }
 
     componentDidMount(){
-        this.getInfoEvent();
+        this.getEvent();
         this.getAllUsers();
     }
 
@@ -81,9 +90,7 @@ class AcceptUserToEvent extends Component{
     }
 
     render(){
-
         return(
-
             <div className="App">
                 <ModalWindow
                 estado1={this.state.estadoModal}
@@ -111,40 +118,24 @@ class AcceptUserToEvent extends Component{
                    />
                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
-                            
+
                             {this.eventos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
-                            ) : (
-
-                            <>
-                            { this.eventos.map((evento) => {  
-                                return (<div key={evento.eventuserid}>
-
-                                    {this.nameEvent.includes(evento.nombre_evento) ? (
-                                        null
-                                    ) : (
-                                        <>
-                                        {this.nameEvent.push(evento.nombre_evento)}
-                                        <h1 className='tituloPagAcept'>{evento.nombre_evento}</h1>
-                                        </>
-                                    )}
-                                        <div className='containerReqSol'>
-
-                                            <div className='requisitosDeEvento'>
-                                                
-                                            {this.reqEvent.includes("1") ? (
-                                                null
-                                            ) : (<>
-                                                {this.requisitos.map((r) => {  
-                                                    return (<div key={r.id}>
-                                                        {this.reqEvent.push("1")}
-                                                        <h3 className='subtitleRequisitos'>{r.contenido_requisito}</h3>
-                                                        {/* <p className='requisitosTexto'>{evento.nombre_evento}</p> */}
-                                                    </div>);
-                                                })}
-                                            </>)}
-                                            </div>
-
+                            ) : (<>
+                            <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
+                                <div className='containerReqSol'>
+                                    <div className='requisitosDeEvento'>
+                                        
+                                        {this.state.requisitos.map((r) => {  
+                                            return (<div key={r.id}>
+                                                <h3 className='subtitleRequisitos'>{r.contenido_requisito}</h3>
+                                                {/* <p className='requisitosTexto'>{evento.nombre_evento}</p> */}
+                                            </div>);
+                                        })}
+                                    
+                                    </div>
+                                    {this.eventos.map((evento) => {  
+                                        return (<div key={evento.eventuserid}>
                                             <div className='containerUserSol'>
                                                 <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
                                                 <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
@@ -154,15 +145,13 @@ class AcceptUserToEvent extends Component{
                                                 {evento.solicitud == 1 ? (
                                                     null
                                                 ) : (
-
                                                     <><button onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
                                                     <button onClick={() => this.aceptarParticipante(evento.eventuserid) }className='buttonDenyUser'> Rechazar </button></>
-
                                                 )}
                                             </div>
-                                        </div>           
-                                </div>);
-                            })}
+                                        </div>);
+                                    })}
+                                </div>           
                             </>
                             )}
                         </div>
