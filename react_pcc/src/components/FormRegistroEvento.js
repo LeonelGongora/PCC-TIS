@@ -18,135 +18,80 @@ const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 
 function FormRegistroEvento(){
 
+  const id_usuario = cookies.get('id_usuario');
   const archivoInput = useRef(null);
   const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
 
   const manejarCargaDeArchivo = (event) => {
-    setArchivo({file: event.target.files[0]})
-    var archivo = event.target.files[0];
-    if (archivo) {
-
-      if (!archivo.name.endsWith('.zip')) {
-      setErrorArchivo('Debe subir un archivo .zip');
-      setShowModal(true); 
-      setArchivo({file:null})
-      archivo = '';
-      console.log("Valor de 'requisito' actualizado a vacío:", archivo.name);
-      document.getElementById('nombreArchivo').textContent = '';
-      }else if (archivo.size > 10485760) {
-        setErrorArchivo('Su archivo excede el tamaño máximo');
-        setShowModal(true);
-        setArchivo({file:null})
-        archivo = '';
-        console.log("Valor de 'requisito' actualizado a vacío:", archivo.name);
-        document.getElementById('nombreArchivo').textContent = '';
-      } else {
-        setErrorArchivo(''); 
-        document.getElementById('nombreArchivo').textContent = `  ${archivo.name}`;
-        console.log(' ', archivo.name);
-        setShowModal(false);
-      }
-   
-  } else {
-    setShowModal(false); 
-  }
+    setArchivo(event.target.files[0]);
+    var archivoAux = event.target.files[0];
+    document.getElementById('nombreArchivo').textContent = `  ${archivoAux.name}`;
   };
 
   const subirArchivo = () => {
     archivoInput.current.click();
   }
-  const [file, setRequisitoNull] = useState(null);
 
   const [formData, setFormData] = useState({
     ci : '',
-    estadoModal: false
+    estadoModal: true
   })
 
-  //const [errorRequisito, setErrorRequisito] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [errorArchivo, setErrorArchivo] = useState('');
-
   const [errors, setErrors] = useState({});
 
   const registrar = async(e) => {
 
     e.preventDefault();
     const form = document.forms["form_name"].getElementsByTagName("input");
-    var atributosInput = Array.from(form);
-    console.log(atributosInput)
-
+    const atributosInput= Array.from(form);
+    
     const validationErrors = {};
-    var i;
 
-    for (i = 0; i < atributos.length; i++) {
+    if (archivo.name) {
+      
+      if (!archivo.name.endsWith('.zip')) {
+        validationErrors.imagen = "Debe subir un archivo .zi";
+        setErrorArchivo('Debe subir un archivo .zip');
+        setShowModal(true);
+        console.log("No Zip")
+      } else if (archivo.size > 10485760) {
+        validationErrors.imagen = "Su archivo excede el tamaño máximo";
+        setErrorArchivo('Su archivo excede el tamaño máximo');
+        setShowModal(true);
+        console.log("Tamaño")
+      }
+      //else if (!archivo.file && mostrarRequisitos)
+    } else {
+      setErrorArchivo('Debe subir un archivo .zip');
+      validationErrors.imagen = "Debe subir un archivo .zip";
+      console.log("Sin archivo")
+      setShowModal(true);
+    } 
+
+    for (let i = 0; i < atributos.length; i++) {
       
       if(!atributosInput[i].value.trim()){
         validationErrors[atributosInput[i].name] = "Este campo es obligatorio";
       }
     }
 
-    if (!formData.ci.trim()) {
-      validationErrors.ci = "Este campo es obligatorio"
-    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
-      validationErrors.ci = "Ingrese un CI valido";
-    }
-
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
-      let nuevo_ci = formData.ci;
-      let seEncontro = 0;
-      for (let index = 0; index < usuarios.length; index++) {
+      console.log(archivo.file)
+      console.log(archivo)
+      
 
-        let ci = usuarios[index].ci
-        console.log(ci)
-        console.log(nuevo_ci)
-
-        if(ci == nuevo_ci){
-            console.log("Ya existe un usuario registrado con este CI")
-            cambiarEstadoModal(!formData.estadoModal)
-            seEncontro = 1;
-            break;
-        }
-      }
-
-      if(seEncontro === 0){
-        window.location.href='./formUsuario';
-      }
-
-    }
-    
-    if (archivoInput.current && archivoInput.current.files.length > 0) {
-      const archivo = archivoInput.current.files[0];
-      if (!archivo.name.endsWith('.zip')) {
-        setErrorArchivo('Debe subir un archivo .zip');
-        setShowModal(true);
-      } else if (archivo.size > 10485760) {
-        setErrorArchivo('Su archivo excede el tamaño máximo');
-        setShowModal(true);
-      }
-    } else if (!archivo.file && mostrarRequisitos) {
-      setErrorArchivo('Debe subir un archivo .zip');
-      setShowModal(true);
-    } else {
-      setErrorArchivo('');
-      setShowModal(false);
-    }
-    
-    if(archivo.file != null){
-
-
-    // registro DB con usuario id=1
-    /*
-    const fd = new FormData();
-    fd.append('file', archivo.file);
-    axios.post(Imagen_Api_Url, fd)
-    .then(response=>{ 
-      var urli= response.data.urlimagen;
+      const fd = new FormData();
+      fd.append('file', archivo);
+      axios.post(Imagen_Api_Url, fd).then(response=>{ 
+        var urli= response.data.urlimagen;
 
       axios.post(EventoUsuario_Api_Url, {
         event_id: idevento,
-        user_id: 1,
+        user_id: id_usuario,
         requisitoZip: urli,
         solicitud : "0"
       })
@@ -154,11 +99,10 @@ function FormRegistroEvento(){
         window.location.href='./paginaRegistrarseEventos';
         console.log(response)
       })
-    })
-    */
-    
-
+      })
+      
     }
+    
   }
 
   const handleChange = (e) => {
@@ -168,48 +112,27 @@ function FormRegistroEvento(){
     })
   }
 
-  
- 
-  //subida imagen
-  const initialValues ={
-    file:null,
-  }
-  const [archivo, setArchivo] = useState(initialValues);
-  //fin subida imagen
-
-  //
+  const [archivo, setArchivo] = useState('');
   const [event, setEvent] = useState ( [] );
   const idevento = cookies.get('idauxiliar');
   const [atributos, setAtributos] = useState ( [] );
-  const [usuarios, setUsuarios] = useState({})
 
   useEffect(()=>{
     getEvent();
-    getUsuarios();
+    console.log(id_usuario)
   }, [])
 
   const getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${idevento}`;
       const response = await axios.get(url)
       setEvent(response.data)
-      console.log(response.data.attributes);
-
       setAtributos(response.data.attributes)
-      console.log(atributos)
   }
-
-  const getUsuarios=async()=>{
-    let url = "http://127.0.0.1:8000/api/get-user-information"
-    //get-user-information
-    const respuesta = await axios.get(url);
-    setUsuarios(respuesta.data.usuarios);
-  } 
 
   const cambiarEstadoModal = (nuevoEstado) => {
     setFormData({ estadoModal: nuevoEstado });
   }
 
-  //
   return(
     <div className='containerForm'>
       <ModalAutentificacion
@@ -242,7 +165,6 @@ function FormRegistroEvento(){
           id='archivoZip'
           type='file'
           accept='.zip'
-          // onChange={e=> setArchivo({file: e.target.files[0]})}
           onChange={manejarCargaDeArchivo} //<- Para las validaciones y mensajes de advertencia
           style={{ display: 'none' }}
           ref={archivoInput}
@@ -261,25 +183,6 @@ function FormRegistroEvento(){
       </div>
       <div className='registro'>
         <form class="form_name" id='form_name'>
-
-
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            <p id="textoCuadro">CI</p>
-            <input
-            id="input"
-            className="input-Formulario-Registro-Evento"
-            type="text"
-            name="ci"
-            placeholder="Ingrese su CI"
-            onChange={handleChange}
-            />
-          </div>
-
-          {errors.ci && (
-          <span className="advertencia">
-            {errors.ci}
-          </span>
-          )}
 
           {atributos.map((atributo,id) => {
           return (<>

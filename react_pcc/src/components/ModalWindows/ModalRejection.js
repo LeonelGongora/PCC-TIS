@@ -8,7 +8,7 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 
 
-function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, atributos, id_user}){
+function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento, id_user}){
 
     const [values, setValues] = useState({
         razon_rechazo : "",
@@ -18,7 +18,7 @@ function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, 
     const [errors, setErrors] = useState({});
 
     const salirVentanaModal = (e) => {
-        cambiarEstadoModalAtributo(false);
+        cambiarEstadoModalRejection(false);
         setValues({
             razon_rechazo : '',
         });
@@ -35,7 +35,6 @@ function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, 
     }
     
     const saveTypeEvent = async (e) => {
-        console.log(atributos);
         e.preventDefault();
     
         const validationErrors = {};
@@ -50,7 +49,6 @@ function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, 
         if(Object.keys(validationErrors).length === 0){
     
             const data = new FormData();
-    
             data.append('razon_rechazo', values.razon_rechazo)
             data.append('event_id', id_evento)
             data.append('user_id',id_user)
@@ -66,11 +64,12 @@ function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, 
             }
         }
     }
+    
 
     return (
-        estadoAtributo && (
+        estadoRejection && (
             <div className="Overlay">
-              <div className="ContenedorModal">
+              <div className="ContenedorModal contRej">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
                     <h1>Razón de rechazo</h1>
@@ -82,16 +81,20 @@ function ModalRejection({estadoAtributo, cambiarEstadoModalAtributo, id_evento, 
                     {salir}
                   </button>
                 </div>
-                <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
-                        <p id="textoCuadroAtributo">Razón*</p>
-                        <input
-                        type="text"
-                        name="razon_rechazo"
-                        className="inputEvento"
-                        placeholder="Ingrese razón de rechazo"
-                        onChange={handleInput}
-                        />
+                <div className="registroTipoEvento reqCont">
+                    <form onSubmit={saveTypeEvent} id="form1" className='reqForm'>
+                        <label>
+                            <input type='checkbox' defaultChecked={true} className='reqCheckbox'/>
+                                Requisito numero 1
+                        </label>
+                        <label>
+                            <input type='checkbox' defaultChecked={true} className='reqCheckbox'/>
+                                Requisito numero 1 ksjhfnksjdfh skdjfhsdf sdfsdf sdfsdf asdasdad asasa asdasdasd asdasdaqweqwe asdasdqwe
+                        </label>
+                        <label>
+                            <input type='checkbox' defaultChecked={true} className='reqCheckbox'/>
+                                Requisito numero 1 ksjhfnksjdfh skdjfhsdf sdfsdf sdfsdf asdasdad asasa asdasdasd asdasdaqweqwe asdasdqwe Requisito numero 1 ksjhfnksjdfh skdjfhsdf sdfsdf sdfsdf asdasdad asasa asdasdasd asdasdaqweqwe asdasdqwe
+                        </label>
                         {errors.razon_rechazo && (
                         <span className="span1Modal">{errors.razon_rechazo}</span>
                         )}

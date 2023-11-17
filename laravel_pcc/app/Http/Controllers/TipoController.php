@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class TipoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return Tipo::all();
     }
 
     /**
@@ -33,55 +33,31 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function get(){
-
-        $usuarios = User::all();
-        return response()->json([
-            'status' => 200,
-            'message' => 'Usuarios obtenidos exitosamente',
-            'usuarios' => $usuarios,
-
-        ]);
-    }
-
     public function store(Request $request)
     {
-        $user = new User();
-        $user-> nombre = $request -> nombre;
-        $user-> apellido = $request -> apellido;
-        $user-> ci = $request -> ci;
-        $user-> telefono = $request -> telefono;
-        $user-> email = $request -> email;
-        $user-> password = $request -> password;
-
-        $user -> save();
-        $user->id;
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Usuario añadido exitosamente',
-            'ultimo_id' => $user->id,
-        ]);
+        $tipo = new Tipo($request->all());
+        $tipo->save();
+        return $tipo;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return User::find($id);
+        return Tipo::find($id);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tipo $tipo)
     {
         //
     }
@@ -90,27 +66,27 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        if(!is_null($user)){
-        $user->update($request->all());
-        return $user;
+        $tipo = Tipo::find($id);
+        if(!is_null($tipo)){
+        $tipo->update($request->all());
+        return $tipo;
        }  
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $user=User::find($id);
-        $user->delete();
+        $tipo=Tipo::find($id);
+        $tipo->delete();
     }
 }

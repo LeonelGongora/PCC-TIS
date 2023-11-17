@@ -24,7 +24,8 @@
     width: 10vw;
     padding: 1.5vw 4vh;
     text-align: center;
-    background: #78E0A1;
+    background: #FFD51E;
+    color: #14365C;
     font-size: 1.3rem;
     border-radius: 1rem;
     font-weight: 600;
@@ -34,7 +35,8 @@
     width: 10vw;
     padding: 1.5vw 4vh;
     text-align: center;
-    background: #E77676;
+    background: #14365C;
+    color: #FFD51E;
     font-size: 1.3rem;
     border-radius: 1rem;
     font-weight: 600;

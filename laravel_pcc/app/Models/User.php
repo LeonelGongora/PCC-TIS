@@ -22,12 +22,15 @@ class User extends Authenticatable
 
     protected $fillable = [
         'nombre', 'apellido', 'ci', 'telefono','email', 'password',
-        'tipo_usuario',
     ];
 
     public function events()
     {
         return $this->belongsToMany(Event::class, 'evento_user', 'user_id','event_id');
+    }
+
+    public function tipos(){
+        return $this->belongsToMany(Tipo::class, 'tipo_user');
     }
 
     /**

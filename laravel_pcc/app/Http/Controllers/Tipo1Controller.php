@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class UserController extends Controller
+class Tipo1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //
     }
 
     /**
@@ -33,36 +33,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-    public function get(){
-
-        $usuarios = User::all();
-        return response()->json([
-            'status' => 200,
-            'message' => 'Usuarios obtenidos exitosamente',
-            'usuarios' => $usuarios,
-
-        ]);
-    }
-
     public function store(Request $request)
     {
-        $user = new User();
-        $user-> nombre = $request -> nombre;
-        $user-> apellido = $request -> apellido;
-        $user-> ci = $request -> ci;
-        $user-> telefono = $request -> telefono;
-        $user-> email = $request -> email;
-        $user-> password = $request -> password;
-
-        $user -> save();
-        $user->id;
-
-        return response()->json([
-            'status' => 200,
-            'message' => 'Usuario añadido exitosamente',
-            'ultimo_id' => $user->id,
-        ]);
+        $req = new Request($request->all());
+        return DB::table('tipos')
+        ->where('tipos.cargo', $req->cargo)
+        ->get();
     }
 
     /**
@@ -73,8 +49,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find($id);
+        //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -95,11 +72,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        if(!is_null($user)){
-        $user->update($request->all());
-        return $user;
-       }  
+        //
     }
 
     /**
@@ -110,7 +83,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::find($id);
-        $user->delete();
+        //
     }
 }

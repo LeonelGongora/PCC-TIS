@@ -7,12 +7,12 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 
-function FormRegistroUsuario() {
+function FormRegistroUsuarioDinamico() {
 
-  const ci = cookies.get('ci_nuevo_usuario');
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
+    ci : '',
     email: '',
     password: '',
     confirmarPassword: '',
@@ -22,17 +22,32 @@ function FormRegistroUsuario() {
 
   const [errors, setErrors] = useState({})
   const [usuarios, setUsuarios] = useState({})
+  const [tipos, setTipos] = useState([])
+  const [tipo, setTipo] = useState('')
 
   useEffect(()=>{
     getUsuarios();
-    console.log(ci)
+    getTipos();
   }, []);
 
+  // useEffect(()=>{
+  //   console.log(tipo)
+  // }, [tipo]);
+
+  const selectTipo= (e)=>{
+    setTipo(e.target.value);
+  }
   
   const getUsuarios = async (e) => {
     const url = "http://127.0.0.1:8000/api/get-user-information"; 
     const respuesta = await axios.get(url);
     setUsuarios(respuesta.data.usuarios);
+  }
+
+  const getTipos = async (e) => {
+    const url = "http://127.0.0.1:8000/api/tipos"; 
+    const respuesta = await axios.get(url);
+    setTipos(respuesta.data)
   }
 
   const handleChange = (e) => {
@@ -63,6 +78,28 @@ function FormRegistroUsuario() {
       !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.apellido)
     ) {
       validationErrors.apellido = "Ingrese apellido(s) valido(s)";
+    }
+
+    if (!formData.ci.trim()) {
+      validationErrors.ci = "Este campo es obligatorio"
+    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
+      validationErrors.ci = "Ingrese un CI valido";
+    }else{
+      for (let index = 0; index < usuarios.length; index++) {
+
+        let ci = usuarios[index].ci
+        let nuevo_ci = formData.ci
+
+        console.log(ci)
+        console.log(nuevo_ci)
+        console.log(typeof(ci))
+        console.log(typeof(nuevo_ci))
+
+        if(ci == nuevo_ci){
+            validationErrors.ci = "Ya existe un usuario registrado con este CI"
+            break;
+        }
+      }
     }
 
     if (!formData.email.trim()) {
@@ -100,7 +137,9 @@ function FormRegistroUsuario() {
     if (!formData.confirmarPassword.trim()) {
       validationErrors.confirmarPassword = "Este campo es obligatorio"
     }
+
     
+
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
@@ -117,16 +156,23 @@ function FormRegistroUsuario() {
       const data = new FormData();
       data.append('nombre', formData.nombre)
       data.append('apellido', formData.apellido)
-      data.append('ci', ci)
+      data.append('ci', formData.ci)
       data.append('email', formData.email)
       data.append('password', formData.password)
       data.append('telefono', formData.telefono)
 
       axios.post(url, data).then(res => {
-        console.log(res)
-        console.log(res.data.ultimo_id)
-        cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
-        window.location.href = './register-to-event';
+        // console.log(res)
+        // console.log(res.data.ultimo_id)
+        // cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
+        const u = "http://127.0.0.1:8000/api/tipousers";
+        axios.post(u, {
+          tipo_id: tipo,
+          user_id: res.data.ultimo_id
+        }).then(response=>{
+          // console.log("exito")
+          window.location.href = './login';
+        })
       })
     }
 
@@ -136,7 +182,7 @@ function FormRegistroUsuario() {
   return (
     <div className="crearEventos-user">
       <div className="textoEvento-user">
-        <p className="textoRegistro-user">Registro de Informacion</p>
+        <p className="textoRegistro-user">Registro de Usuario Privilegiado</p>
       </div>
       <div className="entradaDatos-user">
         <form onSubmit={saveUser}>
@@ -169,6 +215,20 @@ function FormRegistroUsuario() {
               )}
             </div>
           </div>
+
+          <div id="entrada-user">
+            <p id="textoCuadro-user">CI (Carnet de Identidad)*</p>
+            <input
+              id="inputRegistro-user"
+              type="number"
+              name="ci"
+              placeholder="Ingrese su carnet de identidad"
+              onChange={handleChange}
+            />
+          </div>
+          {errors.ci && (
+            <span className="advertencia-user">{errors.ci}</span>
+          )}
 
           <div id="entrada-user">
             <p id="textoCuadro-user">Email*</p>
@@ -230,6 +290,25 @@ function FormRegistroUsuario() {
             <span className="advertencia-user">{errors.telefono}</span>
           )}
 
+                  <div id="entrada">
+                    <p id="textoCuadro">Tipo de Usuario</p>
+                    <select 
+                    onChange={selectTipo}
+                    id="desplegable">
+                      <option disabled selected>
+                        {" "}
+                        Seleccione un tipo
+                      </option>
+                      {tipos.map((tipos, id) => {
+                        return <option
+                          key={tipos.id}
+                          value={tipos.id}
+                          // onClick={()=>selectTipo("1")}
+                        >{tipos.cargo}</option>;
+                      })}
+                    </select>
+                  </div>
+
           <div className="botonEnviar-user">
             <button className="botonRegistrar-user" type="submit">
               {" "}
@@ -242,4 +321,4 @@ function FormRegistroUsuario() {
   );
 }
 
-export default FormRegistroUsuario;
+export default FormRegistroUsuarioDinamico;

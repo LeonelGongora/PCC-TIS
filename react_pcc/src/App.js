@@ -16,7 +16,11 @@ import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 import VisualizarEventoAccepUserToEvent from "./pages/VisualizarEventoAccepUserToEvent.js";
-
+import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
+import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
+import LoginProvisional from "./components/LoginProvisional.jsx";
+import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamico.js";
+import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 
 function App() {
@@ -25,6 +29,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Home_Admin/>} />
       <Route path='/home-participant' element={<Home_Participant/>} />
+      <Route path='/home' element={<Home_User_Dinamico/>} />
       
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
         <Route path='/event-user' element={<ContenedorSliderUser/>} />
@@ -40,11 +45,15 @@ function App() {
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />
 
         <Route path='/editar-evento' element={<EditarEvento/>} />
-
+        <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
 
         <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
         
         <Route path='/eventacceptUser' element={<VisualizarEventoAccepUserToEvent/>} />
+
+        <Route path='/login' element={<LoginProvisional/>} />
+        <Route path='/add-user-dinamico' element={<FormRegistroUsuarioDinamico/>} />
+        <Route path='/add-tipo-user' element={<FormRegistroTipoUser/>} />
 
       </Routes>
     </Router>

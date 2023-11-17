@@ -19,6 +19,10 @@ use App\Http\Controllers\EventUser3Controller;
 use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\Event_OrganizerController;
 use App\Http\Controllers\Event_SponsorController;
+use App\Http\Controllers\TipoController;
+use App\Http\Controllers\TipoUserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Tipo1Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,4 +80,7 @@ Route::resource('eventocerrados', EventoCerradoController::class);
 Route::resource('estareguserevent', EstaRegUserEventController::class);
 Route::resource('eventuser2', EventUser2Controller::class);
 Route::resource('eventuser3', EventUser3Controller::class);
-
+Route::resource('tipos', TipoController::class);
+Route::resource('tipousers', TipoUserController::class);
+Route::resource('login', LoginController::class);
+Route::resource('tipos1', Tipo1Controller::class);

@@ -31,10 +31,6 @@ class EventController extends Controller
         ]);
     }
 
-
-
-    
-
     public function store(Request $request){
         
         if($request -> hasFile ('image')){
@@ -97,7 +93,6 @@ class EventController extends Controller
         if($seCargoArchivo == 0){
 
             $evento-> nombre_evento = $request -> nombre_evento;
-            $evento-> requisitos = $request -> requisitos;
             $evento-> fecha_inicio = $request -> fecha_inicio;
             $evento-> numero_contacto = $request -> numero_contacto;
             $evento-> descripcion = $request -> descripcion;
@@ -110,8 +105,6 @@ class EventController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' =>'No se cargo una nueva imagen']);
-            
-
         }else{
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -119,7 +112,6 @@ class EventController extends Controller
                 $image->move('images/', $name);
 
                 $evento-> nombre_evento = $request -> nombre_evento;
-                $evento-> requisitos = $request -> requisitos;
                 $evento-> fecha_inicio = $request -> fecha_inicio;
                 $evento-> numero_contacto = $request -> numero_contacto;
                 $evento-> descripcion = $request -> descripcion;
@@ -139,13 +131,8 @@ class EventController extends Controller
                     'status' => 200,
                     'message' => 'No hay archivo',
                 ]);
-    
             }
-            
         }
-
-        
-      
     }
 
     public function destroy($id)

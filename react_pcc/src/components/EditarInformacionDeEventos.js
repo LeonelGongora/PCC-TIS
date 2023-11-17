@@ -1,4 +1,4 @@
-import React, { useState, ffectuseE, Component} from 'react';
+import React, {Component} from 'react';
 import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
@@ -7,6 +7,11 @@ import ModalWindow from '../components/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
 import ModalWindowAtributo from './ModalWindowAtributo';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+
+const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{ color: "#ff0000", }} />;
 
 const cookies = new Cookies();
 
@@ -29,6 +34,8 @@ class EditarInformacionDeEventos extends Component{
     componentDidMount(){
         this.getEventTypes();
         this.getEvent();
+        this.getOrganizadores();
+        this.getPatrocinadores();
     }
 
     getEvent=async()=>{
@@ -50,9 +57,24 @@ class EditarInformacionDeEventos extends Component{
           nombre_tipo_evento: response.data.event_type.nombre_tipo_evento,
           id_evento: response.data.id,
           atributos: response.data.attributes,
+          requisitos: response.data.requirements,
+          organizadores_de_evento : response.data.organizers,
+          patrocinadores_de_evento : response.data.sponsors,
           image: response.data.name
         });
       }
+    }
+
+    getOrganizadores = async()=>{
+      const url = "http://127.0.0.1:8000/api/get-organizador"; 
+      const respuesta = await axios.get(url);
+      this.setState({ organizadores: respuesta.data.organizadores})
+    }
+
+    getPatrocinadores = async()=>{
+      const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+      const respuesta = await axios.get(url);
+      this.setState({ patrocinadores: respuesta.data.patrocinadores})
     }
 
     constructor(props){
@@ -73,7 +95,6 @@ class EditarInformacionDeEventos extends Component{
             event_type_id: '',
             errors : {},
             contador : 0,
-            event : [],
             estadoModalAtributo: false,
 
             estadoModal: false,
@@ -81,10 +102,12 @@ class EditarInformacionDeEventos extends Component{
             estadoModalPatrocinador: false,
 
             atributos: [],
+            requisitos: [],
             seCargoArchivo: 0,
-            camposAdicionales: [],
-            nuevoCampo: '',
-            mostrarCampoNuevo: false,
+            organizadores_de_evento: [],
+            organizadores : [],
+            patrocinadores_de_evento: [],
+            patrocinadores : [],
         }
     }
 
@@ -137,14 +160,6 @@ class EditarInformacionDeEventos extends Component{
                 validationErrors.fecha_limite = "La Fecha de Limite no puede ser superior a la Fecha de Fin ";
                 validationErrors.fecha_fin = "La Fecha de Limite no puede ser superior a la Fecha de Fin";
             }
-        }
-
-        if(!this.state.nombre_evento.trim()){
-            validationErrors.nombre_evento = "Este campo es obligatorio"
-            
-            
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(this.state.nombre_evento)){
-            validationErrors.nombre_evento = "Ingrese un nombre valido"
         }
 
         if(!this.state.numero_contacto){
@@ -200,13 +215,6 @@ class EditarInformacionDeEventos extends Component{
           }
         }
 
-        if(!this.state.participantes_equipo){
-            validationErrors.participantes_equipo = "Este campo es obligatorio"
-
-        }else if(!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)){
-            validationErrors.participantes_equipo = "Ingrese un numero de participantes valido"
-        }
-
         if(this.state.seCargoArchivo === 0){
           console.log("NO SE CARGO")
 
@@ -216,16 +224,14 @@ class EditarInformacionDeEventos extends Component{
 
           }else if(this.state.image.name){
             const extensiones = ["png","PNG" ,"jpg", "jpeg"];
-
-                var nombreArchivo = this.state.image.name;
-                const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
-                if (!extensiones.includes(extension)){
-                    document.getElementsByClassName("imagen_input").value = "";
+              var nombreArchivo = this.state.image.name;
+              const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1, nombreArchivo.length);
+              if (!extensiones.includes(extension)){
+                document.getElementsByClassName("imagen_input").value = "";
                     
-                    this.setState({ image: '' });
-                    validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
-
-                }
+                this.setState({ image: '' });
+                validationErrors.image = "La imagen tiene que tener una extension .png, .jpg, .PNG o .jpeg";
+              }
           }
         }
 
@@ -237,17 +243,13 @@ class EditarInformacionDeEventos extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
-
-
             
             const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
 
             const data = new FormData();
 
             data.append('image', this.state.image)
-
             data.append('nombre_evento', this.state.nombre_evento)
-            data.append('requisitos', this.state.requisitos)
             data.append('fecha_inicio', this.state.fecha_inicio)
             data.append('numero_contacto', this.state.numero_contacto)
             data.append('descripcion', this.state.descripcion)
@@ -260,7 +262,7 @@ class EditarInformacionDeEventos extends Component{
             axios.post(url, data).then(res => {
               if(res.data.status === 200){
                 console.log(res);
-                window.location.href = './paginaEditarEventos';
+                window.location.href = './editar-evento-next';
               }
             })
         }
@@ -299,191 +301,243 @@ class EditarInformacionDeEventos extends Component{
 
     render(){
         return (
-            <><div className='contenedorMaximo'></div>
-              <div className="editarEventos">
-              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModalAtributo} 
-              
-              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
-              id_evento = {this.state.id_evento}
-              atributos = {this.state.atributos}/> }
+          <>
+            <div className="contenedorMaximo"></div>
+            <div className="editarEventos">
+              {
+                <ModalWindowAtributo
+                  estadoAtributo={this.state.estadoModalAtributo}
+                  cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
+                  id_evento={this.state.id_evento}
+                  atributos={this.state.atributos}
+                />
+              }
 
-              
-                <div className="textoEvento">
-                  <p className="textoRegistro"> Edicion de eventos</p>
-                </div>
-                <div className="entradasDatos">
-                  <form onSubmit={this.updateEvent} encType="multipart/form-data">
-                    <div className="datoNombre" id="entrada">
-                      <p id="textoCuadro">Nombre*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="nombre_evento"
-                        placeholder="Ingrese nombre"
-                        value={this.state.nombre_evento}
-                        onChange={this.handleInput}
-                      />
-                    </div>
+              <div className="textoEvento">
+                <p className="textoRegistro"> Edicion de eventos</p>
+              </div>
+              <div className="entradasDatos">
+                <form onSubmit={this.updateEvent} encType="multipart/form-data">
+                  <div className="datoNombre" id="entrada">
+                    <p id="textoCuadro">Nombre*</p>
+                    <input
+                      id="inputRegistro"
+                      type="text"
+                      name="nombre_evento"
+                      placeholder="Ingrese nombre"
+                      value={this.state.nombre_evento}
+                      onChange={this.handleInput}
+                      readOnly
+                    />
+                  </div>
 
-                    {this.state.errors.nombre_evento && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.nombre_evento}
-                      </span>
-                    )}
+                  {this.state.errors.nombre_evento && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.nombre_evento}
+                    </span>
+                  )}
 
-                    <div id="entrada">
-                      <p id="textoCuadro">Numero de Contacto*</p>
-                      <input
-                        id="inputRegistro"
-                        type="number"
-                        name="numero_contacto"
-                        placeholder="65487898"
-                        value={this.state.numero_contacto}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.numero_contacto && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.numero_contacto}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Descripcion de Evento*</p>
-                      <input
-                        id="inputRegistro"
-                        type="text"
-                        name="descripcion"
-                        placeholder="Descripcion"
-                        value={this.state.descripcion}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.descripcion && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.descripcion}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha limite de inscripcion*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_limite"
-                        value={this.state.fecha_limite}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_limite && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.fecha_limite}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Fecha fin del evento*</p>
-                      <input
-                        id="inputRegistro"
-                        type="date"
-                        name="fecha_fin"
-                        value={this.state.fecha_fin}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.fecha_fin && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.fecha_fin}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Cantidad de participantes por equipo*</p>
-                      <input
-                        id="inputRegistro"
-                        type="tel"
-                        name="participantes_equipo"
-                        maxLength={2}
-                        placeholder="Ingrese un numero de participantes"
-                        value={this.state.participantes_equipo}
-                        onChange={this.handleInput}
-                      />
-                    </div>
-                    {this.state.errors.participantes_equipo && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.participantes_equipo}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Afiche*</p>
-                      <input
-                        id="inputRegistro"
-                        type="file"
-                        name="image"
-                        onChange={this.handleChange}
-                        className="imagen_input"
-                      />
-                    </div>
-                    {this.state.errors.image && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.image}
-                      </span>
-                    )}
-  
-                    <div id="entrada">
-                      <p id="textoCuadro">Tipo de evento*</p>
-                      <select id="desplegable" onChange={this.myFunction}>
+                  <div id="entrada">
+                    <p id="textoCuadro">Numero de Contacto*</p>
+                    <input
+                      id="inputRegistro"
+                      type="number"
+                      name="numero_contacto"
+                      placeholder="65487898"
+                      value={this.state.numero_contacto}
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.numero_contacto && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.numero_contacto}
+                    </span>
+                  )}
 
-                        <option disabled selected > {this.state.nombre_tipo_evento}</option>
-                        {this.eventos.map((evento, id) => {
-                          return <option>{evento.nombre_tipo_evento}</option>;
-                        })}
+                  <div id="entrada">
+                    <p id="textoCuadro">Descripcion de Evento*</p>
+                    <input
+                      id="inputRegistro"
+                      type="text"
+                      name="descripcion"
+                      placeholder="Descripcion"
+                      value={this.state.descripcion}
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.descripcion && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.descripcion}
+                    </span>
+                  )}
 
-                      </select>
-                      <input
-                        type="hidden"
-                        name="event_type_id"
-                        id="event_type_id"
-                        onChange={this.handleInput}
-                        value={this.state.event_type_id}
-                      />
-                    </div>
-                    {this.state.errors.event_type_id && (
-                      <span className="advertenciaEdit">
-                        {this.state.errors.event_type_id}
-                      </span>
-                    )}
+                  <div id="entrada">
+                    <p id="textoCuadro">Fecha limite de inscripcion*</p>
+                    <input
+                      id="inputRegistro"
+                      type="date"
+                      name="fecha_limite"
+                      value={this.state.fecha_limite}
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.fecha_limite && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.fecha_limite}
+                    </span>
+                  )}
 
-                    {this.state.atributos.map((atributo) => (
-                     <div className="campo-container">
-                       <div id="entrada">
-                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
-                         <input
-                           id="inputRegistro"
-                           type="text"
-                           name="valor"
-                           placeholder="Campo Adicional"
-                           readOnly
-                         />
-                       </div>
-                       <button className="botonEliminar" type='button' onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
-                     </div>
-                   ))}
-                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalAtributo(!this.state.estadoModal)}>Agregar Campo +</button>
-                    <div className="botonEnviar">
-                      <button className="botonGuardarEdit" type="submit">
+                  <div id="entrada">
+                    <p id="textoCuadro">Fecha fin del evento*</p>
+                    <input
+                      id="inputRegistro"
+                      type="date"
+                      name="fecha_fin"
+                      value={this.state.fecha_fin}
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  {this.state.errors.fecha_fin && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.fecha_fin}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">
+                      Cantidad de participantes por equipo*
+                    </p>
+                    <input
+                      id="inputRegistro"
+                      type="number"
+                      name="participantes_equipo"
+                      maxLength={2}
+                      placeholder="Ingrese un numero de participantes"
+                      value={this.state.participantes_equipo}
+                      onChange={this.handleInput}
+                      readOnly
+                    />
+                  </div>
+                  {this.state.errors.participantes_equipo && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.participantes_equipo}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Afiche*</p>
+                    <input
+                      id="inputRegistro"
+                      type="file"
+                      name="image"
+                      onChange={this.handleChange}
+                      className="imagen_input"
+                    />
+                  </div>
+                  {this.state.errors.image && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.image}
+                    </span>
+                  )}
+
+                  <div id="entrada">
+                    <p id="textoCuadro">Tipo de evento*</p>
+                    <select id="desplegable" onChange={this.myFunction}>
+                      <option disabled selected>
                         {" "}
-                        Guardar
+                        {this.state.nombre_tipo_evento}
+                      </option>
+                      {this.eventos.map((evento, id) => {
+                        return <option>{evento.nombre_tipo_evento}</option>;
+                      })}
+                    </select>
+                    <input
+                      type="hidden"
+                      name="event_type_id"
+                      id="event_type_id"
+                      onChange={this.handleInput}
+                      value={this.state.event_type_id}
+                    />
+                  </div>
+                  {this.state.errors.event_type_id && (
+                    <span className="advertenciaEdit">
+                      {this.state.errors.event_type_id}
+                    </span>
+                  )}
+                  <h1 className="textoTituloEdiNext">Campos</h1>
+                  {this.state.atributos.map((atributo) => (
+                    <div className="campo-container">
+                      <div id="entrada">
+                        <p id="textoCuadro">{atributo.nombre_atributo}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminar"
+                        type="button"
+                        onClick={() => this.eliminarAtributo(atributo.id)}
+                      >
+                        {cancelar}
                       </button>
                     </div>
-                  </form>
-                  
-                </div>
-            </div>
-            
-            </>
+                  ))}
+                  <button
+                    className="botonAgregarEdit"
+                    type="button"
+                    onClick={() =>
+                      this.cambiarEstadoModalAtributo(!this.state.estadoModal)
+                    }
+                  >
+                    Agregar Campo +
+                  </button>
 
+                  <h1 className="textoTituloEdiNext">Requisitos</h1>
+                  {this.state.requisitos.map((requisito) => (
+                    <div className="campo-container">
+                      <div id="entrada">
+                        <p id="textoCuadro">{requisito.contenido_requisito}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminar"
+                        type="button"
+                        onClick={() => this.eliminarRequisito(requisito.id)}
+                      >
+                        {cancelar}
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    className="botonAgregarEdit"
+                    type="button"
+                    onClick={() =>
+                      this.cambiarEstadoModalRequisito(!this.state.estadoModal)
+                    }
+                  >
+                    Agregar Requisito +
+                  </button>
+
+                  <div className="botonEnviar">
+                    <button className="botonGuardarEdit" type="submit">
+                      {" "}
+                      Guardar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </>
         );
     }
 }
