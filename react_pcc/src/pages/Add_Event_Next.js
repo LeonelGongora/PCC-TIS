@@ -7,6 +7,11 @@ import ModalWindowAtributo from '../components/ModalWindowAtributo';
 
 import ModalWindowRequisito from '../components/ModalWindows/ModalWindowRequisito';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+
+const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
+
 const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
@@ -90,13 +95,13 @@ class Add_Event_Next extends Component{
 
     eliminarRequisito = (id) => {
         console.log(id)
-        //const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
-        //axios.delete(url).then(res => {
-          //if(res.data.status === 200){
-            //console.log(res);
-            //window.location.reload();
-          //}
-        //})
+        const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+        axios.delete(url).then(res => {
+          if(res.data.status === 200){
+            console.log(res);
+            window.location.reload();
+          }
+        })
     }
   
 
@@ -202,7 +207,7 @@ class Add_Event_Next extends Component{
                   <h1 className="textoTituloEdiNext">Campos</h1>
                   {this.state.atributos.map((atributo) => (
                     <div className="campo-container">
-                      <div id="entrada">
+                      <div id="entradaEveNex">
                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
                         <input
                           id="inputRegistro"
@@ -217,7 +222,7 @@ class Add_Event_Next extends Component{
                         type="button"
                         onClick={() => this.eliminarAtributo(atributo.id)}
                       >
-                        X
+                        {cancelar}
                       </button>
                     </div>
                   ))}
@@ -230,11 +235,11 @@ class Add_Event_Next extends Component{
                   >
                     Agregar Campo +
                   </button>
-                  <br />
+                  
                   <h1 className="textoTituloEdiNext">Requisitos</h1>
                   {this.state.requisitos.map((requisito) => (
                     <div className="campo-container">
-                      <div id="entrada">
+                      <div id="entradaEveNex">
                         <p id="textoCuadro">{requisito.contenido_requisito}*</p>
                         <input
                           id="inputRegistro"
@@ -249,7 +254,7 @@ class Add_Event_Next extends Component{
                         type="button"
                         onClick={() => this.eliminarRequisito(requisito.id)}
                       >
-                        X
+                        {cancelar}
                       </button>
                     </div>
                   ))}
@@ -263,7 +268,6 @@ class Add_Event_Next extends Component{
                     Agregar Requisito +
                   </button>
 
-                  <br />
                   <h1 className="textoTituloEdiNext">Organizadores</h1>
 
                   {this.state.organizadores.map((organizador) => (
@@ -281,7 +285,6 @@ class Add_Event_Next extends Component{
                     </div>
                   ))}
 
-                  <br />
                   <h1 className="textoTituloEdiNext">Patrocinadores</h1>
 
                   {this.state.patrocinadores.map((patrocinador) => (
