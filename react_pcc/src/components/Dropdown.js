@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../stylesheets/Dropdown.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrganizador, estadoPatrocinador, cambiarEstadoPatrocinador}) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +31,7 @@ function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrgan
 	return (
     <div className="dropdown-container">
       <button className="dropdown-button" onClick={toggleDropdown}>
-        OPCIONES
+        OPCIONES <FontAwesomeIcon className='dropdownIcon' icon={faChevronDown} />
       </button>
       {isOpen && (
         <ul className="dropdown-menu">

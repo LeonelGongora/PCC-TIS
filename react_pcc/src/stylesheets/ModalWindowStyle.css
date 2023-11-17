@@ -57,6 +57,17 @@
     flex-direction: column;
     
 }
+
+.contRej{
+    min-height: 200px;
+    max-width: 700px;
+    min-width: 300px;
+}
+
+.reqForm{
+    display: flex;
+    flex-direction: column;
+}
     
 .EncabezadoModal{
     display: flex;
@@ -85,6 +96,22 @@ h1{
     flex: auto;
 
 }
+
+.reqCont{
+    justify-content: start;
+    margin: 1vw;
+}
+.reqCheckbox{
+    margin-right: 1vw;
+}
+label{
+    display: flex;
+    border: 1px solid;
+    padding: 1vh;
+    border-color: black;
+    margin: 3px;
+}
+
 .inputEvento{
     border: 1px solid rgb(175, 175, 175);
     outline: none;

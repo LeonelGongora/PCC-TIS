@@ -6,10 +6,10 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
-import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import ModalRejection from '../components/ModalWindows/ModalRejection';
 import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();
@@ -28,6 +28,8 @@ class AcceptUserToEvent extends Component{
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
+            estadoModalRejection: false,
+            isChecked: false,
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
@@ -40,6 +42,12 @@ class AcceptUserToEvent extends Component{
         this.reqEvent = []
     }
 
+    changeChecked = () => {
+        this.setState((prev) => ({
+          isChecked: !prev.isChecked,
+        }));
+      };
+
     cambiarEstadoModal = (nuevoEstado) => {
         this.setState({ estadoModal: nuevoEstado });
     };
@@ -50,6 +58,10 @@ class AcceptUserToEvent extends Component{
 
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
+    };
+
+    cambiarEstadoModalRejection = (nuevoEstado) => {
+        this.setState({ estadoModalRejection: nuevoEstado });
     };
 
     getAllUsers = async () => {
@@ -89,6 +101,7 @@ class AcceptUserToEvent extends Component{
         window.location.href = window.location.href;
     }
 
+
     render(){
         return(
             <div className="App">
@@ -106,6 +119,13 @@ class AcceptUserToEvent extends Component{
                 this.cambiarEstadoModalPatrocinador
                 }
                 />
+                <ModalRejection estadoRejection={ this.state.estadoModalRejection} 
+                cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
+                id_evento = {this.state.id_evento}
+                id_user ={this.state.user}
+                />
+
+
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
                    <NavbarAdmin
@@ -125,15 +145,15 @@ class AcceptUserToEvent extends Component{
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
                                     <div className='requisitosDeEvento'>
-                                        
+                                        <h3 className='subtitleRequisitos'>Requisitos</h3>
                                         {this.state.requisitos.map((r) => {  
                                             return (<div key={r.id}>
-                                                <h3 className='subtitleRequisitos'>{r.contenido_requisito}</h3>
-                                                {/* <p className='requisitosTexto'>{evento.nombre_evento}</p> */}
+                                                <p className='requisitosTexto'>{r.contenido_requisito}</p>
                                             </div>);
                                         })}
                                     
                                     </div>
+                                    <div>
                                     {this.eventos.map((evento) => {  
                                         return (<div key={evento.eventuserid}>
                                             <div className='containerUserSol'>
@@ -146,11 +166,11 @@ class AcceptUserToEvent extends Component{
                                                     null
                                                 ) : (
                                                     <><button onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
-                                                    <button onClick={() => this.aceptarParticipante(evento.eventuserid) }className='buttonDenyUser'> Rechazar </button></>
+                                                    <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal)} className='buttonDenyUser'> Rechazar </button></>
                                                 )}
                                             </div>
                                         </div>);
-                                    })}
+                                    })}</div>
                                 </div>           
                             </>
                             )}
