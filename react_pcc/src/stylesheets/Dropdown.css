@@ -17,6 +17,9 @@
 .dropdown-button:hover{
   color: #FFD51D;
 }
+.dropdownIcon:hover{
+  color: #FFD51D;
+}
 
 /* Dropdown menu */
 .dropdown-menu {

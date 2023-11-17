@@ -6,10 +6,10 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
-import { faCalendarCheck } from '@fortawesome/free-regular-svg-icons';
 import ModalWindow from '../components/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
+import ModalRejection from '../components/ModalWindows/ModalRejection';
 import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();
@@ -25,6 +25,7 @@ class AcceptUserToEvent extends Component{
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
+            estadoModalRejection: false
         };
         this.EventUser2_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
@@ -45,6 +46,10 @@ class AcceptUserToEvent extends Component{
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
+    
+    cambiarEstadoModalRejection = (nuevoEstado) => {
+        this.setState({ estadoModalAtributo: nuevoEstado });
+      }
 
     getAllEvents = async () => {
         const idevent = cookies.get('auteId');
@@ -90,6 +95,12 @@ class AcceptUserToEvent extends Component{
                 this.cambiarEstadoModalPatrocinador
                 }
                 />
+                <ModalRejection estadoAtributo={ this.state.estadoModalAtributo} 
+                cambiarEstadoModalAtributo={this.cambiarEstadoModalRejection}
+                id_evento = {this.state.id_evento}
+                atributos = {this.state.atributos}
+                id_user ={this.state.user}/>
+
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
                    <NavbarAdmin
@@ -118,21 +129,30 @@ class AcceptUserToEvent extends Component{
                                         <h1 className='tituloPagAcept'>{evento.nombre_evento}</h1>
                                         </>
                                     )}
+                                        <div className='containerReqSol'>
+                                            <div className='requisitosDeEvento'>
+                                                <>
+                                                {this.nameEvent.push(evento.nombre_evento)}
+                                                <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                                <p className='requisitosTexto'>{evento.nombre_evento}</p>
+                                                </>
+                                            </div>
+                                            <div className='containerUserSol'>
+                                                <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
 
-                                    <div className='containerUserSol'>
-                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
-                                        <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
+                                                {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
+                                                <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
+                                                {evento.solicitud == 1 ? (
+                                                    null
+                                                ) : (
 
-                                        {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
-                                        <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
-                                        {evento.solicitud == 1 ? (
-                                            null
-                                        ) : (
-                                            <button onClick={()=>this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <><button type='button' onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <button type='button' onClick={() => this.cambiarEstadoModalRejection(!this.state.estadoModal)} className='buttonDenyUser'> Rechazar </button></>
 
-                                        )}
-                                    </div>
-
+                                                )}
+                                            </div>
+                                        </div>           
                                 </div>);
                             })}
                             </>
