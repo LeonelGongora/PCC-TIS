@@ -3,10 +3,6 @@ import '../stylesheets/EditEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import ModalWindow from '../components/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
-import ModalWindowAtributo from './ModalWindowAtributo';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
@@ -109,10 +105,6 @@ class EditarInformacionDeEventos extends Component{
             patrocinadores_de_evento: [],
             patrocinadores : [],
         }
-    }
-
-    cambiarEstadoModalAtributo = (nuevoEstado) => {
-      this.setState({ estadoModalAtributo: nuevoEstado });
     }
 
     handleInput = (e) => {
@@ -304,15 +296,6 @@ class EditarInformacionDeEventos extends Component{
           <>
             <div className="contenedorMaximo"></div>
             <div className="editarEventos">
-              {
-                <ModalWindowAtributo
-                  estadoAtributo={this.state.estadoModalAtributo}
-                  cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
-                  id_evento={this.state.id_evento}
-                  atributos={this.state.atributos}
-                />
-              }
-
               <div className="textoEvento">
                 <p className="textoRegistro"> Edicion de eventos</p>
               </div>

@@ -43,14 +43,18 @@ Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
 
 Route::post('/add-event_organizer', [Event_OrganizerController::class, 'store']);
+Route::post('/delete-event_organizer', [Event_OrganizerController::class, 'destroy']);
 
 Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
+Route::post('/delete-event_sponsor', [Event_SponsorController::class, 'destroy']);
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::get('/get-organizador', [OrganizerController::class, 'get']);
+Route::delete('/delete-organizador/{id}', [OrganizerController::class, 'destroy']);
 
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
 Route::get('/get-patrocinador', [SponsorController::class, 'get']);
+Route::delete('/delete-patrocinador/{id}', [SponsorController::class, 'destroy']);
 
 Route::post('/add-attribute', [AttributeController::class, 'store']);
 Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);

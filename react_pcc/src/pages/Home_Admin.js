@@ -5,9 +5,10 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import ModalWindow from '../components/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindowPatrocinadores';
+import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+
+import ModalWindow from '../components/ModalWindows/ModalWindow';
 
 const cookies = new Cookies();
 
@@ -22,18 +23,32 @@ class Home_Admin extends Component{
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
+            tipos_de_evento: []
     
         };
         this.eventos = []
 
-      }
+    }
+
+    getEventTypes = async () => {
+        
+      const url = "http://127.0.0.1:8000/api/type-events"; 
+
+      //this.setState({loader:true});
+      const respuesta = await axios.get(url);
+      console.log(respuesta)
+      this.setState({tipos_de_evento: respuesta.data.events})
+
+      //this.eventos = Array.from(events.data.events)
+      //this.setState({ loader:false});
+    };
+
 
     getEvents = async () => {
 
         this.setState({loader:true});
         const events = await axios.get(this.state.url);
         this.eventos = Array.from(events.data.events)
-        console.log(this.eventos)
 
         this.setState({ events: events.data, loader:false});
         var i;
@@ -52,14 +67,12 @@ class Home_Admin extends Component{
             var mes1 = fecha1.getMonth() + 1
             let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
             this.eventos[i].fecha_limite = format5
-            
         }
-
-             
     };
 
     componentDidMount(){
         this.getEvents();
+        this.getEventTypes();
     }
 
     masDetalles(id){
@@ -79,7 +92,40 @@ class Home_Admin extends Component{
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
-    
+
+    manejarBuscador = (e) => {
+
+      if (e.target.matches("#buscador")){
+        if (e.key ==="Escape") {e.target.value = ""}
+      
+        document.querySelectorAll(".containerEvents").forEach(evento =>{
+          evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(e.target.value.toLowerCase())
+            ?evento.classList.remove("filtro")
+            :evento.classList.add("filtro")
+        })
+      }
+    };
+
+    manejar_Filtro_Por_Tipo = (e) => {
+      //Todos
+      if(e.target.value === "Todos"){
+        document.querySelectorAll(".containerEvents").forEach(evento =>{
+            evento.classList.remove("filtro")
+        })
+
+      }else{
+        document.querySelectorAll(".containerEvents").forEach(evento =>{
+          evento.querySelector(".tipoEv").textContent.toLowerCase().includes(e.target.value.toLowerCase())
+            ?evento.classList.remove("filtro")
+            :evento.classList.add("filtro")
+        })
+
+      }
+
+      
+
+    };
+
     render(){
 
         return (
@@ -111,6 +157,23 @@ class Home_Admin extends Component{
               <div className="contenedor">
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
+                  <input type="text" name="buscador" id="buscador" 
+                  placeholder="Buscar..." onChange={this.manejarBuscador}/>
+
+                  <p>
+                    Para hacer espacio
+                  </p>
+
+                    <select id="desplegable" onChange={this.manejar_Filtro_Por_Tipo}>
+                      <option>
+                        {" "}
+                        Todos
+                      </option>
+                      {this.state.tipos_de_evento.map((evento, id) => {
+                        return <option>{evento.nombre_tipo_evento}</option>;
+                      })}
+                    </select>
+                  
                 </div>
                 <div className="columna1">
                   <ListaEventos />
@@ -139,6 +202,7 @@ class Home_Admin extends Component{
                     );
                   })}
                 </div>
+
               </div>
             </div>
           </div>

@@ -24,3 +24,7 @@
 .tipoEv{
     width: 11vw;
 }
+
+.filtro{
+    display: none;
+}

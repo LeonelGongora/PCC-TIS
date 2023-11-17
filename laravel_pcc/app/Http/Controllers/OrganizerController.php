@@ -44,8 +44,15 @@ class OrganizerController extends Controller
                 'status' => 200,
                 'message' => 'No hay archivo',
             ]);
-
         }
+    }
 
+    public function destroy($id)
+    {
+        $organizador = Organizer::find($id);
+        $organizador->delete();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Organizador eliminado exitosamente']);
     }
 }

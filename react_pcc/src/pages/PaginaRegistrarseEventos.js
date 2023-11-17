@@ -60,10 +60,16 @@ class PaginaRegistrarseEventos extends Component{
         this.getEvents();
     }
 
-    irRegistro(id){
+    irRegistro(id, participantes){
         cookies.set('idauxiliar', id, {path: "/"});
+        console.log(participantes)
+        if(participantes > 0){
+          console.log("Por equipo")
+        }else{
+          console.log("Individual")
+          window.location.href='./register-to-event';
+        }
         // console.log(cookies.get('idauxiliar'));
-        window.location.href='./register-to-event';
     }
 
     render(){
@@ -85,7 +91,7 @@ class PaginaRegistrarseEventos extends Component{
                       <>
                         <div
                           className="containerEvents"
-                          onClick={() => this.irRegistro(evento.id)}
+                          onClick={() => this.irRegistro(evento.id, evento.participantes_equipo)}
                         >
                           <img
                             className="imageEvent"
