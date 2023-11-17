@@ -13,7 +13,10 @@
     margin: 20px 0;
     min-height: 17vh;
     align-items: center;
-    border-radius: 3rem;
+    border-radius: 1rem;
+}
+contTeam{
+    cursor: pointer;
 }
 .containerUserSol h4{
     font-size: 2rem;
@@ -77,4 +80,59 @@
     text-align: center;
     margin: 1vh;
     font-size: 1.5rem;
+}
+.contenedorInfoTeam{
+    display: none;
+    width: 68.2vw;
+    margin: 20px 0;
+    min-height: 17vh;
+    max-height: 55vh;
+    border-radius: 1rem;
+    background-color: #ECECEC;
+    padding: 1.5vh;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+.contenedorInfoTeam.mostrando{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedorInfoTeam .contParticip{
+    display: flex;
+    background-color: #FFFFFF;
+    padding: 3vh;
+    width: 60vw;
+    margin: 1vh;
+    min-height: 15vh;
+    border-radius: 1rem;
+    justify-content: space-around;
+    border: 2px solid #B7B7B7;
+}
+.contenedorInfoTeam h3{
+    font-size: 2rem;
+}
+.infoParticipante{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    text-align: center;
+}
+.infoParticipante h3{
+    padding-bottom: 2vh;
+}
+.infoParticipante h4{
+    padding-bottom: 1vh;
+}
+#entradaTeam{
+    border: 1px solid rgb(175, 175, 175);
+    margin-top: 2vh;
+    border-radius: 5px;
+    height: 36px;
+    width: 100%;
+}
+.imgUserTeam{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

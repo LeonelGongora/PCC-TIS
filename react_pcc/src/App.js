@@ -14,6 +14,7 @@ import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
+import AcceptTeamToEvent from "./pages/AcceptTeamToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 import VisualizarEventoAccepUserToEvent from "./pages/VisualizarEventoAccepUserToEvent.js";
 import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
@@ -47,7 +48,7 @@ function App() {
         <Route path='/editar-evento' element={<EditarEvento/>} />
         <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
 
-        <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
+        <Route path='/acceptUser' element={<AcceptTeamToEvent/>} />
         
         <Route path='/eventacceptUser' element={<VisualizarEventoAccepUserToEvent/>} />
 

@@ -28,8 +28,7 @@ class AcceptUserToEvent extends Component{
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
-            estadoModalRejection: false,
-            isChecked: false,
+            estadoModalRejection: false
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
@@ -42,11 +41,6 @@ class AcceptUserToEvent extends Component{
         this.reqEvent = []
     }
 
-    changeChecked = () => {
-        this.setState((prev) => ({
-          isChecked: !prev.isChecked,
-        }));
-      };
 
     cambiarEstadoModal = (nuevoEstado) => {
         this.setState({ estadoModal: nuevoEstado });

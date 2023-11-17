@@ -95,6 +95,15 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
                             <input type='checkbox' defaultChecked={true} className='reqCheckbox'/>
                                 Requisito numero 1 ksjhfnksjdfh skdjfhsdf sdfsdf sdfsdf asdasdad asasa asdasdasd asdasdaqweqwe asdasdqwe Requisito numero 1 ksjhfnksjdfh skdjfhsdf sdfsdf sdfsdf asdasdad asasa asdasdasd asdasdaqweqwe asdasdqwe
                         </label>
+                        <div className='extraInfo'>
+                            <p id="textoCuadroAtributo">Añadir información</p>
+                            <input
+                            type="text"
+                            name="razónRechazo"
+                            className="inputMasInfo"
+                            placeholder="Mayor informacion del rechazo"
+                            />
+                        </div>
                         {errors.razon_rechazo && (
                         <span className="span1Modal">{errors.razon_rechazo}</span>
                         )}
