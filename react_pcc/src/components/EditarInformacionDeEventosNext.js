@@ -6,6 +6,11 @@ import Cookies from 'universal-cookie';
 import ModalWindowAtributo from './ModalWindows/ModalWindowAtributo';
 import ModalWindowRequisito from './ModalWindows/ModalWindowRequisito';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+
+const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
+
 const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
@@ -310,93 +315,138 @@ class EditarInformacionDeEventosNext extends Component{
 
     render(){
         return (
-            <><div className='contenedorMaximo'></div>
-              <div className="editarEventos">
-              { <ModalWindowAtributo estadoAtributo={ this.state.estadoModalAtributo} 
-              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
-              id_evento = {this.state.id_evento}
-              atributos = {this.state.atributos}/> }
+          <>
+            <div className="contenedorMaximo"></div>
+            <div className="editarEventos">
+              {
+                <ModalWindowAtributo
+                  estadoAtributo={this.state.estadoModalAtributo}
+                  cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
+                  id_evento={this.state.id_evento}
+                  atributos={this.state.atributos}
+                />
+              }
 
-              { <ModalWindowRequisito estadoAtributo={ this.state.estadoModalRequisito} 
-              cambiarEstadoModalAtributo={this.cambiarEstadoModalRequisito}
-              id_evento = {this.state.id_evento}/> }
+              {
+                <ModalWindowRequisito
+                  estadoAtributo={this.state.estadoModalRequisito}
+                  cambiarEstadoModalAtributo={this.cambiarEstadoModalRequisito}
+                  id_evento={this.state.id_evento}
+                />
+              }
 
-                <div className="textoEvento">
-                  <p className="textoRegistro"> Edicion de eventos</p>
-                </div>
-                <div className="entradasDatos">
-                  <form onSubmit={this.updateEvent} encType="multipart/form-data">
-
-                    {this.state.atributos.map((atributo) => (
-                     <div className="campo-container">
-                       <div id="entrada">
-                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
-                         <input
-                           id="inputRegistro"
-                           type="text"
-                           name="valor"
-                           placeholder="Campo Adicional"
-                           readOnly
-                         />
-                       </div>
-                       <button className="botonEliminar" type='button' onClick={() => this.eliminarAtributo(atributo.id)}>X</button>
-                     </div>
-                   ))}
-                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalAtributo(!this.state.estadoModal)}>Agregar Campo +</button>
-
-                    <h1>
-                        Requisitos
-                    </h1>
-                    {this.state.requisitos.map((requisito) => (
-                     <div className="campo-container">
-                       <div id="entrada">
-                         <p id="textoCuadro">{requisito.contenido_requisito}*</p>
-                         <input
-                           id="inputRegistro"
-                           type="text"
-                           name="valor"
-                           placeholder="Campo Adicional"
-                           readOnly
-                         />
-                       </div>
-                       <button className="botonEliminar" type='button' onClick={() => this.eliminarRequisito(requisito.id)}>X</button>
-                     </div>
-                    ))}
-                    <button className="botonAgregarEdit" type='button' onClick={() => this.cambiarEstadoModalRequisito(!this.state.estadoModal)}>Agregar Requisito +</button>
-
-                    <br/>
-                    <h1>
-                        Organizadores
-                    </h1>
-
-                    {this.state.organizadores.map((organizador) => (
-                     <div>
-                        <input type="checkbox" className="organizadoresSeleccionados" name="vehicle1" value={organizador.id}/>{organizador.nombre_organizador} <br/>
-                     </div>
-                    ))}
-
-                    <br/>
-                    <h1>
-                        Patrocinadores
-                    </h1>
-
-                    {this.state.patrocinadores.map((patrocinador) => (
-                     <div>
-                        <input type="checkbox" className="patrocinadoresSeleccionados" name="vehicle1" value={patrocinador.id}/>{patrocinador.nombre_patrocinador} <br/>
-                     </div>
-                    ))}
-
-                    <div className="botonEnviar">
-                      <button className="botonGuardarEdit" type="submit">
-                        {" "}
-                        Guardar
+              <div className="textoEvento">
+                <p className="textoRegistro"> Edicion de eventos</p>
+              </div>
+              <div className="entradasDatos">
+                <form onSubmit={this.updateEvent} encType="multipart/form-data">
+                  <h1 className="textoTituloEdiNext">Campos</h1>
+                  {this.state.atributos.map((atributo) => (
+                    <div className="campo-container">
+                      <div id="entradaEveNex">
+                        <p id="textoCuadro">{atributo.nombre_atributo}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminar"
+                        type="button"
+                        onClick={() => this.eliminarAtributo(atributo.id)}
+                      >
+                        {cancelar}
                       </button>
                     </div>
-                  </form>
-                  
-                </div>
+                  ))}
+                  <button
+                    className="botonAgregarEdit"
+                    type="button"
+                    onClick={() =>
+                      this.cambiarEstadoModalAtributo(!this.state.estadoModal)
+                    }
+                  >
+                    Agregar Campo +
+                  </button>
+
+                  <h1 className="textoTituloEdiNext">Requisitos</h1>
+                  {this.state.requisitos.map((requisito) => (
+                    <div className="campo-container">
+                      <div id="entradaEveNex">
+                        <p id="textoCuadro">{requisito.contenido_requisito}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminar"
+                        type="button"
+                        onClick={() => this.eliminarRequisito(requisito.id)}
+                      >
+                        {cancelar}
+                      </button>
+                    </div>
+                  ))}
+                  <button
+                    className="botonAgregarEdit"
+                    type="button"
+                    onClick={() =>
+                      this.cambiarEstadoModalRequisito(!this.state.estadoModal)
+                    }
+                  >
+                    Agregar Requisito +
+                  </button>
+
+                  <h1 className="textoTituloEdiNext">Organizadores</h1>
+
+                  {this.state.organizadores.map((organizador) => (
+                    <div className="filaOrganizador">
+                      <input
+                        type="checkbox"
+                        className="organizadoresSeleccionados"
+                        id="checkBoxAddEvent"
+                        name="vehicle1"
+                        value={organizador.id}
+                      />
+                      <span id="titulosCheckbox">
+                        {organizador.nombre_organizador}
+                      </span>
+                    </div>
+                  ))}
+                  <h1 className="textoTituloEdiNext">Patrocinadores</h1>
+
+                  {this.state.patrocinadores.map((patrocinador) => (
+                    <div className="filaOrganizador">
+                      <input
+                        type="checkbox"
+                        id="checkBoxAddEvent"
+                        className="patrocinadoresSeleccionados"
+                        name="vehicle1"
+                        value={patrocinador.id}
+                      />
+                      <span id="titulosCheckbox">
+                        {patrocinador.nombre_patrocinador}
+                      </span>
+                    </div>
+                  ))}
+
+                  <div className="botonEnviar">
+                    <button className="botonGuardarEdit" type="submit">
+                      {" "}
+                      Guardar
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            </>
+          </>
         );
     }
 }

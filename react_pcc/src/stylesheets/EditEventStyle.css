@@ -19,21 +19,25 @@
 .campo-container{
     display: flex;
 }
-.campo-container #entrada{
+.campo-container #entradaEveNex{
     width: 80%;
+    border: 1px solid rgb(175, 175, 175);
+    margin-left: 4vw;
+    margin-right: 2.5vw;
+    margin-top: 2vh;
+    border-radius: 5px;
+    height: 36px;
 }
 .botonEliminar{
-    background-color: rgb(167, 14, 14);
+    background-color: white;
     padding: 10px 10px;
     font-weight: bolder;
-    font-size: 0.9rem;
+    font-size: 1.8rem;
     border: none;
-    margin-right: 4vw;
-    margin-bottom: 2vh;
-    margin-top: 2vh;
-    border-radius: 20px;
+    margin-right: 3vw;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
     cursor: pointer;
-    color: white
 }
 
 .entradasDatos{
@@ -99,7 +103,7 @@
     margin-bottom: 2vh;
 }
 .filaOrganizador{
-    display: inline-block;
+    display: block;
     margin-top: 1vh;
 }
 #checkBoxIndividual{

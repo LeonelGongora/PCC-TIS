@@ -23,6 +23,7 @@
     margin-top: 2vh;
     border-radius: 5px;
     height: 36px;
+    width: 80%;
 }
 
 
@@ -187,4 +188,16 @@
 }
 #titulosCheckbox{
     margin-right: 1rem;
+}
+#textoCuadroV2{
+    position: relative;
+    font-size: 0.83rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(-12px);
+    background-color: white;
+    color: rgb(175, 175, 175);
 }
