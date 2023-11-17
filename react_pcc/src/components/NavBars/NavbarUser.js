@@ -1,6 +1,6 @@
 import React from 'react';
-import "../stylesheets/NavbarStyles.css";
-import DropdownUser from './DropDownUser';
+import "../../stylesheets/NavbarStyles.css";
+import DropdownUser from '../DropDownUser';
 
 function NavbarUser(){
     return (
@@ -10,7 +10,7 @@ function NavbarUser(){
           <a href="">
             <img
               className="imageNav"
-              src={require("../images/logo512.png")}
+              src={require("../../images/logo512.png")}
               alt="Logo del sistema"
             />
           </a>

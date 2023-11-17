@@ -6,7 +6,7 @@ import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-import ModalWarning from './ModalWarning';
+import ModalWarning from './ModalWindows/ModalWarning';
 
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 

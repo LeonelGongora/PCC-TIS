@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import NavbarAdmin from '../components/NavbarAdmin';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 import '../App.css';
@@ -8,7 +7,7 @@ import Cookies from 'universal-cookie';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
-import NavbarUserDinamico from '../components/NavbarUserDinamico';
+import NavbarUserDinamico from '../components/NavBars/NavbarUserDinamico';
 
 const cookies = new Cookies();
 

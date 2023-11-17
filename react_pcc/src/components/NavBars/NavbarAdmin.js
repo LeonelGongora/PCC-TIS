@@ -1,8 +1,8 @@
 import React from "react";
-import "../stylesheets/NavbarStyles.css";
-import "./Dropdown.js";
+import "../../stylesheets/NavbarStyles.css";
+import "../Dropdown.js";
 
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown.js";
 
 function NavbarAdmin({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrganizador,  estadoPatrocinador, cambiarEstadoPatrocinador}) {
     return (
@@ -13,7 +13,7 @@ function NavbarAdmin({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOr
                     <a href="">
                         <img
                             className="imageNav"
-                            src={require("../images/logo512.png")}
+                            src={require("../../images/logo512.png")}
                             alt="Logo del sistema"
                         />
                     </a>
