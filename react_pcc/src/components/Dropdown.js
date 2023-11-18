@@ -40,8 +40,8 @@ function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrgan
           <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>Registrar organizador</li>
           <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>Registrar patrocinador</li>
           <li onClick={aceptarUsuarioRedireccionar}>Administrar solicitudes</li>
-		  <li onClick={editarEventoRedireccionar}>Editar evento</li>
-		  <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+          <li onClick={editarEventoRedireccionar}>Editar evento</li>
+          <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
         </ul>
       )}
     </div>

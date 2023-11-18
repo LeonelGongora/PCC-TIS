@@ -22,6 +22,7 @@ import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 import LoginProvisional from "./components/LoginProvisional.jsx";
 import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
+import ModalRegister from "./components/ModalWindows/ModalRegister.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
         <Route path='/editar-evento' element={<EditarEvento/>} />
         <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
 
-        <Route path='/acceptUser' element={<AcceptTeamToEvent/>} />
+        <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
+        <Route path='/acceptTeam' element={<AcceptTeamToEvent/>} />
         
         <Route path='/eventacceptUser' element={<VisualizarEventoAccepUserToEvent/>} />
 

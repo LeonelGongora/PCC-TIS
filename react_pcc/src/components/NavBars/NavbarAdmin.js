@@ -23,7 +23,8 @@ function NavbarAdmin({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOr
                     <div className="desplegable1">
                         <Dropdown estado1={ estado1} cambiarEstado1={cambiarEstado1} 
                         estadoOrganizador = {estadoOrganizador} cambiarEstadoOrganizador = {cambiarEstadoOrganizador} 
-                        estadoPatrocinador = {estadoPatrocinador} cambiarEstadoPatrocinador = {cambiarEstadoPatrocinador} />
+                        estadoPatrocinador = {estadoPatrocinador} cambiarEstadoPatrocinador = {cambiarEstadoPatrocinador} 
+                        />
                     </div>
                     <a><FontAwesomeIcon className='buttonNoti' icon={faBell} /></a>
                     <div className='userId'>

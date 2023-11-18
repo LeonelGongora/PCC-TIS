@@ -7,7 +7,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
-
+import ModalRegister from '../components/ModalWindows/ModalRegister';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 
 const cookies = new Cookies();
