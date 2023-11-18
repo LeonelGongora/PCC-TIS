@@ -28,7 +28,7 @@ function ModalWarning({estado1, cambiarEstado1, errorMessage }){
               </button>
             </div>
             <div className="contenedorMensaje">
-              <p className="mensajeError">{errorMessage}</p>
+              <p id="mensajeError">{errorMessage}</p>
             </div>
           </div>
         </div>
