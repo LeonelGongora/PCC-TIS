@@ -134,10 +134,10 @@ function FormRegistroEvento_Equipos(){
     <div className='containerAll'>
       <h1>Competencia Universitaria</h1>
     <div className='containerForm'>
-      {/* <ModalAutentificacion
+      <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
-      /> */}
+      /> 
       <div className='header'>
         <h2 className='titulo-Formulario-Registro-Evento'>Registro de Equipo</h2>
       </div>
