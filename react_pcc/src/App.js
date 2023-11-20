@@ -22,7 +22,7 @@ import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 import LoginProvisional from "./components/LoginProvisional.jsx";
 import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
-import ModalRegister from "./components/ModalWindows/ModalRegister.js";
+import Register_to_Event_Team_Req from "./pages/Register_to_Event_Team_Req.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
 
         <Route path='/register-to-event' element={<Register_to_Event/>}/>
         <Route path='/register-to-event-teams' element={<Register_to_Event_Teams/>}/>
+        <Route path='/register-to-event-teams_req' element={<Register_to_Event_Team_Req/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />
