@@ -1,0 +1,30 @@
+.containerListaP{
+    display: flex;
+    margin-top: 2vh;
+    background-color: #14365C;
+    justify-content: space-around;
+    color: #FFD51E;
+    min-height: 6vh;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.containerListaP h1{
+    text-align: center;
+    padding-left: 0vw;
+} 
+
+.imgListP{
+    width: 13%;
+}
+
+.nombListP, .correo{
+    width: 29%;
+}
+.rolList{
+    width: 11%;
+}
+
+.dni {
+    width: 18%;
+}

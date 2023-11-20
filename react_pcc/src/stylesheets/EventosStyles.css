@@ -28,3 +28,24 @@
 .filtro{
     display: none;
 }
+
+#buscador {
+    flex-grow: 1;
+    width: 35rem;
+    margin-top: 35px;
+    padding: 7px;
+    border-radius: 9px;
+    font-size: 0.92rem;
+    outline: none;
+}
+  
+#buscador::placeholder {
+    color: #808080;
+    font-size: 0.92rem;
+}
+
+.lupa-icon {
+    color: #808080;
+    font-size: 1rem;
+    margin-left: -30px;
+}
