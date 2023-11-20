@@ -67,3 +67,17 @@
     text-align: center;
     font-size: 1rem;
 }
+.registrar-team{
+    background-color: rgb(255, 213, 30);
+    padding: 10px 55px;
+    font-weight: bolder;
+    font-size: 1rem;
+    border: none;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 3vh;
+    margin-top: 2vh;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+}

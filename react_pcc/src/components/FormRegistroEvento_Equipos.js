@@ -1,5 +1,5 @@
 import React , { useState, useRef, useEffect } from 'react';
-import '../stylesheets/Formulario.css';
+import '../stylesheets/FormularioEquipo.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
 import configApi from '../configApi/configApi'
@@ -131,13 +131,15 @@ function FormRegistroEvento_Equipos(){
   }
 
   return(
+    <div className='containerAll'>
+      <h1>Competencia Universitaria</h1>
     <div className='containerForm'>
-      <ModalAutentificacion
+      {/* <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
-      />
+      /> */}
       <div className='header'>
-        <h2 className='titulo-Formulario-Registro-Evento'>Registro al evento</h2>
+        <h2 className='titulo-Formulario-Registro-Evento'>Registro de Equipo</h2>
       </div>
       <div className='containerRequisito'>  
         {mostrarRequisitos ? (
@@ -178,7 +180,73 @@ function FormRegistroEvento_Equipos(){
         </>
         )}
       </div>
-      <div className='registro'>
+      <div className='registroEquipo'>
+          <form className='formEquipo'>
+            <div className='coach'>
+              <p>Coach</p>
+              <div className='camposCoach'>
+                <p>Nombre del coach</p>
+                <input
+                id='input_registro_equipo'
+                type='text'
+                name='nameCoach'
+                placeholder='Ingrese su nombre'/>
+              </div>
+              <div className='camposCoach'>
+                <p>DNI del coach</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNICoach'
+                placeholder='Ingrese el DNI del coach'/>
+              </div>
+            </div>
+            <div className='equipo'>
+              <p className='tituloEquipo'>Equipo</p>
+              <div className='camposEquipo'>
+                <p>Nombre del equipo</p>
+                <input
+                id='input_registro_equipo'
+                type='text'
+                name='nameEquipo'
+                placeholder='Ingrese el nombre del equipo'/>
+              </div>
+              <div className='camposEquipo'>
+                <p>DNI participante</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNIParticipante1'
+                placeholder='Ingrese el DNI del participante 1 '/>
+              </div>
+              <div className='camposEquipo'>
+                <p>DNI participante</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNIParticipante2'
+                placeholder='Ingrese el DNI del participante 2 '/>
+              </div>
+              <div className='camposEquipo'>
+                <p>DNI participante</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNIParticipante3'
+                placeholder='Ingrese el DNI del participante 2 '/>
+              </div>
+              <div className='camposEquipo'>
+                <p>DNI participante</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNIParticipant4'
+                placeholder='Ingrese el DNI del participante 2 '/>
+              </div>
+            </div>
+          </form>
+      </div>
+      {/* <div className='registro'>
         <form class="form_name" id='form_name'>
 
           {atributos.map((atributo,id) => {
@@ -203,12 +271,13 @@ function FormRegistroEvento_Equipos(){
           })}
 
         </form>
-      </div>
+      </div> */}
       <Boton
         texto='Registrarse'
         esBotonDeRegistro={true}
         manejarClic={registrar}/>
         {showModal && <ModalWarning estado1={showModal} cambiarEstado1={setShowModal} errorMessage={errorArchivo} />} {}
+    </div>
     </div>
   )
 }

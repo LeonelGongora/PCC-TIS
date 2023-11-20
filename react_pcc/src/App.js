@@ -36,7 +36,7 @@ function App() {
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
 
         <Route path='/register-to-event' element={<Register_to_Event/>}/>
-        <Route path='/register-to-event-teams' element={<Register_to_Event/>}/>
+        <Route path='/register-to-event-teams' element={<Register_to_Event_Teams/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />

@@ -1,0 +1,46 @@
+.registroEquipo{
+    background-color: white;
+    padding: 5%;
+    width: 410px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.coach #input_registro_equipo{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+	width: 90%;
+    padding: 2%;
+}
+.camposCoach p{
+    position: relative;
+    font-size: 0.70rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(9px);
+    background-color: white;
+}
+.camposEquipo p{
+    position: relative;
+    font-size: 0.70rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(9px);
+    background-color: white;
+}
+.equipo #input_registro_equipo{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+	width: 90%;
+    padding: 2%;
+}
+.tituloEquipo{
+    font-size: 1rem;
+    margin-top: 10px;
+}
