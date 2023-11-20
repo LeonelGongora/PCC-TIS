@@ -24,6 +24,8 @@ import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamic
 import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
 import ModalRegister from "./components/ModalWindows/ModalRegister.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
+import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
+import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 
 function App() {
   return (
@@ -57,6 +59,9 @@ function App() {
         <Route path='/login' element={<LoginProvisional/>} />
         <Route path='/add-user-dinamico' element={<FormRegistroUsuarioDinamico/>} />
         <Route path='/add-tipo-user' element={<FormRegistroTipoUser/>} />
+
+        <Route path='/participantes' element={<VisualizarParticipantes/>} />
+        <Route path='/equipos' element={<VisualizarEquipos/>} />
 
       </Routes>
     </Router>
