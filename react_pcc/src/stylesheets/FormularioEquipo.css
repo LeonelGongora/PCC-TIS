@@ -6,10 +6,16 @@
     margin-bottom: 20px;
     font-weight: bold;
 }
+.containerAll h1{
+ text-align: center;
+ color: white;
+ font-size: 1.7rem;
+ margin-bottom: 20px;    
+}
 .coach #input_registro_equipo{
     border: 1px solid rgb(175, 175, 175);
     border-radius: 5px;
-	width: 90%;
+	width: 93%;
     padding: 2%;
 }
 .camposCoach p{
@@ -37,10 +43,13 @@
 .equipo #input_registro_equipo{
     border: 1px solid rgb(175, 175, 175);
     border-radius: 5px;
-	width: 90%;
+	width: 93%;
     padding: 2%;
 }
 .tituloEquipo{
     font-size: 1rem;
     margin-top: 10px;
+}
+input::placeholder{
+    font-size: 0.8rem;
 }
