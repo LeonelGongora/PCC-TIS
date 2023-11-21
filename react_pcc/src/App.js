@@ -26,6 +26,7 @@ import Register_to_Event_Team_Req from "./pages/Register_to_Event_Team_Req.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
+import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 
 function App() {
   return (
@@ -62,7 +63,9 @@ function App() {
         <Route path='/add-tipo-user' element={<FormRegistroTipoUser/>} />
 
         <Route path='/participantes' element={<VisualizarParticipantes/>} />
-        <Route path='/equipos' element={<VisualizarEquipos/>} />
+        <Route path='/equipos' element={<VisualizarEquipos />} />
+        <Route path='/darBajaEvento' element={< DarBajaEvento />} />
+        <Route path='/' element={< DarBajaEvento />} />
 
       </Routes>
     </Router>

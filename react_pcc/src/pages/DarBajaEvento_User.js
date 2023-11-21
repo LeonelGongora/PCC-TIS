@@ -1,24 +1,32 @@
-import React, {Component} from 'react';
-import NavbarAdmin from '../components/NavBars/NavbarAdmin';
-import ListaEventos from '../components/ListaEventos';
+import React, { Component } from "react";
+import NavbarAdmin from "../components/NavBars/NavbarAdmin";
+import ListaEventos from "../components/ListaEventos";
+import ListaEventos_baja from "../components/ListaEventos_baja";
 import "../stylesheets/EventosStyles.css";
-import '../App.css';
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import "../App.css";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
+import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
 // import ModalRegister from '../components/ModalWindows/ModalRegister';
-import ModalWindow from '../components/ModalWindows/ModalWindow';
-import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
+import ModalWindow from "../components/ModalWindows/ModalWindow";
+import Banner_informativo from "../components/Banner_informativo";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color: "#000000",}} />;
+
+const buscar = (
+  <FontAwesomeIcon
+    icon={faMagnifyingGlass}
+    size="lg"
+    style={{ color: "#000000" }}
+  />
+);
 
 const cookies = new Cookies();
 
-class Home_Admin extends Component {
+class DarBajaEvento extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,8 +36,9 @@ class Home_Admin extends Component {
       estadoModal: false,
       estadoModalOrganizador: false,
       estadoModalPatrocinador: false,
-      estadoModalAnuncio: false,
       tipos_de_evento: [],
+	  estadoBanner: false,
+	  nombreEventoBann: "",
     };
     this.eventos = [];
   }
@@ -93,44 +102,11 @@ class Home_Admin extends Component {
   cambiarEstadoModalPatrocinador = (nuevoEstado) => {
     this.setState({ estadoModalPatrocinador: nuevoEstado });
   };
-  cambiarEstadoModalAnuncio = (nuevoEstado) => {
-    this.setState({ estadoModalAnuncio: nuevoEstado });
-  };
+	cambiarEstadoBanner = (estado, nombre) => {
+		this.setState({ estadoBanner: estado });
+		this.setState({ nombreEventoBann: nombre });
+	};
 
-  manejarBuscador = (e) => {
-    if (e.target.matches("#buscador")) {
-      if (e.key === "Escape") {
-        e.target.value = "";
-      }
-
-      document.querySelectorAll(".containerEvents").forEach((evento) => {
-        evento
-          .querySelector(".nombreEvento")
-          .textContent.toLowerCase()
-          .includes(e.target.value.toLowerCase())
-          ? evento.classList.remove("filtro")
-          : evento.classList.add("filtro");
-      });
-    }
-  };
-
-  manejar_Filtro_Por_Tipo = (e) => {
-    //Todos
-    if (e.target.value === "Todos") {
-      document.querySelectorAll(".containerEvents").forEach((evento) => {
-        evento.classList.remove("filtro");
-      });
-    } else {
-      document.querySelectorAll(".containerEvents").forEach((evento) => {
-        evento
-          .querySelector(".tipoEv")
-          .textContent.toLowerCase()
-          .includes(e.target.value.toLowerCase())
-          ? evento.classList.remove("filtro")
-          : evento.classList.add("filtro");
-      });
-    }
-  };
 
   render() {
     return (
@@ -147,10 +123,6 @@ class Home_Admin extends Component {
           estadoPatrocinador={this.state.estadoModalPatrocinador}
           cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}
         />
-        <ModalAnuncio
-          estadoAnuncio={this.state.estadoModalAnuncio}
-          cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
-        />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
           <NavbarAdmin
@@ -160,47 +132,25 @@ class Home_Admin extends Component {
             cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
             estadoPatrocinador={this.estadoModalPatrocinador}
             cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
-            estadoAnuncio={this.state.estadoModalAnuncio}
-            cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
           />
           <div className="contenedor">
-            <div className="contenedorTitulo-home">
-              <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
+            <Banner_informativo
+				estadoBanner1={this.state.estadoBanner}
+				cambiarEstadoBanner1={this.cambiarEstadoBanner}
+				nombreBanner1={this.state.nombreEventoBann}
+			/>
+			<div className="contenedorTitulo-home">
+              <p className="tituloEvento-home">DARSE DE BAJA EVENTO</p>
 
-              <div className="filtrarElementos-admin">
-                <div className="entradaBuscador-admin">
-                  <input
-                    type="text"
-                    name="buscador"
-                    id="buscador-admin"
-                    placeholder="Buscar..."
-                    onChange={this.manejarBuscador}
-                  />
-                  <span id="botonBuscar-admin">{buscar}</span>
-                </div>
-                <select
-                  id="desplegable-admin"
-                  onChange={this.manejar_Filtro_Por_Tipo}
-                >
-                  <option disabled selected>
-                    {" "}
-                    Seleccione tipo evento
-                  </option>
-                  <option> Todos</option>
-                  {this.state.tipos_de_evento.map((evento, id) => {
-                    return <option>{evento.nombre_tipo_evento}</option>;
-                  })}
-                </select>
-              </div>
             </div>
             <div className="columna1">
-              <ListaEventos />
+              <ListaEventos_baja />
               {this.eventos.map((evento, id) => {
                 return (
                   <>
                     <div
                       className="containerEvents"
-                      onClick={() => this.masDetalles(evento.id)}
+                      //   onClick={() => this.masDetalles(evento.id)}
                     >
                       <img
                         className="imageEvent"
@@ -213,6 +163,13 @@ class Home_Admin extends Component {
                       </h4>
                       <h4>{evento.fecha_limite}</h4>
                       <h4>{evento.fecha_fin}</h4>
+                      <button
+                        className="botonDarBajaEvento"
+                        type="button"
+                        onClick={() => this.cambiarEstadoBanner(true, evento.nombre_evento)}
+                      >
+                        Darse de baja
+                      </button>
                     </div>
                   </>
                 );
@@ -225,4 +182,4 @@ class Home_Admin extends Component {
   }
 }
 
-export default Home_Admin;
+export default DarBajaEvento;

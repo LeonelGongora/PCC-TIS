@@ -1,0 +1,15 @@
+.banner{
+	display: flex;
+	color: white;
+	background-color: #8C391B;
+	border-radius: 8px;
+	height: 3vh;
+	width: 80%;
+	justify-content: space-between;
+	align-items: center;
+	margin-left: 10%;
+	padding: 4px 30px;
+}
+#botonSalirBanner{
+	background-color: #8C391B;
+}
