@@ -20,7 +20,8 @@ function FormRegistroEvento(){
 
   const id_usuario = cookies.get('id_usuario');
   const archivoInput = useRef(null);
-  const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
+  const [requisitos, setRequisitos] = useState ( [] );
+  const [mostrarRequisitos] = useState(true);// Para mostrar Requisitos
 
   const manejarCargaDeArchivo = (event) => {
     setArchivo(event.target.files[0]);
@@ -125,7 +126,9 @@ function FormRegistroEvento(){
   const getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
+      console.log(response.data);
       setEvent(response.data)
+      setRequisitos(response.data.requirements)
       setAtributos(response.data.attributes)
   }
 
@@ -144,7 +147,11 @@ function FormRegistroEvento(){
       </div>
       <div className='containerRequisito'>  
         {mostrarRequisitos ? (
-          <p>{event.requisitos}</p>
+          requisitos.map((r, index) => (
+            <div key={r.id}>
+              <p>{index + 1}. {r.contenido_requisito}</p>
+            </div>
+          ))
         ) : (
           <p>No se requiere subir ningún archivo o documento para registrarse a este evento.</p>
         )}

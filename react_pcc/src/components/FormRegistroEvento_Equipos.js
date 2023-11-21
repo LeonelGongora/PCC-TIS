@@ -1,5 +1,5 @@
 import React , { useState, useRef, useEffect } from 'react';
-import '../stylesheets/Formulario.css';
+import '../stylesheets/FormularioEquipo.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
 import configApi from '../configApi/configApi'
@@ -190,6 +190,8 @@ function FormRegistroEvento_Equipos(){
   }
 
   return(
+    <div className='containerAll'>
+      <h1>Competencia Universitaria</h1>
     <div className='containerForm'>
       <ModalAutentificacion
         estado1={formData.estadoModal}
@@ -283,12 +285,13 @@ function FormRegistroEvento_Equipos(){
           })}
 
         </form>
-      </div>
+      </div> 
       <Boton
         texto='Registrarse'
         esBotonDeRegistro={true}
         manejarClic={registrar}/>
         {showModal && <ModalWarning estado1={showModal} cambiarEstado1={setShowModal} errorMessage={errorArchivo} />} {}
+    </div>
     </div>
   )
 }

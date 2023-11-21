@@ -3,45 +3,60 @@ import "../stylesheets/Dropdown.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-function Dropdown({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrganizador, estadoPatrocinador, cambiarEstadoPatrocinador}) {
-	const [isOpen, setIsOpen] = useState(false);
+function Dropdown({
+  estado1,
+  cambiarEstado1,
+  estadoOrganizador,
+  cambiarEstadoOrganizador,
+  estadoPatrocinador,
+  cambiarEstadoPatrocinador,
+  estadoAnuncio,
+  cambiarEstadoAnuncio,
+}) {
+  const [isOpen, setIsOpen] = useState(false);
 
-	const toggleDropdown = () => {
-		setIsOpen(!isOpen);
-	};
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   const crearEventoRedireccionar = () => {
-		window.location.href='./add-event';
-	};
+    window.location.href = "./add-event";
+  };
 
   const aceptarUsuarioRedireccionar = () => {
-		window.location.href='./eventacceptUser';
-	};
+    window.location.href = "./eventacceptUser";
+  };
 
   const editarEventoRedireccionar = () => {
-		window.location.href='./paginaEditarEventos';
-	};
+    window.location.href = "./paginaEditarEventos";
+  };
 
   const visualizarEventoRedireccionar = () => {
-		window.location.href='/';
-	};
+    window.location.href = "/";
+  };
 
-  
-
-	return (
+  return (
     <div className="dropdown-container">
       <button className="dropdown-button" onClick={toggleDropdown}>
-        OPCIONES <FontAwesomeIcon className='dropdownIcon' icon={faChevronDown} />
+        OPCIONES{" "}
+        <FontAwesomeIcon className="dropdownIcon" icon={faChevronDown} />
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
           <li onClick={crearEventoRedireccionar}>Registrar evento</li>
           <li onClick={() => cambiarEstado1(!estado1)}>Crear tipo de evento</li>
-          <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>Registrar organizador</li>
-          <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>Registrar patrocinador</li>
+          <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
+            Registrar organizador
+          </li>
+          <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
+            Registrar patrocinador
+          </li>
+          <li onClick={() => cambiarEstadoAnuncio(!estadoAnuncio)}>
+            Registrar anuncio
+          </li>
           <li onClick={aceptarUsuarioRedireccionar}>Administrar solicitudes</li>
-		  <li onClick={editarEventoRedireccionar}>Editar evento</li>
-		  <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+          <li onClick={editarEventoRedireccionar}>Editar evento</li>
+          <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
         </ul>
       )}
     </div>

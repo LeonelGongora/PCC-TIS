@@ -17,6 +17,13 @@
     font-size: 1.7rem;
 	font-weight: 700;
 }
+ .reqCont .textoEvento-user{
+    display: none;
+ }
+ .reqCont .botonRegistrar-user{
+    margin-bottom: 0px;
+ }
+
 #entrada-user{
     border: 1px solid rgb(175, 175, 175);
     margin-left: 4vw;

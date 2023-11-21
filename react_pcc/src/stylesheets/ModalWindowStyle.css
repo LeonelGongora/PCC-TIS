@@ -58,9 +58,8 @@
     
 }
 
-.contRej{
-    min-height: 200px;
-    max-width: 700px;
+.contReg{
+    min-height: 500px;
     min-width: 300px;
 }
 
@@ -161,7 +160,7 @@ label{
 
 #textoCuadroAtributo{
     position: relative;
-    font-size: 0.70rem;
+    font-size: 0.74rem;
     text-align: left;
     font-weight: bold;
     width: fit-content;
@@ -172,7 +171,7 @@ label{
 }
 #textoCuadroImg{
     position: relative;
-    font-size: 0.70rem;
+    font-size: 0.74rem;
     text-align: left;
     font-weight: bold;
     width: fit-content;
@@ -180,4 +179,31 @@ label{
     margin-top: 4px;
     transform: translateY(14px);
     background-color: white;
+}
+.inputMasInfo{
+    
+    border: 1px solid rgb(175, 175, 175);
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    width: 98%;
+    min-height: 4vh;
+}
+
+
+.inputEventoAnuncio{
+    height: 300px;
+    width: 300px;
+    border: 1px solid rgb(175, 175, 175);
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 0.85rem;
 }

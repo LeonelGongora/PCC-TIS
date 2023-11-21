@@ -9,7 +9,7 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const warning = <FontAwesomeIcon icon={faExclamationCircle} style={{ color: '#ffffff' }} />
 
 
-function ModalWarning({estado1, cambiarEstado1, errorMessage }){
+function ModalWarningDNI({estado1, cambiarEstado1, errorMessage }){
 
     return (
       estado1 && (
@@ -30,10 +30,11 @@ function ModalWarning({estado1, cambiarEstado1, errorMessage }){
             <div className="contenedorMensaje">
               <p id="mensajeError">{errorMessage}</p>
             </div>
+            <button className='registrar-team'>Registrar</button>
           </div>
         </div>
       )
     );
 }
 
-export default ModalWarning; 
+export default ModalWarningDNI; 

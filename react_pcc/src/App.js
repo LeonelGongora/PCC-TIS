@@ -14,6 +14,7 @@ import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 import AcceptUserToEvent from "./pages/AcceptUserToEvent.js";
+import AcceptTeamToEvent from "./pages/AcceptTeamToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 import VisualizarEventoAccepUserToEvent from "./pages/VisualizarEventoAccepUserToEvent.js";
 import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
@@ -21,7 +22,11 @@ import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 import LoginProvisional from "./components/LoginProvisional.jsx";
 import FormRegistroUsuarioDinamico from "./components/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./components/FormRegistroTipoUser.js";
+import Register_to_Event_Team_Req from "./pages/Register_to_Event_Team_Req.js";
 //import Home_Admin_Prueba from "./pages/Home_Admin_Prueba.js";
+import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
+import VisualizarEquipos from "./pages/VisualizarEquipos.js";
+import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 
 function App() {
   return (
@@ -35,6 +40,7 @@ function App() {
 
         <Route path='/register-to-event' element={<Register_to_Event/>}/>
         <Route path='/register-to-event-teams' element={<Register_to_Event_Teams/>}/>
+        <Route path='/register-to-event-teams_req' element={<Register_to_Event_Team_Req/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />
@@ -48,12 +54,18 @@ function App() {
         <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
 
         <Route path='/acceptUser' element={<AcceptUserToEvent/>} />
+        <Route path='/acceptTeam' element={<AcceptTeamToEvent/>} />
         
         <Route path='/eventacceptUser' element={<VisualizarEventoAccepUserToEvent/>} />
 
         <Route path='/login' element={<LoginProvisional/>} />
         <Route path='/add-user-dinamico' element={<FormRegistroUsuarioDinamico/>} />
         <Route path='/add-tipo-user' element={<FormRegistroTipoUser/>} />
+
+        <Route path='/participantes' element={<VisualizarParticipantes/>} />
+        <Route path='/equipos' element={<VisualizarEquipos />} />
+        <Route path='/darBajaEvento' element={< DarBajaEvento />} />
+        <Route path='/' element={< DarBajaEvento />} />
 
       </Routes>
     </Router>

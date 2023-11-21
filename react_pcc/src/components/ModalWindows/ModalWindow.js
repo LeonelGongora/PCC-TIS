@@ -95,6 +95,7 @@ function ModalWindow({estado1, cambiarEstado1}){
                   <button
                     onClick={salirVentanaModal}
                     className="BotonSalir"
+                    
                   >
                     {salir}
                   </button>

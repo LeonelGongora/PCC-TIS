@@ -92,29 +92,29 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Autentificacion</h1>
+                    <h1>Autentificación</h1>
                   </div>
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
 
-                    <p id="textoCuadro">CI</p>
+                    <p id="textoCuadroAtributo">DNI</p>
                     <input
                     id="input"
                     className="inputEvento"
                     type="text"
                     name="ci"
-                    placeholder="Ingrese su CI"
+                    placeholder="Ingrese su DNI"
                     onChange={handleInput}
                     />
 
                     {errors.ci && (
-                    <span className="advertencia">
+                    <span className="span1Modal">
                     {errors.ci}
                     </span>
                     )}
 
-                    <p id="textoCuadroAtributo">Contraseña*</p>
+                    <p id="textoCuadroAtributo">Contraseña</p>
                         <input
                         type="text"
                         name="nombre_tipo_evento"

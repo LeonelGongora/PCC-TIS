@@ -11,11 +11,11 @@
   
   .title-Register-Event{
     max-width: 1050px;
-    font-size: 2.3em;
+    font-size: 2.5rem;
     color: white;
     font-family: 'Roboto', sans-serif;
     line-height: 1.1;
-    margin: 30px auto;
+    margin: 1.6em auto;
     text-align: center;
   }
   
@@ -34,6 +34,4 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
-
