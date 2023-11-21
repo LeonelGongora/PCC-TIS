@@ -107,7 +107,6 @@ class Home_Admin extends Component{
     };
 
     manejar_Filtro_Por_Tipo = (e) => {
-      //Todos
       if(e.target.value === "Todos"){
         document.querySelectorAll(".containerEvents").forEach(evento =>{
             evento.classList.remove("filtro")
@@ -121,9 +120,6 @@ class Home_Admin extends Component{
         })
 
       }
-
-      
-
     };
 
     render(){

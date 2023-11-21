@@ -14,14 +14,14 @@ function Register_to_Event_Teams() {
 
   const [event, setEvent] = useState ( [] );
   
-  const idevento = cookies.get('idauxiliar');
+  const id_evento = cookies.get('id_evento');
 
   useEffect(()=>{
     getEvent()
   }, [])
 
   const getEvent=async()=>{
-      const url = `${Eventos_Api_Url}/${idevento}`;
+      const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
       setEvent(response.data)
       // console.log(response.data);

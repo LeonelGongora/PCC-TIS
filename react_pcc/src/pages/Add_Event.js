@@ -203,9 +203,7 @@ class Add_Event extends Component {
 
       axios.post(url, data).then((res) => {
         console.log(res);
-        cookies.set("ultimo_id_evento", res.data.ultimo_id_evento, {
-          path: "/",
-        });
+        cookies.set("ultimo_id_evento", res.data.ultimo_id_evento, {path: "/",});
         window.location.href = "./add-event-next";
       });
     }

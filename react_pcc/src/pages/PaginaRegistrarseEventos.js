@@ -61,12 +61,12 @@ class PaginaRegistrarseEventos extends Component{
     }
 
     irRegistro(id, participantes){
-        cookies.set('idauxiliar', id, {path: "/"});
-        console.log(participantes)
+        cookies.set('id_evento', id, {path: "/"});
+        console.log(id)
         if(participantes > 0){
-          console.log("Por equipo")
+          cookies.set('participantes_equipo', participantes, {path: "/"});
+          window.location.href='./register-to-event-teams';
         }else{
-          console.log("Individual")
           window.location.href='./register-to-event';
         }
         // console.log(cookies.get('idauxiliar'));

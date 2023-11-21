@@ -22,7 +22,9 @@ use App\Http\Controllers\Event_SponsorController;
 use App\Http\Controllers\TipoController;
 use App\Http\Controllers\TipoUserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Team_UserController;
 use App\Http\Controllers\Tipo1Controller;
+use App\Http\Controllers\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,10 @@ Route::post('/add-requirement', [RequirementController::class, 'store']);
 
 Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);
+
+Route::post('/add-team', [TeamController::class, 'store']);
+
+Route::post('/add-team_user', [Team_UserController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -123,8 +123,6 @@ function FormRegistroUsuario() {
       data.append('telefono', formData.telefono)
 
       axios.post(url, data).then(res => {
-        console.log(res)
-        console.log(res.data.ultimo_id)
         cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
         window.location.href = './register-to-event';
       })

@@ -18,7 +18,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
     });
 
     const [errors, setErrors] = useState({});
-    const [tipo_eventos, setTipo_eventos] = useState([]);
     const [usuarios, setUsuarios] = useState({})
 
     const handleInput = (e) => {
@@ -31,7 +30,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
     }
 
     useEffect(()=>{
-      getTipos_Evento();
       getUsuarios();
     }, []);
 
@@ -41,12 +39,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
       const respuesta = await axios.get(url);
       console.log(respuesta)
       setUsuarios(respuesta.data.usuarios);
-    }
-
-    const getTipos_Evento = async (e) => {
-      const url = "http://127.0.0.1:8000/api/type-events"; 
-      const respuesta = await axios.get(url);
-      setTipo_eventos(respuesta.data.events);
     }
 
     const salirVentanaModal = (e) => {

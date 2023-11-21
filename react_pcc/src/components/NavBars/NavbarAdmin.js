@@ -1,9 +1,8 @@
 import React from "react";
 import "../../stylesheets/NavbarStyles.css";
-import "../Dropdown.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 
 function NavbarAdmin({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoOrganizador,  estadoPatrocinador, cambiarEstadoPatrocinador}) {
     return (

@@ -53,11 +53,6 @@ class EventController extends Controller
             $evento-> save();
             $evento->id;
 
-
-            for ($i = 1; $i <= 10; $i++) {
-                $i = $i +$i;
-            }
-
             return response()->json([
                 'status' => 200,
                 'message' =>'Evento añadido exitosamente',

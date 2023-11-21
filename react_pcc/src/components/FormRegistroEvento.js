@@ -90,7 +90,7 @@ function FormRegistroEvento(){
         var urli= response.data.urlimagen;
 
       axios.post(EventoUsuario_Api_Url, {
-        event_id: idevento,
+        event_id: id_evento,
         user_id: id_usuario,
         requisitoZip: urli,
         solicitud : "0"
@@ -114,7 +114,7 @@ function FormRegistroEvento(){
 
   const [archivo, setArchivo] = useState('');
   const [event, setEvent] = useState ( [] );
-  const idevento = cookies.get('idauxiliar');
+  const id_evento = cookies.get('id_evento');
   const [atributos, setAtributos] = useState ( [] );
 
   useEffect(()=>{
@@ -123,7 +123,7 @@ function FormRegistroEvento(){
   }, [])
 
   const getEvent=async()=>{
-      const url = `${Eventos_Api_Url}/${idevento}`;
+      const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
       setEvent(response.data)
       setAtributos(response.data.attributes)

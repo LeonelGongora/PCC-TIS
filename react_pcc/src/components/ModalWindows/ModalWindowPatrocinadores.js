@@ -104,8 +104,6 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
 
         if(Object.keys(validationErrors).length === 0){
 
-            console.log(values)
-
             const data = new FormData();
 
             data.append('nombre_patrocinador', values.nombre_patrocinador)

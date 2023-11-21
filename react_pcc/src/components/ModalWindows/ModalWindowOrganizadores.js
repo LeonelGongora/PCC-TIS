@@ -16,7 +16,6 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
     const [values, setValues] = useState({
         nombre_organizador : "",
         imagen_organizador : ""
-
     });
 
     const [errors, setErrors] = useState({});
@@ -24,7 +23,6 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
 
     const handleInput = (e) => {
         const {name, value} = e.target;
-
         setValues({
             ...values,
             [name]:value,

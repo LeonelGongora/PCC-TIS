@@ -8,8 +8,7 @@ use App\Models\Event;
 
 class Event_OrganizerController extends Controller
 {
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $evento_organizador = new Event_Organizer();
         $evento_organizador -> event_id = $request -> evento;
         $evento_organizador -> organizer_id = $request -> organizador;
