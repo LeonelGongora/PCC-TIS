@@ -15,7 +15,6 @@ import Banner_informativo from "../components/Banner_informativo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-
 const buscar = (
   <FontAwesomeIcon
     icon={faMagnifyingGlass}
@@ -32,7 +31,7 @@ class DarBajaEvento extends Component {
     this.state = {
       events: [],
       loader: false,
-      url: "http://127.0.0.1:8000/api/events",
+      url: "http://127.0.0.1:8000/api/miseventos",
       estadoModal: false,
       estadoModalOrganizador: false,
       estadoModalPatrocinador: false,
@@ -48,7 +47,7 @@ class DarBajaEvento extends Component {
 
     //this.setState({loader:true});
     const respuesta = await axios.get(url);
-    console.log(respuesta);
+    // console.log(respuesta);
     this.setState({ tipos_de_evento: respuesta.data.events });
 
     //this.eventos = Array.from(events.data.events)
@@ -57,9 +56,10 @@ class DarBajaEvento extends Component {
 
   getEvents = async () => {
     this.setState({ loader: true });
-    const events = await axios.get(this.state.url);
+    const idu = cookies.get('id_usuario')
+    const events = await axios.get(`${this.state.url}/${idu}`);
     this.eventos = Array.from(events.data.events);
-
+    // console.log(this.eventos);
     this.setState({ events: events.data, loader: false });
     var i;
     var fecha;
@@ -102,9 +102,13 @@ class DarBajaEvento extends Component {
   cambiarEstadoModalPatrocinador = (nuevoEstado) => {
     this.setState({ estadoModalPatrocinador: nuevoEstado });
   };
-	cambiarEstadoBanner = (estado, nombre) => {
-		this.setState({ estadoBanner: estado });
-		this.setState({ nombreEventoBann: nombre });
+	cambiarEstadoBanner = async (estado, nombre, euid) => {
+		const url=`http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    // console.log(url)
+    await axios.delete(url)
+    this.getEvents();
+    this.setState({ estadoBanner: estado });
+	  this.setState({ nombreEventoBann: nombre });
 	};
 
 
@@ -159,14 +163,14 @@ class DarBajaEvento extends Component {
                       />
                       <h4 className="nombreEvento">{evento.nombre_evento}</h4>
                       <h4 className="tipoEv">
-                        {evento.event_type.nombre_tipo_evento}
+                        {evento.nombre_tipo_evento}
                       </h4>
                       <h4>{evento.fecha_limite}</h4>
                       <h4>{evento.fecha_fin}</h4>
                       <button
                         className="botonDarBajaEvento"
                         type="button"
-                        onClick={() => this.cambiarEstadoBanner(true, evento.nombre_evento)}
+                        onClick={() => this.cambiarEstadoBanner(true, evento.nombre_evento, evento.euid)}
                       >
                         Darse de baja
                       </button>

@@ -94,3 +94,4 @@ Route::resource('tipos', TipoController::class);
 Route::resource('tipousers', TipoUserController::class);
 Route::resource('login', LoginController::class);
 Route::resource('tipos1', Tipo1Controller::class);
+Route::get('/miseventos/{id}', [EventController::class, 'misEventos']);
