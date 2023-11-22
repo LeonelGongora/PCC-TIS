@@ -102,15 +102,20 @@ class DarBajaEvento extends Component {
   cambiarEstadoModalPatrocinador = (nuevoEstado) => {
     this.setState({ estadoModalPatrocinador: nuevoEstado });
   };
-	cambiarEstadoBanner = async (estado, nombre, euid) => {
-		const url=`http://127.0.0.1:8000/api/eventousuarios/${euid}`;
-    // console.log(url)
-    await axios.delete(url)
-    this.getEvents();
+	cambiarEstadoBanner = (estado, nombre) => {
     this.setState({ estadoBanner: estado });
 	  this.setState({ nombreEventoBann: nombre });
 	};
 
+  darDeBaja = async (estado, nombre, euid) => {
+		const url=`http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    await axios.delete(url)
+    this.getEvents();
+    this.cambiarEstadoBanner(estado, nombre)
+	};
+
+
+  cambiarEstadoBanner
 
   render() {
     return (
@@ -170,7 +175,7 @@ class DarBajaEvento extends Component {
                       <button
                         className="botonDarBajaEvento"
                         type="button"
-                        onClick={() => this.cambiarEstadoBanner(true, evento.nombre_evento, evento.euid)}
+                        onClick={() => this.darDeBaja(true, evento.nombre_evento, evento.euid)}
                       >
                         Darse de baja
                       </button>
