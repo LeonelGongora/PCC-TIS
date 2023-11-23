@@ -222,19 +222,21 @@ class Home_Admin extends Component {
                   />
                   <span id="botonBuscar-admin">{buscar}</span>
                 </div>
-                <select
-                  id="desplegable-admin"
-                  onChange={this.manejar_Filtro_Por_Tipo}
-                >
-                  <option disabled selected>
-                    {" "}
-                    Seleccione tipo evento
-                  </option>
-                  <option> Todos</option>
-                  {this.state.tipos_de_evento.map((evento, id) => {
-                    return <option>{evento.nombre_tipo_evento}</option>;
-                  })}
-                </select>
+                
+                  <select
+                    id="desplegable-admin"
+                    onChange={this.manejar_Filtro_Por_Tipo}
+                  >
+                    <option disabled selected>
+                      {" "}
+                      Seleccione tipo evento
+                    </option>
+                    <option> Todos</option>
+                    {this.state.tipos_de_evento.map((evento, id) => {
+                      return <option>{evento.nombre_tipo_evento}</option>;
+                    })}
+                  </select>
+      
               </div>
             </div>
             <div className="columna1">

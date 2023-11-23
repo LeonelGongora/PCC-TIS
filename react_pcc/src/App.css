@@ -68,12 +68,17 @@
 }
 
 #desplegable-admin{
-  border-radius: 10px;
-  width: 30%;
+  width: 35%;
   padding-left: 1vw;
   padding-right: 1vw;
+  outline: none;
+  border-radius: 20px;
+  border: 2px solid rgb(201, 201, 201); 
 }
-
+#desplegable-admin:hover{
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.397);
+  border: 2px solid rgb(145, 145, 145);
+}
 
 .filtrarElementos-admin{
   display: flex;
@@ -90,13 +95,17 @@
   justify-content: space-around;
   align-items: center;
   background-color: white;
-  border-radius: 10px;
-  width: 40%;
-  height: 4vh;
+  border-radius: 20px;
+  width: 50%;
+  height: 5vh;
   padding-left: 2vw;
   padding-right: 2vw; 
-
+  border: 2px solid rgb(201, 201, 201);
 }
+ .entradaBuscador-admin:hover{
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.397);
+  border: 2px solid rgb(145, 145, 145);
+ }
 #botonBuscar-admin{
   cursor: pointer;
 }
