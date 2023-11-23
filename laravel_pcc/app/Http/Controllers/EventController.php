@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -67,6 +68,23 @@ class EventController extends Controller
 
         }
 
+    }
+
+    public function misEventos($id){
+
+        $events = DB::table('events')
+        ->join('evento_user', 'events.id', '=', 'evento_user.event_id')
+        ->join('users', 'users.id', '=', 'evento_user.user_id')
+        ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
+        ->where('users.id', $id)
+        ->select('events.*', 'event_types.nombre_tipo_evento', 'evento_user.id as euid')
+        ->get();
+
+        return response()->json([
+            'status' => 200,
+            'events' => $events,
+
+        ]);
     }
 
     public function show($id)
