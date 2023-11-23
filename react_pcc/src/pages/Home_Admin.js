@@ -222,7 +222,7 @@ class Home_Admin extends Component {
                   />
                   <span id="botonBuscar-admin">{buscar}</span>
                 </div>
-                
+                <div className="capsulaDesplegable-admin">
                   <select
                     id="desplegable-admin"
                     onChange={this.manejar_Filtro_Por_Tipo}
@@ -236,7 +236,7 @@ class Home_Admin extends Component {
                       return <option>{evento.nombre_tipo_evento}</option>;
                     })}
                   </select>
-      
+                </div>
               </div>
             </div>
             <div className="columna1">
