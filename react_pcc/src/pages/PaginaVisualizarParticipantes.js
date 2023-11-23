@@ -1,40 +1,38 @@
 import React, {Component} from 'react';
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
+
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import ModalWindow from '../components/ModalWindows/ModalWindow';
-import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
-import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
-import NavbarUserDinamico from '../components/NavBars/NavbarUserDinamico';
-
+import configApi from '../configApi/configApi';
 const cookies = new Cookies();
 
-class Home_User_Dinamico extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state  = {
-            events: [],
-            loader:false,
-            url: "http://127.0.0.1:8000/api/events",
-            estadoModal: false,
-            estadoModalOrganizador:false,
-            estadoModalPatrocinador: false,
+class PaginaVisualizarParticipantes extends Component{
+
+    eventos = []
+    //id = cookies.get('id_usuario')
     
-        };
-        this.eventos = []
-
-      }
+    state = {
+        events: [],
+        loader:false,
+        url: "http://127.0.0.1:8000/api/events"
+    };
 
     getEvents = async () => {
 
+        //var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
+
         this.setState({loader:true});
+        //const events = await axios.get(this.state.url);
         const events = await axios.get(this.state.url);
+        console.log(events)
+
         this.eventos = Array.from(events.data.events)
         console.log(this.eventos)
-
+        
         this.setState({ events: events.data, loader:false});
         var i;
         var fecha;
@@ -55,71 +53,45 @@ class Home_User_Dinamico extends Component{
             
         }
 
-             
+        
     };
 
     componentDidMount(){
         this.getEvents();
     }
 
-    masDetalles(id){
-        cookies.set('idauxiliar', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
-        window.location.href='./event-admin';
+    irRegistro(id, participantes){
+        cookies.set('id_evento', id, {path: "/"});
+        console.log(id)
+        if(participantes > 0){
+          cookies.set('participantes_equipo', participantes, {path: "/"});
+          window.location.href='./equipos';
+        }else{
+          window.location.href='./participantes';
+          
+        }
     }
 
-    cambiarEstadoModal = (nuevoEstado) => {
-        this.setState({ estadoModal: nuevoEstado });
-    };
-
-    cambiarEstadoModalOrganizador = (nuevoEstado) => {
-        this.setState({ estadoModalOrganizador: nuevoEstado });
-    };
-
-    cambiarEstadoModalPatrocinador = (nuevoEstado) => {
-        this.setState({ estadoModalPatrocinador: nuevoEstado });
-    };
-    
     render(){
 
         return (
           <div className="App">
-            <ModalWindow
-              estado1={this.state.estadoModal}
-              cambiarEstado1={this.cambiarEstadoModal}
-            />
-            <ModalWindowOrganizadores
-              estadoOrganizador={this.state.estadoModalOrganizador}
-              cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
-            />
-            <ModalWindowPatrocinadores
-              estadoPatrocinador={this.state.estadoModalPatrocinador}
-              cambiarEstadoModalPatrocinador={
-                this.cambiarEstadoModalPatrocinador
-              }
-            />
             <div className="background-image"></div> {/* Componente de fondo */}
             <div className="content">
-              <NavbarUserDinamico
-                estado1={this.estadoModal}
-                cambiarEstado1={this.cambiarEstadoModal}
-                estadoOrganizador={this.estadoModalOrganizador}
-                cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
-                estadoPatrocinador={this.estadoModalPatrocinador}
-                cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
-              />
+              <NavbarAdmin />
               <div className="contenedor">
                 <div className="contenedorTitulo-home">
-                  <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
+                  <p className="tituloEvento-home">VISUALIZAR PARTICIPANTES DE EVENTOS</p>
                 </div>
                 <div className="columna1">
                   <ListaEventos />
+
                   {this.eventos.map((evento, id) => {
                     return (
                       <>
                         <div
                           className="containerEvents"
-                          onClick={() => this.masDetalles(evento.id)}
+                          onClick={() => this.irRegistro(evento.id, evento.participantes_equipo)}
                         >
                           <img
                             className="imageEvent"
@@ -127,7 +99,7 @@ class Home_User_Dinamico extends Component{
                             alt="Logo del evento"
                           />
                           <h4 className="nombreEvento">
-                            {evento.nombre_evento}
+                            {evento.nombre_evento}{" "}
                           </h4>
                           <h4 className="tipoEv">
                             {evento.event_type.nombre_tipo_evento}
@@ -146,4 +118,4 @@ class Home_User_Dinamico extends Component{
     }
 }
 
-export default Home_User_Dinamico;
+export default PaginaVisualizarParticipantes ;

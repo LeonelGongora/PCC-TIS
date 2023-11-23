@@ -7,9 +7,10 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWindows/ModalWarning';
-import ModalAutentificacionEquipos from './ModalWindows/ModalAutentificacionEquipos';
 
+import ModalRegistroEquipos from './ModalWindows/ModalRegistroEquipos';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
+import ModalWarningDNI from './ModalWindows/ModalWarningDNI';
 
 const cookies = new Cookies();
 
@@ -22,7 +23,6 @@ function FormRegistroEvento_Equipos(){
   const id_evento = cookies.get('id_evento');
   const participantes_equipo = cookies.get('participantes_equipo');
   
-
   const archivoInput = useRef(null);
   const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
 
@@ -43,6 +43,7 @@ function FormRegistroEvento_Equipos(){
   const [formData, setFormData] = useState({
     estadoModal: true,
     estadoModalEquipos :false,
+    estadoModalWarningDNI :false,
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -137,7 +138,9 @@ function FormRegistroEvento_Equipos(){
           dni_no_registrados.push(participantes_dni_Aux[i])
         }
         cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
-        cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
+        cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+        //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
+        cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
       }
     }
   }
@@ -154,7 +157,6 @@ function FormRegistroEvento_Equipos(){
   const [usuarios, setUsuarios] = useState({})
   const [numero_participantes, setNumero_participantes] = useState ( [] );
   const participantes_dni_Aux = []
-
   
   useEffect(()=>{
     getEvent();
@@ -189,18 +191,31 @@ function FormRegistroEvento_Equipos(){
     setFormData({ estadoModalEquipos: nuevoEstado });
   }
 
+  const cambiarEstadoModalWarningDNI = (nuevoEstado) => {
+    setFormData({ estadoModalWarningDNI: nuevoEstado });
+  }
+
+
   return(
     <div className='containerAll'>
       <h1>Competencia Universitaria</h1>
     <div className='containerForm'>
+
+      <ModalWarningDNI
+        estadoWarningDNI={formData.estadoModalWarningDNI}
+        cambiarEstadoWarningDNI={cambiarEstadoModalWarningDNI}
+        cambiarEstadoModalEquipos={cambiarEstadoModalEquipos}
+      />
+
       <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
       />
 
-      <ModalAutentificacionEquipos
+      <ModalRegistroEquipos
         estadoEquipos={formData.estadoModalEquipos}
         cambiarEstadoModalEquipos={cambiarEstadoModalEquipos}
+        cambiarEstadoWarningDNI={cambiarEstadoModalWarningDNI}
       />
       <div className='header'>
         <h2 className='titulo-Formulario-Registro-Evento'>Registro de Equipo</h2>
@@ -246,6 +261,25 @@ function FormRegistroEvento_Equipos(){
       </div>
       <div className='registro'>
         <form className="form_name" id='form_name'>
+        <div className='coach'>
+              <p>Coach</p>
+              <div className='camposCoach'>
+                <p>Nombre del coach</p>
+                <input
+                id='input_registro_equipo'
+                type='text'
+                name='nameCoach'
+                placeholder='Ingrese su nombre'/>
+              </div>
+              <div className='camposCoach'>
+                <p>DNI del coach</p>
+                <input
+                id='input_registro_equipo'
+                type='number'
+                name='DNICoach'
+                placeholder='Ingrese el DNI del coach'/>
+              </div>
+            </div>
 
           <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
             <p id="textoCuadro">Nombre de Equipo</p>

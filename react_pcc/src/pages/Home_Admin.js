@@ -7,7 +7,6 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
-// import ModalRegister from '../components/ModalWindows/ModalRegister';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 
@@ -19,6 +18,7 @@ const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color
 const cookies = new Cookies();
 
 class Home_Admin extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -36,19 +36,18 @@ class Home_Admin extends Component {
 
   getEventTypes = async () => {
     const url = "http://127.0.0.1:8000/api/type-events";
-
-    //this.setState({loader:true});
     const respuesta = await axios.get(url);
     console.log(respuesta);
+    console.log(this.eventos)
     this.setState({ tipos_de_evento: respuesta.data.events });
 
-    //this.eventos = Array.from(events.data.events)
-    //this.setState({ loader:false});
   };
 
   getEvents = async () => {
     this.setState({ loader: true });
     const events = await axios.get(this.state.url);
+    console.log(events)
+    
     this.eventos = Array.from(events.data.events);
 
     this.setState({ events: events.data, loader: false });
@@ -71,110 +70,115 @@ class Home_Admin extends Component {
     }
   };
 
-  componentDidMount() {
-    this.getEvents();
-    this.getEventTypes();
-  }
-
   masDetalles(id) {
     cookies.set("idauxiliar", id, { path: "/" });
     // console.log(cookies.get('idauxiliar'));
     window.location.href = "./event-admin";
   }
 
-  cambiarEstadoModal = (nuevoEstado) => {
-    this.setState({ estadoModal: nuevoEstado });
-  };
-
-  cambiarEstadoModalOrganizador = (nuevoEstado) => {
-    this.setState({ estadoModalOrganizador: nuevoEstado });
-  };
-
-    getEvents = async () => {
-
-        this.setState({loader:true});
-        const events = await axios.get(this.state.url);
-        this.eventos = Array.from(events.data.events)
-
-        this.setState({ events: events.data, loader:false});
-        var i;
-        var fecha;
-        var fecha1;
-
-        for (i = 0; i < this.eventos.length; i++) {
-            fecha = new Date(this.eventos[i].fecha_fin)
-            var dia = fecha.getDate() + 1
-            var mes = fecha.getMonth() + 1
-            let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-            this.eventos[i].fecha_fin = format4
-
-            fecha1 = new Date(this.eventos[i].fecha_limite)
-            var dia1 = fecha1.getDate() + 1
-            var mes1 = fecha1.getMonth() + 1
-            let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
-            this.eventos[i].fecha_limite = format5
-        }
-    };
-
     componentDidMount(){
         this.getEvents();
         this.getEventTypes();
     }
-
-    masDetalles(id){
-        cookies.set('idauxiliar', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
-        window.location.href='./event-admin';
-    }
-
+    
     cambiarEstadoModal = (nuevoEstado) => {
-        this.setState({ estadoModal: nuevoEstado });
+      this.setState({ estadoModal: nuevoEstado });
     };
 
     cambiarEstadoModalOrganizador = (nuevoEstado) => {
-        this.setState({ estadoModalOrganizador: nuevoEstado });
+      this.setState({ estadoModalOrganizador: nuevoEstado });
     };
 
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
-        this.setState({ estadoModalPatrocinador: nuevoEstado });
+      this.setState({ estadoModalPatrocinador: nuevoEstado });
+    };
+
+    cambiarEstadoModalAnuncio = (nuevoEstado) => {
+      this.setState({ estadoModalAnuncio: nuevoEstado });
     };
 
     manejarBuscador = (e) => {
+      let tipo_evento_seleccionado = document.querySelector("#desplegable-admin");
+      let tipo_evento_seleccionado_valor = tipo_evento_seleccionado.value;
 
-      if (e.target.matches("#buscador")){
-        if (e.key ==="Escape") {e.target.value = ""}
-      
-        document.querySelectorAll(".containerEvents").forEach(evento =>{
-          evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(e.target.value.toLowerCase())
-            ?evento.classList.remove("filtro")
-            :evento.classList.add("filtro")
-        })
+      if(tipo_evento_seleccionado.value === "Todos"){
+        if (e.target.matches("#buscador-admin")){
+          if (e.key ==="Escape") {e.target.value = ""}
+        
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+            evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(e.target.value.toLowerCase())
+              ?evento.classList.remove("filtro")
+              :evento.classList.add("filtro")
+          })
+        }
+      }else{
+
+        if (e.target.matches("#buscador-admin")){
+          if (e.key ==="Escape") {e.target.value = ""}
+
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+  
+            if(evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(e.target.value.toLowerCase())
+              && evento.querySelector(".tipoEv").textContent.toLowerCase().includes(tipo_evento_seleccionado_valor.toLowerCase())){
+
+              evento.classList.remove("filtro")
+
+            }else{
+              evento.classList.add("filtro")
+            }
+          })
+        }
       }
     };
 
     manejar_Filtro_Por_Tipo = (e) => {
-      if(e.target.value === "Todos"){
-        document.querySelectorAll(".containerEvents").forEach(evento =>{
-            evento.classList.remove("filtro")
-        })
+      let nombre_seleccionado = document.querySelector("#buscador-admin");
+      let nombre_seleccionado_valor = nombre_seleccionado.value;
+
+      if(nombre_seleccionado_valor === ""){
+
+        if(e.target.value === "Todos"){
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+              evento.classList.remove("filtro")
+          })
+  
+        }else{
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+            evento.querySelector(".tipoEv").textContent.toLowerCase().includes(e.target.value.toLowerCase())
+              ?evento.classList.remove("filtro")
+              :evento.classList.add("filtro")
+          })
+        }
 
       }else{
-        document.querySelectorAll(".containerEvents").forEach(evento =>{
-          evento.querySelector(".tipoEv").textContent.toLowerCase().includes(e.target.value.toLowerCase())
-            ?evento.classList.remove("filtro")
-            :evento.classList.add("filtro")
-        })
+
+        if(e.target.value === "Todos"){
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+            if(evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(nombre_seleccionado_valor.toLowerCase())){
+              evento.classList.remove("filtro")
+              
+            }else{
+              evento.classList.add("filtro")
+            }
+          })
+  
+        }else{
+          document.querySelectorAll(".containerEvents").forEach(evento =>{
+  
+            if(evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(nombre_seleccionado_valor.toLowerCase())
+              && evento.querySelector(".tipoEv").textContent.toLowerCase().includes(e.target.value.toLowerCase())){
+
+              evento.classList.remove("filtro")
+
+            }else{
+
+              evento.classList.add("filtro")
+
+            }
+          })
+        }
       }
     }
-
-  manejarBuscador = (e) => {
-    if (e.target.matches("#buscador")) {
-      if (e.key === "Escape") {
-        e.target.value = "";
-      }
-    };
-
-  }
 
   render() {
     return (
@@ -217,7 +221,7 @@ class Home_Admin extends Component {
                     type="text"
                     name="buscador"
                     id="buscador-admin"
-                    placeholder="Buscar..."
+                    placeholder="Buscar por nombre..."
                     onChange={this.manejarBuscador}
                   />
                   <span id="botonBuscar-admin">{buscar}</span>
@@ -226,10 +230,6 @@ class Home_Admin extends Component {
                   id="desplegable-admin"
                   onChange={this.manejar_Filtro_Por_Tipo}
                 >
-                  <option disabled selected>
-                    {" "}
-                    Seleccione tipo evento
-                  </option>
                   <option> Todos</option>
                   {this.state.tipos_de_evento.map((evento, id) => {
                     return <option>{evento.nombre_tipo_evento}</option>;

@@ -25,6 +25,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Team_UserController;
 use App\Http\Controllers\Tipo1Controller;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,12 @@ use App\Http\Controllers\TeamController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/add-attribute', [AttributeController::class, 'store']);
+Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
+
+Route::post('/add-activity', [ActivityController::class, 'store']);
+Route::delete('/delete-activity/{id}', [ActivityController::class, 'destroy']);
+
 Route::get('type-events', [EventTypeController::class, 'get']);
 Route::post('/add-event_type', [EventTypeController::class, 'store']);
 
@@ -50,6 +58,8 @@ Route::post('/delete-event_organizer', [Event_OrganizerController::class, 'destr
 Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
 Route::post('/delete-event_sponsor', [Event_SponsorController::class, 'destroy']);
 
+Route::post('/add-notice', [NoticeController::class, 'store']);
+
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::get('/get-organizador', [OrganizerController::class, 'get']);
 Route::delete('/delete-organizador/{id}', [OrganizerController::class, 'destroy']);
@@ -57,9 +67,6 @@ Route::delete('/delete-organizador/{id}', [OrganizerController::class, 'destroy'
 Route::post('/add-patrocinador', [SponsorController::class, 'store']);
 Route::get('/get-patrocinador', [SponsorController::class, 'get']);
 Route::delete('/delete-patrocinador/{id}', [SponsorController::class, 'destroy']);
-
-Route::post('/add-attribute', [AttributeController::class, 'store']);
-Route::delete('/delete-attribute/{id}', [AttributeController::class, 'destroy']);
 
 Route::post('/add-requirement', [RequirementController::class, 'store']);
 

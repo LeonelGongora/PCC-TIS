@@ -198,7 +198,7 @@ function FormRegistroEvento(){
             <input
             id="input"
             className="input-Formulario-Registro-Evento"
-            type="text"
+            type={atributo.tipo_dato_atributo}
             name={atributo.nombre_atributo}
             placeholder="Ingrese nombre"
             />
