@@ -278,7 +278,7 @@ class Add_Event_Next extends Component{
                         />
                       </div>
                       <button
-                        className="botonEliminar"
+                        className="botonEliminarv2"
                         type="button"
                         onClick={() => this.eliminarAtributo(atributo.id)}
                       >
@@ -320,7 +320,7 @@ class Add_Event_Next extends Component{
                         />
                       </div>
                       <button
-                        className="botonEliminar"
+                        className="botonEliminarv2"
                         type="button"
                         onClick={() => this.eliminarRequisito(requisito.id)}
                       >
@@ -352,7 +352,7 @@ class Add_Event_Next extends Component{
                         />
                       </div>
                       <button
-                        className="botonEliminar"
+                        className="botonEliminarv2"
                         type="button"
                         onClick={() => this.eliminarRequisito(actividad.id)}
                       >

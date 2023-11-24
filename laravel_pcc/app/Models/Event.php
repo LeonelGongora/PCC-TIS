@@ -80,4 +80,9 @@ class Event extends Model
         return $this->belongsToMany(Sponsor::class, 'event_sponsor', 'event_id', 'sponsor_id');
 
     }
+
+    public function notifications(){
+        return $this->belongsToMany(Notification::class, 'event_notification');
+    }
+
 }

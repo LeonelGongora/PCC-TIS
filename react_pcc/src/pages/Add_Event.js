@@ -253,9 +253,9 @@ class Add_Event extends Component {
       document.querySelectorAll("#inputRegistro")[5].readOnly = false
       this.setState({ participantes_equipo: ""});
     }
-    //this.setState((prev) => ({
-      //sChecked: !prev.isChecked,
-    //}));
+    this.setState((prev) => ({
+      isChecked: !prev.isChecked,
+    }));
   };
   handleInput = (e) => {
     this.setState({
@@ -271,7 +271,7 @@ class Add_Event extends Component {
             <p className="textoRegistro"> Registro de Evento</p>
           </div>
           <div className="entradasDatos">
-            <form onSubmit={this.saveEvent}>
+            <form  onSubmit={this.saveEvent}>
               <div className="datoNombre" id="entrada">
                 <p id="textoCuadro">Nombre*</p>
                 <input
