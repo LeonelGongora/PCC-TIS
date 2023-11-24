@@ -28,11 +28,16 @@ class AcceptUserToEvent extends Component{
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
-            estadoModalRejection: false
+            estadoModalRejection: false,
+            eventuser_id:'',
+            id:'',
+            e_id:''
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
         this.Event_Url_Api= configApi.EVENTOC_API_URL;
+        this.Notification_Url_Api= configApi.NOTIFICATION_API_URL;
+        this.NotificationUser_Url_Api=configApi.NOTIFICATIONUSER_API_URL;
         this.eventos = []
         this.requisitos = []
         this.usuarios = []
@@ -54,8 +59,8 @@ class AcceptUserToEvent extends Component{
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
 
-    cambiarEstadoModalRejection = (nuevoEstado) => {
-        this.setState({ estadoModalRejection: nuevoEstado });
+    cambiarEstadoModalRejection = (nuevoEstado, eventouser_id, evento_id) => {
+        this.setState({ estadoModalRejection: nuevoEstado, eventuser_id:eventouser_id, id:evento_id });
     };
 
     getAllUsers = async () => {
@@ -75,6 +80,7 @@ class AcceptUserToEvent extends Component{
   
         if(response.request.status === 200){
           this.setState({
+            e_id: response.data.id,
             nombre_evento: response.data.nombre_evento,
             requisitos: response.data.requirements
           });
@@ -86,13 +92,30 @@ class AcceptUserToEvent extends Component{
         this.getAllUsers();
     }
 
-    aceptarParticipante = async (id) =>{
-        console.log(id);
-        await axios.put(`${this.EventoUsuario_Url_Api}/${id}`, {
+    aceptarParticipante = async (eventuserid, id) =>{
+        console.log(eventuserid);
+        await axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
             solicitud: 1,
         })
+        .then(response=>{
+            const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
+            // console.log(contenido)
+            axios.post(this.Notification_Url_Api, {
+                contenido: contenido,
+                informacion: null,
+                leido: 0
+            })
+            .then(response=>{
+                axios.post(this.NotificationUser_Url_Api, {
+                    notification_id: response.data.id,
+                    user_id: id
+                }).then(response=>{
+                    window.location.reload();
+                })
+            })
+        })
         // this.getAllEvents();
-        window.location.href = window.location.href;
+        // window.location.href = window.location.href;
     }
 
 
@@ -115,8 +138,9 @@ class AcceptUserToEvent extends Component{
                 />
                 <ModalRejection estadoRejection={ this.state.estadoModalRejection} 
                 cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
-                id_evento = {this.state.id_evento}
-                id_user ={this.state.user}
+                id_evento = {this.state.e_id}
+                id_user ={this.state.eventuser_id}
+                id ={this.state.id}
                 />
 
 
@@ -140,9 +164,9 @@ class AcceptUserToEvent extends Component{
                                 <div className='containerReqSol'>
                                     <div className='requisitosDeEvento'>
                                         <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                        {this.state.requisitos.map((r) => {  
+                                        {this.state.requisitos.map((r, index) => {  
                                             return (<div key={r.id}>
-                                                <p className='requisitosTexto'>{r.contenido_requisito}</p>
+                                                <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
                                             </div>);
                                         })}
                                     
@@ -159,8 +183,8 @@ class AcceptUserToEvent extends Component{
                                                 {evento.solicitud == 1 ? (
                                                     null
                                                 ) : (
-                                                    <><button onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
-                                                    <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal)} className='buttonDenyUser'> Rechazar </button></>
+                                                    <><button onClick={() => this.aceptarParticipante(evento.eventuserid, evento.id)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal, evento.eventuserid, evento.id)} className='buttonDenyUser'> Rechazar </button></>
                                                 )}
                                             </div>
                                         </div>);

@@ -27,6 +27,9 @@ use App\Http\Controllers\Tipo1Controller;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationUserController;
+use App\Http\Controllers\EventNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,3 +105,6 @@ Route::resource('tipousers', TipoUserController::class);
 Route::resource('login', LoginController::class);
 Route::resource('tipos1', Tipo1Controller::class);
 Route::get('/miseventos/{id}', [EventController::class, 'misEventos']);
+Route::resource('notifications', NotificationController::class);
+Route::resource('notificationusers', NotificationUserController::class);
+Route::resource('eventnotifications', EventNotificationController::class);
