@@ -128,7 +128,7 @@ function ModalAutentificacionEquipos({estadoEquipos, cambiarEstadoModalEquipos})
                   </button>
 
                 </div>
-                <div className="registroTipoEvento">
+                <div className="registroTipoEvento reqCont">
                     <form onSubmit={saveTypeEvent} id="form1">
                         <p id="textoCuadroAtributo">Nombre*</p>
                         <input

@@ -3,7 +3,7 @@ import axios from 'axios';
 //import React, {Component} from 'react';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import { faCircleXmark, faUser } from '@fortawesome/free-regular-svg-icons';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -18,7 +18,11 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
     });
 
     const [errors, setErrors] = useState({});
-    const [usuarios, setUsuarios] = useState({})
+    const [usuarios, setUsuarios] = useState({});
+    const [infoVisible, setInfoVisible] = useState(false);
+    const [dniVisible, setDniVisible] = useState(true);
+    const [contraVisible, setContraVisible] = useState(false);
+    const [confButVisible, setConfButVisible] = useState(true);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -72,8 +76,7 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
             let ci = usuarios[index].ci
     
             if(ci == nuevo_ci){
-              
-              cambiarEstado1(false)
+              setInfoVisible(true);
               seEncontro = 1;
               break;
             }
@@ -85,6 +88,12 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
           }
         }
     }
+    const handleToggleVisibility = () => {
+      setDniVisible(!dniVisible);
+      setContraVisible(!contraVisible);
+      setConfButVisible(!confButVisible);
+    };
+  
 
     return (
         estado1 && (
@@ -96,9 +105,10 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                   </div>
                 </div>
                 <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
+                  <div  className='contentForm'>
+                    <form onSubmit={saveTypeEvent} id="form1" className='formUserVerif'>
 
-                    <p id="textoCuadroAtributo">DNI</p>
+                    {dniVisible && <div><p id="textoCuadroAtributo">DNI</p>
                     <input
                     id="input"
                     className="inputEvento"
@@ -113,7 +123,17 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                     {errors.ci}
                     </span>
                     )}
-
+                    </div>
+                    }
+                    {infoVisible && <div className='contenUserVerif'>
+                      <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                      <div className='infoUserVerif'>
+                        <h3 className='nombreUserVerif'>Andrews Valdivia</h3>
+                        <h4 className='dniUserVerif'>DNI: 15642296</h4>
+                      </div>
+                    </div>
+                    }
+                    {contraVisible && <div>
                     <p id="textoCuadroAtributo">Contraseña</p>
                         <input
                         type="text"
@@ -122,13 +142,22 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                         placeholder="Ingrese su contraseña"
                         onChange={handleInput}
                         />
+                        </div>
+                        }
                         </form>
+                      </div>
                         {errors.nombre_tipo_evento && (
                     <span className="span1Modal">{errors.nombre_tipo_evento}</span>
                     )}
-              <button form="form1" type="submit" className="BotonRegistrar">
-                Registrar
-              </button>
+              {dniVisible && <button form="form1" type="submit" className="BotonRegistrar">
+                Buscar DNI
+              </button>}
+              {infoVisible && confButVisible && <button form="form1" type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
+                Confirmar
+              </button>}
+              {contraVisible && <button form="form1" type="submit" className="BotonRegistrar">
+                Acceder
+              </button>}
               </div>
               </div>
         </div>
