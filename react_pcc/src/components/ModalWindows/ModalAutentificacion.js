@@ -74,6 +74,9 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
               
               cambiarEstado1(false)
               seEncontro = 1;
+              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
+              const respuesta = await axios.get(url);
+              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
               break;
             }
           }
@@ -95,7 +98,7 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                   </div>
                 </div>
                 <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
+                  <form onSubmit={saveTypeEvent} id="form1">
 
                     <p id="textoCuadroAtributo">DNI</p>
                     <input
@@ -113,18 +116,9 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                     </span>
                     )}
 
-                    <p id="textoCuadroAtributo">Contraseña</p>
-                        <input
-                        type="text"
-                        name="nombre_tipo_evento"
-                        className="inputEvento"
-                        placeholder="Ingrese su contraseña"
-                        onChange={handleInput}
-                        />
-                        </form>
-                        {errors.nombre_tipo_evento && (
-                    <span className="span1Modal">{errors.nombre_tipo_evento}</span>
-                    )}
+
+                  </form>
+
               <button form="form1" type="submit" className="BotonRegistrar">
                 Registrar
               </button>

@@ -72,6 +72,7 @@ Route::post('/add-requirement', [RequirementController::class, 'store']);
 
 Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);
+Route::get('/get-user-by-dni/{numero_documento}', [UserController::class, 'getIdbyDNI']);
 
 Route::post('/add-team', [TeamController::class, 'store']);
 

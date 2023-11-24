@@ -21,6 +21,7 @@ class CreateTeamsTable extends Migration
                 ->references('id')
                 ->on('events')
                 ->onDelete('cascade');
+            $table->integer('solicitud');
             $table->timestamps();
         });
     }

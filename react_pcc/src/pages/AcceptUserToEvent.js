@@ -95,7 +95,6 @@ class AcceptUserToEvent extends Component{
         window.location.href = window.location.href;
     }
 
-
     render(){
         return(
             <div className="App">
