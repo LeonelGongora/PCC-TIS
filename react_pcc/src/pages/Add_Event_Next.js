@@ -311,7 +311,13 @@ class Add_Event_Next extends Component{
                           value={requisito.contenido_requisito}
                           readOnly
                         />
-
+                        <textarea
+                          name="contenido_anuncio"
+                          className="inputEventoAnuncio"
+				                  rows={10}
+				                  cols={50}
+                          value={requisito.contenido_requisito}
+                        />
                       </div>
                       <button
                         className="botonEliminarv2"

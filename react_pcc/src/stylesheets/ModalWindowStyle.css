@@ -95,6 +95,26 @@ h1{
     flex: auto;
 
 }
+.registroTipoEvento-DarseBaja{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: auto;
+}
+.botonesDarseBaja{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+}
+.textoDarseBaja{
+    margin-top: 3vh;
+    margin-right: 2vw;
+    margin-left: 2vw;
+    font-size: 1.3rem;
+    font-weight: bolder;
+}
 
 .reqCont{
     justify-content: start;

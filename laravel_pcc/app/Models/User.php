@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Tipo::class, 'tipo_user');
     }
 
+    public function notifications(){
+        return $this->belongsToMany(Notification::class, 'notification_user');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

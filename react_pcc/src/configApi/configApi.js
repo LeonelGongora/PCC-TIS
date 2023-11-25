@@ -12,4 +12,6 @@ export default{
     "ESTAREGUSEREVENT_API_URL": `${iniURL}api/estareguserevent`,
     "EVENTUSER2_API_URL": `${iniURL}api/eventuser2`,
     "EVENTUSER3_API_URL": `${iniURL}api/eventuser3`,
+    "NOTIFICATION_API_URL": `${iniURL}api/notifications`,
+    "NOTIFICATIONUSER_API_URL": `${iniURL}api/notificationusers`,
 }

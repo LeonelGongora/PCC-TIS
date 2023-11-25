@@ -77,6 +77,9 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
             if(ci == nuevo_ci){
               setInfoVisible(true);
               seEncontro = 1;
+              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
+              const respuesta = await axios.get(url);
+              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
               break;
             }
           }

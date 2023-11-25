@@ -81,14 +81,16 @@ function FormRegistroEvento(){
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
-      console.log(archivo.file)
-      console.log(archivo)
       
-
+      
       const fd = new FormData();
       fd.append('file', archivo);
       axios.post(Imagen_Api_Url, fd).then(response=>{ 
         var urli= response.data.urlimagen;
+        console.log("Se tiene")
+        console.log(id_evento)
+        console.log(id_usuario)
+        console.log(urli)
 
       axios.post(EventoUsuario_Api_Url, {
         event_id: id_evento,

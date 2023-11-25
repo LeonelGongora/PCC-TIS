@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import NavbarAdmin from "../components/NavBars/NavbarAdmin";
-import ListaEventos from "../components/ListaEventos";
+import React, { Component, useEffect } from "react";
 import ListaEventos_baja from "../components/ListaEventos_baja";
 import "../stylesheets/EventosStyles.css";
 import "../App.css";
@@ -10,6 +8,8 @@ import NavbarUser from "../components/NavBars/NavbarUser";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import Banner_informativo from "../components/Banner_informativo";
+import ModalDarseBaja from "../components/ModalWindows/ModalDarseBaja";
 
 const buscar = (
   <FontAwesomeIcon
@@ -28,12 +28,11 @@ class DarBajaEvento extends Component {
       events: [],
       loader: false,
       url: "http://127.0.0.1:8000/api/miseventos",
-      estadoModal: false,
-      estadoModalOrganizador: false,
-      estadoModalPatrocinador: false,
       tipos_de_evento: [],
-	  estadoBanner: false,
-	  nombreEventoBann: "",
+      estadoBanner: false,
+      estadoBannerModal: false,
+      estadoDarseBaja: false,
+	    nombreEventoBann: "",
     };
     this.eventos = [];
   }
@@ -87,43 +86,45 @@ class DarBajaEvento extends Component {
     window.location.href = "./event-admin";
   }
 
-  cambiarEstadoModal = (nuevoEstado) => {
-    this.setState({ estadoModal: nuevoEstado });
-  };
-
-  cambiarEstadoModalOrganizador = (nuevoEstado) => {
-    this.setState({ estadoModalOrganizador: nuevoEstado });
-  };
-
-  cambiarEstadoModalPatrocinador = (nuevoEstado) => {
-    this.setState({ estadoModalPatrocinador: nuevoEstado });
-  };
-	cambiarEstadoBanner = (estado, nombre) => {
+	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
-	  this.setState({ nombreEventoBann: nombre });
-	};
+  };
+  cambiarDarseBaja = (estado) => {
+    this.setState({ estadoDarseBaja: estado });
+  };
+  
+  setNombreEvento = (nom) => {
+    this.setState({ nombreEventoBann: nom });
+  };
 
   darDeBaja = async (estado, nombre, euid) => {
-		const url=`http://127.0.0.1:8000/api/eventousuarios/${euid}`;
-    await axios.delete(url)
+    const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    await axios.delete(url);
     this.getEvents();
-    this.cambiarEstadoBanner(estado, nombre)
-	};
-
-
-  cambiarEstadoBanner
+    this.cambiarDarseBaja(estado);
+    this.setNombreEvento(nombre);
+    
+  };
 
   render() {
     return (
       <div className="App">
-        
+        <ModalDarseBaja
+          estadoDarseBaja1={this.state.estadoDarseBaja}
+          cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
+          cambiarEstadoBanner2={this.cambiarEstadoBanner}
+        />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
-          <NavbarUser/>
+          <NavbarUser />
           <div className="contenedor">
-			      <div className="contenedorTitulo-home">
+            <Banner_informativo
+              estadoBanner1={this.state.estadoBanner}
+              cambiarEstadoBanner1={this.cambiarEstadoBanner}
+              nombreBanner1={this.state.nombreEventoBann}
+            />
+            <div className="contenedorTitulo-home">
               <p className="tituloEvento-home">DARSE DE BAJA EVENTO</p>
-
             </div>
             <div className="columna1">
               <ListaEventos_baja />
@@ -140,15 +141,19 @@ class DarBajaEvento extends Component {
                         alt="Logo del evento"
                       />
                       <h4 className="nombreEvento">{evento.nombre_evento}</h4>
-                      <h4 className="tipoEv">
-                        {evento.nombre_tipo_evento}
-                      </h4>
+                      <h4 className="tipoEv">{evento.nombre_tipo_evento}</h4>
                       <h4>{evento.fecha_limite}</h4>
                       <h4>{evento.fecha_fin}</h4>
                       <button
                         className="botonDarBajaEvento"
                         type="button"
-                        onClick={() => this.darDeBaja(true, evento.nombre_evento, evento.euid)}
+                        onClick={() =>
+                          this.darDeBaja(
+                            true,
+                            evento.nombre_evento,
+                            evento.euid
+                          )
+                        }
                       >
                         Darse de baja
                       </button>
