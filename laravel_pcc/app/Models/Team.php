@@ -13,7 +13,8 @@ class Team extends Model
     protected $table = 'teams';
     protected $fillable = [
         'nombre_equipo',
-        'event_id'
+        'event_id',
+        'solicitud'
     ];
 
     protected $with = ['users'];

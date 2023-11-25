@@ -76,8 +76,11 @@ Route::post('/add-requirement', [RequirementController::class, 'store']);
 Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);
 Route::get('/get-user-by-dni/{numero_documento}', [UserController::class, 'getIdbyDNI']);
+Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
 
 Route::post('/add-team', [TeamController::class, 'store']);
+Route::get('/get-team-0/{event_id}', [TeamController::class, 'getTeams0']);
+Route::get('/get-team-1/{event_id}', [TeamController::class, 'getTeams1']);
 
 Route::post('/add-team_user', [Team_UserController::class, 'store']);
 

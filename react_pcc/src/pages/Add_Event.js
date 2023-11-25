@@ -243,7 +243,6 @@ class Add_Event extends Component {
   };
   changeChecked = (e) => {
 
-
     if(e.target.checked === true){
       document.querySelectorAll("#inputRegistro")[5].readOnly = true
       document.querySelectorAll("#inputRegistro")[5].value = ""
@@ -257,6 +256,7 @@ class Add_Event extends Component {
       isChecked: !prev.isChecked,
     }));
   };
+
   handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,

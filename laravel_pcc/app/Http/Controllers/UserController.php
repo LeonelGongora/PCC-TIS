@@ -82,6 +82,14 @@ class UserController extends Controller
         return null; // O puedes manejar el caso en el que no se encuentra el usuario
     }
 
+    public function getUser1($event_id){
+        
+        return User::whereHas('events', function ($query) use ($event_id) {
+            $query->where('event_id', $event_id)
+                  ->where('solicitud', 1);
+        })->get();
+    }
+
     /**
      * Display the specified resource.
      *

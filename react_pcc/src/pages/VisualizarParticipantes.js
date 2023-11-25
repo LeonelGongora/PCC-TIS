@@ -11,6 +11,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
+import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();
 
@@ -27,6 +28,42 @@ class VisualizarParticipantes extends Component{
             estadoModalPatrocinador: false,
         };
         this.eventos = []
+        this.participantes = []
+        this.Event_Url_Api= configApi.EVENTOC_API_URL;
+    }
+
+    componentDidMount(){
+      this.getEvent();
+      this.getUsers();
+    }
+
+    getUsers = async () => {
+      //Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
+      const idevent = cookies.get('id_evento');
+      const events = await axios.get(`http://127.0.0.1:8000/api/get-user-1/${idevent}`);
+      console.log(events)
+      console.log(events.data)
+      this.participantes = Array.from(events.data)
+
+      this.setState({ loader:false});
+    };
+
+    getEvent=async()=>{
+      const idevent = cookies.get('id_evento');
+      const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
+      console.log("Eventos")
+      console.log(response)
+      // console.log(response)
+      this.setState({ event: response.data})
+      /*
+       
+      if(response.request.status === 200){
+        this.setState({
+          nombre_evento: response.data.nombre_evento,
+          requisitos: response.data.requirements
+        });
+      }
+      */
     }
 
     cambiarEstadoModal = (nuevoEstado) => {
@@ -40,6 +77,8 @@ class VisualizarParticipantes extends Component{
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
+
+
 
     manejarBuscador = (e) => {
 
@@ -84,6 +123,9 @@ class VisualizarParticipantes extends Component{
                 cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
               />
               <div className="contenedor">
+              {this.participantes[0] == null ? (
+                <h1 className='tituloPagAcept'>No Hay Participantes en este evento</h1>
+                ) : (<>
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">NOMBRE DEL EVENTO</p>
                   <input type="text" name="buscador" id="buscador" 
@@ -93,26 +135,21 @@ class VisualizarParticipantes extends Component{
                 </div>
                 <div className="columna11">
                   <ListaEquipos campos={['img', 'nomb', 'correo', 'dni']}/>
-                  {/*{this.eventos.map((evento, id) => {
+                  {this.participantes.map((participante) => {
                     return (
-                    <>*/}
-                        <div className="containerP">
-                          <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
-                          <h4 className="nombreParticipante">Juan Manuel Calle </h4>
-                          <h4 className="correo">manucg@gmail.com</h4>
-                          <h4 className="dni">8330380</h4>
-                        </div>
-                        <div className="containerP">
-                          <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
-                          <h4 className="nombreParticipante">Laura Rojas </h4>
-                          <h4 className="correo">lr@gmail.com</h4>
-                          <h4 className="dni">8330380</h4>
-                        </div>
-                     { /*</>
+                    <>
+                      <div className="containerP">
+                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                        <h4 className="nombreParticipante">{`${participante.nombre} ${participante.apellido}`} </h4>
+                        <h4 className="correo">{participante.email}</h4>
+                        <h4 className="dni">{participante.ci}</h4>
+                      </div>
+                    </>
                     );
-                  })}*/}
+                  })}
                 </div>
-
+                </>
+                )}
               </div>
             </div>
           </div>

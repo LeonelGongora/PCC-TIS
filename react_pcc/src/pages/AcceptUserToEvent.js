@@ -66,7 +66,9 @@ class AcceptUserToEvent extends Component{
     getAllUsers = async () => {
         const idevent = cookies.get('auteId');
         const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
+        console.log(events)
         this.eventos = Array.from(events.data)
+        console.log(this.eventos)
         // console.log(.eventos)
         this.setState({ events: events.data, loader:false});
         // console.log(this.state.events)

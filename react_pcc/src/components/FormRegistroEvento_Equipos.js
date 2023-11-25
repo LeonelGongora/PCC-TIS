@@ -97,6 +97,7 @@ function FormRegistroEvento_Equipos(){
 
       data.append('nombre_equipo', values.nombre_equipo)
       data.append('event_id', id_evento)
+      data.append('solicitud', 0)
 
       let id_equipo = 0;
       const res = await axios.post('http://127.0.0.1:8000/api/add-team', data);

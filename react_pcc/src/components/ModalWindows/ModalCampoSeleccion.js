@@ -4,63 +4,55 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
-
-
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id_evento, atributos}){
+function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion, id_evento, atributos}){
 
     const [values, setValues] = useState({
         nombre_atributo : "",
-        rango_bajo : "",
-        rango_alto : "",
-        con_rango: 0,
+
     });
 
     const [errors, setErrors] = useState({});
 
     const handleInput = (e) => {
         const {name, value} = e.target;
+
         setValues({
             ...values,
             [name]:value,
         });
+        
     }
 
     const salirVentanaModal = (e) => {
-        cambiarEstadoCampoNumerico(false);
+        cambiarEstadoCampoSeleccion(false);
         setValues({
             nombre_atributo : '',
         });
         setErrors({});
     }
 
-    const changeChecked = (e) => {
+    const agregarOpcion = (e) => {
+        let parent = document.getElementById("form1");
 
-        if(e.target.checked === true){
-
-            document.querySelectorAll(".inputEvento")[1].readOnly = true
-            document.querySelectorAll(".inputEvento")[1].value = ""
-
-            document.querySelectorAll(".inputEvento")[2].readOnly = true
-            document.querySelectorAll(".inputEvento")[2].value = ""
-            setValues({...values, con_rango : 0});
-        }else{
-            document.querySelectorAll(".inputEvento")[1].readOnly = false
-            document.querySelectorAll(".inputEvento")[2].readOnly = false
-            setValues({...values, con_rango : 1});
-        }
+        let input = document.createElement("input");
+        //x.setAttribute("type", "text");
+        input.type = "text";
+        input.name="nombre_atributo";
+        input.className="inputEvento";
+        input.placeholder="Ingrese nombre";
+        input.id="opcion"
+        parent.appendChild(input);
+        //container.appendChild(input); // put it into the DOM
     }
 
     const saveTypeEvent = async (e) => {
-        console.log(values.con_rango)
         e.preventDefault();
 
-        if(values.con_rango === 1){
-            let restriccion = values.rango_bajo + "," + values.rango_alto
-            console.log(restriccion)
-            //data.append('tipo_dato_atributo', restriccion)
-        }
+        document.querySelectorAll("#opcion").forEach(opcion =>{
+            console.log(opcion.value)
+        })
 
         const validationErrors = {};
 
@@ -86,17 +78,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
 
         if(Object.keys(validationErrors).length === 0){
 
-
-            
-
             const data = new FormData();
+
             data.append('nombre_atributo', values.nombre_atributo)
-            data.append('tipo_dato_atributo', "number")
-            if(values.con_rango === 1){
-                let restriccion = values.rango_bajo + "," + values.rango_alto
-                //data.append('tipo_dato_atributo', restriccion)
-            }
-            
+            data.append('tipo_dato_atributo', "date" )
             data.append('event_id', id_evento)
 
             const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
@@ -105,22 +90,19 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                 console.log(res);
                 setValues({
                     nombre_atributo : '',
-                    //rango_bajo : "",
-                    //rango_alto : "",
-                    //con_rango: 0,
                 });
-                //window.location.reload();
+                window.location.reload();
             }
         }
     }
 
     return (
-        estadoCampoNumerico && (
+        estadoCampoSeleccion && (
             <div className="Overlay">
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir campo numerico</h1>
+                    <h1>Añadir campo de seleccion</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}
@@ -143,41 +125,28 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.nombre_atributo}</span>
                         )}
 
-                        <div className="categoriaIndividual">
-                            <input
-                                type="checkbox"
-                                id="checkBoxIndividual"
-                                onChange={changeChecked}
-                                defaultChecked = {true}
-                            />
-                            <span id="tituloIndividualAdd">Sin rango</span>
-                        </div>
-
-                        <p id="textoCuadroAtributo">Rango Bajo*</p>
+                        <p id="textoCuadroAtributo">Opciones*</p>
                         <input
-                            type="number"
-                            name="rango_bajo"
+                            type="text"
+                            id="opcion"
+                            name="nombre_atributo"
                             className="inputEvento"
-                            placeholder=""
+                            placeholder="Ingrese nombre"
                             onChange={handleInput}
                         />
-                        {errors.rango_bajo && (
-                        <span className="span1Modal">{errors.rango_bajo}</span>
+                        {errors.nombre_atributo && (
+                        <span className="span1Modal">{errors.nombre_atributo}</span>
                         )}
 
-                        <p id="textoCuadroAtributo">Rango Alto*</p>
-                        <input
-                            type="number"
-                            name="rango_alto"
-                            className="inputEvento"
-                            placeholder=""
-                            onChange={handleInput}
-                        />
-                        {errors.rango_alto && (
-                        <span className="span1Modal">{errors.rango_alto}</span>
-                        )}
+                        <button
+                        className="BotonRegistrar"
+                        type="button"
+                        onClick={agregarOpcion}
+                        >
+                           +
+                        </button>
+
                     </form>
-
                     <button form="form1" type="submit" className="BotonRegistrar">
                         Agregar
                     </button>
@@ -188,4 +157,4 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
     );
 }
 
-export default ModalCampoNumerico; 
+export default ModalCampoSeleccion; 

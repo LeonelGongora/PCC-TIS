@@ -35,6 +35,7 @@ class AcceptTeamToEvent extends Component{
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
         this.Event_Url_Api= configApi.EVENTOC_API_URL;
         this.eventos = []
+        this.equipos = []
         this.requisitos = []
         this.usuarios = []
         this.url = ''
@@ -59,27 +60,27 @@ class AcceptTeamToEvent extends Component{
     };
 
     getAllUsers = async () => {
+        //Route::get('/get-team-0/{event_id}', [TeamController::class, 'getTeams0']);
         const idevent = cookies.get('auteId');
-        const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
-        this.eventos = Array.from(events.data)
-        // console.log(.eventos)
-        this.setState({ events: events.data, loader:false});
-        // console.log(this.state.events)
-    };
+        const events = await axios.get(`http://127.0.0.1:8000/api/get-team-0/${idevent}`);
+        this.equipos = Array.from(events.data)
+        console.log(this.equipos)
 
+        this.setState({ events: events.data, loader:false});
+    };
+    
     getEvent=async()=>{
         const idevent = cookies.get('auteId');
         const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
         // console.log(response)
         this.setState({ event: response.data})
-  
         if(response.request.status === 200){
           this.setState({
             nombre_evento: response.data.nombre_evento,
             requisitos: response.data.requirements
           });
         }
-      }
+    }
 
     componentDidMount(){
         this.getEvent();
@@ -103,7 +104,6 @@ class AcceptTeamToEvent extends Component{
     };
 
     render(){
-        
         return(
             <div className="App">
                 <ModalWindow
@@ -140,7 +140,7 @@ class AcceptTeamToEvent extends Component{
                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
 
-                            {this.eventos[0] == null ? (
+                            {this.equipos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
@@ -155,18 +155,18 @@ class AcceptTeamToEvent extends Component{
                                     
                                     </div>
                                     <div>
-                                    {this.eventos.map((evento) => {  
-                                        return (<div key={evento.eventuserid}>
+                                    {this.equipos.map((equipo) => {  
+                                        return (<div key={equipo.id}>
                                             <div onClick={this.toggleContenedor} className='containerUserSol contTeam'>
                                                 <FontAwesomeIcon className='buttonIconUser' icon={faUsers} />
-                                                <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
+                                                <h4 className='nameUser'>{equipo.nombre_equipo}</h4>
 
                                                 {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
-                                                <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
-                                                {evento.solicitud == 1 ? (
+                                                <a href = {`${equipo.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
+                                                {equipo.solicitud == 1 ? (
                                                     null
                                                 ) : (
-                                                    <><button onClick={() => this.aceptarParticipante(evento.eventuserid)} className='buttonAcceptUser'> Aceptar </button>
+                                                    <><button onClick={() => this.aceptarParticipante(equipo.id)} className='buttonAcceptUser'> Aceptar </button>
                                                     <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal)} className='buttonDenyUser'> Rechazar </button></>
                                                 )}
                                             </div>

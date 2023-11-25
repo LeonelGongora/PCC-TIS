@@ -13,6 +13,7 @@ class TeamController extends Controller
 
         $equipo-> nombre_equipo = $request -> nombre_equipo;
         $equipo-> event_id = $request -> event_id;
+        $equipo-> solicitud = $request -> solicitud;
 
         $equipo -> save();
         $equipo->id;
@@ -23,4 +24,17 @@ class TeamController extends Controller
             'ultimo_id_equipo' => $equipo->id
         ]);
     }
+
+    public function getTeams0($event_id){
+
+        return Team::where('event_id', $event_id)->where('solicitud', 0)->get();
+
+    }
+
+    public function getTeams1($event_id){
+
+        return Team::where('event_id', $event_id)->where('solicitud', 1)->get();
+
+    }
+
 }
