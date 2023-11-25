@@ -50,9 +50,9 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
     const saveTypeEvent = async (e) => {
         e.preventDefault();
 
-        document.querySelectorAll("#opcion").forEach(opcion =>{
-            console.log(opcion.value)
-        })
+        
+
+        
 
         const validationErrors = {};
 
@@ -78,10 +78,20 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
         if(Object.keys(validationErrors).length === 0){
 
+            let restriccion = []
+
+            document.querySelectorAll("#opcion").forEach(opcion =>{
+                restriccion.push(opcion.value)
+            })
+            
+            let restriccionString = restriccion.toString()
+
             const data = new FormData();
 
+            
             data.append('nombre_atributo', values.nombre_atributo)
-            data.append('tipo_dato_atributo', "date" )
+            data.append('tipo_dato_atributo', "select" )
+            data.append('restriccion', restriccionString)
             data.append('event_id', id_evento)
 
             const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
@@ -129,13 +139,13 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                         <input
                             type="text"
                             id="opcion"
-                            name="nombre_atributo"
+                            name="opcion"
                             className="inputEvento"
                             placeholder="Ingrese nombre"
                             onChange={handleInput}
                         />
-                        {errors.nombre_atributo && (
-                        <span className="span1Modal">{errors.nombre_atributo}</span>
+                        {errors.opcion && (
+                        <span className="span1Modal">{errors.opcion}</span>
                         )}
 
                         <button

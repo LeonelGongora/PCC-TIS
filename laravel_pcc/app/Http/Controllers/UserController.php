@@ -67,8 +67,7 @@ class UserController extends Controller
         ]);
     }
 
-    public static function getIdbyDNI($numero_documento)
-    {
+    public static function getIdbyDNI($numero_documento){
         $usuario = User::where('ci', $numero_documento)->first();
 
         if ($usuario) {
@@ -76,6 +75,9 @@ class UserController extends Controller
                 'status' => 200,
                 'message' => 'id obtenido exitosamente',
                 'id_usuario' => $usuario->id,
+                'nombre_usuario' => $usuario->nombre,
+                'apellido_usuario' => $usuario->apellido,
+                'contraseña_usuario' => $usuario->password,
             ]);
         }
 
