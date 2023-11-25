@@ -7,7 +7,7 @@ function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstad
 
   const salirVentanaModalBanner = (e) => {
     cambiarEstadoDarseBaja1(false);
-	cambiarEstadoBanner2(true)
+	cambiarEstadoBanner2(true);
   };
   const salirVentanaModal = (e) => {
     cambiarEstadoDarseBaja1(false);

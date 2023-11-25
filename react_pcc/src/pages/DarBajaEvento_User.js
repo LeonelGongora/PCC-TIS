@@ -86,15 +86,15 @@ class DarBajaEvento extends Component {
     window.location.href = "./event-admin";
   }
 
-	cambiarEstadoBanner = (estado, nombre) => {
+	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
-	  this.setState({ nombreEventoBann: nombre });
   };
   cambiarDarseBaja = (estado) => {
     this.setState({ estadoDarseBaja: estado });
   };
-  setEstadoBannerModal = (estado) => {
-    this.setState({estadoBannerModal: estado});
+  
+  setNombreEvento = (nom) => {
+    this.setState({ nombreEventoBann: nom });
   };
 
   darDeBaja = async (estado, nombre, euid) => {
@@ -102,9 +102,7 @@ class DarBajaEvento extends Component {
     await axios.delete(url);
     this.getEvents();
     this.cambiarDarseBaja(estado);
-    if (this.estadoBannerModal == true) {
-      this.cambiarEstadoBanner(estado, nombre);
-    }
+    this.setNombreEvento(nombre);
     
   };
 
@@ -114,7 +112,7 @@ class DarBajaEvento extends Component {
         <ModalDarseBaja
           estadoDarseBaja1={this.state.estadoDarseBaja}
           cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
-          cambiarEstadoBanner2={this.setEstadoBannerModal}
+          cambiarEstadoBanner2={this.cambiarEstadoBanner}
         />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
