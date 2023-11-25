@@ -4,11 +4,9 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
-
-
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento, atributos}){
+function ModalCampoFecha({estadoCampoFecha, cambiarEstadoCampoFecha, id_evento, atributos}){
 
     const [values, setValues] = useState({
         nombre_atributo : "",
@@ -27,7 +25,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
     }
 
     const salirVentanaModal = (e) => {
-        cambiarEstadoModalAtributo(false);
+        cambiarEstadoCampoFecha(false);
         setValues({
             nombre_atributo : '',
         });
@@ -65,7 +63,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
             const data = new FormData();
 
             data.append('nombre_atributo', values.nombre_atributo)
-            data.append('tipo_dato_atributo', "text")
+            data.append('tipo_dato_atributo', "date" )
             data.append('event_id', id_evento)
 
             const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
@@ -81,12 +79,12 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
     }
 
     return (
-        estadoAtributo && (
+        estadoCampoFecha && (
             <div className="Overlay">
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir campo de texto</h1>
+                    <h1>Añadir campo de fecha</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}
@@ -120,4 +118,4 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
     );
 }
 
-export default ModalWindowAtributo; 
+export default ModalCampoFecha; 

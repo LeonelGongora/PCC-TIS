@@ -10,12 +10,16 @@ function DropdownUser({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoO
 		setIsOpen(!isOpen);
 	};
 
-    const registrarseEventoRedireccionar = () => {
+  const registrarseEventoRedireccionar = () => {
 		window.location.href='/paginaRegistrarseEventos';
 	};
 
-    const visualizarEventoRedireccionar = () => {
+  const visualizarEventoRedireccionar = () => {
 		window.location.href='/home-participant';
+	};
+
+  const darseBajaEventoRedireccionar = () => {
+		window.location.href='/darBajaEvento';
 	};
 
 	return (
@@ -26,8 +30,8 @@ function DropdownUser({estado1,cambiarEstado1, estadoOrganizador, cambiarEstadoO
       {isOpen && (
         <ul className="dropdown-menu">
           <li onClick={registrarseEventoRedireccionar}>Registrarse a Eventos</li>
-
-		  <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+		      <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+          <li onClick={darseBajaEventoRedireccionar}>Darse de Baja de evento</li>
         </ul>
       )}
     </div>

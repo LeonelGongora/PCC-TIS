@@ -6,11 +6,7 @@ import "../stylesheets/EventosStyles.css";
 import "../App.css";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
-import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
-// import ModalRegister from '../components/ModalWindows/ModalRegister';
-import ModalWindow from "../components/ModalWindows/ModalWindow";
-import Banner_informativo from "../components/Banner_informativo";
+import NavbarUser from "../components/NavBars/NavbarUser";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -120,35 +116,12 @@ class DarBajaEvento extends Component {
   render() {
     return (
       <div className="App">
-        <ModalWindow
-          estado1={this.state.estadoModal}
-          cambiarEstado1={this.cambiarEstadoModal}
-        />
-        <ModalWindowOrganizadores
-          estadoOrganizador={this.state.estadoModalOrganizador}
-          cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
-        />
-        <ModalWindowPatrocinadores
-          estadoPatrocinador={this.state.estadoModalPatrocinador}
-          cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}
-        />
+        
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
-          <NavbarAdmin
-            estado1={this.estadoModal}
-            cambiarEstado1={this.cambiarEstadoModal}
-            estadoOrganizador={this.estadoModalOrganizador}
-            cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
-            estadoPatrocinador={this.estadoModalPatrocinador}
-            cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
-          />
+          <NavbarUser/>
           <div className="contenedor">
-            <Banner_informativo
-				estadoBanner1={this.state.estadoBanner}
-				cambiarEstadoBanner1={this.cambiarEstadoBanner}
-				nombreBanner1={this.state.nombreEventoBann}
-			/>
-			<div className="contenedorTitulo-home">
+			      <div className="contenedorTitulo-home">
               <p className="tituloEvento-home">DARSE DE BAJA EVENTO</p>
 
             </div>

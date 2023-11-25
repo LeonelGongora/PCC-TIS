@@ -24,10 +24,8 @@ function NavbarUser(){
             <a><FontAwesomeIcon className='buttonNoti' icon={faBell} /></a>
             <div className='userId'>
               <a><FontAwesomeIcon className='userIcon' icon={faUser} /></a>
-              <h3>Andrews V.</h3>
             </div>
             <div>
-                <button className='navbarAcceder'>Acceder</button>
             </div>
           </div>
       </nav>

@@ -12,6 +12,7 @@ class AttributeController extends Controller
         $atributo = new Attribute();
 
         $atributo-> nombre_atributo = $request -> nombre_atributo;
+        $atributo-> tipo_dato_atributo = $request -> tipo_dato_atributo;
         $atributo-> event_id = $request -> event_id;
 
         $atributo -> save();

@@ -13,7 +13,7 @@ import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPat
 
 const cookies = new Cookies();
 
-class VisualizarEventoAccepUserToEvent extends Component{
+class PaginaAdministrarSolicitudes extends Component{
 
     constructor(props) {
         super(props);
@@ -57,10 +57,15 @@ class VisualizarEventoAccepUserToEvent extends Component{
         this.getEvents();
     }
 
-    masDetalles(id){
+    masDetalles(id, participantes){
         cookies.set('auteId', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
-        window.location.href='./acceptUser';
+
+        if(participantes > 0){
+          //cookies.set('participantes_equipo', participantes, {path: "/"});
+          window.location.href='./acceptTeam';
+        }else{
+          window.location.href='./acceptUser';
+        }
     }
 
     cambiarEstadoModal = (nuevoEstado) => {
@@ -101,7 +106,7 @@ class VisualizarEventoAccepUserToEvent extends Component{
 
                                 { this.eventos.map((evento,id) => {
                                     
-                                    return (<><div key={evento.id} className='containerEvents' onClick={()=>this.masDetalles(evento.id)}>
+                                    return (<><div key={evento.id} className='containerEvents' onClick={()=>this.masDetalles(evento.id, evento.participantes_equipo)}>
                                      <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
                                      <h4 className='nombreEvento'>{evento.nombre_evento} {cookies.get('id_usuario')}</h4>
                                      <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
@@ -112,38 +117,9 @@ class VisualizarEventoAccepUserToEvent extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="columna1">
-                  <ListaEventos />
-
-                  {this.eventos.map((evento, id) => {
-                    return (
-                      <>
-                        <div
-                          key={evento.id}
-                          className="containerEvents"
-                          onClick={() => this.masDetalles(evento.id)}
-                        >
-                          <img
-                            className="imageEvent"
-                            src={"http://127.0.0.1:8000/images/" + evento.name}
-                            alt="Logo del evento"
-                          />
-                          <h4 className="nombreEvento">
-                            {evento.nombre_evento} {cookies.get("id_usuario")}
-                          </h4>
-                          <h4 className="tipoEv">
-                            {evento.nombre_tipo_evento}
-                          </h4>
-                          <h4>{evento.fecha_inicio}</h4>
-                          <h4>{evento.fecha_limite}</h4>
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
+            </div>
         );
     }
 }
 
-export default VisualizarEventoAccepUserToEvent ;
+export default PaginaAdministrarSolicitudes;

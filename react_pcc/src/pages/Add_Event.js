@@ -65,6 +65,8 @@ class Add_Event extends Component {
     e.preventDefault();
     const validationErrors = {};
 
+    console.log(this.state.participantes_equipo)
+
     if (this.state.fecha_limite && this.state.fecha_fin) {
       var d1 = new Date(this.state.fecha_limite);
       var d2 = new Date(this.state.fecha_fin);
@@ -140,12 +142,12 @@ class Add_Event extends Component {
       }
     }
 
-    if (!this.state.participantes_equipo.trim()) {
-      //validationErrors.participantes_equipo = "Este campo es obligatorio"
+    if (!this.state.participantes_equipo.trim() && this.state.participantes_equipo !== "0") {
+      validationErrors.participantes_equipo = "Este campo es obligatorio"
     } else {
-      if (!/^(?!-)(?:[2-9]|[1-9]\d)$/.test(this.state.participantes_equipo)) {
-        validationErrors.participantes_equipo =
-          "Ingrese un numero de participantes valido";
+      if (!/^(?!-)(?:[2-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
+        && this.state.participantes_equipo !== "0") {
+        validationErrors.participantes_equipo = "Ingrese un numero de participantes valido";
       }
     }
 
@@ -191,7 +193,7 @@ class Add_Event extends Component {
       data.append("descripcion", this.state.descripcion);
       data.append("fecha_limite", this.state.fecha_limite);
       data.append("fecha_fin", this.state.fecha_fin);
-      if (this.state.participantes_equipo.trim().length === 0) {
+      if (this.state.participantes_equipo === "0") {
         data.append("participantes_equipo", 0);
       } else {
         data.append("participantes_equipo", this.state.participantes_equipo);
@@ -239,7 +241,18 @@ class Add_Event extends Component {
       }
     }
   };
-  changeChecked = () => {
+  changeChecked = (e) => {
+
+
+    if(e.target.checked === true){
+      document.querySelectorAll("#inputRegistro")[5].readOnly = true
+      document.querySelectorAll("#inputRegistro")[5].value = ""
+      this.setState({ participantes_equipo: "0"});
+
+    }else{
+      document.querySelectorAll("#inputRegistro")[5].readOnly = false
+      this.setState({ participantes_equipo: ""});
+    }
     this.setState((prev) => ({
       isChecked: !prev.isChecked,
     }));
@@ -258,7 +271,7 @@ class Add_Event extends Component {
             <p className="textoRegistro"> Registro de Evento</p>
           </div>
           <div className="entradasDatos">
-            <form onSubmit={this.saveEvent}>
+            <form  onSubmit={this.saveEvent}>
               <div className="datoNombre" id="entrada">
                 <p id="textoCuadro">Nombre*</p>
                 <input
@@ -343,10 +356,9 @@ class Add_Event extends Component {
                   <input
                     type="checkbox"
                     id="checkBoxIndividual"
-                    isChecked={this.state.isChecked}
                     onChange={this.changeChecked}
                   />
-                  <span id="tituloIndividualAdd">Individual</span>
+                  <span id="tituloIndividualAdd">Sin Equipos</span>
                 </div>
                 <div className="entradaCantidadEqui">
                   <div id="entradaEsp">

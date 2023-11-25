@@ -6,17 +6,19 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
+import FormUserInput from "../../stylesheets/FormUserInput.css";
 
 const cookies = new Cookies();
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 
-function ModalAutentificacionEquipos({estadoEquipos, cambiarEstadoModalEquipos}){
+function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarEstadoWarningDNI}){
 
     const id_evento = cookies.get('id_evento');
     const id_equipo = cookies.get('id_equipo');
     const dni_no_registrados = cookies.get('dni_no_registrados');
+    const indice_dni_no_registrados = cookies.get('indice_dni_no_registrados');
     const [contador, setContador] = useState(0);
 
     const [values, setValues] = useState({
@@ -103,8 +105,16 @@ function ModalAutentificacionEquipos({estadoEquipos, cambiarEstadoModalEquipos})
                         confirmarPassword: '',
                         telefono: '',
                     });
+                    document.querySelectorAll(".inputEvento").forEach(entrada =>{
+                        entrada.value = ""
+                    })
                     if ((contador + 1) === dni_no_registrados.length){
                         console.log("Todos registrados")
+                        window.location.href='./register-to-event-teams_req';
+                    }else{
+                        cookies.set('indice_dni_no_registrados', indice_dni_no_registrados + 1, {path: "/"});
+                        cambiarEstadoModalEquipos(false);
+                        cambiarEstadoWarningDNI(true);
                     }
                 })
 
@@ -115,10 +125,11 @@ function ModalAutentificacionEquipos({estadoEquipos, cambiarEstadoModalEquipos})
 
     return (
         estadoEquipos && (
+
             <div className="Overlay">
-              <div className="ContenedorModal">
+              <div className="ContenedorModal contReg">
                 <div className="EncabezadoModal">
-                  <div id = "tituloVentanaModal" className="tituloEvento">
+                  <div className="tituloEvento">
                     <h1>Registrar Usuario</h1>
                   </div>
 
@@ -201,4 +212,4 @@ function ModalAutentificacionEquipos({estadoEquipos, cambiarEstadoModalEquipos})
     );
 }
 
-export default ModalAutentificacionEquipos; 
+export default ModalRegistroEquipos; 

@@ -10,6 +10,10 @@ use App\Models\User;
 use App\Models\Requirement;
 use App\Models\Organizer;
 use App\Models\Sponsor;
+use App\Models\Team;
+use App\Models\Activity;
+
+
 
 class Event extends Model
 {
@@ -29,7 +33,7 @@ class Event extends Model
         'event_type_id'
     ];
 
-    protected $with = ['event_type', 'attributes', 'requirements', 'organizers', 'sponsors'];
+    protected $with = ['event_type', 'attributes', 'requirements', 'organizers', 'sponsors', 'teams', 'activities'];
 
     public function event_type(){
 
@@ -42,6 +46,11 @@ class Event extends Model
         return $this->belongsToMany(User::class, 'evento_user', 'event_id', 'user_id');
     }
 
+    public function teams()
+    {
+        return $this->hasMany(Team::class, 'event_id', 'id');
+    }
+
     public function attributes(){
 
         return $this->hasMany(Attribute::class, 'event_id', 'id');
@@ -51,6 +60,12 @@ class Event extends Model
     public function requirements(){
 
         return $this->hasMany(Requirement::class, 'event_id', 'id');
+
+    }
+
+    public function activities(){
+
+        return $this->hasMany(Activity::class, 'event_id', 'id');
 
     }
 

@@ -31,6 +31,10 @@ function Dropdown({
     window.location.href = "./paginaEditarEventos";
   };
 
+  const visualizarParticipantesRedireccionar = () => {
+    window.location.href = "./paginaVisualizarParticipantes";
+  };
+
   const visualizarEventoRedireccionar = () => {
     window.location.href = "/";
   };
@@ -57,6 +61,8 @@ function Dropdown({
           <li onClick={aceptarUsuarioRedireccionar}>Administrar solicitudes</li>
           <li onClick={editarEventoRedireccionar}>Editar evento</li>
           <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+          <li onClick={visualizarParticipantesRedireccionar}>Visualizar participantes de eventos</li>
+          
         </ul>
       )}
     </div>

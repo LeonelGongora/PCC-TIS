@@ -3,22 +3,23 @@ import '../stylesheets/FormularioEquipo.css';
 import Boton from './Boton';
 import '../stylesheets/Boton.css';
 import configApi from '../configApi/configApi'
-import axios from 'axios'
+//import axios from 'axios'
 import Cookies from 'universal-cookie';
 import ModalWarning from './ModalWindows/ModalWarning';
 
 
-const cookies = new Cookies();
+//const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 const EventoUsuario_Api_Url = configApi.EVENTO_USUARIO_API_URL;
 const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 
 function FormRegistroEvento_Equipos_Req(){
+  
 
-  const id_usuario = cookies.get('id_usuario');
-  const archivoInput = useRef(null);
-  const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
+  //const id_usuario = cookies.get('id_usuario');
+  //const archivoInput = useRef(null);
+  //const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
 
   const [formData, setFormData] = useState({
     ci : '',
@@ -31,6 +32,9 @@ function FormRegistroEvento_Equipos_Req(){
 
   const registrar = async(e) => {
 
+    window.location.href = "./paginaRegistrarseEventos";
+
+    /*
     e.preventDefault();
     const form = document.forms["form_name"].getElementsByTagName("input");
     const atributosInput= Array.from(form);
@@ -45,25 +49,28 @@ function FormRegistroEvento_Equipos_Req(){
     }
 
     setErrors(validationErrors);
+     
+     */
 
   }
 
-  const [archivo, setArchivo] = useState('');
   const [event, setEvent] = useState ( [] );
-  const idevento = cookies.get('idauxiliar');
+  //const idevento = cookies.get('idauxiliar');
   const [atributos, setAtributos] = useState ( [] );
 
+  /* 
   useEffect(()=>{
-    getEvent();
-    console.log(id_usuario)
+    //getEvent();
+    //console.log(id_usuario)
   }, [])
 
   const getEvent=async()=>{
-      const url = `${Eventos_Api_Url}/${idevento}`;
-      const response = await axios.get(url)
-      setEvent(response.data)
-      setAtributos(response.data.attributes)
+      //const url = `${Eventos_Api_Url}/${idevento}`;
+      //const response = await axios.get(url)
+      //setEvent(response.data)
+      //setAtributos(response.data.attributes)
   }
+  */
 
   return(
     <div className='containerAll'>

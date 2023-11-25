@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
-//import React, {Component} from 'react';
 import "../../stylesheets/ModalWindowStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
@@ -13,26 +12,14 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
   });
 
   const [errors, setErrors] = useState({});
-  const [tipo_eventos, setTipo_eventos] = useState([]);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-
     setValues({
       ...values,
       [name]: value,
     });
   };
-
-//   useEffect(() => {
-//     getTipos_Evento();
-//   }, []);
-
-//   const getTipos_Evento = async (e) => {
-//     const url = "http://127.0.0.1:8000/api/type-events";
-//     const respuesta = await axios.get(url);
-//     setTipo_eventos(respuesta.data.events);
-//   };
 
   const salirVentanaModal = (e) => {
     cambiarEstadoAnuncio(false);
@@ -58,19 +45,22 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
     } 
     setErrors(validationErrors);
 
-    // if (Object.keys(validationErrors).length === 0) {
-    //   const res = await axios.post(
-    //     "http://127.0.0.1:8000/api/add-event_type",
-    //     values
-    //   );
-    //   if (res.data.status === 200) {
-    //     console.log(values.contenido_anuncio);
-    //     setValues({
-    //       contenido_anuncio: "",
-    //     });
-    //     window.location.reload();
-    //   }
-    // }
+    if (Object.keys(validationErrors).length === 0) {
+
+      const data = new FormData();
+
+      data.append('contenido_anuncio', values.contenido_anuncio)
+
+      const res = await axios.post("http://127.0.0.1:8000/api/add-notice", data);
+      
+      if (res.data.status === 200) {
+        console.log(res);
+        setValues({
+           contenido_anuncio: "",
+        });
+        //window.location.reload();
+      }
+    }
   };
 
   return (
@@ -81,7 +71,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
             <div className="tituloEvento">
               <h1>Crear anuncio</h1>
             </div>
-            <button onClick={salirVentanaModal} className="BotonSalir">
+            <button onClick={salirVentanaModal} type="button" className="BotonSalir">
               {salir}
             </button>
           </div>
@@ -93,8 +83,8 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
                 className="inputEventoAnuncio"
                 placeholder="Ingrese anuncio"
                 onChange={handleInput}
-				rows={10}
-				cols={50}
+				        rows={10}
+				        cols={50}
               />
             </form>
             {errors.contenido_anuncio && (

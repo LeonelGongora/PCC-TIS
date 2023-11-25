@@ -4,15 +4,19 @@ import '../../stylesheets/ModalWarningStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const warning = <FontAwesomeIcon icon={faExclamationCircle} style={{ color: '#ffffff' }} />
 
 
-function ModalWarningDNI({estado1, cambiarEstado1, errorMessage }){
+function ModalWarningDNI({estadoWarningDNI, cambiarEstadoWarningDNI, cambiarEstadoModalEquipos}){
+  const dni_no_registrados = cookies.get('dni_no_registrados');
+  const indice_dni_no_registrados = cookies.get('indice_dni_no_registrados');
 
     return (
-      estado1 && (
+      estadoWarningDNI && (
         <div className="OverlayRaisa">
           <div className="ContenedorModalRaisa">
             <div className="EncabezadoModal">
@@ -20,17 +24,12 @@ function ModalWarningDNI({estado1, cambiarEstado1, errorMessage }){
 
                 <h1> {warning} Advertencia</h1>
               </div>
-              <button
-                onClick={() => cambiarEstado1(false)}
-                className="BotonSalir"
-              >
-                {salir}
-              </button>
             </div>
             <div className="contenedorMensaje">
-              <p id="mensajeError">{errorMessage}</p>
+              <p id="mensajeError">El DNI {dni_no_registrados[indice_dni_no_registrados]} no se encuentra registrado</p>
             </div>
-            <button className='registrar-team'>Registrar</button>
+            <button className='registrar-team' 
+            onClick={() => { cambiarEstadoWarningDNI(false); cambiarEstadoModalEquipos(true);}}>Registrar</button>
           </div>
         </div>
       )

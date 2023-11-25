@@ -1,8 +1,7 @@
 .editarEventos{
-    max-width: 700px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 5% 15%;
-    width: 100%;
     text-align: center;
 }
 .contenedorMaximo{
@@ -28,15 +27,24 @@
     border-radius: 5px;
     height: 36px;
 }
+.campo-container #entrada{
+    margin-right: 2vw;
+}
 .botonEliminar{
     background-color: white;
-    padding: 10px 10px;
-    font-weight: bolder;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     border: none;
     margin-right: 3vw;
-    margin-bottom: 1vh;
-    margin-top: 1vh;
+    margin-top: 3vh;
+    cursor: pointer;
+}
+
+.botonEliminarv2{
+    background-color: white;
+    font-size: 1.6rem;
+    border: none;
+    margin-right: 3vw;
+    margin-top: 2vh;
     cursor: pointer;
 }
 
@@ -44,8 +52,10 @@
     background-color: white;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    padding-top: 10px;
-    position: relative;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .botonGuardarEdit{
     background-color: rgb(255, 213, 30);
@@ -73,9 +83,10 @@
     font-weight: bolder;
     font-size: 1rem;
     border: none;
-    margin-left: 10vw;
-    margin-right: 10vw;
-    margin-top: 2vh;
+    margin-left: 9vw;
+    margin-right: 9vw;
+    margin-top: 3vh;
+    margin-bottom: 2vh;
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
@@ -100,7 +111,7 @@
 .textoTituloEdiNext{
     font-size: 1.4rem;
     margin-top: 2vh;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
 }
 .filaOrganizador{
     display: block;
@@ -117,5 +128,5 @@
     accent-color: blue;
 }
 #tituloIndividualAdd{
-    margin-right: 1rem;
+    margin-left: 4px;
 }

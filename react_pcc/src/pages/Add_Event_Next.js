@@ -5,6 +5,10 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import ModalWindowAtributo from '../components/ModalWindows/ModalWindowAtributo';
 import ModalWindowRequisito from '../components/ModalWindows/ModalWindowRequisito';
+import ModalActividad from '../components/ModalWindows/ModalActividad';
+import ModalEleccionTipoCampo from '../components/ModalWindows/ModalEleccionTipoCampo';
+import ModalCampoNumerico from '../components/ModalWindows/ModalCampoNumerico';
+import ModalCampoFecha from '../components/ModalWindows/ModalCampoFecha';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
@@ -36,7 +40,8 @@ class Add_Event_Next extends Component{
         this.setState({
           id_evento: response.data.id,
           atributos: response.data.attributes,
-          requisitos: response.data.requirements
+          requisitos: response.data.requirements,
+          actividades: response.data.activities,
         });
       }
     }
@@ -61,8 +66,13 @@ class Add_Event_Next extends Component{
             errors : {},
             estadoModalAtributo: false,
             estadoModalRequisito: false,
+            estadoModalActividad: false,
+            estadoModalEleccion: false,
+            estadoCampoNumerico: false,
+            estadoCampoFecha: false,
             atributos: [],
             requisitos: [],
+            actividades: [],
             organizadores : [],
             organizadores_id : [],
             patrocinadores : [],
@@ -75,13 +85,29 @@ class Add_Event_Next extends Component{
     }
 
     cambiarEstadoModalAtributo = (nuevoEstado) => {
-        this.setState({ estadoModalAtributo: nuevoEstado });
+      this.setState({ estadoModalAtributo: nuevoEstado });
     }
 
     cambiarEstadoModalRequisito = (nuevoEstado) => {
-        this.setState({ estadoModalRequisito: nuevoEstado });
+      this.setState({ estadoModalRequisito: nuevoEstado });
     }
-  
+
+    cambiarEstadoModalActividad = (nuevoEstado) => {
+      this.setState({ estadoModalActividad: nuevoEstado });
+    }
+
+    cambiarEstadoModalEleccion = (nuevoEstado) => {
+      this.setState({ estadoModalEleccion: nuevoEstado });
+    }
+
+    cambiarEstadoCampoNumerico = (nuevoEstado) => {
+      this.setState({ estadoCampoNumerico: nuevoEstado });
+    }
+
+    cambiarEstadoCampoFecha = (nuevoEstado) => {
+      this.setState({ estadoCampoFecha: nuevoEstado });
+    }
+
     eliminarAtributo = (id) => {
       const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
@@ -102,7 +128,6 @@ class Add_Event_Next extends Component{
           }
         })
     }
-  
 
     saveEvento = async (e) => {
 
@@ -137,7 +162,6 @@ class Add_Event_Next extends Component{
 
             const urlOrganizador = `http://127.0.0.1:8000/api/add-event_organizer`; 
             const urlPatrocinador = `http://127.0.0.1:8000/api/add-event_sponsor`; 
-            ;//add-event-organizer
 
             for (let index = 0; index < this.state.organizadores_id.length; index++) {
               const data = new FormData()
@@ -198,6 +222,43 @@ class Add_Event_Next extends Component{
                 />
               }
 
+              {
+                <ModalActividad
+                  estadoActividad={this.state.estadoModalActividad}
+                  cambiarEstadoModalActividad={this.cambiarEstadoModalActividad}
+                  id_evento={this.state.id_evento}
+                />
+              }
+
+              {
+                <ModalEleccionTipoCampo
+                  estadoEleccion={this.state.estadoModalEleccion}
+                  cambiarEstadoModalEleccion={this.cambiarEstadoModalEleccion}
+                  cambiarEstadoModalAtributo = {this.cambiarEstadoModalAtributo}
+                  cambiarEstadoCampoNumerico = {this.cambiarEstadoCampoNumerico}
+                  cambiarEstadoCampoFecha = {this.cambiarEstadoCampoFecha}
+                  id_evento={this.state.id_evento}
+                />
+              }
+
+              {
+                <ModalCampoNumerico
+                  estadoCampoNumerico={this.state.estadoCampoNumerico}
+                  cambiarEstadoCampoNumerico={this.cambiarEstadoCampoNumerico}
+                  id_evento={this.state.id_evento}
+                  atributos={this.state.atributos}
+                />
+              }
+
+              {
+                <ModalCampoFecha
+                  estadoCampoFecha={this.state.estadoCampoFecha}
+                  cambiarEstadoCampoFecha={this.cambiarEstadoCampoFecha}
+                  id_evento={this.state.id_evento}
+                  atributos={this.state.atributos}
+                />
+              }
+
               <div className="textoEvento">
                 <p className="textoRegistro"> Edicion de eventos</p>
               </div>
@@ -210,14 +271,14 @@ class Add_Event_Next extends Component{
                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
                         <input
                           id="inputRegistro"
-                          type="text"
+                          type={atributo.tipo_dato_atributo}
                           name="valor"
                           placeholder="Campo Adicional"
                           readOnly
                         />
                       </div>
                       <button
-                        className="botonEliminar"
+                        className="botonEliminarv2"
                         type="button"
                         onClick={() => this.eliminarAtributo(atributo.id)}
                       >
@@ -229,27 +290,31 @@ class Add_Event_Next extends Component{
                     className="botonAgregarEdit"
                     type="button"
                     onClick={() =>
-                      this.cambiarEstadoModalAtributo(!this.state.estadoModal)
+                      this.cambiarEstadoModalEleccion(!this.state.estadoModalEleccion)
                     }
                   >
                     Agregar Campo +
                   </button>
                   
                   <h1 className="textoTituloEdiNext">Requisitos</h1>
+                  
                   {this.state.requisitos.map((requisito) => (
                     <div className="campo-container">
                       <div id="entradaEveNex">
-                        <p id="textoCuadro">{requisito.contenido_requisito}*</p>
+                        <p id="textoCuadro">{requisito.contenido_requisito}</p>
+
                         <input
                           id="inputRegistro"
                           type="text"
                           name="valor"
                           placeholder="Campo Adicional"
+                          value={requisito.contenido_requisito}
                           readOnly
                         />
+
                       </div>
                       <button
-                        className="botonEliminar"
+                        className="botonEliminarv2"
                         type="button"
                         onClick={() => this.eliminarRequisito(requisito.id)}
                       >
@@ -261,10 +326,43 @@ class Add_Event_Next extends Component{
                     className="botonAgregarEdit"
                     type="button"
                     onClick={() =>
-                      this.cambiarEstadoModalRequisito(!this.state.estadoModal)
+                      this.cambiarEstadoModalRequisito(!this.state.estadoModalRequisito)
                     }
                   >
                     Agregar Requisito +
+                  </button>
+
+                  <h1 className="textoTituloEdiNext">Actividades</h1>
+                  {this.state.actividades.map((actividad) => (
+                    <div className="campo-container">
+                      <div id="entradaEveNex">
+                        <p id="textoCuadro">{actividad.nombre_actividad}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminarv2"
+                        type="button"
+                        onClick={() => this.eliminarRequisito(actividad.id)}
+                      >
+                        {cancelar}
+                      </button>
+                    </div>
+                  ))}
+
+                  <button
+                    className="botonAgregarEdit"
+                    type="button"
+                    onClick={() =>
+                      this.cambiarEstadoModalActividad(!this.state.estadoModalActividad)
+                    }
+                  >
+                    Agregar Actividad +
                   </button>
 
                   <h1 className="textoTituloEdiNext">Organizadores</h1>
@@ -300,6 +398,8 @@ class Add_Event_Next extends Component{
                       </span>
                     </div>
                   ))}
+
+                  
 
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">
