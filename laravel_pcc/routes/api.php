@@ -30,6 +30,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationUserController;
 use App\Http\Controllers\EventNotificationController;
+use App\Http\Controllers\NotificationTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,3 +110,6 @@ Route::get('/miseventos/{id}', [EventController::class, 'misEventos']);
 Route::resource('notifications', NotificationController::class);
 Route::resource('notificationusers', NotificationUserController::class);
 Route::resource('eventnotifications', EventNotificationController::class);
+Route::get('/getporevento/{id}', [TeamController::class, 'getPorEvento']);
+Route::resource('teams', TeamController::class);
+Route::resource('notificationteams', NotificationTeamController::class);
