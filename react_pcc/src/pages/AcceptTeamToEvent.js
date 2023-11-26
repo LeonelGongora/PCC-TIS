@@ -145,14 +145,16 @@ class AcceptTeamToEvent extends Component{
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
-                                    <div className='requisitosDeEvento'>
-                                        <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                        {this.state.requisitos.map((r) => {  
-                                            return (<div key={r.id}>
-                                                <p className='requisitosTexto'>{r.contenido_requisito}</p>
-                                            </div>);
-                                        })}
-                                    
+                                    <div className='contRaroReq'>
+                                        <div className='requisitosDeEvento'>
+                                            <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                            {this.state.requisitos.map((r) => {  
+                                                return (<div key={r.id}>
+                                                    <p className='requisitosTexto'>{r.contenido_requisito}</p>
+                                                </div>);
+                                            })}
+                                        
+                                        </div>
                                     </div>
                                     <div>
                                     {this.equipos.map((equipo) => {  

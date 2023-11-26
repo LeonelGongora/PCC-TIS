@@ -163,14 +163,15 @@ class AcceptUserToEvent extends Component{
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
-                                    <div className='requisitosDeEvento'>
-                                        <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                        {this.state.requisitos.map((r, index) => {  
-                                            return (<div key={r.id}>
-                                                <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
-                                            </div>);
-                                        })}
-                                    
+                                    <div className='contRaroReq'>
+                                        <div className='requisitosDeEvento'>
+                                            <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                            {this.state.requisitos.map((r, index) => {  
+                                                return (<div key={r.id}>
+                                                    <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
+                                                </div>);
+                                            })}
+                                        </div>
                                     </div>
                                     <div>
                                     {this.eventos.map((evento) => {  
