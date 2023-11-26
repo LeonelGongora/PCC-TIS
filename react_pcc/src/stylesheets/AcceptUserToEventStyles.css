@@ -46,9 +46,7 @@ contTeam{
     cursor: pointer;
 }
 
-.buttonIconUser{
-    font-size: 4vw;
-}
+
 .buttonIconDownload{
     font-size: 2vw;
     cursor: pointer;
@@ -135,4 +133,11 @@ contTeam{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.buttonIconTeam{
+    font-size: 3.3vw;
+}
+.buttonIconUserT{
+    font-size: 3vw;
 }

@@ -63,6 +63,11 @@
     min-width: 300px;
 }
 
+.contRej{
+    max-width: 50vw;
+    max-height: 90vh;
+}
+
 .reqForm{
     display: flex;
     flex-direction: column;
@@ -202,7 +207,6 @@ label{
     background-color: white;
 }
 .inputMasInfo{
-    
     border: 1px solid rgb(175, 175, 175);
     outline: none;
     border-radius: 5px;
@@ -212,6 +216,10 @@ label{
     font-size: 0.85rem;
     width: 98%;
     min-height: 4vh;
+    overflow-y: hidden;
+    max-width: 45vw;
+    max-height: 60vh;
+    min-width: 10vw;
 }
 
 

@@ -158,7 +158,7 @@ class AcceptTeamToEvent extends Component{
                                     {this.equipos.map((equipo) => {  
                                         return (<div key={equipo.id}>
                                             <div onClick={this.toggleContenedor} className='containerUserSol contTeam'>
-                                                <FontAwesomeIcon className='buttonIconUser' icon={faUsers} />
+                                                <FontAwesomeIcon className='buttonIconTeam' icon={faUsers} />
                                                 <h4 className='nameUser'>{equipo.nombre_equipo}</h4>
 
                                                 {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
@@ -175,7 +175,7 @@ class AcceptTeamToEvent extends Component{
                                                 <h3>Coach</h3>
                                                 <div className='contParticip'>
                                                     <div className='imgUserTeam'>
-                                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                        <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>
                                                     <div className='infoParticipante'>
                                                         <h2>Andrews Valdivia</h2>
@@ -201,10 +201,10 @@ class AcceptTeamToEvent extends Component{
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h3>Coach</h3>
+                                                <h3>Participantes</h3>
                                                 <div className='contParticip'>
                                                     <div className='imgUserTeam'>
-                                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                        <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>
                                                     <div className='infoParticipante'>
                                                         <h2>Andrews Valdivia</h2>
@@ -230,10 +230,9 @@ class AcceptTeamToEvent extends Component{
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h3>Coach</h3>
                                                 <div className='contParticip'>
                                                     <div className='imgUserTeam'>
-                                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                        <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>
                                                     <div className='infoParticipante'>
                                                         <h2>Andrews Valdivia</h2>
