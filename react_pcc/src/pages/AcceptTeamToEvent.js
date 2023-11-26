@@ -47,6 +47,7 @@ class AcceptTeamToEvent extends Component{
         this.Notification_Url_Api= configApi.NOTIFICATION_API_URL;
         this.NotificationTeam_Url_Api=configApi.NOTIFICATIONTEAM_API_URL;
         this.eventos = []
+        this.equipos = []
         this.requisitos = []
         this.usuarios = []
         this.url = ''
@@ -69,7 +70,7 @@ class AcceptTeamToEvent extends Component{
     cambiarEstadoModalRejection = (nuevoEstado, id, nombre_equipo) => {
         this.setState({ estadoModalRejection: nuevoEstado, id: id, nombre_equipo: nombre_equipo });
     };
-
+    
     getEvent=async()=>{
         const idevent = cookies.get('auteId');
         const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
@@ -77,11 +78,11 @@ class AcceptTeamToEvent extends Component{
         this.setState({ event: response.data})
         if(response.request.status === 200){
             this.setState({
-              nombre_evento: response.data.nombre_evento,
-              requisitos: response.data.requirements
-            });
-          }
-    }
+                nombre_evento: response.data.nombre_evento,
+                requisitos: response.data.requirements
+              });
+        }
+      }
 
     getEquipos=async()=>{
         const idevent = cookies.get('auteId');
@@ -144,7 +145,6 @@ class AcceptTeamToEvent extends Component{
     };
 
     render(){
-        
         return(
             <div className="App">
                 <ModalWindow
@@ -182,7 +182,7 @@ class AcceptTeamToEvent extends Component{
                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
 
-                            {this.equipos[0] == null ? (
+                        {this.equipos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
@@ -218,7 +218,7 @@ class AcceptTeamToEvent extends Component{
                                                 return (
                                                 <div key={usuario.id} className='contParx`ticip'>
                                                     <div className='imgUserTeam'>
-                                                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                                                        <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>
                                                     <div className='infoParticipante'>
                                                         <h2>{`${usuario.nombre} ${usuario.apellido}`}</h2>

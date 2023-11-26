@@ -9,6 +9,7 @@ import NavbarUser from "../components/NavBars/NavbarUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Banner_informativo from "../components/Banner_informativo";
+import ModalDarseBaja from "../components/ModalWindows/ModalDarseBaja";
 
 const buscar = (
   <FontAwesomeIcon
@@ -27,12 +28,11 @@ class DarBajaEvento extends Component {
       events: [],
       loader: false,
       url: "http://127.0.0.1:8000/api/miseventos",
-      estadoModal: false,
-      estadoModalOrganizador: false,
-      estadoModalPatrocinador: false,
       tipos_de_evento: [],
-	  estadoBanner: false,
-	  nombreEventoBann: "",
+      estadoBanner: false,
+      estadoBannerModal: false,
+      estadoDarseBaja: false,
+	    nombreEventoBann: "",
     };
     this.eventos = [];
   }
@@ -86,21 +86,34 @@ class DarBajaEvento extends Component {
     window.location.href = "./event-admin";
   }
 
-	cambiarEstadoBanner = (estado, nombre) => {
+	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
-	  this.setState({ nombreEventoBann: nombre });
-	};
+  };
+  cambiarDarseBaja = (estado) => {
+    this.setState({ estadoDarseBaja: estado });
+  };
+  
+  setNombreEvento = (nom) => {
+    this.setState({ nombreEventoBann: nom });
+  };
 
   darDeBaja = async (estado, nombre, euid) => {
-		const url=`http://127.0.0.1:8000/api/eventousuarios/${euid}`;
-    await axios.delete(url)
+    const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    await axios.delete(url);
     this.getEvents();
-    this.cambiarEstadoBanner(estado, nombre)
+    this.cambiarDarseBaja(estado);
+    this.setNombreEvento(nombre);
+    
   };
 
   render() {
     return (
       <div className="App">
+        <ModalDarseBaja
+          estadoDarseBaja1={this.state.estadoDarseBaja}
+          cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
+          cambiarEstadoBanner2={this.cambiarEstadoBanner}
+        />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
           <NavbarUser />

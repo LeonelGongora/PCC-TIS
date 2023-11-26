@@ -66,7 +66,9 @@ class AcceptUserToEvent extends Component{
     getAllUsers = async () => {
         const idevent = cookies.get('auteId');
         const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
+        console.log(events)
         this.eventos = Array.from(events.data)
+        console.log(this.eventos)
         // console.log(.eventos)
         this.setState({ events: events.data, loader:false});
         // console.log(this.state.events)
@@ -161,14 +163,15 @@ class AcceptUserToEvent extends Component{
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
-                                    <div className='requisitosDeEvento'>
-                                        <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                        {this.state.requisitos.map((r, index) => {  
-                                            return (<div key={r.id}>
-                                                <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
-                                            </div>);
-                                        })}
-                                    
+                                    <div className='contRaroReq'>
+                                        <div className='requisitosDeEvento'>
+                                            <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                            {this.state.requisitos.map((r, index) => {  
+                                                return (<div key={r.id}>
+                                                    <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
+                                                </div>);
+                                            })}
+                                        </div>
                                     </div>
                                     <div>
                                     {this.eventos.map((evento) => {  
