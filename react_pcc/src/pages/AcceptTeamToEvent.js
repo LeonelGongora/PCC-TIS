@@ -216,7 +216,7 @@ class AcceptTeamToEvent extends Component{
                                                 <h3 >Coach: {e.nombreCoach} {e.apellidoCoach}</h3>
                                                 {this.usuarios[index+1]?.map((usuario) => {
                                                 return (
-                                                <div key={usuario.id} className='contParx`ticip'>
+                                                <div key={usuario.id} className='contParticip'>
                                                     <div className='imgUserTeam'>
                                                         <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>

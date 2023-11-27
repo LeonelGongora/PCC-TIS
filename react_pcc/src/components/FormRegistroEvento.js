@@ -45,10 +45,44 @@ function FormRegistroEvento(){
   const registrar = async(e) => {
 
     e.preventDefault();
-    const form = document.forms["form_name"].getElementsByTagName("input");
-    const atributosInput= Array.from(form);
-    
     const validationErrors = {};
+    console.log(atributos)
+
+    document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(input =>{
+
+      if(input.type != "file"){
+
+        console.log(input.value === "Seleccione una opcion")
+
+        if(!input.value.trim() || input.value === "Seleccione una opcion"){
+          validationErrors[input.name] = "Este campo es obligatorio";
+        }else{
+          if(input.type == "number"){
+            let restriccion_id = input.id;
+            const limites = restriccion_id.split(",");
+    
+            let minimo = parseInt(limites[0])
+            let maximo = parseInt(limites[1])
+
+            let valor_actual = parseInt(input.value);
+
+            if(!(valor_actual >= minimo && valor_actual <= maximo)){
+              console.log("No en rango")
+              validationErrors[input.name] = "El numero no se encuentra en el rango requerido: " + limites[0] + "-" + limites[1];
+            }else{
+              console.log("En rango")
+            }
+    
+          }else if(input.type  == "select"){
+    
+          }else if(input.type  == "date"){
+    
+          }else{
+          }
+
+        }
+      }
+    })    
 
     if (archivo.name) {
       
@@ -71,13 +105,6 @@ function FormRegistroEvento(){
       setShowModal(true);
     } 
 
-    for (let i = 0; i < atributos.length; i++) {
-      
-      if(!atributosInput[i].value.trim()){
-        validationErrors[atributosInput[i].name] = "Este campo es obligatorio";
-      }
-    }
-
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
@@ -87,10 +114,6 @@ function FormRegistroEvento(){
       fd.append('file', archivo);
       axios.post(Imagen_Api_Url, fd).then(response=>{ 
         var urli= response.data.urlimagen;
-        console.log("Se tiene")
-        console.log(id_evento)
-        console.log(id_usuario)
-        console.log(urli)
 
       axios.post(EventoUsuario_Api_Url, {
         event_id: id_evento,
@@ -103,9 +126,7 @@ function FormRegistroEvento(){
         console.log(response)
       })
       })
-      
     }
-    
   }
 
   const handleChange = (e) => {
@@ -123,15 +144,28 @@ function FormRegistroEvento(){
   useEffect(()=>{
     getEvent();
     console.log(id_usuario)
+    console.log(atributos)
   }, [])
 
   const getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
-      console.log(response.data);
-      setEvent(response.data)
-      setRequisitos(response.data.requirements)
-      setAtributos(response.data.attributes)
+      if(response){
+        let atributos_Aux = response.data.attributes
+        for (let i = 0; i < atributos_Aux.length; i++) {
+          if(atributos_Aux[i].tipo_dato_atributo === "select"){
+            atributos_Aux[i]["esSelect"] = true;
+            let nueva_Restriccion = atributos_Aux[i].restriccion.split(",");
+            atributos_Aux[i].restriccion = nueva_Restriccion;
+          }else{
+            atributos_Aux[i]["esSelect"] = false;
+          }
+        }
+        setEvent(response.data)
+        setRequisitos(response.data.requirements)
+        setAtributos(atributos_Aux)
+        //setAtributos(response.data.attributes)
+      }
   }
 
   const cambiarEstadoModal = (nuevoEstado) => {
@@ -195,22 +229,42 @@ function FormRegistroEvento(){
 
           {atributos.map((atributo,id) => {
           return (<>
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            <p id="textoCuadro">{atributo.nombre_atributo}</p>
-            <input
-            id="input"
-            className="input-Formulario-Registro-Evento"
-            type={atributo.tipo_dato_atributo}
-            name={atributo.nombre_atributo}
-            placeholder="Ingrese nombre"
-            />
-          </div>
-          {errors[atributo.nombre_atributo] && (
-          <span className="advertencia">
-            {errors[atributo.nombre_atributo]}
-          </span>
-          )}
-
+              {atributo.esSelect ? (
+                <>
+                  <p id="textoCuadro">{atributo.nombre_atributo}</p>
+                  <select id="desplegable" className="input-Formulario-Registro-Evento" name={atributo.nombre_atributo}>
+                    <option disabled selected> 
+                      Seleccione una opcion
+                    </option>
+                    {atributo.restriccion.map((evento, id) => {
+                      return <option>{evento}</option>;
+                    })}
+                  </select>
+                  {errors[atributo.nombre_atributo] && (
+                    <span className="advertencia">
+                      {errors[atributo.nombre_atributo]}
+                    </span>
+                  )}
+                </>
+                ) : (<>
+                      <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+                        <p id="textoCuadro">{atributo.nombre_atributo}</p>
+                        <input
+                          id={atributo.restriccion}
+                          className="input-Formulario-Registro-Evento"
+                          type={atributo.tipo_dato_atributo}
+                          name={atributo.nombre_atributo}
+                          placeholder="Ingrese nombre"
+                          restriccion = {atributo.restriccion}
+                        />
+                      </div>
+                      {errors[atributo.nombre_atributo] && (
+                      <span className="advertencia">
+                        {errors[atributo.nombre_atributo]}
+                      </span>
+                      )}
+                    </>
+              )}
           </>);
           })}
 

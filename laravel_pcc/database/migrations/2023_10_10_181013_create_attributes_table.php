@@ -18,7 +18,7 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->string('nombre_atributo');
             $table->string('tipo_dato_atributo');
-
+            $table->string('restriccion')->nullable();
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')
                 ->references('id')
