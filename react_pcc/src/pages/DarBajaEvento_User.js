@@ -33,6 +33,7 @@ class DarBajaEvento extends Component {
       estadoBannerModal: false,
       estadoDarseBaja: false,
 	    nombreEventoBann: "",
+      euid:"",
     };
     this.eventos = [];
   }
@@ -88,22 +89,22 @@ class DarBajaEvento extends Component {
 
 	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
+    this.getEvents();
   };
   cambiarDarseBaja = (estado) => {
     this.setState({ estadoDarseBaja: estado });
   };
   
-  setNombreEvento = (nom) => {
-    this.setState({ nombreEventoBann: nom });
+  setNombreEvento = (nom, euid) => {
+    this.setState({ nombreEventoBann: nom, euid: euid });
   };
 
   darDeBaja = async (estado, nombre, euid) => {
-    const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
-    await axios.delete(url);
-    this.getEvents();
+    // const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    // await axios.delete(url);
+    // this.getEvents();
+    this.setNombreEvento(nombre, euid);
     this.cambiarDarseBaja(estado);
-    this.setNombreEvento(nombre);
-    
   };
 
   render() {
@@ -113,6 +114,7 @@ class DarBajaEvento extends Component {
           estadoDarseBaja1={this.state.estadoDarseBaja}
           cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
           cambiarEstadoBanner2={this.cambiarEstadoBanner}
+          euid = {this.state.euid}
         />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
@@ -130,8 +132,8 @@ class DarBajaEvento extends Component {
               <ListaEventos_baja />
               {this.eventos.map((evento, id) => {
                 return (
-                  <>
-                    <div
+                  
+                    <div key={evento.euid}
                       className="containerEvents"
                       //   onClick={() => this.masDetalles(evento.id)}
                     >
@@ -158,7 +160,7 @@ class DarBajaEvento extends Component {
                         Darse de baja
                       </button>
                     </div>
-                  </>
+                  
                 );
               })}
             </div>

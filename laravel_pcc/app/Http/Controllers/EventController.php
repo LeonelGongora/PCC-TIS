@@ -76,6 +76,12 @@ class EventController extends Controller
         ->join('evento_user', 'events.id', '=', 'evento_user.event_id')
         ->join('users', 'users.id', '=', 'evento_user.user_id')
         ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
+        // ->where('evento_user.solicitud', 0)
+        // ->orWhere('evento_user.solicitud', 1)
+        ->where(function($q) {
+            $q->where('evento_user.solicitud', 0)
+            ->orWhere('evento_user.solicitud', 1);
+        })
         ->where('users.id', $id)
         ->select('events.*', 'event_types.nombre_tipo_evento', 'evento_user.id as euid')
         ->get();
