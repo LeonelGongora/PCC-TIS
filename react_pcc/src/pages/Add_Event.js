@@ -145,7 +145,7 @@ class Add_Event extends Component {
     if (!this.state.participantes_equipo.trim() && this.state.participantes_equipo !== "0") {
       validationErrors.participantes_equipo = "Este campo es obligatorio"
     } else {
-      if (!/^(?!-)(?:[2-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
+      if (!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
         && this.state.participantes_equipo !== "0") {
         validationErrors.participantes_equipo = "Ingrese un numero de participantes valido";
       }

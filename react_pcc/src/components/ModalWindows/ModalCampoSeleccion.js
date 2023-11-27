@@ -9,11 +9,16 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion, id_evento, atributos}){
 
     const [values, setValues] = useState({
-        nombre_atributo : "",
-
+        nombre_atributo : ""
     });
 
+    const [nombre_variable, setNombreVariable] = useState("1")
+
     const [errors, setErrors] = useState({});
+
+    const [opciones, setOpciones] = useState([]);
+
+    const [numero, setNumero] = useState(1);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -34,25 +39,28 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
     }
 
     const agregarOpcion = (e) => {
-        let parent = document.getElementById("form1");
 
-        let input = document.createElement("input");
-        //x.setAttribute("type", "text");
-        input.type = "text";
-        input.name="nombre_atributo";
-        input.className="inputEvento";
-        input.placeholder="Ingrese nombre";
-        input.id="opcion"
-        parent.appendChild(input);
-        //container.appendChild(input); // put it into the DOM
+        let nombre_actual = nombre_variable;
+        let nombre_nuevo = nombre_actual + "1"
+        setNombreVariable(nombre_nuevo)
+
+        let diccionario = {}
+        diccionario["name"] = nombre_variable;
+
+        let opciones_actuales = opciones;
+        opciones_actuales.push(diccionario);
+        //console.log(opciones_actuales)
+
+        //setNumero((numero) => numero + 1);
+
+        //console.log(numero)
+
+        //opciones.push(diccionario);
+        //console.log(opciones)
     }
 
     const saveTypeEvent = async (e) => {
         e.preventDefault();
-
-        
-
-        
 
         const validationErrors = {};
 
@@ -74,6 +82,14 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
             }
         }
 
+        document.querySelectorAll("#opcion").forEach(opcion =>{
+            console.log(opcion)
+            console.log(opcion.name)
+            if(!opcion.value.trim()){
+                validationErrors[opcion.name] = "Este campo es obligatorio"
+            }
+        })
+
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
@@ -88,7 +104,6 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
             const data = new FormData();
 
-            
             data.append('nombre_atributo', values.nombre_atributo)
             data.append('tipo_dato_atributo', "select" )
             data.append('restriccion', restriccionString)
@@ -141,12 +156,29 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                             id="opcion"
                             name="opcion"
                             className="inputEvento"
-                            placeholder="Ingrese nombre"
-                            onChange={handleInput}
+                            placeholder="Ingrese opcion"
                         />
                         {errors.opcion && (
                         <span className="span1Modal">{errors.opcion}</span>
                         )}
+
+                        {opciones.map((opcion) => {
+                        return (<>
+
+                        <p id="textoCuadroAtributo">Opcion*</p>
+                        <input
+                            type="text"
+                            id="opcion"
+                            name= {opcion.name}
+                            className="inputEvento"
+                            placeholder="Ingrese opcion"
+                        />
+                        {errors[opcion.name] && (
+                        <span className="span1Modal">{errors[opcion.name]}</span>
+                        )}
+
+                        </>);
+                        })}
 
                         <button
                         className="BotonRegistrar"

@@ -94,7 +94,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             data.append('tipo_dato_atributo', "number")
             if(values.con_rango === 1){
                 let restriccion = values.rango_bajo + "," + values.rango_alto
-                //data.append('tipo_dato_atributo', restriccion)
+                data.append('restriccion', restriccion)
             }
             
             data.append('event_id', id_evento)
@@ -105,11 +105,11 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                 console.log(res);
                 setValues({
                     nombre_atributo : '',
-                    //rango_bajo : "",
-                    //rango_alto : "",
-                    //con_rango: 0,
+                    rango_bajo : "",
+                    rango_alto : "",
+                    con_rango: 0,
                 });
-                //window.location.reload();
+                window.location.reload();
             }
         }
     }

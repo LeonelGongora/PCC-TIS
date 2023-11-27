@@ -46,7 +46,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
       let url = "http://127.0.0.1:8000/api/get-user-information"
       //get-user-information
       const respuesta = await axios.get(url);
-      console.log(respuesta)
       setUsuarios(respuesta.data.usuarios);
     }
 
@@ -64,10 +63,7 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
 
     const buscarContraseña = (e) => {
       const validationErrors = {};
-      console.log(values.contraseña);
-      console.log(values.contraseña_encontrada)
       if(values.contraseña !== values.contraseña_encontrada){
-        console.log("Diferente")
         validationErrors.contraseña = "Contraseña incorrecta"
       }
       setErrors(validationErrors);
@@ -113,7 +109,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                 ci_encontrado: nuevo_ci,
                 contraseña_encontrada: respuesta.data.contraseña_usuario,
                });
-               console.log(respuesta)
               break;
             }
           }
