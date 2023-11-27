@@ -22,6 +22,8 @@ class CreateTeamsTable extends Migration
                 ->on('events')
                 ->onDelete('cascade');
             $table->integer('solicitud');
+            $table->integer('id_coach');
+            $table->string('zip');
             $table->timestamps();
         });
     }

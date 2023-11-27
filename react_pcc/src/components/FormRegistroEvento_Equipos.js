@@ -93,19 +93,37 @@ function FormRegistroEvento_Equipos(){
         participantes_dni_Aux.push(evento.value)
       })
 
+      const fd = new FormData();
+      fd.append('file', archivo);
+      var urli= '';
+      var id_equipo = 0;
+      axios.post(Imagen_Api_Url, fd)
+      .then(response=>{ 
+        urli= response.data.urlimagen;
+      
       const data = new FormData();
+      const idu = cookies.get('id_usuario');
+      const solic = '0';
 
       data.append('nombre_equipo', values.nombre_equipo)
       data.append('event_id', id_evento)
-      data.append('solicitud', 0)
+      data.append('solicitud', solic)
+      data.append('id_coach', idu)
+      data.append('zip', urli)
+
+      console.log(solic)
+      console.log(idu)
+      console.log(urli)
 
       let id_equipo = 0;
-      const res = await axios.post('http://127.0.0.1:8000/api/add-team', data);
-      if(res.data.status === 200){
-        id_equipo = res.data.ultimo_id_equipo
-        cookies.set('id_equipo', id_equipo, {path: "/"});
-      }
-
+      axios.post('http://127.0.0.1:8000/api/add-team', data)
+      .then(res=>{ 
+        if(res.data.status === 200){
+          id_equipo = res.data.ultimo_id_equipo
+          cookies.set('id_equipo', id_equipo, {path: "/"});
+        }
+      })
+      })
       console.log(id_equipo)
 
       let dni_registrados = []

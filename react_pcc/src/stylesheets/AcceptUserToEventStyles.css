@@ -46,9 +46,7 @@ contTeam{
     cursor: pointer;
 }
 
-.buttonIconUser{
-    font-size: 4vw;
-}
+
 .buttonIconDownload{
     font-size: 2vw;
     cursor: pointer;
@@ -63,6 +61,10 @@ contTeam{
 .containerReqSol{
     display: flex;
 }
+.contRaroReq{
+    display: block;
+    width: 27vw;
+}
 .requisitosDeEvento{
     background-color: #f6f6f6;
     min-height: 15vh;
@@ -70,7 +72,7 @@ contTeam{
     border-radius: 8px;
     margin-right: 2vw;
     margin-top: 20px;
-    position: sticky;
+    position: fixed;
 }
 .requisitosTexto{
     margin: 1vh 2vw;
@@ -135,4 +137,11 @@ contTeam{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.buttonIconTeam{
+    font-size: 3.3vw;
+}
+.buttonIconUserT{
+    font-size: 3vw;
 }
