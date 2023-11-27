@@ -127,7 +127,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         estadoEquipos && (
 
             <div className="Overlay">
-              <div className="ContenedorModal contReg">
+              <div className="ContenedorModal contRegTeam">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
                     <h1>Registrar Usuario</h1>

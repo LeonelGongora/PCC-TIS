@@ -191,6 +191,7 @@ class AcceptTeamToEvent extends Component{
                                                             readOnly
                                                             />
                                                         </div>
+                                                        
                                                         <div className="infoMailPart" id="entradaTeam">
                                                             <p id="textoCuadro">Polera</p>
                                                             <input
