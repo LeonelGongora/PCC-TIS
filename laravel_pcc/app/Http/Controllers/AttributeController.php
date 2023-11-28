@@ -13,6 +13,9 @@ class AttributeController extends Controller
 
         $atributo-> nombre_atributo = $request -> nombre_atributo;
         $atributo-> tipo_dato_atributo = $request -> tipo_dato_atributo;
+        if($request->exists('restriccion')){
+            $atributo-> restriccion = $request -> restriccion;
+        }
         $atributo-> event_id = $request -> event_id;
 
         $atributo -> save();

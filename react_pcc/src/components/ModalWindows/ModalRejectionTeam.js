@@ -11,9 +11,9 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 const EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
 const Notification_Url_Api= configApi.NOTIFICATION_API_URL;
-const NotificationUser_Url_Api=configApi.NOTIFICATIONUSER_API_URL;
+const NotificationTeam_Url_Api=configApi.NOTIFICATIONTEAM_API_URL;
 
-function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento, id_user, id}){
+function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_evento, id_equipo, nombre_equipo}){
 
     const [event, setEvent] = useState ( [] );
     const [requisitos, setRequisitos] = useState ( [] );
@@ -66,12 +66,13 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
             
             // console.log(id_user);
             const req = checkedList.join(", ");
-            var contenido = `Ha sido rechazado del Evento: ${state.nombre_evento}, por no cumplir con las siguiente(s) requisito(s): ${req}`;
+            var contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del Evento: ${state.nombre_evento}, por no cumplir con las siguiente(s) requisito(s): ${req}`;
             if(checkedList.length ===0){
-                contenido = `Ha sido rechazado del Evento: ${state.nombre_evento}. Razon: ${razon}`
+                contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del Evento: ${state.nombre_evento}. Razon: ${razon}`
             }
             // console.log(contenido)
-            await axios.put(`${EventoUsuario_Url_Api}/${id_user}`, {
+            const url = `http://127.0.0.1:8000/api/teams/${id_equipo}`
+            await axios.put(url, {
                 solicitud: 2,
             })
             .then(response=>{
@@ -81,9 +82,9 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
                     leido: 0
                 })
                 .then(response=>{
-                    axios.post(NotificationUser_Url_Api, {
+                    axios.post(NotificationTeam_Url_Api, {
                         notification_id: response.data.id,
-                        user_id: id
+                        team_id: id_equipo
                     }).then(response=>{
                         window.location.reload();
                     })
@@ -173,13 +174,13 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
                         </label> */}
                         <div className='extraInfo'>
                             <p id="textoCuadroAtributo">Añadir información</p>
-                        
-                            <textarea
+                            <input
                             type="text"
                             name="razónRechazo"
                             className="inputMasInfo"
                             placeholder="Mayor informacion del rechazo"
-                            onChange={handleRazonChange}/>
+                            onChange={handleRazonChange}
+                            />
                         </div>
                         {errors.razon_rechazo && (
                         <span className="span1Modal">{errors.razon_rechazo}</span>
@@ -196,4 +197,4 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
     );
 }
 
-export default ModalRejection;
+export default ModalRejectionTeam;

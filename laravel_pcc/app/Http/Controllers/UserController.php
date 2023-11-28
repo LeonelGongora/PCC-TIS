@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -63,6 +65,31 @@ class UserController extends Controller
             'message' => 'Usuario añadido exitosamente',
             'ultimo_id' => $user->id,
         ]);
+    }
+
+    public static function getIdbyDNI($numero_documento){
+        $usuario = User::where('ci', $numero_documento)->first();
+
+        if ($usuario) {
+            return response()->json([
+                'status' => 200,
+                'message' => 'id obtenido exitosamente',
+                'id_usuario' => $usuario->id,
+                'nombre_usuario' => $usuario->nombre,
+                'apellido_usuario' => $usuario->apellido,
+                'contraseña_usuario' => $usuario->password,
+            ]);
+        }
+
+        return null; // O puedes manejar el caso en el que no se encuentra el usuario
+    }
+
+    public function getUser1($event_id){
+        
+        return User::whereHas('events', function ($query) use ($event_id) {
+            $query->where('event_id', $event_id)
+                  ->where('solicitud', 1);
+        })->get();
     }
 
     /**

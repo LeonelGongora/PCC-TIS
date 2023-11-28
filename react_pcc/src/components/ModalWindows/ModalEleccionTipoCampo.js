@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from  'react';
+import React from  'react';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
@@ -9,10 +9,8 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
     cambiarEstadoModalAtributo, 
     cambiarEstadoCampoNumerico,
     cambiarEstadoCampoFecha,
+    cambiarEstadoCampoSeleccion,
     id_evento}){
-
-    useEffect(()=>{
-    }, []);
 
     const salirVentanaModal = (e) => {
         cambiarEstadoModalEleccion(false);
@@ -20,8 +18,8 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
 
     return (
         estadoEleccion && (
-            <div className="Overlay">
-              <div className="ContenedorModal">
+          <div className="Overlay">
+            <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
                     <h1>Elegir tipo de Campo</h1>
@@ -45,12 +43,18 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
               </button>
 
               <button type="button" className="BotonRegistrar"
+              onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoSeleccion(true);}}>
+                Campo de opciones
+              </button>
+
+              <button type="button" className="BotonRegistrar"cambiarEstadoCampoSeleccion
               onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoFecha(true);}}>
                 Campo de fecha
               </button>
+
               </div>
-              </div>
-        </div>
+            </div>
+          </div>
         )
     );
 }

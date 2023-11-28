@@ -145,7 +145,7 @@ class Add_Event extends Component {
     if (!this.state.participantes_equipo.trim() && this.state.participantes_equipo !== "0") {
       validationErrors.participantes_equipo = "Este campo es obligatorio"
     } else {
-      if (!/^(?!-)(?:[2-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
+      if (!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
         && this.state.participantes_equipo !== "0") {
         validationErrors.participantes_equipo = "Ingrese un numero de participantes valido";
       }
@@ -243,7 +243,6 @@ class Add_Event extends Component {
   };
   changeChecked = (e) => {
 
-
     if(e.target.checked === true){
       document.querySelectorAll("#inputRegistro")[5].readOnly = true
       document.querySelectorAll("#inputRegistro")[5].value = ""
@@ -257,6 +256,7 @@ class Add_Event extends Component {
       isChecked: !prev.isChecked,
     }));
   };
+
   handleInput = (e) => {
     this.setState({
       [e.target.name]: e.target.value,

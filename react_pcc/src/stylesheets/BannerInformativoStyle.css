@@ -9,6 +9,10 @@
 	align-items: center;
 	margin-left: 10%;
 	padding: 4px 30px;
+	overflow-y: auto;
+	position: fixed;
+	z-index: 1000;
+	top:5%;
 }
 #botonSalirBanner{
 	background-color: #8C391B;

@@ -63,45 +63,46 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 Tu navegador no soporta la etiqueta de video.
             </video>
         <div className='grid-layout'>            
-            <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento} Programacion basica C++</h1></div>
+            <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento}</h1></div>
             <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
             <div className='gDescripcion'>
                 <p id="textoCuadroDescripcion">Descripcion</p>
-                <div className='descripcion'>{event.descripcion} Este taller contendra diferentes modulos que enseñaran las ventajas que un lenguaje como C puede tener sobre otro en programacion competitiva</div>
+                <div className='descripcion'>{event.descripcion}</div>
             </div>
             <div className='gRequisitos'>
                 <p id="textoCuadroRequerimientos">Requisitos</p>
                 <div className='requerimientos'>
                     {requisitos.map((r) => {  
                     return (<div key={r.id}>
-                        {r.contenido_requisito} Este taller contendra Este taller contendra Este taller contendra Este taller contendra
+                        {r.contenido_requisito} 
+                        {/* Este taller contendra Este taller contendra Este taller contendra Este taller contendra */}
                     </div>);
                     })}
                 </div>
             </div>
             <div className='gTipoEvento'>
                 <p id="textoCuadroTipoEvento">Tipo de Evento</p>
-                <div className='tipoDeEvento'>{tipoevent.nombre_tipo_evento} Taller de entrenamiento  </div>
+                <div className='tipoDeEvento'>{tipoevent.nombre_tipo_evento} </div>
             </div>
             <div className='gNParticipantes'>
                 <p id="textoCuadroParticipantes">Nº de participantes por equipo</p>
-                <div className='participantes'>{event.participantes_equipo} 1 </div>
+                <div className='participantes'>{event.participantes_equipo}</div>
             </div>
             {cerrado == true ? (
                 <div className='fechaLimite'>La Fecha de inscripciones estan Cerradas</div>  
                 ) : (
             <div className='gFecLim'>
                 <p id="textoCuadroLimite">Fecha Limite de Inscripcion</p>
-                <div className='fechaLimite'>{event.fecha_limite} 25/12/2023 </div>
+                <div className='fechaLimite'>{event.fecha_limite} </div>
             </div>
                 )}
             <div className='gFecIni'>
                 <p id="textoCuadroInicio">Inicio de Evento</p>
-                <div className='fechaInicio'>{event.fecha_inicio} 26/12/2023 </div>
+                <div className='fechaInicio'>{event.fecha_inicio} </div>
             </div>
             <div className='gFecFin'>
                 <p id="textoCuadroFinal">Fin de Evento</p>
-                <div className='fechaFinal'>{event.fecha_fin} 1/1/2024 </div>
+                <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>
@@ -130,11 +131,11 @@ function VisualizarInformacionDeEventosAdmin({props}){
             </div>
             <div className='gTelf'>
                <p id="textoCuadroTelf">Telefono</p>
-               <div className='telefono'>{event.numero_contacto} 76543210 </div>
+               <div className='telefono'>{event.numero_contacto} </div>
             </div>
             <div className='gEmail'>
                 <p id="textoCuadroEmail">Email</p>
-                <div className='email'>{event.requisitos} blackcloud@gmail.com </div>
+                <div className='email'> blackcloud@gmail.com </div>
             </div>
             <div className='vacio'></div>
             </div>

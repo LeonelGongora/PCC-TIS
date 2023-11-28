@@ -19,7 +19,6 @@ const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 class VisualizarEquipos extends Component{
 
   id_evento = cookies.get('id_evento');
-  equipos = []
   usuarios = []
   indice = -1
 
@@ -27,6 +26,7 @@ class VisualizarEquipos extends Component{
     constructor(props) {
         super(props);
         this.state  = {
+          loader: false,
             event: [],
             equipos : [],
             usuarios: [],
@@ -35,7 +35,7 @@ class VisualizarEquipos extends Component{
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
         };
-        this.eventos = []
+        this.equipos = []
     }
 
     getEvent=async()=>{
@@ -43,28 +43,19 @@ class VisualizarEquipos extends Component{
       const response = await axios.get(url)
       console.log(response)
       this.setState({ event: response.data});
-      this.equipos = Array.from(response.data.teams);
-      this.setState({ equipos: response.data.teams});
-      let arrayUsuarios = []
+
+      const res = await axios.get(`http://127.0.0.1:8000/api/get-team-1/${this.id_evento}`);
+      this.equipos = Array.from(res.data)
+
+      this.setState({loader:false});
       console.log(this.equipos)
 
       for (let i = 0; i < this.equipos.length; i++) {
 
         this.usuarios.push(this.equipos[i].users)
-        //console.log(this.equipos[i].users)
       }
-
-      //console.log(this.usuarios)
-      //setEvent(response.data)
-      
     }
 
-    manejarContador(){
-      
-      console.log(this.indice)
-      this.indice = this.indice +1
-    }
-    
     componentDidMount(){
       this.getEvent();
     }
@@ -126,6 +117,9 @@ class VisualizarEquipos extends Component{
               />
 
               <div className="contenedor">
+              {this.equipos[0] == null ? (
+                <h1 className='tituloPagAcept'>No Hay Equipos en este evento</h1>
+                ) : (<>
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">{this.state.event.nombre_evento}</p>
                   <input type="text" name="buscador" id="buscador" 
@@ -153,15 +147,14 @@ class VisualizarEquipos extends Component{
                         </div>
                         </>
                         );
-                        
-                      }
-                      )}
+                      })}
                     </>
                     );
                   })}
 
                 </div>
-
+                </>
+              )}
               </div>
             </div>
           </div>

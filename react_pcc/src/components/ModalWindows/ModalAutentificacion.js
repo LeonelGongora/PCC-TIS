@@ -2,7 +2,7 @@ import React, {useState, useEffect} from  'react';
 import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import { faCircleXmark, faUser } from '@fortawesome/free-regular-svg-icons';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -14,10 +14,20 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
     
     const [values, setValues] = useState({
       ci : "",
+      nombre_usuario: "",
+      apellido_usuario: "",
+      ci_encontrado: "",
+      contraseña: "",
+      contraseña_encontrada: "",
     });
 
     const [errors, setErrors] = useState({});
-    const [usuarios, setUsuarios] = useState({})
+    const [usuarios, setUsuarios] = useState({});
+
+    const [dniVisible, setDniVisible] = useState(true);
+    const [infoVisible, setInfoVisible] = useState(false);
+    const [contraVisible, setContraVisible] = useState(false);
+    const [confButVisible, setConfButVisible] = useState(true);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -36,7 +46,6 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
       let url = "http://127.0.0.1:8000/api/get-user-information"
       //get-user-information
       const respuesta = await axios.get(url);
-      console.log(respuesta)
       setUsuarios(respuesta.data.usuarios);
     }
 
@@ -46,7 +55,24 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
         nombre_tipo_evento : '',
       });
       setErrors({});
-  }
+    }
+
+    const prueba = (e) => {
+      setInfoVisible(true);
+    }
+
+    const buscarContraseña = (e) => {
+      const validationErrors = {};
+      if(values.contraseña !== values.contraseña_encontrada){
+        validationErrors.contraseña = "Contraseña incorrecta"
+      }
+      setErrors(validationErrors);
+
+      if(Object.keys(validationErrors).length === 0){
+        cambiarEstado1(false);
+      }
+
+    }
 
     const saveTypeEvent = async (e) => {
         e.preventDefault();
@@ -57,7 +83,7 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
             validationErrors.ci = "Este campo es obligatorio"
 
         }else if(!/^(?!-)[1-9][0-9]{6,8}$/.test(values.ci)){
-            validationErrors.ci = "Ingrese un nombre valido"
+            validationErrors.ci = "Ingrese un documento de indentificacion valido"
         }
 
         setErrors(validationErrors);
@@ -71,9 +97,18 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
             let ci = usuarios[index].ci
     
             if(ci == nuevo_ci){
-              
-              cambiarEstado1(false)
+              setInfoVisible(true);
               seEncontro = 1;
+              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
+              const respuesta = await axios.get(url);
+              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
+              setValues({
+                ...values,
+                nombre_usuario: respuesta.data.nombre_usuario,
+                apellido_usuario: respuesta.data.apellido_usuario,
+                ci_encontrado: nuevo_ci,
+                contraseña_encontrada: respuesta.data.contraseña_usuario,
+               });
               break;
             }
           }
@@ -84,6 +119,12 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
           }
         }
     }
+    const handleToggleVisibility = () => {
+      setDniVisible(!dniVisible);
+      setContraVisible(!contraVisible);
+      setConfButVisible(!confButVisible);
+    };
+  
 
     return (
         estado1 && (
@@ -95,9 +136,10 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                   </div>
                 </div>
                 <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
+                  <div  className='contentForm'>
+                    <form onSubmit={saveTypeEvent} id="form1" className='formUserVerif'>
 
-                    <p id="textoCuadroAtributo">DNI</p>
+                    {dniVisible && <div><p id="textoCuadroAtributo">DNI</p>
                     <input
                     id="input"
                     className="inputEvento"
@@ -112,22 +154,41 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
                     {errors.ci}
                     </span>
                     )}
-
+                    </div>
+                    }
+                    {infoVisible && <div className='contenUserVerif'>
+                      <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                      <div className='infoUserVerif'>
+                        <h3 className='nombreUserVerif'>{`${values.nombre_usuario} ${values.apellido_usuario}`}</h3>
+                        <h4 className='dniUserVerif'>{values.ci_encontrado}</h4>
+                      </div>
+                    </div>
+                    }
+                    {contraVisible && <div>
                     <p id="textoCuadroAtributo">Contraseña</p>
                         <input
-                        type="text"
-                        name="nombre_tipo_evento"
+                        type="password"
+                        name="contraseña"
                         className="inputEvento"
                         placeholder="Ingrese su contraseña"
                         onChange={handleInput}
                         />
+                        </div>
+                        }
                         </form>
-                        {errors.nombre_tipo_evento && (
-                    <span className="span1Modal">{errors.nombre_tipo_evento}</span>
-                    )}
-              <button form="form1" type="submit" className="BotonRegistrar">
-                Registrar
-              </button>
+                      </div>
+                        {errors.contraseña && (
+                        <span className="span1Modal">{errors.contraseña}</span>
+                        )}
+              {dniVisible && <button form="form1" type="submit" onClick={prueba} className="BotonRegistrar">
+                Buscar DNI
+              </button>}
+              {infoVisible && confButVisible && <button form="form1" type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
+                Confirmar
+              </button>}
+              {contraVisible && <button form="form1" type="button" onClick={buscarContraseña} className="BotonRegistrar">
+                Acceder
+              </button>}
               </div>
               </div>
         </div>

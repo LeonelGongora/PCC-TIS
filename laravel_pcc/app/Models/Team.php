@@ -12,8 +12,7 @@ class Team extends Model
 
     protected $table = 'teams';
     protected $fillable = [
-        'nombre_equipo',
-        'event_id'
+        'nombre_equipo', 'event_id', 'solicitud', 'id_coach', 'zip',
     ];
 
     protected $with = ['users'];
@@ -23,4 +22,7 @@ class Team extends Model
         return $this->belongsToMany(User::class, 'team_user', 'team_id', 'user_id');
     }
 
+    public function notifications(){
+        return $this->belongsToMany(Notification::class, 'notification_team');
+    }
 }

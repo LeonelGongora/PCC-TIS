@@ -20,6 +20,31 @@ class EditarInformacionDeEventosNext extends Component{
   eventos = []
   id = cookies.get('idauxiliar');
 
+  constructor(props){
+    super(props)
+    this.state = {
+
+        id_evento: '',
+        errors : {},
+        estadoModalAtributo: false,
+        atributos: [],
+        requisitos: [],
+        organizadores : [],
+        organizadores_de_evento: [],
+        organizadores_id : [],
+        patrocinadores : [],
+        patrocinadores_de_evento: [],
+        patrocinadores_id : [],
+        mostrar_organizador : false,
+        mostrar_patrocinador : false,
+    }
+  }
+
+  componentDidMount(){
+    this.getEventTypes();
+    this.getEvent();
+  }
+
     getEventTypes = async () => {
         const url = "http://127.0.0.1:8000/api/type-events"; 
 
@@ -29,58 +54,31 @@ class EditarInformacionDeEventosNext extends Component{
         this.setState({ loader:false});
     };
 
-    componentDidMount(){
-        this.getEventTypes();
-        this.getEvent();
-        this.getOrganizadores();
-        this.getPatrocinadores();
-    }
-
     getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${this.id}`;
       const response = await axios.get(url)
+
       console.log(response)
       this.setState({ event: response.data})
 
       if(response.request.status === 200){
+        
+        const urlOrganizadores = "http://127.0.0.1:8000/api/get-organizador"; 
+        const respuesta = await axios.get(urlOrganizadores);
+
+        const urlPatrocinadores = "http://127.0.0.1:8000/api/get-patrocinador"; 
+        const respuestaPatrocinadores = await axios.get(urlPatrocinadores);
+
         this.setState({
           id_evento: response.data.id,
           atributos: response.data.attributes,
           requisitos: response.data.requirements,
           organizadores_de_evento : response.data.organizers,
           patrocinadores_de_evento : response.data.sponsors,
+          organizadores: respuesta.data.organizadores,
+          patrocinadores: respuestaPatrocinadores.data.patrocinadores
         });
       }
-    }
-
-    getOrganizadores = async()=>{
-      const url = "http://127.0.0.1:8000/api/get-organizador"; 
-      const respuesta = await axios.get(url);
-      this.setState({ organizadores: respuesta.data.organizadores})
-    }
-
-    getPatrocinadores = async()=>{
-      const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
-      const respuesta = await axios.get(url);
-      this.setState({ patrocinadores: respuesta.data.patrocinadores})
-    }
-
-    constructor(props){
-        super(props)
-        this.state = {
-
-            id_evento: '',
-            errors : {},
-            estadoModalAtributo: false,
-            atributos: [],
-            requisitos: [],
-            organizadores : [],
-            organizadores_de_evento: [],
-            organizadores_id : [],
-            patrocinadores : [],
-            patrocinadores_de_evento: [],
-            patrocinadores_id : [],
-        }
     }
 
     cambiarEstadoModalAtributo = (nuevoEstado) => {
@@ -187,15 +185,21 @@ class EditarInformacionDeEventosNext extends Component{
             for (let index = 0; index < organizadores_id_numeros.length; index++) {
               organizador_seleccionado = organizadores_id_numeros[index]
 
-              for (let index2 = 0; index2 <  organizadores_id_registrados.length; index2++) {
-                organizador_registrado = organizadores_id_registrados[index2];
-                if(organizador_seleccionado === organizador_registrado){
-                  break;
-                }
-                if(index2 === (organizadores_id_registrados.length -1)){
-                  organizadores_agregar.push(organizador_seleccionado)
+              if(organizadores_id_registrados.length === 0){
+                organizadores_agregar.push(organizador_seleccionado)
+              }else{
+                for (let index2 = 0; index2 <  organizadores_id_registrados.length; index2++) {
+                  organizador_registrado = organizadores_id_registrados[index2];
+                  if(organizador_seleccionado === organizador_registrado){
+                    break;
+                  }
+                  if(index2 === (organizadores_id_registrados.length -1)){
+                    organizadores_agregar.push(organizador_seleccionado)
+                  }
                 }
               }
+
+              
             }
 
             for (let index = 0; index < organizadores_id_registrados.length; index++) {
@@ -217,13 +221,17 @@ class EditarInformacionDeEventosNext extends Component{
             for (let index = 0; index < patrocinadores_id_numeros.length; index++) {
               patrocinador_seleccionado = patrocinadores_id_numeros[index]
 
-              for (let index2 = 0; index2 <  patrocinadores_id_registrados.length; index2++) {
-                patrocinador_registrado = patrocinadores_id_registrados[index2];
-                if(patrocinador_seleccionado === patrocinador_registrado){
-                  break;
-                }
-                if(index2 === (patrocinadores_id_registrados.length -1)){
-                  patrocinadores_agregar.push(patrocinador_seleccionado)
+              if(patrocinadores_id_registrados.length === 0){
+                patrocinadores_agregar.push(patrocinador_seleccionado)
+              }else{
+                for (let index2 = 0; index2 <  patrocinadores_id_registrados.length; index2++) {
+                  patrocinador_registrado = patrocinadores_id_registrados[index2];
+                  if(patrocinador_seleccionado === patrocinador_registrado){
+                    break;
+                  }
+                  if(index2 === (patrocinadores_id_registrados.length -1)){
+                    patrocinadores_agregar.push(patrocinador_seleccionado)
+                  }
                 }
               }
             }
@@ -342,6 +350,7 @@ class EditarInformacionDeEventosNext extends Component{
                 <form onSubmit={this.updateEvent} encType="multipart/form-data">
                   <h1 className="textoTituloEdiNext">Campos</h1>
                   {this.state.atributos.map((atributo) => (
+                    
                     <div className="campo-container">
                       <div id="entradaEveNex">
                         <p id="textoCuadro">{atributo.nombre_atributo}*</p>
@@ -374,6 +383,7 @@ class EditarInformacionDeEventosNext extends Component{
 
                   <h1 className="textoTituloEdiNext">Requisitos</h1>
                   {this.state.requisitos.map((requisito) => (
+                    
                     <div className="campo-container">
                       <div id="entradaEveNex">
                         <p id="textoCuadro">{requisito.contenido_requisito}*</p>
@@ -406,36 +416,63 @@ class EditarInformacionDeEventosNext extends Component{
 
                   <h1 className="textoTituloEdiNext">Organizadores</h1>
 
-                  {this.state.organizadores.map((organizador) => (
-                    <div className="filaOrganizador">
-                      <input
-                        type="checkbox"
-                        className="organizadoresSeleccionados"
-                        id="checkBoxAddEvent"
-                        name="vehicle1"
-                        value={organizador.id}
-                      />
-                      <span id="titulosCheckbox">
-                        {organizador.nombre_organizador}
-                      </span>
-                    </div>
-                  ))}
+                  {this.state.organizadores.map((organizador) => { 
+                    this.mostrar_organizador = false;
+
+                    for (let i = 0; i < this.state.organizadores_de_evento.length; i++) {
+                      if(organizador.id === this.state.organizadores_de_evento[i].id){
+                        this.mostrar_organizador = true;
+                      }
+                    }
+                    organizador["valor"] = this.mostrar_organizador;
+                    return (
+                    <>
+                      <div className="filaOrganizador">
+                        <input
+                          type="checkbox"
+                          className="organizadoresSeleccionados"
+                          id="checkBoxAddEvent"
+                          name="vehicle1"
+                          value={organizador.id}
+                          defaultChecked = {organizador.valor}
+                        />
+                        <span id="titulosCheckbox">
+                          {organizador.nombre_organizador}
+                        </span>
+                      </div>
+                    </>
+                    );
+                  })}
+
                   <h1 className="textoTituloEdiNext">Patrocinadores</h1>
 
-                  {this.state.patrocinadores.map((patrocinador) => (
-                    <div className="filaOrganizador">
-                      <input
-                        type="checkbox"
-                        id="checkBoxAddEvent"
-                        className="patrocinadoresSeleccionados"
-                        name="vehicle1"
-                        value={patrocinador.id}
-                      />
-                      <span id="titulosCheckbox">
-                        {patrocinador.nombre_patrocinador}
-                      </span>
-                    </div>
-                  ))}
+                  {this.state.patrocinadores.map((patrocinador) => {
+                    this.mostrar_patrocinador = false;
+
+                    for (let i = 0; i < this.state.patrocinadores_de_evento.length; i++) {
+                      if(patrocinador.id === this.state.patrocinadores_de_evento[i].id){
+                        this.mostrar_patrocinador = true;
+                      }
+                    }
+                    patrocinador["valor"] = this.mostrar_patrocinador;
+                    return (
+                    <>
+                      <div className="filaOrganizador">
+                        <input
+                          type="checkbox"
+                          id="checkBoxAddEvent"
+                          className="patrocinadoresSeleccionados"
+                          name="vehicle1"
+                          value={patrocinador.id}
+                          defaultChecked = {patrocinador.valor}
+                        />
+                        <span id="titulosCheckbox">
+                          {patrocinador.nombre_patrocinador}
+                        </span>
+                      </div>
+                    </>
+                    );
+                  })}
 
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">

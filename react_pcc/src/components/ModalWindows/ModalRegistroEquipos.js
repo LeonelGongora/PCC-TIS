@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
-import FormUserInput from "../../stylesheets/FormUserInput.css";
+
 
 const cookies = new Cookies();
 
@@ -127,7 +127,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         estadoEquipos && (
 
             <div className="Overlay">
-              <div className="ContenedorModal contReg">
+              <div className="ContenedorModal contRegTeam">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
                     <h1>Registrar Usuario</h1>
@@ -140,71 +140,97 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
 
                 </div>
                 <div className="registroTipoEvento reqCont">
-                    <form onSubmit={saveTypeEvent} id="form1">
-                        <p id="textoCuadroAtributo">Nombre*</p>
-                        <input
-                        type="text"
-                        name="nombre"
-                        className="inputEvento"
-                        placeholder="Ingrese nombre"
-                        onChange={handleInput}
-                        />
-                        {errors.nombre && (
-                        <span className="span1Modal">{errors.nombre}</span>
-                        )}
+                    <div className="crearEventos-user">
+                        <div className="textoEvento-user">
+                            <p className="textoRegistro-user">Registro de Informacion</p>
+                        </div>
+                    <div className="entradaDatos-user">
+                        <form onSubmit={saveTypeEvent} id="form1">
+                        <div className="nombreAp-user">
+                            <div id="entradaNom-user" className={errors.nombre ? "errorEntrada-user" : ""}>
+                                <p id="textoCuadro-user">Nombres*</p>
+                                <input
+                                    id="inputRegistro-user"
+                                    type="text"
+                                    name="nombre"
+                                    placeholder="Ingrese nombre(s)"
+                                    onChange={handleInput}
+                                />
+                                {errors.nombre && (
+                                    <span className="advertencia-userNom">{errors.nombre}</span>
+                                )}
+                                </div>
 
-                        <p id="textoCuadroAtributo">Apellidos*</p>
-                        <input
-                        type="text"
-                        name="apellido"
-                        className="inputEvento"
-                        placeholder="Ingrese nombre"
-                        onChange={handleInput}
-                        />
-                        {errors.apellido && (
-                        <span className="span1Modal">{errors.apellido}</span>
-                        )}
+                                <div id="entradaAp-user" className={errors.nombre ? "errorEntrada-user" : ""}>
+                                <p id="textoCuadro-user">Apellidos*</p>
+                                <input
+                                    id="inputRegistro-user"
+                                    type="text"
+                                    name="apellido"
+                                    placeholder="Ingrese apellido(s)"
+                                    onChange={handleInput}
+                                />
+                                {errors.apellido && (
+                                    <span className="advertencia-userNom">{errors.apellido}</span>
+                                )}
+                                </div>
+                            </div>
+                            
+                            <div id="entrada-user">
+                                <p id="textoCuadro-user">Email*</p>
+                                <input
+                                id="inputRegistro-user"
+                                type="text"
+                                name="email"
+                                placeholder="Ingrese su correo"
+                                onChange={handleInput}
+                                />
+                            </div>
 
-                        <p id="textoCuadroAtributo">Email*</p>
-                        <input
-                        type="text"
-                        name="email"
-                        className="inputEvento"
-                        placeholder="Ingrese nombre"
-                        onChange={handleInput}
-                        />
-                        {errors.email && (
-                        <span className="span1Modal">{errors.email}</span>
-                        )}
+                            {errors.email && (
+                                <span className="advertencia-user">{errors.email}</span>
+                            )}
 
-                        <p id="textoCuadroAtributo">Telefono*</p>
-                        <input
-                        type="text"
-                        name="telefono"
-                        className="inputEvento"
-                        placeholder="Ingrese nombre"
-                        onChange={handleInput}
-                        />
-                        {errors.telefono && (
-                        <span className="span1Modal">{errors.telefono}</span>
-                        )}
+                            <div id="entrada-user">
+                                <p id="textoCuadro-user">Telefono*</p>
+                                <input
+                                id="inputRegistro-user"
+                                type="number"
+                                name="telefono"
+                                placeholder="Ingrese su telefono"
+                                onChange={handleInput}
+                                />
+                            </div>
 
-                        <p id="textoCuadroAtributo">Contraseña*</p>
-                        <input
-                        type="text"
-                        name="password"
-                        className="inputEvento"
-                        placeholder="Ingrese nombre"
-                        onChange={handleInput}
-                        />
-                        {errors.password && (
-                        <span className="span1Modal">{errors.password}</span>
-                        )}
+                            {errors.telefono && (
+                                <span className="advertencia-user">{errors.telefono}</span>
+                            )}
 
-                    </form>
-                    <button form="form1" type="submit" className="BotonRegistrar">
-                        Registrar
-                    </button>
+                            <div id="entrada-user">
+                                <p id="textoCuadro-user">Contraseña*</p>
+                                <input
+                                id="inputRegistro-user"
+                                type="password"
+                                name="password"
+                                placeholder="Ingrese una contraseña"
+                                onChange={handleInput}
+                                />
+                            </div>
+
+                            {errors.password && (
+                                <span className="advertencia-user">{errors.password}</span>
+                            )}
+
+                            <div className="botonEnviar-user">
+                                <button form="form1" className="botonRegistrar-user" type="submit">
+                                {" "}
+                                Registrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                    
                 </div>
               </div>
             </div>

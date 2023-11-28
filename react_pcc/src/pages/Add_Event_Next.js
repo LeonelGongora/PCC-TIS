@@ -9,6 +9,7 @@ import ModalActividad from '../components/ModalWindows/ModalActividad';
 import ModalEleccionTipoCampo from '../components/ModalWindows/ModalEleccionTipoCampo';
 import ModalCampoNumerico from '../components/ModalWindows/ModalCampoNumerico';
 import ModalCampoFecha from '../components/ModalWindows/ModalCampoFecha';
+import ModalCampoSeleccion from '../components/ModalWindows/ModalCampoSeleccion';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
@@ -70,6 +71,7 @@ class Add_Event_Next extends Component{
             estadoModalEleccion: false,
             estadoCampoNumerico: false,
             estadoCampoFecha: false,
+            estadoCampoSeleccion: false,
             atributos: [],
             requisitos: [],
             actividades: [],
@@ -106,6 +108,10 @@ class Add_Event_Next extends Component{
 
     cambiarEstadoCampoFecha = (nuevoEstado) => {
       this.setState({ estadoCampoFecha: nuevoEstado });
+    }
+
+    cambiarEstadoCampoSeleccion = (nuevoEstado) => {
+      this.setState({ estadoCampoSeleccion: nuevoEstado });
     }
 
     eliminarAtributo = (id) => {
@@ -237,6 +243,7 @@ class Add_Event_Next extends Component{
                   cambiarEstadoModalAtributo = {this.cambiarEstadoModalAtributo}
                   cambiarEstadoCampoNumerico = {this.cambiarEstadoCampoNumerico}
                   cambiarEstadoCampoFecha = {this.cambiarEstadoCampoFecha}
+                  cambiarEstadoCampoSeleccion = {this.cambiarEstadoCampoSeleccion}
                   id_evento={this.state.id_evento}
                 />
               }
@@ -254,6 +261,15 @@ class Add_Event_Next extends Component{
                 <ModalCampoFecha
                   estadoCampoFecha={this.state.estadoCampoFecha}
                   cambiarEstadoCampoFecha={this.cambiarEstadoCampoFecha}
+                  id_evento={this.state.id_evento}
+                  atributos={this.state.atributos}
+                />
+              }
+
+              {
+                <ModalCampoSeleccion
+                  estadoCampoSeleccion={this.state.estadoCampoSeleccion}
+                  cambiarEstadoCampoSeleccion={this.cambiarEstadoCampoSeleccion}
                   id_evento={this.state.id_evento}
                   atributos={this.state.atributos}
                 />
@@ -311,7 +327,13 @@ class Add_Event_Next extends Component{
                           value={requisito.contenido_requisito}
                           readOnly
                         />
-
+                        <textarea
+                          name="contenido_anuncio"
+                          className="inputEventoAnuncio"
+				                  rows={10}
+				                  cols={50}
+                          value={requisito.contenido_requisito}
+                        />
                       </div>
                       <button
                         className="botonEliminarv2"

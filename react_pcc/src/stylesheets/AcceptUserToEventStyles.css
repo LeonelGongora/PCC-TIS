@@ -15,7 +15,7 @@
     align-items: center;
     border-radius: 1rem;
 }
-contTeam{
+.contTeam{
     cursor: pointer;
 }
 .containerUserSol h4{
@@ -24,31 +24,29 @@ contTeam{
     width: 32vw;
 }
 .buttonAcceptUser{
-    width: 10vw;
+    width: 12vw;
     padding: 1.5vw 4vh;
     text-align: center;
     background: #FFD51E;
     color: #14365C;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border-radius: 1rem;
     font-weight: 600;
     cursor: pointer;
 }
 .buttonDenyUser{
-    width: 10vw;
+    width: 12vw;
     padding: 1.5vw 4vh;
     text-align: center;
     background: #14365C;
     color: #FFD51E;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border-radius: 1rem;
     font-weight: 600;
     cursor: pointer;
 }
 
-.buttonIconUser{
-    font-size: 4vw;
-}
+
 .buttonIconDownload{
     font-size: 2vw;
     cursor: pointer;
@@ -63,14 +61,19 @@ contTeam{
 .containerReqSol{
     display: flex;
 }
+.contRaroReq{
+    display: block;
+    width: 27vw;
+}
 .requisitosDeEvento{
     background-color: #f6f6f6;
-    min-height: 15vh;
+    min-height: 50vh;
     width: 25vw;
     border-radius: 8px;
     margin-right: 2vw;
     margin-top: 20px;
-    position: sticky;
+    position: fixed;
+    overflow-y: scroll;
 }
 .requisitosTexto{
     margin: 1vh 2vw;
@@ -86,7 +89,7 @@ contTeam{
     width: 68.2vw;
     margin: 20px 0;
     min-height: 17vh;
-    max-height: 55vh;
+    max-height: 45vh;
     border-radius: 1rem;
     background-color: #ECECEC;
     padding: 1.5vh;
@@ -104,7 +107,6 @@ contTeam{
     padding: 3vh;
     width: 60vw;
     margin: 1vh;
-    min-height: 15vh;
     border-radius: 1rem;
     justify-content: space-around;
     border: 2px solid #B7B7B7;
@@ -135,4 +137,11 @@ contTeam{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.buttonIconTeam{
+    font-size: 3.3vw;
+}
+.buttonIconUserT{
+    font-size: 3vw;
 }
