@@ -230,11 +230,11 @@ function FormRegistroEvento_Equipos(){
         cambiarEstadoModalEquipos={cambiarEstadoModalEquipos}
       />
 
-      <ModalAutentificacion
+      {/* <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
-      />
+      /> */}
 
       <ModalRegistroEquipos
         estadoEquipos={formData.estadoModalEquipos}
@@ -293,7 +293,7 @@ function FormRegistroEvento_Equipos(){
       <div className='registro'>
         <form className="form_name" id='form_name'>
         <div className='coach'>
-              <p>Coach</p>
+              <p className='coachName'>Coach</p>
               <div className='camposCoach'>
                 <p>Nombre del coach</p>
                 <input
@@ -311,9 +311,21 @@ function FormRegistroEvento_Equipos(){
                 placeholder='Ingrese el DNI del coach'/>
               </div>
             </div>
-
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            <p id="textoCuadro">Nombre de Equipo</p>
+            <div className='equipo'>
+              <p className='coachName'>Equipo</p>
+              <div className='camposEquipo'>
+                <p>Nombre del Equipo</p>
+                <input
+                id='input_registro_equi'
+                type='text'
+                name='nameCoach'
+                placeholder='Ingrese el nombre del equipo'
+                onChange={handleChange}/>
+              </div>
+            </div>
+          {/* <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+            
+            <p className='txtEquipo' id="textoCuadro">Nombre de Equipo</p>
             <input
             id="input"
             className="input-Formulario-Registro-Eventox"
@@ -322,7 +334,7 @@ function FormRegistroEvento_Equipos(){
             placeholder="Ingrese el nombre del equipo"
             onChange={handleChange}
             />
-          </div>
+          </div> */}
           {errors.nombre_equipo && (
           <span className="advertencia">
             {errors.nombre_equipo}

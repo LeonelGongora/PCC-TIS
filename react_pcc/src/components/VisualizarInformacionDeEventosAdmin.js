@@ -114,6 +114,18 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <p id="textoCuadroFinal">Fin de Evento</p>
                 <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
+            <div className='gEtapa'>
+                <p id="textoCuadroFinal">Etapa 1</p>
+            </div>
+            <div className='gIniEtapa'>
+                <p id="textoCuadroFinal">Inicio</p>
+                <div className='etapaIni'>27/12/2002</div>
+            </div>
+            <div className='gFinEtapa'>
+                <p id="textoCuadroFinal">Final</p>
+                <div className='etapaFin'>27/12/2002</div>
+            </div>
+            <div className='vacio1'></div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>
                 <div className='organizadores'>
@@ -122,19 +134,19 @@ function VisualizarInformacionDeEventosAdmin({props}){
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
                     </div>);
                     })}
-                {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img src={img}></img><img src={img}></img> */}
+                {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img> */}
                 </div>
             </div>
             <div className='gPat'>
                 <p id="textoCuadroPat">Patrocinadores</p>
-                {patrocinadores.map((p) => {  
-                return (<div key={p.id}>
                 <div className='patrocinadores'>
-                <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
-                {/* <img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img> */}
+                    {patrocinadores.map((p) => {  
+                    return (<div key={p.id}>
+                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                    </div>);
+                    })}
+                {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img> */}
                 </div>
-                </div>);
-                })}
             </div>
             <div className='gContacto'>
                 <p id="textoCuadroCont">Contacto</p>

@@ -12,7 +12,16 @@
  font-size: 1.7rem;
  margin-bottom: 20px;    
 }
+.containerForm{
+    background-color: rgb(240, 240, 240);
+}
 .coach #input_registro_equipo{
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+	width: 93%;
+    padding: 2%;
+}
+.equipo #input_registro_equi{
     border: 1px solid rgb(175, 175, 175);
     border-radius: 5px;
 	width: 93%;
@@ -36,23 +45,24 @@
     font-weight: bold;
     width: fit-content;
     margin-left: 1vw;
-    margin-top: 4px;
+    margin-top: 5px;
     transform: translateY(9px);
     background-color: white;
 }
-.equipo #input_registro_equipo{
-    border: 1px solid rgb(175, 175, 175);
-    border-radius: 5px;
-	width: 93%;
-    padding: 2%;
+.coachName{
+    margin-top: 15px;
 }
-.tituloEquipo{
-    font-size: 1rem;
-    margin-top: 10px;
-}
+
 input::placeholder{
-    font-size: 0.8rem;
+    font-size: 0.8rem;  
 }
+
 .reg_req{
     margin-top: 3vh;
+}
+.registro{
+    padding-bottom: 20px;
+}
+.form_name{
+    width: 80%;
 }
