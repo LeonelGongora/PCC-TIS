@@ -158,7 +158,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                             <span id="tituloIndividualAdd">Sin rango</span>
                         </div>
 
-                        <p id={isChecked ? "textoCuadroAtributo" : "textoCuadroAtributo-campNumerico"}>Rango Bajo*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Bajo*</p>
                         <input
                             type="number"
                             name="rango_bajo"
@@ -170,7 +170,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.rango_bajo}</span>
                         )}
 
-                        <p id={isChecked ? "textoCuadroAtributo" : "textoCuadroAtributo-campNumerico"}>Rango Alto*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Alto*</p>
                         <input
                             type="number"
                             name="rango_alto"
