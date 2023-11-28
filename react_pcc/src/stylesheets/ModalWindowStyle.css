@@ -44,6 +44,22 @@
     justify-content: center;
     z-index: 1000;
     background-repeat: repeat-y;
+    overflow: auto;
+}
+.Overlay-CampoSelec{
+    width: 100%;
+    min-height: 100%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    background-repeat: repeat-y;
+    overflow-y: auto;
+    padding-top: 3vh;
 }
 
 .ContenedorModal{
@@ -104,6 +120,7 @@ h1{
     flex: auto;
 
 }
+
 .registroTipoEvento-DarseBaja{
     display: flex;
     flex-direction: column;
@@ -198,6 +215,18 @@ label{
     margin-top: 4px;
     transform: translateY(26px);
     background-color: white;
+}
+#textoCuadroAtributo-campNumerico{
+    position: relative;
+    font-size: 0.74rem;
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 1vw;
+    margin-top: 4px;
+    transform: translateY(26px);
+    background-color: rgb(255, 255, 255);
+    color: rgb(175, 175, 175) ;
 }
 #textoCuadroImg{
     position: relative;

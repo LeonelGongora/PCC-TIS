@@ -82,8 +82,9 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         if(!values.ci.trim()){
             validationErrors.ci = "Este campo es obligatorio"
 
-        }else if(!/^(?!-)[1-9][0-9]{6,8}$/.test(values.ci)){
-            validationErrors.ci = "Ingrese un documento de indentificacion valido"
+        }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
+          validationErrors.ci =
+            "Ingrese un documento de indentificacion valido";
         }
 
         setErrors(validationErrors);
