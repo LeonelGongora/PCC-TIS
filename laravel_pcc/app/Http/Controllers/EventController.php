@@ -16,7 +16,6 @@ class EventController extends Controller
         return response()->json([
             'status' => 200,
             'events' => $events,
-
         ]);
     }
 
@@ -33,23 +32,23 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
+        $evento = new Event();
+
+        $evento-> nombre_evento = $request -> nombre_evento;
+        $evento-> fecha_inicio = $request -> fecha_inicio;
+        $evento-> numero_contacto = $request -> numero_contacto;
+        $evento-> descripcion = $request -> descripcion;
+        $evento-> fecha_limite = $request -> fecha_limite;
+        $evento-> fecha_fin = $request -> fecha_fin;
+        $evento-> participantes_equipo = $request -> participantes_equipo;
+        $evento-> event_type_id = $request -> event_type_id;
         
         if($request -> hasFile ('image')){
-
-            $evento = new Event();
-
             $image = $request->file('image');
             $name = time().'.'.$image->getClientOriginalExtension();
             $image->move('images/', $name);
 
-            $evento-> nombre_evento = $request -> nombre_evento;
-            $evento-> fecha_inicio = $request -> fecha_inicio;
-            $evento-> numero_contacto = $request -> numero_contacto;
-            $evento-> descripcion = $request -> descripcion;
-            $evento-> fecha_limite = $request -> fecha_limite;
-            $evento-> fecha_fin = $request -> fecha_fin;
-            $evento-> participantes_equipo = $request -> participantes_equipo;
-            $evento-> event_type_id = $request -> event_type_id;
+            
             $evento-> name = $name;
             $evento-> save();
             $evento->id;
@@ -61,11 +60,13 @@ class EventController extends Controller
             ]);
 
         }else{
+            $evento-> save();
+            $evento->id;
             return response()->json([
                 'status' => 200,
-                'message' => 'No hay archivo',
+                'message' => 'No hay archivo, pero se añadio el evento',
+                'ultimo_id_evento' => $evento->id,
             ]);
-
         }
 
     }

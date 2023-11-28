@@ -38,6 +38,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
         setTipoevent(response.data.event_type)
         setPatrocinadores(response.data.sponsors)
         setOrganizadores(response.data.organizers)
+        console.log(response.data.name === null)
         console.log(id)
     }
 
@@ -60,7 +61,16 @@ function VisualizarInformacionDeEventosAdmin({props}){
 
         <div className='grid-layout'>            
             <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento}</h1></div>
-            <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
+            {event.name === null ? (
+                <>
+                <div className='gLogo'><img src="../../logo512.png"></img></div>
+                </>
+                
+                ) : (<>
+                <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
+                </>
+                )}
+            
             <div className='gDescripcion'>
                 <p id="textoCuadroDescripcion">Descripcion</p>
                 <div className='descripcion'>{event.descripcion}</div>

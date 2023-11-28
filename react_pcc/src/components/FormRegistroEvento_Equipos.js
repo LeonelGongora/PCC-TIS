@@ -11,6 +11,7 @@ import ModalWarning from './ModalWindows/ModalWarning';
 import ModalRegistroEquipos from './ModalWindows/ModalRegistroEquipos';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 import ModalWarningDNI from './ModalWindows/ModalWarningDNI';
+import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
 
 const cookies = new Cookies();
 
@@ -44,6 +45,7 @@ function FormRegistroEvento_Equipos(){
     estadoModal: true,
     estadoModalEquipos :false,
     estadoModalWarningDNI :false,
+    estadoRegistroUsuario :false,
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -96,7 +98,6 @@ function FormRegistroEvento_Equipos(){
       const fd = new FormData();
       fd.append('file', archivo);
       var urli= '';
-      var id_equipo = 0;
       axios.post(Imagen_Api_Url, fd)
       .then(response=>{ 
         urli= response.data.urlimagen;
@@ -111,56 +112,56 @@ function FormRegistroEvento_Equipos(){
       data.append('id_coach', idu)
       data.append('zip', urli)
 
-      console.log(solic)
-      console.log(idu)
-      console.log(urli)
 
       let id_equipo = 0;
       axios.post('http://127.0.0.1:8000/api/add-team', data)
       .then(res=>{ 
         if(res.data.status === 200){
+          console.log(res)
           id_equipo = res.data.ultimo_id_equipo
           cookies.set('id_equipo', id_equipo, {path: "/"});
-        }
-      })
-      })
-      console.log(id_equipo)
 
-      let dni_registrados = []
-      let id_registrados = []
+          console.log(id_equipo)
 
-      let dni_no_registrados = []
+          let dni_registrados = []
+          let id_registrados = []
 
-      usuarios.forEach(usuario => {
-        dni_registrados.push(usuario.ci)
-        id_registrados.push(usuario.id)
-      });
+          let dni_no_registrados = []
 
-      for (let i = 0; i < participantes_dni_Aux.length; i++) {
+          usuarios.forEach(usuario => {
+            dni_registrados.push(usuario.ci)
+            id_registrados.push(usuario.id)
+          });
 
-        const indice = dni_registrados.indexOf(parseInt(participantes_dni_Aux[i])); 
+          for (let i = 0; i < participantes_dni_Aux.length; i++) {
 
-        if(dni_registrados.includes(parseInt(participantes_dni_Aux[i]))){
-
-          console.log("DNI REGISTRADO")
-          const data = new FormData();
-          
-          data.append('team_id', id_equipo)
-          data.append('user_id', id_registrados[indice])
-
-          const res = await axios.post('http://127.0.0.1:8000/api/add-team_user', data);
-          if(res.data.status === 200){
-            console.log(res)
+            const indice = dni_registrados.indexOf(parseInt(participantes_dni_Aux[i])); 
+    
+            if(dni_registrados.includes(parseInt(participantes_dni_Aux[i]))){
+    
+              console.log("DNI REGISTRADO")
+              const data = new FormData();
+              
+              data.append('team_id', id_equipo)
+              data.append('user_id', id_registrados[indice])
+    
+              const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
+            }else{
+              console.log("DNI NO REGISTRADO")
+              dni_no_registrados.push(participantes_dni_Aux[i])
+            }
+            cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
+            cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+            //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
+            cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
           }
-        }else{
-          console.log("DNI NO REGISTRADO")
-          dni_no_registrados.push(participantes_dni_Aux[i])
+
         }
-        cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
-        cookies.set('indice_dni_no_registrados', 0, {path: "/"});
-        //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
-        cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
-      }
+      })
+      })
+      
+
+      
     }
   }
 
@@ -214,6 +215,9 @@ function FormRegistroEvento_Equipos(){
     setFormData({ estadoModalWarningDNI: nuevoEstado });
   }
 
+  const cambiarEstadoModalRegistroUsuario = (nuevoEstado) => {
+    setFormData({ estadoRegistroUsuario: nuevoEstado });
+  }
 
   return(
     <div className='containerAll'>
@@ -229,6 +233,7 @@ function FormRegistroEvento_Equipos(){
       <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
+        cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
       />
 
       <ModalRegistroEquipos
@@ -236,6 +241,13 @@ function FormRegistroEvento_Equipos(){
         cambiarEstadoModalEquipos={cambiarEstadoModalEquipos}
         cambiarEstadoWarningDNI={cambiarEstadoModalWarningDNI}
       />
+
+      <ModalRegistroUsuario
+        estadoRegistroUsuario={formData.estadoRegistroUsuario}
+        cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
+        cambiarEstado1={cambiarEstadoModal}
+      />
+
       <div className='header'>
         <h2 className='titulo-Formulario-Registro-Evento'>Registro de Equipo</h2>
       </div>

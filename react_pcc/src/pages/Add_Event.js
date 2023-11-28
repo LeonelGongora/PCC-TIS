@@ -8,6 +8,8 @@ const cookies = new Cookies();
 class Add_Event extends Component {
   eventos = [];
 
+  eventos_registrados = [];
+
   getEventTypes = async () => {
     const url = "http://127.0.0.1:8000/api/type-events";
 
@@ -20,10 +22,16 @@ class Add_Event extends Component {
 
   componentDidMount() {
     this.getEventTypes();
-    this.ocultarCampoParticipantes();
+    this.gentEvents();
   }
 
-  ocultarCampoParticipantes = async () => {
+  gentEvents = async () => {
+    const url = "http://127.0.0.1:8000/api/events";
+
+    const events = await axios.get(url);
+    this.eventos_registrados = Array.from(events.data.events);
+
+    //console.log(events)
     //document.getElementsByName("participantes_equipo").type = "hidden";
     //let inputParticipantes = document.getElementsByName("participantes_equipo");
     //console.log(inputParticipantes)
@@ -61,11 +69,16 @@ class Add_Event extends Component {
   };
 
   saveEvent = async (e) => {
+
     let valor = document.getElementById("event_type_id").value;
     e.preventDefault();
     const validationErrors = {};
 
-    console.log(this.state.participantes_equipo)
+    console.log(this.state.image)
+    console.log(this.state.image.name)
+    if(!this.state.image){
+      console.log("No hay archivo")
+    }
 
     if (this.state.fecha_limite && this.state.fecha_fin) {
       var d1 = new Date(this.state.fecha_limite);
@@ -85,11 +98,18 @@ class Add_Event extends Component {
     if (!this.state.nombre_evento.trim()) {
       validationErrors.nombre_evento = "Este campo es obligatorio";
     } else if (
-      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(
-        this.state.nombre_evento
-      )
-    ) {
+      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(this.state.nombre_evento)) {
       validationErrors.nombre_evento = "Ingrese un nombre válido";
+    }else{
+      for (let index = 0; index < this.eventos_registrados.length; index++) {
+
+        let evento = this.eventos_registrados[index].nombre_evento.trim()
+
+        if(evento === this.state.nombre_evento.trim()){
+            validationErrors.nombre_evento = "Ya existe un evento con este nombre"
+            break;
+        }
+      }
     }
 
     if (!this.state.numero_contacto.trim()) {
@@ -151,9 +171,7 @@ class Add_Event extends Component {
       }
     }
 
-    if (!this.state.image.name) {
-      validationErrors.image = "Debe subir una imagen";
-    } else if (this.state.image.name) {
+    if (this.state.image.name) {
       const extensiones = ["png", "PNG", "jpg", "jpeg"];
 
       var nombreArchivo = this.state.image.name;
@@ -185,8 +203,9 @@ class Add_Event extends Component {
       const url = "http://127.0.0.1:8000/api/add-event";
       const data = new FormData();
 
-      data.append("image", this.state.image);
-
+      if (this.state.image) {
+        data.append("image", this.state.image);
+      }
       data.append("nombre_evento", this.state.nombre_evento);
       data.append("fecha_inicio", fecha_Actual);
       data.append("numero_contacto", this.state.numero_contacto);
@@ -200,8 +219,6 @@ class Add_Event extends Component {
       }
 
       data.append("event_type_id", valor);
-
-      console.log(this.state.participantes_equipo);
 
       axios.post(url, data).then((res) => {
         console.log(res);
@@ -358,7 +375,7 @@ class Add_Event extends Component {
                     id="checkBoxIndividual"
                     onChange={this.changeChecked}
                   />
-                  <span id="tituloIndividualAdd">Sin Equipos</span>
+                  <span id="tituloIndividualAdd">Individual</span>
                 </div>
                 <div className="entradaCantidadEqui">
                   <div id="entradaEsp">
@@ -384,7 +401,7 @@ class Add_Event extends Component {
               </div>
 
               <div id="entrada">
-                <p id="textoCuadro">Afiche*</p>
+                <p id="textoCuadro">Afiche</p>
                 <input
                   id="inputRegistro"
                   type="file"

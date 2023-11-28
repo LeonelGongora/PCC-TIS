@@ -23,7 +23,7 @@ class CreateEventsTable extends Migration
             $table->date('fecha_limite');
             $table->date('fecha_fin');
             $table->integer('participantes_equipo')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
 
             $table->unsignedBigInteger('event_type_id');
 

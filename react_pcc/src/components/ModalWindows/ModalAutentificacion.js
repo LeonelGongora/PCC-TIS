@@ -9,7 +9,7 @@ const cookies = new Cookies();
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalAutentificacion({estado1, cambiarEstado1}){
+function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegistroUsuario}){
 
     
     const [values, setValues] = useState({
@@ -114,15 +114,45 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
           }
     
           if(seEncontro === 0){
+            console.log("No se encontro")
             cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
-            window.location.href='./formUsuario';
+            cambiarEstadoModalRegistroUsuario(true);
+            //cambiarEstado1(false);
           }
         }
     }
-    const handleToggleVisibility = () => {
-      setDniVisible(!dniVisible);
-      setContraVisible(!contraVisible);
-      setConfButVisible(!confButVisible);
+
+    const handleToggleVisibility = async () => {
+     
+      let nuevo_ci = values.ci;
+          let seEncontro = 0;
+          for (let index = 0; index < usuarios.length; index++) {
+    
+            let ci = usuarios[index].ci
+    
+            if(ci == nuevo_ci){
+              seEncontro = 1;
+              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
+              const respuesta = await axios.get(url);
+              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
+              setValues({
+                ...values,
+                nombre_usuario: respuesta.data.nombre_usuario,
+                apellido_usuario: respuesta.data.apellido_usuario,
+                ci_encontrado: nuevo_ci,
+                contraseña_encontrada: respuesta.data.contraseña_usuario,
+               });
+              setDniVisible(!dniVisible);
+              setContraVisible(!contraVisible);
+              setConfButVisible(!confButVisible);
+              break;
+            }
+          }
+    
+          if(seEncontro === 0){
+            cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
+            cambiarEstadoModalRegistroUsuario(true);
+          }
     };
   
 
@@ -183,7 +213,7 @@ function ModalAutentificacion({estado1, cambiarEstado1}){
               {dniVisible && <button form="form1" type="submit" onClick={prueba} className="BotonRegistrar">
                 Buscar DNI
               </button>}
-              {infoVisible && confButVisible && <button form="form1" type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
+              {infoVisible && confButVisible && <button type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
                 Confirmar
               </button>}
               {contraVisible && <button form="form1" type="button" onClick={buscarContraseña} className="BotonRegistrar">
