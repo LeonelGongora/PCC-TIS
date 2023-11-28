@@ -7,6 +7,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWindows/ModalWarning';
+import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
 
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 
@@ -35,7 +36,8 @@ function FormRegistroEvento(){
 
   const [formData, setFormData] = useState({
     ci : '',
-    estadoModal: true
+    estadoModal: true,
+    estadoRegistroUsuario: false
   })
 
   const [showModal, setShowModal] = useState(false);
@@ -172,10 +174,22 @@ function FormRegistroEvento(){
     setFormData({ estadoModal: nuevoEstado });
   }
 
+  const cambiarEstadoModalRegistroUsuario = (nuevoEstado) => {
+    setFormData({ estadoRegistroUsuario: nuevoEstado });
+  }
+
   return(
     <div className='containerForm'>
+
       <ModalAutentificacion
         estado1={formData.estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+        cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
+      />
+
+      <ModalRegistroUsuario
+        estadoRegistroUsuario={formData.estadoRegistroUsuario}
+        cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
         cambiarEstado1={cambiarEstadoModal}
       />
       <div className='header'>

@@ -7,6 +7,7 @@ import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
 import img from '../images/Csharp.png';
+import vid from '../images/fondo1.mp4';
 
 const cookies = new Cookies();
 
@@ -38,6 +39,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
         setTipoevent(response.data.event_type)
         setPatrocinadores(response.data.sponsors)
         setOrganizadores(response.data.organizers)
+        console.log(response.data.name === null)
         console.log(id)
     }
 
@@ -57,10 +59,22 @@ function VisualizarInformacionDeEventosAdmin({props}){
 
     return(
         <div className='visualizadorDeEventos'>
-
+            <video id="video-background" autoPlay muted loop>
+            <source src={vid} type="video/mp4"/>
+                Tu navegador no soporta la etiqueta de video.
+            </video>
         <div className='grid-layout'>            
             <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento}</h1></div>
-            <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
+            {event.name === null ? (
+                <>
+                <div className='gLogo'><img src="../../logo512.png"></img></div>
+                </>
+                
+                ) : (<>
+                <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
+                </>
+                )}
+            
             <div className='gDescripcion'>
                 <p id="textoCuadroDescripcion">Descripcion</p>
                 <div className='descripcion'>{event.descripcion}</div>
@@ -105,10 +119,10 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='organizadores'>
                     {organizadores.map((o) => {  
                     return (<div key={o.id}>
-                    <img src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
+                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
                     </div>);
                     })}
-                {/* <img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img> */}
+                {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img src={img}></img><img src={img}></img> */}
                 </div>
             </div>
             <div className='gPat'>
@@ -116,7 +130,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 {patrocinadores.map((p) => {  
                 return (<div key={p.id}>
                 <div className='patrocinadores'>
-                <img src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
                 {/* <img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img><img src={img}></img> */}
                 </div>
                 </div>);
@@ -134,35 +148,6 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='email'> blackcloud@gmail.com </div>
             </div>
             <div className='vacio'></div>
-                {/*<div className='Izq'>
-                    <div className='logo'><img src={"http://127.0.0.1:8000/images/" + event.name}></img>
-                    </div>
-                        <div className='logo'><img src={event.imagen_evento}></img></div> 
-                    <div className='fechasEventos'>
-                        <p id="textoCuadroIniEven">Inicio de Evento</p>
-                        <div className='IniEvento'>26/12/2023 </div>
-                        <p id="textoCuadroFinEven">Fin de Evento</p>
-                        <div className='FinEvento'>1/1/2024 </div>
-                    </div>
-                </div>
-                <div className='informacion'>
-                    <p id="textoCuadroDescripcion">Descripcion</p>
-                    <div className='descripcion'>{event.descripcion} </div>
-                    <p id="textoCuadroRequerimientos">Requerimientos</p>
-                    <div className='requerimientos'>{event.requisitos}</div>
-                    
-                    {cerrado == true ? (
-                    // {cookies.get('pasoInscripcion') == true ? (
-                    <div className='inscripciones'>La Fecha de inscripciones estan Cerradas</div>  
-                    ) : (
-                        <div>
-                        <p id="textoCuadroInscribete">Inscribete YA!</p>
-                        <p id="textoCuadroLimEven">Fecha Limite de inscripcion</p>
-                        <div className='LimEvento'>25/12/2023 </div>
-                        </div>
-                    )}
-                </div>
-                */}
             </div>
             
         </div>
