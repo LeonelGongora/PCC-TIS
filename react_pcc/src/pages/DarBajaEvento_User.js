@@ -114,7 +114,8 @@ class DarBajaEvento extends Component {
           estadoDarseBaja1={this.state.estadoDarseBaja}
           cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
           cambiarEstadoBanner2={this.cambiarEstadoBanner}
-          euid = {this.state.euid}
+          nombreBanner1={this.state.nombreEventoBann}
+          euid={this.state.euid}
         />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
@@ -125,45 +126,50 @@ class DarBajaEvento extends Component {
               cambiarEstadoBanner1={this.cambiarEstadoBanner}
               nombreBanner1={this.state.nombreEventoBann}
             />
-            <div className="contenedorTitulo-home">
-              <p className="tituloEvento-home">DARSE DE BAJA EVENTO</p>
-            </div>
-            <div className="columna1">
-              <ListaEventos_baja />
-              {this.eventos.map((evento, id) => {
-                return (
-                  
-                    <div key={evento.euid}
-                      className="containerEvents"
-                      //   onClick={() => this.masDetalles(evento.id)}
-                    >
-                      <img
-                        className="imageEvent"
-                        src={"http://127.0.0.1:8000/images/" + evento.name}
-                        alt="Logo del evento"
-                      />
-                      <h4 className="nombreEvento">{evento.nombre_evento}</h4>
-                      <h4 className="tipoEv">{evento.nombre_tipo_evento}</h4>
-                      <h4>{evento.fecha_limite}</h4>
-                      <h4>{evento.fecha_fin}</h4>
-                      <button
-                        className="botonDarBajaEvento"
-                        type="button"
-                        onClick={() =>
-                          this.darDeBaja(
-                            true,
-                            evento.nombre_evento,
-                            evento.euid
-                          )
-                        }
+            {!this.eventos == true || this.eventos.length == 0 ? (
+              <p className="tituloEvento-home">NO HAY EVENTOS REGISTRADOS</p>
+            ) : (
+              <>
+                <div className="contenedorTitulo-home">
+                  <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
+                </div>
+                <div className="columna1">
+                  <ListaEventos_baja />
+                  {this.eventos.map((evento, id) => {
+                    return (
+                      <div
+                        key={evento.euid}
+                        className="containerEvents"
+                        //   onClick={() => this.masDetalles(evento.id)}
                       >
-                        Darse de baja
-                      </button>
-                    </div>
-                  
-                );
-              })}
-            </div>
+                        <img
+                          className="imageEvent"
+                          src={"http://127.0.0.1:8000/images/" + evento.name}
+                          alt="Logo del evento"
+                        />
+                        <h4 className="nombreEvento">{evento.nombre_evento}</h4>
+                        <h4 className="tipoEv">{evento.nombre_tipo_evento}</h4>
+                        <h4>{evento.fecha_limite}</h4>
+                        <h4>{evento.fecha_fin}</h4>
+                        <button
+                          className="botonDarBajaEvento"
+                          type="button"
+                          onClick={() =>
+                            this.darDeBaja(
+                              true,
+                              evento.nombre_evento,
+                              evento.euid
+                            )
+                          }
+                        >
+                          Darse de baja
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../stylesheets/ModalWindowStyle.css";
 
 
-function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, euid }) {
+function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, nombreBanner1, euid }) {
 
   const salirVentanaModalBanner = async(e) => {
     const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
@@ -28,7 +28,7 @@ function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstad
           </div>
           <div className="registroTipoEvento-DarseBaja">
             <span className="textoDarseBaja">
-              ¿Esta seguro darse de baja del evento?
+              ¿Está seguro darse de baja del evento {nombreBanner1 }?
             </span>
             <div className="botonesDarseBaja">
               <button
