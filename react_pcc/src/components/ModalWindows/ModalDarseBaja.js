@@ -3,11 +3,14 @@ import axios from "axios";
 import "../../stylesheets/ModalWindowStyle.css";
 
 
-function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2 }) {
+function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, euid }) {
 
-  const salirVentanaModalBanner = (e) => {
+  const salirVentanaModalBanner = async(e) => {
+    const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+    await axios.delete(url);
+    // console.log(`se elimino ${euid}`)
     cambiarEstadoDarseBaja1(false);
-	cambiarEstadoBanner2(true);
+	  cambiarEstadoBanner2(true);
   };
   const salirVentanaModal = (e) => {
     cambiarEstadoDarseBaja1(false);

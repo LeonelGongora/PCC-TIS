@@ -20,9 +20,12 @@
   }
   
   .background-image-Register-Event{
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    z-index: -100; 
     /* Fondo degradado */
     background: linear-gradient(to bottom, #072444 , white);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);

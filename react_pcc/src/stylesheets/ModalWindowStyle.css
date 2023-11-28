@@ -62,10 +62,14 @@
     min-height: 500px;
     min-width: 300px;
 }
+.contRegTeam{
+    min-height: 30vw;
+    min-width: 80vh;
+}
 
 .contRej{
     max-width: 50vw;
-    max-height: 90vh;
+    max-height: 80vh;
 }
 
 .reqForm{
@@ -218,7 +222,7 @@ label{
     min-height: 4vh;
     overflow-y: hidden;
     max-width: 45vw;
-    max-height: 60vh;
+    max-height: 35vh;
     min-width: 10vw;
 }
 

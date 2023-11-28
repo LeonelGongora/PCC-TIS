@@ -29,6 +29,7 @@ import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 
+import Homepage from "./pages/Homepage.js";
 
 function App() {
   return (
@@ -63,6 +64,8 @@ function App() {
         <Route path='/participantes' element={<VisualizarParticipantes/>} />
         <Route path='/equipos' element={<VisualizarEquipos />} />
         <Route path='/darBajaEvento' element={< DarBajaEvento />} />
+
+        <Route path='/home' element={< Homepage />} />
         
       </Routes>
     </Router>

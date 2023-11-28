@@ -40,6 +40,7 @@ class AcceptTeamToEvent extends Component{
             mostrarInfoTeam: false,
             nombre_equipo:'',
             id:'',
+            equipoSeleccionado:null,
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
@@ -138,13 +139,14 @@ class AcceptTeamToEvent extends Component{
     }
     
     
-    toggleContenedor = () => {
+    handleClick = (equipoId) => {
         this.setState((prevState) => ({
-            mostrarInfoTeam: !prevState.mostrarInfoTeam,
+          equipoSeleccionado: prevState.equipoSeleccionado === equipoId ? null : equipoId,
         }));
-    };
+      };
 
     render(){
+        const { equipoSeleccionado } = this.state;
         return(
             <div className="App">
                 <ModalWindow
@@ -187,20 +189,22 @@ class AcceptTeamToEvent extends Component{
                             ) : (<>
                             <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
-                                    <div className='requisitosDeEvento'>
-                                        <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                        {this.state.requisitos.map((r, index) => {  
-                                            return (<div key={r.id}>
-                                                <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
-                                            </div>);
-                                        })}
-                                    
+                                    <div className='contRaroReq'>
+                                        <div className='requisitosDeEvento'>
+                                            <h3 className='subtitleRequisitos'>Requisitos</h3>
+                                            {this.state.requisitos.map((r, index) => {  
+                                                return (<div key={r.id}>
+                                                    <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
+                                                </div>);
+                                            })}
+                                        
+                                        </div>
                                     </div>
                                     <div>
                                     {this.equipos.map((e, index) => {  
                                         index=index-1
                                         return (<div key={e.id}>
-                                            <div onClick={this.toggleContenedor} className='containerUserSol contTeam'>
+                                            <div onClick={() => this.handleClick(e.id)} className='containerUserSol contTeam'>
                                                 <FontAwesomeIcon className='buttonIconUser' icon={faUsers} />
                                                 <h4 className='nameUser'>{`${e.nombre_equipo}`}</h4>
 
@@ -212,11 +216,11 @@ class AcceptTeamToEvent extends Component{
                                 
                                             </div>
                                             
-                                            <div className={`contenedorInfoTeam ${this.state.mostrarInfoTeam ? 'mostrando' : ''}`}>
+                                            <div className={`contenedorInfoTeam ${equipoSeleccionado === e.id ? 'mostrando' : ''}`}>
                                                 <h3 >Coach: {e.nombreCoach} {e.apellidoCoach}</h3>
                                                 {this.usuarios[index+1]?.map((usuario) => {
                                                 return (
-                                                <div key={usuario.id} className='contParx`ticip'>
+                                                <div key={usuario.id} className='contParticip'>
                                                     <div className='imgUserTeam'>
                                                         <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
                                                     </div>

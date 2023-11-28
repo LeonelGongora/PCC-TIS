@@ -28,10 +28,10 @@ class PaginaRegistrarseEventos extends Component{
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
         const events = await axios.get(this.state.url);
-        console.log(events)
+        // console.log(events)
 
         this.eventos = Array.from(events.data.events)
-        console.log(this.eventos)
+        // console.log(this.eventos)
         
         this.setState({ events: events.data, loader:false});
         var i;
@@ -88,8 +88,8 @@ class PaginaRegistrarseEventos extends Component{
 
                   {this.eventos.map((evento, id) => {
                     return (
-                      <>
-                        <div
+                      
+                        <div key={evento.id}
                           className="containerEvents"
                           onClick={() => this.irRegistro(evento.id, evento.participantes_equipo)}
                         >
@@ -107,7 +107,7 @@ class PaginaRegistrarseEventos extends Component{
                           <h4>{evento.fecha_limite}</h4>
                           <h4>{evento.fecha_fin}</h4>
                         </div>
-                      </>
+                      
                     );
                   })}
                 </div>
