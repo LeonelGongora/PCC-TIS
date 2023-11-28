@@ -1,0 +1,172 @@
+.background-home{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/homepage1.png'); /* Ruta de la imagen de fondo */
+    background-size: cover;
+    filter: brightness(0.9); 
+}
+
+.contenedorHome{
+    flex: 3;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.presentacion{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    height: 12rem;
+    width: 53rem;
+    background-color: rgba(0, 0, 0, 0.82);
+    color: azure;
+    border-radius: 20px;
+    padding-bottom: 1rem;
+}
+.title-description {
+    flex: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1rem;
+}
+.title {
+    font-size: 2.1rem;
+    margin-top: 0.2rem;
+    margin-bottom: 1.8rem;
+    margin-inline: 6rem;
+    text-align: center;
+    line-height: 1.4; 
+}
+.description {
+    font-size: 1.07rem;
+    margin-inline: 2.3rem;
+    text-align: center;
+    line-height: 1.5; 
+}
+.logo {
+    flex: 30%;
+    margin-left: auto;
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto;
+    object-fit: contain;
+}
+
+.contenedorInformacion {
+    display: flex;
+    padding: 1rem;
+}
+
+.informacion{
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    height: 11rem;
+    width: 27.5rem;
+    background-color: #14365C;
+    color: azure;
+    border-radius: 20px;
+    padding-bottom: 1rem;
+    margin-right: 5rem;
+}
+.afiche {
+    flex: 20%;
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto;
+    object-fit: contain;
+    padding: 1rem;
+}
+.titleEvent-date {
+    flex: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.titleEvent {
+    margin-bottom: 1.5rem;
+    margin-right: 1.1rem;
+    text-align: center;
+    line-height: 1.4; 
+}
+.date , .dateEvent{
+    text-align: center;
+    line-height: 1.5; 
+    margin-right: 1.1rem;
+}
+
+.EncabezadoNoticias{
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-between;
+    background-color: rgb(20,54,92);
+    padding: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: white;
+}
+.ContenedorNoticias{
+    height: 258px;
+    min-width: 300px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.ContenedorAnuncios{
+    overflow-y: scroll;
+}
+.tituloNoticias{
+    text-align: center;
+    width: 100%;
+}
+.text{
+    padding-top: 1vh;
+}
+.anuncio{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1.5vh;
+    width: 290px;
+    border-radius: 10px;
+    border: 2px solid #B7B7B7;
+    color: black;
+    font-size: 1rem;
+    
+    padding-bottom: 1rem;
+    margin: 5px;
+}
+.buttonInf, .buttonVer{
+    background-color: rgb(255, 213, 30);
+    padding: 8px 8px;
+    font-weight: bolder;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
+    margin-top: 0.7rem;
+}
+.buttonInf:hover{
+    background-color: rgb(219, 179, 0) ;
+}
+.buttonInf:active{
+    background-color: rgb(255, 213, 0);
+}
+.buttonVer{
+    margin-top: 1rem;
+    align-self: center;
+}
+.contanedorSecuandario {
+    display: flex;
+    flex-direction: column;
+}
