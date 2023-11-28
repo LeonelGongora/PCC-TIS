@@ -230,11 +230,11 @@ function FormRegistroEvento_Equipos(){
         cambiarEstadoModalEquipos={cambiarEstadoModalEquipos}
       />
 
-      {/* <ModalAutentificacion
+      <ModalAutentificacion
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
-      /> */}
+      />
 
       <ModalRegistroEquipos
         estadoEquipos={formData.estadoModalEquipos}
