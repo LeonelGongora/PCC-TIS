@@ -83,7 +83,10 @@ class PaginaRegistrarseEventos extends Component{
               <NavbarUser />
               <div className="contenedor">
               {this.eventos[0] == null ? (
-                  <h1 className='tituloPagAcept'>No Hay Eventos Disponibles</h1>
+                  <div>
+                  <p className="tituloEvento-home">REGISTRARSE A EVENTOS</p>
+                  <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
+              </div>
               ) : (<>
                     <div className="contenedorTitulo-home">
                       <p className="tituloEvento-home">REGISTRARSE A EVENTOS</p>

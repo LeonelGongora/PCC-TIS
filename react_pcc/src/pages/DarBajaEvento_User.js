@@ -127,7 +127,10 @@ class DarBajaEvento extends Component {
               nombreBanner1={this.state.nombreEventoBann}
             />
             {this.eventos[0] == null ? (
-                  <h1 className='tituloPagAcept'>No Participas De Ningún Evento</h1>
+                  <div>
+                    <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
+                    <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
+                </div>
               ) : (<>
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
