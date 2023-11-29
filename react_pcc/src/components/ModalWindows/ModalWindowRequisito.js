@@ -41,7 +41,7 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
             validationErrors.contenido_requisito = "Este campo es obligatorio"
 
         }else if(!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(values.contenido_requisito)){
-            validationErrors.contenido_requisito = "Ingrese un nombre valido"
+            validationErrors.contenido_requisito = "Ingrese un requisito valido"
         }
 
         //if(!this.state.requisitos.trim()){
@@ -89,8 +89,8 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
                 </div>
                 <div className="registroTipoEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
-                        <p id="textoCuadroAtributo">Nombre*</p>
-                        <input
+                        <p id="textoCuadroAtributo"></p>
+                        <textarea
                         type="text"
                         name="contenido_requisito"
                         className="inputEvento"
