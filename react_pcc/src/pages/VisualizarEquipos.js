@@ -143,6 +143,7 @@ class VisualizarEquipos extends Component{
                             <h4 className="nombreParticipante">{usuario.nombre} </h4>
                             <h4 className="rol"> Participante </h4>
                             <h4 className="correo">{usuario.email}</h4>
+                            <h4 className="dni">{usuario.telefono}</h4>
                             <h4 className="dni">{usuario.ci}</h4>
                         </div>
                         </>
