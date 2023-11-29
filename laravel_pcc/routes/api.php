@@ -63,6 +63,7 @@ Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
 Route::post('/delete-event_sponsor', [Event_SponsorController::class, 'destroy']);
 
 Route::post('/add-notice', [NoticeController::class, 'store']);
+Route::get('/get-notices', [NoticeController::class, 'get']);
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::get('/get-organizador', [OrganizerController::class, 'get']);
@@ -90,11 +91,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//delete-attribute
-
 Route::resource('eventos', EventController::class);
 Route::resource('eventousuarios', EventoUserController::class);
-
 
 Route::post('upload', [ArchivoController::class, 'upload']);
 

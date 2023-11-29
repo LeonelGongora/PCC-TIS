@@ -13,6 +13,30 @@ const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 class Homepage extends Component{
 
+    noticias = []
+
+    constructor(props) {
+        super(props);
+        this.state = {
+          events: [],
+          loader: false,
+          url: "http://127.0.0.1:8000/api/eventoabiertos",
+        };
+    }
+
+    getNotices = async () => {
+        const url = "http://127.0.0.1:8000/api/get-notices"; 
+        const respuesta = await axios.get(url);
+        console.log(respuesta)
+        this.noticias = Array.from(respuesta.data.anuncios);
+        this.setState({ loader: false });
+        //setOrganizadores(respuesta.data.organizadores);
+    }
+    
+    componentDidMount(){
+        this.getNotices();
+    }
+
     render(){
 
         return (
@@ -50,15 +74,17 @@ class Homepage extends Component{
                             <h1 className='tituloNoticias'>Noticias</h1>
                         </div>
                         <div className="ContenedorAnuncios">
+                        {this.noticias.map((noticia, index) => {
+                        return (
+                            <>
                             <div className='anuncio'>
-                                <h1 className='tituloNoticias'>Noticia</h1>
-                                <p className='text'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                <h1 className='tituloNoticias'>Noticia  {index + 1}</h1>
+                                <p className='text'>{noticia.contenido_anuncio} </p>
                             </div>
-                            <div className='anuncio'>
-                                <h1 className='tituloNoticias'>Noticia</h1>
-                                <p className='text'>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                            </div>
-                        </div>
+                            </>
+                         );
+                        })}
+                       </div>
                     </div>
                 </div>
               </div>

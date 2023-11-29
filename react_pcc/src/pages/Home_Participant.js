@@ -8,8 +8,8 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-
 class Home_Participant extends Component{
+
   constructor(props) {
     super(props);
     this.state = {
