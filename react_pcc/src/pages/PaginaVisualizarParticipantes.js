@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
+import imgPred from "../images/afiche.png";
+
 
 import '../App.css';
 import axios from 'axios';
@@ -63,7 +65,7 @@ class PaginaVisualizarParticipantes extends Component{
     irRegistro(id, participantes){
         cookies.set('id_evento', id, {path: "/"});
         console.log(id)
-        if(participantes > 0){
+        if(participantes > 1){
           cookies.set('participantes_equipo', participantes, {path: "/"});
           window.location.href='./equipos';
         }else{
@@ -97,11 +99,20 @@ class PaginaVisualizarParticipantes extends Component{
                       <>
                         <div
                           className="containerEvents"
-                          onClick={() => this.irRegistro(evento.id, evento.participantes_equipo)}
+                          onClick={() =>
+                            this.irRegistro(
+                              evento.id,
+                              evento.participantes_equipo
+                            )
+                          }
                         >
                           <img
                             className="imageEvent"
-                            src={"http://127.0.0.1:8000/images/" + evento.name}
+                            src={
+                              evento.name === null
+                                ? imgPred
+                                : "http://127.0.0.1:8000/images/" + evento.name
+                            }
                             alt="Logo del evento"
                           />
                           <h4 className="nombreEvento">
@@ -112,11 +123,11 @@ class PaginaVisualizarParticipantes extends Component{
                           </h4>
                           <h4>{evento.fecha_limite}</h4>
                           <div>
-                              {evento.participantes_equipo <= 1 ? (
-                                  <h4>Individual</h4>
-                              ) : (
-                                  <h4>Equipo de {evento.participantes_equipo}</h4>
-                              )}
+                            {evento.participantes_equipo <= 1 ? (
+                              <h4>Individual</h4>
+                            ) : (
+                              <h4>Equipo de {evento.participantes_equipo}</h4>
+                            )}
                           </div>
                         </div>
                       </>

@@ -6,6 +6,8 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import imgPred from "../images/afiche.png";
+
 const cookies = new Cookies();
 
 
@@ -24,11 +26,10 @@ class PaginaRegistrarseEventos extends Component{
 
     getEvents = async () => {
 
-        //var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
-
+        var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
-        const events = await axios.get(this.state.url);
+        const events = await axios.get(url2);
         // console.log(events)
 
         this.eventos = Array.from(events.data.events)
@@ -53,8 +54,6 @@ class PaginaRegistrarseEventos extends Component{
             this.eventos[i].fecha_limite = format5
             
         }
-
-        
     };
 
     componentDidMount(){
@@ -65,7 +64,7 @@ class PaginaRegistrarseEventos extends Component{
     irRegistro(id, participantes){
         cookies.set('id_evento', id, {path: "/"});
         console.log(id)
-        if(participantes > 0){ 
+        if(participantes > 1){ 
           cookies.set('participantes_equipo', participantes, {path: "/"});
           window.location.href='./register-to-event-teams';
         }else{
@@ -109,7 +108,10 @@ class PaginaRegistrarseEventos extends Component{
                             <img
                               className="imageEvent"
                               src={
-                                "http://127.0.0.1:8000/images/" + evento.name
+                                evento.name === null
+                                  ? imgPred
+                                  : "http://127.0.0.1:8000/images/" +
+                                    evento.name
                               }
                               alt="Logo del evento"
                             />
@@ -117,14 +119,14 @@ class PaginaRegistrarseEventos extends Component{
                               {evento.nombre_evento}{" "}
                             </h4>
                             <h4 className="tipoEv">
-                              {evento.nombre_tipo_evento}
+                              {evento.event_type.nombre_tipo_evento}
                             </h4>
                             <h4>{evento.fecha_limite}</h4>
                             <div>
                               {evento.participantes_equipo <= 1 ? (
-                                  <h4>Individual</h4>
+                                <h4>Individual</h4>
                               ) : (
-                                  <h4>Equipo de {evento.participantes_equipo}</h4>
+                                <h4>Equipo de {evento.participantes_equipo}</h4>
                               )}
                             </div>
                           </div>
