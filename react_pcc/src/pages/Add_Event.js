@@ -169,7 +169,7 @@ class Add_Event extends Component {
     } else {
       if (
         (!/^(?!-)(?:[2-9]|[1]\d)$/.test(this.state.participantes_equipo) ||
-        this.state.participantes_equipo !== "0") && this.state.isChecked === false 
+        this.state.participantes_equipo === "0") && this.state.isChecked === false 
       ) {
         validationErrors.participantes_equipo =
           "Ingrese un número de participantes válido";
