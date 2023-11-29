@@ -118,7 +118,10 @@ class VisualizarEquipos extends Component{
 
               <div className="contenedor">
               {this.equipos[0] == null ? (
-                <h1 className='tituloPagAcept'>No Hay Equipos en este evento</h1>
+                <div>
+                <p className="tituloEvento-home">{this.state.event.nombre_evento}</p>
+                <h1 className='tituloEvento-home'>No Hay Equipos en este evento</h1>
+                </div>
                 ) : (<>
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">{this.state.event.nombre_evento}</p>
@@ -143,7 +146,6 @@ class VisualizarEquipos extends Component{
                             <h4 className="nombreParticipante">{usuario.nombre} </h4>
                             <h4 className="rol"> Participante </h4>
                             <h4 className="correo">{usuario.email}</h4>
-                            <h4 className="dni">{usuario.telefono}</h4>
                             <h4 className="dni">{usuario.ci}</h4>
                         </div>
                         </>
