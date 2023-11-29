@@ -71,6 +71,9 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         console.log(respuesta)
         cambiarDatosCoach(respuesta.data.nombre_usuario, respuesta.data.apellido_usuario, values.ci);
         let datos_Coach = {}
+        cookies.set('nombre_usuario', respuesta.data.nombre_usuario, {path: "/"});
+        cookies.set('apellido_usuario', respuesta.data.apellido_usuario, {path: "/"});
+
         datos_Coach["nombre_coach"] = respuesta.data.nombre_usuario
         datos_Coach["apellido_coach"] = respuesta.data.apellido_usuario
         datos_Coach["dni_coach"] = values.ci
@@ -161,6 +164,8 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
               let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
               const respuesta = await axios.get(url);
               cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
+              cookies.set('nombre_usuario', respuesta.data.nombre_usuario, {path: "/"});
+              cookies.set('apellido_usuario', respuesta.data.apellido_usuario, {path: "/"});
               setValues({
                 ...values,
                 nombre_usuario: respuesta.data.nombre_usuario,

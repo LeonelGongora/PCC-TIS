@@ -52,6 +52,7 @@ class DarBajaEvento extends Component {
   };
 
   getEvents = async () => {
+    
     this.setState({ loader: true });
     if(cookies.get('id_usuario') === '' || cookies.get('id_usuario')=== undefined){
       console.log(`${cookies.get('id_usuario')} No se encuentra registrado`)
