@@ -6,7 +6,7 @@ import '../stylesheets/ViewEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import img from '../images/Csharp.png';
+import img from '../images/afiche.png';
 import vid from '../images/fondo1.mp4';
 
 const cookies = new Cookies();
@@ -67,7 +67,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento}</h1></div>
             {event.name === null ? (
                 <>
-                <div className='gLogo'><img src="../../logo512.png"></img></div>
+                <div className='gLogo'><img src={img}></img></div>
                 </>
                 
                 ) : (<>

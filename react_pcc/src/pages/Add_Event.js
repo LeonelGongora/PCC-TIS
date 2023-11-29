@@ -213,7 +213,7 @@ class Add_Event extends Component {
       data.append("fecha_limite", this.state.fecha_limite);
       data.append("fecha_fin", this.state.fecha_fin);
       if (this.state.participantes_equipo === "0") {
-        data.append("participantes_equipo", 0);
+        data.append("participantes_equipo", 1);
       } else {
         data.append("participantes_equipo", this.state.participantes_equipo);
       }
