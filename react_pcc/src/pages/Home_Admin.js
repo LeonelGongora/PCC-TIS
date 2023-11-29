@@ -9,7 +9,7 @@ import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrga
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
-
+import imgPred from '../images/afiche.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -272,7 +272,11 @@ class Home_Admin extends Component {
                     >
                       <img
                         className="imageEvent"
-                        src={"http://127.0.0.1:8000/images/" + evento.name}
+                        src={
+                          evento.name === null
+                            ? (imgPred)
+                            : "http://127.0.0.1:8000/images/" + evento.name
+                        }
                         alt="Logo del evento"
                       />
                       <h4 className="nombreEvento">{evento.nombre_evento}</h4>
@@ -281,11 +285,11 @@ class Home_Admin extends Component {
                       </h4>
                       <h4>{evento.fecha_limite}</h4>
                       <div>
-                          {evento.participantes_equipo <= 1 ? (
-                              <h4>Individual</h4>
-                          ) : (
-                              <h4>Equipo de {evento.participantes_equipo}</h4>
-                          )}
+                        {evento.participantes_equipo <= 1 ? (
+                          <h4>Individual</h4>
+                        ) : (
+                          <h4>Equipo de {evento.participantes_equipo}</h4>
+                        )}
                       </div>
                     </div>
                   </>

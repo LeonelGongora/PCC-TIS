@@ -10,6 +10,8 @@ import configApi from '../configApi/configApi';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import imgPred from "../images/afiche.png";
+
 
 const cookies = new Cookies();
 
@@ -112,19 +114,47 @@ class PaginaAdministrarSolicitudes extends Component{
 
                                 { this.eventos.map((evento,id) => {
                                     
-                                    return (<div key={evento.id} className='containerEvents' onClick={()=>this.masDetalles(evento.id, evento.participantes_equipo)}>
-                                     <img className='imageEvent' src={"http://127.0.0.1:8000/images/" + evento.name} alt='Logo del evento' />
-                                     <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
-                                     <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
-                                     <h4>{evento.fecha_limite}</h4>
-                                     <div>
-                                        {evento.participantes_equipo <= 1 ? (
+                                    return (
+                                      <div
+                                        key={evento.id}
+                                        className="containerEvents"
+                                        onClick={() =>
+                                          this.masDetalles(
+                                            evento.id,
+                                            evento.participantes_equipo
+                                          )
+                                        }
+                                      >
+                                        <img
+                                          className="imageEvent"
+                                          src={
+                                            evento.name === null
+                                              ? imgPred
+                                              : "http://127.0.0.1:8000/images/" +
+                                                evento.name
+                                          }
+                                          alt="Logo del evento"
+                                        />
+
+                                        <h4 className="nombreEvento">
+                                          {evento.nombre_evento}
+                                        </h4>
+                                        <h4 className="tipoEv">
+                                          {evento.nombre_tipo_evento}
+                                        </h4>
+                                        <h4>{evento.fecha_limite}</h4>
+                                        <div>
+                                          {evento.participantes_equipo <= 1 ? (
                                             <h4>Individual</h4>
-                                        ) : (
-                                            <h4>Equipo de {evento.participantes_equipo}</h4>
-                                        )}
-                                     </div>
-                                     </div>);
+                                          ) : (
+                                            <h4>
+                                              Equipo de{" "}
+                                              {evento.participantes_equipo}
+                                            </h4>
+                                          )}
+                                        </div>
+                                      </div>
+                                    );
                                 })}
                         </div>
                         </>
