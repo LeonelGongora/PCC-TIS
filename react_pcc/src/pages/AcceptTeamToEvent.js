@@ -227,14 +227,12 @@ class AcceptTeamToEvent extends Component{
                                                     <div className='infoParticipante'>
                                                         <h2>{`${usuario.nombre} ${usuario.apellido}`}</h2>
                                                         <div className="infoMailPart" id="entradaTeam">
-                                                            <p id="textoCuadro">{usuario.email}</p>
-                                                            <input
-                                                            id="inputRegistro"
-                                                            type="text"
-                                                            name="nombre_evento"
-                                                            placeholder={usuario.email}
-                                                            readOnly
-                                                            />
+                                                            <p id="textoCuadro">Email</p>
+                                                            <span id="campo-informacion">{usuario.email}</span>
+                                                        </div>
+                                                        <div className="infoMailPart" id="entradaTeam">
+                                                            <p id="textoCuadro">Telefono</p>
+                                                            <span id='campo-informacion' > {usuario.telefono}</span>
                                                         </div>
                                                         {/* <div className="infoMailPart" id="entradaTeam">
                                                             <p id="textoCuadro">Polera</p>

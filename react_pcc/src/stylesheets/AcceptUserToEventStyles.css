@@ -126,11 +126,19 @@
 .infoParticipante h4{
     padding-bottom: 1vh;
 }
+#campo-informacion{
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 #entradaTeam{
+    display: flex;
     border: 1px solid rgb(175, 175, 175);
     margin-top: 2vh;
     border-radius: 5px;
-    height: 36px;
+    
     width: 100%;
 }
 .imgUserTeam{
