@@ -56,7 +56,7 @@ function Dropdown({
             Registrar patrocinador
           </li>
           <li onClick={() => cambiarEstadoAnuncio(!estadoAnuncio)}>
-            Registrar anuncio
+            Crear anuncio
           </li>
           <li onClick={aceptarUsuarioRedireccionar}>Administrar solicitudes</li>
           <li onClick={editarEventoRedireccionar}>Editar evento</li>

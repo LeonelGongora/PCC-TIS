@@ -57,4 +57,15 @@ class TeamController extends Controller
         return $team;
        }  
     }
+
+    public function getTeams0($event_id){
+
+        return Team::where('event_id', $event_id)->where('solicitud', 0)->get();
+    }
+
+    public function getTeams1($event_id){
+
+        return Team::where('event_id', $event_id)->where('solicitud', 1)->get();
+
+    }
 }

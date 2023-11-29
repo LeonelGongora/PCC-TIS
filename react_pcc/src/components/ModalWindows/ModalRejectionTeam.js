@@ -174,13 +174,13 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
                         </label> */}
                         <div className='extraInfo'>
                             <p id="textoCuadroAtributo">Añadir información</p>
-                            <input
+                        
+                            <textarea
                             type="text"
                             name="razónRechazo"
                             className="inputMasInfo"
                             placeholder="Mayor informacion del rechazo"
-                            onChange={handleRazonChange}
-                            />
+                            onChange={handleRazonChange}/>
                         </div>
                         {errors.razon_rechazo && (
                         <span className="span1Modal">{errors.razon_rechazo}</span>

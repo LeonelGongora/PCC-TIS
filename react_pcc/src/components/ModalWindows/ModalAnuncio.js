@@ -41,7 +41,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
         values.contenido_anuncio
       )
     ) {
-      validationErrors.contenido_anuncio = "Ingrese un nombre valido";
+      validationErrors.contenido_anuncio = "Ingrese un contenido válido";
     } 
     setErrors(validationErrors);
 
@@ -81,7 +81,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
               <textarea
                 name="contenido_anuncio"
                 className="inputEventoAnuncio"
-                placeholder="Ingrese anuncio"
+                placeholder="Escriba el contenido"
                 onChange={handleInput}
 				        rows={10}
 				        cols={50}

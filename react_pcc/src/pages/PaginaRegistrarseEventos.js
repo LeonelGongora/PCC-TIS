@@ -82,37 +82,53 @@ class PaginaRegistrarseEventos extends Component{
             <div className="content">
               <NavbarUser />
               <div className="contenedor">
-                <div className="contenedorTitulo-home">
-                  <p className="tituloEvento-home">REGISTRARSE A EVENTOS</p>
-                </div>
-                <div className="columna1">
-                  <ListaEventos />
+                {!this.eventos == true || this.eventos.length == 0 ? (
+                  <div className="contenedorTitulo-home">
+                    <p className="tituloEvento-home">
+                      NO HAY EVENTOS REGISTRADOS
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="contenedorTitulo-home">
+                      <p className="tituloEvento-home">REGISTRARSE A EVENTOS</p>
+                    </div>
+                    <div className="columna1">
+                      <ListaEventos />
 
-                  {this.eventos.map((evento, id) => {
-                    return (
-                      
-                        <div key={evento.id}
-                          className="containerEvents"
-                          onClick={() => this.irRegistro(evento.id, evento.participantes_equipo)}
-                        >
-                          <img
-                            className="imageEvent"
-                            src={"http://127.0.0.1:8000/images/" + evento.name}
-                            alt="Logo del evento"
-                          />
-                          <h4 className="nombreEvento">
-                            {evento.nombre_evento}{" "}
-                          </h4>
-                          <h4 className="tipoEv">
-                            {evento.event_type.nombre_tipo_evento}
-                          </h4>
-                          <h4>{evento.fecha_limite}</h4>
-                          <h4>{evento.fecha_fin}</h4>
-                        </div>
-                      
-                    );
-                  })}
-                </div>
+                      {this.eventos.map((evento, id) => {
+                        return (
+                          <div
+                            key={evento.id}
+                            className="containerEvents"
+                            onClick={() =>
+                              this.irRegistro(
+                                evento.id,
+                                evento.participantes_equipo
+                              )
+                            }
+                          >
+                            <img
+                              className="imageEvent"
+                              src={
+                                "http://127.0.0.1:8000/images/" + evento.name
+                              }
+                              alt="Logo del evento"
+                            />
+                            <h4 className="nombreEvento">
+                              {evento.nombre_evento}{" "}
+                            </h4>
+                            <h4 className="tipoEv">
+                              {evento.event_type.nombre_tipo_evento}
+                            </h4>
+                            <h4>{evento.fecha_limite}</h4>
+                            <h4>{evento.fecha_fin}</h4>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

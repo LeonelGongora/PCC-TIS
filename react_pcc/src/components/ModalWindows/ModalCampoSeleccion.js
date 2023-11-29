@@ -3,8 +3,10 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
+const plus = <FontAwesomeIcon icon={faSquarePlus} size="lg" style={{color: "#000000",}} />
 
 function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion, id_evento, atributos}){
 
@@ -122,80 +124,80 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
     }
 
     return (
-        estadoCampoSeleccion && (
-            <div className="Overlay">
-              <div className="ContenedorModal">
-                <div className="EncabezadoModal">
-                  <div className="tituloEvento">
-                    <h1>Añadir campo de seleccion</h1>
-                  </div>
-                  <button
-                    onClick={salirVentanaModal}
-                    className="BotonSalir"
-                  >
-                    {salir}
-                  </button>
+      estadoCampoSeleccion && (
+        <div className="fondo-camposelec">
+          <div className="Overlay-CampoSelec">
+            <div className="ContenedorModal">
+              <div className="EncabezadoModal">
+                <div className="tituloEvento">
+                  <h1>Añadir campo de seleccion</h1>
                 </div>
-                <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
-                        <p id="textoCuadroAtributo">Nombre*</p>
-                        <input
-                            type="text"
-                            name="nombre_atributo"
-                            className="inputEvento"
-                            placeholder="Ingrese nombre"
-                            onChange={handleInput}
-                        />
-                        {errors.nombre_atributo && (
-                        <span className="span1Modal">{errors.nombre_atributo}</span>
-                        )}
+                <button onClick={salirVentanaModal} className="BotonSalir">
+                  {salir}
+                </button>
+              </div>
+              <div className="registroTipoEvento">
+                <form onSubmit={saveTypeEvent} id="form1">
+                  <p id="textoCuadroAtributo">Nombre*</p>
+                  <input
+                    type="text"
+                    name="nombre_atributo"
+                    className="inputEvento"
+                    placeholder="Ingrese nombre"
+                    onChange={handleInput}
+                  />
+                  {errors.nombre_atributo && (
+                    <span className="span1Modal">{errors.nombre_atributo}</span>
+                  )}
 
-                        <p id="textoCuadroAtributo">Opciones*</p>
-                        <input
-                            type="text"
-                            id="opcion"
-                            name="opcion"
-                            className="inputEvento"
-                            placeholder="Ingrese opcion"
-                        />
-                        {errors.opcion && (
-                        <span className="span1Modal">{errors.opcion}</span>
-                        )}
+                  <p id="textoCuadroAtributo">Opciones*</p>
+                  <input
+                    type="text"
+                    id="opcion"
+                    name="opcion"
+                    className="inputEvento"
+                    placeholder="Ingrese opcion"
+                  />
+                  {errors.opcion && (
+                    <span className="span1Modal">{errors.opcion}</span>
+                  )}
 
-                        {opciones.map((opcion) => {
-                        return (<>
-
+                  {opciones.map((opcion) => {
+                    return (
+                      <>
                         <p id="textoCuadroAtributo">Opcion*</p>
                         <input
-                            type="text"
-                            id="opcion"
-                            name= {opcion.name}
-                            className="inputEvento"
-                            placeholder="Ingrese opcion"
+                          type="text"
+                          id="opcion"
+                          name={opcion.name}
+                          className="inputEvento"
+                          placeholder="Ingrese opcion"
                         />
                         {errors[opcion.name] && (
-                        <span className="span1Modal">{errors[opcion.name]}</span>
+                          <span className="span1Modal">
+                            {errors[opcion.name]}
+                          </span>
                         )}
+                      </>
+                    );
+                  })}
 
-                        </>);
-                        })}
-
-                        <button
-                        className="BotonRegistrar"
-                        type="button"
-                        onClick={agregarOpcion}
-                        >
-                           +
-                        </button>
-
-                    </form>
-                    <button form="form1" type="submit" className="BotonRegistrar">
-                        Agregar
-                    </button>
-                </div>
+                  <button
+                    className="BotonRegistrar"
+                    type="button"
+                    onClick={agregarOpcion}
+                  >
+                    {plus}
+                  </button>
+                </form>
+                <button form="form1" type="submit" className="BotonRegistrar">
+                  Agregar
+                </button>
               </div>
             </div>
-        )
+          </div>
+        </div>
+      )
     );
 }
 

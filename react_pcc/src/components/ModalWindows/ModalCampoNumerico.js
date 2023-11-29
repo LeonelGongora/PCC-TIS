@@ -11,11 +11,12 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id_evento, atributos}){
 
     const [values, setValues] = useState({
-        nombre_atributo : "",
-        rango_bajo : "",
-        rango_alto : "",
-        con_rango: 0,
+      nombre_atributo: "",
+      rango_bajo: "",
+      rango_alto: "",
+      con_rango: 0,
     });
+    const [isChecked, setChecked] = useState(true);
 
     const [errors, setErrors] = useState({});
 
@@ -38,15 +39,19 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
     const changeChecked = (e) => {
 
         if(e.target.checked === true){
-
             document.querySelectorAll(".inputEvento")[1].readOnly = true
 
             document.querySelectorAll(".inputEvento")[2].readOnly = true
             setValues({...values, con_rango : 0});
+            setChecked((prevState) => !prevState);
+
         }else{
+            
             document.querySelectorAll(".inputEvento")[1].readOnly = false
             document.querySelectorAll(".inputEvento")[2].readOnly = false
-            setValues({...values, con_rango : 1});
+            setValues({ ...values, con_rango: 1 });
+            setChecked({ isChecked: false });
+            setChecked((prevState) => !prevState);
         }
     }
 
@@ -150,7 +155,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                             <span id="tituloIndividualAdd">Sin rango</span>
                         </div>
 
-                        <p id="textoCuadroAtributo">Rango Bajo*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Bajo*</p>
                         <input
                             type="number"
                             name="rango_bajo"
@@ -163,7 +168,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.rango_bajo}</span>
                         )}
 
-                        <p id="textoCuadroAtributo">Rango Alto*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Alto*</p>
                         <input
                             type="number"
                             name="rango_alto"
