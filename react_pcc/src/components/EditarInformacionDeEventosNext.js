@@ -313,7 +313,8 @@ class EditarInformacionDeEventosNext extends Component{
                 }
               })
             }
-            
+
+            window.location.href = './paginaEditarEventos';
             //axios.post(url, data).then(res => {
               //if(res.data.status === 200){
                 //console.log(res);

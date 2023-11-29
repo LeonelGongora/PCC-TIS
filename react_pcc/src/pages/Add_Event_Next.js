@@ -411,7 +411,7 @@ class Add_Event_Next extends Component{
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">
                       {" "}
-                      Guardar
+                      Registrar
                     </button>
                   </div>
                 </form>

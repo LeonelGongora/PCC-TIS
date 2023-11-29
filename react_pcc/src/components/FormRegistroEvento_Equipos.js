@@ -12,7 +12,6 @@ import ModalRegistroEquipos from './ModalWindows/ModalRegistroEquipos';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 import ModalWarningDNI from './ModalWindows/ModalWarningDNI';
 import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
-import ModalContraseñas from './ModalWindows/ModalContraseñas';
 
 const cookies = new Cookies();
 
@@ -25,7 +24,7 @@ function FormRegistroEvento_Equipos(){
   const idu = cookies.get('id_usuario');
   const se_Registro = cookies.get('se_Registro');
   const participantes_equipo = cookies.get('participantes_equipo');
-  const datos_Coach = cookies.get('datos_Coach');
+
   
   const archivoInput = useRef(null);
   const [mostrarRequisitos, setMostrarRequisitos] = useState(true);// Para mostrar Requisitos
@@ -243,9 +242,6 @@ function FormRegistroEvento_Equipos(){
    
     if(se_Registro){
       setFormData({ estadoModal: false });
-      setNombreCoach(datos_Coach.nombre_coach)
-      setApellidoCoach(datos_Coach.apellido_coach)
-      setDniCoach(datos_Coach.dni_coach)
     }
   }, [])
 
@@ -326,11 +322,6 @@ function FormRegistroEvento_Equipos(){
         cambiarDatosCoach = {cambiarDatosCoach}
       />
 
-      <ModalContraseñas
-        estadoContraseña={formData.estadoContraseña}
-        cambiarEstadoContraseña={cambiarEstadoContraseña}
-      />
-
       <div className='header'>
         <h2 className='titulo-Formulario-Registro-Evento'>Registro de Equipo</h2>
       </div>
@@ -379,31 +370,7 @@ function FormRegistroEvento_Equipos(){
       </div>
       <div className='registro'>
         <form className="form_name" id='form_name'>
-        <div className='coach'>
-              <p className='coachName'>Coach</p>
-              <div className='camposCoach'>
-                <p>Nombre del coach</p>
-                <input
-                id='input_registro_equipo'
-                type='text'
-                name='nameCoach'
-                placeholder='Ingrese su nombre'
-                value={`${nombre_coach} ${apellido_coach}`}
-                readOnly
-                />
-              </div>
-              <div className='camposCoach'>
-                <p>DNI del coach</p>
-                <input
-                id='input_registro_equipo'
-                type='number'
-                name='DNICoach'
-                placeholder='Ingrese el DNI del coach'
-                value={dni_coach}
-                readOnly
-                />
-              </div>
-            </div>
+
             <div className='equipo'>
               <p className='coachName'>Equipo</p>
               <div className='camposEquipo'>

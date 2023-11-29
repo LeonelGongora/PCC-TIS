@@ -70,16 +70,11 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         const respuesta = await axios.get(url);
         console.log(respuesta)
         cambiarDatosCoach(respuesta.data.nombre_usuario, respuesta.data.apellido_usuario, values.ci);
-        let datos_Coach = {}
         cookies.set('nombre_usuario', respuesta.data.nombre_usuario, {path: "/"});
         cookies.set('apellido_usuario', respuesta.data.apellido_usuario, {path: "/"});
 
-        datos_Coach["nombre_coach"] = respuesta.data.nombre_usuario
-        datos_Coach["apellido_coach"] = respuesta.data.apellido_usuario
-        datos_Coach["dni_coach"] = values.ci
         cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
         cookies.set('se_Registro', true, {path: "/"});
-        cookies.set('datos_Coach', datos_Coach, {path: "/"});
         cambiarEstado1(false);
       }
     }

@@ -43,7 +43,7 @@ function ModalCampoFecha({estadoCampoFecha, cambiarEstadoCampoFecha, id_evento, 
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
-        }else{
+        }else{/* 
             for (let index = 0; index < atributos.length; index++) {
 
                 let atributo = atributos[index].nombre_atributo.trim()
@@ -54,6 +54,7 @@ function ModalCampoFecha({estadoCampoFecha, cambiarEstadoCampoFecha, id_evento, 
                     break;
                 }
             }
+            */
         }
 
         setErrors(validationErrors);
