@@ -3,6 +3,7 @@ import React from 'react';
 import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Add_Event from './Add_Event';
 import "../stylesheets/RegisterEventAdminStyles.css";
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 
 function Register_Event_Admin() {
   return (
@@ -10,7 +11,7 @@ function Register_Event_Admin() {
       <div className="background-image-Manu"></div>
       <div className="content-Manu">
         <div className='navegacion'>
-          <NavbarCreateEvent/>          
+          <NavbarAdmin/>          
         </div>
         <div className='contenido-Manu'>
         <Add_Event/>

@@ -8,6 +8,7 @@ import ModalWindowRequisito from './ModalWindows/ModalWindowRequisito';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import NavbarAdmin from './NavBars/NavbarAdmin';
 
 const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
 
@@ -324,6 +325,7 @@ class EditarInformacionDeEventosNext extends Component{
     render(){
         return (
           <>
+            <NavbarAdmin/>
             <div className="contenedorMaximo"></div>
             <div className="editarEventos">
               {
@@ -362,16 +364,16 @@ class EditarInformacionDeEventosNext extends Component{
                           readOnly
                         />
                       </div>
-                      <button
+                      {/* <button
                         className="botonEliminar"
                         type="button"
                         onClick={() => this.eliminarAtributo(atributo.id)}
                       >
                         {cancelar}
-                      </button>
+                      </button> */}
                     </div>
                   ))}
-                  <button
+                  {/* <button
                     className="botonAgregarEdit"
                     type="button"
                     onClick={() =>
@@ -379,7 +381,7 @@ class EditarInformacionDeEventosNext extends Component{
                     }
                   >
                     Agregar Campo +
-                  </button>
+                  </button> */}
 
                   <h1 className="textoTituloEdiNext">Requisitos</h1>
                   {this.state.requisitos.map((requisito) => (
