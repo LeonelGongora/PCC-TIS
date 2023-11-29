@@ -10,13 +10,16 @@ const cookies = new Cookies();
 function NavbarUser(){
 
   const se_Registro = cookies.get('se_Registro');
+  const nombre_usuario_cookies = cookies.get('nombre_usuario');
+  const apellido_usuario_cookies = cookies.get('apellido_usuario');
 
   const [nombre_usuario, setNombreUsuario] = useState("");
   const [apellido_usuario, setApellidoUsuario] = useState("");
 
   useEffect(()=>{
     if(se_Registro){
-
+      setNombreUsuario(nombre_usuario_cookies)
+      setApellidoUsuario(apellido_usuario_cookies)
     }
   }, []);
 
@@ -58,7 +61,7 @@ function NavbarUser(){
             </a>
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>
-              {`${nombre_usuario} ${apellido_usuario}`} 
+              {`${nombre_usuario} ${apellido_usuario}`} a
               </button>
               {isOpen && (
                 <ul className="dropdown-menu">

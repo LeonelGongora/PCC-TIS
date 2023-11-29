@@ -73,6 +73,10 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
             cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
             let datos_Coach = {}
+
+            cookies.set('nombre_usuario', true, {path: "/"});
+            cookies.set('apellido_usuario', datos_Coach, {path: "/"});
+            
             datos_Coach["nombre_coach"] = values.nombre
             datos_Coach["apellido_coach"] = values.apellido
             datos_Coach["dni_coach"] = values.ci

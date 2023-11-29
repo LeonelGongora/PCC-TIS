@@ -32,14 +32,18 @@ function NavbarAdmin({
   }
 
   useEffect(()=>{
+    console.log(se_Registro)
     if(se_Registro){
-      setNombreUs(idu.nombre_us)
-      setApellidoUs(idu.apellido_us)
+      setNombreUsuario(nombre_usuario_cookies)
+      setApellidoUsuario(apellido_usuario_cookies)
     }
   }, [])
 
-  const [nombre_us, setNombreUs] = useState("");
-  const [apellido_us, setApellidoUs] = useState("");
+  const nombre_usuario_cookies = cookies.get('nombre_usuario');
+  const apellido_usuario_cookies = cookies.get('apellido_usuario');
+
+  const [nombre_usuario, setNombreUsuario] = useState("");
+  const [apellido_usuario, setApellidoUsuario] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -79,7 +83,7 @@ function NavbarAdmin({
             </a>
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>
-                Nombre Usuario{" "}
+              {`${nombre_usuario} ${apellido_usuario}`} a
               </button>
               {isOpen && (
                 <ul className="dropdown-menu">

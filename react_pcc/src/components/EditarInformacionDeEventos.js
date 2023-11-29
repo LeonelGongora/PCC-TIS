@@ -54,6 +54,7 @@ class EditarInformacionDeEventos extends Component{
           id_evento: response.data.id,
           atributos: response.data.attributes,
           requisitos: response.data.requirements,
+          
           organizadores_de_evento : response.data.organizers,
           patrocinadores_de_evento : response.data.sponsors,
           image: response.data.name
