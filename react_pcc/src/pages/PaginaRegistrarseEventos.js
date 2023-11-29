@@ -13,6 +13,7 @@ class PaginaRegistrarseEventos extends Component{
 
 
   se_Registro = cookies.get('se_Registro');
+  id = cookies.get('id_usuario');
 
     eventos = []
 
@@ -23,7 +24,7 @@ class PaginaRegistrarseEventos extends Component{
     };
 
     getEvents = async () => {
-
+      if(this.se_Registro){
         var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
@@ -52,6 +53,38 @@ class PaginaRegistrarseEventos extends Component{
             this.eventos[i].fecha_limite = format5
             
         }
+      }else{
+
+        this.setState({loader:true});
+        //const events = await axios.get(this.state.url);
+        const events = await axios.get(this.state.url);
+        // console.log(events)
+
+        this.eventos = Array.from(events.data.events)
+        // console.log(this.eventos)
+        
+        this.setState({ events: events.data, loader:false});
+        var i;
+        var fecha;
+        var fecha1;
+
+        for (i = 0; i < this.eventos.length; i++) {
+            fecha = new Date(this.eventos[i].fecha_fin)
+            var dia = fecha.getDate() + 1
+            var mes = fecha.getMonth() + 1
+            let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
+            this.eventos[i].fecha_fin = format4
+
+            fecha1 = new Date(this.eventos[i].fecha_limite)
+            var dia1 = fecha1.getDate() + 1
+            var mes1 = fecha1.getMonth() + 1
+            let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
+            this.eventos[i].fecha_limite = format5
+            
+        }
+        
+
+      }
     };
 
     componentDidMount(){
