@@ -155,10 +155,6 @@ function VisualizarInformacionDeEventosAdmin({props}){
                <p id="textoCuadroTelf">Telefono</p>
                <div className='telefono'>{event.numero_contacto} </div>
             </div>
-            <div className='gEmail'>
-                <p id="textoCuadroEmail">Email</p>
-                <div className='email'> blackcloud@gmail.com </div>
-            </div>
             <div className='vacio'></div>
             </div>
             
