@@ -99,10 +99,13 @@ class PaginaAdministrarSolicitudes extends Component{
                    estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    <div className="contenedor">
                    {this.eventos[0] == null ? (
-                        <h1 className='tituloPagAcept'>No Hay Eventos Registrados</h1>
+                        <div>
+                        <p className="tituloEvento-home">ADMINISTRAR SOLICITUDES A EVENTOS</p>
+                        <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
+                      </div>
                     ) : (<>
                         <div className="contenedorTitulo-home">
-                          <p className="tituloEvento-home">ACEPTAR SOLICITUDES A EVENTOS</p>
+                          <p className="tituloEvento-home">ADMINISTRAR SOLICITUDES A EVENTOS</p>
                         </div>
                         <div className="columna1">
                             <ListaEventos/>
