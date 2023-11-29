@@ -27,6 +27,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         telefono: '',
     });
 
+    const [usuarios, setUsuarios] = useState({});
     const [errors, setErrors] = useState({});
 
     const handleInput = (e) => {
@@ -55,6 +56,57 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         e.preventDefault();
 
         const validationErrors = {};
+
+        
+    if (!values.nombre.trim()) {
+      validationErrors.nombre = "Este campo es obligatorio"
+
+
+    } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre)) {
+      validationErrors.nombre = "Ingrese nombre(s) valido";
+    }
+
+    if (!values.apellido.trim()) {
+      validationErrors.apellido = "Este campo es obligatorio";
+    } else if (
+      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(
+        values.apellido
+      )
+    ) {
+      validationErrors.apellido = "Ingrese apellido(s) valido(s)";
+    }
+
+    if (!values.email.trim()) {
+      validationErrors.email = "Este campo es obligatorio"
+
+    } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
+      validationErrors.email = "Ingrese correo valido";
+    } else {
+      for (let index = 0; index < usuarios.length; index++) {
+        let email = usuarios[index].email.trim();
+        let nuevo_email = values.email.trim();
+
+        if (email === nuevo_email) {
+          validationErrors.email =
+            "Ya existe un usuario registrado con este email";
+          break;
+        }
+      }
+    }
+
+    if (!values.password.trim()) {
+      validationErrors.password = "Este campo es obligatorio"
+
+    } else if (!/[A-Z|a-z|0-9|áéíóú]{3,50}\S$/.test(values.password)) {
+      validationErrors.password = "Ingrese una contraseña valida";
+    } else {
+    }
+    
+    if (!values.telefono.trim()) {
+      validationErrors.telefono = "Este campo es obligatorio";
+    } else if (!/^[7|6][0-9]{7}$/.test(values.telefono)) {
+      validationErrors.telefono = "Ingrese un numero valido";
+    }
 
         setErrors(validationErrors);
 

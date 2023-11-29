@@ -84,8 +84,8 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='gRequisitos'>
                 <p id="textoCuadroRequerimientos">Requisitos</p>
                 <div className='requerimientos'>
-                    {requisitos.map((r) => {  
-                    return (<div key={r.id}>
+                    {requisitos.map((r, index) => {  
+                    return (<div key={r.id}>{index + 1}. &nbsp;
                         {r.contenido_requisito} 
                         {/* Este taller contendra Este taller contendra Este taller contendra Este taller contendra */}
                     </div>);
