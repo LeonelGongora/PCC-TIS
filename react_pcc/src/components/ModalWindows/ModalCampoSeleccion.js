@@ -89,6 +89,8 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
             console.log(opcion.name)
             if(!opcion.value.trim()){
                 validationErrors[opcion.name] = "Este campo es obligatorio"
+            }else if(!/^[A-Za-zÑñáéíóú0-9][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(opcion.value)){
+                validationErrors[opcion.name] = "Ingrese un nombre con caracteres alfanumericos"
             }
         })
 

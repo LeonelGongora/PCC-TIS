@@ -4,8 +4,6 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
-
-
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id_evento, atributos}){
@@ -64,7 +62,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
         if(!values.nombre_atributo.trim()){
             validationErrors.nombre_atributo = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }else{
             for (let index = 0; index < atributos.length; index++) {
@@ -80,10 +78,29 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
         }
 
         if(values.con_rango === 1){
-            if(values.rango_bajo > values.rango_alto){
-                validationErrors.rango_bajo = "El limite inferior no puede ser ser mayor al superior"
-                validationErrors.rango_alto = "El limite inferior no puede ser ser mayor al superior"
+
+            if(!values.rango_bajo.trim()){
+                validationErrors.rango_bajo = "Este campo es obligatorio"
+                
+            }else if(values.rango_alto){
+                if(parseInt(values.rango_bajo) > parseInt(values.rango_alto)){
+
+                    validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
+                    validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
+                }
             }
+
+            if(!values.rango_alto.trim()){
+                validationErrors.rango_alto = "Este campo es obligatorio"
+                
+            }else if(values.rango_bajo){
+                if(parseInt(values.rango_bajo) > parseInt(values.rango_alto)){
+
+                    validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
+                    validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
+                }
+            }
+            
         }
 
         setErrors(validationErrors);
@@ -152,10 +169,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                                 onChange={changeChecked}
                                 defaultChecked = {true}
                             />
-                            <span id="tituloIndividualAdd">Sin rango</span>
+                            <span id="tituloIndividualAdd">Sin resticcion</span>
                         </div>
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Bajo*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite inferior*</p>
                         <input
                             type="number"
                             name="rango_bajo"
@@ -168,7 +185,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.rango_bajo}</span>
                         )}
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Rango Alto*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite superior*</p>
                         <input
                             type="number"
                             name="rango_alto"

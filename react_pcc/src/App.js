@@ -35,7 +35,8 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path='/' element={<Home_Admin/>} />
+      <Route path='/' element={<Homepage/>} />
+      <Route path='/home-admin' element={<Home_Admin/>} />
       <Route path='/home-participant' element={<Home_Participant/>} />
       
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />

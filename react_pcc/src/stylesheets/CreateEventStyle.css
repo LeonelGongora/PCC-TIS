@@ -25,8 +25,18 @@
     height: 36px;
     width: 80%;
 }
-
-
+#entrada-area{
+    border: 1px solid rgb(175, 175, 175);
+    margin-left: 3vw;
+    margin-right: 4vw;
+    margin-top: 3vh;
+    border-radius: 5px;
+    width: 80%;
+}
+#entrada-area:focus-within {
+    border: 2px solid blue;
+    color: blue;
+}
 #error {
     border: 2px solid red;
     margin-left: 4vw;
