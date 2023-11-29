@@ -16,6 +16,7 @@ const EventoAbierto_Api_Url = configApi.EVENTOABIERTOS_USUARIO_API_URL;
 
 function VisualizarInformacionDeEventosAdmin({props}){
 
+    const [actividades, setActividades] = useState ( [] );
     const [event, setEvent] = useState ( [] );
     // const [id, setId] = useState ('8');
     // const id = props.id_evento;
@@ -120,7 +121,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
                     </div>);
                     })}
-            {Evento.map((p) => {
+            {actividades.map((p) => {
                 return (<div key={p.id}>
                     <div className='gEtapa'>
                         <p id="textoCuadroFinal">Etapa 1</p>
@@ -138,8 +139,6 @@ function VisualizarInformacionDeEventosAdmin({props}){
                     </div>);
             })}
             
-
-
             <div className='vacio1'></div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>
