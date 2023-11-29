@@ -126,10 +126,9 @@ class DarBajaEvento extends Component {
               cambiarEstadoBanner1={this.cambiarEstadoBanner}
               nombreBanner1={this.state.nombreEventoBann}
             />
-            {!this.eventos == true || this.eventos.length == 0 ? (
-              <p className="tituloEvento-home">NO HAY EVENTOS REGISTRADOS</p>
-            ) : (
-              <>
+            {this.eventos[0] == null ? (
+                  <h1 className='tituloPagAcept'>No Participas De Ningún Evento</h1>
+              ) : (<>
                 <div className="contenedorTitulo-home">
                   <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
                 </div>
@@ -150,7 +149,13 @@ class DarBajaEvento extends Component {
                         <h4 className="nombreEvento">{evento.nombre_evento}</h4>
                         <h4 className="tipoEv">{evento.nombre_tipo_evento}</h4>
                         <h4>{evento.fecha_limite}</h4>
-                        <h4>{evento.fecha_fin}</h4>
+                        <div>
+                            {evento.participantes_equipo <= 1 ? (
+                                <h4>Individual</h4>
+                            ) : (
+                                <h4>Equipo de {evento.participantes_equipo}</h4>
+                            )}
+                        </div>
                         <button
                           className="botonDarBajaEvento"
                           type="button"

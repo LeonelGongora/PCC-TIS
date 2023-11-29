@@ -98,6 +98,9 @@ class PaginaAdministrarSolicitudes extends Component{
                    estadoOrganizador={ this.estadoModalOrganizador} cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
                    estadoPatrocinador={ this.estadoModalPatrocinador} cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}/>
                    <div className="contenedor">
+                   {this.eventos[0] == null ? (
+                        <h1 className='tituloPagAcept'>No Hay Eventos Registrados</h1>
+                    ) : (<>
                         <div className="contenedorTitulo-home">
                           <p className="tituloEvento-home">ACEPTAR SOLICITUDES A EVENTOS</p>
                         </div>
@@ -111,10 +114,18 @@ class PaginaAdministrarSolicitudes extends Component{
                                      <h4 className='nombreEvento'>{evento.nombre_evento}</h4>
                                      <h4 className='tipoEv'>{evento.nombre_tipo_evento}</h4>
                                      <h4>{evento.fecha_limite}</h4>
-                                     <h4>{evento.fecha_fin}</h4>
+                                     <div>
+                                        {evento.participantes_equipo <= 1 ? (
+                                            <h4>Individual</h4>
+                                        ) : (
+                                            <h4>Equipo de {evento.participantes_equipo}</h4>
+                                        )}
+                                     </div>
                                      </div>);
                                 })}
                         </div>
+                        </>
+                        )}
                     </div>
                 </div>
             </div>

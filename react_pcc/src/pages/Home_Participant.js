@@ -74,14 +74,9 @@ class Home_Participant extends Component{
             <div className="content">
               <NavbarUser />
               <div className="contenedor">
-                {!this.eventos == true || this.eventos.length == 0 ? (
-                  <div className="contenedorTitulo-home">
-                    <p className="tituloEvento-home">
-                      NO HAY EVENTOS REGISTRADOS
-                    </p>
-                  </div>
-                ) : (
-                  <>
+                {this.eventos[0] == null ? (
+                  <h1 className='tituloPagAcept'>No Hay Eventos Disponibles</h1>
+                ) : (<>
                     <div className="contenedorTitulo-home">
                       <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
                     </div>
@@ -109,7 +104,13 @@ class Home_Participant extends Component{
                                 {evento.nombre_tipo_evento}
                               </h4>
                               <h4>{evento.fecha_limite}</h4>
-                              <h4>{evento.fecha_fin}</h4>
+                              <div>
+                                  {evento.participantes_equipo <= 1 ? (
+                                      <h4>Individual</h4>
+                                  ) : (
+                                      <h4>Equipo de {evento.participantes_equipo}</h4>
+                                  )}
+                              </div>
                             </div>
                           </>
                         );
