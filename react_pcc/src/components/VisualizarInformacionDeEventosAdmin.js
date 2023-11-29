@@ -97,9 +97,15 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='tipoDeEvento'>{tipoevent.nombre_tipo_evento} </div>
             </div>
             <div className='gNParticipantes'>
-                <p id="textoCuadroParticipantes">Modalidad</p>
-                <div className='participantes'>{event.participantes_equipo}</div>
-            </div>
+    <p id="textoCuadroParticipantes">Modalidad</p>
+    <div className='participantes'>
+        {event.participantes_equipo <= 1 ? (
+            <div>Individual</div>
+        ) : (
+            <div>Equipos de {event.participantes_equipo}</div>
+        )}
+    </div>
+</div>
             {cerrado == true ? (
                 <div className='fechaLimite'>La Fecha de inscripciones estan Cerradas</div>  
                 ) : (
@@ -116,14 +122,15 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <p id="textoCuadroFinal">Fin de Evento</p>
                 <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
-            
+            <div className='prueba'>
             {actividades.map((a) => {
-                return (<div key={a.id}>
+                return (<div className='padre'key={a.id}>
                     <div className='gEtapa'>
                         <p id="textoCuadroFinal">{a.nombre_actividad}</p>
                         <p className='desc' id="textoCuadroFinal">Descripcion</p>
                         <div className='etapaDesc'>{a.descripcion_actividad} </div>
                     </div>
+                    <div className='etapas'>
                     <div className='gIniEtapa'>
                         <p id="textoCuadroFinal">Inicio</p>
                         <div className='etapaIni'>{a.fecha_inicio_actividad}</div>
@@ -132,8 +139,10 @@ function VisualizarInformacionDeEventosAdmin({props}){
                         <p id="textoCuadroFinal">Final</p>
                         <div className='etapaFin'>{a.fecha_fin_actividad}</div>
                     </div>
+                    </div>
                     </div>);
             })}
+            </div>
             
             <div className='vacio1'></div>
             <div className='gOrg'>
