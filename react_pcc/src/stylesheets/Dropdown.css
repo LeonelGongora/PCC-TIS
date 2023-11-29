@@ -47,6 +47,6 @@
 }
 
 /* Display the dropdown menu when the button is clicked */
-.dropdown-container:hover .dropdown-menu {
+.dropdown-container .dropdown-menu {
   display: block;
 }

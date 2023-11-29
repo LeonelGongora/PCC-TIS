@@ -228,7 +228,7 @@ class Home_Admin extends Component {
           />
           <div className="contenedor">
           {this.eventos[0] == null ? (
-              <h1 className='tituloPagAcept'>No Hay Eventos Registrados</h1>
+              <h1 className='tituloPagAcept'>No Hay Eventos Disponibles</h1>
           ) : (<>
             <div className="contenedorTitulo-home">
               <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
