@@ -33,8 +33,7 @@
                          'requisitos requisitos requisitos requisitos requisitos tipoEvento tipoEvento tipoEvento tipoEvento'
                          'requisitos requisitos requisitos requisitos requisitos participantes participantes participantes participantes'
                          'limite limite limite inicio inicio inicio final final final'
-                         'etapa etapa etapa etapa etapa etapa etapa etapa etapa'
-                         'etapaIni etapaIni etapaIni etapaIni vacio1 etapaFin etapaFin etapaFin etapaFin'
+                         'prueba prueba prueba prueba prueba prueba prueba prueba prueba'
                          'org org org org org org org org org'
                          'pat pat pat pat pat pat pat pat pat'
                          'contacto contacto contacto contacto contacto contacto contacto contacto contacto'
@@ -293,12 +292,24 @@
     background-color: #1B3C61;
     color: white;
 }
+.prueba{
+    grid-area: prueba;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.39);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 50px;
+    border-radius: 20px;
+    margin-right: 40px;
+    margin-left: 40px;
+    border: 2px solid;
+}
 .gEtapa{
-    grid-area: etapa; 
-    justify-self: center;
+    display: block;
+    
     color: white;
-    padding-left: 50px;
-    width: 50%;
+
 }
 .gEtapa p{
     text-align: center;
@@ -306,15 +317,15 @@
     color: rgb(0, 0, 0);
     background-color: white;
     padding: 10px;
-    margin-left: 30%;
     border-radius: 30px;
     border: 1px solid;
     font-size: 1.1rem;
     width: 40%;
-    
+    margin-left: 27%;
 }
 .desc{
     margin-top: 20px;
+    
 }
 .etapaDesc{
     text-align: center;
@@ -322,14 +333,18 @@
     background-color: white;
     padding: 10px;
     margin-top: 10px;
-    margin-left: 0px;
     border-radius: 30px;
     border: 1px solid;
     font-size: 1.1rem;
+    width: 400px;
+    margin-left: 15%;
+}
+.etapas{
+    display: flex;
 }
 .gIniEtapa{
-    grid-area: etapaIni; 
     margin-top: 10px;
+    width: 300px;
 }
 .gIniEtapa p{
     text-align: center;
@@ -339,8 +354,6 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 20%;
-    margin-right: 30%;
     margin-top: 2%;
     margin-bottom: 2%;
     border: 1px solid;
@@ -356,12 +369,11 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    margin-left: 20%;
-    margin-right: 30%;
 }
 .gFinEtapa{
-    grid-area: etapaFin; 
     margin-top: 10px;
+    margin-left: 30%;
+    width: 300px;
 }
 .gFinEtapa p{
     text-align: center;
@@ -371,8 +383,6 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 18%;
-    margin-right: 18%;
     margin-top: 2%;
     margin-bottom: 2%;
     border: 1px solid;
@@ -388,21 +398,18 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    margin-left: 18%;
-    margin-right: 18%;
 }
 .gOrg{
     grid-area: org;
     max-width: 100%;
     border: 2px solid;
     border-radius: 10px;
-    border-color: rgb(255, 255, 255);
-    color: white;
     margin-bottom: 5%;
     margin-top: 5%;
     font-size: 1.4rem;
     margin-left: 5%;
     margin-right: 5%;
+    background-color: rgba(0, 0, 0, 0.39);
 }
 .gOrg p{
     text-align: center;
@@ -442,12 +449,10 @@
     max-width: 100%;
     border: 1px solid;
     border-radius: 10px;
-    border-color: rgb(255, 255, 255);
-    /* background-color: white; */
+    background-color: rgb(0, 0, 0,0.39);
     font-size: 1.4rem;
     margin-left: 5%;
     margin-right: 5%;
-    color: white;
 }
 
 .gPat p{
