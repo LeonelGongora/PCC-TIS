@@ -178,7 +178,7 @@ class Add_Event_Next extends Component{
               axios.post(urlOrganizador, data).then(res => {
                 if(res.data.status === 200){
                   console.log(res);
-                  //window.location.href = './paginaEditarEventos';
+                  window.location.href = './home-admin';
                 }
               })
             }
@@ -192,7 +192,6 @@ class Add_Event_Next extends Component{
               axios.post(urlPatrocinador, data).then(res => {
                 if(res.data.status === 200){
                   console.log(res);
-                  
                 }
               })
               

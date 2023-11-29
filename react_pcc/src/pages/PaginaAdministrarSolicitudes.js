@@ -62,7 +62,7 @@ class PaginaAdministrarSolicitudes extends Component{
     masDetalles(id, participantes){
         cookies.set('auteId', id, {path: "/"});
 
-        if(participantes > 0){
+        if(participantes > 1){
           //cookies.set('participantes_equipo', participantes, {path: "/"});
           window.location.href='./acceptTeam';
         }else{

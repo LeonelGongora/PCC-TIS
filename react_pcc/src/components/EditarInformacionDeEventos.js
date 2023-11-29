@@ -451,7 +451,7 @@ class EditarInformacionDeEventos extends Component{
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">
                       {" "}
-                      Guardar
+                      Continuar
                     </button>
                   </div>
                 </form>

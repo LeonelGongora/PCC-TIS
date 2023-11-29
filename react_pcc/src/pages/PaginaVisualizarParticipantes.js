@@ -65,7 +65,7 @@ class PaginaVisualizarParticipantes extends Component{
     irRegistro(id, participantes){
         cookies.set('id_evento', id, {path: "/"});
         console.log(id)
-        if(participantes > 0){
+        if(participantes > 1){
           cookies.set('participantes_equipo', participantes, {path: "/"});
           window.location.href='./equipos';
         }else{
