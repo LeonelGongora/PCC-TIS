@@ -60,7 +60,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
         if(!values.nombre_actividad.trim()){
             validationErrors.nombre_actividad = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_actividad)){
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_actividad)){
             validationErrors.nombre_actividad = "Ingrese un nombre valido"
         }else{
             /* 

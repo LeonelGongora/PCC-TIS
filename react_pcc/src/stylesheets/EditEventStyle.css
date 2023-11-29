@@ -25,10 +25,14 @@
     margin-right: 2.5vw;
     margin-top: 2vh;
     border-radius: 5px;
-    height: 36px;
 }
 .campo-container #entrada{
     margin-right: 2vw;
+}
+
+.inputEventoAnuncio-addEvent{
+    outline: none;
+    width: 80%;
 }
 .botonEliminar{
     background-color: white;

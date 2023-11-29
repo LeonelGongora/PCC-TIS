@@ -169,3 +169,7 @@
   .buttonInfo:hover .textoInfo {
     opacity: 1; 
   }
+  
+  .desplegable-Formulario{
+    margin-top: 1.65rem;
+  }

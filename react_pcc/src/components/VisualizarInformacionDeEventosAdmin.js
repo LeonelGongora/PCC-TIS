@@ -6,7 +6,7 @@ import '../stylesheets/ViewEventStyle.css'
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import img from '../images/Csharp.png';
+import img from '../images/afiche.png';
 import vid from '../images/fondo1.mp4';
 
 const cookies = new Cookies();
@@ -67,7 +67,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='gTitulo'> <h1 className='Titulo'>{event.nombre_evento}</h1></div>
             {event.name === null ? (
                 <>
-                <div className='gLogo'><img src="../../logo512.png"></img></div>
+                <div className='gLogo'><img src={img}></img></div>
                 </>
                 
                 ) : (<>
@@ -128,9 +128,9 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='vacio1'></div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>
-                <div className='organizadores'>
+                <div className='organizadores-visualizar'>
                     {organizadores.map((o) => {  
-                    return (<div key={o.id}>
+                    return (<div className='image-visualizarEvento' key={o.id}>
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
                     </div>);
                     })}
@@ -139,7 +139,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
             </div>
             <div className='gPat'>
                 <p id="textoCuadroPat">Patrocinadores</p>
-                <div className='patrocinadores'>
+                <div className='patrocinadores-visualizar'>
                     {patrocinadores.map((p) => {  
                     return (<div key={p.id}>
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
@@ -154,10 +154,6 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='gTelf'>
                <p id="textoCuadroTelf">Telefono</p>
                <div className='telefono'>{event.numero_contacto} </div>
-            </div>
-            <div className='gEmail'>
-                <p id="textoCuadroEmail">Email</p>
-                <div className='email'> blackcloud@gmail.com </div>
             </div>
             <div className='vacio'></div>
             </div>

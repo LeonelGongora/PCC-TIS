@@ -210,12 +210,7 @@ function FormRegistroEvento_Equipos(){
     getEvent();
     generar_Campos_Dni();
     getUsuarios();
-    console.log(idu)
-    if(idu){
-      //setNombreCoach(nombre_coach)
-      //setApellidoCoach(apellido_coach)
-      //setDniCoach(dni_coach)
-    }
+   
     if(se_Registro){
       setFormData({ estadoModal: false });
       setNombreCoach(datos_Coach.nombre_coach)
@@ -376,7 +371,7 @@ function FormRegistroEvento_Equipos(){
                 <input
                 id='input_registro_equi'
                 type='text'
-                name='nameCoach'
+                name='nombre_equipo'
                 placeholder='Ingrese el nombre del equipo'
                 onChange={handleChange}/>
               </div>
