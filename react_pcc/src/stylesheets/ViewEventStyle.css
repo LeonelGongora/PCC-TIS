@@ -523,8 +523,7 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    min-width: 250px;
-
+    width: 200px;
 }
 .vacio{
     grid-area: vacio;

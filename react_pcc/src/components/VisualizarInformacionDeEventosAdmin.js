@@ -116,11 +116,6 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
             
-            {patrocinadores.map((p) => {  
-                    return (<div key={p.id}>
-                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
-                    </div>);
-                    })}
             {actividades.map((p) => {
                 return (<div key={p.id}>
                     <div className='gEtapa'>
