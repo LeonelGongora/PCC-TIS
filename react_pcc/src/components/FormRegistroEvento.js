@@ -252,7 +252,7 @@ function FormRegistroEvento(){
           {atributos.map((atributo,id) => {
           return (<>
               {atributo.esSelect ? (
-                <>
+                <div className='desplegable-Formulario'>
                   <p id="textoCuadro">{atributo.nombre_atributo}</p>
                   <select id="desplegable" className="input-Formulario-Registro-Evento" name={atributo.nombre_atributo}>
                     <option disabled selected> 
@@ -267,7 +267,7 @@ function FormRegistroEvento(){
                       {errors[atributo.nombre_atributo]}
                     </span>
                   )}
-                </>
+                </div>
                 ) : (<>
                       <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
                         <p id="textoCuadro">{atributo.nombre_atributo}</p>
