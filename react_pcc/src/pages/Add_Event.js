@@ -167,7 +167,7 @@ class Add_Event extends Component {
     } else {
       if (!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
         && this.state.participantes_equipo !== "0") {
-        validationErrors.participantes_equipo = "Ingrese un numero de participantes valido";
+        validationErrors.participantes_equipo = "Ingrese un número de participantes válido";
       }
     }
 
@@ -444,7 +444,7 @@ class Add_Event extends Component {
               <div className="botonEnviar">
                 <button className="botonRegistrar" type="submit">
                   {" "}
-                  Registrar
+                  Continuar
                 </button>
               </div>
             </form>

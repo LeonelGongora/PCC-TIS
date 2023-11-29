@@ -47,6 +47,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function getbyId($id){
+
+        $usuario = User::find($id);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Usuario obtenido exitosamente',
+            'usuario' => $usuario,
+
+        ]);
+    }
+
     public function store(Request $request)
     {
         $user = new User();

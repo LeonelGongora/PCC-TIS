@@ -20,6 +20,8 @@ const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 function FormRegistroEvento(){
 
   const id_usuario = cookies.get('id_usuario');
+  const se_Registro = cookies.get('se_Registro');
+  
   const archivoInput = useRef(null);
   const [requisitos, setRequisitos] = useState ( [] );
   const [mostrarRequisitos] = useState(true);// Para mostrar Requisitos
@@ -48,7 +50,7 @@ function FormRegistroEvento(){
 
     e.preventDefault();
     const validationErrors = {};
-    console.log(atributos)
+    console.log(se_Registro)
 
     document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(input =>{
 
@@ -145,8 +147,10 @@ function FormRegistroEvento(){
 
   useEffect(()=>{
     getEvent();
-    console.log(id_usuario)
-    console.log(atributos)
+    if(se_Registro){
+      setFormData({ estadoModal: false });
+    }
+
   }, [])
 
   const getEvent=async()=>{
@@ -178,6 +182,9 @@ function FormRegistroEvento(){
     setFormData({ estadoRegistroUsuario: nuevoEstado });
   }
 
+  const cambiarDatosCoach = () => {
+  }
+
   return(
     <div className='containerForm'>
 
@@ -185,6 +192,7 @@ function FormRegistroEvento(){
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
+        cambiarDatosCoach = {cambiarDatosCoach}
       />
 
       <ModalRegistroUsuario

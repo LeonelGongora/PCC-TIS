@@ -9,7 +9,7 @@ const cookies = new Cookies();
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegistroUsuario}){
+function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegistroUsuario,cambiarDatosCoach}){
 
     
     const [values, setValues] = useState({
@@ -25,7 +25,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     const [usuarios, setUsuarios] = useState({});
 
     const [dniVisible, setDniVisible] = useState(true);
-    const [infoVisible, setInfoVisible] = useState(false);
+    const [infoVisible, setInfoVisible] = useState(true);
     const [contraVisible, setContraVisible] = useState(false);
     const [confButVisible, setConfButVisible] = useState(true);
 
@@ -61,7 +61,8 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
       setInfoVisible(true);
     }
 
-    const buscarContraseña = (e) => {
+    const buscarContraseña = async (e) => {
+
       const validationErrors = {};
       if(values.contraseña !== values.contraseña_encontrada){
         validationErrors.contraseña = "Contraseña incorrecta"
@@ -69,9 +70,19 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
       setErrors(validationErrors);
 
       if(Object.keys(validationErrors).length === 0){
+        let url = `http://127.0.0.1:8000/api/get-user-by-dni/${values.ci}`
+        const respuesta = await axios.get(url);
+        console.log(respuesta)
+        cambiarDatosCoach(respuesta.data.nombre_usuario, respuesta.data.apellido_usuario, values.ci);
+        let datos_Coach = {}
+        datos_Coach["nombre_coach"] = respuesta.data.nombre_usuario
+        datos_Coach["apellido_coach"] = respuesta.data.apellido_usuario
+        datos_Coach["dni_coach"] = values.ci
+        cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
+        cookies.set('se_Registro', true, {path: "/"});
+        cookies.set('datos_Coach', datos_Coach, {path: "/"});
         cambiarEstado1(false);
       }
-
     }
 
     const saveTypeEvent = async (e) => {
@@ -98,7 +109,6 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
             let ci = usuarios[index].ci
     
             if(ci == nuevo_ci){
-              setInfoVisible(true);
               seEncontro = 1;
               let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
               const respuesta = await axios.get(url);
@@ -115,10 +125,14 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
           }
     
           if(seEncontro === 0){
-            console.log("No se encontro")
             cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
+            setValues({
+              ...values,
+              nombre_usuario: "",
+              apellido_usuario: "",
+              ci_encontrado: "",
+             });
             cambiarEstadoModalRegistroUsuario(true);
-            //cambiarEstado1(false);
           }
         }
     }
@@ -152,6 +166,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     
           if(seEncontro === 0){
             cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
+            
             cambiarEstadoModalRegistroUsuario(true);
           }
     };
@@ -211,7 +226,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
                         {errors.contraseña && (
                         <span className="span1Modal">{errors.contraseña}</span>
                         )}
-              {dniVisible && <button form="form1" type="submit" onClick={prueba} className="BotonRegistrar">
+              {dniVisible && <button form="form1" type="submit" onClick={saveTypeEvent} className="BotonRegistrar">
                 Buscar DNI
               </button>}
               {infoVisible && confButVisible && <button type="button" onClick={handleToggleVisibility} className="BotonRegistrar">

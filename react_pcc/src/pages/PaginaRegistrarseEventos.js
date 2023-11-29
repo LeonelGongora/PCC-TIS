@@ -6,15 +6,16 @@ import "../stylesheets/EventosStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import configApi from '../configApi/configApi';
 const cookies = new Cookies();
 
 
 class PaginaRegistrarseEventos extends Component{
 
+
+  se_Registro = cookies.get('se_Registro');
+
     eventos = []
-    //id = cookies.get('id_usuario')
-    
+
     state = {
         events: [],
         loader:false,
@@ -58,6 +59,7 @@ class PaginaRegistrarseEventos extends Component{
 
     componentDidMount(){
         this.getEvents();
+        console.log(this.se_Registro)
     }
 
     irRegistro(id, participantes){

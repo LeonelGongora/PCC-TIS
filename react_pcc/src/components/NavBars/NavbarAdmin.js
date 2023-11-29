@@ -3,6 +3,9 @@ import "../../stylesheets/NavbarStyles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from "../Dropdown";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 function NavbarAdmin({
   estado1,
@@ -14,6 +17,15 @@ function NavbarAdmin({
   estadoAnuncio,
   cambiarEstadoAnuncio,
 }) {
+
+  const cerrarSesion = () => {
+    const cookieKeys = Object.keys(cookies.getAll());
+      cookieKeys.forEach(key => {
+        console.log(key)
+        cookies.remove(key);
+      });
+    window.location.reload();
+  }
   return (
     <>
       <nav>
@@ -47,6 +59,9 @@ function NavbarAdmin({
             <a>
               <FontAwesomeIcon className="userIcon" icon={faUser} />
             </a>
+            <button className='buttonNoti' onClick={cerrarSesion}>
+                Cerrar Sesion
+            </button>
           </div>
           <div>
           </div>

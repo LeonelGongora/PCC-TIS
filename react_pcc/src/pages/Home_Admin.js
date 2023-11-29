@@ -17,8 +17,11 @@ const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color
 
 const cookies = new Cookies();
 
+
 class Home_Admin extends Component {
-  
+
+  se_Registro = cookies.get('se_Registro');
+  id_usuario = cookies.get('id_usuario');
   constructor(props) {
     super(props);
     this.state = {
@@ -77,8 +80,20 @@ class Home_Admin extends Component {
   }
 
     componentDidMount(){
-        this.getEvents();
-        this.getEventTypes();
+
+      if(this.id_usuario){
+
+      }
+
+      //cookies.remove("se_Registro");
+      const cookieKeys = Object.keys(cookies.getAll());
+      cookieKeys.forEach(key => {
+        console.log(key)
+        cookies.remove(key);
+      });
+      this.getEvents();
+      this.getEventTypes();
+      console.log(this.se_Registro)
     }
     
     cambiarEstadoModal = (nuevoEstado) => {

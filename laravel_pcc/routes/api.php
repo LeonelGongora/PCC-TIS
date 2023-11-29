@@ -78,6 +78,7 @@ Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);
 Route::get('/get-user-by-dni/{numero_documento}', [UserController::class, 'getIdbyDNI']);
 Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
+Route::get('/get-user/{id}', [UserController::class, 'getbyId']);
 
 Route::post('/add-team', [TeamController::class, 'store']);
 Route::get('/get-team-0/{event_id}', [TeamController::class, 'getTeams0']);

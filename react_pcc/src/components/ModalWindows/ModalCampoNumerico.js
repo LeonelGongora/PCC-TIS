@@ -40,11 +40,9 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
 
         if(e.target.checked === true){
             document.querySelectorAll(".inputEvento")[1].readOnly = true
-            document.querySelectorAll(".inputEvento")[1].value = ""
 
             document.querySelectorAll(".inputEvento")[2].readOnly = true
-            document.querySelectorAll(".inputEvento")[2].value = ""
-            setValues({ ...values, con_rango: 0 });
+            setValues({...values, con_rango : 0});
             setChecked((prevState) => !prevState);
 
         }else{
@@ -60,12 +58,6 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
     const saveTypeEvent = async (e) => {
         console.log(values.con_rango)
         e.preventDefault();
-
-        if(values.con_rango === 1){
-            let restriccion = values.rango_bajo + "," + values.rango_alto
-            console.log(restriccion)
-            //data.append('tipo_dato_atributo', restriccion)
-        }
 
         const validationErrors = {};
 
@@ -87,12 +79,17 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             }
         }
 
+        if(values.con_rango === 1){
+            if(values.rango_bajo > values.rango_alto){
+                validationErrors.rango_bajo = "El limite inferior no puede ser ser mayor al superior"
+                validationErrors.rango_alto = "El limite inferior no puede ser ser mayor al superior"
+            }
+        }
+
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
 
-
-            
 
             const data = new FormData();
             data.append('nombre_atributo', values.nombre_atributo)
@@ -165,6 +162,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                             className="inputEvento"
                             placeholder=""
                             onChange={handleInput}
+                            readOnly
                         />
                         {errors.rango_bajo && (
                         <span className="span1Modal">{errors.rango_bajo}</span>
@@ -177,6 +175,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                             className="inputEvento"
                             placeholder=""
                             onChange={handleInput}
+                            readOnly
                         />
                         {errors.rango_alto && (
                         <span className="span1Modal">{errors.rango_alto}</span>

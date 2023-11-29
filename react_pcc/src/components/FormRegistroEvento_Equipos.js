@@ -16,16 +16,19 @@ import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
 const cookies = new Cookies();
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
-const EventoUsuario_Api_Url = configApi.EVENTO_USUARIO_API_URL;
 const Imagen_Api_Url = configApi.IMAGENSTORAGE_API_URL;
 
 function FormRegistroEvento_Equipos(){
 
   const id_evento = cookies.get('id_evento');
+  const idu = cookies.get('id_usuario');
+  const se_Registro = cookies.get('se_Registro');
   const participantes_equipo = cookies.get('participantes_equipo');
+  const datos_Coach = cookies.get('datos_Coach');
   
   const archivoInput = useRef(null);
-  const [mostrarRequisitos, setRequisitos] = useState(true);// Para mostrar Requisitos
+  const [mostrarRequisitos, setMostrarRequisitos] = useState(true);// Para mostrar Requisitos
+  const [requisitos, setRequisitos] = useState([]);
 
   const manejarCargaDeArchivo = (event) => {
     setArchivo(event.target.files[0]);
@@ -38,8 +41,12 @@ function FormRegistroEvento_Equipos(){
   }
 
   const [values, setValues] = useState({
-    nombre_equipo : ""
+    nombre_equipo : "",
   });
+
+  const [nombre_coach, setNombreCoach] = useState("");
+  const [apellido_coach, setApellidoCoach] = useState("");
+  const [dni_coach, setDniCoach] = useState("");
 
   const [formData, setFormData] = useState({
     estadoModal: true,
@@ -56,6 +63,18 @@ function FormRegistroEvento_Equipos(){
 
     e.preventDefault();
     const validationErrors = {};
+    console.log(values)
+
+    let nombres_equipos_registrados = []
+    let id_registrados = []
+
+    for (let i = 0; i < event.teams.length; i++) {
+      nombres_equipos_registrados.push(event.teams[i].nombre_equipo)
+
+      for (let j = 0; j <  event.teams[i].users.length; j++) {
+        id_registrados.push(event.teams[i].users[j].ci)
+      }
+    }
 
     if (archivo.name) {
       
@@ -77,19 +96,32 @@ function FormRegistroEvento_Equipos(){
 
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
-    } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_equipo)) {
+    } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_equipo)) {
       validationErrors.nombre_equipo = "Ingrese un numero de equipo valido";
+    }else if(nombres_equipos_registrados.includes(values.nombre_equipo)){
+      validationErrors.nombre_equipo = "Este nombre ya se encuentra registrado en el evento";
     }
+
+    let dni_ingresados = []
 
     document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(evento =>{
       if(!evento.value.trim()){
         validationErrors[evento.name] = "Este campo es obligatorio";
+      }else if(evento.value === dni_coach){
+        validationErrors[evento.name] = "El entrenador no se puede registrar";
+      }else if(dni_ingresados.includes(evento.value)){
+        validationErrors[evento.name] = "No puede registrar al mismo participante mas de una vez";
+      }else if(id_registrados.includes(parseInt(evento.value))){
+        validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
       }
+      dni_ingresados.push(evento.value)
     })
 
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
+
+      
       
       document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(evento =>{
         participantes_dni_Aux.push(evento.value)
@@ -103,7 +135,7 @@ function FormRegistroEvento_Equipos(){
         urli= response.data.urlimagen;
       
       const data = new FormData();
-      const idu = cookies.get('id_usuario');
+      
       const solic = '0';
 
       data.append('nombre_equipo', values.nombre_equipo)
@@ -111,7 +143,6 @@ function FormRegistroEvento_Equipos(){
       data.append('solicitud', solic)
       data.append('id_coach', idu)
       data.append('zip', urli)
-
 
       let id_equipo = 0;
       axios.post('http://127.0.0.1:8000/api/add-team', data)
@@ -159,9 +190,6 @@ function FormRegistroEvento_Equipos(){
         }
       })
       })
-      
-
-      
     }
   }
 
@@ -182,6 +210,18 @@ function FormRegistroEvento_Equipos(){
     getEvent();
     generar_Campos_Dni();
     getUsuarios();
+    console.log(idu)
+    if(idu){
+      //setNombreCoach(nombre_coach)
+      //setApellidoCoach(apellido_coach)
+      //setDniCoach(dni_coach)
+    }
+    if(se_Registro){
+      setFormData({ estadoModal: false });
+      setNombreCoach(datos_Coach.nombre_coach)
+      setApellidoCoach(datos_Coach.apellido_coach)
+      setDniCoach(datos_Coach.dni_coach)
+    }
   }, [])
 
 
@@ -201,6 +241,7 @@ function FormRegistroEvento_Equipos(){
       const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
       setEvent(response.data)
+      setRequisitos(response.data.requirements)
   }
 
   const cambiarEstadoModal = (nuevoEstado) => {
@@ -219,9 +260,15 @@ function FormRegistroEvento_Equipos(){
     setFormData({ estadoRegistroUsuario: nuevoEstado });
   }
 
+  const cambiarDatosCoach = (nombre_coach, apellido_coach, dni_coach) => {
+    setNombreCoach(nombre_coach)
+    setApellidoCoach(apellido_coach)
+    setDniCoach(dni_coach)
+  }
+  
+
   return(
     <div className='containerAll'>
-      <h1>Competencia Universitaria</h1>
     <div className='containerForm'>
 
       <ModalWarningDNI
@@ -234,6 +281,7 @@ function FormRegistroEvento_Equipos(){
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
+        cambiarDatosCoach = {cambiarDatosCoach}
       />
 
       <ModalRegistroEquipos
@@ -253,7 +301,11 @@ function FormRegistroEvento_Equipos(){
       </div>
       <div className='containerRequisito'>  
         {mostrarRequisitos ? (
-          <p>{event.requisitos}</p>
+          requisitos.map((r, index) => (
+            <div key={r.id}>
+              <p>{index + 1}. {r.contenido_requisito}</p>
+            </div>
+          ))
         ) : (
           <p>No se requiere subir ningún archivo o documento para registrarse a este evento.</p>
         )}
@@ -300,7 +352,10 @@ function FormRegistroEvento_Equipos(){
                 id='input_registro_equipo'
                 type='text'
                 name='nameCoach'
-                placeholder='Ingrese su nombre'/>
+                placeholder='Ingrese su nombre'
+                value={`${nombre_coach} ${apellido_coach}`}
+                readOnly
+                />
               </div>
               <div className='camposCoach'>
                 <p>DNI del coach</p>
@@ -308,7 +363,10 @@ function FormRegistroEvento_Equipos(){
                 id='input_registro_equipo'
                 type='number'
                 name='DNICoach'
-                placeholder='Ingrese el DNI del coach'/>
+                placeholder='Ingrese el DNI del coach'
+                value={dni_coach}
+                readOnly
+                />
               </div>
             </div>
             <div className='equipo'>
