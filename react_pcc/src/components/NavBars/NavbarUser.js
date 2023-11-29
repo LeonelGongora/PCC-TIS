@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState, useRef, useEffect } from 'react';
 import "../../stylesheets/NavbarStyles.css";
 import DropdownUser from '../DropDownUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +18,11 @@ function NavbarUser(){
     window.location.reload();
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
     return (
       <nav>
@@ -35,13 +40,22 @@ function NavbarUser(){
           <div className='desplegable1'>
             <DropdownUser/>
           </div>
-            <a><FontAwesomeIcon className='buttonNoti' icon={faBell} /></a>
-            <div className='userId'>
-              <a><FontAwesomeIcon className='userIcon' icon={faUser} /></a>
-              <button className='buttonNoti' onClick={cerrarSesion}>
-                Cerrar Sesion
+            
+          <div className="userId">
+            <a>
+              <FontAwesomeIcon className="userIcon" icon={faUser} />
+            </a>
+            <div className="dropdown-container">
+              <button className="dropdown-button" onClick={toggleDropdown}>
+                Nombre Usuario{" "}
               </button>
+              {isOpen && (
+                <ul className="dropdown-menu">
+                  <li onClick={cerrarSesion}>cerrarSesion</li>
+                </ul>
+              )}
             </div>
+          </div>
             <div>
             </div>
           </div>

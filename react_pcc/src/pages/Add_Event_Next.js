@@ -313,21 +313,12 @@ class Add_Event_Next extends Component{
                     <div className="campo-container">
                       <div id="entradaEveNex">
                         <p id="textoCuadro">{requisito.contenido_requisito}</p>
-
-                        <input
-                          id="inputRegistro"
-                          type="text"
-                          name="valor"
-                          placeholder="Campo Adicional"
-                          value={requisito.contenido_requisito}
-                          readOnly
-                        />
                         <textarea
                           name="contenido_anuncio"
-                          className="inputEventoAnuncio"
-				                  rows={10}
-				                  cols={50}
-                          value={requisito.contenido_requisito}
+                          className="inputEventoAnuncio-addEvent"
+				                  rows={2}
+				                  cols={20}
+                          placeholder={requisito.contenido_requisito}
                         />
                       </div>
                       <button

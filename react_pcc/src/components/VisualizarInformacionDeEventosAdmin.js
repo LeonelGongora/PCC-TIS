@@ -128,9 +128,9 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='vacio1'></div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>
-                <div className='organizadores'>
+                <div className='organizadores-visualizar'>
                     {organizadores.map((o) => {  
-                    return (<div key={o.id}>
+                    return (<div className='image-visualizarEvento' key={o.id}>
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
                     </div>);
                     })}
@@ -139,7 +139,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
             </div>
             <div className='gPat'>
                 <p id="textoCuadroPat">Patrocinadores</p>
-                <div className='patrocinadores'>
+                <div className='patrocinadores-visualizar'>
                     {patrocinadores.map((p) => {  
                     return (<div key={p.id}>
                     <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>

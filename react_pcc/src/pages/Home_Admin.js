@@ -227,6 +227,9 @@ class Home_Admin extends Component {
             cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
           />
           <div className="contenedor">
+          {this.eventos[0] == null ? (
+              <h1 className='tituloPagAcept'>No Hay Eventos Disponibles</h1>
+          ) : (<>
             <div className="contenedorTitulo-home">
               <p className="tituloEvento-home">VISUALIZAR EVENTOS</p>
 
@@ -255,6 +258,7 @@ class Home_Admin extends Component {
               </div>
             </div>
             <div className="columna1">
+            
               <ListaEventos />
               {this.eventos.map((evento, id) => {
                 return (
@@ -273,14 +277,24 @@ class Home_Admin extends Component {
                         {evento.event_type.nombre_tipo_evento}
                       </h4>
                       <h4>{evento.fecha_limite}</h4>
-                      <h4>{evento.fecha_fin}</h4>
+                      <div>
+                          {evento.participantes_equipo <= 1 ? (
+                              <h4>Individual</h4>
+                          ) : (
+                              <h4>Equipo de {evento.participantes_equipo}</h4>
+                          )}
+                      </div>
                     </div>
                   </>
                 );
               })}
             </div>
+            </>
+              )}
           </div>
+          
         </div>
+        
       </div>
     );
   }

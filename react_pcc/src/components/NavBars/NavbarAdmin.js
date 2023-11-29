@@ -1,9 +1,10 @@
-import React from "react";
+import React , { useState, useRef, useEffect } from 'react';
 import "../../stylesheets/NavbarStyles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from "../Dropdown";
 import Cookies from 'universal-cookie';
+import "../../stylesheets/Dropdown.css";
 
 const cookies = new Cookies();
 
@@ -16,7 +17,10 @@ function NavbarAdmin({
   cambiarEstadoPatrocinador,
   estadoAnuncio,
   cambiarEstadoAnuncio,
-}) {
+})
+{
+  const idu = cookies.get('id_usuario');
+  const se_Registro = cookies.get('se_Registro');
 
   const cerrarSesion = () => {
     const cookieKeys = Object.keys(cookies.getAll());
@@ -26,6 +30,22 @@ function NavbarAdmin({
       });
     window.location.reload();
   }
+
+  useEffect(()=>{
+    if(se_Registro){
+      setNombreUs(idu.nombre_us)
+      setApellidoUs(idu.apellido_us)
+    }
+  }, [])
+
+  const [nombre_us, setNombreUs] = useState("");
+  const [apellido_us, setApellidoUs] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <nav>
@@ -52,16 +72,21 @@ function NavbarAdmin({
               cambiarEstadoAnuncio={cambiarEstadoAnuncio}
             />
           </div>
-          <a>
-            <FontAwesomeIcon className="buttonNoti" icon={faBell} />
-          </a>
+          
           <div className="userId">
             <a>
               <FontAwesomeIcon className="userIcon" icon={faUser} />
             </a>
-            <button className='buttonNoti' onClick={cerrarSesion}>
-                Cerrar Sesion
-            </button>
+            <div className="dropdown-container">
+              <button className="dropdown-button" onClick={toggleDropdown}>
+                Nombre Usuario{" "}
+              </button>
+              {isOpen && (
+                <ul className="dropdown-menu">
+                  <li onClick={cerrarSesion}>cerrarSesion</li>
+                </ul>
+              )}
+            </div>
           </div>
           <div>
           </div>
