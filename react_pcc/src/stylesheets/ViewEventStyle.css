@@ -398,12 +398,12 @@
     font-size: 1.3rem;
 }
 
-.organizadores{
+.organizadores-visualizar{
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .imagen{ 
@@ -443,12 +443,12 @@
     border: 1px solid;
     font-size: 1.3rem;
 }
-.patrocinadores{
+.patrocinadores-visualizar{
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 .gContacto {
     grid-area: contacto;

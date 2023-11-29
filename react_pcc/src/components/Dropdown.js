@@ -36,7 +36,7 @@ function Dropdown({
   };
 
   const visualizarEventoRedireccionar = () => {
-    window.location.href = "/";
+    window.location.href = "/home-admin";
   };
 
   return (

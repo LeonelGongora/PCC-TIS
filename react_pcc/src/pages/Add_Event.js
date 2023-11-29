@@ -121,7 +121,9 @@ class Add_Event extends Component {
     if (!this.state.descripcion.trim()) {
       validationErrors.descripcion = "Este campo es obligatorio";
     } else if (
-      !/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)
+      !/^[:;.,\-\A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(
+        this.state.descripcion
+      )
     ) {
       validationErrors.descripcion = "Ingrese una descripción válida";
     }
@@ -165,9 +167,12 @@ class Add_Event extends Component {
     if (!this.state.participantes_equipo.trim() && this.state.participantes_equipo !== "0") {
       validationErrors.participantes_equipo = "Este campo es obligatorio"
     } else {
-      if (!/^(?!-)(?:[1-9]|[1-9]\d)$/.test(this.state.participantes_equipo)
-        && this.state.participantes_equipo !== "0") {
-        validationErrors.participantes_equipo = "Ingrese un número de participantes válido";
+      if (
+        (!/^(?!-)(?:[2-9]|[1]\d)$/.test(this.state.participantes_equipo) ||
+        this.state.participantes_equipo === "0") && this.state.isChecked === false 
+      ) {
+        validationErrors.participantes_equipo =
+          "Ingrese un número de participantes válido";
       }
     }
 
@@ -213,7 +218,7 @@ class Add_Event extends Component {
       data.append("fecha_limite", this.state.fecha_limite);
       data.append("fecha_fin", this.state.fecha_fin);
       if (this.state.participantes_equipo === "0") {
-        data.append("participantes_equipo", 0);
+        data.append("participantes_equipo", 1);
       } else {
         data.append("participantes_equipo", this.state.participantes_equipo);
       }
@@ -322,13 +327,14 @@ class Add_Event extends Component {
                 </span>
               )}
 
-              <div id="entrada">
+              <div id="entrada-area">
                 <p id="textoCuadro">Descripcion de Evento*</p>
-                <input
+                <textarea
                   id="inputRegistro"
-                  type="text"
                   name="descripcion"
                   placeholder="Descripcion"
+                  rows={5}
+                  cols={30}
                   onChange={this.handleInput}
                 />
               </div>

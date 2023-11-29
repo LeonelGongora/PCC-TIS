@@ -447,70 +447,7 @@ class EditarInformacionDeEventos extends Component{
                       {this.state.errors.event_type_id}
                     </span>
                   )}
-                  <h1 className="textoTituloEdiNext">Campos</h1>
-                  {this.state.atributos.map((atributo) => (
-                    <div className="campo-container">
-                      <div id="entrada">
-                        <p id="textoCuadro">{atributo.nombre_atributo}*</p>
-                        <input
-                          id="inputRegistro"
-                          type="text"
-                          name="valor"
-                          placeholder="Campo Adicional"
-                          readOnly
-                        />
-                      </div>
-                      <button
-                        className="botonEliminar"
-                        type="button"
-                        onClick={() => this.eliminarAtributo(atributo.id)}
-                      >
-                        {cancelar}
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    className="botonAgregarEdit"
-                    type="button"
-                    onClick={() =>
-                      this.cambiarEstadoModalAtributo(!this.state.estadoModal)
-                    }
-                  >
-                    Agregar Campo +
-                  </button>
-
-                  <h1 className="textoTituloEdiNext">Requisitos</h1>
-                  {this.state.requisitos.map((requisito) => (
-                    <div className="campo-container">
-                      <div id="entrada">
-                        <p id="textoCuadro">{requisito.contenido_requisito}*</p>
-                        <input
-                          id="inputRegistro"
-                          type="text"
-                          name="valor"
-                          placeholder="Campo Adicional"
-                          readOnly
-                        />
-                      </div>
-                      <button
-                        className="botonEliminar"
-                        type="button"
-                        onClick={() => this.eliminarRequisito(requisito.id)}
-                      >
-                        {cancelar}
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    className="botonAgregarEdit"
-                    type="button"
-                    onClick={() =>
-                      this.cambiarEstadoModalRequisito(!this.state.estadoModal)
-                    }
-                  >
-                    Agregar Requisito +
-                  </button>
-
+                  
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">
                       {" "}
