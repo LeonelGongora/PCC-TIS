@@ -114,7 +114,7 @@ class PaginaRegistrarseEventos extends Component{
                               {evento.nombre_evento}{" "}
                             </h4>
                             <h4 className="tipoEv">
-                              {evento.event_type.nombre_tipo_evento}
+                              {evento.nombre_tipo_evento}
                             </h4>
                             <h4>{evento.fecha_limite}</h4>
                             <div>
