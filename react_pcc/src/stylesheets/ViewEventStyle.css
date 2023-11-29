@@ -38,7 +38,7 @@
                          'org org org org org org org org org'
                          'pat pat pat pat pat pat pat pat pat'
                          'contacto contacto contacto contacto contacto contacto contacto contacto contacto'
-                         'telf telf telf telf vacio email email email email';
+                         'telf telf telf telf telf telf telf telf telf';
     grid-template-rows: auto auto auto auto auto auto auto auto auto auto; 
     justify-content: center; 
     align-items: center;
@@ -207,7 +207,7 @@
     padding: 10px;
     border-radius: 30px;
     margin-left: 8%;
-    margin-right: 8%;
+    margin-right: 12%;
     border: 1px solid;
     font-size: 0.9rem;
 }
@@ -218,6 +218,7 @@
     border-color: black;
     padding: 10px;
     margin: 10%;
+    margin-right: 12%;
     margin-top: 15px;
     text-align: center;
     background-color: #D73B3B;
@@ -229,7 +230,7 @@
     align-items: center;
     max-width: 300px;
     min-width: 250px;
-    margin-left: 10%;
+    margin-left: 2%;
 }
 .gFecIni p{
     text-align: center;
@@ -239,8 +240,8 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 8%;
-    margin-right: 10%;
+    margin-left: 1%;
+    margin-right: 15%;
     border: 1px solid;
     font-size: 0.9rem;
 }
@@ -250,7 +251,9 @@
     border-radius: 10px;
     border-color: black;
     padding: 10px;
-    margin: 10%;
+    margin-bottom: 10%;
+    margin-left: 0%;
+    margin-right: 15%;
     margin-top: 15px;
     text-align: center;
     background-color: #1B3C61;
@@ -271,18 +274,20 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 10%;
-    margin-right: 8%;
+    margin-left: 1%;
+    margin-right: 20%;
     border: 1px solid;
     font-size: 0.9rem;
 }
 .fechaFinal{
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: 1px solid;
     border-radius: 10px;
     border-color: black;
     padding: 10px;
-    margin: 10%;
+    margin-bottom: 10%;
+    margin-left: 0%;
+    margin-right: 20%;
     margin-top: 15px;
     text-align: center;
     background-color: #1B3C61;
@@ -290,8 +295,10 @@
 }
 .gEtapa{
     grid-area: etapa; 
-    margin-top: 20px;
+    justify-self: center;
     color: white;
+    padding-left: 50px;
+    width: 50%;
 }
 .gEtapa p{
     text-align: center;
@@ -299,9 +306,24 @@
     color: rgb(0, 0, 0);
     background-color: white;
     padding: 10px;
+    margin-left: 30%;
     border-radius: 30px;
-    margin-left: 35%;
-    margin-right: 35%;
+    border: 1px solid;
+    font-size: 1.1rem;
+    width: 40%;
+    
+}
+.desc{
+    margin-top: 20px;
+}
+.etapaDesc{
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 0px;
+    border-radius: 30px;
     border: 1px solid;
     font-size: 1.1rem;
 }
@@ -317,8 +339,8 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 20%;
+    margin-right: 30%;
     margin-top: 2%;
     margin-bottom: 2%;
     border: 1px solid;
@@ -334,8 +356,8 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 20%;
+    margin-right: 30%;
 }
 .gFinEtapa{
     grid-area: etapaFin; 
@@ -349,8 +371,8 @@
     background-color: white;
     padding: 10px;
     border-radius: 30px;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 18%;
+    margin-right: 18%;
     margin-top: 2%;
     margin-bottom: 2%;
     border: 1px solid;
@@ -366,8 +388,8 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 18%;
+    margin-right: 18%;
 }
 .gOrg{
     grid-area: org;
@@ -501,40 +523,7 @@
     text-align: center;
     background-color: #1B3C61;
     color: white;
-    min-width: 250px;
-
-}
-.gEmail{
-    grid-area: email;
-    justify-self: center;
-    color: white;
-}
-.gEmail p{
-    text-align: center;
-    font-weight: bold;
-    margin-top: 20px;
-    color: rgb(0, 0, 0);
-    background-color: white;
-    padding: 10px;
-    border-radius: 30px;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border: 1px solid;
-    font-size: 1.1rem;
-}
-.email{
-    font-size: 1rem;
-    border: 1px solid;
-    border-radius: 10px;
-    border-color: black;
-    padding: 10px;
-    margin-top: 15px;
-    text-align: center;
-    background-color: #1B3C61;
-    color: white;
-    min-width: 250px;
+    width: 200px;
 }
 .vacio{
     grid-area: vacio;

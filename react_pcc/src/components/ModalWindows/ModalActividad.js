@@ -121,7 +121,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
         if (!values.descripcion_actividad.trim()) {
             validationErrors.descripcion_actividad = "Este campo es obligatorio";
-        } else if (!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(values.descripcion_actividad)) {
+        } else if (!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,60}$/.test(values.descripcion_actividad)) {
             validationErrors.descripcion_actividad = "Ingrese una descripción válida";
         }
 

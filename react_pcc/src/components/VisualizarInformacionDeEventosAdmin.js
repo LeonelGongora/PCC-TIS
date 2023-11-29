@@ -16,6 +16,7 @@ const EventoAbierto_Api_Url = configApi.EVENTOABIERTOS_USUARIO_API_URL;
 
 function VisualizarInformacionDeEventosAdmin({props}){
 
+    const [actividades, setActividades] = useState ( [] );
     const [event, setEvent] = useState ( [] );
     // const [id, setId] = useState ('8');
     // const id = props.id_evento;
@@ -95,7 +96,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='tipoDeEvento'>{tipoevent.nombre_tipo_evento} </div>
             </div>
             <div className='gNParticipantes'>
-                <p id="textoCuadroParticipantes">Nº de participantes por equipo</p>
+                <p id="textoCuadroParticipantes">Modalidad</p>
                 <div className='participantes'>{event.participantes_equipo}</div>
             </div>
             {cerrado == true ? (
@@ -114,17 +115,25 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <p id="textoCuadroFinal">Fin de Evento</p>
                 <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
-            <div className='gEtapa'>
-                <p id="textoCuadroFinal">Etapa 1</p>
-            </div>
-            <div className='gIniEtapa'>
-                <p id="textoCuadroFinal">Inicio</p>
-                <div className='etapaIni'>27/12/2002</div>
-            </div>
-            <div className='gFinEtapa'>
-                <p id="textoCuadroFinal">Final</p>
-                <div className='etapaFin'>27/12/2002</div>
-            </div>
+            
+            {actividades.map((p) => {
+                return (<div key={p.id}>
+                    <div className='gEtapa'>
+                        <p id="textoCuadroFinal">Etapa 1</p>
+                        <p className='desc' id="textoCuadroFinal">Descripcion</p>
+                        <div className='etapaDesc'>Descripcion </div>
+                    </div>
+                    <div className='gIniEtapa'>
+                        <p id="textoCuadroFinal">Inicio</p>
+                        <div className='etapaIni'>27/12/2002</div>
+                    </div>
+                    <div className='gFinEtapa'>
+                        <p id="textoCuadroFinal">Final</p>
+                        <div className='etapaFin'>27/12/2002</div>
+                    </div>
+                    </div>);
+            })}
+            
             <div className='vacio1'></div>
             <div className='gOrg'>
                 <p id="textoCuadroOrg">Organizadores</p>

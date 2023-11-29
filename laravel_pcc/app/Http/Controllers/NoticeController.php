@@ -20,4 +20,14 @@ class NoticeController extends Controller
             'message' => 'Anuncio añadido exitosamente',
         ]);
     }
+
+    public function get(){
+
+        $anuncios = Notice::all();
+        return response()->json([
+            'status' => 200,
+            'message' => 'Anuncios obtenidos exitosamente',
+            'anuncios' => $anuncios,
+        ]);
+    }
 }

@@ -52,6 +52,9 @@ class DarBajaEvento extends Component {
 
   getEvents = async () => {
     this.setState({ loader: true });
+    if(cookies.get('id_usuario') === '' || cookies.get('id_usuario')=== undefined){
+      console.log(`${cookies.get('id_usuario')} No se encuentra registrado`)
+    }else{
     const idu = cookies.get('id_usuario')
     const events = await axios.get(`${this.state.url}/${idu}`);
     this.eventos = Array.from(events.data.events);
@@ -73,6 +76,7 @@ class DarBajaEvento extends Component {
       var mes1 = fecha1.getMonth() + 1;
       let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
       this.eventos[i].fecha_limite = format5;
+    }
     }
   };
 

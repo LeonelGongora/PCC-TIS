@@ -74,8 +74,7 @@ class Add_Event extends Component {
     e.preventDefault();
     const validationErrors = {};
 
-    console.log(this.state.image)
-    console.log(this.state.image.name)
+    console.log(this.state)
     if(!this.state.image){
       console.log("No hay archivo")
     }
@@ -228,7 +227,7 @@ class Add_Event extends Component {
       axios.post(url, data).then((res) => {
         console.log(res);
         cookies.set("ultimo_id_evento", res.data.ultimo_id_evento, {path: "/",});
-        window.location.href = "./add-event-next";
+        //window.location.href = "./add-event-next";
       });
     }
   };
@@ -248,8 +247,6 @@ class Add_Event extends Component {
       nombre_tipo_eventos.push(x.options[i].value);
       id_tipo_eventos.push(i + 1);
     }
-    console.log(id_tipo_eventos);
-    console.log(nombre_tipo_eventos);
 
     var y = document.getElementById("desplegable").value;
     var indice;

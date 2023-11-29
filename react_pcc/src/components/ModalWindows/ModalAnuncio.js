@@ -54,7 +54,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
         setValues({
            contenido_anuncio: "",
         });
-        //window.location.reload();
+        window.location.reload();
       }
     }
   };
