@@ -123,13 +123,17 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
             data.append('password', values.password)
             data.append('telefono', values.telefono)
 
-            // cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
-            // let datos_Coach = {}
-            // datos_Coach["nombre_coach"] = values.nombre
-            // datos_Coach["apellido_coach"] = values.apellido
-            // datos_Coach["dni_coach"] = values.ci
-            // cookies.set('se_Registro', true, {path: "/"});
-            // cookies.set('datos_Coach', datos_Coach, {path: "/"});
+            cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
+            let datos_Coach = {}
+
+            cookies.set('nombre_usuario', true, {path: "/"});
+            cookies.set('apellido_usuario', datos_Coach, {path: "/"});
+            
+            datos_Coach["nombre_coach"] = values.nombre
+            datos_Coach["apellido_coach"] = values.apellido
+            datos_Coach["dni_coach"] = values.ci
+            cookies.set('se_Registro', true, {path: "/"});
+            cookies.set('datos_Coach', datos_Coach, {path: "/"});
 
             axios.post(url, data).then( res => {
                 cookies.set('id_usuario', res.data.ultimo_id, {path: "/"});

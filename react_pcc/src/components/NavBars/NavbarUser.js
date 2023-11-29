@@ -10,13 +10,16 @@ const cookies = new Cookies();
 function NavbarUser(){
 
   const se_Registro = cookies.get('se_Registro');
+  const nombre_usuario_cookies = cookies.get('nombre_usuario');
+  const apellido_usuario_cookies = cookies.get('apellido_usuario');
 
   const [nombre_usuario, setNombreUsuario] = useState("");
   const [apellido_usuario, setApellidoUsuario] = useState("");
 
   useEffect(()=>{
     if(se_Registro){
-
+      setNombreUsuario(nombre_usuario_cookies)
+      setApellidoUsuario(apellido_usuario_cookies)
     }
   }, []);
   
@@ -75,3 +78,4 @@ function NavbarUser(){
 }
 
 export default NavbarUser;
+
