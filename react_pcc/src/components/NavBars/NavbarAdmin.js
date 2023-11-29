@@ -83,7 +83,7 @@ function NavbarAdmin({
             </a>
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>
-              {`${nombre_usuario} ${apellido_usuario}`} a
+              {`${nombre_usuario} ${apellido_usuario}`}
               </button>
               {isOpen && (
                 <ul className="dropdown-menu">
