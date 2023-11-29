@@ -31,7 +31,6 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
 
     const handleInput = (e) => {
         const {name, value} = e.target;
-
         setValues({
             ...values,
             [name]:value,
@@ -57,13 +56,10 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
       setErrors({});
     }
 
-    const prueba = (e) => {
-      setInfoVisible(true);
-    }
-
     const buscarContraseña = async (e) => {
 
       const validationErrors = {};
+
       if(values.contraseña !== values.contraseña_encontrada){
         validationErrors.contraseña = "Contraseña incorrecta"
       }
@@ -89,6 +85,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         e.preventDefault();
 
         const validationErrors = {};
+        console.log("Prueba")
 
         if(!values.ci.trim()){
             validationErrors.ci = "Este campo es obligatorio"
@@ -138,8 +135,22 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     }
 
     const handleToggleVisibility = async () => {
-     
-      let nuevo_ci = values.ci;
+
+      const validationErrors = {};
+        console.log("Prueba")
+
+        if(!values.ci.trim()){
+            validationErrors.ci = "Este campo es obligatorio"
+
+        }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
+          validationErrors.ci =
+            "Ingrese un documento de indentificacion valido";
+        }
+
+        setErrors(validationErrors);
+
+        if(Object.keys(validationErrors).length === 0){
+          let nuevo_ci = values.ci;
           let seEncontro = 0;
           for (let index = 0; index < usuarios.length; index++) {
     
@@ -169,8 +180,9 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
             
             cambiarEstadoModalRegistroUsuario(true);
           }
+        }
+      
     };
-  
 
     return (
         estado1 && (

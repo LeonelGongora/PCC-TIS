@@ -24,7 +24,6 @@ import PaginaAdministrarSolicitudes from "./pages/PaginaAdministrarSolicitudes.j
 import PaginaVisualizarParticipantes from "./pages/PaginaVisualizarParticipantes.js";
 import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
 
-import Register_to_Event_Team_Req from "./pages/Register_to_Event_Team_Req.js";
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
@@ -43,7 +42,6 @@ function App() {
 
         <Route path='/register-to-event' element={<Register_to_Event/>}/>
         <Route path='/register-to-event-teams' element={<Register_to_Event_Teams/>}/>
-        <Route path='/register-to-event-teams_req' element={<Register_to_Event_Team_Req/>}/>
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />

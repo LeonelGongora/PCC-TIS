@@ -10,8 +10,8 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const salir = <FontAwesomeIcon icon={faCircleXmark} />
-const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
+const salir = <FontAwesomeIcon icon={faCircleXmark}/>
+const subir = <FontAwesomeIcon icon={faArrowUpFromBracket}/>
 
 function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarEstadoWarningDNI}){
 
@@ -110,14 +110,13 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                     })
                     if ((contador + 1) === dni_no_registrados.length){
                         console.log("Todos registrados")
-                        window.location.href='./register-to-event-teams_req';
+                        window.location.href='./paginaRegistrarseEventos';
                     }else{
                         cookies.set('indice_dni_no_registrados', indice_dni_no_registrados + 1, {path: "/"});
                         cambiarEstadoModalEquipos(false);
                         cambiarEstadoWarningDNI(true);
                     }
                 })
-
             })
 
         }

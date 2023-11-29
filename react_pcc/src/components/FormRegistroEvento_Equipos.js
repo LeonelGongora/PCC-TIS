@@ -12,6 +12,7 @@ import ModalRegistroEquipos from './ModalWindows/ModalRegistroEquipos';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 import ModalWarningDNI from './ModalWindows/ModalWarningDNI';
 import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
+import ModalContraseñas from './ModalWindows/ModalContraseñas';
 
 const cookies = new Cookies();
 
@@ -53,6 +54,7 @@ function FormRegistroEvento_Equipos(){
     estadoModalEquipos :false,
     estadoModalWarningDNI :false,
     estadoRegistroUsuario :false,
+    estadoContraseña:false,
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -97,7 +99,7 @@ function FormRegistroEvento_Equipos(){
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_equipo)) {
-      validationErrors.nombre_equipo = "Ingrese un numero de equipo valido";
+      validationErrors.nombre_equipo = "Ingrese un nombre de equipo valido";
     }else if(nombres_equipos_registrados.includes(values.nombre_equipo)){
       validationErrors.nombre_equipo = "Este nombre ya se encuentra registrado en el evento";
     }
@@ -148,14 +150,12 @@ function FormRegistroEvento_Equipos(){
       axios.post('http://127.0.0.1:8000/api/add-team', data)
       .then(res=>{ 
         if(res.data.status === 200){
-          console.log(res)
           id_equipo = res.data.ultimo_id_equipo
           cookies.set('id_equipo', id_equipo, {path: "/"});
 
-          console.log(id_equipo)
-
           let dni_registrados = []
           let id_registrados = []
+          let contraseñas_generadas = []
 
           let dni_no_registrados = []
 
@@ -177,16 +177,46 @@ function FormRegistroEvento_Equipos(){
               data.append('user_id', id_registrados[indice])
     
               const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
+
+              
+              const longitud = 5
+              let caracteres = ""
+              const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+              const charactersLength = characters.length;
+              let counter = 0;
+              while (counter < longitud) {
+                caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
+                counter += 1;
+              }
+
+              let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
+              contraseñas_generadas.push(contraseña_generada)
+              console.log(contraseña_generada)
             }else{
+
+              const longitud = 5
+              let caracteres = ""
+              const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+              const charactersLength = characters.length;
+              let counter = 0;
+              while (counter < longitud) {
+                caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
+                counter += 1;
+              }
+
+              let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
+              console.log(contraseña_generada)
+              contraseñas_generadas.push(contraseña_generada)
               console.log("DNI NO REGISTRADO")
               dni_no_registrados.push(participantes_dni_Aux[i])
             }
+
             cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
             cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+            cookies.set('contraseñas_generadas', contraseñas_generadas, {path: "/"});
             //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
             cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
           }
-
         }
       })
       })
@@ -254,6 +284,10 @@ function FormRegistroEvento_Equipos(){
   const cambiarEstadoModalRegistroUsuario = (nuevoEstado) => {
     setFormData({ estadoRegistroUsuario: nuevoEstado });
   }
+  
+  const cambiarEstadoContraseña = (nuevoEstado) => {
+    setFormData({ estadoContraseña: nuevoEstado });
+  }
 
   const cambiarDatosCoach = (nombre_coach, apellido_coach, dni_coach) => {
     setNombreCoach(nombre_coach)
@@ -289,6 +323,12 @@ function FormRegistroEvento_Equipos(){
         estadoRegistroUsuario={formData.estadoRegistroUsuario}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
         cambiarEstado1={cambiarEstadoModal}
+        cambiarDatosCoach = {cambiarDatosCoach}
+      />
+
+      <ModalContraseñas
+        estadoContraseña={formData.estadoContraseña}
+        cambiarEstadoContraseña={cambiarEstadoContraseña}
       />
 
       <div className='header'>
@@ -376,18 +416,6 @@ function FormRegistroEvento_Equipos(){
                 onChange={handleChange}/>
               </div>
             </div>
-          {/* <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
-            
-            <p className='txtEquipo' id="textoCuadro">Nombre de Equipo</p>
-            <input
-            id="input"
-            className="input-Formulario-Registro-Eventox"
-            type="text"
-            name= "nombre_equipo"
-            placeholder="Ingrese el nombre del equipo"
-            onChange={handleChange}
-            />
-          </div> */}
           {errors.nombre_equipo && (
           <span className="advertencia">
             {errors.nombre_equipo}

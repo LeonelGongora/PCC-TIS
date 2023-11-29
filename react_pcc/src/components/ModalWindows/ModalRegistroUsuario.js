@@ -14,7 +14,7 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 //estadoRegistroUsuario
 //cambiarEstadoModalRegistroUsuario
-function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1}){
+function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1, cambiarDatosCoach}){
 
     const ci_nuevo_usuario = cookies.get('ci_nuevo_usuario');
 
@@ -71,10 +71,18 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
             data.append('password', values.password)
             data.append('telefono', values.telefono)
 
-            axios.post(url, data).then(res => {
+            cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
+            let datos_Coach = {}
+            datos_Coach["nombre_coach"] = values.nombre
+            datos_Coach["apellido_coach"] = values.apellido
+            datos_Coach["dni_coach"] = values.ci
+            cookies.set('se_Registro', true, {path: "/"});
+            cookies.set('datos_Coach', datos_Coach, {path: "/"});
+
+            axios.post(url, data).then( res => {
                 cookies.set('id_usuario', res.data.ultimo_id, {path: "/"});
                 cambiarEstadoModalRegistroUsuario(false)
-                
+
             })
         }
     }
