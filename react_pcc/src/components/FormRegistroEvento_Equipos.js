@@ -79,7 +79,7 @@ function FormRegistroEvento_Equipos(){
     if (archivo.name) {
       
       if (!archivo.name.endsWith('.zip')) {
-        validationErrors.imagen = "Debe subir un archivo .zi";
+        validationErrors.imagen = "Debe subir un archivo .zip";
         setErrorArchivo('Debe subir un archivo .zip');
         setShowModal(true);
       } else if (archivo.size > 10485760) {
@@ -417,7 +417,7 @@ function FormRegistroEvento_Equipos(){
         </form>
       </div> 
       <Boton
-        texto='Registrarse'
+        texto='Registrar equipo'
         esBotonDeRegistro={true}
         manejarClic={registrar}/>
         {showModal && <ModalWarning estado1={showModal} cambiarEstado1={setShowModal} errorMessage={errorArchivo} />} {}
