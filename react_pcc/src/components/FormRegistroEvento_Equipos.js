@@ -81,7 +81,7 @@ function FormRegistroEvento_Equipos(){
     if (archivo.name) {
       
       if (!archivo.name.endsWith('.zip')) {
-        validationErrors.imagen = "Debe subir un archivo .zi";
+        validationErrors.imagen = "Debe subir un archivo .zip";
         setErrorArchivo('Debe subir un archivo .zip');
         setShowModal(true);
       } else if (archivo.size > 10485760) {
@@ -99,7 +99,7 @@ function FormRegistroEvento_Equipos(){
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_equipo)) {
-      validationErrors.nombre_equipo = "Ingrese un nombre de equipo valido";
+      validationErrors.nombre_equipo = "Ingrese un nombre valido";
     }else if(nombres_equipos_registrados.includes(values.nombre_equipo)){
       validationErrors.nombre_equipo = "Este nombre ya se encuentra registrado en el evento";
     }
@@ -110,9 +110,9 @@ function FormRegistroEvento_Equipos(){
       if(!evento.value.trim()){
         validationErrors[evento.name] = "Este campo es obligatorio";
       }else if(evento.value === dni_coach){
-        validationErrors[evento.name] = "El entrenador no se puede registrar";
+        validationErrors[evento.name] = "El entrenador no puede ser participante de este evento";
       }else if(dni_ingresados.includes(evento.value)){
-        validationErrors[evento.name] = "No puede registrar al mismo participante mas de una vez";
+        validationErrors[evento.name] = "No puede registrar al mismo participante más de una vez";
       }else if(id_registrados.includes(parseInt(evento.value))){
         validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
       }
@@ -431,7 +431,7 @@ function FormRegistroEvento_Equipos(){
             className="input-Formulario-Registro-Evento"
             type="text"
             name= {participante_numero}
-            placeholder="Ingrese nombre"
+            placeholder="Ingrese DNI"
             />
           </div>
           {errors[participante_numero] && (
@@ -445,7 +445,7 @@ function FormRegistroEvento_Equipos(){
         </form>
       </div> 
       <Boton
-        texto='Registrarse'
+        texto='Registrar equipo'
         esBotonDeRegistro={true}
         manejarClic={registrar}/>
         {showModal && <ModalWarning estado1={showModal} cambiarEstado1={setShowModal} errorMessage={errorArchivo} />} {}

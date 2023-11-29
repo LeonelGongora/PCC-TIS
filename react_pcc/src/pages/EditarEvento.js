@@ -1,12 +1,12 @@
 import React from 'react';
 import "../stylesheets/ContenedorSliderStyles.css";
 import EditarInformacionDeEventos from '../components/EditarInformacionDeEventos';
-import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 
 function EditarEvento(){
     return(
         <div className='containerSlider'>
-            <NavbarCreateEvent/>
+            <NavbarAdmin/>
             <EditarInformacionDeEventos/>
         </div>
     )

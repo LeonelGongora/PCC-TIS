@@ -92,7 +92,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
 
         }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
           validationErrors.ci =
-            "Ingrese un documento de indentificacion valido";
+            "Ingrese un documento de indentificación válido";
         }
 
         setErrors(validationErrors);

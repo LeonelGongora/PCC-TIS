@@ -40,6 +40,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
         setTipoevent(response.data.event_type)
         setPatrocinadores(response.data.sponsors)
         setOrganizadores(response.data.organizers)
+        setActividades(response.data.activities)
         console.log(response.data.name === null)
         console.log(id)
     }
@@ -116,25 +117,20 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='fechaFinal'>{event.fecha_fin}</div>
             </div>
             
-            {patrocinadores.map((p) => {  
-                    return (<div key={p.id}>
-                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
-                    </div>);
-                    })}
-            {actividades.map((p) => {
-                return (<div key={p.id}>
+            {actividades.map((a) => {
+                return (<div key={a.id}>
                     <div className='gEtapa'>
-                        <p id="textoCuadroFinal">Etapa 1</p>
+                        <p id="textoCuadroFinal">{a.nombre_actividad}</p>
                         <p className='desc' id="textoCuadroFinal">Descripcion</p>
-                        <div className='etapaDesc'>Descripcion </div>
+                        <div className='etapaDesc'>{a.descripcion_actividad} </div>
                     </div>
                     <div className='gIniEtapa'>
                         <p id="textoCuadroFinal">Inicio</p>
-                        <div className='etapaIni'>27/12/2002</div>
+                        <div className='etapaIni'>{a.fecha_inicio_actividad}</div>
                     </div>
                     <div className='gFinEtapa'>
                         <p id="textoCuadroFinal">Final</p>
-                        <div className='etapaFin'>27/12/2002</div>
+                        <div className='etapaFin'>{a.fecha_fin_actividad}</div>
                     </div>
                     </div>);
             })}
