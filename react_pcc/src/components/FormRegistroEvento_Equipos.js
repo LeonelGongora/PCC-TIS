@@ -379,7 +379,7 @@ function FormRegistroEvento_Equipos(){
       </div>
       <div className='registro'>
         <form className="form_name" id='form_name'>
-        <div className='coach'>
+        {/* <div className='coach'>
               <p className='coachName'>Coach</p>
               <div className='camposCoach'>
                 <p>Nombre del coach</p>
@@ -403,7 +403,7 @@ function FormRegistroEvento_Equipos(){
                 readOnly
                 />
               </div>
-            </div>
+            </div> */}
             <div className='equipo'>
               <p className='coachName'>Equipo</p>
               <div className='camposEquipo'>
