@@ -11,7 +11,7 @@ function Register_Event_Admin_NextAlt() {
         <div className='navegacion'>
             <NavbarCreateEvent/>          
         </div>
-        <div className='contenido-Manu'>
+        <div className='contenido-Manu cambioManu'>
             <Add_Event_NextAlt/>
         </div>
       </div>

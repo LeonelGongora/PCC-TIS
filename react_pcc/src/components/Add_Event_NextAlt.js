@@ -25,55 +25,24 @@ class Add_Event_NextAlt extends Component{
     constructor(props) {
         super(props);
         this.state = {
-          estadoCamposInfo: true,
-          estadoRequisitosInfo: false,
-          estadoActividadesInfo: false,
-          estadoOrganizadoresInfo: false,
-          estadoPatrocinadoresInfo: false,
+            pestañas: [true, false, false, false, false], // Inicialmente, todas las pestañas están en false
         };
+        
       }
-    cambiarEstadoCampos = (nuevoEstado) => {
-        this.setState({ estadoCamposInfo: true });
-        this.setState({ estadoRequisitosInfo: false });
-        this.setState({ estadoActividadesInfo: false });
-        this.setState({ estadoOrganizadoresInfo: false });
-        this.setState({ estadoPatrocinadoresInfo: false });
-    };
-    cambiarEstadoRequisitos = (nuevoEstado) => {
-        this.setState({ estadoRequisitosInfo: true });
-        this.setState({ estadoCamposInfo: false });
-        this.setState({ estadoActividadesInfo: false });
-        this.setState({ estadoOrganizadoresInfo: false });
-        this.setState({ estadoPatrocinadoresInfo: false });
-    };
-    cambiarEstadoActividades = (nuevoEstado) => {
-        this.setState({ estadoRequisitosInfo: false });
-        this.setState({ estadoCamposInfo: false });
-        this.setState({ estadoActividadesInfo: true });
-        this.setState({ estadoOrganizadoresInfo: false });
-        this.setState({ estadoPatrocinadoresInfo: false });
-    };
-    cambiarEstadoOrganizadores = (nuevoEstado) => {
-        this.setState({ estadoRequisitosInfo: false });
-        this.setState({ estadoCamposInfo: false });
-        this.setState({ estadoActividadesInfo: false });
-        this.setState({ estadoOrganizadoresInfo: true });
-        this.setState({ estadoPatrocinadoresInfo: false });
-    };
-    cambiarEstadoPatrocinadores = (nuevoEstado) => {
-        this.setState({ estadoRequisitosInfo: false });
-        this.setState({ estadoCamposInfo: false });
-        this.setState({ estadoActividadesInfo: false });
-        this.setState({ estadoOrganizadoresInfo: false });
-        this.setState({ estadoPatrocinadoresInfo: true });
-    };
+
+    cambiarEstadoPestaña = (indice) => {
+    const nuevasPestañas = [...this.state.pestañas];
+
+    nuevasPestañas.fill(false);
+    nuevasPestañas[indice] = true;
+
+    this.setState({ pestañas: nuevasPestañas });
+    };  
+
 
     render(){
-        const { estadoCamposInfo } = this.state;
-        const { estadoRequisitosInfo } = this.state;
-        const { estadoActividadesInfo } = this.state;
-        const { estadoOrganizadoresInfo } = this.state;
-        const { estadoPatrocinadoresInfo } = this.state;
+        const pestañas = this.state.pestañas;
+        
         return (
           <>
                 <div className="contenedorMaximo"></div>
@@ -81,43 +50,54 @@ class Add_Event_NextAlt extends Component{
                     <p className="tituloEvento-home">REGISTRAR EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
-                            <div className={`campoPestana cmp${estadoCamposInfo ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoCampos()}>
+                            <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(0)}>
                                 <h3>Campos</h3>
                             </div>
-                            <div className={`campoPestana req${estadoRequisitosInfo ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoRequisitos()}>
+                            <div className={`campoPestana req${pestañas[1] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(1)}>
                                 <h3>Requisitos</h3>
                             </div>
-                            <div className={`campoPestana act${estadoActividadesInfo ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoActividades()}>
+                            <div className={`campoPestana act${pestañas[2] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(2)}>
                                 <h3>Actividades</h3>
                             </div>
-                            <div className={`campoPestana org${estadoOrganizadoresInfo ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoOrganizadores()}>
+                            <div className={`campoPestana org${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
                                 <h3>Organizadores</h3>
                             </div>
-                            <div className={`campoPestana ptr${estadoPatrocinadoresInfo ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPatrocinadores()}>
+                            <div className={`campoPestana ptr${pestañas[4] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(4)}>
                                 <h3>Patrocinadores</h3>
                             </div>
                         </div>
                         <div className='contenedorCamb'>
                             <Campos
-                                estadoCampos={this.state.estadoCamposInfo}
+                                estadoCampos={pestañas[0]}
                                 cambiarEstadoCampos={this.cambiarEstadoCampos}
                             />
                             <Requisitos
-                                estadoRequisitos={this.state.estadoRequisitosInfo}
+                                estadoRequisitos={this.state.pestañas[1]}
                                 cambiarEstadoRequisitos={this.cambiarEstadoRequisitos}
                             />
                             <Actividades
-                                estadoActividades={this.state.estadoActividadesInfo}
+                                estadoActividades={this.state.pestañas[2]}
                                 cambiarEstadoActividades={this.cambiarEstadoActividades}
                             />
                             <Organizadores
-                                estadoOrganizadores={this.state.estadoOrganizadoresInfo}
+                                estadoOrganizadores={this.state.pestañas[3]}
                                 cambiarEstadoOrganizadores={this.cambiarEstadoOrganizadores}
                             />
                             <Patrocinadores
-                                estadoPatrocinadores={this.state.estadoPatrocinadoresInfo}
+                                estadoPatrocinadores={this.state.pestañas[4]}
                                 cambiarEstadoPatrocinadores={this.cambiarEstadoPatrocinadores}
                             />
+                        </div>
+                        <div className='opcionesCambiar'>
+                            <button className={`botonesCambiar ${pestañas[0] ? ' activo' : ''}`}>
+                                Anterior
+                            </button>
+                            <button className='botonesCambiar'>
+                                Terminar Registro
+                            </button>
+                            <button className={`botonesCambiar ${pestañas[4] ? ' activo' : ''}`}>
+                                Siguiente
+                            </button>
                         </div>
                     </div>
                 </div>
