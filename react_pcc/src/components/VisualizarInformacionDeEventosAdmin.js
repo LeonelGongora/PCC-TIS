@@ -84,8 +84,8 @@ function VisualizarInformacionDeEventosAdmin({props}){
             <div className='gRequisitos'>
                 <p id="textoCuadroRequerimientos">Requisitos</p>
                 <div className='requerimientos'>
-                    {requisitos.map((r) => {  
-                    return (<div key={r.id}>
+                    {requisitos.map((r, index) => {  
+                    return (<div key={r.id}>{index + 1}. &nbsp;
                         {r.contenido_requisito} 
                         {/* Este taller contendra Este taller contendra Este taller contendra Este taller contendra */}
                     </div>);
@@ -97,9 +97,15 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='tipoDeEvento'>{tipoevent.nombre_tipo_evento} </div>
             </div>
             <div className='gNParticipantes'>
-                <p id="textoCuadroParticipantes">Modalidad</p>
-                <div className='participantes'>{event.participantes_equipo}</div>
-            </div>
+    <p id="textoCuadroParticipantes">Modalidad</p>
+    <div className='participantes'>
+        {event.participantes_equipo <= 1 ? (
+            <div>Individual</div>
+        ) : (
+            <div>Equipos de {event.participantes_equipo}</div>
+        )}
+    </div>
+</div>
             {cerrado == true ? (
                 <div className='fechaLimite'>La Fecha de inscripciones estan Cerradas</div>  
                 ) : (

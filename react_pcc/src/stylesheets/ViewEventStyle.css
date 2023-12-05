@@ -126,6 +126,7 @@
     min-height: 300px;
     background-color: white;
     color:black;
+    line-height: 1.5;
 }
 .gTipoEvento{
     grid-area: tipoEvento;

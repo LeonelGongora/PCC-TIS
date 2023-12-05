@@ -311,7 +311,7 @@ class Add_Event_Next extends Component{
                   {this.state.requisitos.map((requisito) => (
                     <div className="campo-container">
                       <div id="entradaEveNex">
-                        <p id="textoCuadro">{requisito.contenido_requisito}</p>
+                        <p id="textoCuadro"></p>
                         <textarea
                           name="contenido_anuncio"
                           className="inputEventoAnuncio-addEvent"
@@ -411,7 +411,7 @@ class Add_Event_Next extends Component{
                   <div className="botonEnviar">
                     <button className="botonGuardarEdit" type="submit">
                       {" "}
-                      Guardar
+                      Registrar
                     </button>
                   </div>
                 </form>

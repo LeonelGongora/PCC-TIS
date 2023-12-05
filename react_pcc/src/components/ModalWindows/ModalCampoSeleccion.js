@@ -72,6 +72,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }else{
+            /* 
             for (let index = 0; index < atributos.length; index++) {
 
                 let atributo = atributos[index].nombre_atributo.trim()
@@ -82,15 +83,14 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                     break;
                 }
             }
+            */
         }
 
         document.querySelectorAll("#opcion").forEach(opcion =>{
-            console.log(opcion)
-            console.log(opcion.name)
             if(!opcion.value.trim()){
                 validationErrors[opcion.name] = "Este campo es obligatorio"
-            }else if(!/^[A-Za-zÑñáéíóú0-9][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(opcion.value)){
-                validationErrors[opcion.name] = "Ingrese un nombre con caracteres alfanumericos"
+            }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(opcion.value)){
+                validationErrors[opcion.name] = "Ingrese un nombre válido"
             }
         })
 
@@ -132,7 +132,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
             <div className="ContenedorModal">
               <div className="EncabezadoModal">
                 <div className="tituloEvento">
-                  <h1>Añadir campo de seleccion</h1>
+                  <h1>Añadir campo de opciones</h1>
                 </div>
                 <button onClick={salirVentanaModal} className="BotonSalir">
                   {salir}

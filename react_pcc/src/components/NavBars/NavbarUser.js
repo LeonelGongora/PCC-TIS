@@ -10,15 +10,19 @@ const cookies = new Cookies();
 function NavbarUser(){
 
   const se_Registro = cookies.get('se_Registro');
+  const nombre_usuario_cookies = cookies.get('nombre_usuario');
+  const apellido_usuario_cookies = cookies.get('apellido_usuario');
 
   const [nombre_usuario, setNombreUsuario] = useState("");
   const [apellido_usuario, setApellidoUsuario] = useState("");
 
   useEffect(()=>{
     if(se_Registro){
-
+      setNombreUsuario(nombre_usuario_cookies)
+      setApellidoUsuario(apellido_usuario_cookies)
     }
   }, []);
+  
 
   const cerrarSesion = () => {
     const cookieKeys = Object.keys(cookies.getAll());
@@ -37,8 +41,8 @@ function NavbarUser(){
 
     return (
       <nav>
-        <div className='logoName'>
-          <h1 className='name'>PCC</h1>
+        <div className="logoName">
+          <h1 className="name">PCC</h1>
           <a href="">
             <img
               className="imageNav"
@@ -47,18 +51,18 @@ function NavbarUser(){
             />
           </a>
         </div>
-        <div className='navbarRight'>
-          <div className='desplegable1'>
-            <DropdownUser/>
+        <div className="navbarRight">
+          <div className="desplegable1">
+            <DropdownUser />
           </div>
-            
+
           <div className="userId">
-            <a>
-              <FontAwesomeIcon className="userIcon" icon={faUser} />
-            </a>
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>
-              {`${nombre_usuario} ${apellido_usuario}`} 
+                <a>
+                  <FontAwesomeIcon className="userIcon" icon={faUser} />
+                </a>
+                {`${nombre_usuario} ${apellido_usuario}`}
               </button>
               {isOpen && (
                 <ul className="dropdown-menu">
@@ -67,11 +71,11 @@ function NavbarUser(){
               )}
             </div>
           </div>
-            <div>
-            </div>
-          </div>
+          <div></div>
+        </div>
       </nav>
     );
 }
 
 export default NavbarUser;
+

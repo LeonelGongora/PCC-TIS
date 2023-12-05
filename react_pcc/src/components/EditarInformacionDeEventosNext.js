@@ -30,6 +30,7 @@ class EditarInformacionDeEventosNext extends Component{
         estadoModalAtributo: false,
         atributos: [],
         requisitos: [],
+        actividades: [],
         organizadores : [],
         organizadores_de_evento: [],
         organizadores_id : [],
@@ -74,6 +75,7 @@ class EditarInformacionDeEventosNext extends Component{
           id_evento: response.data.id,
           atributos: response.data.attributes,
           requisitos: response.data.requirements,
+          actividades: response.data.activities,
           organizadores_de_evento : response.data.organizers,
           patrocinadores_de_evento : response.data.sponsors,
           organizadores: respuesta.data.organizadores,
@@ -311,7 +313,8 @@ class EditarInformacionDeEventosNext extends Component{
                 }
               })
             }
-            
+
+            window.location.href = './paginaEditarEventos';
             //axios.post(url, data).then(res => {
               //if(res.data.status === 200){
                 //console.log(res);
@@ -415,6 +418,30 @@ class EditarInformacionDeEventosNext extends Component{
                   >
                     Agregar Requisito +
                   </button>
+
+                  <p>Actividades</p>
+                  {this.state.actividades.map((actividad) => (
+                    
+                    <div className="campo-container">
+                      <div id="entradaEveNex">
+                        <p id="textoCuadro">{actividad.nombre_actividad}*</p>
+                        <input
+                          id="inputRegistro"
+                          type="text"
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly
+                        />
+                      </div>
+                      <button
+                        className="botonEliminar"
+                        type="button"
+                        onClick={() => this.eliminarRequisito(actividad.id)}
+                      >
+                        {cancelar}
+                      </button>
+                    </div>
+                  ))}
 
                   <h1 className="textoTituloEdiNext">Organizadores</h1>
 

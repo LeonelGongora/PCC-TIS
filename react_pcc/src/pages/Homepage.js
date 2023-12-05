@@ -32,6 +32,10 @@ class Homepage extends Component{
         this.setState({ loader: false });
         //setOrganizadores(respuesta.data.organizadores);
     }
+
+    redirigir = async () => {
+        window.location.href='./home-admin';
+    }
     
     componentDidMount(){
         this.getNotices();
@@ -57,17 +61,11 @@ class Homepage extends Component{
                 <div className='contenedorInformacion'>
                     <div className='contanedorSecuandario'>
                     <div className='informacion'>
-                        <img className="afiche" src={require("../images/afiche.png")}
-                        alt="Logo del sistema"/>
+                        
                         <div className='titleEvent-date'>
-                            <h4 className='titleEvent'>Competencia Internacional de Programacion Universitaria</h4>
-                            <p className='date'>
-                            <FontAwesomeIcon icon={faCalendar} />  Fecha de Inscripcion</p>
-                            <p className='dateEvent'>25/12/2023</p>
-                        <button className='buttonInf'> Más información del evento </button>
+                        <button className='buttonVer' onClick={this.redirigir}> Ver todos los eventos </button>
                         </div>
                     </div>
-                    <button className='buttonVer'> Ver todos los eventos </button>
                     </div>
                     <div className="ContenedorNoticias">
                         <div className="EncabezadoNoticias">
