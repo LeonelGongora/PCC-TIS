@@ -45,11 +45,11 @@ class PaginaAdministrarSolicitudes extends Component{
             let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
             this.eventos[i].fecha_fin = format4
 
-            fecha1 = new Date(this.eventos[i].fecha_limite)
+            fecha1 = new Date(this.eventos[i].fecha_inicio)
             var dia1 = fecha1.getDate() + 1
             var mes1 = fecha1.getMonth() + 1
             let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
-            this.eventos[i].fecha_limite = format5
+            this.eventos[i].fecha_inicio = format5
             
         }
 
@@ -142,7 +142,7 @@ class PaginaAdministrarSolicitudes extends Component{
                                         <h4 className="tipoEv">
                                           {evento.nombre_tipo_evento}
                                         </h4>
-                                        <h4>{evento.fecha_limite}</h4>
+                                        <h4>{evento.fecha_inicio}</h4>
                                         <div>
                                           {evento.participantes_equipo <= 1 ? (
                                             <h4>Individual</h4>

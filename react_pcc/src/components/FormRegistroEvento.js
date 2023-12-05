@@ -24,7 +24,8 @@ function FormRegistroEvento(){
   
   const archivoInput = useRef(null);
   const [requisitos, setRequisitos] = useState ( [] );
-  const [mostrarRequisitos] = useState(true);// Para mostrar Requisitos
+  
+  const [mostrarRequisitos, setMostrarRequisitos] = useState(false);// Para mostrar Requisitos
 
   const manejarCargaDeArchivo = (event) => {
     setArchivo(event.target.files[0]);
@@ -83,53 +84,67 @@ function FormRegistroEvento(){
     
           }else{
           }
-
         }
       }
     })    
 
-    if (archivo.name) {
+    if(mostrarRequisitos){
+      if (archivo.name) {
       
-      if (!archivo.name.endsWith('.zip')) {
-        validationErrors.imagen = "Debe subir un archivo .zi";
+        if (!archivo.name.endsWith('.zip')) {
+          validationErrors.imagen = "Debe subir un archivo .zi";
+          setErrorArchivo('Debe subir un archivo .zip');
+          setShowModal(true);
+          console.log("No Zip")
+        } else if (archivo.size > 10485760) {
+          validationErrors.imagen = "Su archivo excede el tamaño máximo";
+          setErrorArchivo('Su archivo excede el tamaño máximo');
+          setShowModal(true);
+          console.log("Tamaño")
+        }
+        //else if (!archivo.file && mostrarRequisitos)
+      } else {
         setErrorArchivo('Debe subir un archivo .zip');
+        validationErrors.imagen = "Debe subir un archivo .zip";
+        console.log("Sin archivo")
         setShowModal(true);
-        console.log("No Zip")
-      } else if (archivo.size > 10485760) {
-        validationErrors.imagen = "Su archivo excede el tamaño máximo";
-        setErrorArchivo('Su archivo excede el tamaño máximo');
-        setShowModal(true);
-        console.log("Tamaño")
-      }
-      //else if (!archivo.file && mostrarRequisitos)
-    } else {
-      setErrorArchivo('Debe subir un archivo .zip');
-      validationErrors.imagen = "Debe subir un archivo .zip";
-      console.log("Sin archivo")
-      setShowModal(true);
-    } 
+      } 
+    }
 
     setErrors(validationErrors);
 
     if(Object.keys(validationErrors).length === 0){
       
-      
-      const fd = new FormData();
-      fd.append('file', archivo);
-      axios.post(Imagen_Api_Url, fd).then(response=>{ 
-        var urli= response.data.urlimagen;
+      if(mostrarRequisitos){
 
-      axios.post(EventoUsuario_Api_Url, {
-        event_id: id_evento,
-        user_id: id_usuario,
-        requisitoZip: urli,
-        solicitud : "0"
-      })
-      .then(response=>{
-        window.location.href='./paginaRegistrarseEventos';
-        console.log(response)
-      })
-      })
+        const fd = new FormData();
+        fd.append('file', archivo);
+        axios.post(Imagen_Api_Url, fd).then(response=>{ 
+          var urli= response.data.urlimagen;
+
+          axios.post(EventoUsuario_Api_Url, {
+            event_id: id_evento,
+            user_id: id_usuario,
+            requisitoZip: urli,
+            solicitud : "0"
+          }).then(response=>{
+            window.location.href='./paginaRegistrarseEventos';
+            console.log(response)
+          })
+        })
+      }else{
+        axios.post(EventoUsuario_Api_Url, {
+          event_id: id_evento,
+          user_id: id_usuario,
+          //requisitoZip: urli,
+          solicitud : "1"
+        }).then(response=>{
+          window.location.href='./paginaRegistrarseEventos';
+          console.log(response)
+        })
+
+      }
+      
     }
   }
 
@@ -150,7 +165,6 @@ function FormRegistroEvento(){
     if(se_Registro){
       setFormData({ estadoModal: false });
     }
-
   }, [])
 
   const getEvent=async()=>{
@@ -167,10 +181,12 @@ function FormRegistroEvento(){
             atributos_Aux[i]["esSelect"] = false;
           }
         }
+        if(response.data.requirements.length !== 0){
+          setMostrarRequisitos(true)
+        }
         setEvent(response.data)
         setRequisitos(response.data.requirements)
         setAtributos(atributos_Aux)
-        //setAtributos(response.data.attributes)
       }
   }
 
@@ -214,14 +230,16 @@ function FormRegistroEvento(){
           <p>No se requiere subir ningún archivo o documento para registrarse a este evento.</p>
         )}
       </div>
-      <div className='archivoZip'>
-        {mostrarRequisitos && (
+      {mostrarRequisitos && (
         <>
+      <div className='archivoZip'>
+        
         <p> Archivo seleccionado:  </p>
         <span id="nombreArchivo"></span> {/* zip seleccionado */}  
-        </>
-        )}
+        
       </div>
+      </>
+        )}
       <div className='botonesContainer'>
         {mostrarRequisitos && (
         <> 

@@ -20,7 +20,6 @@ class CreateEventsTable extends Migration
             $table->date('fecha_inicio');
             $table->integer('numero_contacto');
             $table->text('descripcion');
-            $table->date('fecha_limite');
             $table->date('fecha_fin');
             $table->integer('participantes_equipo')->nullable();
             $table->string('name')->nullable();

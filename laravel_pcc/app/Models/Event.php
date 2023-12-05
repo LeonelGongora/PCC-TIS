@@ -26,7 +26,6 @@ class Event extends Model
         'fecha_inicio',
         'numero_contacto',
         'descripcion',
-        'fecha_limite',
         'fecha_fin',
         'participantes_equipo',
         'name',

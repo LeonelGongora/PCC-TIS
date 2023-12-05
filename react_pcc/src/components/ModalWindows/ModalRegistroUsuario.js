@@ -14,7 +14,7 @@ const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 //estadoRegistroUsuario
 //cambiarEstadoModalRegistroUsuario
-function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1, cambiarDatosCoach}){
+function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1}){
 
     const ci_nuevo_usuario = cookies.get('ci_nuevo_usuario');
 
@@ -23,7 +23,6 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         apellido: '',
         email: '',
         password: '',
-        confirmarPassword: '',
         telefono: '',
     });
 
@@ -45,10 +44,12 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     const salirVentanaModal = (e) => {
         cambiarEstadoModalRegistroUsuario(false);
         cambiarEstado1(true)
+        /* 
         setValues({
             nombre_organizador : '',
             imagen_organizador: ''
         });
+        */
         setErrors({});
     }
 
@@ -61,7 +62,6 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     if (!values.nombre.trim()) {
       validationErrors.nombre = "Este campo es obligatorio"
 
-
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre)) {
       validationErrors.nombre = "Ingrese nombre(s) valido";
     }
@@ -69,10 +69,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     if (!values.apellido.trim()) {
       validationErrors.apellido = "Este campo es obligatorio";
     } else if (
-      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(
-        values.apellido
-      )
-    ) {
+      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.apellido)) {
       validationErrors.apellido = "Ingrese apellido(s) valido(s)";
     }
 
@@ -109,6 +106,8 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     }
 
         setErrors(validationErrors);
+        console.log(values)
+        console.log(ci_nuevo_usuario)
 
         if(Object.keys(validationErrors).length === 0){
 
@@ -123,17 +122,19 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
             data.append('password', values.password)
             data.append('telefono', values.telefono)
 
-            cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
+            //cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
 
             cookies.set('nombre_usuario', values.nombre, {path: "/"});
             cookies.set('apellido_usuario', values.apellido, {path: "/"});
+            cookies.set('id_usuario', values.id_usuario, {path: "/"});
+            cookies.set('ci_nuevo_usuario', ci_nuevo_usuario, {path: "/"});
             
             cookies.set('se_Registro', true, {path: "/"});
 
             axios.post(url, data).then( res => {
                 cookies.set('id_usuario', res.data.ultimo_id, {path: "/"});
+                console.log(ci_nuevo_usuario)
                 cambiarEstadoModalRegistroUsuario(false)
-
             })
         }
     }

@@ -9,25 +9,26 @@ const cookies = new Cookies();
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
-function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegistroUsuario,cambiarDatosCoach}){
+function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegistroUsuario}){
 
     
     const [values, setValues] = useState({
       ci : "",
+      ci_encontrado: "",
       nombre_usuario: "",
       apellido_usuario: "",
-      ci_encontrado: "",
       contraseña: "",
       contraseña_encontrada: "",
+      id_usuario: "",
     });
 
     const [errors, setErrors] = useState({});
     const [usuarios, setUsuarios] = useState({});
 
     const [dniVisible, setDniVisible] = useState(true);
-    const [infoVisible, setInfoVisible] = useState(true);
     const [contraVisible, setContraVisible] = useState(false);
-    const [confButVisible, setConfButVisible] = useState(true);
+
+    const [infoVisible, setInfoVisible] = useState(false);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -43,7 +44,6 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
 
     const getUsuarios=async()=>{
       let url = "http://127.0.0.1:8000/api/get-user-information"
-      //get-user-information
       const respuesta = await axios.get(url);
       setUsuarios(respuesta.data.usuarios);
     }
@@ -64,72 +64,21 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         validationErrors.contraseña = "Contraseña incorrecta"
       }
       setErrors(validationErrors);
+      console.log(values)
 
       if(Object.keys(validationErrors).length === 0){
-        let url = `http://127.0.0.1:8000/api/get-user-by-dni/${values.ci}`
-        const respuesta = await axios.get(url);
-        console.log(respuesta)
-        cambiarDatosCoach(respuesta.data.nombre_usuario, respuesta.data.apellido_usuario, values.ci);
-        cookies.set('nombre_usuario', respuesta.data.nombre_usuario, {path: "/"});
-        cookies.set('apellido_usuario', respuesta.data.apellido_usuario, {path: "/"});
-
-        cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
+        
+        //let url = `http://127.0.0.1:8000/api/get-user-by-dni/${values.ci}`
+        //const respuesta = await axios.get(url);
+        //console.log(respuesta)
+        //cambiarDatosCoach(respuesta.data.nombre_usuario, respuesta.data.apellido_usuario, values.ci);
+        cookies.set('nombre_usuario',values.nombre_usuario, {path: "/"});
+        cookies.set('apellido_usuario', values.apellido_usuario, {path: "/"});
+        cookies.set('id_usuario', values.id_usuario, {path: "/"});
+        cookies.set('ci_nuevo_usuario', values.ci, {path: "/"});
         cookies.set('se_Registro', true, {path: "/"});
         cambiarEstado1(false);
       }
-    }
-
-    const saveTypeEvent = async (e) => {
-        e.preventDefault();
-
-        const validationErrors = {};
-        console.log("Prueba")
-
-        if(!values.ci.trim()){
-            validationErrors.ci = "Este campo es obligatorio"
-
-        }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
-          validationErrors.ci =
-            "Ingrese un documento de indentificación válido";
-        }
-
-        setErrors(validationErrors);
-
-        if(Object.keys(validationErrors).length === 0){
-
-          let nuevo_ci = values.ci;
-          let seEncontro = 0;
-          for (let index = 0; index < usuarios.length; index++) {
-    
-            let ci = usuarios[index].ci
-    
-            if(ci == nuevo_ci){
-              seEncontro = 1;
-              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
-              const respuesta = await axios.get(url);
-              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
-              setValues({
-                ...values,
-                nombre_usuario: respuesta.data.nombre_usuario,
-                apellido_usuario: respuesta.data.apellido_usuario,
-                ci_encontrado: nuevo_ci,
-                contraseña_encontrada: respuesta.data.contraseña_usuario,
-               });
-              break;
-            }
-          }
-    
-          if(seEncontro === 0){
-            cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
-            setValues({
-              ...values,
-              nombre_usuario: "",
-              apellido_usuario: "",
-              ci_encontrado: "",
-             });
-            cambiarEstadoModalRegistroUsuario(true);
-          }
-        }
     }
 
     const handleToggleVisibility = async () => {
@@ -141,8 +90,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
             validationErrors.ci = "Este campo es obligatorio"
 
         }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
-          validationErrors.ci =
-            "Ingrese un documento de indentificacion valido";
+          validationErrors.ci ="Ingrese un documento de indentificacion valido";
         }
 
         setErrors(validationErrors);
@@ -158,30 +106,27 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
               seEncontro = 1;
               let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
               const respuesta = await axios.get(url);
-              cookies.set('id_usuario', respuesta.data.id_usuario, {path: "/"});
-              cookies.set('nombre_usuario', respuesta.data.nombre_usuario, {path: "/"});
-              cookies.set('apellido_usuario', respuesta.data.apellido_usuario, {path: "/"});
+
               setValues({
                 ...values,
                 nombre_usuario: respuesta.data.nombre_usuario,
                 apellido_usuario: respuesta.data.apellido_usuario,
                 ci_encontrado: nuevo_ci,
                 contraseña_encontrada: respuesta.data.contraseña_usuario,
+                id_usuario: respuesta.data.id_usuario
                });
               setDniVisible(!dniVisible);
               setContraVisible(!contraVisible);
-              setConfButVisible(!confButVisible);
+              setInfoVisible(!contraVisible);
               break;
             }
           }
     
           if(seEncontro === 0){
             cookies.set('ci_nuevo_usuario', nuevo_ci, {path: "/"});
-            
             cambiarEstadoModalRegistroUsuario(true);
           }
         }
-      
     };
 
     return (
@@ -195,7 +140,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
                 </div>
                 <div className="registroTipoEvento">
                   <div  className='contentForm'>
-                    <form onSubmit={saveTypeEvent} id="form1" className='formUserVerif'>
+                    <form onSubmit={handleToggleVisibility} id="form1" className='formUserVerif'>
 
                     {dniVisible && <div><p id="textoCuadroAtributo">DNI</p>
                     <input
@@ -208,9 +153,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
                     />
 
                     {errors.ci && (
-                    <span className="span1Modal">
-                    {errors.ci}
-                    </span>
+                    <span className="span1Modal">{errors.ci}</span>
                     )}
                     </div>
                     }
@@ -238,10 +181,8 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
                         {errors.contraseña && (
                         <span className="span1Modal">{errors.contraseña}</span>
                         )}
-              {dniVisible && <button form="form1" type="submit" onClick={saveTypeEvent} className="BotonRegistrar">
-                Buscar DNI
-              </button>}
-              {infoVisible && confButVisible && <button type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
+
+              {dniVisible && <button type="button" onClick={handleToggleVisibility} className="BotonRegistrar">
                 Confirmar
               </button>}
               {contraVisible && <button form="form1" type="button" onClick={buscarContraseña} className="BotonRegistrar">

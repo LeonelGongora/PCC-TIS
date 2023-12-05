@@ -46,10 +46,10 @@ class Add_Event extends Component {
       nombre_evento: "",
       numero_contacto: "",
       descripcion: "",
-      fecha_limite: "",
       fecha_fin: "",
       participantes_equipo: "",
       event_type_id: "",
+      fecha_inicio: "",
       errors: {},
       contador: 0,
       isChecked: false,
@@ -79,18 +79,18 @@ class Add_Event extends Component {
       console.log("No hay archivo")
     }
 
-    if (this.state.fecha_limite && this.state.fecha_fin) {
-      var d1 = new Date(this.state.fecha_limite);
+    if (this.state.fecha_inicio && this.state.fecha_fin) {
+      var d1 = new Date(this.state.fecha_inicio);
       var d2 = new Date(this.state.fecha_fin);
 
       var fecha1 = d1.getTime();
       var fecha2 = d2.getTime();
 
       if (fecha1 > fecha2) {
-        validationErrors.fecha_limite =
-          "La Fecha de Limite no puede ser superior a la Fecha de Fin ";
+        validationErrors.fecha_inicio =
+          "La Fecha de Inicio no puede ser superior a la Fecha de Fin ";
         validationErrors.fecha_fin =
-          "La Fecha de Limite no puede ser superior a la Fecha de Fin";
+          "La Fecha de Inicio no puede ser superior a la Fecha de Fin";
       }
     }
 
@@ -127,10 +127,10 @@ class Add_Event extends Component {
       validationErrors.descripcion = "Ingrese una descripción válida";
     }
 
-    if (!this.state.fecha_limite.trim()) {
-      validationErrors.fecha_limite = "Este campo es obligatorio";
+    if (!this.state.fecha_inicio.trim()) {
+      validationErrors.fecha_inicio = "Este campo es obligatorio";
     } else {
-      let d2 = new Date(this.state.fecha_limite);
+      let d2 = new Date(this.state.fecha_inicio);
       d2.setDate(d2.getDate() + 1);
       d2.setUTCHours(0, 0, 0, 0);
 
@@ -141,7 +141,7 @@ class Add_Event extends Component {
       let fecha1 = d2.getTime();
       let fecha2 = date_Actual1.getTime();
       if (fecha1 < fecha2) {
-        validationErrors.fecha_limite = "Esta fecha no es válida";
+        validationErrors.fecha_inicio = "Esta fecha no es válida";
       }
     }
 
@@ -211,10 +211,9 @@ class Add_Event extends Component {
         data.append("image", this.state.image);
       }
       data.append("nombre_evento", this.state.nombre_evento);
-      data.append("fecha_inicio", fecha_Actual);
+      data.append("fecha_inicio", this.state.fecha_inicio);
       data.append("numero_contacto", this.state.numero_contacto);
       data.append("descripcion", this.state.descripcion);
-      data.append("fecha_limite", this.state.fecha_limite);
       data.append("fecha_fin", this.state.fecha_fin);
       if (this.state.participantes_equipo === "0") {
         data.append("participantes_equipo", 1);
@@ -342,17 +341,17 @@ class Add_Event extends Component {
               )}
 
               <div id="entrada">
-                <p id="textoCuadro">Fecha Limite de inscripcion*</p>
+                <p id="textoCuadro">Fecha de Inicio*</p>
                 <input
                   id="inputRegistro"
                   type="date"
-                  name="fecha_limite"
+                  name="fecha_inicio"
                   onChange={this.handleInput}
                 />
               </div>
-              {this.state.errors.fecha_limite && (
+              {this.state.errors.fecha_inicio && (
                 <span className="advertencia-creEve">
-                  {this.state.errors.fecha_limite}
+                  {this.state.errors.fecha_inicio}
                 </span>
               )}
 

@@ -24,10 +24,11 @@ function FormRegistroEvento_Equipos(){
   const idu = cookies.get('id_usuario');
   const se_Registro = cookies.get('se_Registro');
   const participantes_equipo = cookies.get('participantes_equipo');
+  const dni_coach = cookies.get('ci_nuevo_usuario');
 
-  
   const archivoInput = useRef(null);
-  const [mostrarRequisitos, setMostrarRequisitos] = useState(true);// Para mostrar Requisitos
+  //const [mostrarRequisitos, setMostrarRequisitos] = useState(true);// Para mostrar Requisitos
+  const [mostrarRequisitos, setMostrarRequisitos] = useState(false);// Para mostrar Requisitos
   const [requisitos, setRequisitos] = useState([]);
 
   const manejarCargaDeArchivo = (event) => {
@@ -44,9 +45,7 @@ function FormRegistroEvento_Equipos(){
     nombre_equipo : "",
   });
 
-  const [nombre_coach, setNombreCoach] = useState("");
-  const [apellido_coach, setApellidoCoach] = useState("");
-  const [dni_coach, setDniCoach] = useState("");
+  //const [dni_coach, setDniCoach] = useState("");
 
   const [formData, setFormData] = useState({
     estadoModal: true,
@@ -64,7 +63,8 @@ function FormRegistroEvento_Equipos(){
 
     e.preventDefault();
     const validationErrors = {};
-    console.log(values)
+    console.log("DNI")
+    console.log(dni_coach)
 
     let nombres_equipos_registrados = []
     let id_registrados = []
@@ -77,23 +77,24 @@ function FormRegistroEvento_Equipos(){
       }
     }
 
-    if (archivo.name) {
-      
-      if (!archivo.name.endsWith('.zip')) {
-        validationErrors.imagen = "Debe subir un archivo .zip";
+    if(mostrarRequisitos){
+      if (archivo.name) {
+        if (!archivo.name.endsWith('.zip')) {
+          validationErrors.imagen = "Debe subir un archivo .zip";
+          setErrorArchivo('Debe subir un archivo .zip');
+          setShowModal(true);
+        } else if (archivo.size > 10485760) {
+          validationErrors.imagen = "Su archivo excede el tamaño máximo";
+          setErrorArchivo('Su archivo excede el tamaño máximo');
+          setShowModal(true);
+        }
+      } else {
         setErrorArchivo('Debe subir un archivo .zip');
+        validationErrors.imagen = "Debe subir un archivo .zip";
         setShowModal(true);
-      } else if (archivo.size > 10485760) {
-        validationErrors.imagen = "Su archivo excede el tamaño máximo";
-        setErrorArchivo('Su archivo excede el tamaño máximo');
-        setShowModal(true);
-      }
-      //else if (!archivo.file && mostrarRequisitos)
-    } else {
-      setErrorArchivo('Debe subir un archivo .zip');
-      validationErrors.imagen = "Debe subir un archivo .zip";
-      setShowModal(true);
+      } 
     } 
+    
 
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
@@ -108,7 +109,7 @@ function FormRegistroEvento_Equipos(){
     document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(evento =>{
       if(!evento.value.trim()){
         validationErrors[evento.name] = "Este campo es obligatorio";
-      }else if(evento.value === dni_coach){
+      }else if(parseInt(evento.value) === dni_coach){
         validationErrors[evento.name] = "El entrenador no puede ser participante de este evento";
       }else if(dni_ingresados.includes(evento.value)){
         validationErrors[evento.name] = "No puede registrar al mismo participante más de una vez";
@@ -128,22 +129,28 @@ function FormRegistroEvento_Equipos(){
         participantes_dni_Aux.push(evento.value)
       })
 
+      if(mostrarRequisitos){
+        
+      }
       const fd = new FormData();
       fd.append('file', archivo);
       var urli= '';
       axios.post(Imagen_Api_Url, fd)
       .then(response=>{ 
-        urli= response.data.urlimagen;
-      
-      const data = new FormData();
-      
-      const solic = '0';
-
+        const data = new FormData();
+        let solic = '0'
+        if(mostrarRequisitos){
+          urli= response.data.urlimagen;
+          data.append('zip', urli);
+        }else{
+          data.append('zip', null);
+          solic = 1;
+        }
+        
       data.append('nombre_equipo', values.nombre_equipo)
       data.append('event_id', id_evento)
       data.append('solicitud', solic)
       data.append('id_coach', idu)
-      data.append('zip', urli)
 
       let id_equipo = 0;
       axios.post('http://127.0.0.1:8000/api/add-team', data)
@@ -177,7 +184,6 @@ function FormRegistroEvento_Equipos(){
     
               const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
 
-              
               const longitud = 5
               let caracteres = ""
               const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -261,6 +267,9 @@ function FormRegistroEvento_Equipos(){
   const getEvent=async()=>{
       const url = `${Eventos_Api_Url}/${id_evento}`;
       const response = await axios.get(url)
+      if(response.data.requirements.length !== 0){
+        setMostrarRequisitos(true)
+      }
       setEvent(response.data)
       setRequisitos(response.data.requirements)
   }
@@ -285,13 +294,6 @@ function FormRegistroEvento_Equipos(){
     setFormData({ estadoContraseña: nuevoEstado });
   }
 
-  const cambiarDatosCoach = (nombre_coach, apellido_coach, dni_coach) => {
-    setNombreCoach(nombre_coach)
-    setApellidoCoach(apellido_coach)
-    setDniCoach(dni_coach)
-  }
-  
-
   return(
     <div className='containerAll'>
     <div className='containerForm'>
@@ -306,7 +308,6 @@ function FormRegistroEvento_Equipos(){
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
-        cambiarDatosCoach = {cambiarDatosCoach}
       />
 
       <ModalRegistroEquipos
@@ -319,7 +320,6 @@ function FormRegistroEvento_Equipos(){
         estadoRegistroUsuario={formData.estadoRegistroUsuario}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
         cambiarEstado1={cambiarEstadoModal}
-        cambiarDatosCoach = {cambiarDatosCoach}
       />
 
       <div className='header'>
@@ -336,14 +336,16 @@ function FormRegistroEvento_Equipos(){
           <p>No se requiere subir ningún archivo o documento para registrarse a este evento.</p>
         )}
       </div>
-      <div className='archivoZip'>
-        {mostrarRequisitos && (
+      {mostrarRequisitos && (
         <>
+      <div className='archivoZip'>
+        
         <p> Archivo seleccionado:  </p>
         <span id="nombreArchivo"></span> {/* zip seleccionado */}  
-        </>
-        )}
+        
       </div>
+        </>
+      )}
       <div className='botonesContainer'>
         {mostrarRequisitos && (
         <> 

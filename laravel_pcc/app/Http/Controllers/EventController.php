@@ -38,7 +38,6 @@ class EventController extends Controller
         $evento-> fecha_inicio = $request -> fecha_inicio;
         $evento-> numero_contacto = $request -> numero_contacto;
         $evento-> descripcion = $request -> descripcion;
-        $evento-> fecha_limite = $request -> fecha_limite;
         $evento-> fecha_fin = $request -> fecha_fin;
         $evento-> participantes_equipo = $request -> participantes_equipo;
         $evento-> event_type_id = $request -> event_type_id;
@@ -116,7 +115,6 @@ class EventController extends Controller
             $evento-> fecha_inicio = $request -> fecha_inicio;
             $evento-> numero_contacto = $request -> numero_contacto;
             $evento-> descripcion = $request -> descripcion;
-            $evento-> fecha_limite = $request -> fecha_limite;
             $evento-> fecha_fin = $request -> fecha_fin;
             $evento-> participantes_equipo = $request -> participantes_equipo;
             $evento-> event_type_id = $request -> event_type_id;
@@ -135,7 +133,6 @@ class EventController extends Controller
                 $evento-> fecha_inicio = $request -> fecha_inicio;
                 $evento-> numero_contacto = $request -> numero_contacto;
                 $evento-> descripcion = $request -> descripcion;
-                $evento-> fecha_limite = $request -> fecha_limite;
                 $evento-> fecha_fin = $request -> fecha_fin;
                 $evento-> participantes_equipo = $request -> participantes_equipo;
                 $evento-> event_type_id = $request -> event_type_id;

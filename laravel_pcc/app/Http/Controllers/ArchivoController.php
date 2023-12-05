@@ -17,25 +17,28 @@ class ArchivoController extends Controller
      public function upload(Request $request)
      {
         //$res = $request;
-        // if ( $res -> hasFile('file'))
-        // {
+        if ( $request -> hasFile('file'))
+        {
             $file = $request->file('file');
             $basic_url ='http://localhost:8000/';
             $destinationPath = 'imagen/';
             $filename = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $request->file('file')->move($destinationPath, $filename);
             $url = $basic_url . $destinationPath . $filename;
-        // }
+
+            return response()->json([
+                'messaje' => 'Imagen registrada exitosamente',
+                'urlimagen' => $url 
+            ], 201);
+        }
         // return $url;
         // return response()->json(['urla' => $url], 200);
         // return response()->json([
         //     'urla' => $url
         // ], 201);
-        return response()->json([
-            'messaje' => 'Imagen registrada exitosamente',
-            'urlimagen' => $url 
-        ], 201);
-     }
+
+    }
+
     public function download(Request $request)
     {
         $url = $request->nombre;
