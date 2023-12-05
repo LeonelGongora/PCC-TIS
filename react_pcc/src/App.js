@@ -29,6 +29,7 @@ import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 
 import Homepage from "./pages/Homepage.js";
+import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             
         <Route path='/add-event' element={<Register_Event_Admin/>} />
         <Route path='/add-event-next' element={<Register_Event_Admin_Next/>} />
+        <Route path='/add-event-next-alt' element={<Register_Event_Admin_NextAlt/>} />
 
         <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos/>} />
         <Route path='/paginaVisualizarParticipantes' element={<PaginaVisualizarParticipantes/>} />
