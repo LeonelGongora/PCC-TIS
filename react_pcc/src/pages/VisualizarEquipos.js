@@ -12,6 +12,7 @@ import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrga
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import configApi from '../configApi/configApi'
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
@@ -30,7 +31,7 @@ class VisualizarEquipos extends Component{
             event: [],
             equipos : [],
             usuarios: [],
-            url: "http://127.0.0.1:8000/api/events",
+            url: `${URL_API}/events`,
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
@@ -44,7 +45,7 @@ class VisualizarEquipos extends Component{
       console.log(response)
       this.setState({ event: response.data});
 
-      const res = await axios.get(`http://127.0.0.1:8000/api/get-team-01/${this.id_evento}`);
+      const res = await axios.get(`${URL_API}/get-team-01/${this.id_evento}`);
       this.equipos = Array.from(res.data)
 
       this.setState({loader:false});

@@ -1,4 +1,4 @@
-const iniURL = "http://localhost:8000/";
+const iniURL = "http://blackcloud.tis.cs.umss.edu.bo/";
 //const iniURL = ""; //deployado
 //http://blackcloud.tis.cs.umss.edu.bo
 export default{

@@ -11,6 +11,7 @@ import ModalEleccionTipoCampo from '../ModalWindows/ModalEleccionTipoCampo';
 import ModalCampoFecha from '../ModalWindows/ModalCampoFecha';
 import ModalCampoNumerico from '../ModalWindows/ModalCampoNumerico';
 import ModalWindowAtributo from '../ModalWindows/ModalWindowAtributo';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -59,7 +60,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
     }, [])
 
     const eliminarAtributo = (id) => {
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);

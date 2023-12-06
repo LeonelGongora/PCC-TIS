@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Banner_informativo from "../components/Banner_informativo";
 import ModalDarseBaja from "../components/ModalWindows/ModalDarseBaja";
+import {URL_API, URL_IMG} from '../const';
 
 const buscar = (
   <FontAwesomeIcon
@@ -28,8 +29,8 @@ class DarBajaEvento extends Component {
     this.state = {
       events: [],
       loader: false,
-      url: "http://127.0.0.1:8000/api/miseventos",
-      urle: "http://127.0.0.1:8000/api/misequipos",
+      url: `${URL_API}/miseventos`,
+      urle: `${URL_API}/misequipos`,
       tipos_de_evento: [],
       estadoBanner: false,
       estadoBannerModal: false,
@@ -43,7 +44,7 @@ class DarBajaEvento extends Component {
   }
 
   getEventTypes = async () => {
-    const url = "http://127.0.0.1:8000/api/type-events";
+    const url = `${URL_API}/type-events`;
 
     //this.setState({loader:true});
     const respuesta = await axios.get(url);
@@ -192,7 +193,7 @@ class DarBajaEvento extends Component {
                           src={
                             evento.name === null
                               ? imgPred
-                              : "http://127.0.0.1:8000/images/" + evento.name
+                              : `${URL_IMG}/images/` + evento.name
                           }
                           alt="Logo del evento"
                         />
@@ -240,7 +241,7 @@ class DarBajaEvento extends Component {
                           src={
                             evento.name === null
                               ? imgPred
-                              : "http://127.0.0.1:8000/images/" + evento.name
+                              : `${URL_IMG}/images/` + evento.name
                           }
                           alt="Logo del evento"
                         />

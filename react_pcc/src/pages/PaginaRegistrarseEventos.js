@@ -7,6 +7,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import imgPred from "../images/afiche.png";
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
@@ -22,12 +23,12 @@ class PaginaRegistrarseEventos extends Component{
     state = {
         events: [],
         loader:false,
-        url: "http://127.0.0.1:8000/api/events"
+        url: `${URL_API}/events`
     };
 
     getEvents = async () => {
       if(this.se_Registro){
-        var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
+        var url2 = `${URL_API}/register-to-events/${this.id}`; 
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
         const events = await axios.get(url2);

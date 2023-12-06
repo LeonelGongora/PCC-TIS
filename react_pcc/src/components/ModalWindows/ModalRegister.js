@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import FormRegistroUsuario from "../FormRegistroUsuario";
 
+
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 

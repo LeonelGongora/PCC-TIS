@@ -20,6 +20,7 @@ import Requisitos from './AtributosSeparados/Requisitos';
 import Actividades from './AtributosSeparados/Actividades';
 import Organizadores from './AtributosSeparados/Organizadores';
 import Patrocinadores from './AtributosSeparados/Patrocinadores';
+
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 const cookies = new Cookies();

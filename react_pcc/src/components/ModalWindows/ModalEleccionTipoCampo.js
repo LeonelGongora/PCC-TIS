@@ -3,6 +3,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
+
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion, 

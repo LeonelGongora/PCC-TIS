@@ -12,7 +12,6 @@ import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrga
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import imgPred from "../images/afiche.png";
 
-
 const cookies = new Cookies();
 
 class PaginaAdministrarSolicitudes extends Component{

@@ -7,6 +7,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
 import ModalWindowRequisito from '../ModalWindows/ModalWindowRequisito';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -29,7 +30,7 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
 
     const eliminarRequisito = (id) => {
       console.log(id)
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);

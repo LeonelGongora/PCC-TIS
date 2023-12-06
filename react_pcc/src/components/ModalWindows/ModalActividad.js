@@ -5,7 +5,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
@@ -142,7 +142,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
             data.append('descripcion_actividad', values.descripcion_actividad)
             data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-activity', data);
+            const res = await axios.post(`${URL_API}/add-activity`, data);
             
             if(res.data.status === 200){
                 console.log(res);

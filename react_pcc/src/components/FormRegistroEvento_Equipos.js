@@ -12,6 +12,7 @@ import ModalRegistroEquipos from './ModalWindows/ModalRegistroEquipos';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 import ModalWarningDNI from './ModalWindows/ModalWarningDNI';
 import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
@@ -259,7 +260,7 @@ function FormRegistroEvento_Equipos(){
   }
 
   const getUsuarios=async()=>{
-    let url = "http://127.0.0.1:8000/api/get-user-information"
+    let url = `${URL_API}/get-user-information`
     const respuesta = await axios.get(url);
     setUsuarios(respuesta.data.usuarios);
   }

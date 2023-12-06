@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {Component} from 'react';
 import "../stylesheets/CreateEventStyle.css";
 import Cookies from 'universal-cookie';
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
@@ -11,7 +12,7 @@ class Add_Event extends Component {
   eventos_registrados = [];
 
   getEventTypes = async () => {
-    const url = "http://127.0.0.1:8000/api/type-events";
+    const url = `${URL_API}/type-events`;
 
     this.setState({ loader: true });
     const events = await axios.get(url);
@@ -26,7 +27,7 @@ class Add_Event extends Component {
   }
 
   gentEvents = async () => {
-    const url = "http://127.0.0.1:8000/api/events";
+    const url = `${URL_API}/events`;
 
     const events = await axios.get(url);
     this.eventos_registrados = Array.from(events.data.events);
@@ -204,7 +205,7 @@ class Add_Event extends Component {
       let mes = date_Actual.getMonth() + 1;
       let fecha_Actual = dia + "-" + mes + "-" + date_Actual.getFullYear();
 
-      const url = "http://127.0.0.1:8000/api/add-event";
+      const url = `${URL_API}/add-event`;
       const data = new FormData();
 
       if (this.state.image) {

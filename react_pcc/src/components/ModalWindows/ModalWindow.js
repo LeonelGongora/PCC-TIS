@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-
+import {URL_API} from '../../const';
 
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
@@ -32,7 +32,7 @@ function ModalWindow({estado1, cambiarEstado1}){
     }, []);
 
     const getTipos_Evento = async (e) => {
-      const url = "http://127.0.0.1:8000/api/type-events"; 
+      const url = `${URL_API}/type-events`; 
       const respuesta = await axios.get(url);
       setTipo_eventos(respuesta.data.events);
     }
