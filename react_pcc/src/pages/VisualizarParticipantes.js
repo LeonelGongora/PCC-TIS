@@ -40,7 +40,7 @@ class VisualizarParticipantes extends Component{
     getUsers = async () => {
       //Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
       const idevent = cookies.get('id_evento');
-      const events = await axios.get(`http://127.0.0.1:8000/api/get-user-1/${idevent}`);
+      const events = await axios.get(`http://127.0.0.1:8000/api/get-user-01/${idevent}`);
       console.log(events)
       console.log(events.data)
       this.participantes = Array.from(events.data)

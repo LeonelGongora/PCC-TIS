@@ -117,3 +117,8 @@ Route::resource('eventnotifications', EventNotificationController::class);
 Route::get('/getporevento/{id}', [TeamController::class, 'getPorEvento']);
 Route::resource('teams', TeamController::class);
 Route::resource('notificationteams', NotificationTeamController::class);
+Route::get('/get-team-01/{event_id}', [TeamController::class, 'getTeams01']);
+Route::get('/get-user-01/{event_id}', [UserController::class, 'getUser01']);
+Route::get('/misequipos/{id}', [EventController::class, 'misEquipos']);
+Route::get('/miseventindiequi/{id}', [EventController::class, 'misEventIndiEqui']);
+Route::delete('/delete-team/{id}', [TeamController::class, 'destroy']);

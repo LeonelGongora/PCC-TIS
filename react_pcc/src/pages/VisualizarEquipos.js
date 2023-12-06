@@ -44,7 +44,7 @@ class VisualizarEquipos extends Component{
       console.log(response)
       this.setState({ event: response.data});
 
-      const res = await axios.get(`http://127.0.0.1:8000/api/get-team-1/${this.id_evento}`);
+      const res = await axios.get(`http://127.0.0.1:8000/api/get-team-01/${this.id_evento}`);
       this.equipos = Array.from(res.data)
 
       this.setState({loader:false});

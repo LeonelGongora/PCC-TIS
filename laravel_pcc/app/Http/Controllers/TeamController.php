@@ -68,4 +68,16 @@ class TeamController extends Controller
         return Team::where('event_id', $event_id)->where('solicitud', 1)->get();
 
     }
+
+    public function getTeams01($event_id){
+
+        return Team::where('event_id', $event_id)->where('solicitud', 0)->orWhere('solicitud', 1)->get();
+
+    }
+
+    public function destroy($id)
+    {
+        $user=Team::find($id);
+        $user->delete();
+    }
 }

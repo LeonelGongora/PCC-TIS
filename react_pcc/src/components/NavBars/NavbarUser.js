@@ -1,6 +1,7 @@
 import React , { useState, useRef, useEffect } from 'react';
 import "../../stylesheets/NavbarStyles.css";
 import DropdownUser from '../DropDownUser';
+import DropdownNotification from '../DropdownNotification';             
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
@@ -55,7 +56,9 @@ function NavbarUser(){
           <div className="desplegable1">
             <DropdownUser />
           </div>
-
+          <div>
+            <DropdownNotification />
+          </div>
           <div className="userId">
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>

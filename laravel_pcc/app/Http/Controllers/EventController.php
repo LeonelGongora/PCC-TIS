@@ -93,6 +93,87 @@ class EventController extends Controller
         ]);
     }
 
+    public function misEquipos($id){
+
+        $events = DB::table('events')
+        ->join('teams', 'events.id', '=', 'teams.event_id')
+        ->join('users', 'users.id', '=', 'teams.id_coach')
+        ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
+        // ->where('evento_user.solicitud', 0)
+        // ->orWhere('evento_user.solicitud', 1)
+        ->where(function($q) {
+            $q->where('teams.solicitud', 0)
+            ->orWhere('teams.solicitud', 1);
+        })
+        ->where('users.id', $id)
+        ->select('events.*', 'event_types.nombre_tipo_evento', 'teams.id as euid')
+        ->get();
+
+        return response()->json([
+            'status' => 200,
+            'events' => $events,
+
+        ]);
+    }
+
+    public function misEventIndiEqui($id){
+
+        $events = DB::table('events')
+        ->join('evento_user', 'events.id', '=', 'evento_user.event_id')
+        ->join('users', 'users.id', '=', 'evento_user.user_id')
+        ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
+        ->where(function($q) {
+            $q->where('evento_user.solicitud', 0)
+            ->orWhere('evento_user.solicitud', 1);
+        })
+        ->where('users.id', $id)
+        ->select('events.*', 'event_types.nombre_tipo_evento', 'evento_user.id as euid')
+        ->get();
+
+        $equipos = DB::table('events')
+        ->join('teams', 'events.id', '=', 'teams.event_id')
+        ->join('users', 'users.id', '=', 'teams.id_coach')
+        ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
+        ->where(function($q) {
+            $q->where('teams.solicitud', 0)
+            ->orWhere('teams.solicitud', 1);
+        })
+        ->where('users.id', $id)
+        ->select('events.*', 'event_types.nombre_tipo_evento', 'teams.id as euid')
+        ->get();
+
+        // $results = array();
+        // $results[] = $events;
+        // $results[] = $equipos;
+
+        // $results = array();
+        // $r = array();
+        // $results[] = $events;
+        // $results[] = $equipos;
+        // $mapeo = function($elemento) {
+        //     return array(
+        //         'id' => $elemento['id'],
+        //         'nombre_evento' => $elemento['nombre_evento']
+        //         );
+        // };
+        // $r = array_map($mapeo, $results);
+
+        $r = array();
+        $mapeo = function($elemento) {
+            return array(
+                'id' => $elemento['id'],
+                'nombre_evento' => $elemento['nombre_evento']
+                );
+        };
+        $r = array_map($mapeo, array($events, $equipos));
+
+        return response()->json([
+            'status' => 200,
+            'events' => $r,
+
+        ]);
+    }
+
     public function show($id)
     {
         return Event::find($id);
