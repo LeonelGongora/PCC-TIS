@@ -55,6 +55,8 @@ Route::get('events', [EventController::class, 'get']);
 Route::post('/add-event', [EventController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
+Route::get('/get-event-by-date/{fecha}', [EventController::class, 'getByDate']);
+
 
 Route::post('/add-event_organizer', [Event_OrganizerController::class, 'store']);
 Route::post('/delete-event_organizer', [Event_OrganizerController::class, 'destroy']);

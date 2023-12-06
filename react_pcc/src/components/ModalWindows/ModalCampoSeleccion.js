@@ -51,6 +51,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
         let opciones_actuales = opciones;
         opciones_actuales.push(diccionario);
+        console.log(id_evento)
         //console.log(opciones_actuales)
 
         //setNumero((numero) => numero + 1);

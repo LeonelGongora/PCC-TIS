@@ -78,7 +78,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             */
         }
 
-        if(values.con_rango === 1){
+        if(parseInt(values.con_rango) === 1){
 
             if(!values.rango_bajo.trim()){
                 validationErrors.rango_bajo = "Este campo es obligatorio"

@@ -152,6 +152,17 @@ class EventController extends Controller
         }
     }
 
+    public function getByDate($fecha)
+    {
+        //$eventos = Event::where('created_at', '>', '2023-01-01 00:00:00')->get();
+        $eventos = Event::whereBetween('created_at', ['2023-01-01 00:00:00', '2023-12-31 23:59:59'])->get();
+        return response()->json([
+            'status' => 200,
+            'message' => 'No hay archivo',
+            'eventos' => $eventos
+        ]);
+    }
+
     public function destroy($id)
     {
         $evento=Event::find($id);

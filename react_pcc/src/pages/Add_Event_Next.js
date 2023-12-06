@@ -126,6 +126,7 @@ class Add_Event_Next extends Component{
 
     eliminarRequisito = (id) => {
         console.log(id)
+        /* 
         const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
         axios.delete(url).then(res => {
           if(res.data.status === 200){
@@ -133,6 +134,7 @@ class Add_Event_Next extends Component{
             window.location.reload();
           }
         })
+        */
     }
 
     saveEvento = async (e) => {

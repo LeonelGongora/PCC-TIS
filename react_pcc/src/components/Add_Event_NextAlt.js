@@ -20,15 +20,56 @@ import Requisitos from './AtributosSeparados/Requisitos';
 import Actividades from './AtributosSeparados/Actividades';
 import Organizadores from './AtributosSeparados/Organizadores';
 import Patrocinadores from './AtributosSeparados/Patrocinadores';
+const Eventos_Api_Url = configApi.EVENTOC_API_URL;
+
+const cookies = new Cookies();
 
 class Add_Event_NextAlt extends Component{
+
+    id = cookies.get('ultimo_id_evento');
+
+    componentDidMount(){
+        this.getEvento();
+        //this.getOrganizadores();
+        //this.getPatrocinadores();
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            pestañas: [true, false, false, false, false], // Inicialmente, todas las pestañas están en false
+            pestañas: [true, false, false, false, false],// Inicialmente, todas las pestañas están en false
+
+            estadoModalAtributo: false,
+            estadoModalRequisito: false,
+            estadoModalActividad: false,
+            estadoModalEleccion: false,
+            estadoCampoNumerico: false,
+            estadoCampoFecha: false,
+            estadoCampoSeleccion: false, 
+
+            atributos: [],
+            requisitos: [],
+            actividades: [],
+            id_evento: ''
         };
         
+    }
+
+    getEvento=async()=>{
+      console.log(this.id)
+      const url = `${Eventos_Api_Url}/${this.id}`;
+      const response = await axios.get(url)
+      console.log(response)
+      this.setState({ event: response.data})
+      if(response.request.status === 200){
+        this.setState({
+          id_evento: response.data.id,
+          atributos: response.data.attributes,
+          requisitos: response.data.requirements,
+          actividades: response.data.activities,
+        });
       }
+    }
 
     cambiarEstadoPestaña = (indice) => {
     const nuevasPestañas = [...this.state.pestañas];
@@ -42,7 +83,6 @@ class Add_Event_NextAlt extends Component{
 
     render(){
         const pestañas = this.state.pestañas;
-        
         return (
           <>
                 <div className="contenedorMaximo"></div>
@@ -70,10 +110,12 @@ class Add_Event_NextAlt extends Component{
                             <Campos
                                 estadoCampos={pestañas[0]}
                                 cambiarEstadoCampos={this.cambiarEstadoCampos}
+                                atributosFormulario = {this.state.atributos}
                             />
                             <Requisitos
                                 estadoRequisitos={this.state.pestañas[1]}
                                 cambiarEstadoRequisitos={this.cambiarEstadoRequisitos}
+                                requisitos = {this.state.requisitos}
                             />
                             <Actividades
                                 estadoActividades={this.state.pestañas[2]}
