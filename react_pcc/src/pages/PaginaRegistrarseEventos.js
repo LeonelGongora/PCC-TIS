@@ -144,7 +144,7 @@ class PaginaRegistrarseEventos extends Component{
                               src={
                                 evento.name === null
                                   ? imgPred
-                                  : "http://127.0.0.1:8000/images/" +
+                                  : `${URL_API}/images/` +
                                     evento.name
                               }
                               alt="Logo del evento"

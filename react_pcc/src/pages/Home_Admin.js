@@ -276,7 +276,7 @@ class Home_Admin extends Component {
                         src={
                           evento.name === null
                             ? (imgPred)
-                            : "http://127.0.0.1:8000/images/" + evento.name
+                            : `${URL_API}/images/` + evento.name
                         }
                         alt="Logo del evento"
                       />
