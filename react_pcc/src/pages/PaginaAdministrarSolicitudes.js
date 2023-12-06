@@ -11,7 +11,7 @@ import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import imgPred from "../images/afiche.png";
-import {URL_API} from '../../const';
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
