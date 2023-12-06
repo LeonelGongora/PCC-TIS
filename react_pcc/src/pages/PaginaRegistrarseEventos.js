@@ -7,7 +7,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import imgPred from "../images/afiche.png";
-import {URL_API} from '../const';
+import {URL_API, URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -144,7 +144,7 @@ class PaginaRegistrarseEventos extends Component{
                               src={
                                 evento.name === null
                                   ? imgPred
-                                  : `${URL_API}/images/` +
+                                  : `${URL_IMG}/images/` +
                                     evento.name
                               }
                               alt="Logo del evento"

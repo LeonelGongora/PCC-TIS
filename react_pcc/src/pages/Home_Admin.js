@@ -12,7 +12,7 @@ import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 import imgPred from '../images/afiche.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import {URL_API} from '../const';
+import {URL_API, URL_IMG} from '../const';
 
 const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color: "#000000",}} />;
 
@@ -276,7 +276,7 @@ class Home_Admin extends Component {
                         src={
                           evento.name === null
                             ? (imgPred)
-                            : `${URL_API}/images/` + evento.name
+                            : `${URL_IMG}/images/` + evento.name
                         }
                         alt="Logo del evento"
                       />
