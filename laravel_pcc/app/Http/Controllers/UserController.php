@@ -103,6 +103,14 @@ class UserController extends Controller
         })->get();
     }
 
+    public function getUser01($event_id){
+        
+        return User::whereHas('events', function ($query) use ($event_id) {
+            $query->where('event_id', $event_id)
+                  ->where('solicitud', 0)
+                  ->orWhere('solicitud', 1);
+        })->get();
+    }
     /**
      * Display the specified resource.
      *

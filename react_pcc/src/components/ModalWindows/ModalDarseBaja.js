@@ -3,15 +3,23 @@ import axios from "axios";
 import "../../stylesheets/ModalWindowStyle.css";
 
 
-function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, nombreBanner1, euid }) {
+function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, nombreBanner1, euid, pe }) {
 
   const salirVentanaModalBanner = async(e) => {
-    const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
-    await axios.delete(url);
-    // console.log(`se elimino ${euid}`)
+    if (pe <=1 ){
+      // console.log(`${pe}individual ${euid}`)
+      const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+      await axios.delete(url);
+      // console.log(`se elimino ${euid}`)
+    }else{
+      // console.log(`${pe}equipo ${euid}`)
+      const url = `http://127.0.0.1:8000/api/delete-team/${euid}`;
+      await axios.delete(url);
+    }
     cambiarEstadoDarseBaja1(false);
-	  cambiarEstadoBanner2(true);
+    cambiarEstadoBanner2(true);
   };
+
   const salirVentanaModal = (e) => {
     cambiarEstadoDarseBaja1(false);
     
