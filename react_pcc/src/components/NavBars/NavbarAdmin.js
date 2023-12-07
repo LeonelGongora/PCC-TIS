@@ -79,7 +79,7 @@ function NavbarAdmin({
           
           <div className="userId">
             <a>
-              <FontAwesomeIcon className="userIcon" icon={faUser} />
+              <FontAwesomeIcon className="userIcon-admin" icon={faUser} />
             </a>
             <div className="dropdown-container">
               <button className="dropdown-button" onClick={toggleDropdown}>

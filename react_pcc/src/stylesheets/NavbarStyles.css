@@ -85,7 +85,11 @@ nav{
     padding-right: 1.5vw;
 }
 .userIcon{
-    color: #f6f6f6;
+    font-size: 25px;
+    padding: 0.5vw;
+}
+.userIcon-admin{
+    color: white;
     padding: 0.5vw;
 }
 .userId h3{
