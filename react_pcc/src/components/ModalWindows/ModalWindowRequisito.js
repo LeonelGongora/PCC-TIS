@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
@@ -60,7 +61,7 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
             data.append('contenido_requisito', values.contenido_requisito)
             data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-requirement', data);
+            const res = await axios.post(`${URL_API}/add-requirement`, data);
             
             if(res.data.status === 200){
                 console.log(res);

@@ -7,6 +7,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import imgPred from "../images/afiche.png";
+import {URL_API, URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -17,7 +18,7 @@ class Home_Participant extends Component{
     this.state = {
       events: [],
       loader: false,
-      url: "http://127.0.0.1:8000/api/eventoabiertos",
+      url: `${URL_API}/eventoabiertos`,
     };
     this.eventos = [];
   }
@@ -100,7 +101,7 @@ class Home_Participant extends Component{
                                 src={
                                   evento.name === null
                                     ? imgPred
-                                    : "http://127.0.0.1:8000/images/" +
+                                    : `${URL_IMG}/images/` +
                                       evento.name
                                 }
                                 alt="Logo del evento"

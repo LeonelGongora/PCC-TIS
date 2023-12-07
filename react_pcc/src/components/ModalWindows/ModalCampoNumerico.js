@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
@@ -78,7 +79,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             */
         }
 
-        if(values.con_rango === 1){
+        if(parseInt(values.con_rango) === 1){
 
             if(!values.rango_bajo.trim()){
                 validationErrors.rango_bajo = "Este campo es obligatorio"
@@ -119,7 +120,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             
             data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
+            const res = await axios.post(`${URL_API}/add-attribute`, data);
             
             if(res.data.status === 200){
                 console.log(res);

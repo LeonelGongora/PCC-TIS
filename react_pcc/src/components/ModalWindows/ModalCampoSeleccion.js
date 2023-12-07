@@ -4,6 +4,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const plus = <FontAwesomeIcon icon={faSquarePlus} size="lg" style={{color: "#000000",}} />
@@ -51,6 +52,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
         let opciones_actuales = opciones;
         opciones_actuales.push(diccionario);
+        console.log(id_evento)
         //console.log(opciones_actuales)
 
         //setNumero((numero) => numero + 1);
@@ -113,7 +115,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
             data.append('restriccion', restriccionString)
             data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-attribute', data);
+            const res = await axios.post(`${URL_API}/add-attribute`, data);
             
             if(res.data.status === 200){
                 console.log(res);

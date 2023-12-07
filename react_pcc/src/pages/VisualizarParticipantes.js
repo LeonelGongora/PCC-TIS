@@ -12,6 +12,7 @@ import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrga
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import configApi from '../configApi/configApi';
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
@@ -22,7 +23,7 @@ class VisualizarParticipantes extends Component{
         this.state  = {
             events: [],
             loader:false,
-            url: "http://127.0.0.1:8000/api/events",
+            url: `${URL_API}/events`,
             estadoModal: false,
             estadoModalOrganizador:false,
             estadoModalPatrocinador: false,
@@ -40,7 +41,7 @@ class VisualizarParticipantes extends Component{
     getUsers = async () => {
       //Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
       const idevent = cookies.get('id_evento');
-      const events = await axios.get(`http://127.0.0.1:8000/api/get-user-1/${idevent}`);
+      const events = await axios.get(`${URL_API}/get-user-01/${idevent}`);
       console.log(events)
       console.log(events.data)
       this.participantes = Array.from(events.data)

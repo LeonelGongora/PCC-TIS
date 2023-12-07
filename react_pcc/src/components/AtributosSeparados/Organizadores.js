@@ -6,10 +6,25 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../../const';
 
+const cookies = new Cookies();
 
 function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
 
+    const id = cookies.get('ultimo_id_evento');
+
+    const [organizadores, setOrganizadores] = useState ( [] );
+
+    const getOrganizadores = async()=>{
+        const url = `${URL_API}/get-organizador`;
+        const respuesta = await axios.get(url);
+        setOrganizadores(respuesta.data.organizadores)
+    }
+
+    useEffect(()=>{
+        getOrganizadores();
+    }, [])
 
     return (
         estadoOrganizadores && (
@@ -17,68 +32,25 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
             <h2>Organizadores</h2>
             <div className='seccionCampo'>
                 <div className='seccionesExtra extraOrganizador'>
-                    {/* {this.state.organizadores.map((organizador) => ( */}
-                        <div className="contCadaOrganizador">
-                        <input
-                            type="checkbox"
-                            className="organizadoresSeleccionados"
-                            id="checkBoxAddEvent"
-                            name="vehicle1"
-                            // value={organizador.id}
-                        />
-                        <span id="titulosCheckbox" className='nombreCheckOrg'>
-                            Organizador 1
-                            {/* {organizador.nombre_organizador} */}
-                        </span>
+                    {organizadores.map((organizador) => ( 
+                        <><div className="contCadaOrganizador">
+                            <input
+                                type="checkbox"
+                                className="organizadoresSeleccionados"
+                                id="checkBoxAddEvent"
+                                name="vehicle1"
+                                value={organizador.id} />
+                            <span id="titulosCheckbox" className='nombreCheckOrg'>
+                                {organizador.nombre_organizador}
+                            </span>
                         </div>
-                        <div className="contCadaOrganizador">
-                        <input
-                            type="checkbox"
-                            className="organizadoresSeleccionados"
-                            id="checkBoxAddEvent"
-                            name="vehicle1"
-                        />
-                        <span id="titulosCheckbox" className='nombreCheckOrg'>
-                            Organizador 1 dkfjhsdfjhs kjsdf hsyse huifysuyh seufysufsefy
-                        </span>
-                        </div>
-                        <div className="contCadaOrganizador">
-                        <input
-                            type="checkbox"
-                            className="organizadorSelect"
-                            id="checkBoxAddEvent"
-                            name="vehicle1"
-                        />
-                        <span id="titulosCheckbox" className='nombreCheckOrg'>
-                            Organizador 1
-                        </span>
-                        </div>
-                        <div className="contCadaOrganizador">
-                        <input
-                            type="checkbox"
-                            className="organizadorSelect"
-                            id="checkBoxAddEvent"
-                            name="vehicle1"
-                        />
-                        <span id="titulosCheckbox" className='nombreCheckOrg'>
-                            Organizador 1
-                        </span>
-                        </div>
-                        <div className="contCadaOrganizador">
-                        <input
-                            type="checkbox"
-                            className="organizadorSelect"
-                            id="checkBoxAddEvent"
-                            name="vehicle1"
-                        />
-                        <span id="titulosCheckbox" className='nombreCheckOrg'>
-                            Organizador 1
-                        </span>
-                        </div>
-                    {/* ))} */}
+                        </>
+                    ))} 
                 </div>
             </div>
-        </div>)
+            
+        </div>
+        )
 
     );
 }

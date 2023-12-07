@@ -8,6 +8,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import img from '../images/afiche.png';
 import vid from '../images/fondo1.mp4';
+import {URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -73,7 +74,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 </>
                 
                 ) : (<>
-                <div className='gLogo'><img src={"http://127.0.0.1:8000/images/"+event.name}></img></div>
+                <div className='gLogo'><img src={`${URL_IMG}/images/`+event.name}></img></div>
                 </>
                 )}
             
@@ -150,7 +151,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='organizadores-visualizar'>
                     {organizadores.map((o) => {  
                     return (<div className='image-visualizarEvento' key={o.id}>
-                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
+                    <img className='imagen' src={`${URL_IMG}/imagenesOrganizadores/`+o.imagen_organizador}></img>
                     </div>);
                     })}
                 {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img> */}
@@ -161,7 +162,7 @@ function VisualizarInformacionDeEventosAdmin({props}){
                 <div className='patrocinadores-visualizar'>
                     {patrocinadores.map((p) => {  
                     return (<div key={p.id}>
-                    <img className='imagen' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                    <img className='imagen' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                     </div>);
                     })}
                 {/* <img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img><img className='imagen' src={img}></img> */}

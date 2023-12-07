@@ -55,6 +55,8 @@ Route::get('events', [EventController::class, 'get']);
 Route::post('/add-event', [EventController::class, 'store']);
 Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
+Route::get('/get-event-by-date/{fecha}', [EventController::class, 'getByDate']);
+
 
 Route::post('/add-event_organizer', [Event_OrganizerController::class, 'store']);
 Route::post('/delete-event_organizer', [Event_OrganizerController::class, 'destroy']);
@@ -115,3 +117,8 @@ Route::resource('eventnotifications', EventNotificationController::class);
 Route::get('/getporevento/{id}', [TeamController::class, 'getPorEvento']);
 Route::resource('teams', TeamController::class);
 Route::resource('notificationteams', NotificationTeamController::class);
+Route::get('/get-team-01/{event_id}', [TeamController::class, 'getTeams01']);
+Route::get('/get-user-01/{event_id}', [UserController::class, 'getUser01']);
+Route::get('/misequipos/{id}', [EventController::class, 'misEquipos']);
+Route::get('/miseventindiequi/{id}', [EventController::class, 'misEventIndiEqui']);
+Route::delete('/delete-team/{id}', [TeamController::class, 'destroy']);

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../stylesheets/ModalWindowStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-
+import {URL_API} from '../../const';
 const salir = <FontAwesomeIcon icon={faCircleXmark} />;
 
 function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
@@ -47,7 +47,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
 
       data.append('contenido_anuncio', values.contenido_anuncio)
 
-      const res = await axios.post("http://127.0.0.1:8000/api/add-notice", data);
+      const res = await axios.post(`${URL_API}/add-notice`, data);
       
       if (res.data.status === 200) {
         console.log(res);

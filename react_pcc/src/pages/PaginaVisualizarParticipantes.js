@@ -9,6 +9,8 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import configApi from '../configApi/configApi';
+import { URL_API,URL_IMG } from '../const';
+
 const cookies = new Cookies();
 
 
@@ -20,7 +22,7 @@ class PaginaVisualizarParticipantes extends Component{
     state = {
         events: [],
         loader:false,
-        url: "http://127.0.0.1:8000/api/events"
+        url: `${URL_API}/events`
     };
 
     getEvents = async () => {
@@ -111,7 +113,7 @@ class PaginaVisualizarParticipantes extends Component{
                             src={
                               evento.name === null
                                 ? imgPred
-                                : "http://127.0.0.1:8000/images/" + evento.name
+                                : `${URL_IMG}/images/` + evento.name
                             }
                             alt="Logo del evento"
                           />
