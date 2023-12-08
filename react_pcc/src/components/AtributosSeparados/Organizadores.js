@@ -28,6 +28,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
 
     return (
         estadoOrganizadores && (
+        <>
         <div className='tituloCampos'>
             <h2>Organizadores</h2>
             <div className='seccionCampo'>
@@ -40,7 +41,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
                                 id="checkBoxAddEvent"
                                 name="vehicle1"
                                 value={organizador.id} />
-                            <span id="titulosCheckbox" className='nombreCheckOrg'>
+                            <span id="titCheck" className='nombreCheckOrg'>
                                 {organizador.nombre_organizador}
                             </span>
                         </div>
@@ -50,6 +51,12 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
             </div>
             
         </div>
+        <div className='contBotonRegist'>
+            <button className='botonesCambiar'>
+            Terminar Registro
+            </button>
+        </div>
+        </>
         )
 
     );

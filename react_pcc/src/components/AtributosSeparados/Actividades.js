@@ -13,6 +13,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades}){
     const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
     return (
         estadoActividades && (
+          <>
         <div className='tituloCampos'>
             <h2>Actividades</h2>
             <div className='seccionCampo'>
@@ -66,7 +67,14 @@ function Actividades({estadoActividades, cambiarEstadoActividades}){
                     </button>
                   </div>
             </div>
-        </div>)
+        </div>
+        <div className='contBotonRegist'>
+            <button className='botonesCambiar'>
+              Terminar Registro
+            </button>
+        </div>
+        </>
+        )
 
     );
 }

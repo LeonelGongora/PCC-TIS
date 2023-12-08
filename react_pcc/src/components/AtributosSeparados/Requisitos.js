@@ -87,7 +87,13 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
                 </div>
               </div>
             </div>
-          </div></>)
+          </div>
+          <div className='contBotonRegist'>
+              <button className='botonesCambiar'>
+              Terminar Registro
+              </button>
+          </div>
+          </>)
 
     );
 }

@@ -113,41 +113,9 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
           />
               
           <div className='tituloCampos'>
-            <h2>Campos Adicionales</h2>
+            <h2>Campos adicionales al registro</h2>
             <div className='seccionCampo'>
-              <h3>Secciones de información</h3>
               <div className='seccionesExtra'>
-                {/* {this.state.atributos.map((atributo) => ( */}
-                <div className="campo-cont">
-                  <div id="entradaEveNex">
-                    <p id="textoCuadro">Seccion extra 1*</p>
-                    <input
-                      id="inputRegistro"
-                      //   type={atributo.tipo_dato_atributo}
-                      name="valor"
-                      placeholder="Campo Adicional"
-                      readOnly />
-                  </div>
-                  <button
-                    className="botonEliminarCampo"
-                    type="button"
-                  >
-                    {cancelar}
-                  </button>
-                </div>
-                {/* ))} */}
-                <div className='contenedorBotonCampo'>
-                  <button
-                    className="botonAgregarCampo"
-                    type="button"
-                  >
-                    Agregar Sección de información +
-                  </button>
-                </div>
-              </div>
-              <h3>Campos adicionales para el formulario de registro al evento</h3>
-              <div className='seccionesExtra'>
-
                  {atributosFormulario.map((atributo) => ( 
                 <div className="campo-cont">
                   <div id="entradaEveNex">
@@ -180,6 +148,11 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
                 </div>
               </div>
             </div>
+          </div>
+          <div className='contBotonRegist'>
+                  <button className='botonesCambiar'>
+                    Terminar Registro
+                  </button>
           </div>
           </>)
 
