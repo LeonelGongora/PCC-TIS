@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "../stylesheets/Dropdown.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
+const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 
 function Dropdown({
   estado1,
@@ -47,22 +50,35 @@ function Dropdown({
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
-          <li onClick={crearEventoRedireccionar}>Registrar evento</li>
-          <li onClick={() => cambiarEstado1(!estado1)}>Crear tipo de evento</li>
+          <li onClick={crearEventoRedireccionar}>
+            {" "}
+            <span id="lineaV">{lineV}</span> Registrar evento
+          </li>
+          <li onClick={() => cambiarEstado1(!estado1)}>
+            {" "}
+            <span id="lineaV">{lineV}</span> Crear tipo de evento
+          </li>
           <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
-            Registrar organizador
+            <span id="lineaV">{lineV}</span> Registrar organizador
           </li>
           <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
-            Registrar patrocinador
+            <span id="lineaV">{lineV}</span> Registrar patrocinador
           </li>
           <li onClick={() => cambiarEstadoAnuncio(!estadoAnuncio)}>
-            Crear anuncio
+            <span id="lineaV">{lineV}</span> Crear anuncio
           </li>
-          <li onClick={aceptarUsuarioRedireccionar}>Administrar solicitudes</li>
-          <li onClick={editarEventoRedireccionar}>Editar evento</li>
-          <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
-          <li onClick={visualizarParticipantesRedireccionar}>Visualizar participantes de eventos</li>
-          
+          <li onClick={aceptarUsuarioRedireccionar}>
+            <span id="lineaV">{lineV}</span> Administrar solicitudes
+          </li>
+          <li onClick={editarEventoRedireccionar}>
+            <span id="lineaV">{lineV}</span> Editar evento
+          </li>
+          <li onClick={visualizarEventoRedireccionar}>
+            <span id="lineaV">{lineV}</span> Visualizar eventos
+          </li>
+          <li onClick={visualizarParticipantesRedireccionar}>
+            <span id="lineaV">{lineV}</span> Visualizar participantes de eventos
+          </li>
         </ul>
       )}
     </div>

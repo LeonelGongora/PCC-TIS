@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "../stylesheets/Dropdown.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+
+const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 
 function DropdownUser({ setOpenDropFath, isOpen }) {
   //const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +41,13 @@ function DropdownUser({ setOpenDropFath, isOpen }) {
       {isOpen && (
         <ul className="dropdown-menu">
           <li onClick={registrarseEventoRedireccionar}>
-            Registrarse a Eventos
+            <span id="lineaV">{lineV}</span> Registrarse a Eventos
           </li>
-          <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
+          <li onClick={visualizarEventoRedireccionar}>
+            <span id="lineaV">{lineV}</span> Visualizar eventos
+          </li>
           <li onClick={darseBajaEventoRedireccionar}>
-            Darse de Baja de evento
+            <span id="lineaV">{lineV}</span> Darse de Baja de evento
           </li>
         </ul>
       )}

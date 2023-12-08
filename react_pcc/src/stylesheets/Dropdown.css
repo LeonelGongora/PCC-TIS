@@ -113,6 +113,9 @@
   background-color: #1a5276; 
   color: #d4d9dd;
 }
+.dropdown-menu li:hover #lineaV{
+  color: #b42e1c;
+}
 
 /* Display the dropdown menu when the button is clicked */
 .dropdown-container .dropdown-menu {

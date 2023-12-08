@@ -3,6 +3,7 @@ import NavbarUser from '../components/NavBars/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 
+
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';

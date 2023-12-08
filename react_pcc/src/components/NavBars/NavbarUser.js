@@ -4,8 +4,12 @@ import DropdownUser from '../DropDownUser';
 import DropdownNotification from '../DropdownNotification';             
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+
 import Cookies from 'universal-cookie';
 
+const exitSesion = <FontAwesomeIcon icon={faRightFromBracket} />;
 const cookies = new Cookies();
 
 function NavbarUser(){
@@ -91,7 +95,8 @@ function NavbarUser(){
               </button>
               {isOpen && openDropdown === "sesionUser" && (
                 <ul className="dropdown-menu">
-                  <li onClick={cerrarSesion}>cerrarSesion</li>
+                  <li onClick={cerrarSesion}>
+                    <span id='lineaV'>{ exitSesion}</span> CerrarSesion</li>
                 </ul>
               )}
             </div>
