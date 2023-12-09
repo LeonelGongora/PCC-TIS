@@ -3,7 +3,7 @@ import "../../stylesheets/NavbarStyles.css";
 import DropdownUser from '../DropDownUser';
 import DropdownNotification from '../DropdownNotification';             
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 

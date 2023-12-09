@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "../../stylesheets/NavbarStyles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "../Dropdown";
 import Cookies from 'universal-cookie';
 import "../../stylesheets/Dropdown.css";
 import DropdownReporte from '../DropDownReporte';
 import DropdownAdmin from '../DropDownAdmin';
 
+const exitSesion = <FontAwesomeIcon icon={faRightFromBracket} />;
 const cookies = new Cookies();
 
 function NavbarAdmin({
@@ -96,16 +98,25 @@ function NavbarAdmin({
           </div>
 
           <div className="userId">
-            <a>
-              <FontAwesomeIcon className="userIcon-admin" icon={faUser} />
-            </a>
             <div className="dropdown-container">
-              <button className="dropdown-button" onClick={toggleDropdown}>
+              <button
+                className={`${
+                  isOpen && openDropdown === "sesionUser"
+                    ? "dropdown-button-active"
+                    : "dropdown-button"
+                }`}
+                onClick={toggleDropdown}
+              >
                 {`${nombre_usuario} ${apellido_usuario}`}
+                <a>
+                  <FontAwesomeIcon className="userIcon" icon={faUser} />
+                </a>
               </button>
-              {isOpen && (
-                <ul className="dropdown-menu">
-                  <li onClick={cerrarSesion}>cerrarSesion</li>
+              {isOpen && openDropdown === "sesionUser" && (
+                <ul className="dropdown-menu-user">
+                  <li onClick={cerrarSesion}>
+                    <span id="lineaV">{exitSesion}</span> CerrarSesion
+                  </li>
                 </ul>
               )}
             </div>
