@@ -31,6 +31,10 @@ import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 import Homepage from "./pages/Homepage.js";
 import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
+import Reportes_Pagina from "./pages/Reportes_Pagina.js";
+import EmailPrueba from "./pages/EmailPrueba.js";
+
+
 function App() {
   return (
     <Router>
@@ -67,6 +71,9 @@ function App() {
         <Route path='/darBajaEvento' element={< DarBajaEvento />} />
 
         <Route path='/home' element={< Homepage />} />
+
+        <Route path='/reportes' element={< Reportes_Pagina />} />
+        <Route path='/emailPrueba' element={< EmailPrueba />} />
         
       </Routes>
     </Router>

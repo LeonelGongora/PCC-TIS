@@ -12,7 +12,7 @@ use App\Models\Organizer;
 use App\Models\Sponsor;
 use App\Models\Team;
 use App\Models\Activity;
-
+use App\Models\Information;
 
 
 class Event extends Model
@@ -32,7 +32,8 @@ class Event extends Model
         'event_type_id'
     ];
 
-    protected $with = ['event_type', 'attributes', 'requirements', 'organizers', 'sponsors', 'teams', 'activities'];
+    protected $with = ['event_type', 'attributes', 'requirements', 
+    'organizers', 'sponsors', 'teams', 'activities', 'informations', 'users'];
 
     public function event_type(){
 
@@ -65,6 +66,12 @@ class Event extends Model
     public function activities(){
 
         return $this->hasMany(Activity::class, 'event_id', 'id');
+
+    }
+
+    public function informations(){
+
+        return $this->hasMany(Information::class, 'event_id', 'id');
 
     }
 

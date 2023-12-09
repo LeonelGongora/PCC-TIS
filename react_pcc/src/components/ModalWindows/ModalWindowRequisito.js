@@ -44,13 +44,6 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
             validationErrors.contenido_requisito = "Ingrese un nombre valido"
         }
 
-        //if(!this.state.requisitos.trim()){
-            //validationErrors.requisitos = "Este campo es obligatorio"
-
-        //}else if(!/^[ .,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.requisitos)){
-            //validationErrors.requisitos = "Ingrese requisitos validos"
-        //}
-
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){

@@ -5,16 +5,6 @@ import NavbarCreateEvent from './NavBars/NavBarCreateEvent';
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
-import ModalWindowAtributo from './ModalWindows/ModalWindowAtributo';
-import ModalWindowRequisito from './ModalWindows/ModalWindowRequisito';
-import ModalActividad from './ModalWindows/ModalActividad';
-import ModalEleccionTipoCampo from './ModalWindows/ModalEleccionTipoCampo';
-import ModalCampoNumerico from './ModalWindows/ModalCampoNumerico';
-import ModalCampoFecha from './ModalWindows/ModalCampoFecha';
-import ModalCampoSeleccion from './ModalWindows/ModalCampoSeleccion';
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Campos from './AtributosSeparados/Campos';
 import Requisitos from './AtributosSeparados/Requisitos';
 import Actividades from './AtributosSeparados/Actividades';
@@ -48,6 +38,7 @@ class Add_Event_NextAlt extends Component{
             estadoCampoSeleccion: false, 
 
             atributos: [],
+            atributosInformacion: [],
             requisitos: [],
             actividades: [],
             id_evento: ''
@@ -67,6 +58,7 @@ class Add_Event_NextAlt extends Component{
           atributos: response.data.attributes,
           requisitos: response.data.requirements,
           actividades: response.data.activities,
+          atributosInformacion : response.data.informations
         });
       }
     }
@@ -111,6 +103,7 @@ class Add_Event_NextAlt extends Component{
                                 estadoCampos={pestañas[0]}
                                 cambiarEstadoCampos={this.cambiarEstadoCampos}
                                 atributosFormulario = {this.state.atributos}
+                                atributosInformacion = {this.state.atributosInformacion}
                             />
                             <Requisitos
                                 estadoRequisitos={this.state.pestañas[1]}
@@ -120,6 +113,7 @@ class Add_Event_NextAlt extends Component{
                             <Actividades
                                 estadoActividades={this.state.pestañas[2]}
                                 cambiarEstadoActividades={this.cambiarEstadoActividades}
+                                actividades = {this.state.actividades}
                             />
                             <Organizadores
                                 estadoOrganizadores={this.state.pestañas[3]}

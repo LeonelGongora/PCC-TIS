@@ -36,6 +36,7 @@ function InfoEvento({props}){
     const getEvent=async()=>{
         const url = `${Eventos_Api_Url}/${id}`;
         const response = await axios.get(url)
+        console.log(response)
         setEvent(response.data)
         setRequisitos(response.data.requirements)
         setTipoevent(response.data.event_type)
@@ -45,12 +46,6 @@ function InfoEvento({props}){
         console.log(response.data.name === null)
         console.log(id)
     }
-
-    useEffect(()=>{
-       console.log(requisitos)
-       console.log(organizadores)
-       console.log(tipoevent)
-    }, )
 
     const getEstaInscripcionCerrada=async()=>{
         const url = `${EventoAbierto_Api_Url}/${id}`;
@@ -103,7 +98,7 @@ function InfoEvento({props}){
                                     </div>
                                 </div>
                             </div>
-                            {event.requisitos != null ? (
+                            {event.requisitos != [] ? (
                                 <div className='descripcionEvento infoRequisitos'>
                                     <h3>Requisitos</h3>
                                     {requisitos.map((r, index) => {  
@@ -126,7 +121,7 @@ function InfoEvento({props}){
                                 <p>Telefono: {event.numero_contacto}</p>
                             </div>
                         </div>
-                        {event.actividades != null ? (
+                        {actividades != [] ? (
                             <div className='actividadesExtra'>
                             {actividades.map((a) => {
                                 return (<div className='infoActividad' key={a.id}>

@@ -171,7 +171,6 @@ class Home_Admin extends Component {
           document.querySelectorAll(".containerEvents").forEach(evento =>{
             if(evento.querySelector(".nombreEvento").textContent.toLowerCase().includes(nombre_seleccionado_valor.toLowerCase())){
               evento.classList.remove("filtro")
-              
             }else{
               evento.classList.add("filtro")
             }

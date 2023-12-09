@@ -31,6 +31,9 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationUserController;
 use App\Http\Controllers\EventNotificationController;
 use App\Http\Controllers\NotificationTeamController;
+use App\Http\Controllers\InformationController;
+
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,15 +60,18 @@ Route::post('/update-event/{id}', [EventController::class, 'update']);
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
 Route::get('/get-event-by-date/{fecha}', [EventController::class, 'getByDate']);
 
-
 Route::post('/add-event_organizer', [Event_OrganizerController::class, 'store']);
 Route::post('/delete-event_organizer', [Event_OrganizerController::class, 'destroy']);
 
 Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
 Route::post('/delete-event_sponsor', [Event_SponsorController::class, 'destroy']);
 
+Route::post('/add-information', [InformationController::class, 'store']);
+
 Route::post('/add-notice', [NoticeController::class, 'store']);
 Route::get('/get-notices', [NoticeController::class, 'get']);
+
+Route::post('/enviar-correo', [MailController::class, 'enviarCorreo']);
 
 Route::post('/add-organizador', [OrganizerController::class, 'store']);
 Route::get('/get-organizador', [OrganizerController::class, 'get']);

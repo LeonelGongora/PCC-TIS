@@ -62,6 +62,8 @@ function Dropdown({
           <li onClick={editarEventoRedireccionar}>Editar evento</li>
           <li onClick={visualizarEventoRedireccionar}>Visualizar eventos</li>
           <li onClick={visualizarParticipantesRedireccionar}>Visualizar participantes de eventos</li>
+
+          
           
         </ul>
       )}

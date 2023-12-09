@@ -11,15 +11,14 @@ import ModalEleccionTipoCampo from '../ModalWindows/ModalEleccionTipoCampo';
 import ModalCampoFecha from '../ModalWindows/ModalCampoFecha';
 import ModalCampoNumerico from '../ModalWindows/ModalCampoNumerico';
 import ModalWindowAtributo from '../ModalWindows/ModalWindowAtributo';
+import ModalCampoInformacion from '../ModalWindows/ModalCampoInformacion';
 
 const cookies = new Cookies();
 
-function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
+function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atributosInformacion}){
 
     const id = cookies.get('ultimo_id_evento');
     //const atributos = [];
-
-    const [atributos, setAtributos] = useState ( [] );
 
     const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
 
@@ -29,6 +28,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
       estadoModalAtributo: false,
       estadoCampoNumerico: false,
       estadoCampoFecha: false,
+      estadoCampoInformacion: false,
 
       estadoModal: true,
       estadoRegistroUsuario: false
@@ -54,9 +54,9 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
       setValues({ estadoCampoFecha: nuevoEstado });
     }
 
-    useEffect(()=>{
-
-    }, [])
+    const cambiarEstadoCampoInformacion = (nuevoEstado) => {
+      setValues({ estadoCampoInformacion: nuevoEstado });
+    }
 
     const eliminarAtributo = (id) => {
       const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
@@ -68,11 +68,17 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
       })
     }
 
+    useEffect(()=>{
+      console.log(atributosFormulario)
+      for (let i = 0; i < atributosFormulario.length; i++) {
+        if(atributosFormulario[i].tipo_dato_atributo === "information"){
+          console.log(atributosFormulario[i])
+        }
+      }
+    }, []);
 
     return (
-      
         estadoCampos && (
-
           <>
           <ModalEleccionTipoCampo
             estadoEleccion={values.estadoModalEleccion}
@@ -110,37 +116,46 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario}){
             id_evento={id}
             atributos={atributosFormulario}
           />
+
+          <ModalCampoInformacion
+            estadoCampoInformacion={values.estadoCampoInformacion}
+            cambiarEstadoCampoInformacion={cambiarEstadoCampoInformacion}
+            id_evento={id}
+            atributos={atributosFormulario}
+          />
               
           <div className='tituloCampos'>
             <h2>Campos Adicionales</h2>
             <div className='seccionCampo'>
-              <h3>Secciones de información</h3>
+              <h3>Campos de información</h3>
               <div className='seccionesExtra'>
-                {/* {this.state.atributos.map((atributo) => ( */}
-                <div className="campo-cont">
-                  <div id="entradaEveNex">
-                    <p id="textoCuadro">Seccion extra 1*</p>
-                    <input
-                      id="inputRegistro"
-                      //   type={atributo.tipo_dato_atributo}
-                      name="valor"
-                      placeholder="Campo Adicional"
-                      readOnly />
-                  </div>
-                  <button
-                    className="botonEliminarCampo"
-                    type="button"
-                  >
-                    {cancelar}
-                  </button>
-                </div>
-                {/* ))} */}
+                {atributosInformacion.map((atributo) => ( 
+                  <div className="campo-cont">
+                      <div id="entradaEveNex">
+                        <p id="textoCuadro">{atributo.nombre_informacion}</p>
+                        <input
+                          id="inputRegistro"
+                          //   type={atributo.tipo_dato_atributo}
+                          name="valor"
+                          placeholder="Campo Adicional"
+                          readOnly />
+                      </div>
+                      <button
+                        className="botonEliminarCampo"
+                        type="button"
+                      >
+                      {cancelar}
+                      </button>
+                    </div>
+                ))} 
+
                 <div className='contenedorBotonCampo'>
                   <button
                     className="botonAgregarCampo"
                     type="button"
+                    onClick={() => cambiarEstadoCampoInformacion(!values.estadoCampoInformacion)}
                   >
-                    Agregar Sección de información +
+                    Agregar Campo de información +
                   </button>
                 </div>
               </div>
