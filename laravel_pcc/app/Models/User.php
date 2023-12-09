@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'nombre', 'apellido', 'ci', 'telefono','email', 'password',
+        'nombre', 'apellido', 'ci', 'pais','telefono','email', 'password',
     ];
 
     public function events()

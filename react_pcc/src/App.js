@@ -12,7 +12,6 @@ import Register_Event_Admin_Next from "./pages/Register_Event_Admin_Next.js";
 
 import ContenedorSliderAdmin from "./pages/ContenedorSliderAdmin.js";
 
-import FormRegisterUser from "./pages/FormRegisterUser.js";
 import PaginaEditarEventos from "./pages/PaginaEditarEventos.js";
 import EditarEvento from "./pages/EditarEvento.js";
 
@@ -56,7 +55,6 @@ function App() {
         <Route path='/paginaVisualizarParticipantes' element={<PaginaVisualizarParticipantes/>} />
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />
 
-        <Route path='/formUsuario' element={<FormRegisterUser/>} />
         
         <Route path='/editar-evento' element={<EditarEvento/>} />
         <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />

@@ -174,6 +174,18 @@ function FormRegistroEvento_Equipos(){
           for (let i = 0; i < participantes_dni_Aux.length; i++) {
 
             const indice = dni_registrados.indexOf(parseInt(participantes_dni_Aux[i])); 
+
+            const longitud = 5
+            let caracteres = ""
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            const charactersLength = characters.length;
+            let counter = 0;
+            while (counter < longitud) {
+              caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
+              counter += 1;
+            }
+
+            let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
     
             if(dni_registrados.includes(parseInt(participantes_dni_Aux[i]))){
     
@@ -185,30 +197,10 @@ function FormRegistroEvento_Equipos(){
     
               const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
 
-              const longitud = 5
-              let caracteres = ""
-              const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-              const charactersLength = characters.length;
-              let counter = 0;
-              while (counter < longitud) {
-                caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
-                counter += 1;
-              }
-
-              let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
+              
               contraseñas_generadas.push(contraseña_generada)
               console.log(contraseña_generada)
             }else{
-
-              const longitud = 5
-              let caracteres = ""
-              const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-              const charactersLength = characters.length;
-              let counter = 0;
-              while (counter < longitud) {
-                caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
-                counter += 1;
-              }
 
               let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
               console.log(contraseña_generada)

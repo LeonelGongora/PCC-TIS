@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\WebsiteController;
 use App\Mail\DemoMail;
 
-/*
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -19,3 +18,4 @@ use App\Mail\DemoMail;
 Route::get('/{any}', function () {
     return view('index');
 }) -> where ('any','.*');
+*/
