@@ -47,6 +47,7 @@
 }
 .dropdown-menu-notification{
   position: absolute;
+  padding: 10px;
   top:45px;
   right: -100px;
   list-style-type: none !important;
@@ -58,7 +59,8 @@
   width: 300px;
   max-height: 400px;
   overflow-y: auto;
-  padding: 10px;
+  z-index: 1;
+  
 }
 .dropdown-menu {
   position: absolute;
@@ -92,11 +94,35 @@
   cursor: pointer; 
   transition: background-color 0.3s;
   border-radius: 8px;
+  border-bottom: 0.5px solid #617285; 
+  font-size: 1rem;
 }
 .dropdown-button-notification-active{
   background-color: #14365C;
   color: #FFD51D;
   padding: 8px;
+}
+
+#tituloNotif{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  text-align: center;
+  border-bottom: 1px solid #617285;
+  width: 100%;
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #b42e1c;
+  color: white;
+  border-radius: 45%;
+  padding: 4px 8px;
+  font-size: 0.8em;
+  z-index: 2;
 }
 
 /* Dropdown menu items */
@@ -106,15 +132,17 @@
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 8px;
+  transition: padding-top 0.3s ease;
 }
 
 /* Change background color of dropdown items on hover */
 .dropdown-menu li:hover {
   background-color: #1a5276; 
   color: #d4d9dd;
+  padding-top: 15px;
 }
 .dropdown-menu li:hover #lineaV{
-  color: #b42e1c;
+  color: #FFD51D;
 }
 
 /* Display the dropdown menu when the button is clicked */
