@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {URL_API} from '../const';
 
 const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{ color: "#ff0000", }} />;
 
@@ -19,7 +20,7 @@ class EditarInformacionDeEventos extends Component{
   id = cookies.get('idauxiliar');
 
     getEventTypes = async () => {
-        const url = "http://127.0.0.1:8000/api/type-events"; 
+        const url = `${URL_API}/type-events`; 
 
         this.setState({loader:true});
         const events = await axios.get(url);
@@ -62,13 +63,13 @@ class EditarInformacionDeEventos extends Component{
     }
 
     getOrganizadores = async()=>{
-      const url = "http://127.0.0.1:8000/api/get-organizador"; 
+      const url = `${URL_API}/get-organizador`; 
       const respuesta = await axios.get(url);
       this.setState({ organizadores: respuesta.data.organizadores})
     }
 
     getPatrocinadores = async()=>{
-      const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+      const url = `${URL_API}/get-patrocinador`; 
       const respuesta = await axios.get(url);
       this.setState({ patrocinadores: respuesta.data.patrocinadores})
     }
@@ -122,7 +123,7 @@ class EditarInformacionDeEventos extends Component{
     }
 
     eliminarAtributo = (id) => {
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);
@@ -235,7 +236,7 @@ class EditarInformacionDeEventos extends Component{
 
         if(Object.keys(validationErrors).length === 0){
             
-            const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
+            const url = `${URL_API}/update-event/${this.id}`; 
 
             const data = new FormData();
 

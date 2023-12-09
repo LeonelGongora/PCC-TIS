@@ -11,7 +11,7 @@ import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
 import imgPred from "../images/afiche.png";
-
+import {URL_API, URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -130,7 +130,7 @@ class PaginaAdministrarSolicitudes extends Component{
                                           src={
                                             evento.name === null
                                               ? imgPred
-                                              : "http://127.0.0.1:8000/images/" +
+                                              : `${URL_IMG}/images/` +
                                                 evento.name
                                           }
                                           alt="Logo del evento"

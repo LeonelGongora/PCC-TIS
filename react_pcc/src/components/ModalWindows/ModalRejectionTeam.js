@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
@@ -71,7 +72,7 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
                 contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del Evento: ${state.nombre_evento}. Razon: ${razon}`
             }
             // console.log(contenido)
-            const url = `http://127.0.0.1:8000/api/teams/${id_equipo}`
+            const url = `${URL_API}/teams/${id_equipo}`
             await axios.put(url, {
                 solicitud: 2,
             })

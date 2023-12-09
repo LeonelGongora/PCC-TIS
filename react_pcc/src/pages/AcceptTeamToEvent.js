@@ -12,6 +12,7 @@ import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPat
 import ModalRejection from '../components/ModalWindows/ModalRejection';
 import configApi from '../configApi/configApi';
 import ModalRejectionTeam from '../components/ModalWindows/ModalRejectionTeam';
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 
@@ -31,7 +32,7 @@ class AcceptTeamToEvent extends Component{
             user: [],
             nombre_evento: '',
             requisitos: [],
-            url: "http://127.0.0.1:8000/api/events",
+            url: `${URL_API}/events`,
             loader:false,
             estadoModal: false,
             estadoModalOrganizador:false,
@@ -87,7 +88,7 @@ class AcceptTeamToEvent extends Component{
 
     getEquipos=async()=>{
         const idevent = cookies.get('auteId');
-        const url = `http://127.0.0.1:8000/api/getporevento/${idevent}`
+        const url = `${URL_API}/getporevento/${idevent}`
         const response = await axios.get(url);
         
         // console.log(response.data.teams)
@@ -113,7 +114,7 @@ class AcceptTeamToEvent extends Component{
     }
 
     aceptarEquipo = async (id, nombre_equipo) =>{
-        const url = `http://127.0.0.1:8000/api/teams/${id}`
+        const url = `${URL_API}/teams/${id}`
         await axios.put(url, {
             solicitud: 1,
         })

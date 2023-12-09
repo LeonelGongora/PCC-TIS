@@ -12,6 +12,7 @@ import ModalCampoFecha from '../ModalWindows/ModalCampoFecha';
 import ModalCampoNumerico from '../ModalWindows/ModalCampoNumerico';
 import ModalWindowAtributo from '../ModalWindows/ModalWindowAtributo';
 import ModalCampoInformacion from '../ModalWindows/ModalCampoInformacion';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -59,7 +60,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
     }
 
     const eliminarAtributo = (id) => {
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);
@@ -125,43 +126,9 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
           />
               
           <div className='tituloCampos'>
-            <h2>Campos Adicionales</h2>
+            <h2>Campos adicionales al registro</h2>
             <div className='seccionCampo'>
-              <h3>Campos de información</h3>
               <div className='seccionesExtra'>
-                {atributosInformacion.map((atributo) => ( 
-                  <div className="campo-cont">
-                      <div id="entradaEveNex">
-                        <p id="textoCuadro">{atributo.nombre_informacion}</p>
-                        <input
-                          id="inputRegistro"
-                          //   type={atributo.tipo_dato_atributo}
-                          name="valor"
-                          placeholder="Campo Adicional"
-                          readOnly />
-                      </div>
-                      <button
-                        className="botonEliminarCampo"
-                        type="button"
-                      >
-                      {cancelar}
-                      </button>
-                    </div>
-                ))} 
-
-                <div className='contenedorBotonCampo'>
-                  <button
-                    className="botonAgregarCampo"
-                    type="button"
-                    onClick={() => cambiarEstadoCampoInformacion(!values.estadoCampoInformacion)}
-                  >
-                    Agregar Campo de información +
-                  </button>
-                </div>
-              </div>
-              <h3>Campos adicionales para el formulario de registro al evento</h3>
-              <div className='seccionesExtra'>
-
                  {atributosFormulario.map((atributo) => ( 
                 <div className="campo-cont">
                   <div id="entradaEveNex">
@@ -194,6 +161,11 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
                 </div>
               </div>
             </div>
+          </div>
+          <div className='contBotonRegist'>
+                  <button className='botonesCambiar'>
+                    Terminar Registro
+                  </button>
           </div>
           </>)
 

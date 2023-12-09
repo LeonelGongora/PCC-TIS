@@ -4,6 +4,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faUser } from '@fortawesome/free-regular-svg-icons';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -43,7 +44,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     }, []);
 
     const getUsuarios=async()=>{
-      let url = "http://127.0.0.1:8000/api/get-user-information"
+      let url = `${URL_API}/get-user-information`
       const respuesta = await axios.get(url);
       setUsuarios(respuesta.data.usuarios);
     }
@@ -104,7 +105,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     
             if(ci == nuevo_ci){
               seEncontro = 1;
-              let url = `http://127.0.0.1:8000/api/get-user-by-dni/${nuevo_ci}`
+              let url = `${URL_API}/get-user-by-dni/${nuevo_ci}`
               const respuesta = await axios.get(url);
 
               setValues({

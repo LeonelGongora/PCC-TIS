@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 
 import FormUserInput from "../stylesheets/FormUserInput.css";
-
+import {URL_API} from '../const';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -30,7 +30,7 @@ function FormRegistroUsuario() {
 
   
   const getUsuarios = async (e) => {
-    const url = "http://127.0.0.1:8000/api/get-user-information"; 
+    const url = `${URL_API}/get-user-information`; 
     const respuesta = await axios.get(url);
     setUsuarios(respuesta.data.usuarios);
   }
@@ -112,7 +112,7 @@ function FormRegistroUsuario() {
     setErrors(validationErrors)
 
     if (Object.keys(validationErrors).length === 0) {
-      const url = "http://127.0.0.1:8000/api/add-user-information";
+      const url = `${URL_API}/add-user-information`;
 
       const data = new FormData();
       data.append('nombre', formData.nombre)

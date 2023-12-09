@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 import imgFondo from '../images/FondoInfoEve.jpeg';
 import img from '../images/afiche.png';
 import ImagenAmpliable from './ModalWindows/ImagenAmpliable';
+import {URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -159,7 +160,7 @@ function InfoEvento({props}){
                         <ImagenAmpliable src={img}/>
                         </>
                         ) : (<>
-                        <ImagenAmpliable src={"http://127.0.0.1:8000/images/"+event.name} alt="Imagen" />
+                        <ImagenAmpliable src={`${URL_IMG}/images/`+event.name} alt="Imagen" />
                         </>
                         )}
                         
@@ -171,12 +172,12 @@ function InfoEvento({props}){
                                 <div className='contOrganizador'>
                                 {organizadores.map((o) => {  
                                 return (<div key={o.id}>
-                                <img className='imagenSlv' src={"http://127.0.0.1:8000/imagenesOrganizadores/"+o.imagen_organizador}></img>
+                                <img className='imagenSlv' src={`${URL_IMG}/imagenesOrganizadores/`+o.imagen_organizador}></img>
                                 </div>);
                                 })}
-                                <img className='imagenSlv' src={"http://127.0.0.1:8000/images/"+event.name}></img>
-                                <img className='imagenSlv' src={"http://127.0.0.1:8000/images/"+event.name}></img>
-                                <img className='imagenSlv' src={"http://127.0.0.1:8000/images/"+event.name}></img>
+                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
+                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
+                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
                                 </div>
                             </div>
                         </div>
@@ -188,21 +189,21 @@ function InfoEvento({props}){
                                 <div className='patrocinadoresGold'>
                                 {patrocinadores.map((p) => {  
                                 return (<div key={p.id}>
-                                <img className='imagenGld' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                                <img className='imagenGld' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}
                                 </div>
                                 <div className='patrocinadoresSilver'>
                                 {patrocinadores.map((p) => {  
                                 return (<div key={p.id}>
-                                <img className='imagenSlv' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                                <img className='imagenSlv' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}
                                 </div>
                                 <div className='patrocinadoresBronce'>
                                 {patrocinadores.map((p) => {  
                                 return (<div key={p.id}>
-                                <img className='imagenBrc' src={"http://127.0.0.1:8000/imagenesPatrocinadores/"+p.imagen_patrocinador}></img>
+                                <img className='imagenBrc' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}
                                 </div>

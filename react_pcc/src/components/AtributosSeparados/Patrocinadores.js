@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -16,7 +17,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
     const [patrocinadores, setPatrocinadores] = useState ( [] );
 
     const getPatrocinadores = async()=>{
-        const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+        const url = `${URL_API}/get-patrocinador`;
         const respuesta = await axios.get(url);
         setPatrocinadores(respuesta.data.patrocinadores)
     }
@@ -28,6 +29,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
 
     return (
         estadoPatrocinadores && (
+          <>
         <div className='tituloCampos'>
             <h2>Patrocinadores</h2>
             <div className='seccionCampo patrocinadoresReg'>
@@ -42,7 +44,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
                         name="vehicle1"
                         value={patrocinador.id}
                       />
-                      <span id="titulosCheckbox" className='nombreCheckOrg'>
+                      <span id="titCheck" className='nombreCheckOrg'>
                         {patrocinador.nombre_patrocinador}
                       </span>
                     </div>
@@ -59,7 +61,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
                         name="vehicle1"
                         value={patrocinador.id}
                       />
-                      <span id="titulosCheckbox" className='nombreCheckOrg'>
+                      <span id="titCheck" className='nombreCheckOrg'>
                         {patrocinador.nombre_patrocinador} 
                       </span>
                     </div>
@@ -77,7 +79,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
                         name="vehicle1"
                         value={patrocinador.id}
                       />
-                      <span id="titulosCheckbox" className='nombreCheckOrg'>
+                      <span id="titCheck" className='nombreCheckOrg'>
                         {patrocinador.nombre_patrocinador}
                       </span>
                     </div>
@@ -85,7 +87,14 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores}){
                   
                 </div>
             </div>
-        </div>)
+        </div>
+        <div className='contBotonRegist'>
+            <button className='botonesCambiar'>
+            Terminar Registro
+            </button>
+        </div>
+        </>
+        )
 
     );
 }

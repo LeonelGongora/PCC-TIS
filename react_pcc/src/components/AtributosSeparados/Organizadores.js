@@ -6,6 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -16,7 +17,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
     const [organizadores, setOrganizadores] = useState ( [] );
 
     const getOrganizadores = async()=>{
-        const url = "http://127.0.0.1:8000/api/get-organizador"; 
+        const url = `${URL_API}/get-organizador`;
         const respuesta = await axios.get(url);
         setOrganizadores(respuesta.data.organizadores)
     }
@@ -27,6 +28,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
 
     return (
         estadoOrganizadores && (
+        <>
         <div className='tituloCampos'>
             <h2>Organizadores</h2>
             <div className='seccionCampo'>
@@ -39,7 +41,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
                                 id="checkBoxAddEvent"
                                 name="vehicle1"
                                 value={organizador.id} />
-                            <span id="titulosCheckbox" className='nombreCheckOrg'>
+                            <span id="titCheck" className='nombreCheckOrg'>
                                 {organizador.nombre_organizador}
                             </span>
                         </div>
@@ -49,6 +51,12 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores}){
             </div>
             
         </div>
+        <div className='contBotonRegist'>
+            <button className='botonesCambiar'>
+            Terminar Registro
+            </button>
+        </div>
+        </>
         )
 
     );

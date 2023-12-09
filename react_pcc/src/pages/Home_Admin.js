@@ -12,6 +12,7 @@ import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 import imgPred from '../images/afiche.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {URL_API, URL_IMG} from '../const';
 
 const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color: "#000000",}} />;
 
@@ -27,7 +28,7 @@ class Home_Admin extends Component {
     this.state = {
       events: [],
       loader: false,
-      url: "http://127.0.0.1:8000/api/events",
+      url: `${URL_API}/events`,
       estadoModal: false,
       estadoModalOrganizador: false,
       estadoModalPatrocinador: false,
@@ -38,7 +39,7 @@ class Home_Admin extends Component {
   }
 
   getEventTypes = async () => {
-    const url = "http://127.0.0.1:8000/api/type-events";
+    const url = `${URL_API}/type-events`;
     const respuesta = await axios.get(url);
     console.log(respuesta);
     console.log(this.eventos)
@@ -274,7 +275,7 @@ class Home_Admin extends Component {
                         src={
                           evento.name === null
                             ? (imgPred)
-                            : "http://127.0.0.1:8000/images/" + evento.name
+                            : `${URL_IMG}/images/` + evento.name
                         }
                         alt="Logo del evento"
                       />

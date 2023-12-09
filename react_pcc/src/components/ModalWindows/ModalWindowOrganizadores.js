@@ -4,7 +4,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
@@ -41,7 +41,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
 
       
     const getOrganizadores = async (e) => {
-        const url = "http://127.0.0.1:8000/api/get-organizador"; 
+        const url = `${URL_API}/get-organizador`; 
         const respuesta = await axios.get(url);
         setOrganizadores(respuesta.data.organizadores);
     }

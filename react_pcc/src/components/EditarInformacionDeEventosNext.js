@@ -9,6 +9,7 @@ import ModalWindowRequisito from './ModalWindows/ModalWindowRequisito';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import NavbarAdmin from './NavBars/NavbarAdmin';
+import {URL_API} from '../const';
 
 const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
 
@@ -48,7 +49,7 @@ class EditarInformacionDeEventosNext extends Component{
   }
 
     getEventTypes = async () => {
-        const url = "http://127.0.0.1:8000/api/type-events"; 
+        const url = `${URL_API}/type-events`; 
 
         this.setState({loader:true});
         const events = await axios.get(url);
@@ -65,10 +66,10 @@ class EditarInformacionDeEventosNext extends Component{
 
       if(response.request.status === 200){
         
-        const urlOrganizadores = "http://127.0.0.1:8000/api/get-organizador"; 
+        const urlOrganizadores = `${URL_API}/get-organizador`; 
         const respuesta = await axios.get(urlOrganizadores);
 
-        const urlPatrocinadores = "http://127.0.0.1:8000/api/get-patrocinador"; 
+        const urlPatrocinadores = `${URL_API}/get-patrocinador`; 
         const respuestaPatrocinadores = await axios.get(urlPatrocinadores);
 
         this.setState({
@@ -108,7 +109,7 @@ class EditarInformacionDeEventosNext extends Component{
     }
 
     eliminarAtributo = (id) => {
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-attribute/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);
@@ -250,13 +251,13 @@ class EditarInformacionDeEventosNext extends Component{
             console.log("Eliminar")
             console.log(patrocinadores_eliminar)
 
-            const url_Organizador_agregar = `http://127.0.0.1:8000/api/add-event_organizer`; 
-            const url_Organizador_eliminar = `http://127.0.0.1:8000/api/delete-event_organizer`; 
+            const url_Organizador_agregar = `${URL_API}/add-event_organizer`; 
+            const url_Organizador_eliminar = `${URL_API}/delete-event_organizer`; 
             
-            const url_Patrocinador_agregar = `http://127.0.0.1:8000/api/add-event_sponsor`; 
-            const url_Patrocinador_eliminar = `http://127.0.0.1:8000/api/delete-event_sponsor`; 
+            const url_Patrocinador_agregar = `${URL_API}/add-event_sponsor`; 
+            const url_Patrocinador_eliminar = `${URL_API}/delete-event_sponsor`; 
 
-            const url = `http://127.0.0.1:8000/api/update-event/${this.id}`; 
+            const url = `${URL_API}/update-event/${this.id}`; 
 
             for (let index = 0; index < organizadores_agregar.length; index++) {
               const data = new FormData()

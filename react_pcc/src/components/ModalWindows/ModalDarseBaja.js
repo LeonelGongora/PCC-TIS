@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../stylesheets/ModalWindowStyle.css";
-
+import {URL_API} from '../../const';
 
 function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstadoBanner2, nombreBanner1, euid, pe }) {
 
   const salirVentanaModalBanner = async(e) => {
     if (pe <=1 ){
       // console.log(`${pe}individual ${euid}`)
-      const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
+      const url = `${URL_API}/eventousuarios/${euid}`;
       await axios.delete(url);
       // console.log(`se elimino ${euid}`)
     }else{
       // console.log(`${pe}equipo ${euid}`)
-      const url = `http://127.0.0.1:8000/api/delete-team/${euid}`;
+      const url = `${URL_API}/delete-team/${euid}`;
       await axios.delete(url);
     }
     cambiarEstadoDarseBaja1(false);

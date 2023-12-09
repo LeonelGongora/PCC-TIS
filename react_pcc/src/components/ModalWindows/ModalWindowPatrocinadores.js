@@ -4,7 +4,7 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
-
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
@@ -42,7 +42,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
     }, []);
 
     const getPatrocinadores = async (e) => {
-        const url = "http://127.0.0.1:8000/api/get-patrocinador"; 
+        const url = `${URL_API}/get-patrocinador`; 
         const respuesta = await axios.get(url);
         setPatrocinadores(respuesta.data.patrocinadores);
     }
@@ -108,7 +108,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
             data.append('nombre_patrocinador', values.nombre_patrocinador)
             data.append('imagen_patrocinador', values.imagen_patrocinador)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-patrocinador', data);
+            const res = await axios.post(`${URL_API}/add-patrocinador`, data);
             if(res.data.status === 200){
                 console.log(res);
                 setValues({

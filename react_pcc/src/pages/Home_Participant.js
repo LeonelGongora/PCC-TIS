@@ -3,10 +3,12 @@ import NavbarUser from '../components/NavBars/NavbarUser';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 
+
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import imgPred from "../images/afiche.png";
+import {URL_API, URL_IMG} from '../const';
 
 const cookies = new Cookies();
 
@@ -17,7 +19,7 @@ class Home_Participant extends Component{
     this.state = {
       events: [],
       loader: false,
-      url: "http://127.0.0.1:8000/api/eventoabiertos",
+      url: `${URL_API}/eventoabiertos`,
     };
     this.eventos = [];
   }
@@ -28,11 +30,11 @@ class Home_Participant extends Component{
         this.setState({loader:true});
         const events = await axios.get(this.state.url);
         this.eventos = Array.from(events.data.events)
-        console.log(events)
+        // console.log(events)
         
 
         this.setState({ events: events.data, loader:false});
-        console.log(this.eventos)
+        // console.log(this.eventos)
 
         var i;
         var fecha;
@@ -90,17 +92,18 @@ class Home_Participant extends Component{
 
                       {this.eventos.map((evento, id) => {
                         return (
-                          <>
+                         
                             <div
                               className="containerEvents"
                               onClick={() => this.masDetalles(evento.id)}
+                              key={evento.id}
                             >
                               <img
                                 className="imageEvent"
                                 src={
                                   evento.name === null
                                     ? imgPred
-                                    : "http://127.0.0.1:8000/images/" +
+                                    : `${URL_IMG}/images/` +
                                       evento.name
                                 }
                                 alt="Logo del evento"
@@ -122,7 +125,7 @@ class Home_Participant extends Component{
                                 )}
                               </div>
                             </div>
-                          </>
+                          
                         );
                       })}
                     </div>

@@ -16,15 +16,6 @@ use App\Mail\DemoMail;
 |
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/' ,[WebsiteController::class , 'index']);
-*/
-
-//$content = "Contenido del correo electrónico";
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/{any}', function () {
+    return view('index');
+}) -> where ('any','.*');

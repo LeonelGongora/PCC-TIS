@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import ModalWarning from './ModalWindows/ModalWarning';
 import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
-
+import {URL_API} from '../const';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
 
 const cookies = new Cookies();

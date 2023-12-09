@@ -7,6 +7,7 @@ import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../configApi/configApi'
+import {URL_API} from '../const';
 
 const cookies = new Cookies();
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
@@ -20,12 +21,12 @@ class Homepage extends Component{
         this.state = {
           events: [],
           loader: false,
-          url: "http://127.0.0.1:8000/api/eventoabiertos",
+          url: `${URL_API}/eventoabiertos`,
         };
     }
 
     getNotices = async () => {
-        const url = "http://127.0.0.1:8000/api/get-notices"; 
+        const url = `${URL_API}/get-notices`; 
         const respuesta = await axios.get(url);
         console.log(respuesta)
         this.noticias = Array.from(respuesta.data.anuncios);

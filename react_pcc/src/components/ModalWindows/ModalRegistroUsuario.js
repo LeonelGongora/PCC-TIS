@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
-
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -111,7 +111,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
         if(Object.keys(validationErrors).length === 0){
 
-            const url = "http://127.0.0.1:8000/api/add-user-information";
+            const url = `${URL_API}/add-user-information`;
 
             const data = new FormData();
 

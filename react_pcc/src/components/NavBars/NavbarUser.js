@@ -4,8 +4,12 @@ import DropdownUser from '../DropDownUser';
 import DropdownNotification from '../DropdownNotification';             
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+
 import Cookies from 'universal-cookie';
 
+const exitSesion = <FontAwesomeIcon icon={faRightFromBracket} />;
 const cookies = new Cookies();
 
 function NavbarUser(){
@@ -37,8 +41,17 @@ function NavbarUser(){
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (isOpen) {
+      setOpenDropdown(null);
+      setIsOpen(!isOpen);
+    } else {
+      setIsOpen(!isOpen);
+      setOpenDropdown("sesionUser");
+    }
   };
+
+  const [openDropdown, setOpenDropdown] = useState(null);
+
 
     return (
       <nav>
@@ -54,22 +67,36 @@ function NavbarUser(){
         </div>
         <div className="navbarRight">
           <div className="desplegable1">
-            <DropdownUser />
+            <DropdownUser
+              setOpenDropFath={setOpenDropdown}
+              isOpen={openDropdown === "user"}
+            />
           </div>
           <div>
-            <DropdownNotification />
+            <DropdownNotification
+              setOpenDropFath={setOpenDropdown}
+              isOpen={openDropdown === "notification"}
+            />
           </div>
           <div className="userId">
             <div className="dropdown-container">
-              <button className="dropdown-button" onClick={toggleDropdown}>
+              <button
+                className={`${
+                  (isOpen && openDropdown === "sesionUser")
+                    ? "dropdown-button-active"
+                    : "dropdown-button"
+                }`}
+                onClick={toggleDropdown}
+              >
                 <a>
                   <FontAwesomeIcon className="userIcon" icon={faUser} />
                 </a>
                 {`${nombre_usuario} ${apellido_usuario}`}
               </button>
-              {isOpen && (
+              {isOpen && openDropdown === "sesionUser" && (
                 <ul className="dropdown-menu">
-                  <li onClick={cerrarSesion}>cerrarSesion</li>
+                  <li onClick={cerrarSesion}>
+                    <span id='lineaV'>{ exitSesion}</span> CerrarSesion</li>
                 </ul>
               )}
             </div>

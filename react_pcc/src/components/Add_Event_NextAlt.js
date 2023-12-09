@@ -10,6 +10,8 @@ import Requisitos from './AtributosSeparados/Requisitos';
 import Actividades from './AtributosSeparados/Actividades';
 import Organizadores from './AtributosSeparados/Organizadores';
 import Patrocinadores from './AtributosSeparados/Patrocinadores';
+import Secciones from './AtributosSeparados/Secciones';
+
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 const cookies = new Cookies();
@@ -27,7 +29,7 @@ class Add_Event_NextAlt extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            pestañas: [true, false, false, false, false],// Inicialmente, todas las pestañas están en false
+            pestañas: [true, false, false, false, false, false],// Inicialmente, todas las pestañas están en false
 
             estadoModalAtributo: false,
             estadoModalRequisito: false,
@@ -82,19 +84,23 @@ class Add_Event_NextAlt extends Component{
                     <p className="tituloEvento-home">REGISTRAR EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
+                            
                             <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(0)}>
                                 <h3>Campos</h3>
                             </div>
-                            <div className={`campoPestana req${pestañas[1] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(1)}>
+                            <div className={`campoPestana cmp${pestañas[1] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(1)}>
+                                <h3>Secciones</h3>
+                            </div>
+                            <div className={`campoPestana req${pestañas[2] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(2)}>
                                 <h3>Requisitos</h3>
                             </div>
-                            <div className={`campoPestana act${pestañas[2] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(2)}>
+                            <div className={`campoPestana act${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
                                 <h3>Actividades</h3>
                             </div>
-                            <div className={`campoPestana org${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
+                            <div className={`campoPestana org${pestañas[4] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(4)}>
                                 <h3>Organizadores</h3>
                             </div>
-                            <div className={`campoPestana ptr${pestañas[4] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(4)}>
+                            <div className={`campoPestana ptr${pestañas[5] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(5)}>
                                 <h3>Patrocinadores</h3>
                             </div>
                         </div>
@@ -105,26 +111,31 @@ class Add_Event_NextAlt extends Component{
                                 atributosFormulario = {this.state.atributos}
                                 atributosInformacion = {this.state.atributosInformacion}
                             />
+                            <Secciones
+                                estadoSecciones={this.state.pestañas[1]}
+                                cambiarEstadoSecciones={this.cambiarEstadoSecciones}
+                                atributosFormulario = {this.state.atributos}
+                            />
                             <Requisitos
-                                estadoRequisitos={this.state.pestañas[1]}
+                                estadoRequisitos={this.state.pestañas[2]}
                                 cambiarEstadoRequisitos={this.cambiarEstadoRequisitos}
                                 requisitos = {this.state.requisitos}
                             />
                             <Actividades
-                                estadoActividades={this.state.pestañas[2]}
+                                estadoActividades={this.state.pestañas[3]}
                                 cambiarEstadoActividades={this.cambiarEstadoActividades}
                                 actividades = {this.state.actividades}
                             />
                             <Organizadores
-                                estadoOrganizadores={this.state.pestañas[3]}
+                                estadoOrganizadores={this.state.pestañas[4]}
                                 cambiarEstadoOrganizadores={this.cambiarEstadoOrganizadores}
                             />
                             <Patrocinadores
-                                estadoPatrocinadores={this.state.pestañas[4]}
+                                estadoPatrocinadores={this.state.pestañas[5]}
                                 cambiarEstadoPatrocinadores={this.cambiarEstadoPatrocinadores}
                             />
                         </div>
-                        <div className='opcionesCambiar'>
+                        {/* <div className='opcionesCambiar'>
                             <button className={`botonesCambiar ${pestañas[0] ? ' activo' : ''}`}>
                                 Anterior
                             </button>
@@ -134,7 +145,7 @@ class Add_Event_NextAlt extends Component{
                             <button className={`botonesCambiar ${pestañas[4] ? ' activo' : ''}`}>
                                 Siguiente
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
           </>

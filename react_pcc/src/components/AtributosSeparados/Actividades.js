@@ -103,7 +103,14 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
                 </button>
               </div>
             </div>
-          </div></>)
+        </div>
+        <div className='contBotonRegist'>
+            <button className='botonesCambiar'>
+              Terminar Registro
+            </button>
+        </div>
+        </>
+        )
 
     );
 }

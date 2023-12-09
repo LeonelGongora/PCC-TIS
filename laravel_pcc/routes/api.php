@@ -128,3 +128,5 @@ Route::get('/get-user-01/{event_id}', [UserController::class, 'getUser01']);
 Route::get('/misequipos/{id}', [EventController::class, 'misEquipos']);
 Route::get('/miseventindiequi/{id}', [EventController::class, 'misEventIndiEqui']);
 Route::delete('/delete-team/{id}', [TeamController::class, 'destroy']);
+Route::get('/misnotificaciones/{id}', [NotificationController::class, 'misNotificaciones']);
+
