@@ -24,7 +24,6 @@ class NotificationController extends Controller
         $notificacionuser = DB::table('notifications')
         ->join('notification_user', 'notifications.id', '=', 'notification_user.notification_id')
         ->join('users', 'users.id', '=', 'notification_user.user_id')
-        // ->join('event_types', 'event_types.id', '=', 'events.event_type_id')
         ->where('users.id', $id)
         ->select('notifications.*')
         ->get();
@@ -37,38 +36,28 @@ class NotificationController extends Controller
         ->select('notifications.*')
         ->get();
 
-        // $results = array();
-        // $results[] = $events;
-        // $results[] = $equipos;
+        $notificacioneventindi = DB::table('notifications')
+        ->join('event_notification', 'notifications.id', '=', 'event_notification.notification_id')
+        ->join('events', 'events.id', '=', 'event_notification.event_id')
+        ->join('evento_user', 'events.id', '=', 'evento_user.event_id')
+        ->join('users', 'users.id', '=', 'evento_user.user_id') 
+        ->where('evento_user.solicitud', 1)
+        ->orWhere('evento_user.solicitud', 0)
+        ->where('users.id', $id)
+        ->whereColumn('notifications.created_at','>','evento_user.created_at')
+        ->select('notifications.*')
+        ->get();
 
-        // $results = array();
-        // $r = array();
-        // $results[] = $events;
-        // $results[] = $equipos;
-        // $mapeo = function($elemento) {
-        //     return array(
-        //         'id' => $elemento['id'],
-        //         'nombre_evento' => $elemento['nombre_evento']
-        //         );
-        // };
-        // $r = array_map($mapeo, $results);
-        $r = array();
-        // $r = array_merge($notificacionuser, $notificacionteam);
-        $array = Arr::collapse([$notificacionuser, $notificacionteam]);
-        // $orde = sort($array, int '$created_at' = SORT_REGULAR): true { }
+        $notificacioneventteam = DB::table('notifications')
+        ->join('event_notification', 'notifications.id', '=', 'event_notification.notification_id')
+        ->join('events', 'events.id', '=', 'event_notification.event_id')
+        ->join('teams', 'teams.event_id', '=', 'events.id')
+        ->where('teams.id_coach', $id)
+        ->whereColumn('notifications.created_at','>','teams.created_at')
+        ->select('notifications.*')
+        ->get();
 
-        // $ordenados = $array->sortByDesc('created_at')->paginate(5);
-        // $prueba = array.sort((a, b) => new Date(a.fechas).getTime() > new Date(b.fechas).getTime());
-        // $ordenados = $array::latest()-get();
-
-        // $e = array_merge()
-        // $mapeo = function($elemento) {
-        //     return array(
-        //         'id' => $elemento['id'],
-        //         'nombre_evento' => $elemento['nombre_evento']
-        //         );
-        // };
-        // $r = array_map($mapeo, array($events, $equipos));
+        $array = Arr::collapse([$notificacionuser, $notificacionteam, $notificacioneventindi, $notificacioneventteam]);
 
         return response()->json([
             'status' => 200,
