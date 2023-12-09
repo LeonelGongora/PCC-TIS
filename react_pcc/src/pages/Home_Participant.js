@@ -30,11 +30,11 @@ class Home_Participant extends Component{
         this.setState({loader:true});
         const events = await axios.get(this.state.url);
         this.eventos = Array.from(events.data.events)
-        console.log(events)
+        // console.log(events)
         
 
         this.setState({ events: events.data, loader:false});
-        console.log(this.eventos)
+        // console.log(this.eventos)
 
         var i;
         var fecha;
@@ -92,10 +92,11 @@ class Home_Participant extends Component{
 
                       {this.eventos.map((evento, id) => {
                         return (
-                          <>
+                         
                             <div
                               className="containerEvents"
                               onClick={() => this.masDetalles(evento.id)}
+                              key={evento.id}
                             >
                               <img
                                 className="imageEvent"
@@ -124,7 +125,7 @@ class Home_Participant extends Component{
                                 )}
                               </div>
                             </div>
-                          </>
+                          
                         );
                       })}
                     </div>

@@ -32,11 +32,30 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
       const id = cookies.get('id_usuario');
       const url = `${Notificacion_Url}/${id}`;
       const response = await axios.get(url)
-      setNotification(response.data.notifications)
-      console.log(response.data.notifications)
-      console.log(id)
+      const r = response.data.notifications
+
+      //ordenar por id
+      r.sort((o1, o2)=>{
+        if(o1.id < o2.id){
+          return -1;
+        }else if(o1.id > o2.id){
+          return 1;
+        }else{
+          return 0;
+        }
+      });
+      //fin
+
+      // console.log(r)
+      setNotification(r)
     }
   }
+
+  function ordenarAsc(p_array_json, p_key) {
+    p_array_json.sort(function (a, b) {
+       return a[p_key] > b[p_key];
+    });
+ }
 
   return (
     <div className="dropdown-container">
@@ -57,9 +76,17 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
                 {notification.map((n) => {  
                       return (<div key={n.id}>
                         {n.informacion === null ? (
-                            <li>{n.contenido}</li>
+                          <>
+                            <li>{n.contenido}
+                            <p>{n.created_at}</p>
+                            </li>
+                          </>
                         ) : (
-                            <li>{`${n.contenido}. Mayor Informacion: ${n.informacion}`}</li>
+                          <>
+                            <li>{`${n.contenido}. Mayor Informacion: ${n.informacion}`}
+                            <p>{n.created_at}</p>
+                            </li>
+                          </>
                         )}
                       </div>);
                 })}</>
