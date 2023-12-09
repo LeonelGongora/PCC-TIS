@@ -60,7 +60,7 @@ class Homepage extends Component{
                     alt="Logo del sistema"/>
                 </div>
                 <div className='contenedorInformacion'>
-                    <div className='contanedorSecuandario'>
+                    <div className='contenedorSecundario'>
                     <div className='informacion'>
                         
                         <div className='titleEvent-date'>
