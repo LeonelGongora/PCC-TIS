@@ -7,7 +7,6 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 
 function DropdownUser({ setOpenDropFath, isOpen }) {
-  //const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     if (isOpen) {
@@ -33,13 +32,13 @@ function DropdownUser({ setOpenDropFath, isOpen }) {
     <div className="dropdown-container">
       <button
         className={`${isOpen ? "dropdown-button-active" : "dropdown-button"}`}
-        onClick={toggleDropdown}
+        onMouseEnter={toggleDropdown}
       >
         OPCIONES{" "}
         <FontAwesomeIcon className="dropdownIcon" icon={faChevronDown} />
       </button>
       {isOpen && (
-        <ul className="dropdown-menu">
+        <ul className="dropdown-menu" onMouseLeave={toggleDropdown}>
           <li onClick={registrarseEventoRedireccionar}>
             <span id="lineaV">{lineV}</span> Registrarse a Eventos
           </li>

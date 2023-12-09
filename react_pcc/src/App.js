@@ -28,6 +28,7 @@ import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
 
 import Homepage from "./pages/Homepage.js";
+import Login from "./pages/Login.js";
 import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
 import Reportes_Pagina from "./pages/Reportes_Pagina.js";
@@ -68,7 +69,8 @@ function App() {
         <Route path='/equipos' element={<VisualizarEquipos />} />
         <Route path='/darBajaEvento' element={< DarBajaEvento />} />
 
-        <Route path='/home' element={< Homepage />} />
+        <Route path='/home' element={<Homepage/>} />
+        <Route path='/login' element={<Login/>} />
 
         <Route path='/reportes' element={< Reportes_Pagina />} />
         <Route path='/emailPrueba' element={< EmailPrueba />} />

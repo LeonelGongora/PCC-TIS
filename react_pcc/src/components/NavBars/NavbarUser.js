@@ -3,7 +3,7 @@ import "../../stylesheets/NavbarStyles.css";
 import DropdownUser from '../DropDownUser';
 import DropdownNotification from '../DropdownNotification';             
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -40,6 +40,7 @@ function NavbarUser(){
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
   const toggleDropdown = () => {
     if (isOpen) {
       setOpenDropdown(null);
@@ -49,10 +50,6 @@ function NavbarUser(){
       setOpenDropdown("sesionUser");
     }
   };
-
-  const [openDropdown, setOpenDropdown] = useState(null);
-
-
     return (
       <nav>
         <div className="logoName">
@@ -72,36 +69,38 @@ function NavbarUser(){
               isOpen={openDropdown === "user"}
             />
           </div>
-          <div>
+
+          <div id='contenedorRigthUser'>
             <DropdownNotification
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "notification"}
             />
-          </div>
-          <div className="userId">
-            <div className="dropdown-container">
-              <button
-                className={`${
-                  (isOpen && openDropdown === "sesionUser")
-                    ? "dropdown-button-active"
-                    : "dropdown-button"
-                }`}
-                onClick={toggleDropdown}
-              >
-                <a>
-                  <FontAwesomeIcon className="userIcon" icon={faUser} />
-                </a>
-                {`${nombre_usuario} ${apellido_usuario}`}
-              </button>
-              {isOpen && openDropdown === "sesionUser" && (
-                <ul className="dropdown-menu">
-                  <li onClick={cerrarSesion}>
-                    <span id='lineaV'>{ exitSesion}</span> CerrarSesion</li>
-                </ul>
-              )}
+
+            <div className="userId">
+              <div className="dropdown-container">
+                <button
+                  className={`${
+                    isOpen && openDropdown === "sesionUser"
+                      ? "dropdown-button-active"
+                      : "dropdown-button"
+                  }`}
+                  onClick={toggleDropdown}
+                >
+                  <a>
+                    <FontAwesomeIcon className="userIcon" icon={faUser} />
+                  </a>
+                  {`${nombre_usuario} ${apellido_usuario}`}
+                </button>
+                {isOpen && openDropdown === "sesionUser" && (
+                  <ul className="dropdown-menu-user">
+                    <li onClick={cerrarSesion}>
+                      <span id="lineaV">{exitSesion}</span> CerrarSesion
+                    </li>
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
-          <div></div>
         </div>
       </nav>
     );
