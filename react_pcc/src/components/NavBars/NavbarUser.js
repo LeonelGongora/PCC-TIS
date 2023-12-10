@@ -70,7 +70,7 @@ function NavbarUser(){
             />
           </div>
 
-          <div id='contenedorRigthUser'>
+          <div id="contenedorRigthUser">
             <DropdownNotification
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "notification"}
@@ -86,9 +86,7 @@ function NavbarUser(){
                   }`}
                   onClick={toggleDropdown}
                 >
-                  <a>
                     <FontAwesomeIcon className="userIcon" icon={faUser} />
-                  </a>
                   {`${nombre_usuario} ${apellido_usuario}`}
                 </button>
                 {isOpen && openDropdown === "sesionUser" && (

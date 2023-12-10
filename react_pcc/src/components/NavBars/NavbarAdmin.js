@@ -107,10 +107,10 @@ function NavbarAdmin({
                 }`}
                 onClick={toggleDropdown}
               >
-                {`${nombre_usuario} ${apellido_usuario}`}
                 <a>
                   <FontAwesomeIcon className="userIcon" icon={faUser} />
                 </a>
+                {`${nombre_usuario} ${apellido_usuario}`}
               </button>
               {isOpen && openDropdown === "sesionUser" && (
                 <ul className="dropdown-menu-user">
