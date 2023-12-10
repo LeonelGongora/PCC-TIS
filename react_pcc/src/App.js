@@ -34,6 +34,8 @@ import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.j
 import Reportes_Pagina from "./pages/Reportes_Pagina.js";
 import EmailPrueba from "./pages/EmailPrueba.js";
 
+import FormRegistroUsuarioDinamico from "./pages/FormRegistroUsuarioDinamico.js";
+import FormRegistroTipoUser from "./pages/FormRegistroTipoUser.js";
 
 function App() {
   return (
@@ -75,6 +77,9 @@ function App() {
         <Route path='/reportes' element={< Reportes_Pagina />} />
         <Route path='/emailPrueba' element={< EmailPrueba />} />
         
+        <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
+        <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />
+
       </Routes>
     </Router>
   );

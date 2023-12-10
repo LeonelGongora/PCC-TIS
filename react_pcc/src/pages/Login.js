@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavbarUser from '../components/NavBars/NavbarUser';
+import NavbarUser from '../components/NavBars/NavBarCreateEvent';
 import "../stylesheets/LoginStyles.css";
 import '../App.css';
 import axios from 'axios';
@@ -62,7 +62,6 @@ function Login (){
                         <span className='error-message'>{passwordError}</span>
                         <a href='#' onClick={handleClick}>Olvido su contraseña?</a>
                         <input type='Submit' value='Ingresar' className='buttonLogin'/>
-                        <p>Aún no se ha registrado? <a href='formUsuario' id='registrarse'>Registrarse</a></p>
                     </form>  
                 </div>
                 <div className='presentacionlogin'>
