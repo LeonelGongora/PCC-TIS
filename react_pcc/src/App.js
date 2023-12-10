@@ -26,6 +26,7 @@ import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEven
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
+import DarBajaEquipo from "./pages/DarBajaEquipo_User.js";
 
 import Homepage from "./pages/Homepage.js";
 import Login from "./pages/Login.js";
@@ -70,6 +71,7 @@ function App() {
         <Route path='/participantes' element={<VisualizarParticipantes/>} />
         <Route path='/equipos' element={<VisualizarEquipos />} />
         <Route path='/darBajaEvento' element={< DarBajaEvento />} />
+        <Route path='/darBajaEquipo' element={< DarBajaEquipo />} />
 
         <Route path='/home' element={<Homepage/>} />
         <Route path='/login' element={<Login/>} />

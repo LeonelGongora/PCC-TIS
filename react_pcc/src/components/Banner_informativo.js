@@ -5,17 +5,28 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const salir = <FontAwesomeIcon icon={faXmark} size="xl" style={{color: "#ffffff",}} />;
 
-function Banner_informativo({ estadoBanner1, cambiarEstadoBanner1, nombreBanner1 }) {
+function Banner_informativo({ estadoBanner1, cambiarEstadoBanner1, nombreBanner1, pe }) {
 
 	const salirBanner = (e) => {
 		cambiarEstadoBanner1(false);
+    console.log(pe)
 	};
 
 	return (
     estadoBanner1 && (
       <>
         <div className="banner">
-          <span> Se dio de baja exitosamente del evento {nombreBanner1}</span>
+          <span> 
+            {pe <= 1 ? (
+              <>
+              Se dio de baja exitosamente del evento {nombreBanner1}
+              </>
+            ) : (
+              <>
+              Se dio de baja exitosamente el equipo del evento {nombreBanner1}
+              </>
+            )}
+          </span>
           <button id="botonSalirBanner" onClick={salirBanner}>
             {salir}
           </button>
