@@ -9,10 +9,13 @@ const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 function DropdownAdmin({
   estadoAnuncio,
   cambiarEstadoAnuncio,
+  estadoOrganizador,
+  cambiarEstadoOrganizador,
+  estadoPatrocinador,
+  cambiarEstadoPatrocinador,
   setOpenDropFath,
-  isOpen
+  isOpen,
 }) {
-
   const toggleDropdown = () => {
     if (isOpen) {
       setOpenDropFath(null);
@@ -24,15 +27,6 @@ function DropdownAdmin({
   const aceptarUsuarioRedireccionar = () => {
     window.location.href = "./eventacceptUser";
   };
-
-  const visualizarParticipantesRedireccionar = () => {
-    window.location.href = "./paginaVisualizarParticipantes";
-  };
-
-  const visualizarEventoRedireccionar = () => {
-    window.location.href = "/home-admin";
-  };
-
   return (
     <div className="dropdown-container">
       <button
@@ -50,11 +44,11 @@ function DropdownAdmin({
           <li onClick={aceptarUsuarioRedireccionar}>
             <span id="lineaV">{lineV}</span> Administrar solicitudes
           </li>
-          <li onClick={visualizarEventoRedireccionar}>
-            <span id="lineaV">{lineV}</span> Visualizar eventos
+          <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
+            <span id="lineaV">{lineV}</span> Registrar organizador
           </li>
-          <li onClick={visualizarParticipantesRedireccionar}>
-            <span id="lineaV">{lineV}</span> Visualizar participantes de eventos
+          <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
+            <span id="lineaV">{lineV}</span> Registrar patrocinador
           </li>
         </ul>
       )}

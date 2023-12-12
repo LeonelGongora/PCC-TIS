@@ -80,16 +80,16 @@ function NavbarAdmin({
               isOpen={openDropdown === "eventos"}
               estado1={estado1}
               cambiarEstado1={cambiarEstado1}
-              estadoOrganizador={estadoOrganizador}
-              cambiarEstadoOrganizador={cambiarEstadoOrganizador}
-              estadoPatrocinador={estadoPatrocinador}
-              cambiarEstadoPatrocinador={cambiarEstadoPatrocinador}
             />
             <DropdownAdmin
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "administracion"}
               estadoAnuncio={estadoAnuncio}
               cambiarEstadoAnuncio={cambiarEstadoAnuncio}
+              estadoOrganizador={estadoOrganizador}
+              cambiarEstadoOrganizador={cambiarEstadoOrganizador}
+              estadoPatrocinador={estadoPatrocinador}
+              cambiarEstadoPatrocinador={cambiarEstadoPatrocinador}
             />
             <DropdownReporte
               setOpenDropFath={setOpenDropdown}
