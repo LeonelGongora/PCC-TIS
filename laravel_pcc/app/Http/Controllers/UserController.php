@@ -68,6 +68,7 @@ class UserController extends Controller
         $user-> telefono = $request -> telefono;
         $user-> email = $request -> email;
         $user-> password = $request -> password;
+        $user-> auxinoti = 0;
 
         $user -> save();
         $user->id;

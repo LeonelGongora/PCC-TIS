@@ -8,21 +8,33 @@ import {URL_API} from '../const';
 
 const cookies = new Cookies();
 const Notificacion_Url = `${URL_API}/misnotificaciones`;
+const User_Url = `${URL_API}/usuarios`;
 
 function DropdownNotification({setOpenDropFath, isOpen}) {
   //const [isOpen, setIsOpen] = useState(false);
   const [notification, setNotification] = useState([]);
-  const [notificationCount, setNotificationCount] = useState(2); 
+  const [notificationCount, setNotificationCount] = useState(0); 
 
   const incrementNotifications = () => {
     setNotificationCount(notificationCount + 1);
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = async () => {
     if (isOpen) {
       setOpenDropFath(null);
     } else {
       setOpenDropFath("notification");
+    }
+
+    if (notificationCount>0) {
+      console.log(`actualizar countnoti ${notificationCount}`)
+      const id = cookies.get("id_usuario");
+      const url = `${User_Url}/${id}`
+      // console.log(url)
+      await axios.put(url, {
+        auxinoti: notificationCount
+      })
+      setNotificationCount(0)
     }
   };
 
@@ -41,13 +53,14 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
       const url = `${Notificacion_Url}/${id}`;
       const response = await axios.get(url);
       const r = response.data.notifications;
+      const countnoti = response.data.countnoti;
 
       //ordenar por id
       r.sort((o1, o2) => {
         if (o1.id < o2.id) {
-          return -1;
-        } else if (o1.id > o2.id) {
           return 1;
+        } else if (o1.id > o2.id) {
+          return -1;
         } else {
           return 0;
         }
@@ -56,6 +69,17 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
 
       // console.log(r)
       setNotification(r);
+
+      console.log(r.length)
+      console.log(countnoti)
+      if (countnoti<r.length){
+        const cn = r.length-countnoti;
+        setNotificationCount(cn)
+        // console.log(`SE muestra esto: ${countnoti}`)
+      }else{
+        // console.log("no se muestra nada")
+        setNotificationCount(0)
+      }
     }
   };
 
