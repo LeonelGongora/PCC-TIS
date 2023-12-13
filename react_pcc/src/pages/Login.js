@@ -18,23 +18,33 @@ function Login (){
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [errors, setErrors] = useState({})
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        if (!username) {
-            setUsernameError('Este campo es obligatorio.');
-        } else {
-            setUsernameError('');
+        const validationErrors = {};
+        if (!username.trim()) {
+            validationErrors.username = "Este campo es obligatorio"
         }
-        if (!password) {
-            setPasswordError('Este campo es obligatorio.');
-        } else {
-            setPasswordError('');
+        if (!password.trim()) {
+            validationErrors.password = "Este campo es obligatorio"
         }
-        if (!username || !password) {
-            event.preventDefault();
-        }
-
+        setErrors(validationErrors)
+        // if (!username) {
+        //     setUsernameError('Este campo es obligatorio.');
+        // } else {
+        //     setUsernameError('');
+        // }
+        // if (!password) {
+        //     setPasswordError('Este campo es obligatorio.');
+        // } else {
+        //     setPasswordError('');
+        // }
+        // if (!username || !password) {
+        //     event.preventDefault();
+        // }
+        
+        if (Object.keys(validationErrors).length === 0) {
         await axios.post(login, {
             email: username,
             password: password
@@ -45,33 +55,39 @@ function Login (){
 
         //Almacenar los datos de forma global en cookies
         cookies.set('login_userId', response.data[0].id, {path: "/"});
-        cookies.set('login_userCargo', response.data[0].cargo, {path: "/"});
         cookies.set('login_userPrivilegio', response.data[0].privilegio, {path: "/"});
-        cookies.set('login_userNombre', response.data[0].nombre, {path: "/"});
+
+        cookies.set('nombre_usuario',response.data[0].nombre, {path: "/"});
+        cookies.set('apellido_usuario', response.data[0].apellido, {path: "/"});
+        cookies.set('id_usuario', response.data[0].id, {path: "/"});
+        cookies.set('ci_nuevo_usuario', response.data[0].ci, {path: "/"});
+        cookies.set('se_Registro', true, {path: "/"});   
     
         const usu = response.data[0].cargo;
         switch (usu){
             case "Administrador" :
-            window.location.href='./home-admin';
+                window.location.href='./home-admin';
             break;
-            case "Participante" :
-            cookies.set('id_usuario', response.data[0].id, {path: "/"});
-            window.location.href='./home-participant';
+            case "Participante":
+                window.location.href='./home-participant';
+            break; 
+            case undefined:
+                window.location.href='./home-participant';
             break; 
             default :
-            window.location.href='./home-dinamico';
-            cookies.set('nombre_usuario',response.data[0].nombre, {path: "/"});
-            cookies.set('apellido_usuario', response.data[0].apellido, {path: "/"});
-            cookies.set('id_usuario', response.data[0].id, {path: "/"});
-            cookies.set('ci_nuevo_usuario', response.data[0].ci, {path: "/"});
-            cookies.set('se_Registro', true, {path: "/"});
+                window.location.href='./home-dinamico';
             break; 
         }  
     
         })
         .catch(error=>{
             console.log('Usuario NO Registrado')
+            const validationErrors2 = {};
+            validationErrors2.username = "Email o contraseña incorrecta."
+            validationErrors2.password = "Email o contraseña incorrecta."
+            setErrors(validationErrors2)
         })
+        }
     };
 
     const handleClick = () => {
@@ -81,7 +97,7 @@ function Login (){
     // useEffect(() => {
     //     console.log(username) 
     //     console.log(password) 
-    // });
+    // }, [errors]);
 
     return (
         <div className='App'>
@@ -93,12 +109,15 @@ function Login (){
                         <p>Ingrese sus datos</p>
                         <input
                             type='text'
-                            placeholder='Nombre de Usuario'
+                            placeholder='Email'
                             className='input-text'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                        <span className='error-message'>{usernameError}</span>
+                        {/* <span className='error-message'>{usernameError}</span> */}
+                        {errors.username && (
+                            <span className='error-message'>{errors.username}</span>
+                        )}
                         <input
                             type='password'
                             placeholder='Contraseña'
@@ -106,9 +125,12 @@ function Login (){
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <span className='error-message'>{passwordError}</span>
+                        {/* <span className='error-message'>{passwordError}</span> */}
+                        {errors.password && (
+                            <span className='error-message'>{errors.password}</span>
+                        )}
                         <a href='#' onClick={handleClick}>Olvido su contraseña?</a>
-                        <input type='Submit' value='Ingresar' className='buttonLogin'/>
+                        <input type='Submit' defaultValue='Ingresar' className='buttonLogin'/>
                     </form>  
                 </div>
                 <div className='presentacionlogin'>
