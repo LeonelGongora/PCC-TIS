@@ -14,6 +14,7 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
   //const [isOpen, setIsOpen] = useState(false);
   const [notification, setNotification] = useState([]);
   const [notificationCount, setNotificationCount] = useState(0); 
+  const [notificationlength, setNotificationlength] = useState(0); 
 
   const incrementNotifications = () => {
     setNotificationCount(notificationCount + 1);
@@ -27,12 +28,12 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
     }
 
     if (notificationCount>0) {
-      console.log(`actualizar countnoti ${notificationCount}`)
+      // console.log(`actualizar countnoti ${notificationCount}`)
       const id = cookies.get("id_usuario");
       const url = `${User_Url}/${id}`
       // console.log(url)
       await axios.put(url, {
-        auxinoti: notificationCount
+        auxinoti: notificationlength
       })
       setNotificationCount(0)
     }
@@ -69,9 +70,10 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
 
       // console.log(r)
       setNotification(r);
+      setNotificationlength(r.length);
 
-      console.log(r.length)
-      console.log(countnoti)
+      // console.log(r.length)
+      // console.log(countnoti)
       if (countnoti<r.length){
         const cn = r.length-countnoti;
         setNotificationCount(cn)
