@@ -44,26 +44,30 @@ function DropdownUserDinamico({
       </button>
       {isOpen && (
         <ul className="dropdown-menu" onMouseLeave={toggleDropdown}>
-          {cadenaPrivilegio.charAt(16) == 1 ? (
-            <li onClick={() => cambiarEstadoAnuncio(!estadoAnuncio)}>
-              <span id="lineaV">{lineV}</span> Crear anuncio
-            </li>
-          ) : ( null )}
-          {cadenaPrivilegio.charAt(14) == 1 ? (
-            <li onClick={aceptarUsuarioRedireccionar}>
-              <span id="lineaV">{lineV}</span> Administrar solicitudes
-            </li>
-          ) : ( null )}
-          {cadenaPrivilegio.charAt(10) == 1 ? (
-            <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
-              <span id="lineaV">{lineV}</span> Registrar organizador
-            </li>
-          ) : ( null )}
-          {cadenaPrivilegio.charAt(12) == 1 ? (
-            <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
-              <span id="lineaV">{lineV}</span> Registrar patrocinador
-            </li>
-          ) : ( null )}
+          {cadenaPrivilegio === '' || cadenaPrivilegio === undefined ? (
+            null
+          ) : (<>
+            {cadenaPrivilegio.charAt(16) == 1 ? (
+              <li onClick={() => cambiarEstadoAnuncio(!estadoAnuncio)}>
+                <span id="lineaV">{lineV}</span> Crear anuncio
+              </li>
+            ) : ( null )}
+            {cadenaPrivilegio.charAt(14) == 1 ? (
+              <li onClick={aceptarUsuarioRedireccionar}>
+                <span id="lineaV">{lineV}</span> Administrar solicitudes
+              </li>
+            ) : ( null )}
+            {cadenaPrivilegio.charAt(10) == 1 ? (
+              <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
+                <span id="lineaV">{lineV}</span> Registrar organizador
+              </li>
+            ) : ( null )}
+            {cadenaPrivilegio.charAt(12) == 1 ? (
+              <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
+                <span id="lineaV">{lineV}</span> Registrar patrocinador
+              </li>
+            ) : ( null )}
+          </>)}
         </ul>
       )}
     </div>

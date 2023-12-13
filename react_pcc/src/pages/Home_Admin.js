@@ -41,8 +41,8 @@ class Home_Admin extends Component {
   getEventTypes = async () => {
     const url = `${URL_API}/type-events`;
     const respuesta = await axios.get(url);
-    console.log(respuesta);
-    console.log(this.eventos)
+    // console.log(respuesta);
+    // console.log(this.eventos)
     this.setState({ tipos_de_evento: respuesta.data.events });
 
   };
@@ -50,7 +50,7 @@ class Home_Admin extends Component {
   getEvents = async () => {
     this.setState({ loader: true });
     const events = await axios.get(this.state.url);
-    console.log(events)
+    // console.log(events)
     
     this.eventos = Array.from(events.data.events);
 
@@ -254,7 +254,7 @@ class Home_Admin extends Component {
                   >
                     <option> Todos</option>
                     {this.state.tipos_de_evento.map((evento, id) => {
-                      return <option>{evento.nombre_tipo_evento}</option>;
+                      return <option key={evento.id}>{evento.nombre_tipo_evento}</option>;
                     })}
                   </select>
                 </div>
@@ -265,10 +265,11 @@ class Home_Admin extends Component {
               <ListaEventos />
               {this.eventos.map((evento, id) => {
                 return (
-                  <>
+                  
                     <div
                       className="containerEvents"
                       onClick={() => this.masDetalles(evento.id)}
+                      key={evento.id}
                     >
                       <img
                         className="imageEvent"
@@ -292,7 +293,7 @@ class Home_Admin extends Component {
                         )}
                       </div>
                     </div>
-                  </>
+                  
                 );
               })}
             </div>

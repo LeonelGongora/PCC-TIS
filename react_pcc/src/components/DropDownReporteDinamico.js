@@ -35,11 +35,15 @@ function DropdownReporteDinamico({
       </button>
       {isOpen && (
         <ul className="dropdown-menu" onMouseLeave={toggleDropdown}>
-        {cadenaPrivilegio.charAt(18) == 1 ? (
-          <li>
-            <span id="lineaV">{lineV}</span> Reporte General
-          </li>
-        ) : ( null )}
+          {cadenaPrivilegio === '' || cadenaPrivilegio === undefined ? (
+            null
+          ) : (<>
+            {cadenaPrivilegio.charAt(18) == 1 ? (
+              <li>
+                <span id="lineaV">{lineV}</span> Reporte General
+              </li>
+            ) : ( null )}
+          </>)}
         </ul>
       )}
     </div>

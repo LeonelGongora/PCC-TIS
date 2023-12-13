@@ -83,8 +83,8 @@ function Login (){
         .catch(error=>{
             console.log('Usuario NO Registrado')
             const validationErrors2 = {};
-            validationErrors2.username = "Email o contraseña incorrecta."
-            validationErrors2.password = "Email o contraseña incorrecta."
+            validationErrors2.username = "Email o contraseña incorrecto."
+            validationErrors2.password = "Email o contraseña incorrecto."
             setErrors(validationErrors2)
         })
         }
