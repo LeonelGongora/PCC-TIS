@@ -42,8 +42,16 @@ class LoginController extends Controller
         ->join('tipos', 'tipo_user.tipo_id', '=', 'tipos.id')
         ->where('users.email', $req->email)
         ->where('users.password', $req-> password)
-        ->select('users.id', 'users.nombre', 'tipos.cargo', 'tipos.privilegio')
+        ->select('users.id', 'users.nombre', 'users.apellido', 'users.ci', 'tipos.cargo', 'tipos.privilegio')
         ->get();
+
+        // return DB::table('users')
+        // // ->join('users', 'tipo_user.user_id', '=', 'users.id')
+        // // ->join('tipos', 'tipo_user.tipo_id', '=', 'tipos.id')
+        // ->where('users.email', $req->email)
+        // ->where('users.password', $req-> password)
+        // ->select('users.id', 'users.nombre')
+        // ->get();
     }   
 
     /**

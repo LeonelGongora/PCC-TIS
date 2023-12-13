@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavbarUser from '../components/NavBars/NavBarCreateEvent';
 import "../stylesheets/LoginStyles.css";
 import '../App.css';
@@ -8,6 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import configApi from '../configApi/configApi'
 import {URL_API} from '../const';
 
+const cookies = new Cookies();
+
+const login =`${URL_API}/login`;
 
 function Login (){
 
@@ -16,7 +19,8 @@ function Login (){
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
+        event.preventDefault();
         if (!username) {
             setUsernameError('Este campo es obligatorio.');
         } else {
@@ -30,11 +34,54 @@ function Login (){
         if (!username || !password) {
             event.preventDefault();
         }
+
+        await axios.post(login, {
+            email: username,
+            password: password
+        })
+        .then(response=>{
+        // console.log(response.data[0].id)
+        // console.log(response.data[0].nombre)
+
+        //Almacenar los datos de forma global en cookies
+        cookies.set('login_userId', response.data[0].id, {path: "/"});
+        cookies.set('login_userCargo', response.data[0].cargo, {path: "/"});
+        cookies.set('login_userPrivilegio', response.data[0].privilegio, {path: "/"});
+        cookies.set('login_userNombre', response.data[0].nombre, {path: "/"});
+    
+        const usu = response.data[0].cargo;
+        switch (usu){
+            case "Administrador" :
+            window.location.href='./home-admin';
+            break;
+            case "Participante" :
+            cookies.set('id_usuario', response.data[0].id, {path: "/"});
+            window.location.href='./home-participant';
+            break; 
+            default :
+            window.location.href='./home-dinamico';
+            cookies.set('nombre_usuario',response.data[0].nombre, {path: "/"});
+            cookies.set('apellido_usuario', response.data[0].apellido, {path: "/"});
+            cookies.set('id_usuario', response.data[0].id, {path: "/"});
+            cookies.set('ci_nuevo_usuario', response.data[0].ci, {path: "/"});
+            cookies.set('se_Registro', true, {path: "/"});
+            break; 
+        }  
+    
+        })
+        .catch(error=>{
+            console.log('Usuario NO Registrado')
+        })
     };
 
     const handleClick = () => {
         console.log("Al hacer clic en el enlace");
     };
+
+    // useEffect(() => {
+    //     console.log(username) 
+    //     console.log(password) 
+    // });
 
     return (
         <div className='App'>

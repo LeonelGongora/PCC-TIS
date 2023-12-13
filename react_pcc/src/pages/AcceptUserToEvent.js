@@ -99,23 +99,18 @@ class AcceptUserToEvent extends Component{
         await axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
             solicitud: 1,
         })
-        .then(response=>{
-            const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
-            // console.log(contenido)
-            axios.post(this.Notification_Url_Api, {
-                contenido: contenido,
-                informacion: null,
-                leido: 0
-            })
-            .then(response=>{
-                axios.post(this.NotificationUser_Url_Api, {
-                    notification_id: response.data.id,
-                    user_id: id
-                }).then(response=>{
-                    window.location.reload();
-                })
-            })
+        const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
+        // console.log(contenido)
+        const response = await axios.post(this.Notification_Url_Api, {
+            contenido: contenido,
+            informacion: null,
+            leido: 0
         })
+        await axios.post(this.NotificationUser_Url_Api, {
+            notification_id: response.data.id,
+            user_id: id
+        })
+        window.location.reload();
         // this.getAllEvents();
         // window.location.href = window.location.href;
     }

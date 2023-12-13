@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Home_Admin from "./pages/Home_Admin.js";
 import Home_Participant from "./pages/Home_Participant.js";
+import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 
 import Register_to_Event from "./pages/Register_to_Event.js";
 import Register_to_Event_Teams from "./pages/Register_to_Event_Teams.js";
@@ -45,6 +46,7 @@ function App() {
       <Route path='/' element={<Homepage/>} />
       <Route path='/home-admin' element={<Home_Admin/>} />
       <Route path='/home-participant' element={<Home_Participant/>} />
+      <Route path='/home-dinamico' element={<Home_User_Dinamico/>} />
       
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
 

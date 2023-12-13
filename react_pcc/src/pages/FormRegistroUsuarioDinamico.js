@@ -156,9 +156,10 @@ function FormRegistroUsuarioDinamico() {
       data.append('nombre', formData.nombre)
       data.append('apellido', formData.apellido)
       data.append('ci', formData.ci)
+      data.append('pais', 'Bolivia')
+      data.append('telefono', formData.telefono)
       data.append('email', formData.email)
       data.append('password', formData.password)
-      data.append('telefono', formData.telefono)
 
       axios.post(url, data).then(res => {
         // console.log(res)

@@ -67,9 +67,9 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
             
             // console.log(id_user);
             const req = checkedList.join(", ");
-            var contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del Evento: ${state.nombre_evento}, por no cumplir con las siguiente(s) requisito(s): ${req}`;
+            var contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del evento: ${state.nombre_evento}, por no cumplir con los siguiente(s) requisito(s): ${req}`;
             if(checkedList.length ===0){
-                contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del Evento: ${state.nombre_evento}. Razon: ${razon}`
+                contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del evento: ${state.nombre_evento}. Razon: ${razon}`
             }
             // console.log(contenido)
             const url = `${URL_API}/teams/${id_equipo}`
