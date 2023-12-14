@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Banner_informativo from "../components/Banner_informativo";
 import ModalDarseBaja from "../components/ModalWindows/ModalDarseBaja";
+import ModalAutentificacion from "../components/ModalWindows/ModalAutentificacion";
+import ModalRegistroUsuario from "../components/ModalWindows/ModalRegistroUsuario";
 import {URL_API, URL_IMG} from '../const';
 
 const buscar = (
@@ -24,6 +26,10 @@ const buscar = (
 const cookies = new Cookies();
 
 class DarBajaEvento extends Component {
+
+  se_Registro = cookies.get('se_Registro');//sas
+  idu = cookies.get('id_usuario') 
+
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +41,8 @@ class DarBajaEvento extends Component {
       estadoBanner: false,
       estadoBannerModal: false,
       estadoDarseBaja: false,
+      estadoAutentficacion: false,
+      estadoRegistroUsuario : false,
 	    nombreEventoBann: "",
       euid:"",
       pe: "",
@@ -46,11 +54,10 @@ class DarBajaEvento extends Component {
   getEvents = async () => {
     
     this.setState({ loader: true });
-    if(cookies.get('id_usuario') === '' || cookies.get('id_usuario')=== undefined){
-      console.log(`${cookies.get('id_usuario')} No se encuentra registrado`)
+    if(!this.idu){
+      this.setState({ estadoAutentficacion: true });
     }else{
-    const idu = cookies.get('id_usuario')
-    const events = await axios.get(`${this.state.url}/${idu}`);
+    const events = await axios.get(`${this.state.url}/${this.idu}`);
     this.eventos = Array.from(events.data.events);
     // console.log(this.eventos);
     this.setState({ events: events.data, loader: false });
@@ -75,6 +82,9 @@ class DarBajaEvento extends Component {
   };
 
   componentDidMount() {
+    if(this.se_Registro){
+      console.log("se registro")
+    }
     this.getEvents();
   }
 
@@ -88,13 +98,22 @@ class DarBajaEvento extends Component {
     this.setState({ estadoBanner: estado });
     this.getEvents();
   };
+
   cambiarDarseBaja = (estado) => {
     this.setState({ estadoDarseBaja: estado });
+  };
+
+  cambiarEstadoAutentificacion = (estado) => {
+    this.setState({ estadoAutentficacion: estado });
   };
   
   setNombreEvento = (nom, euid, pe) => {
     this.setState({ nombreEventoBann: nom, euid: euid, pe: pe });
   };
+
+  cambiarEstadoModalRegistroUsuario = (nuevoEstado) => {
+    this.setState({ estadoRegistroUsuario: nuevoEstado });
+  }
 
   darDeBaja = async (estado, nombre, euid, pe) => {
     // const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
@@ -107,6 +126,18 @@ class DarBajaEvento extends Component {
   render() {
     return (
       <div className="App">
+        <ModalAutentificacion
+          estado1={this.state.estadoAutentficacion}
+          cambiarEstado1={this.cambiarEstadoAutentificacion}
+          cambiarEstadoModalRegistroUsuario={this.cambiarEstadoModalRegistroUsuario}
+        />
+
+        <ModalRegistroUsuario
+          estadoRegistroUsuario={this.state.estadoRegistroUsuario}
+          cambiarEstadoModalRegistroUsuario={this.cambiarEstadoModalRegistroUsuario}
+          cambiarEstado1={this.cambiarEstadoAutentificacion}
+        />
+
         <ModalDarseBaja
           estadoDarseBaja1={this.state.estadoDarseBaja}
           cambiarEstadoDarseBaja1={this.cambiarDarseBaja}
@@ -115,6 +146,7 @@ class DarBajaEvento extends Component {
           euid={this.state.euid}
           pe = {this.state.pe}
         />
+
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
           <NavbarUser />

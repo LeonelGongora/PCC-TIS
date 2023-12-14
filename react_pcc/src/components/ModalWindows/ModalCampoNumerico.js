@@ -4,11 +4,14 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {URL_API} from '../../const';
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id_evento, atributos}){
 
+    const id_evento_Aux = cookies.get('id_evento');
+    
     const [values, setValues] = useState({
       nombre_atributo: "",
       rango_bajo: "",
@@ -118,7 +121,12 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                 data.append('restriccion', restriccion)
             }
             
-            data.append('event_id', id_evento)
+            if(id_evento_Aux){
+                data.append('event_id', id_evento_Aux)
+                cookies.remove('id_evento');
+            }else{
+                data.append('event_id', id_evento)
+            }
 
             const res = await axios.post(`${URL_API}/add-attribute`, data);
             

@@ -66,10 +66,10 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores, patr
         axios.post(url_Patrocinador_agregar, data).then(res => {
           if(res.data.status === 200){
             console.log(res);
-            //window.location.href = './paginaEditarEventos';
           }
         })
       }
+      window.location.href = './paginaEditarEventos';
       
     }
     

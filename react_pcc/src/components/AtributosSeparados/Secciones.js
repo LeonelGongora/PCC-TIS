@@ -6,13 +6,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
-import ModalCampoSeleccion from '../ModalWindows/ModalCampoSeleccion';
-import ModalEleccionTipoCampo from '../ModalWindows/ModalEleccionTipoCampo';
-import ModalCampoFecha from '../ModalWindows/ModalCampoFecha';
-import ModalCampoNumerico from '../ModalWindows/ModalCampoNumerico';
-import ModalWindowAtributo from '../ModalWindows/ModalWindowAtributo';
 import {URL_API} from '../../const';
-
+import ModalInformacion from '../ModalWindows/ModalInformacion';
 const cookies = new Cookies();
 
 function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacion}){
@@ -20,6 +15,9 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
     const id = cookies.get('ultimo_id_evento');
     const organizadores_agregar = cookies.get('organizadores_agregar');
     const organizadores_eliminar = cookies.get('organizadores_eliminar');
+    
+    const patrocinadores_agregar = cookies.get('patrocinadores_agregar');
+    const patrocinadores_eliminar = cookies.get('patrocinadores_eliminar');
     //const atributos = [];
 
     const [atributos, setAtributos] = useState ( [] );
@@ -38,17 +36,16 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
     }
 
     const eliminarInformacion = (id) => {
+      
       console.log(id)
-      /* 
-      console.log(id)
-      const url = `http://127.0.0.1:8000/api/delete-attribute/${id}`; 
+      const url = `http://127.0.0.1:8000/api/delete-information/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);
           window.location.reload();
         }
       })
-      */
+      
     }
 
     const terminarRegistro = () => {
@@ -93,7 +90,6 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
         }
         cookies.remove("organizadores_eliminar");
       }
-
       window.location.href = "./home-admin";
 
     }
@@ -102,6 +98,12 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
       
         estadoSecciones && (
               <>
+
+          <ModalInformacion
+            estadoInformacion={values.estadoModalInformacion}
+            cambiarEstadoModalInformacion={cambiarEstadoModalInformacion}
+            id_evento={id} 
+          />
           <div className='tituloCampos'>
             <h2>Secciones de información</h2>
             <div className='seccionCampo'>
@@ -120,6 +122,7 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
                   <button
                     className="botonEliminarCampo"
                     type="button"
+                    onClick={() => eliminarInformacion(seccion.id)}
                   >
                     {cancelar}
                   </button>

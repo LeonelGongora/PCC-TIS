@@ -17,6 +17,8 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
 
   const organizadores_agregar = cookies.get('organizadores_agregar');
   const organizadores_eliminar = cookies.get('organizadores_eliminar');
+  const patrocinadores_agregar = cookies.get('patrocinadores_agregar');
+  const patrocinadores_eliminar = cookies.get('patrocinadores_eliminar');
 
     const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
 
@@ -33,7 +35,7 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
 
     const eliminarRequisito = (id) => {
       console.log(id)
-      const url = `${URL_API}/delete-attribute/${id}`; 
+      const url = `${URL_API}/delete-requirement/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);
@@ -64,7 +66,6 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
         }
 
         cookies.remove("organizadores_agregar");
-        
       }
 
       if(organizadores_eliminar){
@@ -83,6 +84,25 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
             });
         }
         cookies.remove("organizadores_eliminar");
+      }
+
+      if(patrocinadores_agregar){
+        const url_Organizador_agregar = `${URL_API}/add-event_organizer`; 
+        
+        for (let index = 0; index < patrocinadores_agregar.length; index++) {
+          const data = new FormData();
+          let organizador = organizadores_agregar[index];
+          data.append("organizador", organizador);
+          data.append("evento", id);
+
+          axios.post(url_Organizador_agregar, data).then((res) => {
+            if (res.data.status === 200) {
+              console.log(res);
+            }
+          });
+        }
+
+        cookies.remove("organizadores_agregar");
       }
 
       window.location.href = "./home-admin";

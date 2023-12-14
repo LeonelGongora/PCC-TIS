@@ -21,4 +21,15 @@ class RequirementController extends Controller
             'message' => 'Requisito añadido exitosamente',
         ]);
     }
+
+    public function destroy($id)
+    {
+        $requisito = Requirement::find($id);
+        $requisito->delete();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Requisito eliminado exitosamente']);
+    }
+
+    
 }

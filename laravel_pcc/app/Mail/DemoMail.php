@@ -38,6 +38,5 @@ class DemoMail extends Mailable
                     ->with(['content' => $this->content]);
                     //->view('orden');
         //->to('blackcloudsrl@gmail.com')
-        
     }
 }

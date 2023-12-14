@@ -75,7 +75,6 @@ class Add_Event extends Component {
     e.preventDefault();
     const validationErrors = {};
 
-    console.log(this.state)
     if(!this.state.image){
       console.log("No hay archivo")
     }

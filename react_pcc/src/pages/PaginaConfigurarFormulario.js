@@ -8,10 +8,13 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import imgPred from "../images/afiche.png";
 import {URL_API, URL_IMG} from '../const';
-import ModalActividad from '../components/ModalWindows/ModalActividad';
+import ModalEleccionTipoCampo from '../components/ModalWindows/ModalEleccionTipoCampo';
+import ModalCampoSeleccion from '../components/ModalWindows/ModalCampoSeleccion';
+import ModalWindowAtributo from '../components/ModalWindows/ModalWindowAtributo';
+import ModalCampoFecha from '../components/ModalWindows/ModalCampoFecha';
+import ModalCampoNumerico from '../components/ModalWindows/ModalCampoNumerico';
 
 const cookies = new Cookies();
-
 
 class PaginaConfigurarFormulario extends Component{
 
@@ -25,20 +28,25 @@ class PaginaConfigurarFormulario extends Component{
         loader:false,
         url: `${URL_API}/events`,
         estadoModalActividad: false,
+
+        estadoModalEleccion:false,
+        estadoCampoSeleccion: false, 
+        estadoModalAtributo: false,
+        estadoCampoNumerico: false,
+        estadoCampoFecha: false,
+        atributos: []
     };
 
     getEvents = async () => {
+
       if(this.se_Registro){
-        var url2 = `${URL_API}/register-to-events/${this.id}`; 
+        //var url2 = `${URL_API}/register-to-events/${this.id}`; 
         this.setState({loader:true});
-        //const events = await axios.get(this.state.url);
-        const events = await axios.get(url2);
-        // console.log(events)
+        const events = await axios.get(this.state.url);
 
         this.eventos = Array.from(events.data.events)
-        // console.log(this.eventos)
         
-        this.setState({ events: events.data, loader:false});
+        this.setState({ events: events.data, loader:false, atributos: events.data.attributes});
         var i;
         var fecha;
         var fecha1;
@@ -60,14 +68,10 @@ class PaginaConfigurarFormulario extends Component{
       }else{
 
         this.setState({loader:true});
-        //const events = await axios.get(this.state.url);
         const events = await axios.get(this.state.url);
-        // console.log(events)
-
         this.eventos = Array.from(events.data.events)
-        // console.log(this.eventos)
         
-        this.setState({ events: events.data, loader:false});
+        this.setState({ events: events.data, loader:false, atributos: events.data.attributes});
         var i;
         var fecha;
         var fecha1;
@@ -95,14 +99,30 @@ class PaginaConfigurarFormulario extends Component{
         console.log(this.se_Registro)
     }
 
-    cambiarEstadoModalActividad = (nuevoEstado) => {
-        this.setState({ estadoModalActividad: nuevoEstado });
-    };
-    
 
+    cambiarEstadoModalEleccion = (nuevoEstado) => {
+      this.setState({ estadoModalEleccion: nuevoEstado });
+    }
+
+    cambiarEstadoCampoSeleccion = (nuevoEstado) => {
+      this.setState({ estadoCampoSeleccion: nuevoEstado });
+    }
+
+    cambiarEstadoModalAtributo = (nuevoEstado) => {
+      this.setState({ estadoModalAtributo: nuevoEstado });
+    }
+
+    cambiarEstadoCampoNumerico = (nuevoEstado) => {
+      this.setState({ estadoCampoNumerico: nuevoEstado });
+    }
+
+    cambiarEstadoCampoFecha = (nuevoEstado) => {
+      this.setState({ estadoCampoFecha: nuevoEstado });
+    }
+    
     abrirModalActividad(id){
         cookies.set('id_evento', id, {path: "/"});
-        this.cambiarEstadoModalActividad(!this.state.estadoModalActividad);
+        this.cambiarEstadoModalEleccion(!this.state.estadoModalEleccion);
         // console.log(cookies.get('idauxiliar'));
     }
 
@@ -110,14 +130,38 @@ class PaginaConfigurarFormulario extends Component{
 
         return (
           <div className="App">
-            <ModalActividad
-                estadoActividad={this.state.estadoModalActividad}
-                cambiarEstadoModalActividad={this.cambiarEstadoModalActividad}
+            <ModalEleccionTipoCampo
+              estadoEleccion={this.state.estadoModalEleccion}
+              cambiarEstadoModalEleccion={this.cambiarEstadoModalEleccion}
+              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
+              cambiarEstadoCampoNumerico={this.cambiarEstadoCampoNumerico}
+              cambiarEstadoCampoFecha={this.cambiarEstadoCampoFecha}
+              cambiarEstadoCampoSeleccion={this.cambiarEstadoCampoSeleccion}
+            />
+            <ModalCampoSeleccion
+              estadoCampoSeleccion={this.state.estadoCampoSeleccion}
+              cambiarEstadoCampoSeleccion={this.cambiarEstadoCampoSeleccion}
+              atributos={this.state.atributos}
+            />
+            <ModalWindowAtributo
+              estadoAtributo={this.state.estadoModalAtributo}
+              cambiarEstadoModalAtributo={this.cambiarEstadoModalAtributo}
+              atributos={this.state.atributos}
+            />
+            <ModalCampoNumerico
+              estadoCampoNumerico={this.state.estadoCampoNumerico}
+              cambiarEstadoCampoNumerico={this.cambiarEstadoCampoNumerico}
+              atributos={this.state.atributos}
+            />
+            <ModalCampoFecha
+              estadoCampoFecha={this.state.estadoCampoFecha}
+              cambiarEstadoCampoFecha={this.cambiarEstadoCampoFecha}
+              atributos={this.state.atributos}
             />
 
             <div className="background-image"></div> {/* Componente de fondo */}
             <div className="content">
-            <NavbarAdmin
+              <NavbarAdmin
                 estado1={this.estadoModal}
                 cambiarEstado1={this.cambiarEstadoModal}
                 estadoOrganizador={this.estadoModalOrganizador}
@@ -126,14 +170,17 @@ class PaginaConfigurarFormulario extends Component{
                 cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
                 estadoAnuncio={this.state.estadoModalAnuncio}
                 cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
-            />
+              />
               <div className="contenedor">
-              {this.eventos[0] == null ? (
+                {this.eventos[0] == null ? (
                   <div>
-                  <p className="tituloEvento-home">CONFIGURAR FORMULARIO</p>
-                  <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
-              </div>
-              ) : (<>
+                    <p className="tituloEvento-home">CONFIGURAR FORMULARIO</p>
+                    <h1 className="tituloEvento-home">
+                      No Hay Eventos Disponibles
+                    </h1>
+                  </div>
+                ) : (
+                  <>
                     <div className="contenedorTitulo-home">
                       <p className="tituloEvento-home">CONFIGURAR FORMULARIO</p>
                     </div>
@@ -145,19 +192,14 @@ class PaginaConfigurarFormulario extends Component{
                           <div
                             key={evento.id}
                             className="containerEvents"
-                            onClick={() =>
-                              this.abrirModalActividad(
-                                evento.id
-                              )
-                            }
+                            onClick={() => this.abrirModalActividad(evento.id)}
                           >
                             <img
                               className="imageEvent"
                               src={
                                 evento.name === null
                                   ? imgPred
-                                  : `${URL_IMG}/images/` +
-                                    evento.name
+                                  : `${URL_IMG}/images/` + evento.name
                               }
                               alt="Logo del evento"
                             />

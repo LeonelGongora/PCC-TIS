@@ -32,10 +32,10 @@ class PaginaEliminarActividad extends Component{
 
     getEvents = async () => {
       if(this.se_Registro){
-        var url2 = `${URL_API}/register-to-events/${this.id}`; 
+        //var url2 = `${URL_API}/register-to-events/${this.id}`; 
         this.setState({loader:true});
         //const events = await axios.get(this.state.url);
-        const events = await axios.get(url2);
+        const events = await axios.get(this.state.url);
         // console.log(events)
 
         this.eventos = Array.from(events.data.events)

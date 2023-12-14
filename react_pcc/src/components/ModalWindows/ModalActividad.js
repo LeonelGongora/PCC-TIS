@@ -126,12 +126,6 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
         if(Object.keys(validationErrors).length === 0){
 
-            console.log(values.nombre_actividad)
-            console.log(values.fecha_inicio_actividad)
-            console.log(values.fecha_fin_actividad)
-            console.log(values.descripcion_actividad)
-            console.log(id_evento)
-
             const data = new FormData();
             data.append('nombre_actividad', values.nombre_actividad)
             data.append('fecha_inicio_actividad', values.fecha_inicio_actividad)

@@ -67,6 +67,7 @@ Route::post('/add-event_sponsor', [Event_SponsorController::class, 'store']);
 Route::post('/delete-event_sponsor', [Event_SponsorController::class, 'destroy']);
 
 Route::post('/add-information', [InformationController::class, 'store']);
+Route::delete('/delete-information/{id}', [InformationController::class, 'destroy']);
 
 Route::post('/add-notice', [NoticeController::class, 'store']);
 Route::get('/get-notices', [NoticeController::class, 'get']);
@@ -82,6 +83,7 @@ Route::get('/get-patrocinador', [SponsorController::class, 'get']);
 Route::delete('/delete-patrocinador/{id}', [SponsorController::class, 'destroy']);
 
 Route::post('/add-requirement', [RequirementController::class, 'store']);
+Route::delete('/delete-requirement/{id}', [RequirementController::class, 'destroy']);
 
 Route::post('/add-user-information', [UserController::class, 'store']);
 Route::get('/get-user-information', [UserController::class, 'get']);

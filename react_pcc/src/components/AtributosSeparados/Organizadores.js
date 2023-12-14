@@ -20,6 +20,8 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores, organiz
     
     const organizadores_agregar = cookies.get('organizadores_agregar');
     const organizadores_eliminar = cookies.get('organizadores_eliminar');
+    const patrocinadores_agregar = cookies.get('patrocinadores_agregar');
+    const patrocinadores_eliminar = cookies.get('patrocinadores_eliminar');
 
     //organizadores : [],
     

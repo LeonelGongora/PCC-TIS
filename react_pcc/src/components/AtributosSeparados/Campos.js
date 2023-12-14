@@ -21,6 +21,8 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
     const id = cookies.get('ultimo_id_evento');
     const organizadores_agregar = cookies.get('organizadores_agregar');
     const organizadores_eliminar = cookies.get('organizadores_eliminar');
+    const patrocinadores_agregar = cookies.get('patrocinadores_agregar');
+    const patrocinadores_eliminar = cookies.get('patrocinadores_eliminar');
     //const atributos = [];
 
     const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;

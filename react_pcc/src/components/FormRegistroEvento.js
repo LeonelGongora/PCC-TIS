@@ -198,9 +198,6 @@ function FormRegistroEvento(){
     setFormData({ estadoRegistroUsuario: nuevoEstado });
   }
 
-  const cambiarDatosCoach = () => {
-  }
-
   return(
     <div className='containerForm'>
 
@@ -208,7 +205,6 @@ function FormRegistroEvento(){
         estado1={formData.estadoModal}
         cambiarEstado1={cambiarEstadoModal}
         cambiarEstadoModalRegistroUsuario={cambiarEstadoModalRegistroUsuario}
-        cambiarDatosCoach = {cambiarDatosCoach}
       />
 
       <ModalRegistroUsuario
