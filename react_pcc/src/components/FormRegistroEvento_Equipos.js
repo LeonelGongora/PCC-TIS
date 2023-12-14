@@ -386,12 +386,12 @@ function FormRegistroEvento_Equipos(){
 
           {numero_participantes.map((participante_numero) => {
           return (<>
-          <div className='datoNombre' id='entrada-Formulario-Registro-Evento' tabIndex='0'>
+          <div className='datoNombre' id='entrada-Formulario-Registro-Evento-Team' tabIndex='0'>
             <p id="textoCuadro">Participante No {participante_numero}</p>
             <input
             id="input"
             className="input-Formulario-Registro-Evento"
-            type="text"
+            type="number"
             name= {participante_numero}
             placeholder="Ingrese DNI"
             />

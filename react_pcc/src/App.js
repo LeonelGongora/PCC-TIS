@@ -36,7 +36,7 @@ import Homepage from "./pages/Homepage.js";
 import Login from "./pages/Login.js";
 import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
-import Reportes from "./components/Reportes.js";
+import Reportes_Pagina from "./components/Reportes.js";
 
 import FormRegistroUsuarioDinamico from "./pages/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./pages/FormRegistroTipoUser.js";
@@ -83,7 +83,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
 
         <Route path='/reportes' element={< Reportes_Pagina />} />
-        <Route path='/emailPrueba' element={< EmailPrueba />} />
+        {/* <Route path='/emailPrueba' element={< EmailPrueba />} /> */}
         
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />
