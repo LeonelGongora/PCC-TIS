@@ -12,6 +12,7 @@ import Organizadores from './AtributosSeparados/Organizadores';
 import Patrocinadores from './AtributosSeparados/Patrocinadores';
 import Secciones from './AtributosSeparados/Secciones';
 
+
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 
 const cookies = new Cookies();
@@ -43,13 +44,14 @@ class Add_Event_NextAlt extends Component{
             atributosInformacion: [],
             requisitos: [],
             actividades: [],
+            organizadores: [],
+            patrocinadores: [],
             id_evento: ''
         };
         
     }
 
     getEvento=async()=>{
-      console.log(this.id)
       const url = `${Eventos_Api_Url}/${this.id}`;
       const response = await axios.get(url)
       console.log(response)
@@ -60,7 +62,9 @@ class Add_Event_NextAlt extends Component{
           atributos: response.data.attributes,
           requisitos: response.data.requirements,
           actividades: response.data.activities,
-          atributosInformacion : response.data.informations
+          atributosInformacion : response.data.informations,
+          organizadores: response.data.organizers,
+          patrocinadores: response.data.sponsors,
         });
       }
     }
@@ -84,7 +88,6 @@ class Add_Event_NextAlt extends Component{
                     <p className="tituloEvento-home">REGISTRAR EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
-                            
                             <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(0)}>
                                 <h3>Campos</h3>
                             </div>
@@ -109,12 +112,11 @@ class Add_Event_NextAlt extends Component{
                                 estadoCampos={pestañas[0]}
                                 cambiarEstadoCampos={this.cambiarEstadoCampos}
                                 atributosFormulario = {this.state.atributos}
-                                atributosInformacion = {this.state.atributosInformacion}
                             />
                             <Secciones
                                 estadoSecciones={this.state.pestañas[1]}
                                 cambiarEstadoSecciones={this.cambiarEstadoSecciones}
-                                atributosFormulario = {this.state.atributos}
+                                atributosInformacion = {this.state.atributosInformacion}
                             />
                             <Requisitos
                                 estadoRequisitos={this.state.pestañas[2]}
@@ -129,10 +131,12 @@ class Add_Event_NextAlt extends Component{
                             <Organizadores
                                 estadoOrganizadores={this.state.pestañas[4]}
                                 cambiarEstadoOrganizadores={this.cambiarEstadoOrganizadores}
+                                organizadoresRegistrados = {this.state.organizadores}
                             />
                             <Patrocinadores
                                 estadoPatrocinadores={this.state.pestañas[5]}
                                 cambiarEstadoPatrocinadores={this.cambiarEstadoPatrocinadores}
+                                patrocinadoresRegistrados = {this.state.patrocinadores}
                             />
                         </div>
                         {/* <div className='opcionesCambiar'>

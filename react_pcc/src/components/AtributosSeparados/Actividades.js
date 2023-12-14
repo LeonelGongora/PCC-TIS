@@ -7,12 +7,15 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import configApi from '../../configApi/configApi';
 import Cookies from 'universal-cookie';
 import ModalActividad from '../ModalWindows/ModalActividad';
+import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
 function Actividades({estadoActividades, cambiarEstadoActividades, actividades}){
 
   const id = cookies.get('ultimo_id_evento');
+  const organizadores_agregar = cookies.get('organizadores_agregar');
+  const organizadores_eliminar = cookies.get('organizadores_eliminar');
 
     const cancelar = <FontAwesomeIcon icon={faCircleXmark} size="lg" style={{color: "#ff0000",}} />;
 
@@ -41,6 +44,53 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
       */
     }
 
+    const terminarRegistro = () => {
+
+      //console.log(organizadores_agregar)
+      //console.log(organizadores_eliminar)
+
+      if(organizadores_agregar){
+        const url_Organizador_agregar = `${URL_API}/add-event_organizer`; 
+        
+        for (let index = 0; index < organizadores_agregar.length; index++) {
+          const data = new FormData();
+          let organizador = organizadores_agregar[index];
+          data.append("organizador", organizador);
+          data.append("evento", id);
+
+          axios.post(url_Organizador_agregar, data).then((res) => {
+            if (res.data.status === 200) {
+              console.log(res);
+            }
+          });
+        }
+
+        cookies.remove("organizadores_agregar");
+        
+      }
+
+      if(organizadores_eliminar){
+        const url_Organizador_eliminar = `${URL_API}/delete-event_organizer`;
+
+        for (let index = 0;index < organizadores_eliminar.length; index++) {
+          const data = new FormData();
+          let organizador = organizadores_eliminar[index];
+          data.append("organizador", organizador);
+          data.append("evento", id);
+
+          axios.post(url_Organizador_eliminar, data).then((res) => {
+            if (res.data.status === 200) {
+              console.log(res);
+              }
+            });
+        }
+        cookies.remove("organizadores_eliminar");
+      }
+
+      window.location.href = "./home-admin";
+
+    }
+
     return (
         estadoActividades && (
           <>
@@ -64,7 +114,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
                         className="inputRequisitoOp"
                         rows={2}
                         cols={20}
-                        placeholder={actividad.nombre_actividad}
+                        placeholder={actividad.descripcion_actividad}
                         readOnly />
                     </div>
                     <div className='fechasActividadModif'>
@@ -105,7 +155,9 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
             </div>
         </div>
         <div className='contBotonRegist'>
-            <button className='botonesCambiar'>
+            <button className='botonesCambiar'
+            onClick={terminarRegistro}
+            >
               Terminar Registro
             </button>
         </div>

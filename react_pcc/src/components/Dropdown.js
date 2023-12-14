@@ -32,6 +32,18 @@ function Dropdown({
     window.location.href = "./paginaEditarEventos";
   };
 
+  const registrarActividadRedireccionar = () => {
+    window.location.href = "./paginaRegistrarActividad";
+  };
+
+  const eliminarActividadRedireccionar = () => {
+    window.location.href = "./paginaEliminarActividad";
+  };
+
+  const configurarFormularioRedireccionar = () => {
+    window.location.href = "./paginaConfigurarFormulario";
+  };
+
   return (
     <div className="dropdown-container">
       <button
@@ -57,6 +69,15 @@ function Dropdown({
           </li>
           <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
             <span id="lineaV">{lineV}</span> Registrar patrocinador
+          </li>
+          <li onClick={registrarActividadRedireccionar}>
+            <span id="lineaV">{lineV}</span> Registrar actividad
+          </li>
+          <li onClick={eliminarActividadRedireccionar}>
+            <span id="lineaV">{lineV}</span> Eliminar actividad
+          </li>
+          <li onClick={configurarFormularioRedireccionar}>
+            <span id="lineaV">{lineV}</span> Configurar formulario
           </li>
         </ul>
       )}

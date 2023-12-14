@@ -17,6 +17,7 @@ class Sponsor extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'event_sponsor', 'sponsor_id','event_id');
+        return $this->belongsToMany(Event::class, 'event_sponsor', 'sponsor_id','event_id')->withPivot('categoria');
     }
+
 }

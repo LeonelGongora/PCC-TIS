@@ -17,6 +17,7 @@ class CreateEventSponsorTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('event_id');
+            $table->string('categoria');
             $table->unsignedBigInteger('sponsor_id');
 
             $table->foreign('event_id')
