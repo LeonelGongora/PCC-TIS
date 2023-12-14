@@ -99,7 +99,7 @@ function InfoEvento({props}){
                                     </div>
                                 </div>
                             </div>
-                            {event.requisitos != [] ? (
+                            {requisitos.length !== 0 ? (
                                 <div className='descripcionEvento infoRequisitos'>
                                     <h3>Requisitos</h3>
                                     {requisitos.map((r, index) => {  
@@ -122,7 +122,7 @@ function InfoEvento({props}){
                                 <p>Telefono: {event.numero_contacto}</p>
                             </div>
                         </div>
-                        {actividades != [] ? (
+                        {actividades.length !== 0 ? (
                             <div className='actividadesExtra'>
                             {actividades.map((a) => {
                                 return (<div className='infoActividad' key={a.id}>
@@ -175,14 +175,11 @@ function InfoEvento({props}){
                                 <img className='imagenSlv' src={`${URL_IMG}/imagenesOrganizadores/`+o.imagen_organizador}></img>
                                 </div>);
                                 })}
-                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
-                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
-                                <img className='imagenSlv' src={`${URL_IMG}/images/`+event.name}></img>
                                 </div>
                             </div>
                         </div>
                         
-                        {event.patrocinadores != null ? (
+                        {patrocinadores.length !== 0 ? (
                             <div className='contenedorOrganizadores contPatrocinadores'>
                             <h2>Patrocinadores</h2>
                             <div className='organizadores'>

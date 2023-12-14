@@ -91,7 +91,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     if (!values.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
-    } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
+    } else if (!/^[A-Za-z0-9-._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
       validationErrors.email = "Ingrese correo valido";
     } else {
       for (let index = 0; index < usuarios.length; index++) {

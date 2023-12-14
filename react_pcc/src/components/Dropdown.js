@@ -9,10 +9,6 @@ const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 function Dropdown({
   estado1,
   cambiarEstado1,
-  estadoOrganizador,
-  cambiarEstadoOrganizador,
-  estadoPatrocinador,
-  cambiarEstadoPatrocinador,
   setOpenDropFath,
   isOpen,
 }) {
@@ -31,6 +27,13 @@ function Dropdown({
   const editarEventoRedireccionar = () => {
     window.location.href = "./paginaEditarEventos";
   };
+    const visualizarParticipantesRedireccionar = () => {
+      window.location.href = "./paginaVisualizarParticipantes";
+    };
+
+    const visualizarEventoRedireccionar = () => {
+      window.location.href = "/home-admin";
+    };
 
   const registrarActividadRedireccionar = () => {
     window.location.href = "./paginaRegistrarActividad";
@@ -64,11 +67,11 @@ function Dropdown({
           <li onClick={() => cambiarEstado1(!estado1)}>
             <span id="lineaV">{lineV}</span> Crear tipo de evento
           </li>
-          <li onClick={() => cambiarEstadoOrganizador(!estadoOrganizador)}>
-            <span id="lineaV">{lineV}</span> Registrar organizador
+          <li onClick={visualizarEventoRedireccionar}>
+            <span id="lineaV">{lineV}</span> Visualizar eventos
           </li>
-          <li onClick={() => cambiarEstadoPatrocinador(!estadoPatrocinador)}>
-            <span id="lineaV">{lineV}</span> Registrar patrocinador
+          <li onClick={visualizarParticipantesRedireccionar}>
+            <span id="lineaV">{lineV}</span> Visualizar participantes de eventos
           </li>
           <li onClick={registrarActividadRedireccionar}>
             <span id="lineaV">{lineV}</span> Registrar actividad

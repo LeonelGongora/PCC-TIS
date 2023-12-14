@@ -11,12 +11,17 @@ import Cookies from 'universal-cookie';
 import axios from 'axios'
 import { URL_API } from '../const';
 
+import "../stylesheets/reportes.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import { useState, useEffect } from 'react'
 function Reportes(){
 
     useEffect(()=>{
         getEvent();
     }, [])
+    const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color: "#000000",}} />;
 
     const getEvent=async()=>{
         const url = `${URL_API}/events`;
@@ -320,16 +325,25 @@ function Reportes(){
     });
 
     return(
-        <div> 
+        <div className='contenidoReport'>
+            <div className="background-image"></div> {/* Componente de fondo */}
+        <div className='contenedorReport'>
+        <NavbarAdmin/>
+        <h1 className='tituloReport'>Reportes</h1>
+        <div className='contenedorReportes'> 
+        
+            <div className='busqueda'>
             <input
                 type='text'
                 value={filtering}
                 onChange={(e) => setFiltering(e.target.value)}
-
+                placeholder='Buscar evento por nombre o descripcion'
             />
-
-            <label>Opciones</label>
-
+            <span id="botonBuscar-admin">{buscar}</span>
+            </div>
+            
+            <p className='opciones'>Opciones</p>
+            <div className='opcionesReportes'>
             <select name="lenguajes" onChange={cambioReporteGeneral}>
                 <option value="predeterminado" disabled selected>
                     {" "}
@@ -360,8 +374,8 @@ function Reportes(){
                 <option value="Actividades_Evento" >Actividades</option>
 
             </select>
-
-            <table>
+            </div>
+            <table className='tablaReportes'>
                 <thead>
                     {table.getHeaderGroups().map((headerGroup) => ( 
                             <tr key={headerGroup.id}>
@@ -417,7 +431,7 @@ function Reportes(){
 
                 </tfoot>
             </table>
-
+            <div className='paginas'>
             <button onClick={() => table.setPageIndex(0)}>
                 Primera Pagina
             </button>
@@ -430,7 +444,9 @@ function Reportes(){
             <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
                 Ultima Pagina
             </button>
-
+            </div>
+        </div>
+        </div>
         </div>
     )
 }

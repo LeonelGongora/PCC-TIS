@@ -106,7 +106,7 @@ class EventController extends Controller
             ->orWhere('teams.solicitud', 1);
         })
         ->where('users.id', $id)
-        ->select('events.*', 'event_types.nombre_tipo_evento', 'teams.id as euid')
+        ->select('events.*', 'event_types.nombre_tipo_evento', 'teams.id as euid', 'teams.nombre_equipo')
         ->get();
 
         return response()->json([

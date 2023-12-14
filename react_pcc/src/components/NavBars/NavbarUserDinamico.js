@@ -3,16 +3,16 @@ import "../../stylesheets/NavbarStyles.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "../Dropdown";
+import DropdownDinamico from "../DropdownDinamico";
 import Cookies from 'universal-cookie';
 import "../../stylesheets/Dropdown.css";
-import DropdownReporte from '../DropDownReporte';
-import DropdownAdmin from '../DropDownAdmin';
+import DropdownReporteDinamico from '../DropDownReporteDinamico';
+import DropdownUserDinamico from "../DropdownUserDinamico.js";
 
 const exitSesion = <FontAwesomeIcon icon={faRightFromBracket} />;
 const cookies = new Cookies();
 
-function NavbarAdmin({
+function NavbarUserDinamico({
   estado1,
   cambiarEstado1,
   estadoOrganizador,
@@ -31,7 +31,7 @@ function NavbarAdmin({
       console.log(key)
       cookies.remove(key);
     });
-    window.location.reload();
+    window.location.href='./login';
   }
 
   useEffect(() => {
@@ -75,13 +75,13 @@ function NavbarAdmin({
         </div>
         <div className="navbarRight">
           <div className="desplegable1">
-            <Dropdown
+            <DropdownDinamico
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "eventos"}
               estado1={estado1}
               cambiarEstado1={cambiarEstado1}
             />
-            <DropdownAdmin
+            <DropdownUserDinamico
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "administracion"}
               estadoAnuncio={estadoAnuncio}
@@ -91,7 +91,7 @@ function NavbarAdmin({
               estadoPatrocinador={estadoPatrocinador}
               cambiarEstadoPatrocinador={cambiarEstadoPatrocinador}
             />
-            <DropdownReporte
+            <DropdownReporteDinamico
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "reportes"}
             />
@@ -127,4 +127,4 @@ function NavbarAdmin({
   );
 }
 
-export default NavbarAdmin;
+export default NavbarUserDinamico;

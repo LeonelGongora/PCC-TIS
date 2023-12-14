@@ -6,6 +6,8 @@
 
 /* Dropdown button */
 .dropdown-button {
+  display: flex;
+  align-items: center;
   background-color: #14365C;
   color: #fff;
   padding: 10px;
@@ -13,6 +15,9 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 1rem;
+}
+.dropdown-button a{
+  height: 100%;
 }
 .dropdown-button:hover{
   color: #FFD51D;

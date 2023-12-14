@@ -66,9 +66,9 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
             
             // console.log(id_user);
             const req = checkedList.join(", ");
-            var contenido = `Ha sido rechazado del Evento: ${state.nombre_evento}, por no cumplir con las siguiente(s) requisito(s): ${req}`;
+            var contenido = `Ha sido rechazado del evento: ${state.nombre_evento}, por no cumplir con los siguiente(s) requisito(s): ${req}`;
             if(checkedList.length ===0){
-                contenido = `Ha sido rechazado del Evento: ${state.nombre_evento}. Razon: ${razon}`
+                contenido = `Ha sido rechazado del evento: ${state.nombre_evento}. Razon: ${razon}`
             }
             // console.log(contenido)
             await axios.put(`${EventoUsuario_Url_Api}/${id_user}`, {

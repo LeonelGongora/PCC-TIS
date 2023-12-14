@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Home_Admin from "./pages/Home_Admin.js";
 import Home_Participant from "./pages/Home_Participant.js";
+import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 
 import Register_to_Event from "./pages/Register_to_Event.js";
 import Register_to_Event_Teams from "./pages/Register_to_Event_Teams.js";
@@ -29,6 +30,7 @@ import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEven
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
 import DarBajaEvento from "./pages/DarBajaEvento_User.js";
+import DarBajaEquipo from "./pages/DarBajaEquipo_User.js";
 
 import Homepage from "./pages/Homepage.js";
 import Login from "./pages/Login.js";
@@ -36,6 +38,8 @@ import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.j
 
 import Reportes from "./components/Reportes.js";
 
+import FormRegistroUsuarioDinamico from "./pages/FormRegistroUsuarioDinamico.js";
+import FormRegistroTipoUser from "./pages/FormRegistroTipoUser.js";
 
 function App() {
   return (
@@ -44,6 +48,7 @@ function App() {
       <Route path='/' element={<Homepage/>} />
       <Route path='/home-admin' element={<Home_Admin/>} />
       <Route path='/home-participant' element={<Home_Participant/>} />
+      <Route path='/home-dinamico' element={<Home_User_Dinamico/>} />
       
         <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
 
@@ -72,11 +77,16 @@ function App() {
         <Route path='/participantes' element={<VisualizarParticipantes/>} />
         <Route path='/equipos' element={<VisualizarEquipos />} />
         <Route path='/darBajaEvento' element={< DarBajaEvento />} />
+        <Route path='/darBajaEquipo' element={< DarBajaEquipo />} />
 
         <Route path='/home' element={<Homepage/>} />
         <Route path='/login' element={<Login/>} />
 
-        <Route path='/reportes' element={< Reportes />} />
+        <Route path='/reportes' element={< Reportes_Pagina />} />
+        <Route path='/emailPrueba' element={< EmailPrueba />} />
+        
+        <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
+        <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />
 
       </Routes>
     </Router>

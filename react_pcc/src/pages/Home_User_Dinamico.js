@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavbarAdmin from '../components/NavBars/NavbarAdmin';
+import NavbarUserDinamico from '../components/NavBars/NavbarUserDinamico';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 import '../App.css';
@@ -19,7 +19,7 @@ const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color
 const cookies = new Cookies();
 
 
-class Home_Admin extends Component {
+class Home_User_Dinamico extends Component {
 
   se_Registro = cookies.get('se_Registro');
   id_usuario = cookies.get('id_usuario');
@@ -87,11 +87,11 @@ class Home_Admin extends Component {
       }
 
       //cookies.remove("se_Registro");
-      const cookieKeys = Object.keys(cookies.getAll());
-      cookieKeys.forEach(key => {
-        console.log(key)
-        cookies.remove(key);
-      });
+      // const cookieKeys = Object.keys(cookies.getAll());
+      // cookieKeys.forEach(key => {
+      //   console.log(key)
+      //   cookies.remove(key);
+      // });
       this.getEvents();
       this.getEventTypes();
       console.log(this.se_Registro)
@@ -216,7 +216,7 @@ class Home_Admin extends Component {
         />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
-          <NavbarAdmin
+          <NavbarUserDinamico
             estado1={this.estadoModal}
             cambiarEstado1={this.cambiarEstadoModal}
             estadoOrganizador={this.estadoModalOrganizador}
@@ -308,4 +308,4 @@ class Home_Admin extends Component {
   }
 }
 
-export default Home_Admin;
+export default Home_User_Dinamico;

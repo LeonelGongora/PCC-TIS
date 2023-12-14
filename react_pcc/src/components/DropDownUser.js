@@ -28,6 +28,10 @@ function DropdownUser({ setOpenDropFath, isOpen }) {
     window.location.href = "/darBajaEvento";
   };
 
+  const darseBajaEquipoRedireccionar = () => {
+    window.location.href = "/darBajaEquipo";
+  };
+
   return (
     <div className="dropdown-container">
       <button
@@ -47,6 +51,9 @@ function DropdownUser({ setOpenDropFath, isOpen }) {
           </li>
           <li onClick={darseBajaEventoRedireccionar}>
             <span id="lineaV">{lineV}</span> Darse de Baja de evento
+          </li>
+          <li onClick={darseBajaEquipoRedireccionar}>
+            <span id="lineaV">{lineV}</span> Dar de Baja Equipo de evento
           </li>
         </ul>
       )}

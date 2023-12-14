@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import ListaEventos_baja from "../components/ListaEventos_baja";
+import ListaEquipos_baja from "../components/ListaEquipos_baja";
 import "../stylesheets/EventosStyles.css";
 import "../App.css";
 import axios from "axios";
@@ -43,39 +43,39 @@ class DarBajaEvento extends Component {
     this.equipos = [];
   }
 
-  getEvents = async () => {
+  getEquipos = async () => {
     
     this.setState({ loader: true });
     if(cookies.get('id_usuario') === '' || cookies.get('id_usuario')=== undefined){
       console.log(`${cookies.get('id_usuario')} No se encuentra registrado`)
     }else{
     const idu = cookies.get('id_usuario')
-    const events = await axios.get(`${this.state.url}/${idu}`);
-    this.eventos = Array.from(events.data.events);
-    // console.log(this.eventos);
+    const events = await axios.get(`${this.state.urle}/${idu}`);
+    this.equipos = Array.from(events.data.events);
+    // console.log(this.equipos);
     this.setState({ events: events.data, loader: false });
     var i;
     var fecha;
     var fecha1;
     //fecha_inicio
-    for (i = 0; i < this.eventos.length; i++) {
-      fecha = new Date(this.eventos[i].fecha_fin);
+    for (i = 0; i < this.equipos.length; i++) {
+      fecha = new Date(this.equipos[i].fecha_fin);
       var dia = fecha.getDate() + 1;
       var mes = fecha.getMonth() + 1;
       let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-      this.eventos[i].fecha_fin = format4;
+      this.equipos[i].fecha_fin = format4;
 
-      fecha1 = new Date(this.eventos[i].fecha_inicio);
+      fecha1 = new Date(this.equipos[i].fecha_inicio);
       var dia1 = fecha1.getDate() + 1;
       var mes1 = fecha1.getMonth() + 1;
       let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
-      this.eventos[i].fecha_inicio = format5;
+      this.equipos[i].fecha_inicio = format5;
     }
     }
   };
 
   componentDidMount() {
-    this.getEvents();
+    this.getEquipos();
   }
 
   masDetalles(id) {
@@ -86,7 +86,7 @@ class DarBajaEvento extends Component {
 
 	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
-    this.getEvents();
+    this.getEquipos();
   };
   cambiarDarseBaja = (estado) => {
     this.setState({ estadoDarseBaja: estado });
@@ -125,23 +125,25 @@ class DarBajaEvento extends Component {
               nombreBanner1={this.state.nombreEventoBann}
               pe={this.state.pe}
             />
-            {this.eventos[0] == null? (
+            {this.equipos[0] == null ? (
                   <div>
-                    <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
+                    <p className="tituloEvento-home">DAR DE BAJA EQUIPO DE EVENTO</p>
                     <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
                 </div>
               ) : (<>
                 <div className="contenedorTitulo-home">
-                  <p className="tituloEvento-home">DARSE DE BAJA DE EVENTO</p>
+                  <p className="tituloEvento-home">DAR DE BAJA EQUIPO DE EVENTO</p>
                 </div>
                 <div className="columna1">
-                  <ListaEventos_baja />
-                  {this.eventos.map((evento, id) => {
+                  <ListaEquipos_baja />
+                  {this.equipos.map((evento, id) => {
                     return (
                       <div
                         key={evento.euid}
                         className="containerEvents"
+                        //   onClick={() => this.masDetalles(evento.id)}
                       >
+                        <h4 className="tipoEv">{evento.nombre_equipo}</h4>
                         <img
                           className="imageEvent"
                           src={
@@ -173,7 +175,7 @@ class DarBajaEvento extends Component {
                             )
                           }
                         >
-                          Darse de baja
+                          Dar baja Equipo
                         </button>
                       </div>
                     );

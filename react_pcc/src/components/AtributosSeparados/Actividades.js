@@ -103,9 +103,10 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
           <div className='tituloCampos'>
             <h2>Actividades</h2>
             <div className='seccionCampo'>
-              <div className='seccionesExtraActividad'>
+              
                 {actividades.map((actividad) => ( 
                 <>
+                <div className='seccionesExtraActividad'>
                   <h3>{actividad.nombre_actividad}</h3><div className="campo-cont actividad-cont">
                     <div id="entradaEveNex">
                       <p id="textoCuadro">Descripción*</p>
@@ -137,10 +138,11 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
                       {cancelar}
                     </button>
                   </div>
+                </div>
                   </>
                 ))} 
 
-              </div>
+              
               <div className='contenedorBotonCampo'>
                 <button
                   className="botonAgregarCampo"

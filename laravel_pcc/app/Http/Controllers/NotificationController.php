@@ -6,6 +6,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class NotificationController extends Controller
 {
@@ -57,12 +58,20 @@ class NotificationController extends Controller
         ->select('notifications.*')
         ->get();
 
+        // $countnoti = DB::table('users')
+        // ->where('users.id', $id)
+        // ->select('users.auxinoti')
+        // ->get();
+
+        $user = User::find($id);
+        $countnoti = $user->auxinoti;
+        
         $array = Arr::collapse([$notificacionuser, $notificacionteam, $notificacioneventindi, $notificacioneventteam]);
 
         return response()->json([
             'status' => 200,
             'notifications' => $array,
-
+            'countnoti' => $countnoti,
         ]);
     }
 

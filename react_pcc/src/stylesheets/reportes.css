@@ -1,0 +1,95 @@
+.background-image{
+    z-index: -1;
+}
+.contenedorReportes{
+    width: 84%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    background-color: white;
+    margin: 5%;
+    margin-top: 2%;
+    border-radius: 50px;
+}
+.tituloReport{
+    font-size: 2.4rem;
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+}
+.busqueda{
+    width: 98%;
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 30px;
+}
+
+.busqueda input{
+    width: 93%;
+    padding-left: 10px;
+    border-radius: 30px;
+}
+.busqueda input:focus {
+    outline: none;
+    border: none;
+}
+
+.opciones{
+    margin-top: 20px;
+    margin-left: 30px;
+    font-weight: bold;
+}
+.opcionesReportes{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-around;
+}
+.opcionesReportes select{
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 2px;
+}
+.opcionesReportes select:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+.tablaReportes{
+    font-size: 0.8rem;
+    text-align: center;
+    border-spacing: 0;
+}
+.tablaReportes, th, td{
+    border: 1px solid black;
+    
+}
+.tablaReportes th{
+    background-color: #0A2E56;
+    color: #FFE572;
+    font-weight: lighter;
+    padding: 4px;
+}
+.tablaReportes td{
+    background-color: rgb(233, 233, 233);
+    font-size: 0.7rem;
+    padding: 3px;
+}
+.paginas{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    
+}
+.paginas button{
+    background-color: #FFD51E;
+    padding: 5px;
+    border-radius: 30px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+.paginas button:hover{
+    background-color: #FFD51E;
+    color: white;
+}

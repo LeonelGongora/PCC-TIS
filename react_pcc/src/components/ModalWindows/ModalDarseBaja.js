@@ -36,7 +36,15 @@ function ModalDarseBaja({ estadoDarseBaja1, cambiarEstadoDarseBaja1,cambiarEstad
           </div>
           <div className="registroTipoEvento-DarseBaja">
             <span className="textoDarseBaja">
-              ¿Está seguro darse de baja del evento {nombreBanner1 }?
+              {pe <= 1 ? (
+                <>
+                ¿Está seguro darse de baja del evento {nombreBanner1 }?
+                </>
+              ) : (
+                <>
+                ¿Está seguro dar de baja el equipo del evento {nombreBanner1 }?
+                </>
+              )}
             </span>
             <div className="botonesDarseBaja">
               <button
