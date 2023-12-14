@@ -9,6 +9,8 @@ import {
 } from '@tanstack/react-table'
 import Cookies from 'universal-cookie';
 import axios from 'axios'
+import { URL_API } from '../const';
+
 import "../stylesheets/reportes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +24,7 @@ function Reportes(){
     const buscar = <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" style={{color: "#000000",}} />;
 
     const getEvent=async()=>{
-        const url = "http://127.0.0.1:8000/api/events"
+        const url = `${URL_API}/events`;
         const response = await axios.get(url)
         if(response){
           console.log(response.data.events)
@@ -73,33 +75,32 @@ function Reportes(){
     }
 
     const reporteEvento = async (e) => {
-        const url = "http://127.0.0.1:8000/api/events"
-        const response = await axios.get(url)
-        if(response){
-          console.log(response.data.events)
-          setDataTabla(response.data.events)
-          const keys = Object.keys(response.data.events[0]);
-          //let fecha_creacion = ""
-          //fecha_creacion = keys[9];
+        console.log(eventos)
+        
 
-          let claves = keys.slice(0,7);
-          //claves.push()
+        const keys = Object.keys(eventos[0]);
+        console.log(keys)
+        let claves = keys.slice(0,10);
+        
+        //const streetAddress = addy.substring(0, addy.indexOf(","));
+        for (let i = 0; i < eventos.length; i++) {
+            eventos[i].created_at= eventos[i].created_at.substring(0, eventos[i].created_at.indexOf("T"));
+        }
+        setDataTabla(eventos);
 
-          let columnasActuales = []
+        let columnasActuales = []
 
           //string.charAt(0).toUpperCase();
         
-          for (let i = 0; i < claves.length; i++) {
+        for (let i = 0; i < claves.length; i++) {
             let diccionario = {}
             diccionario["header"] = claves[i];
             diccionario["accessorKey"] = claves[i];
             columnasActuales.push(diccionario)
-            //const element = array[i];
-          }
-
-          setColumnas(columnasActuales)
-          e.target.value = 'predeterminado'
         }
+
+        setColumnas(columnasActuales)
+        e.target.value = 'predeterminado'
     }
 
     const cambioEventoActual = (e) => {
@@ -119,38 +120,193 @@ function Reportes(){
     const cambioReporteEspecifico = (e) => {
         if(e.target.value === "Participantes"){
             reporteParticipantes(e);
+        }else if(e.target.value === "Organizadores_Evento"){
+            reporteOrganizadoresEvento(e);
+        }else if(e.target.value === "Patrocinadores_Evento"){
+            reportePatrocinadoresEvento(e);
+        }else if(e.target.value === "Requisitos_Evento"){
+            reporteRequisitosEvento(e);
+        }else if(e.target.value === "Actividades_Evento"){
+            reporteActividadesEvento(e);
         }
     }
+
+    
 
     const reporteParticipantes = (e) => {
         console.log(evento_actual.users)
 
-        const keys = Object.keys(evento_actual.users[0]);
-          //let fecha_creacion = ""
-          //fecha_creacion = keys[9];
+        if (evento_actual.users.length === 0) {
+            console.log("NULO")
 
-          let claves = keys.slice(0,8);
-          console.log(claves)
-          //claves.push()
+        }else{
 
-          let columnasActuales = []
+            const keys = Object.keys(evento_actual.users[0]);
+            //let fecha_creacion = ""
+            //fecha_creacion = keys[9];
 
-          //string.charAt(0).toUpperCase();
+            let claves = keys.slice(0, 8);
+            console.log(claves);
+            //claves.push()
+
+            let columnasActuales = [];
+
+            //string.charAt(0).toUpperCase();
+
+            for (let i = 0; i < claves.length; i++) {
+              let diccionario = {};
+              diccionario["header"] = claves[i];
+              diccionario["accessorKey"] = claves[i];
+              columnasActuales.push(diccionario);
+              //const element = array[i];
+            }
+            console.log(evento_actual.users);
+            console.log(columnasActuales);
+
+            setDataTabla(evento_actual.users);
+            setColumnas(columnasActuales);
+
+            e.target.value = "predeterminado";
+
+        }
+    }
+
+    const reporteOrganizadoresEvento = (e) => {
+        console.log(evento_actual.organizers)
+
+        if (evento_actual.organizers.length === 0) {
+            console.log("NULO Organizadores")
+
+        }else{
+
+            const keys = Object.keys(evento_actual.organizers[0]);
+            //let fecha_creacion = ""
+            //fecha_creacion = keys[9];
+
+            keys.splice(2, 1);
+
+            let claves = keys.slice(1, 2);
+            console.log(claves);
+            //claves.push()
+
+            let columnasActuales = [];
+
+            //string.charAt(0).toUpperCase();
+
+            for (let i = 0; i < claves.length; i++) {
+              let diccionario = {};
+              diccionario["header"] = claves[i];
+              diccionario["accessorKey"] = claves[i];
+              columnasActuales.push(diccionario);
+              //const element = array[i];
+            }
+
+            setDataTabla(evento_actual.organizers);
+            setColumnas(columnasActuales);
+
+            e.target.value = "predeterminado";
+
+        }
+    }
+
+    const reportePatrocinadoresEvento = (e) => {
+        if (evento_actual.sponsors.length === 0) {
+            console.log("NULO Organizadores")
+        }else{
+
+            const keys = Object.keys(evento_actual.sponsors[0]);
+            //let fecha_creacion = ""
+            //fecha_creacion = keys[9];
+
+            let claves = keys.slice(1, 2);
+            console.log(claves);
+            //claves.push()
+
+            let columnasActuales = [];
+
+            //string.charAt(0).toUpperCase();
+
+            for (let i = 0; i < claves.length; i++) {
+              let diccionario = {};
+              diccionario["header"] = claves[i];
+              diccionario["accessorKey"] = claves[i];
+              columnasActuales.push(diccionario);
+              //const element = array[i];
+            }
+
+            setDataTabla(evento_actual.sponsors);
+            setColumnas(columnasActuales);
+
+            e.target.value = "predeterminado";
+
+        }
+    }
+
+    const reporteRequisitosEvento = (e) => {
+        if (evento_actual.requirements.length === 0) {
+            console.log("NULO Organizadores")
+        }else{
+
+            const keys = Object.keys(evento_actual.requirements[0]);
+            //let fecha_creacion = ""
+            //fecha_creacion = keys[9];
+
+            let claves = keys.slice(1, 2);
+            console.log(claves);
+            //claves.push()
+
+            let columnasActuales = [];
+
+            //string.charAt(0).toUpperCase();
+
+            for (let i = 0; i < claves.length; i++) {
+              let diccionario = {};
+              diccionario["header"] = claves[i];
+              diccionario["accessorKey"] = claves[i];
+              columnasActuales.push(diccionario);
+              //const element = array[i];
+            }
+
+            setDataTabla(evento_actual.requirements);
+            setColumnas(columnasActuales);
+
+            e.target.value = "predeterminado";
+
+        }
         
-          for (let i = 0; i < claves.length; i++) {
-            let diccionario = {}
-            diccionario["header"] = claves[i];
-            diccionario["accessorKey"] = claves[i];
-            columnasActuales.push(diccionario)
-            //const element = array[i];
-          }
-          console.log(evento_actual.users)
-          console.log(columnasActuales)
+    }
 
-          setDataTabla(evento_actual.users)
-          setColumnas(columnasActuales)
+    const reporteActividadesEvento = (e) => {
+        if (evento_actual.activities.length === 0) {
+            console.log("NULO Organizadores")
+        }else{
 
-          e.target.value = 'predeterminado'
+            const keys = Object.keys(evento_actual.activities[0]);
+            //let fecha_creacion = ""
+            //fecha_creacion = keys[9];
+
+            let claves = keys.slice(1, 5);
+            console.log(claves);
+            //claves.push()
+
+            let columnasActuales = [];
+
+            //string.charAt(0).toUpperCase();
+
+            for (let i = 0; i < claves.length; i++) {
+              let diccionario = {};
+              diccionario["header"] = claves[i];
+              diccionario["accessorKey"] = claves[i];
+              columnasActuales.push(diccionario);
+              //const element = array[i];
+            }
+
+            setDataTabla(evento_actual.activities);
+            setColumnas(columnasActuales);
+
+            e.target.value = "predeterminado";
+
+        }
     }
 
     const[sorting, setSorting] = useState([]);
@@ -213,7 +369,10 @@ function Reportes(){
                     Seleccione un tipo de reporte
                 </option>
                 <option value="Participantes">Participantes</option>
-                <option value="Actividades" >Actividades</option>
+                <option value="Organizadores_Evento" >Organizadores</option>
+                <option value="Requisitos_Evento" >Requisitos</option>
+                <option value="Actividades_Evento" >Actividades</option>
+
             </select>
             </div>
             <table className='tablaReportes'>

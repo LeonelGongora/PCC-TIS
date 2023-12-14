@@ -5,10 +5,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {URL_API} from '../../const';
 
-
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_evento, atributos}){
+
+    const id_evento_Aux = cookies.get('id_evento');
 
     const [values, setValues] = useState({
         nombre_atributo : "",
@@ -67,7 +70,13 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
 
             data.append('nombre_atributo', values.nombre_atributo)
             data.append('tipo_dato_atributo', "text")
-            data.append('event_id', id_evento)
+            
+            if(id_evento_Aux){
+                data.append('event_id', id_evento_Aux)
+                cookies.remove('id_evento');
+            }else{
+                data.append('event_id', id_evento)
+            }  
 
             const res = await axios.post(`${URL_API}/add-attribute`, data);
             

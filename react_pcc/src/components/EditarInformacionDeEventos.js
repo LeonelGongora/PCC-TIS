@@ -110,7 +110,6 @@ class EditarInformacionDeEventos extends Component{
     handleInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
-            
         });
         
     }
@@ -253,7 +252,9 @@ class EditarInformacionDeEventos extends Component{
             axios.post(url, data).then(res => {
               if(res.data.status === 200){
                 console.log(res);
-                window.location.href = './editar-evento-next';
+                //window.location.href = './editar-evento-next';
+                cookies.set("ultimo_id_evento", this.id, {path: "/",});
+                window.location.href = './add-event-next-alt';
               }
             })
         }

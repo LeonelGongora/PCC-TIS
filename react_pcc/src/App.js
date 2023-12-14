@@ -22,6 +22,9 @@ import AcceptTeamToEvent from "./pages/AcceptTeamToEvent.js";
 import PaginaRegistrarseEventos from "./pages/PaginaRegistrarseEventos.js";
 import PaginaAdministrarSolicitudes from "./pages/PaginaAdministrarSolicitudes.js";
 import PaginaVisualizarParticipantes from "./pages/PaginaVisualizarParticipantes.js";
+import PaginaRegistrarActividad from "./pages/PaginaRegistrarActividad.js";
+import PaginaEliminarActividad from "./pages/PaginaEliminarActividad.js";
+import PaginaConfigurarFormulario from "./pages/PaginaConfigurarFormulario.js";
 import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
 
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
@@ -33,8 +36,7 @@ import Homepage from "./pages/Homepage.js";
 import Login from "./pages/Login.js";
 import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
-import Reportes_Pagina from "./pages/Reportes_Pagina.js";
-import EmailPrueba from "./pages/EmailPrueba.js";
+import Reportes_Pagina from "./components/Reportes.js";
 
 import FormRegistroUsuarioDinamico from "./pages/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./pages/FormRegistroTipoUser.js";
@@ -60,7 +62,9 @@ function App() {
         <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos/>} />
         <Route path='/paginaVisualizarParticipantes' element={<PaginaVisualizarParticipantes/>} />
         <Route path='/paginaEditarEventos' element={<PaginaEditarEventos/>} />
-
+        <Route path='/paginaRegistrarActividad' element={< PaginaRegistrarActividad />} />
+        <Route path='/paginaEliminarActividad' element={< PaginaEliminarActividad />} />
+        <Route path='/paginaConfigurarFormulario' element={< PaginaConfigurarFormulario />} />
         
         <Route path='/editar-evento' element={<EditarEvento/>} />
         <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} />
@@ -78,8 +82,7 @@ function App() {
         <Route path='/home' element={<Homepage/>} />
         <Route path='/login' element={<Login/>} />
 
-        <Route path='/reportes' element={< Reportes_Pagina />} />
-        <Route path='/emailPrueba' element={< EmailPrueba />} />
+        <Route path='/reportes' element={<Reportes_Pagina/>} />
         
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />

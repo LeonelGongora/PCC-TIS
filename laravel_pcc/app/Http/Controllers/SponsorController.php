@@ -31,7 +31,6 @@ class SponsorController extends Controller
             $patrocinador-> nombre_patrocinador = $request -> nombre_patrocinador;
             $patrocinador-> imagen_patrocinador = $name;
 
-
             $patrocinador -> save();
 
             return response()->json([

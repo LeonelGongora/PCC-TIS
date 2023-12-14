@@ -156,8 +156,10 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                     const myElement = document.getElementById("Boton-Registro-User");
                     myElement.disabled = true;
                     cambiarEstadoModalRegistroUsuario(false);
+                    window.location.reload();
                   })
                   .catch((error) => {
+                    window.location.reload();
                     console.error("Error al enviar el correo:", error);
                 });
             })
@@ -183,7 +185,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                   <p className="textoRegistro-user">Registro de Informacion</p>
                 </div>
                 <div className="entradaDatos-user">
-                  <form onSubmit={saveTypeEvent} id="form1">
+                  <form >
                     <div className="nombreAp-user">
                       <div
                         id="entradaNom-user"
@@ -502,9 +504,9 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
                     <div className="botonEnviar-user">
                       <button
-                        form="form1"
                         className="botonRegistrar-user"
-                        type="submit"
+                        type="button"
+                        onClick={saveTypeEvent}
                       >
                         {" "}
                         Registrar

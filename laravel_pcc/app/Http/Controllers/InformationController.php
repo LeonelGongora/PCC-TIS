@@ -22,4 +22,13 @@ class InformationController extends Controller
         ]);
     }
 
+    public function destroy($id)
+    {
+        $informacion = Information::find($id);
+        $informacion->delete();
+        return response()->json([
+            'status' => 200,
+            'message' =>'Informacion eliminada exitosamente']);
+    }
+
 }

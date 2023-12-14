@@ -66,3 +66,20 @@ input::placeholder{
 .form_name{
     width: 80%;
 }
+#entrada-Formulario-Registro-Evento-Team{
+    border: 1px solid rgb(175, 175, 175);
+    margin-bottom: 0.5em;
+    margin-top: 1.1em;
+    border-radius: 5px;
+    height: 36px;
+    width: 350px;
+    transition: border-color 0.3s;
+    background-color: white;
+}
+.textoInfo{
+    height: auto;
+}
+#botonRegistroRai{
+    padding-left: 5px;
+    width: 170px;
+}

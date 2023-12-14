@@ -94,7 +94,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         if (!values.email.trim()) {
             validationErrors.email = "Este campo es obligatorio"
       
-        } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
+        } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}(\.[A-Za-z]{2,})?$/.test(values.email)) {
             validationErrors.email = "Ingrese correo valido";
         } else {
             /*
@@ -177,7 +177,13 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                             destinatario: values.email,
                             contenido: contraseña_generada,
                           })
-                          .then((response) => {
+                          .then((response) => { 
+
+
+
+
+
+
                             //console.log(response.data.mensaje);
                             //console.log("Todos registrados")
                             window.location.href='./paginaRegistrarseEventos';

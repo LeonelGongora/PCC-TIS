@@ -11,6 +11,7 @@ class Event_Sponsor extends Model
     protected $table = 'event_sponsor';
     protected $fillable = [
         'event_id',
+        'categoria',
         'sponsor_id'
     ];
 }

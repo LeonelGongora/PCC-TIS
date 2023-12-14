@@ -16,6 +16,8 @@ const cookies = new Cookies();
 
 class AcceptUserToEvent extends Component{
 
+    se_Registro = cookies.get('se_Registro');
+
     constructor(props) {
         super(props);
         this.state  = {

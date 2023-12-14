@@ -5,13 +5,16 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
+import Cookies from 'universal-cookie';
 import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
+const cookies = new Cookies();
 
 function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento}){
 
+    const id_evento_Aux = cookies.get('id_evento');
     
     const [values, setValues] = useState({
         nombre_actividad : "",
@@ -21,7 +24,6 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
     });
 
     const [errors, setErrors] = useState({});
-    const [organizadores, setOrganizadores] = useState([]);
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -34,12 +36,6 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
     useEffect(()=>{
         //getOrganizadores();
     }, []);
-
-    const getOrganizadores = async (e) => {
-        //const url = "http://127.0.0.1:8000/api/get-organizador"; 
-        //const respuesta = await axios.get(url);
-        //setOrganizadores(respuesta.data.organizadores);
-    }
 
     const salirVentanaModal = (e) => {
         cambiarEstadoModalActividad(false);
@@ -54,6 +50,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
     const saveTypeEvent = async (e) => {
         e.preventDefault();
+        console.log(id_evento_Aux)
 
         const validationErrors = {};
 
@@ -129,18 +126,18 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
         if(Object.keys(validationErrors).length === 0){
 
-            console.log(values.nombre_actividad)
-            console.log(values.fecha_inicio_actividad)
-            console.log(values.fecha_fin_actividad)
-            console.log(values.descripcion_actividad)
-            console.log(id_evento)
-
             const data = new FormData();
             data.append('nombre_actividad', values.nombre_actividad)
             data.append('fecha_inicio_actividad', values.fecha_inicio_actividad)
             data.append('fecha_fin_actividad', values.fecha_fin_actividad)
             data.append('descripcion_actividad', values.descripcion_actividad)
-            data.append('event_id', id_evento)
+            if(id_evento_Aux){
+                data.append('event_id', id_evento_Aux)
+                cookies.remove('id_evento');
+            }else{
+                data.append('event_id', id_evento)
+            }
+            
 
             const res = await axios.post(`${URL_API}/add-activity`, data);
             

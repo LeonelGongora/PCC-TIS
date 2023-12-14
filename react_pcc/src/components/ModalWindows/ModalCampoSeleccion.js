@@ -5,11 +5,15 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
 import {URL_API} from '../../const';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 const plus = <FontAwesomeIcon icon={faSquarePlus} size="lg" style={{color: "#000000",}} />
 
 function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion, id_evento, atributos}){
+
+  const id_evento_Aux = cookies.get('id_evento');
 
     const [values, setValues] = useState({
         nombre_atributo : ""
@@ -113,8 +117,14 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
             data.append('nombre_atributo', values.nombre_atributo)
             data.append('tipo_dato_atributo', "select" )
             data.append('restriccion', restriccionString)
-            data.append('event_id', id_evento)
 
+            if(id_evento_Aux){
+              data.append('event_id', id_evento_Aux)
+              cookies.remove('id_evento');
+            }else{
+              data.append('event_id', id_evento)
+            }  
+            
             const res = await axios.post(`${URL_API}/add-attribute`, data);
             
             if(res.data.status === 200){

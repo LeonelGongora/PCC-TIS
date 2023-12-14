@@ -13,23 +13,28 @@ class Event_SponsorController extends Controller
         $evento_patrocinador = new Event_Sponsor();
         $evento_patrocinador -> event_id = $request -> evento;
         $evento_patrocinador -> sponsor_id = $request -> patrocinador;
+        $evento_patrocinador-> categoria = $request -> categoria;
         $evento_patrocinador->save();
 
         return response()->json([
             'status' => 200,
-            'message' =>'Evento-Patrocinador añadido exitosamente']);
+            'message' =>'Evento-Patrocinador añadido exitosamente',
+            'evento_patrocinador' => $evento_patrocinador]);
     }
 
     public function destroy(Request $request)
     {
         $evento_id = $request -> evento;
+        $categoria = $request -> categoria;
         $patrocinador_id = $request -> patrocinador;
 
         $evento = Event::find($evento_id);
-        $evento->sponsors()->detach($patrocinador_id);
+        $evento->sponsors()->detach($patrocinador_id, ['categoria' => $categoria]);
 
         return response()->json([
             'status' => 200,
-            'message' =>'Evento-patrocinador eliminado exitosamente']);
+            'message' =>'Evento-patrocinador eliminado exitosamente',
+            'patrocinador' => $patrocinador_id,
+            'categoria' => $categoria]);
     }
 }

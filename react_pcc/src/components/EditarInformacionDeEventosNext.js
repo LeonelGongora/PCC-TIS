@@ -32,12 +32,15 @@ class EditarInformacionDeEventosNext extends Component{
         atributos: [],
         requisitos: [],
         actividades: [],
+
         organizadores : [],
         organizadores_de_evento: [],
         organizadores_id : [],
+
         patrocinadores : [],
         patrocinadores_de_evento: [],
         patrocinadores_id : [],
+
         mostrar_organizador : false,
         mostrar_patrocinador : false,
     }
@@ -202,8 +205,6 @@ class EditarInformacionDeEventosNext extends Component{
                   }
                 }
               }
-
-              
             }
 
             for (let index = 0; index < organizadores_id_registrados.length; index++) {
@@ -454,6 +455,7 @@ class EditarInformacionDeEventosNext extends Component{
                         this.mostrar_organizador = true;
                       }
                     }
+
                     organizador["valor"] = this.mostrar_organizador;
                     return (
                     <>

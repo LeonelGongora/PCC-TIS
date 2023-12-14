@@ -23,6 +23,7 @@ class Home_Admin extends Component {
 
   se_Registro = cookies.get('se_Registro');
   id_usuario = cookies.get('id_usuario');
+
   constructor(props) {
     super(props);
     this.state = {

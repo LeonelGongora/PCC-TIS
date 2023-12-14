@@ -24,6 +24,10 @@ const buscar = (
 const cookies = new Cookies();
 
 class DarBajaEvento extends Component {
+
+  id = cookies.get('id_usuario');
+  se_Registro = cookies.get('se_Registro');
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +79,9 @@ class DarBajaEvento extends Component {
   };
 
   componentDidMount() {
+    
     this.getEquipos();
+    console.log(this.id)
   }
 
   masDetalles(id) {

@@ -79,6 +79,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         cookies.set('ci_nuevo_usuario', values.ci, {path: "/"});
         cookies.set('se_Registro', true, {path: "/"});
         cambiarEstado1(false);
+        window.location.reload();
       }
     }
 
