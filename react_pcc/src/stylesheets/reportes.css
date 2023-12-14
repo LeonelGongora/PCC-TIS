@@ -9,7 +9,7 @@
     background-color: white;
     margin: 5%;
     margin-top: 2%;
-    border-radius: 50px;
+    border-radius: 20px;
 }
 .tituloReport{
     font-size: 2.4rem;
@@ -21,13 +21,13 @@
     width: 98%;
     border: 1px solid black;
     padding: 3px;
-    border-radius: 30px;
+    border-radius: 8px;
 }
 
 .busqueda input{
     width: 93%;
     padding-left: 10px;
-    border-radius: 30px;
+    border-radius: 8px;
 }
 .busqueda input:focus {
     outline: none;
@@ -47,7 +47,7 @@
 }
 .opcionesReportes select{
     border: 1px solid black;
-    border-radius: 30px;
+    border-radius: 8px;
     margin-left: 5px;
     margin-right: 5px;
     padding: 2px;
@@ -83,13 +83,19 @@
     
 }
 .paginas button{
-    background-color: #FFD51E;
-    padding: 5px;
-    border-radius: 30px;
-    border: 1px solid black;
+    width: 160px;
+    height: 30px;
+    font-size: 0.9rem;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: black;
+    border-radius: 8px;
+    margin: 5px;
+    margin-bottom: 18px;
     cursor: pointer;
+    background-color: rgb(255, 214, 31);
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
 }
 .paginas button:hover{
-    background-color: #FFD51E;
-    color: white;
+    background-color: rgb(190, 160, 23);
 }
