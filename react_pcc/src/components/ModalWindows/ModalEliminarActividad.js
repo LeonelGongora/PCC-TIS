@@ -59,7 +59,7 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
     return (
       estadoActividad && (
         <div className="Overlay">
-          <div className="ContenedorModal">
+          <div className="ContenedorModal ContenedorModalActividades">
             <div className="EncabezadoModal">
               <div className="tituloEvento">
                 <h1>Eliminar Actividad</h1>
