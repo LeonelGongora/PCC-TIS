@@ -60,7 +60,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
         if(!values.nombre_actividad.trim()){
             validationErrors.nombre_actividad = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_actividad)){
+        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_actividad)){
             validationErrors.nombre_actividad = "Ingrese un nombre valido"
         }else{
             /* 
@@ -121,7 +121,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
         if (!values.descripcion_actividad.trim()) {
             validationErrors.descripcion_actividad = "Este campo es obligatorio";
-        } else if (!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,60}$/.test(values.descripcion_actividad)) {
+        } else if (!/^[A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(values.descripcion_actividad)) {
             validationErrors.descripcion_actividad = "Ingrese una descripción válida";
         }
 
@@ -158,77 +158,81 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
     }
 
     return (
-        estadoActividad && (
-            <div className="Overlay">
-              <div className="ContenedorModal">
-                <div className="EncabezadoModal">
-                  <div className="tituloEvento">
-                    <h1>Registrar Actividad</h1>
-                  </div>
-
-                  <button className="BotonSalir"
-                  onClick={salirVentanaModal}>
-                    {salir}
-                  </button>
-
-                </div>
-                <div className="registroTipoEvento">
-                    <form onSubmit={saveTypeEvent} id="form1">
-
-                        <p id="textoCuadroAtributo">Nombre de Actividad*</p>
-                        <input
-                            type="text"
-                            name="nombre_actividad"
-                            className="inputEvento"
-                            placeholder="Ingrese nombre"
-                            onChange={handleInput}
-                        />
-                        {errors.nombre_actividad && (
-                        <span className="span1Modal">{errors.nombre_actividad}</span>
-                        )}
-
-                        <p id="textoCuadroAtributo">Fecha de inicio*</p>
-                        <input
-                            type="date"
-                            name="fecha_inicio_actividad"
-                            className="inputEvento"
-                            onChange={handleInput}
-                        />
-                        {errors.fecha_inicio_actividad && (
-                        <span className="span1Modal">{errors.fecha_inicio_actividad}</span>
-                        )}
-
-                        <p id="textoCuadroAtributo">Fecha de fin*</p>
-                        <input
-                            type="date"
-                            name="fecha_fin_actividad"
-                            className="inputEvento"
-                            onChange={handleInput}
-                        />
-                        {errors.fecha_fin_actividad && (
-                        <span className="span1Modal">{errors.fecha_fin_actividad}</span>
-                        )}
-
-                        <p id="textoCuadroAtributo">Descripcion</p>
-                        <input
-                            type="text"
-                            name="descripcion_actividad"
-                            className="inputEvento"
-                            placeholder="Ingrese descripcion"
-                            onChange={handleInput}
-                        />
-                        {errors.descripcion_actividad && (
-                        <span className="span1Modal">{errors.descripcion_actividad}</span>
-                        )}
-
-                    </form>
-                    <button form="form1" type="submit" className="BotonRegistrar">
-                        Registrar
-                    </button>
-                </div>
+      estadoActividad && (
+        <div className="Overlay">
+          <div className="ContenedorModal">
+            <div className="EncabezadoModal">
+              <div className="tituloEvento">
+                <h1>Registrar Actividad</h1>
               </div>
+
+              <button className="BotonSalir" onClick={salirVentanaModal}>
+                {salir}
+              </button>
             </div>
-        )
+            <div className="registroTipoEvento">
+              <form onSubmit={saveTypeEvent} id="form1">
+                <p id="textoCuadroAtributo">Nombre de Actividad*</p>
+                <input
+                  type="text"
+                  name="nombre_actividad"
+                  className="inputEvento"
+                  placeholder="Ingrese nombre"
+                  onChange={handleInput}
+                />
+                {errors.nombre_actividad && (
+                  <span className="span1Modal">{errors.nombre_actividad}</span>
+                )}
+
+                <p id="textoCuadroAtributo">Fecha de inicio*</p>
+                <input
+                  type="date"
+                  name="fecha_inicio_actividad"
+                  className="inputEvento"
+                  onChange={handleInput}
+                />
+                {errors.fecha_inicio_actividad && (
+                  <span className="span1Modal">
+                    {errors.fecha_inicio_actividad}
+                  </span>
+                )}
+
+                <p id="textoCuadroAtributo">Fecha de fin*</p>
+                <input
+                  type="date"
+                  name="fecha_fin_actividad"
+                  className="inputEvento"
+                  onChange={handleInput}
+                />
+                {errors.fecha_fin_actividad && (
+                  <span className="span1Modal">
+                    {errors.fecha_fin_actividad}
+                  </span>
+                )}
+
+                <p id="textoCuadroAtributo">Descripcion</p>
+                <textarea
+                  name="descripcion_actividad"
+                  className="inputEvento-descripcion"
+                  placeholder="Ingrese descripcion"
+                  rows={5}
+                  cols={30}
+                  onChange={handleInput}
+                  
+                />
+                {errors.descripcion_actividad && (
+                  <span className="span1Modal">
+                    {errors.descripcion_actividad}
+                  </span>
+                )}
+              </form>
+              <button form="form1" type="submit" className="BotonRegistrar">
+                Registrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )
     );
 }
 
