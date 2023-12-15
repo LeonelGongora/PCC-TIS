@@ -73,7 +73,7 @@
     margin-right: 2vw;
     margin-top: 20px;
     position: fixed;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .requisitosTexto{
     margin: 1vh 2vw;

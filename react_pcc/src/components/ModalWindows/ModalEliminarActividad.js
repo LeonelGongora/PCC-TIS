@@ -71,9 +71,10 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
             </div>
 
             <div className="seccionCampo">
-              <div className="seccionesExtraActividad">
+              
                 {actividades.map((actividad) => (
                   <>
+                  <div className="seccionesExtraActividad">
                     <h3>{actividad.nombre_actividad}</h3>
                     <div className="campo-cont actividad-cont">
                       <div id="entradaEveNex">
@@ -107,9 +108,10 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
                         {cancelar}
                       </button>
                     </div>
+                  </div>
                   </>
                 ))}
-              </div>
+              
             </div>
           </div>
         </div>
