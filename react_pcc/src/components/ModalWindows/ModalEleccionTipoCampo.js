@@ -33,22 +33,22 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
                   </button>
                 </div>
                 <div className="registroTipoEvento">
-              <button type="button" className="BotonRegistrar"
+              <button type="button" className="BotonRegistrar BotonElegirCampo"
               onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoNumerico(true);}}>
                 Campo Numerico
               </button>
 
-              <button type="button" className="BotonRegistrar"
+              <button type="button" className="BotonRegistrar BotonElegirCampo"
               onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoModalAtributo(true);}}>
                 Campo de texto
               </button>
 
-              <button type="button" className="BotonRegistrar"
+              <button type="button" className="BotonRegistrar BotonElegirCampo"
               onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoSeleccion(true);}}>
                 Campo de opciones
               </button>
 
-              <button type="button" className="BotonRegistrar"cambiarEstadoCampoSeleccion
+              <button type="button" className="BotonRegistrar BotonElegirCampo"cambiarEstadoCampoSeleccion
               onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoFecha(true);}}>
                 Campo de fecha
               </button>

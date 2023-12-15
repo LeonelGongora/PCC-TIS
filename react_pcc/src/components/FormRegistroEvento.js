@@ -261,7 +261,7 @@ function FormRegistroEvento(){
         )}
       </div>
       <div className='registro'>
-        <form class="form_name" id='form_name'>
+        <form className="form_name" id='form_name'>
 
           {atributos.map((atributo,id) => {
           return (<>

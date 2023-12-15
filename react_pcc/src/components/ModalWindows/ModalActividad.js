@@ -167,7 +167,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
                 {salir}
               </button>
             </div>
-            <div className="registroTipoEvento">
+            <div className="registroTipoEvento registroActividadEvento">
               <form onSubmit={saveTypeEvent} id="form1">
                 <p id="textoCuadroAtributo">Nombre de Actividad*</p>
                 <input
@@ -210,10 +210,9 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
                 <p id="textoCuadroAtributo">Descripcion</p>
                 <textarea
                   name="descripcion_actividad"
-                  className="inputEvento-descripcion"
+                  className="inputMasInfo"
                   placeholder="Ingrese descripcion"
-                  rows={5}
-                  cols={30}
+                  rows={2}
                   onChange={handleInput}
                   
                 />

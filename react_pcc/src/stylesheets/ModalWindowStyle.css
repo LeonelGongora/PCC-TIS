@@ -264,7 +264,7 @@ label{
     font-size: 0.85rem;
     width: 98%;
     min-height: 4vh;
-    overflow-y: hidden;
+    overflow-y: auto;
     max-width: 45vw;
     max-height: 35vh;
     min-width: 10vw;
@@ -302,4 +302,35 @@ label{
 }
 .contentForm{
     text-align: center;
+}
+.registroCampoNumerico{
+    padding-left: 3vh;
+    padding-right: 3vh;
+}
+.BotonAgregarSeleccion{
+    margin-left: 38%;
+}
+
+.registroCampoNumerico .span1Modal{
+    min-width: 29vw;
+}
+.registroCampoSeleccion .span1Modal{
+    min-width: 24vw;
+}
+.registroSeccionEvento{
+    margin: 1vw;
+}
+.registroSeccionEvento .inputMasInfo{
+    min-width: 20vw;
+    max-height: 25vh;
+}
+.BotonElegirCampo{
+    width: 20vw;
+}
+.registroActividadEvento{
+    margin: 1vw;
+}
+.registroActividadEvento .inputMasInfo{
+    min-width: 20vw;
+    max-height: 5vh;
 }

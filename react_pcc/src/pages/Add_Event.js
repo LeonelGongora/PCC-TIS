@@ -288,7 +288,7 @@ class Add_Event extends Component {
             <p className="textoRegistro"> Registro de Evento</p>
           </div>
           <div className="entradasDatos">
-            <form  onSubmit={this.saveEvent}>
+            <form className='formularioRegistroEvento' onSubmit={this.saveEvent}>
               <div className="datoNombre" id="entrada">
                 <p id="textoCuadro">Nombre*</p>
                 <input

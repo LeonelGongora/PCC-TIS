@@ -150,7 +150,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                   {salir}
                 </button>
               </div>
-              <div className="registroTipoEvento">
+              <div className="registroTipoEvento registroCampoSeleccion">
                 <form onSubmit={saveTypeEvent} id="form1">
                   <p id="textoCuadroAtributo">Nombre*</p>
                   <input
@@ -197,7 +197,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                   })}
 
                   <button
-                    className="BotonRegistrar"
+                    className="BotonRegistrar BotonAgregarSeleccion"
                     type="button"
                     onClick={agregarOpcion}
                   >

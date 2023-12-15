@@ -7,6 +7,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    width: 45vw;
 }
 .textoEvento{
     background-color: #14365C;
@@ -18,8 +19,7 @@
 }
 #entrada{
     border: 1px solid rgb(175, 175, 175);
-    margin-left: 3vw;
-    margin-right: 4vw;
+
     margin-top: 3vh;
     border-radius: 5px;
     height: 36px;
@@ -27,8 +27,7 @@
 }
 #entrada-area{
     border: 1px solid rgb(175, 175, 175);
-    margin-left: 3vw;
-    margin-right: 4vw;
+
     margin-top: 3vh;
     border-radius: 5px;
     width: 80%;
@@ -91,7 +90,7 @@
 }
 
 #desplegable{
-    font-size: small;
+    font-size: 14px;
     margin: 3px;
     width: 95%;
     padding: 2px;
@@ -148,13 +147,23 @@
     color: red;
     width: 100%;
 }
+
+.formularioRegistroEvento .advertencia-creEve{
+    font-size: 0.75rem;
+    margin-right: 0;
+    margin-left: 9vw;
+    margin-top: 4px;
+    text-align: start;
+    color: red;
+    width: 100%;
+}
 .lineaCategoria{
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 3vw;
-    margin-right: 4vw;
+    justify-content: space-between;
     margin-top: 3vh;
+    width: 80%;
 }
 
 .categoriaIndividual{
@@ -211,4 +220,11 @@
     transform: translateY(-12px);
     background-color: white;
     color: rgb(175, 175, 175);
+}
+.formularioRegistroEvento{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -172,7 +172,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
           />
               
           <div className='tituloCampos'>
-            <h2>Campos adicionales al registro</h2>
+            <h2>Campos adicionales al formulario de registro</h2>
             <div className='seccionCampo'>
               <div className='seccionesExtra'>
                  {atributosFormulario.map((atributo) => ( 
