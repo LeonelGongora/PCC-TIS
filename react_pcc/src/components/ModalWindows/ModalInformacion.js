@@ -92,7 +92,7 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
                     {salir}
                   </button>
                 </div>
-                <div className="registroTipoEvento">
+                <div className="registroTipoEvento registroSeccionEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
                        <p id="textoCuadroAtributo">Nombre*</p>
                         <input
@@ -106,11 +106,11 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
                         <span className="span1Modal">{errors.nombre_informacion}</span>
                         )}
 
-                        <p id="textoCuadroAtributo"></p>
+                        <p id="textoCuadroAtributo">Descripción*</p>
                         <textarea
                         type="text"
                         name="contenido_informacion"
-                        className="inputEvento"
+                        className="inputMasInfo"
                         placeholder="Ingrese el contenido"
                         onChange={handleInput}
                         />

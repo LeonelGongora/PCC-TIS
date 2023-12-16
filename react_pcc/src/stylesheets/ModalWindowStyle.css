@@ -74,10 +74,11 @@
     
 }
 
-.contReg{
-    min-height: 500px;
-    min-width: 300px;
+.ContenedorModalActividades{
+    width: 70vw;
 }
+
+
 .contRegTeam{
     min-height: 30vw;
     min-width: 80vh;
@@ -167,6 +168,17 @@ label{
     font-size: 0.85rem;
     width: 95%;
 }
+.inputEvento-descripcion{
+    border: 1px solid rgb(175, 175, 175);
+    outline: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    width: 95%;
+    resize: none;
+}
 
 .span1Modal{
     font-size: 0.75rem;
@@ -249,8 +261,8 @@ label{
     font-size: 0.85rem;
     width: 98%;
     min-height: 4vh;
-    overflow-y: hidden;
-    max-width: 45vw;
+    overflow-y: auto;
+    max-width: 47vw;
     max-height: 35vh;
     min-width: 10vw;
 }
@@ -287,4 +299,48 @@ label{
 }
 .contentForm{
     text-align: center;
+}
+.registroCampoNumerico{
+    padding-left: 3vh;
+    padding-right: 3vh;
+}
+.BotonAgregarSeleccion{
+    margin-left: 38%;
+}
+
+.registroCampoNumerico .span1Modal{
+    min-width: 29vw;
+}
+.registroCampoSeleccion{
+    max-height: 65vh;
+    
+}
+.registroCampoSeleccion .span1Modal{
+    min-width: 24vw;
+}
+.registroSeccionEvento{
+    margin: 1vw;
+}
+.registroSeccionEvento .inputMasInfo{
+    min-width: 20vw;
+    max-height: 25vh;
+}
+.BotonElegirCampo{
+    width: 20vw;
+}
+.registroActividadEvento{
+    margin: 1vw;
+}
+.registroActividadEvento .inputMasInfo{
+    min-width: 20vw;
+    max-height: 5vh;
+}
+.camposSeleccionForm{
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 80%;
+}
+.textoCuadroAnuncio{
+    transform: translateY(37px) !important;
+    margin-left: 3vw !important;
 }

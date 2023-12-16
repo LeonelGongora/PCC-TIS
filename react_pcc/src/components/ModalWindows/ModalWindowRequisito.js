@@ -81,13 +81,13 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
                     {salir}
                   </button>
                 </div>
-                <div className="registroTipoEvento">
+                <div className="registroTipoEvento registroSeccionEvento">
                     <form onSubmit={saveTypeEvent} id="form1">
-                        <p id="textoCuadroAtributo"></p>
+                        <p id="textoCuadroAtributo"> Requisito*</p>
                         <textarea
                         type="text"
                         name="contenido_requisito"
-                        className="inputEvento"
+                        className="inputMasInfo"
                         placeholder="Ingrese un nombre"
                         onChange={handleInput}
                         />

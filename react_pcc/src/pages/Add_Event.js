@@ -96,8 +96,7 @@ class Add_Event extends Component {
 
     if (!this.state.nombre_evento.trim()) {
       validationErrors.nombre_evento = "Este campo es obligatorio";
-    } else if (
-      !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(this.state.nombre_evento)) {
+    } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(this.state.nombre_evento)) {
       validationErrors.nombre_evento = "Ingrese un nombre válido";
     }else{
       for (let index = 0; index < this.eventos_registrados.length; index++) {
@@ -120,7 +119,7 @@ class Add_Event extends Component {
     if (!this.state.descripcion.trim()) {
       validationErrors.descripcion = "Este campo es obligatorio";
     } else if (
-      !/^[:;.,\-\A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(
+      !/^[A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(
         this.state.descripcion
       )
     ) {
@@ -289,7 +288,7 @@ class Add_Event extends Component {
             <p className="textoRegistro"> Registro de Evento</p>
           </div>
           <div className="entradasDatos">
-            <form  onSubmit={this.saveEvent}>
+            <form className='formularioRegistroEvento' onSubmit={this.saveEvent}>
               <div className="datoNombre" id="entrada">
                 <p id="textoCuadro">Nombre*</p>
                 <input

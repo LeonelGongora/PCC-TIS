@@ -113,30 +113,131 @@ class AcceptTeamToEvent extends Component{
         // this.getAllUsers();
     }
 
+    getAll(){
+        this.getEquipos();
+        this.getEvent();
+    }
+
     aceptarEquipo = async (id, nombre_equipo) =>{
+        // const url = `${URL_API}/teams/${id}`
+        // await axios.put(url, {
+        //     solicitud: 1,
+        // })
+        // .then(response=>{
+        //     const contenido = `Tu equipo: ${nombre_equipo}, ha sido aceptado en el evento: ${this.state.nombre_evento}`
+        //     console.log(contenido)
+        //     axios.post(this.Notification_Url_Api, {
+        //         contenido: contenido,
+        //         informacion: null,
+        //         leido: 1
+        //     })
+        //     .then(response=>{
+        //         axios.post(this.NotificationTeam_Url_Api, {
+        //             notification_id: response.data.id,
+        //             team_id: id
+        //         }).then(response=>{
+        //             window.location.reload();
+        //         })
+        //     })
+        // })
+
         const url = `${URL_API}/teams/${id}`
-        await axios.put(url, {
+        const uno = axios.put(url, {
             solicitud: 1,
         })
-        .then(response=>{
-            const contenido = `Tu equipo: ${nombre_equipo}, ha sido aceptado en el evento: ${this.state.nombre_evento}`
-            console.log(contenido)
-            axios.post(this.Notification_Url_Api, {
-                contenido: contenido,
-                informacion: null,
-                leido: 1
-            })
-            .then(response=>{
-                axios.post(this.NotificationTeam_Url_Api, {
-                    notification_id: response.data.id,
-                    team_id: id
-                }).then(response=>{
-                    window.location.reload();
-                })
-            })
+        const contenido = `Tu equipo: ${nombre_equipo}, ha sido aceptado en el evento: ${this.state.nombre_evento}`
+        const dos = axios.post(this.Notification_Url_Api, {
+            contenido: contenido,
+            informacion: null,
+            leido: 0
         })
-        // this.getAllEvents();
-        // window.location.href = window.location.href;
+
+        const urlidusers = `${URL_API}/iduserofteams/${id}`
+        const tres = axios.get(urlidusers) 
+
+        const results = await Promise.all([uno, dos, tres])
+        const response = results[1];
+        const resusers= results[2];
+
+        console.log(response)
+        console.log(resusers.data.length)
+
+        await axios.post(this.NotificationTeam_Url_Api, {
+            notification_id: response.data.id,
+            team_id: id
+        })
+    
+
+        const contenido2 = `El equipo: ${nombre_equipo}, al que perteneces, ha sido aceptado en el evento: ${this.state.nombre_evento}`
+        const url_notificacion = `${URL_API}/notifications`;
+        const url_notificacionuser = `${URL_API}/notificationusers`;
+
+        const res = await axios.post(url_notificacion, {
+            contenido: contenido2,
+            informacion: null,
+            leido: 0
+        })
+        .then(res=>{
+
+            (async () => {
+                for await (const commit of resusers.data) {
+                //   console.log(commit.id);
+                    axios.post(url_notificacionuser, {
+                        notification_id: res.data.id,
+                        user_id: commit.id,
+                        auxieventid: null
+                    })
+                    .then(resp=>{
+                        console.log(`notificacion del participante${commit.id}`)
+                    })
+                }
+            })()
+
+            // (async () => {
+            //     for await (const commit of resusers.data) {
+            //     //   console.log(commit.id);
+            //         axios.post(url_notificacionuser, {
+            //             notification_id: res.data.id,
+            //             user_id: commit.id,
+            //             auxieventid: null
+            //         })
+            //         .then(resp=>{
+            //             console.log(`notificacion del participante${commit.id}`)
+            //         })
+            //     }
+            // })()
+            
+
+        // async function* asyncGenerator() {
+        //     var i = 0;
+        //     while (i < resusers.data.length) {
+        //       yield i++;
+        //     }
+        //   }
+          
+        // (async function () {
+        //     for await (let num of asyncGenerator()) {
+        //       console.log(resusers.data[num].id);
+
+        //         axios.post(url_notificacionuser, {
+        //         notification_id: res.data.id,
+        //         user_id: resusers.data[num].id,
+        //         auxieventid: null
+        //         })
+        //         .then(res=>{
+        //             console.log(`notificacion del participante${resusers.data[num].id}`)
+        //         })
+        //     }
+        //     // console.log(`termino`)
+        // })();
+
+        
+        })
+        
+        // window.location.reload();
+        console.log(`termino`)
+        this.getAll()
+        
     }
     
     

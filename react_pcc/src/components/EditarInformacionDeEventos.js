@@ -300,7 +300,7 @@ class EditarInformacionDeEventos extends Component{
                 <p className="textoRegistro"> Edicion de eventos</p>
               </div>
               <div className="entradasDatos">
-                <form onSubmit={this.updateEvent} encType="multipart/form-data">
+                <form onSubmit={this.updateEvent} encType="multipart/form-data" className='formularioRegistroEvento'>
                   <div className="datoNombre" id="entrada">
                     <p id="textoCuadro">Nombre*</p>
                     <input

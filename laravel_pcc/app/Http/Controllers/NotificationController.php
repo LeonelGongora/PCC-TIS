@@ -26,7 +26,7 @@ class NotificationController extends Controller
         ->join('notification_user', 'notifications.id', '=', 'notification_user.notification_id')
         ->join('users', 'users.id', '=', 'notification_user.user_id')
         ->where('users.id', $id)
-        ->select('notifications.*')
+        ->select('notifications.*', 'notification_user.user_id', 'notification_user.auxieventid')
         ->get();
 
         $notificacionteam = DB::table('notifications')

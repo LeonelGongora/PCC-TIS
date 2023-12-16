@@ -83,7 +83,8 @@ function ModalRejection({estadoRejection, cambiarEstadoModalRejection, id_evento
                 .then(response=>{
                     axios.post(NotificationUser_Url_Api, {
                         notification_id: response.data.id,
-                        user_id: id
+                        user_id: id,
+                        auxieventid: null
                     }).then(response=>{
                         window.location.reload();
                     })

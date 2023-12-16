@@ -60,6 +60,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 .botonGuardarEdit{
     background-color: rgb(255, 213, 30);

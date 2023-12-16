@@ -11,6 +11,6 @@ class Notification_User extends Model
     protected $table = 'notification_user';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'notification_id', 'user_id',
+        'notification_id', 'user_id', 'auxieventid',
     ];
 }

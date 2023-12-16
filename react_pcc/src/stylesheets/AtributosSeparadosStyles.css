@@ -43,9 +43,10 @@
 }
 .inputRequisitoOp{
     outline: none;
-    width: 100%;
-    max-width: 100%;
+    width: 95%;
+
     resize: none;
+    margin-left: 1vw;
 }
 .botonEliminarCampo{
     background-color: white;
