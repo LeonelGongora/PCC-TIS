@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import "../stylesheets/AcceptUserToEventStyles.css";
 import '../App.css';
@@ -9,23 +9,24 @@ import { faDownload, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 import ModalRejection from '../components/ModalWindows/ModalRejection';
 import configApi from '../configApi/configApi';
 import ModalRejectionTeam from '../components/ModalWindows/ModalRejectionTeam';
-import {URL_API} from '../const';
+import { URL_API } from '../const';
 
 const cookies = new Cookies();
 
-class AcceptTeamToEvent extends Component{
-    
+class AcceptTeamToEvent extends Component {
+
     equipos = []
     usuarios = []
-    
+
     constructor(props) {
         super(props);
-        this.state  = {
+        this.state = {
             event: [],
-            equipos : [],
+            equipos: [],
             usuarios: [],
             events: [],
             e: [],
@@ -33,10 +34,11 @@ class AcceptTeamToEvent extends Component{
             nombre_evento: '',
             requisitos: [],
             url: `${URL_API}/events`,
-            loader:false,
+            loader: false,
             estadoModal: false,
-            estadoModalOrganizador:false,
+            estadoModalOrganizador: false,
             estadoModalPatrocinador: false,
+            estadoModalAnuncio: false,
             estadoModalRejection: false,
             mostrarInfoTeam: false,
             nombre_equipo:'',
@@ -45,10 +47,10 @@ class AcceptTeamToEvent extends Component{
             clic:false,
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
-        this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
-        this.Event_Url_Api= configApi.EVENTOC_API_URL;
-        this.Notification_Url_Api= configApi.NOTIFICATION_API_URL;
-        this.NotificationTeam_Url_Api=configApi.NOTIFICATIONTEAM_API_URL;
+        this.EventoUsuario_Url_Api = configApi.EVENTO_USUARIO_API_URL;
+        this.Event_Url_Api = configApi.EVENTOC_API_URL;
+        this.Notification_Url_Api = configApi.NOTIFICATION_API_URL;
+        this.NotificationTeam_Url_Api = configApi.NOTIFICATIONTEAM_API_URL;
         this.eventos = []
         this.equipos = []
         this.requisitos = []
@@ -69,33 +71,37 @@ class AcceptTeamToEvent extends Component{
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
+    cambiarEstadoModalAnuncio = (nuevoEstado) => {
+        this.setState({ estadoModalAnuncio: nuevoEstado });
+    };
 
     cambiarEstadoModalRejection = (nuevoEstado, id, nombre_equipo) => {
         this.getAll()  
         this.setState({ estadoModalRejection: nuevoEstado, id: id, nombre_equipo: nombre_equipo });
     };
-    
-    getEvent=async()=>{
+
+
+    getEvent = async () => {
         const idevent = cookies.get('auteId');
         const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
         // console.log(response)
-        this.setState({ event: response.data})
-        if(response.request.status === 200){
+        this.setState({ event: response.data })
+        if (response.request.status === 200) {
             this.setState({
                 nombre_evento: response.data.nombre_evento,
                 requisitos: response.data.requirements
-              });
+            });
         }
-      }
+    }
 
-    getEquipos=async()=>{
+    getEquipos = async () => {
         const idevent = cookies.get('auteId');
         const url = `${URL_API}/getporevento/${idevent}`
         const response = await axios.get(url);
-        
+
         // console.log(response.data.teams)
         this.equipos = Array.from(response.data.teams);
-        this.setState({ equipos: response.data.teams});
+        this.setState({ equipos: response.data.teams });
         let arrayUsuarios = []
         // console.log(this.equipos)
 
@@ -105,43 +111,23 @@ class AcceptTeamToEvent extends Component{
             // console.log(this.equipos[i].users)
         }
         // console.log(this.usuarios[1])
-        this.setState({ loader: false});
-        this.i = this.i-(this.equipos.length*2)
+        this.setState({ loader: false });
+        this.i = this.i - (this.equipos.length * 2)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getEquipos();
         this.getEvent();
         // this.getAllUsers();
     }
 
-    getAll(){
+    getAll() {
         this.getEquipos();
         this.getEvent();
     }
 
-    aceptarEquipo = async (id, nombre_equipo) =>{
-        // const url = `${URL_API}/teams/${id}`
-        // await axios.put(url, {
-        //     solicitud: 1,
-        // })
-        // .then(response=>{
-        //     const contenido = `Tu equipo: ${nombre_equipo}, ha sido aceptado en el evento: ${this.state.nombre_evento}`
-        //     console.log(contenido)
-        //     axios.post(this.Notification_Url_Api, {
-        //         contenido: contenido,
-        //         informacion: null,
-        //         leido: 1
-        //     })
-        //     .then(response=>{
-        //         axios.post(this.NotificationTeam_Url_Api, {
-        //             notification_id: response.data.id,
-        //             team_id: id
-        //         }).then(response=>{
-        //             window.location.reload();
-        //         })
-        //     })
-        // })
+    aceptarEquipo = async (id, nombre_equipo) => {
+        
 
         this.setState({ clic: true});
         const url = `${URL_API}/teams/${id}`
@@ -156,11 +142,11 @@ class AcceptTeamToEvent extends Component{
         })
 
         const urlidusers = `${URL_API}/iduserofteams/${id}`
-        const tres = axios.get(urlidusers) 
+        const tres = axios.get(urlidusers)
 
         const results = await Promise.all([uno, dos, tres])
         const response = results[1];
-        const resusers= results[2];
+        const resusers = results[2];
 
         // console.log(response)
         // console.log(resusers.data.length)
@@ -169,6 +155,8 @@ class AcceptTeamToEvent extends Component{
             notification_id: response.data.id,
             team_id: id
         })
+
+
 
         const contenido2 = `El equipo: ${nombre_equipo}, al que perteneces, ha sido aceptado en el evento: ${this.state.nombre_evento}`
         const url_notificacion = `${URL_API}/notifications`;
@@ -179,7 +167,7 @@ class AcceptTeamToEvent extends Component{
             informacion: null,
             leido: 0
         })
-        .then(res=>{
+            .then(res => {
 
             (async () => {
                 for await (const commit of resusers.data) {
@@ -195,127 +183,134 @@ class AcceptTeamToEvent extends Component{
                 }
             })()
         })
+        // window.location.reload();
         console.log(`termino`)
         // this.getAll()       
-        setTimeout(this.recargarPagina, 2500);  
+setTimeout(this.recargarPagina, 2500);  
     }
 
     recargarPagina = () => {
         window.location.reload();
     };
-    
-    
+
+
     handleClick = (equipoId) => {
         this.setState((prevState) => ({
-          equipoSeleccionado: prevState.equipoSeleccionado === equipoId ? null : equipoId,
+            equipoSeleccionado: prevState.equipoSeleccionado === equipoId ? null : equipoId,
         }));
-      };
+    };
 
-    render(){
+    render() {
         const { equipoSeleccionado } = this.state;
-        return(
+        return (
             <div className="App">
                 <ModalWindow
-                estado1={this.state.estadoModal}
-                cambiarEstado1={this.cambiarEstadoModal}
+                    estado1={this.state.estadoModal}
+                    cambiarEstado1={this.cambiarEstadoModal}
                 />
                 <ModalWindowOrganizadores
-                estadoOrganizador={this.state.estadoModalOrganizador}
-                cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
+                    estadoOrganizador={this.state.estadoModalOrganizador}
+                    cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
                 />
                 <ModalWindowPatrocinadores
-                estadoPatrocinador={this.state.estadoModalPatrocinador}
-                cambiarEstadoModalPatrocinador={
-                this.cambiarEstadoModalPatrocinador
-                }
+                    estadoPatrocinador={this.state.estadoModalPatrocinador}
+                    cambiarEstadoModalPatrocinador={
+                        this.cambiarEstadoModalPatrocinador
+                    }
                 />
-                <ModalRejectionTeam estadoRejection={ this.state.estadoModalRejection} 
-                cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
-                id_evento = {this.state.id_evento}
-                id_equipo ={this.state.id}
-                nombre_equipo = {this.state.nombre_equipo}
+                <ModalAnuncio
+                    estadoAnuncio={this.state.estadoModalAnuncio}
+                    cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
+                />
+                <ModalRejectionTeam estadoRejection={this.state.estadoModalRejection}
+                    cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
+                    id_evento={this.state.id_evento}
+                    id_equipo={this.state.id}
+                    nombre_equipo={this.state.nombre_equipo}
                 />
 
 
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin
-                   estado1={this.estadoModal}
-                   cambiarEstado1={this.cambiarEstadoModal}
-                   estadoOrganizador={this.estadoModalOrganizador}
-                   cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
-                   estadoPatrocinador={this.estadoModalPatrocinador}
-                   cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
-                   />
-                   <div className="contenedor">
+                    <NavbarAdmin
+                        estado1={this.estadoModal}
+                        cambiarEstado1={this.cambiarEstadoModal}
+                        estadoOrganizador={this.estadoModalOrganizador}
+                        cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+                        estadoPatrocinador={this.estadoModalPatrocinador}
+                        cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
+                        estadoAnuncio={this.estadoModalAnuncio}
+                        cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
+                    />
+                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
 
-                        {this.equipos[0] == null ? (
+                            {this.equipos[0] == null ? (
                                 <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
                             ) : (<>
-                            <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
+                                <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
                                 <div className='containerReqSol'>
                                     <div className='contRaroReq'>
                                         <div className='requisitosDeEvento'>
                                             <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                            {this.state.requisitos.map((r, index) => {  
+                                            {this.state.requisitos.map((r, index) => {
                                                 return (<div key={r.id}>
-                                                    <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
+                                                    <p className='requisitosTexto'>{index + 1}. {r.contenido_requisito}</p>
                                                 </div>);
                                             })}
-                                        
+
                                         </div>
                                     </div>
                                     <div>
-                                    {this.equipos.map((e, index) => {  
-                                        index=index-1
-                                        return (<div key={e.id}>
-                                            <div onClick={() => this.handleClick(e.id)} className='containerUserSol contTeam'>
-                                                <FontAwesomeIcon className='buttonIconUser' icon={faUsers} />
-                                                <h4 className='nameUser'>{`${e.nombre_equipo}`}</h4>
+                                        {this.equipos.map((e, index) => {
+                                            index = index - 1
+                                            return (<div key={e.id}>
+                                                <div onClick={() => this.handleClick(e.id)} className='containerUserSol contTeam'>
+                                                    <FontAwesomeIcon className='buttonIconUser' icon={faUsers} />
+                                                    <h4 className='nameUser'>{`${e.nombre_equipo}`}</h4>
 
-                                                {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
-                                                <a href = {`${e.zip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
-                                                
-                                                <button onClick={() => this.aceptarEquipo(e.id, e.nombre_equipo)} className='buttonAcceptUser' disabled = {this.state.clic}> Aceptar </button>
-                                                <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal, e.id, e.nombre_equipo)} className='buttonDenyUser' disabled = {this.state.clic}> Rechazar </button>
-                                
-                                            </div>
-                                            
-                                            <div className={`contenedorInfoTeam ${equipoSeleccionado === e.id ? 'mostrando' : ''}`}>
-                                                <h3 >Coach: {e.nombreCoach} {e.apellidoCoach}</h3>
-                                                {this.usuarios[index+1]?.map((usuario) => {
-                                                return (
-                                                <div key={usuario.id} className='contParticip'>
-                                                    <div className='imgUserTeam'>
-                                                        <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
-                                                    </div>
-                                                    <div className='infoParticipante'>
-                                                        <h2>{`${usuario.nombre} ${usuario.apellido}`}</h2>
-                                                        <div className="infoMailPart" id="entradaTeam">
-                                                            <p id="textoCuadro">Email</p>
-                                                            <span id="campo-informacion">{usuario.email}</span>
-                                                        </div>
-                                                        <div className="infoMailPart" id="entradaTeam">
-                                                            <p id="textoCuadro">Telefono</p>
-                                                            <span id="campo-informacion">{usuario.telefono}</span>
-                                                        </div>
-                                                    </div>
+                                                    {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
+                                                    <a href={`${e.zip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
+
+                                                    <button onClick={() => this.aceptarEquipo(e.id, e.nombre_equipo)} className='buttonAcceptUser' disabled = {this.state.clic}> Aceptar </button>
+                                                    <button onClick={() => this.cambiarEstadoModalRejection(!this.state.estadoModal, e.id, e.nombre_equipo)} className='buttonDenyUser' disabled = {this.state.clic}> Rechazar </button>
+
                                                 </div>
-                                                );
-                                                })}
-                                                
-                                            </div>
-                                            
-                                        </div>);
-                                    })}</div>
-                                </div>           
+
+                                                <div className={`contenedorInfoTeam ${equipoSeleccionado === e.id ? 'mostrando' : ''}`}>
+                                                    <h3 >Coach: {e.nombreCoach} {e.apellidoCoach}</h3>
+                                                    {this.usuarios[index + 1]?.map((usuario) => {
+                                                        return (
+                                                            <div key={usuario.id} className='contParticip'>
+                                                                <div className='imgUserTeam'>
+                                                                    <FontAwesomeIcon className='buttonIconUserT' icon={faUser} />
+                                                                </div>
+                                                                <div className='infoParticipante'>
+                                                                    <h2>{`${usuario.nombre} ${usuario.apellido}`}</h2>
+                                                                    <div className="infoMailPart" id="entradaTeam">
+                                                                        <p id="textoCuadro">Email</p>
+                                                                        <span id="campo-informacion">{usuario.email}</span>
+                                                                    </div>
+                                                                    <div className="infoMailPart" id="entradaTeam">
+                                                                        <p id="textoCuadro">Telefono</p>
+                                                                        <span id="campo-informacion">{usuario.telefono}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+
+                                                </div>
+
+                                            </div>);
+                                        })}</div>
+                                </div>
                             </>
                             )}
                         </div>
                     </div>
                 </div>
-           </div>
+            </div>
         );
     }
 }

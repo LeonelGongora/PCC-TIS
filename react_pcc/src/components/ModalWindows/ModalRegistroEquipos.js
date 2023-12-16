@@ -283,7 +283,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
 
                     <div id="entrada-user">
                       <p id="textoCuadro-user">Seleccione un Pais*</p>
-                      <select onChange={seleccionarPais}>
+                      <select onChange={seleccionarPais} id='inputRegistro-user'>
                         <option disabled selected>
                           {" "}
                           Seleccione un pais

@@ -11,8 +11,6 @@ const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 function DropdownReporte({
   setOpenDropFath,
   isOpen,
-  cambiarEstadoAnuncio,
-  estadoAnuncio,
 }) {
 
   const toggleDropdown = () => {

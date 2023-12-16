@@ -59,6 +59,9 @@ function NavbarUserDinamico({
       setOpenDropdown("sesionUser");
     }
   };
+  const redirigirLogin = () => {
+    window.location.href = "./login";
+  };
 
   return (
     <>
@@ -99,7 +102,7 @@ function NavbarUserDinamico({
 
           <div className="userId">
             <div className="dropdown-container">
-              <button
+              {se_Registro && <button
                 className={`${
                   isOpen && openDropdown === "sesionUser"
                     ? "dropdown-button-active"
@@ -111,7 +114,12 @@ function NavbarUserDinamico({
                   <FontAwesomeIcon className="userIcon" icon={faUser} />
                 </a>
                 {`${nombre_usuario} ${apellido_usuario}`}
-              </button>
+              </button>}
+              {!se_Registro && <button className='dropdown-button botonAcceder'
+                onClick={redirigirLogin}
+                >
+                    Acceder
+                </button>}
               {isOpen && openDropdown === "sesionUser" && (
                 <ul className="dropdown-menu-user">
                   <li onClick={cerrarSesion}>
