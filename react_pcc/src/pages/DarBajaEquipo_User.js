@@ -46,6 +46,7 @@ class DarBajaEvento extends Component {
 	    nombreEventoBann: "",
       euid:"",
       pe: "",
+      nombre_equipo:"",
     };
     this.eventos = [];
     this.equipos = [];
@@ -105,15 +106,15 @@ class DarBajaEvento extends Component {
     this.setState({ estadoDarseBaja: estado });
   };
   
-  setNombreEvento = (nom, euid, pe) => {
-    this.setState({ nombreEventoBann: nom, euid: euid, pe: pe });
+  setNombreEvento = (nom, euid, pe, nombre_equipo) => {
+    this.setState({ nombreEventoBann: nom, euid: euid, pe: pe, nombre_equipo:nombre_equipo });
   };
 
-  darDeBaja = async (estado, nombre, euid, pe) => {
+  darDeBaja = async (estado, nombre, euid, pe, nombre_equipo) => {
     // const url = `http://127.0.0.1:8000/api/eventousuarios/${euid}`;
     // await axios.delete(url);
     // this.getEvents();
-    this.setNombreEvento(nombre, euid, pe);
+    this.setNombreEvento(nombre, euid, pe, nombre_equipo);
     this.cambiarDarseBaja(estado);
   };
 
@@ -147,6 +148,7 @@ class DarBajaEvento extends Component {
           nombreBanner1={this.state.nombreEventoBann}
           euid={this.state.euid}
           pe = {this.state.pe}
+          ne = {this.state.nombre_equipo}
         />
         <div className="background-image"></div> {/* Componente de fondo */}
         <div className="content">
@@ -204,7 +206,8 @@ class DarBajaEvento extends Component {
                               true,
                               evento.nombre_evento,
                               evento.euid,
-                              evento.participantes_equipo
+                              evento.participantes_equipo,
+                              evento.nombre_equipo
                             )
                           }
                         >
