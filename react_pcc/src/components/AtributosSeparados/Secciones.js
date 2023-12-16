@@ -141,7 +141,7 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
             </div>
           </div>
           <div className='contBotonRegist'>
-                <button className='botonesCambiar'
+            <button className='botonesCambiar botonTerminarFix'
                 onClick={terminarRegistro}
                 >
                 Terminar Registro

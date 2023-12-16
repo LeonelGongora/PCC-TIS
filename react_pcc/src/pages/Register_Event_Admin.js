@@ -34,7 +34,6 @@ function Register_Event_Admin() {
       />
       <div className="background-image-Manu"></div>
       <div className="content-Manu">
-        <div className="navegacion">
           <NavbarAdmin
             estado1={estadoModal}
             cambiarEstado1={cambiarEstadoModal}
@@ -45,7 +44,6 @@ function Register_Event_Admin() {
             estadoAnuncio={estadoModalAnuncio}
             cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
           />
-        </div>
         <div className="contenido-Manu">
           <Add_Event />
         </div>

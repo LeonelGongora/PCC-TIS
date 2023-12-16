@@ -56,7 +56,7 @@ function App() {
         <Route path='/register-to-event-teams' element={<Register_to_Event_Teams />} />
 
         <Route path='/add-event' element={<Register_Event_Admin />} />
-        <Route path='/add-event-next' element={<Register_Event_Admin_Next />} />
+        {/* <Route path='/add-event-next' element={<Register_Event_Admin_Next />} /> */}
         <Route path='/add-event-next-alt' element={<Register_Event_Admin_NextAlt />} />
 
         <Route path='/paginaRegistrarseEventos' element={<PaginaRegistrarseEventos />} />
@@ -82,17 +82,10 @@ function App() {
         <Route path='/home' element={<Homepage />} />
         <Route path='/login' element={<Login />} />
 
-<<<<<<< HEAD
         <Route path='/reportes' element={<Reportes_Pagina />} />
 
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico />} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser />} />
-=======
-        <Route path='/reportes' element={<Reportes/>} />
-        
-        <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
-        <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />
->>>>>>> 4fffe0bad390fc0fe5c9be088244e0bb1972eef3
 
       </Routes>
     </Router>
