@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home_Admin from "./pages/Home_Admin.js";
 import Home_Participant from "./pages/Home_Participant.js";
-import Home_User_Dinamico from "./pages/Home_User_Dinamico.js";
 
 import Register_to_Event from "./pages/Register_to_Event.js";
 import Register_to_Event_Teams from "./pages/Register_to_Event_Teams.js";
@@ -36,7 +35,7 @@ import Homepage from "./pages/Homepage.js";
 import Login from "./pages/Login.js";
 import Register_Event_Admin_NextAlt from "./pages/Register_Event_Admin_NextAlt.js";
 
-import Reportes_Pagina from "./components/Reportes.js";
+import Reportes from "./components/Reportes.js";
 
 import FormRegistroUsuarioDinamico from "./pages/FormRegistroUsuarioDinamico.js";
 import FormRegistroTipoUser from "./pages/FormRegistroTipoUser.js";
@@ -45,12 +44,11 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='/home-admin' element={<Home_Admin />} />
-        <Route path='/home-participant' element={<Home_Participant />} />
-        <Route path='/home-dinamico' element={<Home_User_Dinamico />} />
-
-        <Route path='/event-admin' element={<ContenedorSliderAdmin />} />
+      <Route path='/' element={<Homepage/>} />
+      <Route path='/home-admin' element={<Home_Admin/>} />
+      <Route path='/home-participant' element={<Home_Participant/>} />
+      
+        <Route path='/event-admin' element={<ContenedorSliderAdmin/>} />
 
         <Route path='/register-to-event' element={<Register_to_Event />} />
         <Route path='/register-to-event-teams' element={<Register_to_Event_Teams />} />
@@ -82,10 +80,17 @@ function App() {
         <Route path='/home' element={<Homepage />} />
         <Route path='/login' element={<Login />} />
 
+<<<<<<< HEAD
         <Route path='/reportes' element={<Reportes_Pagina />} />
 
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico />} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser />} />
+=======
+        <Route path='/reportes' element={<Reportes/>} />
+        
+        <Route path='/formRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
+        <Route path='/formRegistroTipoUser' element={<FormRegistroTipoUser/>} />
+>>>>>>> 5e5a73061005dc8ec6ab10f5dbf190d23839379d
 
       </Routes>
     </Router>

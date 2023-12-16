@@ -50,13 +50,13 @@ class LoginController extends Controller
         $usercontipo = DB::table('users')
         ->join('tipo_user', 'tipo_user.user_id', '=', 'users.id')
         ->join('tipos', 'tipo_user.tipo_id', '=', 'tipos.id')
-        ->where('users.email', $req->email)
+        ->where('users.ci', $req->email)
         ->where('users.password', $req-> password)
         ->select('users.id', 'users.nombre', 'users.apellido', 'users.ci', 'tipos.cargo', 'tipos.privilegio')
         ->get();
 
         $usersintipo = DB::table('users')
-        ->where('users.email', $req->email)
+        ->where('users.ci', $req->email)
         ->where('users.password', $req-> password)
         ->select('users.id', 'users.nombre', 'users.apellido', 'users.ci')
         ->get();

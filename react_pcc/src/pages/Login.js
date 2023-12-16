@@ -61,7 +61,7 @@ function Login (){
                 window.location.href='./home-participant';
             break; 
             default :
-                window.location.href='./home-dinamico';
+                window.location.href='./home-admin';
             break; 
         }  
     
@@ -69,8 +69,8 @@ function Login (){
         .catch(error=>{
             console.log('Usuario NO Registrado')
             const validationErrors2 = {};
-            validationErrors2.username = "Email o contraseña incorrecto."
-            validationErrors2.password = "Email o contraseña incorrecto."
+            validationErrors2.username = "Username o contraseña incorrecto."
+            validationErrors2.password = "Username o contraseña incorrecto."
             setErrors(validationErrors2)
         })
         }
@@ -102,7 +102,7 @@ function Login (){
                         <p>Ingrese sus datos</p>
                         <input
                             type='text'
-                            placeholder='Email'
+                            placeholder='Username'
                             className='input-text'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
