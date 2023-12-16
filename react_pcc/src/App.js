@@ -80,17 +80,10 @@ function App() {
         <Route path='/home' element={<Homepage />} />
         <Route path='/login' element={<Login />} />
 
-<<<<<<< HEAD
-        <Route path='/reportes' element={<Reportes_Pagina />} />
+        <Route path='/reportes' element={<Reportes/>} />
 
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico />} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser />} />
-=======
-        <Route path='/reportes' element={<Reportes/>} />
-        
-        <Route path='/formRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
-        <Route path='/formRegistroTipoUser' element={<FormRegistroTipoUser/>} />
->>>>>>> 5e5a73061005dc8ec6ab10f5dbf190d23839379d
 
       </Routes>
     </Router>
