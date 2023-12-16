@@ -32,15 +32,14 @@ function NavbarUser(){
   const cerrarSesion = () => {
     const cookieKeys = Object.keys(cookies.getAll());
       cookieKeys.forEach(key => {
-        console.log(key)
         cookies.remove(key);
       });
     window.location.reload();
   }
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [openDropdown, setOpenDropdown] = useState(null);
+
   const toggleDropdown = () => {
     if (isOpen) {
       setOpenDropdown(null);
@@ -105,6 +104,8 @@ function NavbarUser(){
                     </li>
                   </ul>
                 )}
+
+
               </div>
             </div>
           </div>

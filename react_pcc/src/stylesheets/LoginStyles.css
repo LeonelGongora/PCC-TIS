@@ -107,3 +107,18 @@
 .buttonLogin:active{
     background-color: rgb(255, 213, 0);
 }
+#registrarse{
+    color: rgb(255, 213, 30);
+    margin-left: 1vw;
+}
+.mensajeInf {
+    background-color: #ececec; 
+    color: #000000; 
+    padding-block: 1vw; 
+    padding-inline: 1vw;
+    border-radius: 1vw; 
+    margin-top: 10px; 
+    margin-left: 7.2vw;
+    font-size: 1.7vh;
+    
+  }

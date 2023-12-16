@@ -8,7 +8,7 @@ const lineV = <FontAwesomeIcon icon={faAngleRight} />;
 
 function DropdownReporte({
   setOpenDropFath,
-  isOpen
+  isOpen,
 }) {
 
   const toggleDropdown = () => {
@@ -18,7 +18,9 @@ function DropdownReporte({
       setOpenDropFath("reportes");
     }
   };
-
+  const visualizarReportes = () => {
+    window.location.href = "./reportes";
+  };
   return (
     <div className="dropdown-container">
       <button
@@ -30,7 +32,7 @@ function DropdownReporte({
       </button>
       {isOpen && (
         <ul className="dropdown-menu" onMouseLeave={toggleDropdown}>
-          <li>
+          <li onClick={visualizarReportes}>
             <span id="lineaV">{lineV}</span> Reporte General
           </li>
         </ul>

@@ -3,6 +3,10 @@ import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import ListaEventos from '../components/ListaEventos';
 import "../stylesheets/EventosStyles.css";
 import imgPred from "../images/afiche.png";
+import ModalWindow from '../components/ModalWindows/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 
 
 import '../App.css';
@@ -14,84 +18,129 @@ import { URL_API,URL_IMG } from '../const';
 const cookies = new Cookies();
 
 
-class PaginaVisualizarParticipantes extends Component{
+class PaginaVisualizarParticipantes extends Component {
+  eventos = [];
+  //id = cookies.get('id_usuario')
 
-    eventos = []
-    //id = cookies.get('id_usuario')
-    
-    state = {
-        events: [],
-        loader:false,
-        url: `${URL_API}/events`
-    };
+  state = {
+    events: [],
+    loader: false,
+    url: `${URL_API}/events`,
+    estadoModal: false,
+    estadoModalOrganizador: false,
+    estadoModalPatrocinador: false,
+    estadoModalAnuncio: false,
+  };
 
-    getEvents = async () => {
+  getEvents = async () => {
+    //var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`;
 
-        //var url2 = `http://127.0.0.1:8000/api/register-to-events/${this.id}`; 
+    this.setState({ loader: true });
+    //const events = await axios.get(this.state.url);
+    const events = await axios.get(this.state.url);
+    console.log(events);
 
-        this.setState({loader:true});
-        //const events = await axios.get(this.state.url);
-        const events = await axios.get(this.state.url);
-        console.log(events)
+    this.eventos = Array.from(events.data.events);
+    console.log(this.eventos);
 
-        this.eventos = Array.from(events.data.events)
-        console.log(this.eventos)
-        
-        this.setState({ events: events.data, loader:false});
-        var i;
-        var fecha;
-        var fecha1;
+    this.setState({ events: events.data, loader: false });
+    var i;
+    var fecha;
+    var fecha1;
 
-        for (i = 0; i < this.eventos.length; i++) {
-            fecha = new Date(this.eventos[i].fecha_fin)
-            var dia = fecha.getDate() + 1
-            var mes = fecha.getMonth() + 1
-            let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
-            this.eventos[i].fecha_fin = format4
+    for (i = 0; i < this.eventos.length; i++) {
+      fecha = new Date(this.eventos[i].fecha_fin);
+      var dia = fecha.getDate() + 1;
+      var mes = fecha.getMonth() + 1;
+      let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
+      this.eventos[i].fecha_fin = format4;
 
-            fecha1 = new Date(this.eventos[i].fecha_inicio)
-            var dia1 = fecha1.getDate() + 1
-            var mes1 = fecha1.getMonth() + 1
-            let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
-            this.eventos[i].fecha_inicio = format5
-            
-        }
-
-        
-    };
-
-    componentDidMount(){
-        this.getEvents();
+      fecha1 = new Date(this.eventos[i].fecha_inicio);
+      var dia1 = fecha1.getDate() + 1;
+      var mes1 = fecha1.getMonth() + 1;
+      let format5 = dia1 + "-" + mes1 + "-" + fecha1.getFullYear();
+      this.eventos[i].fecha_inicio = format5;
     }
+  };
 
-    irRegistro(id, participantes){
-        cookies.set('id_evento', id, {path: "/"});
-        console.log(id)
-        if(participantes > 1){
-          cookies.set('participantes_equipo', participantes, {path: "/"});
-          window.location.href='./equipos';
-        }else{
-          window.location.href='./participantes';
-          
-        }
+  componentDidMount() {
+    this.getEvents();
+  }
+
+  irRegistro(id, participantes) {
+    cookies.set("id_evento", id, { path: "/" });
+    console.log(id);
+    if (participantes > 1) {
+      cookies.set("participantes_equipo", participantes, { path: "/" });
+      window.location.href = "./equipos";
+    } else {
+      window.location.href = "./participantes";
     }
+  }
 
-    render(){
+  cambiarEstadoModal = (nuevoEstado) => {
+    this.setState({ estadoModal: nuevoEstado });
+  };
 
-        return (
-          <div className="App">
-            <div className="background-image"></div> {/* Componente de fondo */}
-            <div className="content">
-              <NavbarAdmin />
-              <div className="contenedor">
-                {this.eventos[0] == null ? (
-                  <div>
-                    <p className="tituloEvento-home">VISUALIZAR PARTICIPANTES DE EVENTOS</p>
-                    <h1 className='tituloEvento-home'>No Hay Eventos Disponibles</h1>
-                </div>
-                ) : (<>
+  cambiarEstadoModalOrganizador = (nuevoEstado) => {
+    this.setState({ estadoModalOrganizador: nuevoEstado });
+  };
+
+  cambiarEstadoModalPatrocinador = (nuevoEstado) => {
+    this.setState({ estadoModalPatrocinador: nuevoEstado });
+  };
+
+  cambiarEstadoModalAnuncio = (nuevoEstado) => {
+    this.setState({ estadoModalAnuncio: nuevoEstado });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <ModalWindow
+          estado1={this.state.estadoModal}
+          cambiarEstado1={this.cambiarEstadoModal}
+        />
+        <ModalWindowOrganizadores
+          estadoOrganizador={this.state.estadoModalOrganizador}
+          cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
+        />
+        <ModalWindowPatrocinadores
+          estadoPatrocinador={this.state.estadoModalPatrocinador}
+          cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}
+        />
+        <ModalAnuncio
+          estadoAnuncio={this.state.estadoModalAnuncio}
+          cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
+        />
+        <div className="background-image"></div> {/* Componente de fondo */}
+        <div className="content">
+          <NavbarAdmin
+            estado1={this.estadoModal}
+            cambiarEstado1={this.cambiarEstadoModal}
+            estadoOrganizador={this.estadoModalOrganizador}
+            cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+            estadoPatrocinador={this.estadoModalPatrocinador}
+            cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
+            estadoAnuncio={this.state.estadoModalAnuncio}
+            cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
+          />
+          <div className="contenedor">
+            {this.eventos[0] == null ? (
+              <div>
+                <p className="tituloEvento-home">
+                  VISUALIZAR PARTICIPANTES DE EVENTOS
+                </p>
+                <h1 className="tituloEvento-home">
+                  No Hay Eventos Disponibles
+                </h1>
+              </div>
+            ) : (
+              <>
                 <div className="contenedorTitulo-home">
-                  <p className="tituloEvento-home">VISUALIZAR PARTICIPANTES DE EVENTOS</p>
+                  <p className="tituloEvento-home">
+                    VISUALIZAR PARTICIPANTES DE EVENTOS
+                  </p>
                 </div>
                 <div className="columna1">
                   <ListaEventos />
@@ -136,13 +185,13 @@ class PaginaVisualizarParticipantes extends Component{
                     );
                   })}
                 </div>
-                </>
-                )}
-              </div>
-            </div>
+              </>
+            )}
           </div>
-        );
-    }
+        </div>
+      </div>
+    );
+  }
 }
 
 export default PaginaVisualizarParticipantes ;
