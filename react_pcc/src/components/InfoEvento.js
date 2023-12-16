@@ -120,8 +120,8 @@ function InfoEvento({props}){
                                     {seccciones.map((s) => {
                                         return (
                                             <>
-                                                <h3>Titulo de seccion</h3>
-                                                <p>Descripcion de seccion</p>
+                                                <h3>{s.nombre_informacion}</h3>
+                                                <p>{s.contenido_informacion}</p>
                                             </>
                                         );
                                     })} 
@@ -185,7 +185,7 @@ function InfoEvento({props}){
                             <div className='organizadores'>
                                 <div className='contOrganizador'>
                                 {organizadores.map((o) => {  
-                                return (<div key={o.id}>
+                                return (<div className='divExtraSlv' key={o.id}>
                                 <img className='imagenSlv' src={`${URL_IMG}/imagenesOrganizadores/`+o.imagen_organizador}></img>
                                 </div>);
                                 })}
@@ -199,21 +199,21 @@ function InfoEvento({props}){
                             <div className='organizadores'>
                                 <div className='patrocinadoresGold'>
                                 {patrocinadores.map((p) => {  
-                                return (<div key={p.id}>
+                                return (<div className='divExtraGold' key={p.id}>
                                 <img className='imagenGld' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}
                                 </div>
                                 <div className='patrocinadoresSilver'>
                                 {patrocinadores.map((p) => {  
-                                return (<div key={p.id}>
+                                return (<div className='divExtraSlv' key={p.id}>
                                 <img className='imagenSlv' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}
                                 </div>
                                 <div className='patrocinadoresBronce'>
                                 {patrocinadores.map((p) => {  
-                                return (<div key={p.id}>
+                                return (<div className='divExtraBrc' key={p.id}>
                                 <img className='imagenBrc' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
                                 </div>);
                                 })}

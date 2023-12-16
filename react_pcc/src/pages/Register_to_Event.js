@@ -7,6 +7,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie';
 import NavbarUser from "../components/NavBars/NavbarUser";
 
+import "../stylesheets/RegisterEventStyles.css";
 
 const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 

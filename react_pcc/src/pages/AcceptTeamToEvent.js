@@ -41,9 +41,10 @@ class AcceptTeamToEvent extends Component {
             estadoModalAnuncio: false,
             estadoModalRejection: false,
             mostrarInfoTeam: false,
-            nombre_equipo: '',
-            id: '',
-            equipoSeleccionado: null,
+            nombre_equipo:'',
+            id:'',
+            equipoSeleccionado:null,
+            clic:false,
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
         this.EventoUsuario_Url_Api = configApi.EVENTO_USUARIO_API_URL;
@@ -75,6 +76,7 @@ class AcceptTeamToEvent extends Component {
     };
 
     cambiarEstadoModalRejection = (nuevoEstado, id, nombre_equipo) => {
+        this.getAll()  
         this.setState({ estadoModalRejection: nuevoEstado, id: id, nombre_equipo: nombre_equipo });
     };
 
@@ -125,28 +127,9 @@ class AcceptTeamToEvent extends Component {
     }
 
     aceptarEquipo = async (id, nombre_equipo) => {
-        // const url = `${URL_API}/teams/${id}`
-        // await axios.put(url, {
-        //     solicitud: 1,
-        // })
-        // .then(response=>{
-        //     const contenido = `Tu equipo: ${nombre_equipo}, ha sido aceptado en el evento: ${this.state.nombre_evento}`
-        //     console.log(contenido)
-        //     axios.post(this.Notification_Url_Api, {
-        //         contenido: contenido,
-        //         informacion: null,
-        //         leido: 1
-        //     })
-        //     .then(response=>{
-        //         axios.post(this.NotificationTeam_Url_Api, {
-        //             notification_id: response.data.id,
-        //             team_id: id
-        //         }).then(response=>{
-        //             window.location.reload();
-        //         })
-        //     })
-        // })
+        
 
+        this.setState({ clic: true});
         const url = `${URL_API}/teams/${id}`
         const uno = axios.put(url, {
             solicitud: 1,
@@ -165,13 +148,14 @@ class AcceptTeamToEvent extends Component {
         const response = results[1];
         const resusers = results[2];
 
-        console.log(response)
-        console.log(resusers.data.length)
+        // console.log(response)
+        // console.log(resusers.data.length)
 
         await axios.post(this.NotificationTeam_Url_Api, {
             notification_id: response.data.id,
             team_id: id
         })
+
 
 
         const contenido2 = `El equipo: ${nombre_equipo}, al que perteneces, ha sido aceptado en el evento: ${this.state.nombre_evento}`
@@ -185,66 +169,29 @@ class AcceptTeamToEvent extends Component {
         })
             .then(res => {
 
-                (async () => {
-                    for await (const commit of resusers.data) {
-                        //   console.log(commit.id);
-                        axios.post(url_notificacionuser, {
-                            notification_id: res.data.id,
-                            user_id: commit.id,
-                            auxieventid: null
-                        })
-                            .then(resp => {
-                                console.log(`notificacion del participante${commit.id}`)
-                            })
-                    }
-                })()
-
-                // (async () => {
-                //     for await (const commit of resusers.data) {
-                //     //   console.log(commit.id);
-                //         axios.post(url_notificacionuser, {
-                //             notification_id: res.data.id,
-                //             user_id: commit.id,
-                //             auxieventid: null
-                //         })
-                //         .then(resp=>{
-                //             console.log(`notificacion del participante${commit.id}`)
-                //         })
-                //     }
-                // })()
-
-
-                // async function* asyncGenerator() {
-                //     var i = 0;
-                //     while (i < resusers.data.length) {
-                //       yield i++;
-                //     }
-                //   }
-
-                // (async function () {
-                //     for await (let num of asyncGenerator()) {
-                //       console.log(resusers.data[num].id);
-
-                //         axios.post(url_notificacionuser, {
-                //         notification_id: res.data.id,
-                //         user_id: resusers.data[num].id,
-                //         auxieventid: null
-                //         })
-                //         .then(res=>{
-                //             console.log(`notificacion del participante${resusers.data[num].id}`)
-                //         })
-                //     }
-                //     // console.log(`termino`)
-                // })();
-
-
-            })
-
+            (async () => {
+                for await (const commit of resusers.data) {
+                //   console.log(commit.id);
+                    axios.post(url_notificacionuser, {
+                        notification_id: res.data.id,
+                        user_id: commit.id,
+                        auxieventid: null
+                    })
+                    .then(resp=>{
+                        console.log(`Se creo notificacion del participante ${commit.id}`)
+                    })
+                }
+            })()
+        })
         // window.location.reload();
         console.log(`termino`)
-        this.getAll()
-
+        // this.getAll()       
+setTimeout(this.recargarPagina, 2500);  
     }
+
+    recargarPagina = () => {
+        window.location.reload();
+    };
 
 
     handleClick = (equipoId) => {
@@ -325,8 +272,8 @@ class AcceptTeamToEvent extends Component {
                                                     {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
                                                     <a href={`${e.zip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
 
-                                                    <button onClick={() => this.aceptarEquipo(e.id, e.nombre_equipo)} className='buttonAcceptUser'> Aceptar </button>
-                                                    <button onClick={() => this.cambiarEstadoModalRejection(!this.state.estadoModal, e.id, e.nombre_equipo)} className='buttonDenyUser'> Rechazar </button>
+                                                    <button onClick={() => this.aceptarEquipo(e.id, e.nombre_equipo)} className='buttonAcceptUser' disabled = {this.state.clic}> Aceptar </button>
+                                                    <button onClick={() => this.cambiarEstadoModalRejection(!this.state.estadoModal, e.id, e.nombre_equipo)} className='buttonDenyUser' disabled = {this.state.clic}> Rechazar </button>
 
                                                 </div>
 
