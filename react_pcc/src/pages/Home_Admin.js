@@ -84,8 +84,8 @@ class Home_Admin extends Component {
     componentDidMount(){
       
       //entrar como admin
-      const privilegio = 'admin'
-      cookies.set("login_userPrivilegio", privilegio, { path: "/" });
+      //const privilegio = 'admin'
+      //cookies.set("login_userPrivilegio", privilegio, { path: "/" });
       //fin entrar como admin
 
       // cookies.remove("se_Registro");
