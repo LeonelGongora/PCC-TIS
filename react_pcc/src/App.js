@@ -85,7 +85,6 @@ function App() {
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico />} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser />} />
 
-
       </Routes>
     </Router>
   );

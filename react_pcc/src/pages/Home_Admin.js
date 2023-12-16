@@ -88,7 +88,7 @@ class Home_Admin extends Component {
       cookies.set("login_userPrivilegio", privilegio, { path: "/" });
       //fin entrar como admin
 
-      //cookies.remove("se_Registro");
+      // cookies.remove("se_Registro");
       /*
       const cookieKeys = Object.keys(cookies.getAll());
       cookieKeys.forEach(key => {

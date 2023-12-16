@@ -180,9 +180,9 @@ function FormRegistroUsuarioDinamico() {
       <div className="background-image"></div>
       <div className="content">
         <NavbarCreateEvent/>
-        <div className="registroTipoUsuario">
+        <div className="registroUsuarioDinamico">
           <div className="textoEvento-user">
-            <p className="textoRegistro-user">Registro de Usuario Privilegiado</p>
+            <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>
           </div>
           <div className="entradaDatos-user">
             <form onSubmit={saveUser}>
@@ -216,13 +216,13 @@ function FormRegistroUsuarioDinamico() {
                 </div>
               </div>
 
-              <div id="entrada-user">
-                <p id="textoCuadro-user">CI (Carnet de Identidad)*</p>
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">DI (Documento de Identidad)*</p>
                 <input
                   id="inputRegistro-user"
                   type="number"
                   name="ci"
-                  placeholder="Ingrese su carnet de identidad"
+                  placeholder="Ingrese su DI"
                   onChange={handleChange}
                 />
               </div>
@@ -230,7 +230,7 @@ function FormRegistroUsuarioDinamico() {
                 <span className="advertencia-user">{errors.ci}</span>
               )}
 
-              <div id="entrada-user">
+              <div id="entrada-userPriv">
                 <p id="textoCuadro-user">Email*</p>
                 <input
                   id="inputRegistro-user"
@@ -245,7 +245,7 @@ function FormRegistroUsuarioDinamico() {
                 <span className="advertencia-user">{errors.email}</span>
               )}
 
-              <div id="entrada-user">
+              <div id="entrada-userPriv">
                 <p id="textoCuadro-user">Contraseña*</p>
                 <input
                   id="inputRegistro-user"
@@ -260,7 +260,7 @@ function FormRegistroUsuarioDinamico() {
                 <span className="advertencia-user">{errors.password}</span>
               )}
 
-              <div id="entrada-user">
+              <div id="entrada-userPriv">
                 <p id="textoCuadro-user">Confirmar Contraseña*</p>
                 <input
                   id="inputRegistro-user"
@@ -275,7 +275,7 @@ function FormRegistroUsuarioDinamico() {
                 <span className="advertencia-user">{errors.confirmarPassword}</span>
               )}
 
-              <div id="entrada-user">
+              <div id="entrada-userPriv">
                 <p id="textoCuadro-user">Telefono*</p>
                 <input
                   id="inputRegistro-user"
@@ -290,7 +290,7 @@ function FormRegistroUsuarioDinamico() {
                 <span className="advertencia-user">{errors.telefono}</span>
               )}
 
-                <div id="entrada-user">
+                <div id="entrada-userPriv">
                   <p id="textoCuadro-user">Tipo de Usuario</p>
                   <select 
                   onChange={selectTipo}
