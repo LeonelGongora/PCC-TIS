@@ -198,13 +198,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                           })
                           .then((response) => { 
 
-
-
-
-
-
-                            //console.log(response.data.mensaje);
-                            //console.log("Todos registrados")
                             window.location.href='./paginaRegistrarseEventos';
                             //cambiarEstadoModalRegistroUsuario(false);
                         });

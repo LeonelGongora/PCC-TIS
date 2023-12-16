@@ -114,6 +114,7 @@ function NavbarAdmin({
                 </a>
                 {`${nombre_usuario} ${apellido_usuario}`}
               </button>
+
               {isOpen && openDropdown === "sesionUser" && (
                 <ul className="dropdown-menu-user">
                   <li onClick={cerrarSesion}>
@@ -121,6 +122,8 @@ function NavbarAdmin({
                   </li>
                 </ul>
               )}
+
+              
             </div>
           </div>
         </div>

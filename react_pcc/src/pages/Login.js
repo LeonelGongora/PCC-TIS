@@ -16,8 +16,6 @@ function Login (){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [usernameError, setUsernameError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
     const [errors, setErrors] = useState({})
 
     const handleLogin = async (event) => {

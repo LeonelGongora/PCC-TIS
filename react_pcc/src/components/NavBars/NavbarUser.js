@@ -32,15 +32,14 @@ function NavbarUser(){
   const cerrarSesion = () => {
     const cookieKeys = Object.keys(cookies.getAll());
       cookieKeys.forEach(key => {
-        console.log(key)
         cookies.remove(key);
       });
     window.location.reload();
   }
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [openDropdown, setOpenDropdown] = useState(null);
+
   const toggleDropdown = () => {
     if (isOpen) {
       setOpenDropdown(null);
@@ -89,6 +88,7 @@ function NavbarUser(){
                     <FontAwesomeIcon className="userIcon" icon={faUser} />
                   {`${nombre_usuario} ${apellido_usuario}`}
                 </button>
+
                 {isOpen && openDropdown === "sesionUser" && (
                   <ul className="dropdown-menu-user">
                     <li onClick={cerrarSesion}>
@@ -96,6 +96,8 @@ function NavbarUser(){
                     </li>
                   </ul>
                 )}
+
+
               </div>
             </div>
           </div>
