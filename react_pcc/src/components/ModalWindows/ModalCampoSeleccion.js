@@ -139,8 +139,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
     return (
       estadoCampoSeleccion && (
-        <div className="fondo-camposelec">
-          <div className="Overlay-CampoSelec">
+          <div className="Overlay">
             <div className="ContenedorModal">
               <div className="EncabezadoModal">
                 <div className="tituloEvento">
@@ -151,7 +150,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                 </button>
               </div>
               <div className="registroTipoEvento registroCampoSeleccion">
-                <form onSubmit={saveTypeEvent} id="form1">
+                <form onSubmit={saveTypeEvent} id="form1" className='camposSeleccionForm'>
                   <p id="textoCuadroAtributo">Nombre*</p>
                   <input
                     type="text"
@@ -196,21 +195,21 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                     );
                   })}
 
-                  <button
-                    className="BotonRegistrar BotonAgregarSeleccion"
+                  
+                </form>
+                <button
+                    className="BotonRegistrar"
                     type="button"
                     onClick={agregarOpcion}
                   >
                     {plus}
                   </button>
-                </form>
                 <button form="form1" type="submit" className="BotonRegistrar">
                   Agregar
                 </button>
               </div>
             </div>
           </div>
-        </div>
       )
     );
 }

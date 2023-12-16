@@ -73,7 +73,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
           </div>
           <div className="registroTipoEvento">
             <form onSubmit={saveTypeEvent} id="form1">
-              
+            <p id="textoCuadroAtributo" className="textoCuadroAnuncio">Anuncio*</p>
               <textarea
                 name="contenido_anuncio"
                 className="inputEventoAnuncio"

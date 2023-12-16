@@ -78,10 +78,7 @@
     width: 70vw;
 }
 
-.contReg{
-    min-height: 500px;
-    min-width: 300px;
-}
+
 .contRegTeam{
     min-height: 30vw;
     min-width: 80vh;
@@ -265,7 +262,7 @@ label{
     width: 98%;
     min-height: 4vh;
     overflow-y: auto;
-    max-width: 45vw;
+    max-width: 47vw;
     max-height: 35vh;
     min-width: 10vw;
 }
@@ -314,6 +311,10 @@ label{
 .registroCampoNumerico .span1Modal{
     min-width: 29vw;
 }
+.registroCampoSeleccion{
+    max-height: 65vh;
+    
+}
 .registroCampoSeleccion .span1Modal{
     min-width: 24vw;
 }
@@ -333,4 +334,13 @@ label{
 .registroActividadEvento .inputMasInfo{
     min-width: 20vw;
     max-height: 5vh;
+}
+.camposSeleccionForm{
+    max-height: 50vh;
+    overflow-y: auto;
+    width: 80%;
+}
+.textoCuadroAnuncio{
+    transform: translateY(37px) !important;
+    margin-left: 3vw !important;
 }
