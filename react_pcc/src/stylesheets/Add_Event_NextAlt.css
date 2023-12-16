@@ -1,23 +1,23 @@
 .vistaPestana{
-    width: 85%;
-    height: 80%;
+    height: 100%;
+    margin-left: 17%;
+    margin-right: 17%;
+    margin-top: 50px;
 }
 .contenedorInfoPestana{
-    margin-top: 3vh;
+    margin-top: 5vh;
     display: flex;
-    height: 85%;
+    min-height: 400px;
+
 }
 .pestanasEventos{
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 30%;
+    width: 25%;
 }
 .campoPestana{
     width: 100%;
     background-color: #fffffff2;
-    border-top-left-radius: 2vh;
-    border-bottom-left-radius: 2vh;
     height: 16.66%;
     display: flex;
     align-items: center;
@@ -37,8 +37,7 @@
 }
 .contenedorCamb{
     background-color: #FFFFFF;
-    width: 80%;
-    height: 100%;
+    width: 70%;
     overflow-y: auto;
     border-top-right-radius: 2vh;
     border-bottom-right-radius: 2vh;
@@ -54,7 +53,14 @@
     color: #B12B1A;
     background-color: #f9fafadd;
     
-  }
+}
+.bordePersonalizado{
+    border-top-left-radius: 2vh;
+}
+.bordePerzonalizadoBottom{
+    border-bottom-left-radius: 2vh;
+}
+
 .cambioManu{
     margin-top: 3vh;
 }

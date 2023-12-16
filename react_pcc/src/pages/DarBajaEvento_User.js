@@ -145,6 +145,7 @@ class DarBajaEvento extends Component {
           nombreBanner1={this.state.nombreEventoBann}
           euid={this.state.euid}
           pe = {this.state.pe}
+          ne = {'8'}
         />
 
         <div className="background-image"></div> {/* Componente de fondo */}

@@ -18,6 +18,7 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
 
     const [event, setEvent] = useState ( [] );
     const [requisitos, setRequisitos] = useState ( [] );
+    const [clic , setClic]= useState(false);
     const [state, setState] = useState ({
         id:'',
         nombre_evento:'',
@@ -65,7 +66,8 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
     
         if(Object.keys(validationErrors).length === 0){
             
-            // console.log(id_user);
+            console.log('inicio registro');
+            setClic(true)
             const req = checkedList.join(", ");
             var contenido = `Tu equipo ${nombre_equipo}, ha sido rechazado del evento: ${state.nombre_evento}, por no cumplir con los siguiente(s) requisito(s): ${req}`;
             if(checkedList.length ===0){
@@ -73,26 +75,62 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
             }
             // console.log(contenido)
             const url = `${URL_API}/teams/${id_equipo}`
-            await axios.put(url, {
+            const uno = axios.put(url, {
                 solicitud: 2,
             })
-            .then(response=>{
-                axios.post(Notification_Url_Api, {
-                    contenido: contenido,
-                    informacion: razon,
-                    leido: 0
-                })
-                .then(response=>{
-                    axios.post(NotificationTeam_Url_Api, {
-                        notification_id: response.data.id,
-                        team_id: id_equipo
-                    }).then(response=>{
-                        window.location.reload();
-                    })
-                })
+            const dos = axios.post(Notification_Url_Api, {
+                contenido: contenido,
+                informacion: razon,
+                leido: 0
             })
+
+            const urlidusers = `${URL_API}/iduserofteams/${id_equipo}`
+            const tres = axios.get(urlidusers) 
+            
+            const results = await Promise.all([uno, dos, tres])
+            const response = results[1];
+            const resusers= results[2];
+
+            await axios.post(NotificationTeam_Url_Api, {
+                notification_id: response.data.id,
+                team_id: id_equipo
+            })
+
+            const contenido2 = `El equipo: ${nombre_equipo}, al que perteneces, ha sido rechazado del evento: ${state.nombre_evento}`
+            const url_notificacion = `${URL_API}/notifications`;
+            const url_notificacionuser = `${URL_API}/notificationusers`;
+
+            const res = await axios.post(url_notificacion, {
+                contenido: contenido2,
+                informacion: null,
+                leido: 0
+            })
+            .then(res=>{
+    
+                (async () => {
+                    for await (const commit of resusers.data) {
+                    //   console.log(commit.id);
+                        axios.post(url_notificacionuser, {
+                            notification_id: res.data.id,
+                            user_id: commit.id,
+                            auxieventid: null
+                        })
+                        .then(resp=>{
+                            console.log(`Se creo notificacion del participante ${commit.id}`)
+                        })
+                    }
+                })()
+            })
+                
+            console.log(`termino`)
+            // this.getAll()   
+            setTimeout(recargarPagina, 2500);
         }
     }
+
+    const recargarPagina = () => {
+        window.location.reload();
+    };
 
     useEffect(() => {
         getEvent()
@@ -144,6 +182,7 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
                   <button
                     onClick={salirVentanaModal}
                     className="BotonSalir"
+                    disabled={clic}
                   >
                     {salir}
                   </button>
@@ -188,7 +227,7 @@ function ModalRejectionTeam({estadoRejection, cambiarEstadoModalRejection, id_ev
                         )}
 
                     </form>
-                    <button form="form1" type="submit" className="BotonRegistrar">
+                    <button form="form1" type="submit" className="BotonRegistrar" disabled={clic}>
                         Enviar
                     </button>
                 </div>

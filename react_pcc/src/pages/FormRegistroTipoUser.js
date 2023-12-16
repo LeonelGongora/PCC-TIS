@@ -21,6 +21,9 @@ function FormRegistroTipoUser() {
   const [registertypeevent, setRegistertypeevent] = useState(0);
   const [viewevent, setViewevent] = useState(0);
   const [viewparticipantevent, setViewparticipantevent] = useState(0);
+  const [registeractivity, setRegisteractivity] = useState(0);
+  const [deleteactivity, setDeleteactivity] = useState(0);
+  const [configureform, setConfigureform] = useState(0);
   const [registerorganizer, setRegisterorganizer] = useState(0);
   const [registersponsor, setRegistersponsor] = useState(0);
   const [administerrequest, setAdministerrequest] = useState(0);
@@ -56,8 +59,8 @@ function FormRegistroTipoUser() {
   }
 
   useEffect(() => {
-    setPrivilegio(`${registerevent},${editevent},${registertypeevent},${viewevent},${viewparticipantevent},${registerorganizer},${registersponsor},${administerrequest},${registerad},${generalreport}`)
-  }, [registerevent, editevent, registertypeevent, viewevent, viewparticipantevent, registerorganizer, registersponsor, administerrequest, registerad, generalreport]);
+    setPrivilegio(`${registerevent},${editevent},${registertypeevent},${viewevent},${viewparticipantevent},${registeractivity},${deleteactivity},${configureform},${registerorganizer},${registersponsor},${administerrequest},${registerad},${generalreport}`)
+  }, [registerevent, editevent, registertypeevent, viewevent, viewparticipantevent, registeractivity, deleteactivity, configureform, registerorganizer, registersponsor, administerrequest, registerad, generalreport]);
 
   const changeRegisterevent =(e) =>{
     if (registerevent==1) setRegisterevent(0)
@@ -82,6 +85,21 @@ function FormRegistroTipoUser() {
   const changeViewparticipantevent =(e) =>{
     if (viewparticipantevent==1) setViewparticipantevent(0)
     else setViewparticipantevent(1)
+  };
+
+  const changeRegisteractivity =(e) =>{
+    if (registeractivity==1) setRegisteractivity(0)
+    else setRegisteractivity(1)
+  };
+
+  const changeDeleteactivity =(e) =>{
+    if (deleteactivity==1) setDeleteactivity(0)
+    else setDeleteactivity(1)
+  };
+
+  const changeConfigureform =(e) =>{
+    if (configureform==1) setConfigureform(0)
+    else setConfigureform(1)
   };
 
   const changeRegisterorganizer =(e) =>{
@@ -189,6 +207,39 @@ function FormRegistroTipoUser() {
                         onChange={(e) =>changeViewparticipantevent()}
                       />
                       <span className='nombreCheck'>Vizualizar participantes de Eventos</span>
+                    </div>
+
+                    <div className="accion">
+                      <input
+                        id="register-activity"
+                        type="checkbox"
+                        name="register-activity"
+                        value={1}
+                        onChange={(e) =>changeRegisteractivity()}
+                      />
+                      <span className='nombreCheck'>Registrar actividad</span>
+                    </div>
+
+                    <div className="accion">
+                      <input
+                        id="delete-activity"
+                        type="checkbox"
+                        name="delete-activity"
+                        value={1}
+                        onChange={(e) =>changeDeleteactivity()}
+                      />
+                      <span className='nombreCheck'>Eliminar actividad</span>
+                    </div>
+
+                    <div className="accion">
+                      <input
+                        id="configure-form"
+                        type="checkbox"
+                        name="confiture-form"
+                        value={1}
+                        onChange={(e) =>changeConfigureform()}
+                      />
+                      <span className='nombreCheck'>Configurar formulario</span>
                     </div>
     
                   </div>

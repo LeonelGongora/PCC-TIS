@@ -209,7 +209,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores, organiz
             
         </div>
         <div className='contBotonRegist'>
-            <button className='botonesCambiar'
+                    <button className='botonesCambiar botonTerminarFix'
             onClick={registrarOrganizadores}
             //onClick={() => { cambiarEstadoModalEleccion(false); cambiarEstadoCampoSeleccion(true);}}
             >
