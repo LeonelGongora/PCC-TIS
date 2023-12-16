@@ -91,6 +91,12 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
     });
   }
 
+  function abrirmodal(id_notification, id_user, id_event) {
+    console.log(id_notification)
+    console.log(id_user)
+    console.log(id_event)
+  }
+
   return (
     <div className="dropdown-container">
       <button
@@ -113,20 +119,42 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
             <>
               {notification.map((n) => {
                 return (
-                  <div key={n.id}>
+                  <div key={n.id} >
                     {n.informacion === null ? (
                       <>
-                        <li>
-                          {n.contenido}
-                          <p>{n.created_at}</p>
-                        </li>
+                        {n.leido === 1 ? (
+                          <>
+                            <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
+                              {n.contenido}
+                              <p>{n.created_at}</p>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              {n.contenido}
+                              <p>{n.created_at}</p>
+                            </li>
+                          </>
+                        )}
                       </>
                     ) : (
                       <>
-                        <li>
-                          {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
-                          <p>{n.created_at}</p>
-                        </li>
+                        {n.leido === 1 ? (
+                          <>
+                            <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
+                              {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
+                              <p>{n.created_at}</p>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
+                              <p>{n.created_at}</p>
+                            </li>
+                          </>
+                        )}
                       </>
                     )}
                   </div>
@@ -136,9 +164,6 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
           ) : (
             <li>No tiene notificaciones</li>
           )}
-          {/* <li>Registrarse a Eventos</li>
-          <li>Visualizar eventos</li>
-          <li>Darse de Baja de evento</li> */}
         </ul>
       )}
     </div>

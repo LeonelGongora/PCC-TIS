@@ -68,9 +68,9 @@ class AcceptUserToEvent extends Component{
     getAllUsers = async () => {
         const idevent = cookies.get('auteId');
         const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
-        console.log(events)
+        // console.log(events)
         this.eventos = Array.from(events.data)
-        console.log(this.eventos)
+        // console.log(this.eventos)
         // console.log(.eventos)
         this.setState({ events: events.data, loader:false});
         // console.log(this.state.events)
@@ -96,25 +96,55 @@ class AcceptUserToEvent extends Component{
         this.getAllUsers();
     }
 
+    getAll(){
+        this.getEvent();
+        this.getAllUsers();
+    }
+
     aceptarParticipante = async (eventuserid, id) =>{
-        console.log(eventuserid);
-        await axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
+        // console.log(eventuserid);
+        // await axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
+        //     solicitud: 1,
+        // })
+        // const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
+        // // console.log(contenido)
+        // const response = await axios.post(this.Notification_Url_Api, {
+        //     contenido: contenido,
+        //     informacion: null,
+        //     leido: 0
+        // })
+        // await axios.post(this.NotificationUser_Url_Api, {
+        //     notification_id: response.data.id,
+        //     user_id: id
+        // })
+        // window.location.reload();
+
+        // this.getAllEvents();
+        // window.location.href = window.location.href;
+
+        // console.log(eventuserid);
+        const uno= axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
             solicitud: 1,
         })
         const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
         // console.log(contenido)
-        const response = await axios.post(this.Notification_Url_Api, {
+        const dos = axios.post(this.Notification_Url_Api, {
             contenido: contenido,
             informacion: null,
             leido: 0
         })
+
+        const results = await Promise.all([uno, dos])
+        const response = results[1];
+        // console.log(response)
+        
         await axios.post(this.NotificationUser_Url_Api, {
             notification_id: response.data.id,
-            user_id: id
+            user_id: id,
+            auxieventid: null
         })
-        window.location.reload();
-        // this.getAllEvents();
-        // window.location.href = window.location.href;
+        // window.location.reload();
+        this.getAll();
     }
 
     render(){

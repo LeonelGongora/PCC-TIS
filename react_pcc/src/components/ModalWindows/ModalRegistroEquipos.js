@@ -18,6 +18,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
 
     const id_evento = cookies.get('id_evento');
     const id_equipo = cookies.get('id_equipo');
+    const nombre_equipo = cookies.get('nombre_equipo');
     const dni_no_registrados = cookies.get('dni_no_registrados');
     const indice_dni_no_registrados = cookies.get('indice_dni_no_registrados');
     const [contador, setContador] = useState(0);
@@ -152,6 +153,24 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                     let contador_Aux = contador;
                     contador_Aux = contador_Aux + 1;
                     setContador(contador_Aux);
+
+                    //noti
+                    const contenido = `Has sido registrado como participante del equipo: ${nombre_equipo}. Haga clic aqui para llenar informacion extra.`
+                    const url_notificacion = `${URL_API}/notifications`;
+                    const url_notificacionuser = `${URL_API}/notificationusers`;
+                    axios.post(url_notificacion, {
+                        contenido: contenido,
+                        informacion: null,
+                        leido: 1
+                    })
+                    .then(response=>{
+                      axios.post(url_notificacionuser, {
+                        notification_id: response.data.id,
+                        user_id: id_usuario,
+                        auxieventid: id_evento
+                      })
+                    })
+                    //fin noti
 
                     setValues({
                         nombre: '',

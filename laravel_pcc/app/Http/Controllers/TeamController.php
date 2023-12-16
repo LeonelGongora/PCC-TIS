@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class TeamController extends Controller
@@ -79,5 +80,17 @@ class TeamController extends Controller
     {
         $user=Team::find($id);
         $user->delete();
+    }
+
+    public function iduserofteams($id)
+    {
+        $userofteam = DB::table('users')
+        ->join('team_user', 'users.id', '=', 'team_user.user_id')
+        ->join('teams', 'teams.id', '=', 'team_user.team_id')
+        ->where('teams.id', $id)
+        ->select('users.id')
+        ->get();
+
+        return $userofteam;
     }
 }

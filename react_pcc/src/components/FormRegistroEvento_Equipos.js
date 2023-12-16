@@ -159,6 +159,7 @@ function FormRegistroEvento_Equipos(){
         if(res.data.status === 200){
           id_equipo = res.data.ultimo_id_equipo
           cookies.set('id_equipo', id_equipo, {path: "/"});
+          cookies.set('nombre_equipo', values.nombre_equipo , {path: "/"});
 
           let dni_registrados = []
           let id_registrados = []
