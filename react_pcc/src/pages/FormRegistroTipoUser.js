@@ -131,6 +131,7 @@ function FormRegistroTipoUser() {
                     onChange={handleChange}
                   />
                 </div>  
+                <p className="instruccion">Seleccione las opciones que le asignara al usuario*</p>
                 <div className='listaAcciones'>
                   <div className='eventos'>
                     <h2>Eventos</h2>

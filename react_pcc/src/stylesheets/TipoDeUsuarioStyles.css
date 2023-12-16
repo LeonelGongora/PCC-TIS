@@ -17,28 +17,30 @@
 
 #entradaRol-user{
     border: 1px solid rgb(175, 175, 175);
-    margin-top: 7vh;
+    margin-top: 5vh;
     margin-bottom: 3vh;
     margin-inline: 18vw;
     border-radius: 6px;
-    height: 5vh;
+    height: 4vh;
 }
 #textoCuadro-user {
     position: relative;
-    font-size: 2.1vh;
+    font-size: 1.525vh;
     text-align: left;
     font-weight: bold;
-    width: fit-content;
-    transform: translateY(-14px);
+    transform: translateY(-1.5vh);
     background-color: white;
 }
 #inputRegistro-user{
-    font-size: small;
-    margin: 3px;
+    font-size: 1.417vh;
+    margin: 2px;
     width: 95%;
     padding: 2px;
-    transform: translateY(-14px);
+    transform: translateY(-12px);
     outline: none;
+}
+#inputRegistro-user::placeholder {
+    font-size: 1.417vh; 
 }
 #entradaRol-user:focus-within {
     border: 2px solid #14365C;
@@ -50,7 +52,7 @@
 }
 
 .listaAcciones h2{
-    font-size: 1.2vw;
+    font-size: 1.02vw;
     margin-bottom: 1vw;
 }
 .listaAcciones{
@@ -66,7 +68,7 @@
     margin-right: 0.7vw; 
 }
 .nombreCheck{
-    font-size: 1.1vw;
+    font-size: 1vw;
     line-height: 1.9vw; 
     overflow: hidden;        
     text-overflow: ellipsis;
@@ -85,4 +87,29 @@
 }
 .form{
     width: 100%;
+}
+#desplegable{
+    font-size: 0.8vw;
+}
+#entrada-user, #entradaNom-user, #entradaAp-user{
+    border: 1px solid rgb(175, 175, 175);
+    margin-bottom: 1vh;
+    margin-top: 2.8vh;
+    margin-inline: 4vw;
+    border-radius: 6px;
+    height: 4vh;
+    width: 30vw;
+}
+#entradaNom-user, #entradaAp-user{
+    margin-top: 4vh;
+    margin-bottom: 2.2vh;
+}
+.botonRegistrar-user{
+    margin-block: 2vw;
+}
+.instruccion{
+    margin-top: 2.2vw;
+    margin-bottom: 1vw;
+    font-size: 1vw;
+    margin-left: 0vh;
 }
