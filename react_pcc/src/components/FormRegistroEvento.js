@@ -54,8 +54,9 @@ function FormRegistroEvento(){
     console.log(se_Registro)
 
     document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(input =>{
-
+      
       if(input.type != "file"){
+        console.log(input)
 
         console.log(input.value === "Seleccione una opcion")
 
@@ -63,20 +64,29 @@ function FormRegistroEvento(){
           validationErrors[input.name] = "Este campo es obligatorio";
         }else{
           if(input.type == "number"){
-            let restriccion_id = input.id;
-            const limites = restriccion_id.split(",");
+            if(input.id){
+              console.log("Hay limites")
+              let restriccion_id = input.id;
+              const limites = restriccion_id.split(",");
     
-            let minimo = parseInt(limites[0])
-            let maximo = parseInt(limites[1])
+              let minimo = parseInt(limites[0])
+              let maximo = parseInt(limites[1])
 
-            let valor_actual = parseInt(input.value);
+              let valor_actual = parseInt(input.value);
 
-            if(!(valor_actual >= minimo && valor_actual <= maximo)){
-              console.log("No en rango")
-              validationErrors[input.name] = "El numero no se encuentra en el rango requerido: " + limites[0] + "-" + limites[1];
+              if(!(valor_actual >= minimo && valor_actual <= maximo)){
+                console.log("No en rango")
+                validationErrors[input.name] = "El número no se encuentra en el rango requerido: " + limites[0] + "-" + limites[1];
+              }else{
+                console.log("En rango")
+              }
             }else{
-              console.log("En rango")
+              if (!/^(0|[1-9]\d*)$/.test(input.value)) {
+                validationErrors[input.name] = "Ingrese un número posivito o el número cero";
+              }
+              console.log("No hay limtes")
             }
+
     
           }else if(input.type  == "select"){
     
@@ -261,7 +271,7 @@ function FormRegistroEvento(){
         )}
       </div>
       <div className='registro'>
-        <form class="form_name" id='form_name'>
+        <form className="form_name" id='form_name'>
 
           {atributos.map((atributo,id) => {
           return (<>

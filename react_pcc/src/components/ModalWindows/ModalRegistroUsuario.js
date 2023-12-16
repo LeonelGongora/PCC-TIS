@@ -145,23 +145,17 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
             axios.post(url, data).then( res => {
                 cookies.set('id_usuario', res.data.ultimo_id, {path: "/"});
-                console.log(ci_nuevo_usuario)
-
+                const myElement = document.getElementById("Boton-Registro-User");
+                myElement.disabled = true;
                 axios.post(url_correo, {
                     destinatario: values.email,
                     contenido: contraseña_generada,
                   })
                   .then((response) => {
                     console.log(response.data.mensaje);
-                    const myElement = document.getElementById("Boton-Registro-User");
-                    myElement.disabled = true;
                     cambiarEstadoModalRegistroUsuario(false);
                     window.location.reload();
-                  })
-                  .catch((error) => {
-                    window.location.reload();
-                    console.error("Error al enviar el correo:", error);
-                });
+                  });
             })
         }
     }
@@ -185,7 +179,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                   <p className="textoRegistro-user">Registro de Informacion</p>
                 </div>
                 <div className="entradaDatos-user">
-                  <form >
+                  <form onSubmit={saveTypeEvent} id="form1">
                     <div className="nombreAp-user">
                       <div
                         id="entradaNom-user"
@@ -504,9 +498,10 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
                     <div className="botonEnviar-user">
                       <button
+                        id="Boton-Registro-User"
                         className="botonRegistrar-user"
-                        type="button"
-                        onClick={saveTypeEvent}
+                        type="submit"
+                        form="form1"
                       >
                         {" "}
                         Registrar

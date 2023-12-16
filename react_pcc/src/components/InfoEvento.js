@@ -28,6 +28,7 @@ function InfoEvento({props}){
     const [tipoevent, setTipoevent] = useState ( [] );
     const [patrocinadores, setPatrocinadores] = useState ( [] );
     const [organizadores, setOrganizadores] = useState ( [] );
+    const [seccciones, setSecciones] = useState ( [] );
 
     useEffect(()=>{
         getEvent()
@@ -44,6 +45,7 @@ function InfoEvento({props}){
         setPatrocinadores(response.data.sponsors)
         setOrganizadores(response.data.organizers)
         setActividades(response.data.activities)
+        setSecciones(response.data.informations)
         console.log(response.data.name === null)
         console.log(id)
     }
@@ -112,11 +114,23 @@ function InfoEvento({props}){
                                 <div>
                                 </div>
                             )}
+
+                            {seccciones.length !== 0 ? (
+                                <div className='descripcionEvento seccionExtra'>
+                                    {seccciones.map((s) => {
+                                        return (
+                                            <>
+                                                <h3>Titulo de seccion</h3>
+                                                <p>Descripcion de seccion</p>
+                                            </>
+                                        );
+                                    })} 
+                                </div>
+                            ):(
+                                <div>
+                                </div>
+                            )}
                             
-                            <div className='descripcionEvento seccionExtra'>
-                                <h3>Titulo de seccion</h3>
-                                <p>Descripcion de seccion</p>
-                            </div>
                             <div className='descripcionEvento infoContacto'>
                                 <h3>Contacto</h3>
                                 <p>Telefono: {event.numero_contacto}</p>

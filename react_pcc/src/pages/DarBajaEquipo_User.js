@@ -12,6 +12,8 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Banner_informativo from "../components/Banner_informativo";
 import ModalDarseBaja from "../components/ModalWindows/ModalDarseBaja";
 import {URL_API, URL_IMG} from '../const';
+import ModalAutentificacion from "../components/ModalWindows/ModalAutentificacion";
+import ModalRegistroUsuario from "../components/ModalWindows/ModalRegistroUsuario";
 
 const buscar = (
   <FontAwesomeIcon
@@ -39,6 +41,8 @@ class DarBajaEvento extends Component {
       estadoBanner: false,
       estadoBannerModal: false,
       estadoDarseBaja: false,
+      estadoAutentficacion: false,
+      estadoRegistroUsuario : false,
 	    nombreEventoBann: "",
       euid:"",
       pe: "",
@@ -48,10 +52,10 @@ class DarBajaEvento extends Component {
   }
 
   getEquipos = async () => {
-    
+
     this.setState({ loader: true });
-    if(cookies.get('id_usuario') === '' || cookies.get('id_usuario')=== undefined){
-      console.log(`${cookies.get('id_usuario')} No se encuentra registrado`)
+    if(!this.id){
+      this.setState({ estadoAutentficacion: true });
     }else{
     const idu = cookies.get('id_usuario')
     const events = await axios.get(`${this.state.urle}/${idu}`);
@@ -81,6 +85,9 @@ class DarBajaEvento extends Component {
   componentDidMount() {
     
     this.getEquipos();
+    if(this.se_Registro){
+      console.log("Re regstro")
+    }
     console.log(this.id)
   }
 
@@ -110,9 +117,29 @@ class DarBajaEvento extends Component {
     this.cambiarDarseBaja(estado);
   };
 
+  cambiarEstadoAutentificacion = (estado) => {
+    this.setState({ estadoAutentficacion: estado });
+  };
+
+  cambiarEstadoModalRegistroUsuario = (nuevoEstado) => {
+    this.setState({ estadoRegistroUsuario: nuevoEstado });
+  }
+
   render() {
     return (
       <div className="App">
+        <ModalAutentificacion
+          estado1={this.state.estadoAutentficacion}
+          cambiarEstado1={this.cambiarEstadoAutentificacion}
+          cambiarEstadoModalRegistroUsuario={this.cambiarEstadoModalRegistroUsuario}
+        />
+
+        <ModalRegistroUsuario
+          estadoRegistroUsuario={this.state.estadoRegistroUsuario}
+          cambiarEstadoModalRegistroUsuario={this.cambiarEstadoModalRegistroUsuario}
+          cambiarEstado1={this.cambiarEstadoAutentificacion}
+        />
+
         <ModalDarseBaja
           estadoDarseBaja1={this.state.estadoDarseBaja}
           cambiarEstadoDarseBaja1={this.cambiarDarseBaja}

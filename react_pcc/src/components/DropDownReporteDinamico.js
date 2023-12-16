@@ -21,6 +21,10 @@ function DropdownReporteDinamico({
     }
   };
 
+  const redireccionarReportes = () => {
+    window.location.href = "./reportes";
+  };
+
   const cargo = cookies.get('login_userCargo')
   const cadenaPrivilegio = cookies.get('login_userPrivilegio')
 
@@ -39,9 +43,10 @@ function DropdownReporteDinamico({
             null
           ) : (<>
             {cadenaPrivilegio.charAt(18) == 1 ? (
-              <li>
+              <li onClick={() => redireccionarReportes()}>
                 <span id="lineaV">{lineV}</span> Reporte General
               </li>
+
             ) : ( null )}
           </>)}
         </ul>
