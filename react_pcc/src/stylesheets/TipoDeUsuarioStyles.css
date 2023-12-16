@@ -8,7 +8,21 @@
     margin-inline: 16.5vw;
     margin-block: 3vw;
 }
-.entradaDatos-user{
+.registroUsuarioDinamico {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-inline: 27vw;
+    margin-block: 3vw;
+    width: 46vw;
+}
+#titulo-userPriv{
+    font-size: 3vh;
+}
+.entradaDatos-userPriv{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,36 +35,24 @@
     margin-bottom: 3vh;
     margin-inline: 18vw;
     border-radius: 6px;
-    height: 4vh;
+    height: 33px;
 }
-#textoCuadro-user {
-    position: relative;
-    font-size: 1.525vh;
-    text-align: left;
-    font-weight: bold;
-    transform: translateY(-1.5vh);
-    background-color: white;
+#entrada-userPriv:focus-within {
+    border: 2px solid #012da7;
+    color: #012da7;
 }
-#inputRegistro-user{
-    font-size: 1.417vh;
-    margin: 2px;
-    width: 95%;
-    padding: 2px;
-    transform: translateY(-12px);
-    outline: none;
+#entradaNom-user:focus-within {
+    border: 2px solid #012da7;
+    color: #012da7;
 }
-#inputRegistro-user::placeholder {
-    font-size: 1.417vh; 
+#entradaAp-user:focus-within {
+    border: 2px solid #012da7;
+    color: #012da7;
 }
 #entradaRol-user:focus-within {
-    border: 2px solid #14365C;
-    color: #14365C;
+    border: 2px solid #012da7;
+    color: #012da7;
 }
-.entradaDatos-user form {
-    width: 100%; 
-    margin: 0 auto; 
-}
-
 .listaAcciones h2{
     font-size: 1.02vw;
     margin-bottom: 1vw;
@@ -88,21 +90,14 @@
 .form{
     width: 100%;
 }
-#desplegable{
-    font-size: 0.8vw;
-}
-#entrada-user, #entradaNom-user, #entradaAp-user{
+#entrada-userPriv{
     border: 1px solid rgb(175, 175, 175);
     margin-bottom: 1vh;
-    margin-top: 2.8vh;
+    margin-top: 3.4vh;
     margin-inline: 4vw;
     border-radius: 6px;
-    height: 4vh;
-    width: 30vw;
-}
-#entradaNom-user, #entradaAp-user{
-    margin-top: 4vh;
-    margin-bottom: 2.2vh;
+    width: 38vw;
+    height: 35px;
 }
 .botonRegistrar-user{
     margin-block: 2vw;
