@@ -94,8 +94,6 @@ function NavbarAdmin({
             <DropdownReporte
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "reportes"}
-              estadoAnuncio={estadoAnuncio}
-              cambiarEstadoAnuncio={cambiarEstadoAnuncio}
             />
           </div>
 

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import "../stylesheets/AcceptUserToEventStyles.css";
 import '../App.css';
@@ -9,45 +9,45 @@ import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
 import ModalWindow from '../components/ModalWindows/ModalWindow';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 import ModalRejection from '../components/ModalWindows/ModalRejection';
 import configApi from '../configApi/configApi';
 
 const cookies = new Cookies();
 
-class AcceptUserToEvent extends Component{
-
-    se_Registro = cookies.get('se_Registro');
+class AcceptUserToEvent extends Component {
+    se_Registro = cookies.get("se_Registro");
 
     constructor(props) {
         super(props);
-        this.state  = {
+        this.state = {
             events: [],
             e: [],
             user: [],
-            nombre_evento: '',
+            nombre_evento: "",
             requisitos: [],
-            loader:false,
+            loader: false,
             estadoModal: false,
-            estadoModalOrganizador:false,
+            estadoModalOrganizador: false,
             estadoModalPatrocinador: false,
+            estadoModalAnuncio: false,
             estadoModalRejection: false,
-            eventuser_id:'',
-            id:'',
-            e_id:''
+            eventuser_id: "",
+            id: "",
+            e_id: "",
         };
         this.EventUser_Url_Api = configApi.EVENTUSER3_API_URL;
-        this.EventoUsuario_Url_Api= configApi.EVENTO_USUARIO_API_URL;
-        this.Event_Url_Api= configApi.EVENTOC_API_URL;
-        this.Notification_Url_Api= configApi.NOTIFICATION_API_URL;
-        this.NotificationUser_Url_Api=configApi.NOTIFICATIONUSER_API_URL;
-        this.eventos = []
-        this.requisitos = []
-        this.usuarios = []
-        this.url = ''
-        this.nameEvent = []
-        this.reqEvent = []
+        this.EventoUsuario_Url_Api = configApi.EVENTO_USUARIO_API_URL;
+        this.Event_Url_Api = configApi.EVENTOC_API_URL;
+        this.Notification_Url_Api = configApi.NOTIFICATION_API_URL;
+        this.NotificationUser_Url_Api = configApi.NOTIFICATIONUSER_API_URL;
+        this.eventos = [];
+        this.requisitos = [];
+        this.usuarios = [];
+        this.url = "";
+        this.nameEvent = [];
+        this.reqEvent = [];
     }
-
 
     cambiarEstadoModal = (nuevoEstado) => {
         this.setState({ estadoModal: nuevoEstado });
@@ -60,48 +60,55 @@ class AcceptUserToEvent extends Component{
     cambiarEstadoModalPatrocinador = (nuevoEstado) => {
         this.setState({ estadoModalPatrocinador: nuevoEstado });
     };
+    cambiarEstadoModalAnuncio = (nuevoEstado) => {
+        this.setState({ estadoModalAnuncio: nuevoEstado });
+    };
 
     cambiarEstadoModalRejection = (nuevoEstado, eventouser_id, evento_id) => {
-        this.setState({ estadoModalRejection: nuevoEstado, eventuser_id:eventouser_id, id:evento_id });
+        this.setState({
+            estadoModalRejection: nuevoEstado,
+            eventuser_id: eventouser_id,
+            id: evento_id,
+        });
     };
 
     getAllUsers = async () => {
-        const idevent = cookies.get('auteId');
+        const idevent = cookies.get("auteId");
         const events = await axios.get(`${this.EventUser_Url_Api}/${idevent}`);
         // console.log(events)
-        this.eventos = Array.from(events.data)
+        this.eventos = Array.from(events.data);
         // console.log(this.eventos)
         // console.log(.eventos)
-        this.setState({ events: events.data, loader:false});
+        this.setState({ events: events.data, loader: false });
         // console.log(this.state.events)
     };
 
-    getEvent=async()=>{
-        const idevent = cookies.get('auteId');
+    getEvent = async () => {
+        const idevent = cookies.get("auteId");
         const response = await axios.get(`${this.Event_Url_Api}/${idevent}`);
         // console.log(response)
-        this.setState({ event: response.data})
-  
-        if(response.request.status === 200){
-          this.setState({
-            e_id: response.data.id,
-            nombre_evento: response.data.nombre_evento,
-            requisitos: response.data.requirements
-          });
+        this.setState({ event: response.data });
+
+        if (response.request.status === 200) {
+            this.setState({
+                e_id: response.data.id,
+                nombre_evento: response.data.nombre_evento,
+                requisitos: response.data.requirements,
+            });
         }
-      }
+    };
 
-    componentDidMount(){
+    componentDidMount() {
         this.getEvent();
         this.getAllUsers();
     }
 
-    getAll(){
+    getAll() {
         this.getEvent();
         this.getAllUsers();
     }
 
-    aceptarParticipante = async (eventuserid, id) =>{
+    aceptarParticipante = async (eventuserid, id) => {
         // console.log(eventuserid);
         // await axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
         //     solicitud: 1,
@@ -123,108 +130,154 @@ class AcceptUserToEvent extends Component{
         // window.location.href = window.location.href;
 
         // console.log(eventuserid);
-        const uno= axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
+        const uno = axios.put(`${this.EventoUsuario_Url_Api}/${eventuserid}`, {
             solicitud: 1,
-        })
-        const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`
+        });
+        const contenido = `Has sido aceptado en el evento: ${this.state.nombre_evento}`;
         // console.log(contenido)
         const dos = axios.post(this.Notification_Url_Api, {
             contenido: contenido,
             informacion: null,
-            leido: 0
-        })
+            leido: 0,
+        });
 
-        const results = await Promise.all([uno, dos])
+        const results = await Promise.all([uno, dos]);
         const response = results[1];
         // console.log(response)
-        
+
         await axios.post(this.NotificationUser_Url_Api, {
             notification_id: response.data.id,
             user_id: id,
-            auxieventid: null
-        })
+            auxieventid: null,
+        });
         // window.location.reload();
         this.getAll();
-    }
+    };
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="App">
                 <ModalWindow
-                estado1={this.state.estadoModal}
-                cambiarEstado1={this.cambiarEstadoModal}
+                    estado1={this.state.estadoModal}
+                    cambiarEstado1={this.cambiarEstadoModal}
                 />
                 <ModalWindowOrganizadores
-                estadoOrganizador={this.state.estadoModalOrganizador}
-                cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
+                    estadoOrganizador={this.state.estadoModalOrganizador}
+                    cambiarEstadoModalOrganizador={this.cambiarEstadoModalOrganizador}
                 />
                 <ModalWindowPatrocinadores
-                estadoPatrocinador={this.state.estadoModalPatrocinador}
-                cambiarEstadoModalPatrocinador={
-                this.cambiarEstadoModalPatrocinador
-                }
+                    estadoPatrocinador={this.state.estadoModalPatrocinador}
+                    cambiarEstadoModalPatrocinador={this.cambiarEstadoModalPatrocinador}
                 />
-                <ModalRejection estadoRejection={ this.state.estadoModalRejection} 
-                cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
-                id_evento = {this.state.e_id}
-                id_user ={this.state.eventuser_id}
-                id ={this.state.id}
+                <ModalAnuncio
+                    estadoAnuncio={this.state.estadoModalAnuncio}
+                    cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
                 />
-
-
+                <ModalRejection
+                    estadoRejection={this.state.estadoModalRejection}
+                    cambiarEstadoModalRejection={this.cambiarEstadoModalRejection}
+                    id_evento={this.state.e_id}
+                    id_user={this.state.eventuser_id}
+                    id={this.state.id}
+                />
                 <div className="background-image"></div> {/* Componente de fondo */}
                 <div className="content">
-                   <NavbarAdmin
-                   estado1={this.estadoModal}
-                   cambiarEstado1={this.cambiarEstadoModal}
-                   estadoOrganizador={this.estadoModalOrganizador}
-                   cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
-                   estadoPatrocinador={this.estadoModalPatrocinador}
-                   cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
-                   />
-                   <div className="contenedor">
+                    <NavbarAdmin
+                        estado1={this.estadoModal}
+                        cambiarEstado1={this.cambiarEstadoModal}
+                        estadoOrganizador={this.estadoModalOrganizador}
+                        cambiarEstadoOrganizador={this.cambiarEstadoModalOrganizador}
+                        estadoPatrocinador={this.estadoModalPatrocinador}
+                        cambiarEstadoPatrocinador={this.cambiarEstadoModalPatrocinador}
+                        estadoAnuncio={this.estadoModalAnuncio}
+                        cambiarEstadoAnuncio={this.cambiarEstadoModalAnuncio}
+                    />
+                    <div className="contenedor">
                         <div className="contenedorSolicitudes">
-
                             {this.eventos[0] == null ? (
-                                <h1 className='tituloPagAcept'>No Hay Solicitudes</h1>
-                            ) : (<>
-                            <h1 className='tituloPagAcept'>{this.state.nombre_evento}</h1>
-                                <div className='containerReqSol'>
-                                    <div className='contRaroReq'>
-                                        <div className='requisitosDeEvento'>
-                                            <h3 className='subtitleRequisitos'>Requisitos</h3>
-                                            {this.state.requisitos.map((r, index) => {  
-                                                return (<div key={r.id}>
-                                                    <p className='requisitosTexto'>{index+1}. {r.contenido_requisito}</p>
-                                                </div>);
+                                <h1 className="tituloPagAcept">No Hay Solicitudes</h1>
+                            ) : (
+                                <>
+                                    <h1 className="tituloPagAcept">{this.state.nombre_evento}</h1>
+                                    <div className="containerReqSol">
+                                        <div className="contRaroReq">
+                                            <div className="requisitosDeEvento">
+                                                <h3 className="subtitleRequisitos">Requisitos</h3>
+                                                {this.state.requisitos.map((r, index) => {
+                                                    return (
+                                                        <div key={r.id}>
+                                                            <p className="requisitosTexto">
+                                                                {index + 1}. {r.contenido_requisito}
+                                                            </p>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            {this.eventos.map((evento) => {
+                                                return (
+                                                    <div key={evento.eventuserid}>
+                                                        <div className="containerUserSol">
+                                                            <FontAwesomeIcon
+                                                                className="buttonIconUser"
+                                                                icon={faUser}
+                                                            />
+                                                            <h4 className="nameUser">{`${evento.nombre} ${evento.apellido}`}</h4>
+
+                                                            {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
+                                                            <a
+                                                                href={`${evento.requisitoZip}`}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                download
+                                                            >
+                                                                <FontAwesomeIcon
+                                                                    className="buttonIconDownload"
+                                                                    icon={faDownload}
+                                                                />
+                                                            </a>
+                                                            {evento.solicitud == 1 ? null : (
+                                                                <>
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            this.aceptarParticipante(
+                                                                                evento.eventuserid,
+                                                                                evento.id
+                                                                            )
+                                                                        }
+                                                                        className="buttonAcceptUser"
+                                                                    >
+                                                                        {" "}
+                                                                        Aceptar{" "}
+                                                                    </button>
+                                                                    <button
+                                                                        onClick={() =>
+                                                                            this.cambiarEstadoModalRejection(
+                                                                                !this.state.estadoModal,
+                                                                                evento.eventuserid,
+                                                                                evento.id
+                                                                            )
+                                                                        }
+                                                                        className="buttonDenyUser"
+                                                                    >
+                                                                        {" "}
+                                                                        Rechazar{" "}
+                                                                    </button>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                );
                                             })}
                                         </div>
                                     </div>
-                                    <div>
-                                    {this.eventos.map((evento) => {  
-                                        return (<div key={evento.eventuserid}>
-                                            <div className='containerUserSol'>
-                                                <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
-                                                <h4 className='nameUser'>{`${evento.nombre} ${evento.apellido}`}</h4>
-
-                                                {/* <a onClick={()=>window.location.href = `${evento.requisitoZip}`}><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a> */}
-                                                <a href = {`${evento.requisitoZip}`} target="_blank" rel="noopener noreferrer" download><FontAwesomeIcon className='buttonIconDownload' icon={faDownload} /></a>
-                                                {evento.solicitud == 1 ? (
-                                                    null
-                                                ) : (
-                                                    <><button onClick={() => this.aceptarParticipante(evento.eventuserid, evento.id)} className='buttonAcceptUser'> Aceptar </button>
-                                                    <button onClick={() =>this.cambiarEstadoModalRejection(!this.state.estadoModal, evento.eventuserid, evento.id)} className='buttonDenyUser'> Rechazar </button></>
-                                                )}
-                                            </div>
-                                        </div>);
-                                    })}</div>
-                                </div>           
-                            </>
+                                </>
                             )}
                         </div>
                     </div>
                 </div>
-           </div>
+            </div>
         );
     }
 }
