@@ -116,7 +116,7 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
                       id="inputRegistro"
                       //   type={atributo.tipo_dato_atributo}
                       name="valor"
-                      placeholder="Campo Adicional"
+                      placeholder={seccion.contenido_informacion}
                       readOnly />
                   </div>
                   <button

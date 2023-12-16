@@ -173,12 +173,12 @@ class DarBajaEvento extends Component {
                     return (
                       <div
                         key={evento.euid}
-                        className="containerEvents"
+                        className="containerEvents containerEventsBaja"
                         //   onClick={() => this.masDetalles(evento.id)}
                       >
-                        <h4 className="tipoEv">{evento.nombre_equipo}</h4>
+                        <h4 className="nombreEquipoBaja">{evento.nombre_equipo}</h4>
                         <img
-                          className="imageEvent"
+                          className="imagenEventoBaja"
                           src={
                             evento.name === null
                               ? imgPred
@@ -186,14 +186,13 @@ class DarBajaEvento extends Component {
                           }
                           alt="Logo del evento"
                         />
-                        <h4 className="nombreEvento">{evento.nombre_evento}</h4>
-                        <h4 className="tipoEv">{evento.nombre_tipo_evento}</h4>
-                        <h4>{evento.fecha_fin}</h4>
+                        <h4 className="nombreEventoBaja">{evento.nombre_evento}</h4>
+                        <h4 className="tipoEventoBaja">{evento.nombre_tipo_evento}</h4>
                         <div>
                           {evento.participantes_equipo <= 1 ? (
-                            <h4>Individual</h4>
+                            <h4 className="modalidadEventoBaja">Individual</h4>
                           ) : (
-                            <h4>Equipo de {evento.participantes_equipo}</h4>
+                            <h4 className="modalidadEventoBaja">Equipo de {evento.participantes_equipo}</h4>
                           )}
                         </div>
                         <button

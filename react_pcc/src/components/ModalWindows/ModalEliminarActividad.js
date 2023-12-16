@@ -71,7 +71,9 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
             </div>
 
             <div className="seccionCampo">
-              
+              { actividades.length === 0 ? (
+                <h2 className='noHayActividades'>No hay actividades en este evento</h2>
+              ) : ( <div className='seccionesDivExtra'>
                 {actividades.map((actividad) => (
                   <>
                   <div className="seccionesExtraActividad">
@@ -111,7 +113,8 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
                   </div>
                   </>
                 ))}
-              
+                </div>
+                )}
             </div>
           </div>
         </div>

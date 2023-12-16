@@ -111,11 +111,11 @@
     width: 100%;
   }
   .seccionesExtraActividad{
-    margin: 1vh 0;
+    
     border: 2px solid black;
     padding: 2vh;
     border-radius: 1vh;
-    width: 95%;
+    
   }
   .extraOrganizador{
     display: flex;
@@ -160,4 +160,15 @@
     cursor: pointer;
     box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.3);
     
+}
+.noHayActividades{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vw;
+  margin-top: 5%;
+}
+.seccionesDivExtra{
+  margin: 1vh 0;
+  width: 95%;
 }
