@@ -58,17 +58,12 @@ class PaginaEditarEventos extends Component {
     }
   };
 
-    masDetalles(id){
-        cookies.set('ultimo_id_evento', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
-        window.location.href='./editar-evento';
-    }
   componentDidMount() {
     this.getEvents();
   }
 
   masDetalles(id) {
-    cookies.set("idauxiliar", id, { path: "/" });
+    cookies.set("ultimo_id_evento", id, { path: "/" });
     // console.log(cookies.get('idauxiliar'));
     window.location.href = "./editar-evento";
   }

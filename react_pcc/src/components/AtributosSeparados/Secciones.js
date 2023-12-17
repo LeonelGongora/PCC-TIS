@@ -50,8 +50,8 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
 
     const terminarRegistro = () => {
 
-      //console.log(organizadores_agregar)
-      //console.log(organizadores_eliminar)
+      console.log(patrocinadores_agregar)
+      console.log(patrocinadores_eliminar)
 
       if(organizadores_agregar){
         const url_Organizador_agregar = `${URL_API}/add-event_organizer`; 
@@ -90,7 +90,47 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
         }
         cookies.remove("organizadores_eliminar");
       }
-      window.location.href = "./home-admin";
+
+      if(patrocinadores_eliminar){
+        const url_Patrocinador_eliminar = `${URL_API}/delete-event_sponsor`; 
+        for (let index = 0; index < patrocinadores_eliminar.length; index++) {
+
+          const data = new FormData()
+          let patrocinador = patrocinadores_eliminar[index][0]
+          let categoria = patrocinadores_eliminar[index][1]
+          data.append("patrocinador", patrocinador)
+          data.append("categoria", categoria)
+          data.append("evento", id)
+  
+          axios.post(url_Patrocinador_eliminar, data).then(res => {
+            if(res.data.status === 200){
+              console.log(res);
+            }
+          })
+        }
+        cookies.remove("patrocinadores_eliminar");
+      }
+
+      if(patrocinadores_agregar){
+        const url_Patrocinador_agregar = `${URL_API}/add-event_sponsor`; 
+        
+        for (let index = 0; index < patrocinadores_agregar.length; index++) {
+          const data = new FormData()
+          let patrocinador = patrocinadores_agregar[index][0]
+          let categoria = patrocinadores_agregar[index][1]
+          data.append("patrocinador", patrocinador)
+          data.append("evento", id)
+          data.append("categoria", categoria)
+
+          axios.post(url_Patrocinador_agregar, data).then((res) => {
+            if (res.data.status === 200) {
+              console.log(res);
+            }
+          });
+        }
+        cookies.remove("patrocinadores_agregar");
+      }
+      //window.location.href = "./home-admin";
 
     }
 

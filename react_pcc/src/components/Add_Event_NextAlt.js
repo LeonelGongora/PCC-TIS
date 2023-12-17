@@ -47,6 +47,7 @@ class Add_Event_NextAlt extends Component{
             estadoCampoSeleccion: false, 
 
             atributos: [],
+            usuarios: [],
             atributosInformacion: [],
             requisitos: [],
             actividades: [],
@@ -68,6 +69,7 @@ class Add_Event_NextAlt extends Component{
         this.setState({
           id_evento: response.data.id,
           atributos: response.data.attributes,
+          usuarios: response.data.users,
           requisitos: response.data.requirements,
           actividades: response.data.activities,
           atributosInformacion : response.data.informations,
@@ -85,7 +87,6 @@ class Add_Event_NextAlt extends Component{
 
     this.setState({ pestañas: nuevasPestañas });
     };  
-
 
     render(){
         const pestañas = this.state.pestañas;
@@ -124,6 +125,7 @@ class Add_Event_NextAlt extends Component{
                                 estadoCampos={pestañas[0]}
                                 cambiarEstadoCampos={this.cambiarEstadoCampos}
                                 atributosFormulario = {this.state.atributos}
+                                usuarios = {this.state.usuarios}
                             />
                             <Secciones
                                 estadoSecciones={this.state.pestañas[1]}

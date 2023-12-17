@@ -86,26 +86,47 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
         cookies.remove("organizadores_eliminar");
       }
 
+      if(patrocinadores_eliminar){
+        const url_Patrocinador_eliminar = `${URL_API}/delete-event_sponsor`; 
+        for (let index = 0; index < patrocinadores_eliminar.length; index++) {
+
+          const data = new FormData()
+          let patrocinador = patrocinadores_eliminar[index][0]
+          let categoria = patrocinadores_eliminar[index][1]
+          data.append("patrocinador", patrocinador)
+          data.append("categoria", categoria)
+          data.append("evento", id)
+  
+          axios.post(url_Patrocinador_eliminar, data).then(res => {
+            if(res.data.status === 200){
+              console.log(res);
+            }
+          })
+        }
+        cookies.remove("patrocinadores_eliminar");
+      }
+
       if(patrocinadores_agregar){
-        const url_Organizador_agregar = `${URL_API}/add-event_organizer`; 
+        const url_Patrocinador_agregar = `${URL_API}/add-event_sponsor`; 
         
         for (let index = 0; index < patrocinadores_agregar.length; index++) {
-          const data = new FormData();
-          let organizador = organizadores_agregar[index];
-          data.append("organizador", organizador);
-          data.append("evento", id);
+          const data = new FormData()
+          let patrocinador = patrocinadores_agregar[index][0]
+          let categoria = patrocinadores_agregar[index][1]
+          data.append("patrocinador", patrocinador)
+          data.append("evento", id)
+          data.append("categoria", categoria)
 
-          axios.post(url_Organizador_agregar, data).then((res) => {
+          axios.post(url_Patrocinador_agregar, data).then((res) => {
             if (res.data.status === 200) {
               console.log(res);
             }
           });
         }
-
-        cookies.remove("organizadores_agregar");
+        cookies.remove("patrocinadores_agregar");
       }
 
-      window.location.href = "./home-admin";
+      //window.location.href = "./home-admin";
 
     }
 

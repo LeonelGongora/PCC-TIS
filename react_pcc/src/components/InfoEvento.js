@@ -194,31 +194,51 @@ function InfoEvento({props}){
                         {patrocinadores.length !== 0 ? (
                             <div className='contenedorOrganizadores contPatrocinadores'>
                             <h2>Patrocinadores</h2>
-                            {organizadores.map((o) => {  
-                                
+                            {patrocinadores.map((p) => {  
+                                //patrocinadoresRegistrados[i].pivot.categoria === "Silver"
                                 return (
                             <div className='organizadores'>
-                                <div className='patrocinadoresGold'>
-                                {patrocinadores.map((p) => {  
-                                return (<div className='divExtraGold' key={p.id}>
-                                <img className='imagenGld' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
-                                </div>);
-                                })}
-                                </div>
-                                <div className='patrocinadoresSilver'>
-                                {patrocinadores.map((p) => {  
-                                return (<div className='divExtraSlv' key={p.id}>
-                                <img className='imagenSlv' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
-                                </div>);
-                                })}
-                                </div>
-                                <div className='patrocinadoresBronce'>
-                                {patrocinadores.map((p) => {  
-                                return (<div className='divExtraBrc' key={p.id}>
-                                <img className='imagenBrc' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
-                                </div>);
-                                })}
-                                </div>
+                                
+
+                                {p.pivot.categoria === "Gold" ? (
+                                    <>
+                                    <div className='patrocinadoresGold'>
+                                        <div className='divExtraGold' key={p.id}>
+                                        <img className='imagenGld' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
+                                        </div>
+                                    </div>
+                                    </>
+                                    ) : (<>
+                                    <div></div>
+                                    </>
+                                )}
+                                
+                                {p.pivot.categoria === "Silver" ? (
+                                    <>
+                                    <div className='patrocinadoresSilver'>
+                                        <div className='divExtraSlv' key={p.id}>
+                                        <img className='imagenSlv' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
+                                        </div>
+                                    </div>
+                                    </>
+                                    ) : (<>
+                                    <div></div>
+                                    </>
+                                )}
+
+                                
+                                {p.pivot.categoria === "Bronce" ? (
+                                    <>
+                                    <div className='patrocinadoresBronce'>
+                                        <div className='divExtraBrc' key={p.id}>
+                                        <img className='imagenBrc' src={`${URL_IMG}/imagenesPatrocinadores/`+p.imagen_patrocinador}></img>
+                                        </div>
+                                    </div>
+                                    </>
+                                    ) : (<>
+                                    <div></div>
+                                    </>
+                                )}
                             </div>
                             );
                         })}

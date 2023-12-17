@@ -25,8 +25,6 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
 
     const [opciones, setOpciones] = useState([]);
 
-    const [numero, setNumero] = useState(1);
-
     const handleInput = (e) => {
         const {name, value} = e.target;
 

@@ -130,7 +130,9 @@ class PaginaConfigurarFormulario extends Component {
     this.setState({ estadoCampoFecha: nuevoEstado });
   };
 
-  abrirModalActividad(id) {
+  async abrirModalActividad(id, usuariosEvento) {
+    console.log(usuariosEvento)
+    cookies.set("participantes_Evento", usuariosEvento, { path: "/" });
     cookies.set("id_evento", id, { path: "/" });
     this.cambiarEstadoModalEleccion(!this.state.estadoModalEleccion);
     // console.log(cookies.get('idauxiliar'));
@@ -232,7 +234,7 @@ class PaginaConfigurarFormulario extends Component {
                       <div
                         key={evento.id}
                         className="containerEvents"
-                        onClick={() => this.abrirModalActividad(evento.id)}
+                        onClick={() => this.abrirModalActividad(evento.id, evento.users)}
                       >
                         <img
                           className="imageEvent"

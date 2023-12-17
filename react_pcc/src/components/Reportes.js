@@ -53,6 +53,9 @@ function Reportes() {
     const [dataTabla, setDataTabla] = useState([]);
     const [evento_actual, setEventoActual] = useState([]);
     const [cantidadRegistros, setCantidadRegistros] = useState({});
+    const [nombreDeReporte, setNombreDeReporte] = useState("");
+    const [nombreDeEvento, setNombreDeEvento] = useState("");
+    const [nombreDeReporteEspecifico, setNombreDeReporteEspecifico] = useState("");
 
     const cambioReporteGeneral = (e) => {
         if (e.target.value === "Eventos") {
@@ -102,12 +105,12 @@ function Reportes() {
 
             setColumnas(columnasActuales);
             setCantidadRegistros(dataTabla.length);
+            setNombreDeReporte("Reporte de Eventos")
         }
         e.target.value = "predeterminado";
     };
 
     const cambioEventoActual = (e) => {
-        console.log(table.getState());
         id_evento_actual = e.target.value;
         let evento_actual_aux = [];
         for (let i = 0; i < eventos.length; i++) {
@@ -133,21 +136,25 @@ function Reportes() {
             const myElement1 = document.getElementById("Participantes_Opcion");
             myElement1.disabled = true;
         }
+        setNombreDeEvento(evento_actual_aux.nombre_evento);
     };
 
     const cambioReporteEspecifico = (e) => {
+      setNombreDeReporteEspecifico(e.target.value)
+
         if (e.target.value === "Participantes") {
-            reporteParticipantes(e);
-        } else if (e.target.value === "Organizadores_Evento") {
-            reporteOrganizadoresEvento(e);
-        } else if (e.target.value === "Patrocinadores_Evento") {
-            reportePatrocinadoresEvento(e);
-        } else if (e.target.value === "Requisitos_Evento") {
-            reporteRequisitosEvento(e);
-        } else if (e.target.value === "Actividades_Evento") {
-            reporteActividadesEvento(e);
-        } else if (e.target.value === "Equipos_Evento") {
-            reporteEquiposEvento(e);
+          
+          reporteParticipantes(e);
+        } else if (e.target.value === "Organizadores") {
+          reporteOrganizadoresEvento(e);
+        } else if (e.target.value === "Patrocinadores") {
+          reportePatrocinadoresEvento(e);
+        } else if (e.target.value === "Requisitos") {
+          reporteRequisitosEvento(e);
+        } else if (e.target.value === "Actividades") {
+          reporteActividadesEvento(e);
+        } else if (e.target.value === "Equipos") {
+          reporteEquiposEvento(e);
         }
     };
 
@@ -173,7 +180,6 @@ function Reportes() {
             //fecha_creacion = keys[9];
 
             let claves = keys.slice(0, 8);
-            console.log(claves);
             //claves.push()
 
             let columnasActuales = [];
@@ -187,14 +193,15 @@ function Reportes() {
                 columnasActuales.push(diccionario);
                 //const element = array[i];
             }
-            console.log(evento_actual.users);
-            console.log(columnasActuales);
 
             setDataTabla(evento_actual.users);
             setColumnas(columnasActuales);
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+
+        let nombre_Reporte = "Participantes de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const reporteOrganizadoresEvento = (e) => {
@@ -239,6 +246,8 @@ function Reportes() {
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+        let nombre_Reporte = "Organizadores de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const reportePatrocinadoresEvento = (e) => {
@@ -283,6 +292,8 @@ function Reportes() {
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+        let nombre_Reporte = "Patrocinadores de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const reporteRequisitosEvento = (e) => {
@@ -327,6 +338,8 @@ function Reportes() {
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+        let nombre_Reporte = "Requisitos de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const reporteActividadesEvento = (e) => {
@@ -370,6 +383,8 @@ function Reportes() {
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+        let nombre_Reporte = "Actividades de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const reporteEquiposEvento = (e) => {
@@ -388,11 +403,11 @@ function Reportes() {
             setDataTabla(fila);
             setColumnas(columna);
         } else {
-            const keys = Object.keys(evento_actual.activities[0]);
+            const keys = Object.keys(evento_actual.teams[0]);
             //let fecha_creacion = ""
             //fecha_creacion = keys[9];
 
-            let claves = keys.slice(1, 5);
+            let claves = keys.slice(1, 2);
             console.log(claves);
             //claves.push()
 
@@ -408,11 +423,13 @@ function Reportes() {
                 //const element = array[i];
             }
 
-            setDataTabla(evento_actual.activities);
+            setDataTabla(evento_actual.teams);
             setColumnas(columnasActuales);
             setCantidadRegistros(dataTabla.length);
         }
         e.target.value = "predeterminado";
+        let nombre_Reporte = "Equipos de " + nombreDeEvento
+        setNombreDeReporte(nombre_Reporte)
     };
 
     const [sorting, setSorting] = useState([]);
@@ -516,15 +533,16 @@ function Reportes() {
                 >
                   Participantes
                 </option>
-                <option value="Equipos_Evento" id="Equipos_Opcion" disabled>
+                <option value="Equipos" id="Equipos_Opcion" disabled>
                   Equipos
                 </option>
-                <option value="Organizadores_Evento">Organizadores</option>
-                <option value="Patrocinadores_Evento">Patrocinadores</option>
-                <option value="Requisitos_Evento">Requisitos</option>
-                <option value="Actividades_Evento">Actividades</option>
+                <option value="Organizadores">Organizadores</option>
+                <option value="Patrocinadores">Patrocinadores</option>
+                <option value="Requisitos">Requisitos</option>
+                <option value="Actividades">Actividades</option>
               </select>
             </div>
+            <h1>Reporte: {nombreDeReporte}</h1>
             <table className="tablaReportes">
               <thead>
                 {table.getHeaderGroups().map((headerGroup) => (

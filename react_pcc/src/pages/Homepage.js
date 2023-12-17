@@ -35,7 +35,7 @@ class Homepage extends Component{
     }
 
     redirigir = async () => {
-        window.location.href='./home-admin';
+        window.location.href='./home-participant';
     }
     
     componentDidMount(){
