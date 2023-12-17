@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import {URL_API} from '../../const';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
@@ -74,7 +75,7 @@ function ModalCampoInformacion({estadoCampoInformacion, cambiarEstadoCampoInform
             data.append('contenido_informacion', values.contenido_informacion)
             data.append('event_id', id_evento)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-information', data);
+            const res = await axios.post(`${URL_API}/add-information`, data);
             
             if(res.data.status === 200){
                 console.log(res);

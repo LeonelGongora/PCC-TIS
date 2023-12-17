@@ -64,9 +64,12 @@ function FormRegistroEvento_Equipos(){
 
     e.preventDefault();
     const validationErrors = {};
-    console.log("DNI")
-    console.log(dni_coach)
-
+    let camposAdicionales = false
+    if(event.attributes.length > 0 ){
+      camposAdicionales = true
+    }
+    cookies.set('camposAdicionales', camposAdicionales, {path: "/"});
+    
     let nombres_equipos_registrados = []
     let id_registrados = []
 
@@ -116,6 +119,8 @@ function FormRegistroEvento_Equipos(){
         validationErrors[evento.name] = "No puede registrar al mismo participante más de una vez";
       }else if(id_registrados.includes(parseInt(evento.value))){
         validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
+      } else if (!/^[1-9][0-9]{5,11}$/.test(evento.value)){
+        validationErrors[evento.name] = "Ingrese un DNI valido";
       }
       dni_ingresados.push(evento.value)
     })
@@ -124,8 +129,6 @@ function FormRegistroEvento_Equipos(){
 
     if(Object.keys(validationErrors).length === 0){
 
-      
-      
       document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(evento =>{
         participantes_dni_Aux.push(evento.value)
       })
@@ -163,7 +166,6 @@ function FormRegistroEvento_Equipos(){
 
           let dni_registrados = []
           let id_registrados = []
-          let contraseñas_generadas = []
 
           let dni_no_registrados = []
 
@@ -175,18 +177,6 @@ function FormRegistroEvento_Equipos(){
           for (let i = 0; i < participantes_dni_Aux.length; i++) {
 
             const indice = dni_registrados.indexOf(parseInt(participantes_dni_Aux[i])); 
-
-            const longitud = 5
-            let caracteres = ""
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const charactersLength = characters.length;
-            let counter = 0;
-            while (counter < longitud) {
-              caracteres += characters.charAt(Math.floor(Math.random() * charactersLength));
-              counter += 1;
-            }
-
-            let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
     
             if(dni_registrados.includes(parseInt(participantes_dni_Aux[i]))){
     
@@ -197,22 +187,14 @@ function FormRegistroEvento_Equipos(){
               data.append('user_id', id_registrados[indice])
     
               const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
-
-              
-              contraseñas_generadas.push(contraseña_generada)
-              console.log(contraseña_generada)
             }else{
 
-              let contraseña_generada = participantes_dni_Aux[i] + "" + caracteres
-              console.log(contraseña_generada)
-              contraseñas_generadas.push(contraseña_generada)
               console.log("DNI NO REGISTRADO")
               dni_no_registrados.push(participantes_dni_Aux[i])
             }
 
             cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
             cookies.set('indice_dni_no_registrados', 0, {path: "/"});
-            cookies.set('contraseñas_generadas', contraseñas_generadas, {path: "/"});
             //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
             cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
           }
@@ -266,6 +248,7 @@ function FormRegistroEvento_Equipos(){
       }
       setEvent(response.data)
       setRequisitos(response.data.requirements)
+      cookies.set('usuarios', response.data.users, {path: "/"});
   }
 
   const cambiarEstadoModal = (nuevoEstado) => {

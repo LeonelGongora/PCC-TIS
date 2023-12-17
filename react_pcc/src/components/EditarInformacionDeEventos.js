@@ -17,7 +17,7 @@ const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 class EditarInformacionDeEventos extends Component{
 
   eventos = []
-  id = cookies.get('idauxiliar');
+  id = cookies.get('ultimo_id_evento');
 
     getEventTypes = async () => {
         const url = `${URL_API}/type-events`; 

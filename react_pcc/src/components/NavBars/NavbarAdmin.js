@@ -31,7 +31,7 @@ function NavbarAdmin({
       console.log(key)
       cookies.remove(key);
     });
-    window.location.reload();
+    window.location.href='./home-participant';
   }
 
   useEffect(() => {

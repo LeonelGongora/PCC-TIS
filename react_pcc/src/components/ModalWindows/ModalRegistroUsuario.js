@@ -18,7 +18,8 @@ const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1}){
 
     const ci_nuevo_usuario = cookies.get('ci_nuevo_usuario');
-
+    const usuarios = cookies.get('usuarios');
+    
     const [values, setValues] = useState({
         nombre: '',
         apellido: '',
@@ -27,9 +28,6 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         telefono: '',
     });
 
-
-
-    const [usuarios, setUsuarios] = useState({});
     const [errors, setErrors] = useState({});
 
     const handleInput = (e) => {
@@ -91,7 +89,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     if (!values.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
-    } else if (!/^[A-Za-z0-9-._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
+    } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(values.email)) {
       validationErrors.email = "Ingrese correo valido";
     } else {
       for (let index = 0; index < usuarios.length; index++) {
@@ -101,6 +99,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         if (email === nuevo_email) {
           validationErrors.email =
             "Ya existe un usuario registrado con este email";
+          
           break;
         }
       }
@@ -108,16 +107,17 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
     if (!values.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio";
-    } else if (!/^[7|6][0-9]{7}$/.test(values.telefono)) {
+    } else if (!/^\+?[1-9][0-9]{7,11}$/.test(values.telefono)) {
       validationErrors.telefono = "Ingrese un numero valido";
     }
 
         setErrors(validationErrors);
         console.log(values)
         console.log(ci_nuevo_usuario)
-        /* */
 
         if(Object.keys(validationErrors).length === 0){
+          
+          cookies.remove("usuarios");
 
             const url = `${URL_API}/add-user-information`;
             const url_correo = `${URL_API}/enviar-correo`;

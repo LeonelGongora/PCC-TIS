@@ -3,10 +3,14 @@ import "../stylesheets/Dropdown.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import configApi from '../configApi/configApi'
 import Cookies from "universal-cookie";
 import {URL_API} from '../const';
+import ModalActividad from "./ModalWindows/ModalActividad";
+import ModalCamposEquipo from "./ModalWindows/ModalCamposEquipo";
 
 const cookies = new Cookies();
+const Eventos_Api_Url = configApi.EVENTOC_API_URL;
 const Notificacion_Url = `${URL_API}/misnotificaciones`;
 const User_Url = `${URL_API}/usuarios`;
 
@@ -91,82 +95,136 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
     });
   }
 
-  function abrirmodal(id_notification, id_user, id_event) {
+  async function abrirmodal(id_notification, id_user, id_event) {
+
+    
+    
+    const url = `${Eventos_Api_Url}/${id_event}`;
+    
+    axios.get(url).then( response => {
+      console.log(response)
+      setEstadoModalActividad(!estadoModalActividad)
+
+      let atributos_Aux = response.data.attributes
+      for (let i = 0; i < atributos_Aux.length; i++) {
+        if(atributos_Aux[i].tipo_dato_atributo === "select"){
+          atributos_Aux[i]["esSelect"] = true;
+          let nueva_Restriccion = atributos_Aux[i].restriccion.split(",");
+          atributos_Aux[i].restriccion = nueva_Restriccion;
+        }else{
+          atributos_Aux[i]["esSelect"] = false;
+        }
+      }
+      console.log(atributos_Aux)
+      cookies.set('campos_evento', atributos_Aux, {path: "/"});
+      
+    })
+    /* 
+      
+      if(response){
+        let atributos_Aux = response.data.attributes
+        for (let i = 0; i < atributos_Aux.length; i++) {
+          if(atributos_Aux[i].tipo_dato_atributo === "select"){
+            atributos_Aux[i]["esSelect"] = true;
+            let nueva_Restriccion = atributos_Aux[i].restriccion.split(",");
+            atributos_Aux[i].restriccion = nueva_Restriccion;
+          }else{
+            atributos_Aux[i]["esSelect"] = false;
+          }
+        }
+
+        //setEvent(response.data)
+        //setAtributos(atributos_Aux)
+      }
+    */
+    
     console.log(id_notification)
     console.log(id_user)
     console.log(id_event)
   }
 
+  const [estadoModalActividad, setEstadoModalActividad] = useState(false);
+  
+  const cambiarEstadoModalActividad = (nuevoEstado) => {
+    setEstadoModalActividad(nuevoEstado);
+  }
+
   return (
-    <div className="dropdown-container">
-      <button
-        className={`${
-          isOpen
-            ? "dropdown-button-notification-active"
-            : "dropdown-button-notification "
-        }`}
-        onClick={toggleDropdown}
-      >
-        <FontAwesomeIcon className="dropdownIcon-notification" icon={faBell} />
-        {notificationCount > 0 && (
-          <span className="notification-count">{notificationCount}</span>
-        )}
-      </button>
-      {isOpen && (
-        <ul className="dropdown-menu-notification">
-          <p id="tituloNotif">Notificaciones</p>
-          {notification[0] != null ? (
-            <>
-              {notification.map((n) => {
-                return (
-                  <div key={n.id} >
-                    {n.informacion === null ? (
-                      <>
-                        {n.leido === 1 ? (
-                          <>
-                            <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
-                              {n.contenido}
-                              <p>{n.created_at}</p>
-                            </li>
-                          </>
-                        ) : (
-                          <>
-                            <li>
-                              {n.contenido}
-                              <p>{n.created_at}</p>
-                            </li>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {n.leido === 1 ? (
-                          <>
-                            <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
-                              {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
-                              <p>{n.created_at}</p>
-                            </li>
-                          </>
-                        ) : (
-                          <>
-                            <li>
-                              {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
-                              <p>{n.created_at}</p>
-                            </li>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <li>No tiene notificaciones</li>
+
+    <>
+    <ModalCamposEquipo
+      estadoActividad={estadoModalActividad}
+      cambiarEstadoModalActividad={cambiarEstadoModalActividad}
+      />
+      
+      <div className="dropdown-container">
+        <button
+          className={`${isOpen
+              ? "dropdown-button-notification-active"
+              : "dropdown-button-notification "}`}
+          onClick={toggleDropdown}
+        >
+          <FontAwesomeIcon className="dropdownIcon-notification" icon={faBell} />
+          {notificationCount > 0 && (
+            <span className="notification-count">{notificationCount}</span>
           )}
-        </ul>
-      )}
-    </div>
+        </button>
+        {isOpen && (
+          <ul className="dropdown-menu-notification">
+            <p id="tituloNotif">Notificaciones</p>
+            {notification[0] != null ? (
+              <>
+                {notification.map((n) => {
+                  return (
+                    <div key={n.id}>
+                      {n.informacion === null ? (
+                        <>
+                          {n.leido === 1 ? (
+                            <>
+                              <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
+                                {n.contenido}
+                                <p>{n.created_at}</p>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li>
+                                {n.contenido}
+                                <p>{n.created_at}</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          {n.leido === 1 ? (
+                            <>
+                              <li onClick={() => abrirmodal(n.id, n.user_id, n.auxieventid)}>
+                                {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
+                                <p>{n.created_at}</p>
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li>
+                                {`${n.contenido}. Mayor Informacion: ${n.informacion}`}
+                                <p>{n.created_at}</p>
+                              </li>
+                            </>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <li>No tiene notificaciones</li>
+            )}
+          </ul>
+        )}
+      </div>
+      </>
   );
 }
 
