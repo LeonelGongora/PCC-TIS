@@ -32,8 +32,38 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
       setValues({ estadoModalActividad: nuevoEstado });
     }
 
-    const eliminarActividad = (id) => {
+    const eliminarActividad = async (id, nombreacti) => {
       
+      //noti
+      var esE = '';
+      if (cookies.get('esEditar') != undefined){esE = cookies.get('esEditar')}
+      if (cookies.get('esEditar') == true){
+
+        const url_notificacion = `${URL_API}/notifications`;
+        const url_eventnotificacion= `${URL_API}/eventnotifications`;
+        var ide= cookies.get('ultimo_id_evento');
+        // if(id_evento_Aux){
+        //   ide= id_evento_Aux;
+        //   cookies.remove('id_evento');
+        // }else{
+        //   ide= id_evento;
+        // }
+        const url_event= `${URL_API}/eventos/${ide}`;
+        const event = await axios.get(url_event)
+        const contenido = `El evento: ${event.data.nombre_evento}, ha eliminado la siguiente actividad: ${nombreacti}`
+
+        const response = await axios.post(url_notificacion, {
+          contenido: contenido,
+          informacion: null,
+          leido: 0
+        })
+        await axios.post(url_eventnotificacion, {
+          notification_id: response.data.id,
+          event_id: ide
+        })
+      }
+      //fin noti
+
       console.log(id)
       const url = `http://127.0.0.1:8000/api/delete-activity/${id}`; 
       axios.delete(url).then(res => {
@@ -151,7 +181,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
                     <button
                       className="botonEliminarCampo botonEliminarActividad"
                       type="button"
-                      onClick={() => eliminarActividad(actividad.id)}
+                      onClick={() => eliminarActividad(actividad.id, actividad.nombre_actividad)}
                     >
                       {cancelar}
                     </button>

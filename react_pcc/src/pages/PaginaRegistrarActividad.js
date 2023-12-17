@@ -95,6 +95,7 @@ class PaginaRegistrarActividad extends Component {
   componentDidMount() {
     this.getEvents();
     console.log(this.se_Registro);
+    cookies.set("esEditar", true, { path: "/" });
   }
 
   cambiarEstadoModalActividad = (nuevoEstado) => {

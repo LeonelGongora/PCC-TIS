@@ -24,6 +24,7 @@ class Add_Event extends Component {
   componentDidMount() {
     this.getEventTypes();
     this.gentEvents();
+    cookies.remove('esEditar');
   }
 
   gentEvents = async () => {

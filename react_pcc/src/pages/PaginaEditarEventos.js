@@ -67,11 +67,11 @@ class PaginaEditarEventos extends Component {
     this.getEvents();
   }
 
-  masDetalles(id) {
-    cookies.set("idauxiliar", id, { path: "/" });
-    // console.log(cookies.get('idauxiliar'));
-    window.location.href = "./editar-evento";
-  }
+  // masDetalles(id) {
+  //   cookies.set("idauxiliar", id, { path: "/" });
+  //   // console.log(cookies.get('idauxiliar'));
+  //   window.location.href = "./editar-evento";
+  // }
 
   cambiarEstadoModal = (nuevoEstado) => {
     this.setState({ estadoModal: nuevoEstado });
