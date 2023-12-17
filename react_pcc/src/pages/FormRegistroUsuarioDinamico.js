@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import FormUserInput from "../stylesheets/FormUserDinamico.css";
-
+import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -28,10 +28,6 @@ function FormRegistroUsuarioDinamico() {
     getUsuarios();
     getTipos();
   }, []);
-
-  // useEffect(()=>{
-  //   console.log(tipo)
-  // }, [tipo]);
 
   const selectTipo= (e)=>{
     setTipo(e.target.value);
@@ -180,143 +176,149 @@ function FormRegistroUsuarioDinamico() {
 
 
   return (
-    <div className="crearEventos-user">
-      <div className="textoEvento-user">
-        <p className="textoRegistro-user">Registro de Usuario Privilegiado</p>
-      </div>
-      <div className="entradaDatos-user">
-        <form onSubmit={saveUser}>
-          <div className="nombreAp-user">
-            <div id="entradaNom-user" className={errors.nombre ? "errorEntrada-user" : ""}>
-              <p id="textoCuadro-user">Nombres*</p>
-              <input
-                id="inputRegistro-user"
-                type="text"
-                name="nombre"
-                placeholder="Ingrese nombre(s)"
-                onChange={handleChange}
-              />
-              {errors.nombre && (
-                  <span className="advertencia-userNom">{errors.nombre}</span>
+    <div className="App">
+      <div className="background-image"></div>
+      <div className="content">
+        <NavbarCreateEvent/>
+        <div className="registroUsuarioDinamico">
+          <div className="textoEvento-user">
+            <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>
+          </div>
+          <div className="entradaDatos-user">
+            <form onSubmit={saveUser}>
+              <div className="nombreAp-user">
+                <div id="entradaNom-user" className={errors.nombre ? "errorEntrada-user" : ""}>
+                  <p id="textoCuadro-user">Nombres*</p>
+                  <input
+                    id="inputRegistro-user"
+                    type="text"
+                    name="nombre"
+                    placeholder="Ingrese nombre(s)"
+                    onChange={handleChange}
+                  />
+                  {errors.nombre && (
+                      <span className="advertencia-userNom">{errors.nombre}</span>
+                  )}
+                </div>
+
+                <div id="entradaAp-user" className={errors.nombre ? "errorEntrada-user" : ""}>
+                  <p id="textoCuadro-user">Apellidos*</p>
+                  <input
+                    id="inputRegistro-user"
+                    type="text"
+                    name="apellido"
+                    placeholder="Ingrese apellido(s)"
+                    onChange={handleChange}
+                  />
+                  {errors.apellido && (
+                      <span className="advertencia-userNom">{errors.apellido}</span>
+                  )}
+                </div>
+              </div>
+
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">DI (Documento de Identidad)*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="number"
+                  name="ci"
+                  placeholder="Ingrese su DI"
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.ci && (
+                <span className="advertencia-user">{errors.ci}</span>
               )}
-            </div>
 
-            <div id="entradaAp-user" className={errors.nombre ? "errorEntrada-user" : ""}>
-              <p id="textoCuadro-user">Apellidos*</p>
-              <input
-                id="inputRegistro-user"
-                type="text"
-                name="apellido"
-                placeholder="Ingrese apellido(s)"
-                onChange={handleChange}
-              />
-              {errors.apellido && (
-                  <span className="advertencia-userNom">{errors.apellido}</span>
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">Email*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="text"
+                  name="email"
+                  placeholder="Ingrese su correo"
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errors.email && (
+                <span className="advertencia-user">{errors.email}</span>
               )}
-            </div>
+
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">Contraseña*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="password"
+                  name="password"
+                  placeholder="Ingrese una contraseña"
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errors.password && (
+                <span className="advertencia-user">{errors.password}</span>
+              )}
+
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">Confirmar Contraseña*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="password"
+                  name="confirmarPassword"
+                  placeholder="Repita la contraseña ingresada"
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errors.confirmarPassword && (
+                <span className="advertencia-user">{errors.confirmarPassword}</span>
+              )}
+
+              <div id="entrada-userPriv">
+                <p id="textoCuadro-user">Telefono*</p>
+                <input
+                  id="inputRegistro-user"
+                  type="number"
+                  name="telefono"
+                  placeholder="Ingrese su telefono"
+                  onChange={handleChange}
+                />
+              </div>
+
+              {errors.telefono && (
+                <span className="advertencia-user">{errors.telefono}</span>
+              )}
+
+                <div id="entrada-userPriv">
+                  <p id="textoCuadro-user">Tipo de Usuario</p>
+                  <select 
+                  onChange={selectTipo}
+                  id="desplegable">
+                    <option disabled selected>
+                      {" "}
+                      Seleccione un tipo
+                    </option>
+                    {tipos.map((tipos, id) => {
+                      return <option
+                        key={tipos.id}
+                        value={tipos.id}
+                        // onClick={()=>selectTipo("1")}
+                      >{tipos.cargo}</option>;
+                    })}
+                  </select>
+                </div>
+
+              <div className="botonEnviar-user">
+                <button className="botonRegistrar-user" type="submit">
+                  {" "}
+                  Registrar
+                </button>
+              </div>
+            </form>
           </div>
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">CI (Carnet de Identidad)*</p>
-            <input
-              id="inputRegistro-user"
-              type="number"
-              name="ci"
-              placeholder="Ingrese su carnet de identidad"
-              onChange={handleChange}
-            />
-          </div>
-          {errors.ci && (
-            <span className="advertencia-user">{errors.ci}</span>
-          )}
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">Email*</p>
-            <input
-              id="inputRegistro-user"
-              type="text"
-              name="email"
-              placeholder="Ingrese su correo"
-              onChange={handleChange}
-            />
-          </div>
-
-          {errors.email && (
-            <span className="advertencia-user">{errors.email}</span>
-          )}
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">Contraseña*</p>
-            <input
-              id="inputRegistro-user"
-              type="password"
-              name="password"
-              placeholder="Ingrese una contraseña"
-              onChange={handleChange}
-            />
-          </div>
-
-          {errors.password && (
-            <span className="advertencia-user">{errors.password}</span>
-          )}
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">Confirmar Contraseña*</p>
-            <input
-              id="inputRegistro-user"
-              type="password"
-              name="confirmarPassword"
-              placeholder="Repita la contraseña ingresada"
-              onChange={handleChange}
-            />
-          </div>
-
-          {errors.confirmarPassword && (
-            <span className="advertencia-user">{errors.confirmarPassword}</span>
-          )}
-
-          <div id="entrada-user">
-            <p id="textoCuadro-user">Telefono*</p>
-            <input
-              id="inputRegistro-user"
-              type="number"
-              name="telefono"
-              placeholder="Ingrese su telefono"
-              onChange={handleChange}
-            />
-          </div>
-
-          {errors.telefono && (
-            <span className="advertencia-user">{errors.telefono}</span>
-          )}
-
-                  <div id="entrada">
-                    <p id="textoCuadro">Tipo de Usuario</p>
-                    <select 
-                    onChange={selectTipo}
-                    id="desplegable">
-                      <option disabled selected>
-                        {" "}
-                        Seleccione un tipo
-                      </option>
-                      {tipos.map((tipos, id) => {
-                        return <option
-                          key={tipos.id}
-                          value={tipos.id}
-                          // onClick={()=>selectTipo("1")}
-                        >{tipos.cargo}</option>;
-                      })}
-                    </select>
-                  </div>
-
-          <div className="botonEnviar-user">
-            <button className="botonRegistrar-user" type="submit">
-              {" "}
-              Registrar
-            </button>
-          </div>
-        </form>
-      </div>
+        </div>
+        </div>
     </div>
   );
 }

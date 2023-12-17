@@ -1,4 +1,4 @@
-import React , { useState, useRef, useEffect } from 'react';
+import React , { useState, useEffect } from 'react';
 import "../../stylesheets/NavbarStyles.css";
 import DropdownUser from '../DropDownUser';
 import DropdownNotification from '../DropdownNotification';             
@@ -49,6 +49,10 @@ function NavbarUser(){
       setOpenDropdown("sesionUser");
     }
   };
+
+  const redirigirLogin = () => {
+    window.location.href = "./login";
+  };
     return (
       <nav>
         <div className="logoName">
@@ -70,14 +74,14 @@ function NavbarUser(){
           </div>
 
           <div id="contenedorRigthUser">
-            <DropdownNotification
+            {se_Registro && <DropdownNotification
               setOpenDropFath={setOpenDropdown}
               isOpen={openDropdown === "notification"}
-            />
+            />}
 
             <div className="userId">
               <div className="dropdown-container">
-                <button
+                { se_Registro && <button
                   className={`${
                     isOpen && openDropdown === "sesionUser"
                       ? "dropdown-button-active"
@@ -87,8 +91,12 @@ function NavbarUser(){
                 >
                     <FontAwesomeIcon className="userIcon" icon={faUser} />
                   {`${nombre_usuario} ${apellido_usuario}`}
-                </button>
-
+                </button>}
+                {!se_Registro && <button className='dropdown-button botonAcceder'
+                onClick={redirigirLogin}
+                >
+                    Acceder
+                </button>}
                 {isOpen && openDropdown === "sesionUser" && (
                   <ul className="dropdown-menu-user">
                     <li onClick={cerrarSesion}>

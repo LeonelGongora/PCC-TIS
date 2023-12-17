@@ -77,34 +77,34 @@ class EditarInformacionDeEventos extends Component{
     constructor(props){
         super(props)
         this.state = {
+          nombre_tipo_evento: "",
+          id_evento: "",
 
-            nombre_tipo_evento : '',
-            id_evento: '',
-            
-            image: '',
-            nombre_evento: '',
-            fecha_inicio: '',
-            numero_contacto: '',
-            descripcion: '',
-            fecha_fin: '',
-            participantes_equipo: '',
-            event_type_id: '',
-            errors : {},
-            contador : 0,
-            estadoModalAtributo: false,
+          image: "",
+          nombre_evento: "",
+          fecha_inicio: "",
+          numero_contacto: "",
+          descripcion: "",
+          fecha_fin: "",
+          participantes_equipo: "",
+          event_type_id: "",
+          errors: {},
+          contador: 0,
+          estadoModalAtributo: false,
 
-            estadoModal: false,
-            estadoModalOrganizador:false,
-            estadoModalPatrocinador: false,
+          estadoModal: false,
+          estadoModalOrganizador: false,
+          estadoModalPatrocinador: false,
+          estadoModalAnuncio: false,
 
-            atributos: [],
-            requisitos: [],
-            seCargoArchivo: 0,
-            organizadores_de_evento: [],
-            organizadores : [],
-            patrocinadores_de_evento: [],
-            patrocinadores : [],
-        }
+          atributos: [],
+          requisitos: [],
+          seCargoArchivo: 0,
+          organizadores_de_evento: [],
+          organizadores: [],
+          patrocinadores_de_evento: [],
+          patrocinadores: [],
+        };
     }
 
     handleInput = (e) => {

@@ -320,7 +320,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores, patr
             </div>
         </div>
         <div className='contBotonRegist'>
-            <button className='botonesCambiar'
+            <button className='botonesCambiar botonTerminarFix'
             onClick={registrarPatrocinadores}>
             Terminar Registro
             </button>

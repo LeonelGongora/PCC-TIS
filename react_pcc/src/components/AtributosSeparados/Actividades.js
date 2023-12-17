@@ -175,7 +175,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
             </div>
         </div>
         <div className='contBotonRegist'>
-            <button className='botonesCambiar'
+            <button className='botonesCambiar botonTerminarFix'
             onClick={terminarRegistro}
             >
               Terminar Registro

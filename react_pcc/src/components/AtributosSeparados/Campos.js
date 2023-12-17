@@ -209,7 +209,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, atribut
             </div>
           </div>
           <div className='contBotonRegist'>
-                  <button className='botonesCambiar'
+            <button className='botonesCambiar botonTerminarFix'
                   onClick={terminarRegistro}
                   >
                     Terminar Registro

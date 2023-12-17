@@ -172,11 +172,9 @@
     border-radius: 20px;
    }
    .imagenGld{
-    height: 24vh;
-    width: 24vh;
-    margin-right: 15px;
-    margin-left: 15px;
-    margin-bottom: 3%;
+    width: 100%;
+    height: auto;
+    max-height: 24vh;
     border-radius: 20px;
    }
     .organizadores{
@@ -194,13 +192,14 @@
     border-radius: 3vh;
     width: 90%;
     height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
    }
    .imagenSlv{
-    height: 17vh;
-    width: 17vh;
-    margin-right: 15px;
-    margin-left: 15px;
-    margin-bottom: 3%;
+    width: 100%;
+    height: auto;
+    max-height: 17vh;
     border-radius: 20px;
    }
    .patrocinadoresSilver{
@@ -210,13 +209,14 @@
     border-radius: 3vh;
     width: 90%;
     height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
    }
    .imagenBrc{
-    height: 14vh;
-    width: 14vh;
-    margin-right: 15px;
-    margin-left: 15px;
-    margin-bottom: 3%;
+    width: 100%;
+    height: auto;
+    max-height: 14vh;
     border-radius: 20px;
    }
    .patrocinadoresBronce{
@@ -226,6 +226,9 @@
     border-radius: 3vh;
     width: 90%;
     height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
    }
   
   .imagen-ampliada {
@@ -235,4 +238,29 @@
     left: 50%;
     transform-origin: center center;
     transform: translate(-50%, -50%) scale(1.5);
+}
+.divExtraGold{
+    width: 40%;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 3%;
+}
+.divExtraSlv{
+    width: 24%;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 3%;
+}
+.divExtraBrc{
+  width: 20%;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-bottom: 3%;
+}
+.contOrganizador{
+  margin: 2vh;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

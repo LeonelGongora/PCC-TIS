@@ -17,6 +17,7 @@ function Login (){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({})
+    const [showMessage, setShowMessage] = useState(false);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -28,19 +29,6 @@ function Login (){
             validationErrors.password = "Este campo es obligatorio"
         }
         setErrors(validationErrors)
-        // if (!username) {
-        //     setUsernameError('Este campo es obligatorio.');
-        // } else {
-        //     setUsernameError('');
-        // }
-        // if (!password) {
-        //     setPasswordError('Este campo es obligatorio.');
-        // } else {
-        //     setPasswordError('');
-        // }
-        // if (!username || !password) {
-        //     event.preventDefault();
-        // }
         
         if (Object.keys(validationErrors).length === 0) {
         await axios.post(login, {
@@ -73,7 +61,7 @@ function Login (){
                 window.location.href='./home-participant';
             break; 
             default :
-                window.location.href='./home-dinamico';
+                window.location.href='./home-admin';
             break; 
         }  
     
@@ -81,8 +69,8 @@ function Login (){
         .catch(error=>{
             console.log('Usuario NO Registrado')
             const validationErrors2 = {};
-            validationErrors2.username = "Email o contraseña incorrecto."
-            validationErrors2.password = "Email o contraseña incorrecto."
+            validationErrors2.username = "Username o contraseña incorrecto."
+            validationErrors2.password = "Username o contraseña incorrecto."
             setErrors(validationErrors2)
         })
         }
@@ -92,6 +80,13 @@ function Login (){
         console.log("Al hacer clic en el enlace");
     };
 
+    const handleMouseEnter = () => {
+        setShowMessage(true);
+      };
+    
+      const handleMouseLeave = () => {
+        setShowMessage(false);
+      };
     // useEffect(() => {
     //     console.log(username) 
     //     console.log(password) 
@@ -107,12 +102,11 @@ function Login (){
                         <p>Ingrese sus datos</p>
                         <input
                             type='text'
-                            placeholder='Email'
+                            placeholder='Username'
                             className='input-text'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                        {/* <span className='error-message'>{usernameError}</span> */}
                         {errors.username && (
                             <span className='error-message'>{errors.username}</span>
                         )}
@@ -123,12 +117,19 @@ function Login (){
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {/* <span className='error-message'>{passwordError}</span> */}
                         {errors.password && (
                             <span className='error-message'>{errors.password}</span>
                         )}
                         <a href='#' onClick={handleClick}>Olvido su contraseña?</a>
                         <input type='Submit' defaultValue='Ingresar' className='buttonLogin'/>
+                        <p>Aún no se ha registrado? 
+                            <span id='registrarse' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Registrarse</span>
+                            {showMessage && (
+                                <div className='mensajeInf'>
+                                    Si deseas tener una cuenta en PCC, primero debes registrarte a un evento.
+                                </div>
+                            )}
+                        </p>
                     </form>  
                 </div>
                 <div className='presentacionlogin'>

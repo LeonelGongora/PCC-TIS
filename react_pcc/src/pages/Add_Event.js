@@ -327,6 +327,7 @@ class Add_Event extends Component {
                 <textarea
                   id="inputRegistro"
                   name="descripcion"
+                  className='inputDescripcionRegistroEvento'
                   placeholder="Descripcion"
                   rows={5}
                   cols={30}

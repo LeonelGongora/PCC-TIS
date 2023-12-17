@@ -26,6 +26,11 @@ class Add_Event_NextAlt extends Component{
         console.log(this.id)
         //this.getOrganizadores();
         //this.getPatrocinadores();
+        const cadena = cookies.get('login_userPrivilegio');
+        if (cadena != undefined){
+            this.setState({ cadenaPrivilegio: cadena });
+        }
+        console.log(this.state.cadenaPrivilegio)
     }
 
     constructor(props) {
@@ -47,7 +52,9 @@ class Add_Event_NextAlt extends Component{
             actividades: [],
             organizadores: [],
             patrocinadores: [],
-            id_evento: ''
+            id_evento: '',
+            cargo: cookies.get('login_userCargo'),
+            cadenaPrivilegio: ''
         };
         
     }
@@ -89,22 +96,26 @@ class Add_Event_NextAlt extends Component{
                     <p className="tituloEvento-home">REGISTRAR EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
-                            <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(0)}>
-                                <h3>Campos</h3>
-                            </div>
+                            {this.state.cadenaPrivilegio.charAt(14) == 1 || this.state.cadenaPrivilegio == 'admin'? (
+                                <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''} bordePersonalizado`} onClick={() =>this.cambiarEstadoPestaña(0)}>
+                                    <h3>Campos</h3>
+                                </div>
+                            ) : (null)}
                             <div className={`campoPestana cmp${pestañas[1] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(1)}>
                                 <h3>Secciones</h3>
                             </div>
                             <div className={`campoPestana req${pestañas[2] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(2)}>
                                 <h3>Requisitos</h3>
                             </div>
-                            <div className={`campoPestana act${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
-                                <h3>Actividades</h3>
-                            </div>
+                            {this.state.cadenaPrivilegio.charAt(10) == 1 || this.state.cadenaPrivilegio == 'admin'? (
+                                <div className={`campoPestana act${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
+                                    <h3>Actividades</h3>
+                                </div>
+                            ) : (null)}
                             <div className={`campoPestana org${pestañas[4] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(4)}>
                                 <h3>Organizadores</h3>
                             </div>
-                            <div className={`campoPestana ptr${pestañas[5] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(5)}>
+                            <div className={`campoPestana ptr${pestañas[5] ? ' activo' : ''} bordePerzonalizadoBottom`} onClick={() =>this.cambiarEstadoPestaña(5)}>
                                 <h3>Patrocinadores</h3>
                             </div>
                         </div>
