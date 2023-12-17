@@ -75,7 +75,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
         if(!values.nombre_atributo.trim()){
             validationErrors.nombre_atributo = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_atributo)){
+        } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_atributo)){
             validationErrors.nombre_atributo = "Ingrese un nombre valido"
         }else{
             /* 
@@ -95,7 +95,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
         document.querySelectorAll("#opcion").forEach(opcion =>{
             if(!opcion.value.trim()){
                 validationErrors[opcion.name] = "Este campo es obligatorio"
-            }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(opcion.value)){
+            } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(opcion.value)){
                 validationErrors[opcion.name] = "Ingrese un nombre válido"
             }
         })

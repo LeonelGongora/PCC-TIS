@@ -36,7 +36,7 @@ function ModalAnuncio({ estadoAnuncio, cambiarEstadoAnuncio }) {
 
     if (!values.contenido_anuncio.trim()) {
       validationErrors.contenido_anuncio = "Este campo es obligatorio";
-    } else if (!/^[ :;.,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(values.contenido_anuncio)) {
+    } else if (!/^[A-Za-záéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,300}$/.test(values.contenido_anuncio)) {
       validationErrors.contenido_anuncio = "Ingrese un contenido válido";
     } 
     setErrors(validationErrors);

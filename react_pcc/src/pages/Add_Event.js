@@ -119,7 +119,7 @@ class Add_Event extends Component {
     if (!this.state.descripcion.trim()) {
       validationErrors.descripcion = "Este campo es obligatorio";
     } else if (
-      !/^[A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(
+      !/^[A-Za-záéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(
         this.state.descripcion
       )
     ) {

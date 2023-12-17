@@ -91,7 +91,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
     if (!values.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
-    } else if (!/^[A-Za-z0-9-._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(values.email)) {
+    } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(values.email)) {
       validationErrors.email = "Ingrese correo valido";
     } else {
       for (let index = 0; index < usuarios.length; index++) {
@@ -108,7 +108,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
     if (!values.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio";
-    } else if (!/^[7|6][0-9]{7}$/.test(values.telefono)) {
+    } else if (!/^\+?[1-9][0-9]{7,11}$/.test(values.telefono)) {
       validationErrors.telefono = "Ingrese un numero valido";
     }
 
