@@ -82,7 +82,7 @@ function App() {
         <Route path='/home' element={<Homepage/>} />
         <Route path='/login' element={<Login/>} />
 
-        <Route path='/reportes' element={<Reportes_Pagina/>} />
+        <Route path='/reportes' element={<Reportes/>} />
         
         <Route path='/FormRegistroUsuarioDinamico' element={<FormRegistroUsuarioDinamico/>} />
         <Route path='/FormRegistroTipoUser' element={<FormRegistroTipoUser/>} />

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from  'react';
 import axios from 'axios';
-//import React, {Component} from 'react';
 import '../../stylesheets/ModalWindowStyle.css'
 import '../../stylesheets/FormUserInput.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -21,6 +20,9 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
     const nombre_equipo = cookies.get('nombre_equipo');
     const dni_no_registrados = cookies.get('dni_no_registrados');
     const indice_dni_no_registrados = cookies.get('indice_dni_no_registrados');
+    const camposAdicionales = cookies.get('camposAdicionales');
+    const usuarios = cookies.get('usuarios');
+    
     const [contador, setContador] = useState(0);
 
     const [values, setValues] = useState({
@@ -40,18 +42,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
             [name]:value,
         });
     }
-
-    const handleChange = (e) => {
-        setValues({
-            ...values,
-            imagen_organizador: e.target.files[0]
-          });
-    }
-
-    useEffect(()=>{
-        //document.getElementById("tituloVentanaModal").innerHTML= "Registro de Usuario con DNI: " + dni_no_registrados[0]; 
-
-    }, []);
 
     const salirVentanaModal = (e) => {
         cambiarEstadoModalEquipos(false);
@@ -98,7 +88,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}(\.[A-Za-z]{2,})?$/.test(values.email)) {
             validationErrors.email = "Ingrese correo valido";
         } else {
-            /*
             for (let index = 0; index < usuarios.length; index++) {
               let email = usuarios[index].email.trim();
               let nuevo_email = values.email.trim();
@@ -109,8 +98,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                 break;
               }
             }
-             */
-            
         }
 
         if (!values.telefono.trim()) {
@@ -123,6 +110,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
+          console.log()
 
             const url = `${URL_API}/add-user-information`;
             const url_correo = `${URL_API}/enviar-correo`;
@@ -140,6 +128,11 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
             data.append('password', contraseña_generada)
             data.append('telefono', values.telefono)
 
+            let nuevo_correo = {"email": values.email}
+
+            let nuevos_usuarios = usuarios.push(nuevo_correo)
+            cookies.set('usuarios', nuevos_usuarios, {path: "/"});
+
             let id_usuario = 0
 
             axios.post(url, data).then(res => {
@@ -149,27 +142,35 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                 data_equipo.append('user_id', id_usuario)
 
                 axios.post(url_equipo, data_equipo).then(res_equipo => {
-                    console.log(res_equipo)
                     let contador_Aux = contador;
                     contador_Aux = contador_Aux + 1;
                     setContador(contador_Aux);
 
                     //noti
-                    const contenido = `Has sido registrado como participante del equipo: ${nombre_equipo}. Haga clic aqui para llenar informacion extra.`
-                    const url_notificacion = `${URL_API}/notifications`;
-                    const url_notificacionuser = `${URL_API}/notificationusers`;
-                    axios.post(url_notificacion, {
+                    
+                    if(camposAdicionales){
+                      console.log("Si hay campos adicionales")
+
+                      const contenido = `Has sido registrado como participante del equipo: ${nombre_equipo}. Haga clic aqui para llenar informacion extra.`
+                      const url_notificacion = `${URL_API}/notifications`;
+                      const url_notificacionuser = `${URL_API}/notificationusers`;
+                      axios.post(url_notificacion, {
                         contenido: contenido,
                         informacion: null,
                         leido: 1
-                    })
-                    .then(response=>{
-                      axios.post(url_notificacionuser, {
-                        notification_id: response.data.id,
-                        user_id: id_usuario,
-                        auxieventid: id_evento
                       })
-                    })
+                      .then(response=>{
+                        axios.post(url_notificacionuser, {
+                          notification_id: response.data.id,
+                          user_id: id_usuario,
+                          auxieventid: id_evento
+                        })
+                      })
+                    }else{
+                      console.log("No hay campos adicionales")
+                    }
+                    
+                    
                     //fin noti
 
                     setValues({
@@ -184,8 +185,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                         entrada.value = ""
                     })
 
-                    
-                    
                     console.log("contador")
                     console.log(contador)
 
@@ -197,7 +196,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                             contenido: contraseña_generada,
                           })
                           .then((response) => { 
-
+                            cookies.remove("camposAdicionales");
                             window.location.href='./paginaRegistrarseEventos';
                             //cambiarEstadoModalRegistroUsuario(false);
                         });

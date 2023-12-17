@@ -23,6 +23,7 @@ class Add_Event_NextAlt extends Component{
 
     componentDidMount(){
         this.getEvento();
+        console.log(this.id)
         //this.getOrganizadores();
         //this.getPatrocinadores();
     }
