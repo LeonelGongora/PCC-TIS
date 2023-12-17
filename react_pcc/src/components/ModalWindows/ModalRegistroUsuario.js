@@ -18,7 +18,8 @@ const subir = <FontAwesomeIcon icon={faArrowUpFromBracket} />
 function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistroUsuario,cambiarEstado1}){
 
     const ci_nuevo_usuario = cookies.get('ci_nuevo_usuario');
-
+    const usuarios = cookies.get('usuarios');
+    
     const [values, setValues] = useState({
         nombre: '',
         apellido: '',
@@ -27,9 +28,6 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         telefono: '',
     });
 
-
-
-    const [usuarios, setUsuarios] = useState({});
     const [errors, setErrors] = useState({});
 
     const handleInput = (e) => {
@@ -101,6 +99,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         if (email === nuevo_email) {
           validationErrors.email =
             "Ya existe un usuario registrado con este email";
+          
           break;
         }
       }
@@ -115,9 +114,10 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
         setErrors(validationErrors);
         console.log(values)
         console.log(ci_nuevo_usuario)
-        /* */
 
         if(Object.keys(validationErrors).length === 0){
+          
+          cookies.remove("usuarios");
 
             const url = `${URL_API}/add-user-information`;
             const url_correo = `${URL_API}/enviar-correo`;

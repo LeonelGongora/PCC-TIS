@@ -46,8 +46,6 @@ function InfoEvento({props}){
         setOrganizadores(response.data.organizers)
         setActividades(response.data.activities)
         setSecciones(response.data.informations)
-        console.log(response.data.name === null)
-        console.log(id)
     }
 
     const getEstaInscripcionCerrada=async()=>{
@@ -196,6 +194,9 @@ function InfoEvento({props}){
                         {patrocinadores.length !== 0 ? (
                             <div className='contenedorOrganizadores contPatrocinadores'>
                             <h2>Patrocinadores</h2>
+                            {organizadores.map((o) => {  
+                                
+                                return (
                             <div className='organizadores'>
                                 <div className='patrocinadoresGold'>
                                 {patrocinadores.map((p) => {  
@@ -219,6 +220,8 @@ function InfoEvento({props}){
                                 })}
                                 </div>
                             </div>
+                            );
+                        })}
                         </div>
                         ):(
                             <div></div>

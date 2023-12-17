@@ -166,7 +166,6 @@ function FormRegistroEvento(){
   }
 
   const [archivo, setArchivo] = useState('');
-  const [event, setEvent] = useState ( [] );
   const id_evento = cookies.get('id_evento');
   const [atributos, setAtributos] = useState ( [] );
 
@@ -194,9 +193,10 @@ function FormRegistroEvento(){
         if(response.data.requirements.length !== 0){
           setMostrarRequisitos(true)
         }
-        setEvent(response.data)
+
         setRequisitos(response.data.requirements)
         setAtributos(atributos_Aux)
+        cookies.set('usuarios', response.data.users, {path: "/"});
       }
   }
 

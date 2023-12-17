@@ -42,6 +42,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
         setValues({
             nombre_atributo : '',
         });
+        setOpciones([])
         setErrors({});
     }
 
@@ -57,14 +58,6 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
         let opciones_actuales = opciones;
         opciones_actuales.push(diccionario);
         console.log(id_evento)
-        //console.log(opciones_actuales)
-
-        //setNumero((numero) => numero + 1);
-
-        //console.log(numero)
-
-        //opciones.push(diccionario);
-        //console.log(opciones)
     }
 
     const saveTypeEvent = async (e) => {
