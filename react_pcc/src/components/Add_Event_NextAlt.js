@@ -94,7 +94,7 @@ class Add_Event_NextAlt extends Component{
           <>
                 <div className="contenedorMaximo"></div>
                 <div className="vistaPestana">
-                    <p className="tituloEvento-home">REGISTRAR EVENTO</p>
+                    <p className="tituloEvento-home">DATOS DEL EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
                             {this.state.cadenaPrivilegio.charAt(14) == 1 || this.state.cadenaPrivilegio == 'admin'? (
