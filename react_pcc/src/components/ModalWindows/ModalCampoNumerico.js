@@ -84,15 +84,17 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
 
         if(parseInt(values.con_rango) === 1){
 
-            if(!values.rango_bajo.trim()){
+            if (!values.rango_bajo.trim()) {
                 validationErrors.rango_bajo = "Este campo es obligatorio"
                 
-            }else if(values.rango_alto){
-                if(parseInt(values.rango_bajo) > parseInt(values.rango_alto)){
+            } else if (values.rango_alto) {
+                if (parseInt(values.rango_bajo) > parseInt(values.rango_alto)) {
 
                     validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
                     validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
                 }
+            } else if (!/^(?!-)(?:[0-9]|\d\d)$/.test(values.rango_bajo)) {
+                validationErrors.rango_bajo = "Ingrese un número valido"
             }
 
             if(!values.rango_alto.trim()){
@@ -104,6 +106,8 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                     validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
                     validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
                 }
+            } else if (!/^(?!-)(?:[0-9]|\d\d)$/.test(values.rango_bajo)) {
+                validationErrors.rango_bajo = "Ingrese un número valido"
             }
             
         }

@@ -45,7 +45,29 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
         //setActividades(response.data.activities)
     }
 
-    const eliminarActividad = (id) => {
+    const eliminarActividad = async(id, nombreacti) => {
+
+        //noti
+
+        const url_notificacion = `${URL_API}/notifications`;
+        const url_eventnotificacion= `${URL_API}/eventnotifications`;
+        var ide= id_evento;
+
+        const url_event= `${URL_API}/eventos/${ide}`;
+        const event = await axios.get(url_event)
+        const contenido = `El evento: ${event.data.nombre_evento}, ha eliminado la siguiente actividad: ${nombreacti}`
+
+        const response = await axios.post(url_notificacion, {
+          contenido: contenido,
+          informacion: null,
+          leido: 0
+        })
+        await axios.post(url_eventnotificacion, {
+          notification_id: response.data.id,
+          event_id: ide
+        })
+        
+        //fin noti
         console.log(id)
         const url = `${URL_API}/delete-activity/${id}`; 
         axios.delete(url).then(res => {
@@ -105,7 +127,7 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
                       <button
                         className="botonEliminarCampo botonEliminarActividad"
                         type="button"
-                        onClick={() => eliminarActividad(actividad.id)}
+                        onClick={() => eliminarActividad(actividad.id, actividad.nombre_actividad)}
                       >
                         {cancelar}
                       </button>

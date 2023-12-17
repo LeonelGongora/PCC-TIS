@@ -34,7 +34,7 @@ function NavbarUser(){
       cookieKeys.forEach(key => {
         cookies.remove(key);
       });
-    window.location.reload();
+      window.location.href='./home-participant';
   }
 
   const [isOpen, setIsOpen] = useState(false);

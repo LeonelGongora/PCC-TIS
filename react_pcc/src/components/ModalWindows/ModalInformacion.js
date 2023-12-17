@@ -43,14 +43,14 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
         if(!values.nombre_informacion.trim()){
             validationErrors.nombre_informacion = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre_informacion)){
+        } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_informacion)){
             validationErrors.nombre_informacion = "Ingrese un nombre valido"
         }
 
         if(!values.contenido_informacion.trim()){
             validationErrors.contenido_informacion = "Este campo es obligatorio"
 
-        }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.contenido_informacion)){
+        } else if (!/^[A-Za-záéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(values.contenido_informacion)){
             validationErrors.contenido_informacion = "Ingrese caracteres alfanumericos"
         }
 

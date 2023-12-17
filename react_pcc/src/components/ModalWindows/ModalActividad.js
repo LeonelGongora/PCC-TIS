@@ -118,13 +118,43 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
 
         if (!values.descripcion_actividad.trim()) {
             validationErrors.descripcion_actividad = "Este campo es obligatorio";
-        } else if (!/^[A-Za-z0-9áéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(values.descripcion_actividad)) {
+        } else if (!/^[A-Za-záéíóúñÑ][ :;.,\-\A-Za-z0-9áéíóúñÑ]{9,250}$/.test(values.descripcion_actividad)) {
             validationErrors.descripcion_actividad = "Ingrese una descripción válida";
         }
 
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
+
+            //noti
+            var esE = '';
+            if (cookies.get('esEditar') != undefined){esE = cookies.get('esEditar')}
+            if (cookies.get('esEditar') == true){
+
+              const url_notificacion = `${URL_API}/notifications`;
+              const url_eventnotificacion= `${URL_API}/eventnotifications`;
+              var ide= '';
+              if(id_evento_Aux){
+                ide= id_evento_Aux;
+                cookies.remove('id_evento');
+              }else{
+                ide= id_evento;
+              }
+              const url_event= `${URL_API}/eventos/${ide}`;
+              const event = await axios.get(url_event)
+              const contenido = `El evento: ${event.data.nombre_evento}, ha registrado la siguiente actividad: ${values.nombre_actividad}`
+
+              const response = await axios.post(url_notificacion, {
+                contenido: contenido,
+                informacion: null,
+                leido: 0
+              })
+              await axios.post(url_eventnotificacion, {
+                notification_id: response.data.id,
+                event_id: ide
+              })
+            }
+            //fin noti
 
             const data = new FormData();
             data.append('nombre_actividad', values.nombre_actividad)

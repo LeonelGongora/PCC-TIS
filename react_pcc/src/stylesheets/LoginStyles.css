@@ -110,6 +110,7 @@
 #registrarse{
     color: rgb(255, 213, 30);
     margin-left: 1vw;
+    cursor: pointer;
 }
 .mensajeInf {
     background-color: #ececec; 

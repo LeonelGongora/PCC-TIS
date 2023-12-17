@@ -100,7 +100,7 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.email.trim()) {
       validationErrors.email = "Este campo es obligatorio"
 
-    } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$/.test(formData.email)) {
+    } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(formData.email)) {
       validationErrors.email = "Ingrese correo valido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
@@ -138,7 +138,7 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
-    } else if (!/^[7|6][0-9]{7}$/.test(formData.telefono)) {
+    } else if (!/^[7|6][0-9]{8}$/.test(formData.telefono)) {
       validationErrors.telefono = "Ingrese un numero valido"
     }
 
@@ -217,7 +217,7 @@ function FormRegistroUsuarioDinamico() {
               </div>
 
               <div id="entrada-userPriv">
-                <p id="textoCuadro-user">DI (Documento de Identidad)*</p>
+                <p id="textoCuadro-user">DNI (Documento de Identidad)*</p>
                 <input
                   id="inputRegistro-user"
                   type="number"

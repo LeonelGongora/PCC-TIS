@@ -57,7 +57,13 @@ class EditarInformacionDeEventos extends Component{
           
           organizadores_de_evento : response.data.organizers,
           patrocinadores_de_evento : response.data.sponsors,
-          image: response.data.name
+          image: response.data.name,
+
+          numero_contacto_ant: response.data.numero_contacto,
+          descripcion_ant: response.data.descripcion,
+          fecha_inicio_ant: response.data.fecha_inicio,
+          fecha_fin_ant: response.data.fecha_fin,
+          event_type_id_ant: response.data.event_type_id,
         });
       }
     }
@@ -104,6 +110,13 @@ class EditarInformacionDeEventos extends Component{
           organizadores: [],
           patrocinadores_de_evento: [],
           patrocinadores: [],
+
+          numero_contacto_ant: "",
+          descripcion_ant: "",
+          fecha_inicio_ant: "",
+          fecha_fin_ant: "",
+          event_type_id_ant: "",
+          listaCambio: [],
         };
     }
 
@@ -234,6 +247,42 @@ class EditarInformacionDeEventos extends Component{
         this.setState({ errors: validationErrors });
 
         if(Object.keys(validationErrors).length === 0){
+
+            //noti
+            if(
+              this.state.numero_contacto != this.state.numero_contacto_ant ||
+              this.state.descripcion != this.state.descripcion_ant ||
+              this.state.fecha_inicio != this.state.fecha_inicio_ant ||
+              this.state.fecha_fin != this.state.fecha_fin_ant ||
+              valor != this.state.event_type_id_ant
+            ){
+              if(this.state.numero_contacto != this.state.numero_contacto_ant){this.state.listaCambio.push(`numero de contacto: ${this.state.numero_contacto}`)}
+              if(this.state.descripcion != this.state.descripcion_ant){this.state.listaCambio.push(`descripcion`)}
+              if(this.state.fecha_inicio != this.state.fecha_inicio_ant){this.state.listaCambio.push(`fecha de inicio: ${this.state.fecha_inicio}`)}
+              if(this.state.fecha_fin != this.state.fecha_fin_ant){this.state.listaCambio.push(`fecha de fin: ${this.state.fecha_fin}`)}
+              if(valor != this.state.event_type_id_ant){this.state.listaCambio.push('tipo de evento')}
+
+              const listastring = this.state.listaCambio.join(", ");
+              console.log(listastring)
+              console.log(this.state.listaCambio)
+
+              const contenido = `El evento: ${this.state.nombre_evento}, tuvo las siguiente(s) modificacion(es): ${listastring}.`
+              const url_notificacion = `${URL_API}/notifications`;
+              const url_eventnotificacion= `${URL_API}/eventnotifications`;
+              await axios.post(url_notificacion, {
+                contenido: contenido,
+                informacion: null,
+                leido: 0
+              })
+              .then(response=>{
+                axios.post(url_eventnotificacion, {
+                  notification_id: response.data.id,
+                  event_id: this.id
+                })
+              })
+            }
+
+            //fin noti
             
             const url = `${URL_API}/update-event/${this.id}`; 
 
@@ -254,6 +303,7 @@ class EditarInformacionDeEventos extends Component{
                 console.log(res);
                 //window.location.href = './editar-evento-next';
                 cookies.set("ultimo_id_evento", this.id, {path: "/",});
+                cookies.set("esEditar", true, {path: "/",});
                 window.location.href = './add-event-next-alt';
               }
             })

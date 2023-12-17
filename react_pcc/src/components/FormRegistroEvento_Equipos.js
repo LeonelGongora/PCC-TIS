@@ -119,6 +119,8 @@ function FormRegistroEvento_Equipos(){
         validationErrors[evento.name] = "No puede registrar al mismo participante más de una vez";
       }else if(id_registrados.includes(parseInt(evento.value))){
         validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
+      } else if (!/^[1-9][0-9]{5,11}$/.test(evento.value)){
+        validationErrors[evento.name] = "Ingrese un DNI valido";
       }
       dni_ingresados.push(evento.value)
     })
@@ -349,7 +351,11 @@ function FormRegistroEvento_Equipos(){
         <form className="form_name" id='form_name'>
 
             <div className='equipo'>
-              <p className='coachName'>Equipo</p>
+              <p className='coachName'>Equipo <button className="buttonInfo">
+                    ?
+              <span className="textoInfo">Al registrar un equipo, el usuario responsable llega a formar parte como Coach automáticamente</span>
+              </button> </p>
+              
               <div className='camposEquipo'>
                 <p>Nombre del Equipo</p>
                 <input
