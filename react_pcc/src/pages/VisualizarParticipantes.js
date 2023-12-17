@@ -153,7 +153,7 @@ class VisualizarParticipantes extends Component {
                         <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
                         <h4 className="nombreParticipante">{`${participante.nombre} ${participante.apellido}`} </h4>
                         <h4 className="correo">{participante.email}</h4>
-                        <h4 className="dni">{participante.telefono}</h4>
+                        
                         <h4 className="dni">{participante.ci}</h4>
                       </div>
                     </>

@@ -368,7 +368,11 @@ function FormRegistroEvento_Equipos(){
         <form className="form_name" id='form_name'>
 
             <div className='equipo'>
-              <p className='coachName'>Equipo</p>
+              <p className='coachName'>Equipo <button className="buttonInfo">
+                    ?
+              <span className="textoInfo">Al registrar un equipo, el usuario responsable llega a formar parte como Coach automáticamente</span>
+              </button> </p>
+              
               <div className='camposEquipo'>
                 <p>Nombre del Equipo</p>
                 <input

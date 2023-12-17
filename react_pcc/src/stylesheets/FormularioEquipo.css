@@ -51,6 +51,7 @@
 }
 .coachName{
     margin-top: 15px;
+    text-align: justify;
 }
 
 input::placeholder{

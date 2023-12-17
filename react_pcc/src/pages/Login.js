@@ -92,6 +92,9 @@ function Login (){
     //     console.log(password) 
     // }, [errors]);
 
+      const redireccionVisualizarEventos = () => {
+        window.location.href='./home-participant';
+      };
     return (
         <div className='App'>
         <NavbarUser />
@@ -123,7 +126,7 @@ function Login (){
                         <a href='#' onClick={handleClick}>Olvido su contraseña?</a>
                         <input type='Submit' defaultValue='Ingresar' className='buttonLogin'/>
                         <p>Aún no se ha registrado? 
-                            <span id='registrarse' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Registrarse</span>
+                            <span id='registrarse' onClick={redireccionVisualizarEventos} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Registrarse</span>
                             {showMessage && (
                                 <div className='mensajeInf'>
                                     Si deseas tener una cuenta en PCC, primero debes registrarte a un evento.
