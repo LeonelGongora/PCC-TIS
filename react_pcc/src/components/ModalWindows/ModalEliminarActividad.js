@@ -98,7 +98,7 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
               ) : ( <div className='seccionesDivExtra'>
                 {actividades.map((actividad) => (
                   <>
-                  <div className="seccionesExtraActividad">
+                  <div className="seccionesExtraActividad seccionesExtraActividadModal">
                     <h3>{actividad.nombre_actividad}</h3>
                     <div className="campo-cont actividad-cont">
                       <div id="entradaEveNex">
