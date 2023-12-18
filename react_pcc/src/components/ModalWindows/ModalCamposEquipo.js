@@ -50,7 +50,7 @@ function ModalCamposEquipo({estadoActividad, cambiarEstadoModalActividad, id_eve
       
           if(input.type != "file"){
     
-            if(!input.value.trim() || input.value === "Seleccione una opcion"){
+            if(!input.value.trim() || input.value === "Seleccione una opción"){
               validationErrors[input.name] = "Este campo es obligatorio";
             }else{
               if(input.type == "number"){
@@ -69,7 +69,7 @@ function ModalCamposEquipo({estadoActividad, cambiarEstadoModalActividad, id_eve
                   }
                 }else{
                   if (!/^(0|[1-9]\d*)$/.test(input.value)) {
-                    validationErrors[input.name] = "Ingrese un número posivito o el número cero";
+                    validationErrors[input.name] = "Ingrese un número positivo o el número cero";
                   }
                 }
     

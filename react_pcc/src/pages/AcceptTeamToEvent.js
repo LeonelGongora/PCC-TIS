@@ -178,7 +178,7 @@ class AcceptTeamToEvent extends Component {
                         auxieventid: null
                     })
                     .then(resp=>{
-                        console.log(`Se creo notificacion del participante ${commit.id}`)
+                        console.log(`Se creo notificación del participante ${commit.id}`)
                     })
                 }
             })()
@@ -292,7 +292,7 @@ setTimeout(this.recargarPagina, 2500);
                                                                         <span id="campo-informacion">{usuario.email}</span>
                                                                     </div>
                                                                     <div className="infoMailPart" id="entradaTeam">
-                                                                        <p id="textoCuadro">Telefono</p>
+                                                                        <p id="textoCuadro">Teléfono</p>
                                                                         <span id="campo-informacion">{usuario.telefono}</span>
                                                                     </div>
                                                                 </div>

@@ -82,7 +82,7 @@ function FormRegistroEvento(){
               }
             }else{
               if (!/^(0|[1-9]\d*)$/.test(input.value)) {
-                validationErrors[input.name] = "Ingrese un número posivito o el número cero";
+                validationErrors[input.name] = "Ingrese un número positivo o el número cero";
               }
               console.log("No hay limtes")
             }

@@ -58,7 +58,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
             validationErrors.nombre_actividad = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_actividad)){
-            validationErrors.nombre_actividad = "Ingrese un nombre valido"
+            validationErrors.nombre_actividad = "Ingrese un nombre válido"
         }else{
             /* 
             for (let index = 0; index < organizadores.length; index++) {

@@ -114,7 +114,7 @@ class Add_Event extends Component {
     if (!this.state.numero_contacto.trim()) {
       validationErrors.numero_contacto = "Este campo es obligatorio";
     } else if (!/^(?!-)[7|6][0-9]{7}$/.test(this.state.numero_contacto)) {
-      validationErrors.numero_contacto = "Ingrese un numero de contacto valido";
+      validationErrors.numero_contacto = "Ingrese un número de contacto válido";
     }
 
     if (!this.state.descripcion.trim()) {
