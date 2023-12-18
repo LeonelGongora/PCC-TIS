@@ -132,3 +132,4 @@ Route::get('/miseventindiequi/{id}', [EventController::class, 'misEventIndiEqui'
 Route::delete('/delete-team/{id}', [TeamController::class, 'destroy']);
 Route::get('/misnotificaciones/{id}', [NotificationController::class, 'misNotificaciones']);
 Route::get('/iduserofteams/{id}', [TeamController::class, 'iduserofteams']);
+Route::post('/arrcoach', [UserController::class, 'getCoachArray']);

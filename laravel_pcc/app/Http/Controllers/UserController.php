@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use LengthException;
+use PhpParser\Node\Expr\Cast\String_;
+use Ramsey\Uuid\Type\Integer;
 
 class UserController extends Controller
 {
@@ -113,6 +117,28 @@ class UserController extends Controller
                   ->orWhere('solicitud', 1);
         })->get();
     }
+
+    public function getCoachArray(Request $arreglo){
+        
+        $arr = $arreglo->arregloCoach;
+        $arrResul = [];
+        $aa=[];
+        for ($i=0; $i < $arreglo->lonarr ; $i++) { 
+            $coc = User::where('id', substr($arr, $i, 1))->get();
+            array_push($arrResul, $coc[0]);
+        }
+
+        return $arrResul;
+
+
+        // return User::whereHas('events', function ($query) use ($arreglo) {
+        //     $query->where('event_id', $arreglo)
+        //           ->where('solicitud', 0)
+        //           ->orWhere('solicitud', 1);
+        // })->get();
+        // return $arreglo->lonarr;
+    }
+
     /**
      * Display the specified resource.
      *

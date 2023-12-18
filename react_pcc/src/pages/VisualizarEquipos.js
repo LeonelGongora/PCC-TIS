@@ -37,26 +37,45 @@ class VisualizarEquipos extends Component {
       estadoModalOrganizador: false,
       estadoModalPatrocinador: false,
       estadoModalAnuncio: false,
+      clic:false,
     };
     this.equipos = []
+    this.coach = []
+    this.coachc = []
   }
 
   getEvent = async () => {
     const url = `${Eventos_Api_Url}/${this.id_evento}`;
     const response = await axios.get(url)
-    console.log(response)
+    // console.log(response)
     this.setState({ event: response.data });
 
     const res = await axios.get(`${URL_API}/get-team-1/${this.id_evento}`);
     this.equipos = Array.from(res.data)
 
-    this.setState({ loader: false });
-    console.log(this.equipos)
+    // console.log(this.equipos)
 
     for (let i = 0; i < this.equipos.length; i++) {
 
       this.usuarios.push(this.equipos[i].users)
     }
+    for (let i = 0; i < this.equipos.length; i++) {
+
+      this.coach.push(this.equipos[i].id_coach)
+    }
+    // console.log(this.coach)
+    const listacoa = this.coach.join("");
+    // console.log(listacoa)
+    const rescoach = await axios.post(`${URL_API}/arrcoach`, {
+      arregloCoach: listacoa,
+      lonarr: this.coach.length
+    })
+    .then(res=>{
+    this.coachc = Array.from(res.data)
+    this.setState({ loader: false });
+
+   })
+    
   }
 
   componentDidMount() {
@@ -148,22 +167,32 @@ class VisualizarEquipos extends Component {
                 {this.equipos.map((equipo) => {
                   this.indice = this.indice + 1
                   return (
-                    <>
+                    <div key={equipo.id}>
                       <p className="nombreEquipo" onLoad={this.manejarContador}>{equipo.nombre_equipo}</p>
+                      
+                        <div className="containerP" >
+                        <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
+                        <h4 className="nombreParticipante">{this.coachc[this.indice].nombre} </h4>
+                        <h4 className="rol"> Coach </h4>
+                        <h4 className="correo">{this.coachc[this.indice].email}</h4>
+                        <h4 className="dni">{this.coachc[this.indice].ci}</h4>
+                        </div>
+                    
+                      
                       {this.usuarios[this.indice].map((usuario) => {
                         return (
-                          <>
-                            <div className="containerP">
+                        
+                            <div className="containerP" key={usuario.id}>
                               <FontAwesomeIcon className='buttonIconUser' icon={faUser} />
                               <h4 className="nombreParticipante">{usuario.nombre} </h4>
                               <h4 className="rol"> Participante </h4>
                               <h4 className="correo">{usuario.email}</h4>
                               <h4 className="dni">{usuario.ci}</h4>
                             </div>
-                          </>
+                          
                         );
                       })}
-                    </>
+                    </div>
                   );
                 })}
 
