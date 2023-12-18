@@ -590,8 +590,8 @@ function Reportes() {
               <tfoot></tfoot>
             </table>
 
-            {/*
-            {cantidadRegistros > 2 ? (
+            
+            {true ? (
                 <div className='paginas'>
                 <button onClick={() => table.setPageIndex(0)}>
                     Primera Pagina
@@ -612,7 +612,7 @@ function Reportes() {
                     </div>
             )}
 
-             */}
+             
             <div className="paginas">
               <button
                 onClick={() => {

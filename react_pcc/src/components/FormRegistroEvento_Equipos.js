@@ -73,6 +73,8 @@ function FormRegistroEvento_Equipos(){
     let nombres_equipos_registrados = []
     let id_registrados = []
 
+    console.log(event)
+
     for (let i = 0; i < event.teams.length; i++) {
       nombres_equipos_registrados.push(event.teams[i].nombre_equipo)
 
@@ -119,7 +121,7 @@ function FormRegistroEvento_Equipos(){
         validationErrors[evento.name] = "No puede registrar al mismo participante más de una vez";
       }else if(id_registrados.includes(parseInt(evento.value))){
         validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
-      } else if (!/^[1-9][0-9]{5,11}$/.test(evento.value)){
+      } else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(evento.value)){
         validationErrors[evento.name] = "Ingrese un DNI valido";
       }
       dni_ingresados.push(evento.value)
@@ -193,10 +195,17 @@ function FormRegistroEvento_Equipos(){
               dni_no_registrados.push(participantes_dni_Aux[i])
             }
 
-            cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
-            cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+            console.log(dni_no_registrados.length)
+            if(dni_no_registrados.length > 0){
+              cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
+              cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
+              cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+            }else{
+              window.location.href='./paginaRegistrarseEventos';
+            }
+            
             //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
-            cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
+            
           }
         }
       })

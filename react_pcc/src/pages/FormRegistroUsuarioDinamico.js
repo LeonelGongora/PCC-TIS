@@ -77,7 +77,7 @@ function FormRegistroUsuarioDinamico() {
 
     if (!formData.ci.trim()) {
       validationErrors.ci = "Este campo es obligatorio"
-    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
+    } else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(formData.ci)) {
       validationErrors.ci = "Ingrese un CI valido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {

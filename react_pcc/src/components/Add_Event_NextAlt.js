@@ -24,13 +24,12 @@ class Add_Event_NextAlt extends Component{
     componentDidMount(){
         this.getEvento();
         console.log(this.id)
-        //this.getOrganizadores();
-        //this.getPatrocinadores();
         const cadena = cookies.get('login_userPrivilegio');
         if (cadena != undefined){
             this.setState({ cadenaPrivilegio: cadena });
         }
         console.log(this.state.cadenaPrivilegio)
+        
     }
 
     constructor(props) {

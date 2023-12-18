@@ -199,7 +199,7 @@ function FormRegistroEvento(){
         cookies.set('usuarios', response.data.users, {path: "/"});
       }
   }
-
+  
   const cambiarEstadoModal = (nuevoEstado) => {
     setFormData({ estadoModal: nuevoEstado });
   }
