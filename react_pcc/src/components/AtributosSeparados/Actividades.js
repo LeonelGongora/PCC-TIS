@@ -65,7 +65,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
       //fin noti
 
       console.log(id)
-      const url = `http://127.0.0.1:8000/api/delete-activity/${id}`; 
+      const url = `${URL_API}/delete-activity/${id}`; 
       axios.delete(url).then(res => {
         if(res.data.status === 200){
           console.log(res);

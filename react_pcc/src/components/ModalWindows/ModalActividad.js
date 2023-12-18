@@ -237,11 +237,11 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
                   </span>
                 )}
 
-                <p id="textoCuadroAtributo">Descripcion</p>
+                <p id="textoCuadroAtributo">Descripción</p>
                 <textarea
                   name="descripcion_actividad"
                   className="inputMasInfo"
-                  placeholder="Ingrese descripcion"
+                  placeholder="Ingrese descripción"
                   rows={2}
                   onChange={handleInput}
                   

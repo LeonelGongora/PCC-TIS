@@ -3,6 +3,7 @@ import axios from 'axios';
 import FormUserInput from "../stylesheets/FormUserDinamico.css";
 import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../const';
 const cookies = new Cookies();
 
 
@@ -34,13 +35,13 @@ function FormRegistroUsuarioDinamico() {
   }
   
   const getUsuarios = async (e) => {
-    const url = "http://127.0.0.1:8000/api/get-user-information"; 
+    const url = `${URL_API}/get-user-information`; 
     const respuesta = await axios.get(url);
     setUsuarios(respuesta.data.usuarios);
   }
 
   const getTipos = async (e) => {
-    const url = "http://127.0.0.1:8000/api/tipos"; 
+    const url = `${URL_API}/tipos`; 
     const respuesta = await axios.get(url);
     setTipos(respuesta.data)
   }
@@ -146,7 +147,7 @@ function FormRegistroUsuarioDinamico() {
     setErrors(validationErrors)
 
     if (Object.keys(validationErrors).length === 0) {
-      const url = "http://127.0.0.1:8000/api/add-user-information";
+      const url = `${URL_API}/add-user-information`;
 
       const data = new FormData();
       data.append('nombre', formData.nombre)
@@ -161,7 +162,7 @@ function FormRegistroUsuarioDinamico() {
         // console.log(res)
         // console.log(res.data.ultimo_id)
         // cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
-        const u = "http://127.0.0.1:8000/api/tipousers";
+        const u = `${URL_API}/tipousers`;
         axios.post(u, {
           tipo_id: tipo,
           user_id: res.data.ultimo_id
@@ -276,12 +277,12 @@ function FormRegistroUsuarioDinamico() {
               )}
 
               <div id="entrada-userPriv">
-                <p id="textoCuadro-user">Telefono*</p>
+                <p id="textoCuadro-user">Teléfono*</p>
                 <input
                   id="inputRegistro-user"
                   type="number"
                   name="telefono"
-                  placeholder="Ingrese su telefono"
+                  placeholder="Ingrese su teléfono"
                   onChange={handleChange}
                 />
               </div>

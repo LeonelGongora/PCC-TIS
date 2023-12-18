@@ -54,7 +54,7 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
                   }
                 }}
               >
-                Campo Numerico
+                Campo Numérico
               </button>
 
               <button

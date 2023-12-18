@@ -126,6 +126,9 @@ function FormRegistroTipoUser() {
     if (generalreport==1) setGeneralreport(0)
     else setGeneralreport(1)
   };
+  const reiniciarPagina = () => {
+    window.location.href='./FormRegistroTipoUser';
+  };
 
   return (
     <div className="App">
@@ -309,7 +312,7 @@ function FormRegistroTipoUser() {
                   </div>
                 </div>
               <div className="botonEnviar-user">
-                <button className="botonRegistrar-user" type="submit">
+                <button className="botonRegistrar-user" type="submit" onClick={reiniciarPagina}>
                   {" "} Registrar</button>
               </div>
             </form>

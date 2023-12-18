@@ -487,7 +487,7 @@ function Reportes() {
                 type="text"
                 value={filtering}
                 onChange={(e) => setFiltering(e.target.value)}
-                placeholder="Buscar evento por nombre o descripcion"
+                placeholder="Buscar evento por nombre o descripción"
               />
               <span id="botonBuscar-admin">{buscar}</span>
             </div>

@@ -347,7 +347,7 @@ class EditarInformacionDeEventos extends Component{
             <div className="contenedorMaximo"></div>
             <div className="editarEventos">
               <div className="textoEvento">
-                <p className="textoRegistro"> Edicion de eventos</p>
+                <p className="textoRegistro"> Edición de eventos</p>
               </div>
               <div className="entradasDatos">
                 <form onSubmit={this.updateEvent} encType="multipart/form-data" className='formularioRegistroEvento'>
@@ -388,12 +388,12 @@ class EditarInformacionDeEventos extends Component{
                   )}
 
                   <div id="entrada">
-                    <p id="textoCuadro">Descripcion de Evento*</p>
+                    <p id="textoCuadro">Descripción de Evento*</p>
                     <input
                       id="inputRegistro"
                       type="text"
                       name="descripcion"
-                      placeholder="Descripcion"
+                      placeholder="Descripción"
                       value={this.state.descripcion}
                       onChange={this.handleInput}
                     />

@@ -107,7 +107,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
             data.append('nombre_organizador', values.nombre_organizador)
             data.append('imagen_organizador', values.imagen_organizador)
 
-            const res = await axios.post('http://127.0.0.1:8000/api/add-organizador', data);
+            const res = await axios.post(`${URL_API}/add-organizador`, data);
             
             if(res.data.status === 200){
                 console.log(res);
@@ -148,7 +148,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                         {errors.nombre_organizador && (
                         <span className="span1Modal">{errors.nombre_organizador}</span>
                         )}
-                        <p id="textoCuadroImg">Imagen*</p>
+                        <p id="textoCuadroImg">Imágen*</p>
                       <label htmlFor="imagen_organizador" className="inputEvento-label">
                       <input
                         type="file"
@@ -164,7 +164,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
                               className="imagenSubida"
                           />
                       ) : (
-                          <span>Agregar imagen {subir}</span>
+                          <span>Agregar imágen {subir}</span>
                       )}
                       </label>
  

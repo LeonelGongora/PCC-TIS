@@ -150,7 +150,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                             <span className="span1Modal">{errors.nombre_patrocinador}</span>
                         )}
 
-                        <p id="textoCuadroImg">Imagen*</p>
+                        <p id="textoCuadroImg">Imágen*</p>
                         <label htmlFor="imagen_patrocinador" className="inputEvento-label">
                         <input
                         type="file"
@@ -166,7 +166,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
                               className="imagenSubida"
                           />
                         ) : (
-                            <span>Agregar imagen {subir}</span>
+                            <span>Agregar imágen {subir}</span>
                         )}
                         </label>
  
