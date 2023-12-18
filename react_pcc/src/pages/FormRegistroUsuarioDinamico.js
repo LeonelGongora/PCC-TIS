@@ -4,6 +4,10 @@ import FormUserInput from "../stylesheets/FormUserDinamico.css";
 import Cookies from 'universal-cookie';
 import {URL_API} from '../const';
 import NavbarAdmin from "../components/NavBars/NavbarAdmin";
+import ModalWindow from "../components/ModalWindows/ModalWindow";
+import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
+import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
+import ModalAnuncio from "../components/ModalWindows/ModalAnuncio";
 const cookies = new Cookies();
 
 
@@ -19,7 +23,10 @@ function FormRegistroUsuarioDinamico() {
     telefono: '',
 
   })
-
+  const [estadoModal, cambiarEstadoModal] = useState(false);
+  const [estadoModalOrganizador, cambiarEstadoModalOrganizador] = useState(false);
+  const [estadoModalPatrocinador, cambiarEstadoModalPatrocinador] = useState(false);
+  const [estadoModalAnuncio, cambiarEstadoModalAnuncio] = useState(false);
   const [errors, setErrors] = useState({})
   const [usuarios, setUsuarios] = useState({})
   const [tipos, setTipos] = useState([])
@@ -178,9 +185,34 @@ function FormRegistroUsuarioDinamico() {
 
   return (
     <div className="App">
+      <ModalWindow
+        estado1={estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+      />
+      <ModalWindowOrganizadores
+        estadoOrganizador={estadoModalOrganizador}
+        cambiarEstadoModalOrganizador={cambiarEstadoModalOrganizador}
+      />
+      <ModalWindowPatrocinadores
+        estadoPatrocinador={estadoModalPatrocinador}
+        cambiarEstadoModalPatrocinador={cambiarEstadoModalPatrocinador}
+      />
+      <ModalAnuncio
+        estadoAnuncio={estadoModalAnuncio}
+        cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+      />
       <div className="background-image"></div>
       <div className="content">
-        <NavbarAdmin/>
+        <NavbarAdmin
+          estado1={estadoModal}
+          cambiarEstado1={cambiarEstadoModal}
+          estadoOrganizador={estadoModalOrganizador}
+          cambiarEstadoOrganizador={cambiarEstadoModalOrganizador}
+          estadoPatrocinador={estadoModalPatrocinador}
+          cambiarEstadoPatrocinador={cambiarEstadoModalPatrocinador}
+          estadoAnuncio={estadoModalAnuncio}
+          cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+        />
         <div className="registroUsuarioDinamico">
           <div className="textoEvento-user">
             <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>

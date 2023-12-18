@@ -543,11 +543,7 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                         id="inputRegistro-user"
                         type="number"
                         name="telefono"
-<<<<<<< HEAD
                         placeholder="Ingrese su teléfono"
-=======
-                        placeholder="Ingrese su telefono"
->>>>>>> 39861b20f06236dab3df85f98a73596dd1f098d5
                         onChange={handleInput}
                       />
                     </div>

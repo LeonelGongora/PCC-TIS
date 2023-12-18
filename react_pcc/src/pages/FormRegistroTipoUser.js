@@ -3,7 +3,11 @@ import axios from 'axios';
 import "../stylesheets/TipoDeUsuarioStyles.css";
 import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import Cookies from 'universal-cookie';
-import {URL_API} from '../const';
+import { URL_API } from '../const';
+import ModalWindow from '../components/ModalWindows/ModalWindow';
+import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
+import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
+import ModalAnuncio from '../components/ModalWindows/ModalAnuncio';
 
 const cookies = new Cookies();
 
@@ -29,6 +33,10 @@ function FormRegistroTipoUser() {
   const [administerrequest, setAdministerrequest] = useState(0);
   const [registerad, setRegisterad] = useState(0);
   const [generalreport, setGeneralreport] = useState(0);
+  const [estadoModal, cambiarEstadoModal] = useState(false);
+  const [estadoModalOrganizador, cambiarEstadoModalOrganizador] = useState(false);
+  const [estadoModalPatrocinador, cambiarEstadoModalPatrocinador] = useState(false);
+  const [estadoModalAnuncio, cambiarEstadoModalAnuncio] = useState(false);
 
   // useEffect(()=>{
   //   console.log(formData.cargo)
@@ -132,9 +140,34 @@ function FormRegistroTipoUser() {
 
   return (
     <div className="App">
+      <ModalWindow
+        estado1={estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+      />
+      <ModalWindowOrganizadores
+        estadoOrganizador={estadoModalOrganizador}
+        cambiarEstadoModalOrganizador={cambiarEstadoModalOrganizador}
+      />
+      <ModalWindowPatrocinadores
+        estadoPatrocinador={estadoModalPatrocinador}
+        cambiarEstadoModalPatrocinador={cambiarEstadoModalPatrocinador}
+      />
+      <ModalAnuncio
+        estadoAnuncio={estadoModalAnuncio}
+        cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+      />
       <div className="background-image"></div>
       <div className="content">
-        <NavbarAdmin/>
+        <NavbarAdmin
+          estado1={estadoModal}
+          cambiarEstado1={cambiarEstadoModal}
+          estadoOrganizador={estadoModalOrganizador}
+          cambiarEstadoOrganizador={cambiarEstadoModalOrganizador}
+          estadoPatrocinador={estadoModalPatrocinador}
+          cambiarEstadoPatrocinador={cambiarEstadoModalPatrocinador}
+          estadoAnuncio={estadoModalAnuncio}
+          cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+        />
         <div className="registroTipoUsuario">
           <div className="textoEvento-user">
             <p className="textoRegistro-user">Registro Tipo de Usuario</p>
