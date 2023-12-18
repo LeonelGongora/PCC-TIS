@@ -104,7 +104,6 @@ class PaginaRegistrarActividad extends Component {
   abrirModalActividad(id) {
     cookies.set("id_evento", id, { path: "/" });
     this.cambiarEstadoModalActividad(!this.state.estadoModalActividad);
-    // console.log(cookies.get('idauxiliar'));
   }
 
   cambiarEstadoModal = (nuevoEstado) => {

@@ -108,8 +108,7 @@ function Patrocinadores({estadoPatrocinadores, cambiarEstadoPatrocinadores, patr
           })
         }
       }
-      //console.log(patrocinadores_agregar)
-      //window.location.href = './paginaEditarEventos';
+      window.location.href = './paginaEditarEventos';
     }
     
     const actualizarGold = (e)=>{

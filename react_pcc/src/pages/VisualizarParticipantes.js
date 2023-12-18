@@ -22,7 +22,7 @@ class VisualizarParticipantes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      event: [],
       loader: false,
       url: `${URL_API}/events`,
       estadoModal: false,
@@ -138,10 +138,11 @@ class VisualizarParticipantes extends Component {
               <h1 className='tituloPagAcept'>No Hay Participantes en este evento</h1>
             ) : (<>
               <div className="contenedorTitulo-home">
-                <p className="tituloEvento-home">NOMBRE DEL EVENTO</p>
-                <input type="text" name="buscador" id="buscador"
+                <p className="tituloEvento-home">{this.state.event.nombre_evento}</p>
+                {/*<input type="text" name="buscador" id="buscador"
                   placeholder="Buscar..." onChange={this.manejarBuscador} />
-                <FontAwesomeIcon icon={faSearch} className="lupa-icon" />
+                <FontAwesomeIcon icon={faSearch} className="lupa-icon" />*/}
+                
 
               </div>
               <div className="columna11">
