@@ -130,7 +130,7 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
         }
         cookies.remove("patrocinadores_agregar");
       }
-      //window.location.href = "./home-admin";
+      window.location.href = "./home-admin";
 
     }
 
@@ -138,7 +138,6 @@ function Secciones({estadoSecciones, cambiarEstadoSecciones, atributosInformacio
       
         estadoSecciones && (
               <>
-
           <ModalInformacion
             estadoInformacion={values.estadoModalInformacion}
             cambiarEstadoModalInformacion={cambiarEstadoModalInformacion}

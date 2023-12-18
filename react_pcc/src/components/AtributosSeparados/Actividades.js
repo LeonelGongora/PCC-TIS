@@ -158,7 +158,7 @@ function Actividades({estadoActividades, cambiarEstadoActividades, actividades})
         cookies.remove("patrocinadores_agregar");
       }
 
-      //window.location.href = "./home-admin";
+      window.location.href = "./home-admin";
 
     }
 

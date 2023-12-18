@@ -111,7 +111,6 @@ class PaginaEliminarActividad extends Component {
     const response = await axios.get(url);
     cookies.set("actividades", response.data.activities, { path: "/" });
     this.cambiarEstadoModalActividad(!this.state.estadoModalActividad);
-    // console.log(cookies.get('idauxiliar'));
   }
   cambiarEstadoModal = (nuevoEstado) => {
     this.setState({ estadoModal: nuevoEstado });

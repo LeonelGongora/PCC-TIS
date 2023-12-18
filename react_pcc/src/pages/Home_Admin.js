@@ -77,7 +77,6 @@ class Home_Admin extends Component {
 
   masDetalles(id) {
     cookies.set("idauxiliar", id, { path: "/" });
-    // console.log(cookies.get('idauxiliar'));
     window.location.href = "./event-admin";
   }
 

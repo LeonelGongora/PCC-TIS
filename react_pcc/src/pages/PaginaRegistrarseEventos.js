@@ -104,7 +104,6 @@ class PaginaRegistrarseEventos extends Component{
         }else{
           window.location.href='./register-to-event';
         }
-        // console.log(cookies.get('idauxiliar'));
     }
 
     render(){

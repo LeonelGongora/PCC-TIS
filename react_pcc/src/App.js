@@ -24,7 +24,6 @@ import PaginaVisualizarParticipantes from "./pages/PaginaVisualizarParticipantes
 import PaginaRegistrarActividad from "./pages/PaginaRegistrarActividad.js";
 import PaginaEliminarActividad from "./pages/PaginaEliminarActividad.js";
 import PaginaConfigurarFormulario from "./pages/PaginaConfigurarFormulario.js";
-import EditarInformacionDeEventosNext from "./components/EditarInformacionDeEventosNext.js";
 
 import VisualizarParticipantes from "./pages/VisualizarParticipantes.js";
 import VisualizarEquipos from "./pages/VisualizarEquipos.js";
@@ -65,7 +64,6 @@ function App() {
         <Route path='/paginaConfigurarFormulario' element={< PaginaConfigurarFormulario />} />
 
         <Route path='/editar-evento' element={<EditarEvento />} />
-        {/* <Route path='/editar-evento-next' element={<EditarInformacionDeEventosNext/>} /> */}
 
         <Route path='/acceptUser' element={<AcceptUserToEvent />} />
         <Route path='/acceptTeam' element={<AcceptTeamToEvent />} />
