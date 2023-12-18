@@ -77,7 +77,8 @@
 
 }
 .imagenEventoBaja{
-    width: 10vw;
+    max-width: 10vw;
+    max-height: 20vh;
     margin: 1vh 2vw;
 }
 .nombreEventoBaja{

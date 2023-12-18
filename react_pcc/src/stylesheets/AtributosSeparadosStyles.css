@@ -121,6 +121,10 @@
     width: 100%;
     margin-bottom: 1vh;
   }
+  .seccionesExtraActividadModal{
+    width: 95%;
+  }
+
   .extraOrganizador{
     display: flex;
     flex-wrap: wrap;
