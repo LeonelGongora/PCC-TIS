@@ -493,7 +493,7 @@ function Reportes() {
                 type="text"
                 value={filtering}
                 onChange={(e) => setFiltering(e.target.value)}
-                placeholder="Buscar evento por nombre o descripción"
+                placeholder="Buscar por nombre o descripción"
               />
               <span id="botonBuscar-admin">{buscar}</span>
             </div>
@@ -600,16 +600,16 @@ function Reportes() {
             {true ? (
                 <div className='paginas'>
                 <button onClick={() => table.setPageIndex(0)}>
-                    Primera Pagina
+                    Primera Página
                 </button>
                 <button  onClick={() => table.previousPage()}>
-                    Pagina anterior 
+                    Página Anterior 
                 </button>
                 <button  onClick={() => table.nextPage()}>
-                    Pagina siguiente
+                    Página Siguiente
                 </button>
                 <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-                    Ultima Pagina
+                    última Página
                 </button>
             </div>
 
