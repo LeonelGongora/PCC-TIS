@@ -92,7 +92,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
             validationErrors.ci = "Este campo es obligatorio"
 
         }else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(values.ci)) {
-          validationErrors.ci ="Ingrese un documento de indentificacion valido";
+          validationErrors.ci ="Ingrese un documento de identificación válido";
         }
 
         setErrors(validationErrors);

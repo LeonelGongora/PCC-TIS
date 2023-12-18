@@ -170,7 +170,7 @@ class EditarInformacionDeEventos extends Component{
             validationErrors.numero_contacto = "Este campo es obligatorio"
 
         }else if(!/[7|6][0-9]{7}$/.test(this.state.numero_contacto)){
-            validationErrors.numero_contacto = "Ingrese un numero de contacto valido"
+            validationErrors.numero_contacto = "Ingrese un número de contacto válido"
         }
 
 
@@ -178,7 +178,7 @@ class EditarInformacionDeEventos extends Component{
             validationErrors.descripcion = "Este campo es obligatorio"
 
         }else if(!/^[ .:;,\-\A-Za-z0-9áéíóúñÑ]{3,150}$/.test(this.state.descripcion)){
-            validationErrors.descripcion = "Ingrese una descripcion valido"
+            validationErrors.descripcion = "Ingrese una descripción válida"
         }
 
         if(!this.state.fecha_inicio.trim()){
@@ -196,7 +196,7 @@ class EditarInformacionDeEventos extends Component{
           let fecha1= d2.getTime()
           let fecha2= date_Actual1.getTime()
           if(fecha1 < fecha2){
-            validationErrors.fecha_inicio = "Esta fecha no es valida"
+            validationErrors.fecha_inicio = "Esta fecha no es válida"
           }
         }
 
@@ -215,7 +215,7 @@ class EditarInformacionDeEventos extends Component{
           let fecha1= d2.getTime()
           let fecha2= date_Actual1.getTime()
           if(fecha1 < fecha2){
-            validationErrors.fecha_fin = "Esta fecha no es valida"
+            validationErrors.fecha_fin = "Esta fecha no es válida"
           }
         }
 

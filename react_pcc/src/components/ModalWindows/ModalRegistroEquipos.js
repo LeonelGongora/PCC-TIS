@@ -68,14 +68,14 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
             validationErrors.nombre = "Este campo es obligatorio"
       
         } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.nombre)) {
-            validationErrors.nombre = "Ingrese nombre(s) valido";
+            validationErrors.nombre = "Ingrese nombre(s) válido";
         }
 
         if (!values.apellido.trim()) {
             validationErrors.apellido = "Este campo es obligatorio";
         } else if (
             !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(values.apellido)) {
-            validationErrors.apellido = "Ingrese apellido(s) valido(s)";
+            validationErrors.apellido = "Ingrese apellido(s) válido(s)";
         }
 
         if (!values.pais.trim()) {
@@ -85,8 +85,8 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
         if (!values.email.trim()) {
             validationErrors.email = "Este campo es obligatorio"
       
-        } else if (!/^[A-Za-z0-9._%]+@[A-Za-z0-9]+\.[A-Za-z]{2,}(\.[A-Za-z]{2,})?$/.test(values.email)) {
-            validationErrors.email = "Ingrese correo valido";
+        } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(values.email)) {
+          validationErrors.email = "Ingrese un email válido";
         } else {
             for (let index = 0; index < usuarios.length; index++) {
               let email = usuarios[index].email.trim();
@@ -102,8 +102,8 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
 
         if (!values.telefono.trim()) {
             validationErrors.telefono = "Este campo es obligatorio";
-        } else if (!/^[7|6][0-9]{7}$/.test(values.telefono)) {
-            validationErrors.telefono = "Ingrese un numero valido";
+        } else if (!/^\+?[1-9][0-9]{7,11}$/.test(values.telefono)) {
+          validationErrors.telefono = "Ingrese un número válido";
         }
 
 

@@ -64,7 +64,7 @@ function FormRegistroUsuarioDinamico() {
 
 
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.nombre)) {
-      validationErrors.nombre = "Ingrese nombre(s) valido";
+      validationErrors.nombre = "Ingrese nombre(s) válido";
     }
 
     if (!formData.apellido.trim()) {
@@ -73,7 +73,7 @@ function FormRegistroUsuarioDinamico() {
     } else if (
       !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.apellido)
     ) {
-      validationErrors.apellido = "Ingrese apellido(s) valido(s)";
+      validationErrors.apellido = "Ingrese apellido(s) válido(s)";
     }
 
     if (!formData.ci.trim()) {
