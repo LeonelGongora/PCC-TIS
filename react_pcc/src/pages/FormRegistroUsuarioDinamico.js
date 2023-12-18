@@ -79,7 +79,7 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.ci.trim()) {
       validationErrors.ci = "Este campo es obligatorio"
     } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
-      validationErrors.ci = "Ingrese un CI valido";
+      validationErrors.ci = "Ingrese un DNI válido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
 
@@ -92,7 +92,7 @@ function FormRegistroUsuarioDinamico() {
         console.log(typeof(nuevo_ci))
 
         if(ci == nuevo_ci){
-            validationErrors.ci = "Ya existe un usuario registrado con este CI"
+            validationErrors.ci = "Ya existe un usuario registrado con este DNI"
             break;
         }
       }
@@ -102,7 +102,7 @@ function FormRegistroUsuarioDinamico() {
       validationErrors.email = "Este campo es obligatorio"
 
     } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(formData.email)) {
-      validationErrors.email = "Ingrese correo valido";
+      validationErrors.email = "Ingrese correo válido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
 
@@ -117,15 +117,15 @@ function FormRegistroUsuarioDinamico() {
     }
 
     if (formData.password !== formData.confirmarPassword) {
-      validationErrors.password = "Las contraseñas debe coincidir"
-      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
+      validationErrors.password = "Las contraseñas deben coincidir"
+      validationErrors.confirmarPassword = "Las contraseñas deben coincidir"
     }
 
     if (!formData.password.trim()) {
       validationErrors.password = "Este campo es obligatorio"
 
     } else if (!/^\S[A-Z|a-z|0-9|áéíóú]{3,70}\S$/.test(formData.password)) {
-      validationErrors.password = "Ingrese una contraseña valida"
+      validationErrors.password = "Ingrese una contraseña válida"
     }else{
       
     }
@@ -139,8 +139,8 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
-    } else if (!/^[7|6][0-9]{8}$/.test(formData.telefono)) {
-      validationErrors.telefono = "Ingrese un numero valido"
+    } else if (!/^\+?[1-9][0-9]{7,11}$/.test(formData.telefono)) {
+      validationErrors.telefono = "Ingrese un número válido"
     }
 
 
@@ -223,7 +223,7 @@ function FormRegistroUsuarioDinamico() {
                   id="inputRegistro-user"
                   type="number"
                   name="ci"
-                  placeholder="Ingrese su DI"
+                  placeholder="Ingrese su DNI"
                   onChange={handleChange}
                 />
               </div>
