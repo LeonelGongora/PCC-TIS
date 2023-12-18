@@ -324,7 +324,7 @@ class Add_Event extends Component {
               )}
 
               <div id="entrada-area">
-                <p id="textoCuadro">Descripcion de Evento*</p>
+                <p id="textoCuadro">Descripción de Evento*</p>
                 <textarea
                   id="inputRegistro"
                   name="descripcion"

@@ -91,7 +91,7 @@
     justify-content: space-around;
 }
 .fechaActModif{
-    width: 12vw;
+    width: 11vw;
     text-align: center;
     margin-right: 5px;
 }
@@ -115,7 +115,8 @@
     border: 2px solid black;
     padding: 2vh;
     border-radius: 1vh;
-    
+    width: 100%;
+    margin-bottom: 1vh;
   }
   .extraOrganizador{
     display: flex;

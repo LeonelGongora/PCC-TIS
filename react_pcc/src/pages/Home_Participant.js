@@ -62,10 +62,7 @@ class Home_Participant extends Component{
     }
 
     masDetalles(id){
-        console.log("clik");
-        // console.log(id);
         cookies.set('idauxiliar', id, {path: "/"});
-        // console.log(cookies.get('idauxiliar'));
         window.location.href='./event-admin';
     }
 

@@ -126,7 +126,7 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
         cookies.remove("patrocinadores_agregar");
       }
 
-      //window.location.href = "./home-admin";
+      window.location.href = "./home-admin";
 
     }
 

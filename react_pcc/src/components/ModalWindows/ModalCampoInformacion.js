@@ -94,7 +94,7 @@ function ModalCampoInformacion({estadoCampoInformacion, cambiarEstadoCampoInform
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir campo de informacion</h1>
+                    <h1>Añadir campo de información</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}

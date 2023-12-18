@@ -152,7 +152,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir campo numerico</h1>
+                    <h1>Añadir campo numérico</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}
@@ -182,10 +182,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                                 onChange={changeChecked}
                                 defaultChecked = {true}
                             />
-                            <span id="tituloIndividualAdd">Sin resticcion</span>
+                            <span id="tituloIndividualAdd">Sin restricción</span>
                         </div>
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite inferior*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Límite inferior*</p>
                         <input
                             type="number"
                             name="rango_bajo"
@@ -198,7 +198,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.rango_bajo}</span>
                         )}
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite superior*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Límite superior*</p>
                         <input
                             type="number"
                             name="rango_alto"

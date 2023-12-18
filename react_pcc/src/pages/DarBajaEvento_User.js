@@ -88,12 +88,6 @@ class DarBajaEvento extends Component {
     this.getEvents();
   }
 
-  masDetalles(id) {
-    cookies.set("idauxiliar", id, { path: "/" });
-    // console.log(cookies.get('idauxiliar'));
-    window.location.href = "./event-admin";
-  }
-
 	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
     this.getEvents();

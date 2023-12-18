@@ -92,12 +92,6 @@ class DarBajaEvento extends Component {
     console.log(this.id)
   }
 
-  masDetalles(id) {
-    cookies.set("idauxiliar", id, { path: "/" });
-    // console.log(cookies.get('idauxiliar'));
-    window.location.href = "./event-admin";
-  }
-
 	cambiarEstadoBanner = (estado) => {
     this.setState({ estadoBanner: estado });
     this.getEquipos();
@@ -176,7 +170,6 @@ class DarBajaEvento extends Component {
                       <div
                         key={evento.euid}
                         className="containerEvents containerEventsBaja"
-                        //   onClick={() => this.masDetalles(evento.id)}
                       >
                         <h4 className="nombreEquipoBaja">{evento.nombre_equipo}</h4>
                         <img

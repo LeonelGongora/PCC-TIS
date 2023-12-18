@@ -344,3 +344,17 @@ label{
     transform: translateY(37px) !important;
     margin-left: 3vw !important;
 }
+.contAnuncioEditCampos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.anuncioNoEditCampos{
+    color: red;
+    width: 40%;
+    height: 10vh;
+    justify-content: center;
+    align-items: center;
+}

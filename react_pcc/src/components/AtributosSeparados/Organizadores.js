@@ -148,6 +148,7 @@ function Organizadores({estadoOrganizadores, cambiarEstadoOrganizadores, organiz
                 }
                 cookies.remove("patrocinadores_agregar");
             }
+            window.location.href = "./home-admin";
 
         }
     }

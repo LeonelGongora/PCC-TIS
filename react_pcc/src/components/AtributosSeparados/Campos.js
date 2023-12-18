@@ -160,7 +160,7 @@ function Campos({estadoCampos, cambiarEstadoCampos, atributosFormulario, usuario
         cookies.remove("patrocinadores_agregar");
       }
 
-      //window.location.href = "./home-admin";
+      window.location.href = "./home-admin";
 
     }
 

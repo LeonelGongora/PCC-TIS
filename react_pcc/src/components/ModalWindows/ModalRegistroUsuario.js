@@ -480,11 +480,11 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                     )}
 
                     <div id="entrada-user">
-                      <p id="textoCuadro-user">Telefono*</p>
+                      <p id="textoCuadro-user">Teléfono*</p>
                       <input
                         id="inputRegistro-user"
                         type="number"
-                        name="telefono"
+                        name="teléfono"
                         placeholder="Ingrese su telefono"
                         onChange={handleInput}
                       />

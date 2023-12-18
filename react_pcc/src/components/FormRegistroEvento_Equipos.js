@@ -157,7 +157,7 @@ function FormRegistroEvento_Equipos(){
       data.append('id_coach', idu)
 
       let id_equipo = 0;
-      axios.post('http://127.0.0.1:8000/api/add-team', data)
+      axios.post(`${URL_API}/add-team`, data)
       .then(res=>{ 
         if(res.data.status === 200){
           id_equipo = res.data.ultimo_id_equipo
@@ -186,7 +186,7 @@ function FormRegistroEvento_Equipos(){
               data.append('team_id', id_equipo)
               data.append('user_id', id_registrados[indice])
     
-              const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
+              const res = axios.post(`${URL_API}/add-team_user`, data);
             }else{
 
               console.log("DNI NO REGISTRADO")

@@ -71,7 +71,7 @@ function ModalWindow({estado1, cambiarEstado1}){
         setErrors(validationErrors);
 
         if(Object.keys(validationErrors).length === 0){
-            const res = await axios.post('http://127.0.0.1:8000/api/add-event_type', values);
+            const res = await axios.post(`${URL_API}/add-event_type`, values);
             if(res.data.status === 200){
                 console.log(values.nombre_tipo_evento);
                 setValues({

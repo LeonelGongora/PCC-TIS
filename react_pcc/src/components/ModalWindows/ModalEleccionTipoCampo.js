@@ -39,9 +39,6 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
 
             <div className="registroTipoEvento">
 
-              {errors.error_eleccion && (
-                <span className="span1Modal">{errors.error_eleccion}</span>
-              )}
               <button
                 type="button"
                 className="BotonRegistrar BotonElegirCampo"
@@ -57,7 +54,7 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
                   }
                 }}
               >
-                Campo Numericooo
+                Campo Numérico
               </button>
 
               <button
@@ -112,6 +109,11 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
                 Campo de fecha
               </button>
             </div>
+            {errors.error_eleccion && (
+              <div className='contAnuncioEditCampos'>
+                <span className="anuncioNoEditCampos">{errors.error_eleccion}</span>
+              </div>
+              )}
           </div>
         </div>
       )

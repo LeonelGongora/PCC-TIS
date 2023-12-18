@@ -83,7 +83,7 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir Seccion de Informacion</h1>
+                    <h1>Añadir Sección de Información</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}

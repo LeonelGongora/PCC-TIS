@@ -135,7 +135,6 @@ class PaginaConfigurarFormulario extends Component {
     cookies.set("participantes_Evento", usuariosEvento, { path: "/" });
     cookies.set("id_evento", id, { path: "/" });
     this.cambiarEstadoModalEleccion(!this.state.estadoModalEleccion);
-    // console.log(cookies.get('idauxiliar'));
   }
 
   cambiarEstadoModal = (nuevoEstado) => {

@@ -131,7 +131,7 @@ function InfoEvento({props}){
                             
                             <div className='descripcionEvento infoContacto'>
                                 <h3>Contacto</h3>
-                                <p>Telefono: {event.numero_contacto}</p>
+                                <p>Teléfono: {event.numero_contacto}</p>
                             </div>
                         </div>
                         {actividades.length !== 0 ? (
