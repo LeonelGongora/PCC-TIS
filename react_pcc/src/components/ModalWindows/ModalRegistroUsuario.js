@@ -484,8 +484,8 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                       <input
                         id="inputRegistro-user"
                         type="number"
-                        name="teléfono"
-                        placeholder="Ingrese su telefono"
+                        name="telefono"
+                        placeholder="Ingrese su teléfono"
                         onChange={handleInput}
                       />
                     </div>

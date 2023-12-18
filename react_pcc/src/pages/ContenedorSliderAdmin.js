@@ -1,11 +1,11 @@
 import React from "react";
 import "../stylesheets/ContenedorSliderStyles.css";
-import NavbarCreateEvent from "../components/NavBars/NavBarCreateEvent";
 import InfoEvento from "../components/InfoEvento";
+import NavbarAdmin from "../components/NavBars/NavbarAdmin";
 function ContenedorSliderAdmin() {
     return (
         <div className="containerSlider">
-            <NavbarCreateEvent />
+            <NavbarAdmin />
             <InfoEvento />
         </div>
     );

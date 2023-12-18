@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import FormUserInput from "../stylesheets/FormUserDinamico.css";
-import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Cookies from 'universal-cookie';
 import {URL_API} from '../const';
+import NavbarAdmin from "../components/NavBars/NavbarAdmin";
+import ModalWindow from "../components/ModalWindows/ModalWindow";
+import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
+import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
+import ModalAnuncio from "../components/ModalWindows/ModalAnuncio";
 const cookies = new Cookies();
 
 
@@ -19,7 +23,10 @@ function FormRegistroUsuarioDinamico() {
     telefono: '',
 
   })
-
+  const [estadoModal, cambiarEstadoModal] = useState(false);
+  const [estadoModalOrganizador, cambiarEstadoModalOrganizador] = useState(false);
+  const [estadoModalPatrocinador, cambiarEstadoModalPatrocinador] = useState(false);
+  const [estadoModalAnuncio, cambiarEstadoModalAnuncio] = useState(false);
   const [errors, setErrors] = useState({})
   const [usuarios, setUsuarios] = useState({})
   const [tipos, setTipos] = useState([])
@@ -78,7 +85,7 @@ function FormRegistroUsuarioDinamico() {
 
     if (!formData.ci.trim()) {
       validationErrors.ci = "Este campo es obligatorio"
-    } else if (!/^(?!-)[1-9][0-9]{6,8}$/.test(formData.ci)) {
+    } else if (!/^[1-9][A-Za-z0-9.-]{4,14}$/.test(formData.ci)) {
       validationErrors.ci = "Ingrese un CI valido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
@@ -92,7 +99,7 @@ function FormRegistroUsuarioDinamico() {
         console.log(typeof(nuevo_ci))
 
         if(ci == nuevo_ci){
-            validationErrors.ci = "Ya existe un usuario registrado con este CI"
+            validationErrors.ci = "Ya existe un usuario registrado con este DNI"
             break;
         }
       }
@@ -102,7 +109,7 @@ function FormRegistroUsuarioDinamico() {
       validationErrors.email = "Este campo es obligatorio"
 
     } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(formData.email)) {
-      validationErrors.email = "Ingrese correo valido";
+      validationErrors.email = "Ingrese correo válido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
 
@@ -117,15 +124,15 @@ function FormRegistroUsuarioDinamico() {
     }
 
     if (formData.password !== formData.confirmarPassword) {
-      validationErrors.password = "Las contraseñas debe coincidir"
-      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
+      validationErrors.password = "Las contraseñas deben coincidir"
+      validationErrors.confirmarPassword = "Las contraseñas deben coincidir"
     }
 
     if (!formData.password.trim()) {
       validationErrors.password = "Este campo es obligatorio"
 
     } else if (!/^\S[A-Z|a-z|0-9|áéíóú]{3,70}\S$/.test(formData.password)) {
-      validationErrors.password = "Ingrese una contraseña valida"
+      validationErrors.password = "Ingrese una contraseña válida"
     }else{
       
     }
@@ -139,8 +146,8 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
-    } else if (!/^[7|6][0-9]{8}$/.test(formData.telefono)) {
-      validationErrors.telefono = "Ingrese un numero valido"
+    } else if (!/^\+?[1-9][0-9]{7,11}$/.test(formData.telefono)) {
+      validationErrors.telefono = "Ingrese un número válido"
     }
 
 
@@ -178,9 +185,34 @@ function FormRegistroUsuarioDinamico() {
 
   return (
     <div className="App">
+      <ModalWindow
+        estado1={estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+      />
+      <ModalWindowOrganizadores
+        estadoOrganizador={estadoModalOrganizador}
+        cambiarEstadoModalOrganizador={cambiarEstadoModalOrganizador}
+      />
+      <ModalWindowPatrocinadores
+        estadoPatrocinador={estadoModalPatrocinador}
+        cambiarEstadoModalPatrocinador={cambiarEstadoModalPatrocinador}
+      />
+      <ModalAnuncio
+        estadoAnuncio={estadoModalAnuncio}
+        cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+      />
       <div className="background-image"></div>
       <div className="content">
-        <NavbarCreateEvent/>
+        <NavbarAdmin
+          estado1={estadoModal}
+          cambiarEstado1={cambiarEstadoModal}
+          estadoOrganizador={estadoModalOrganizador}
+          cambiarEstadoOrganizador={cambiarEstadoModalOrganizador}
+          estadoPatrocinador={estadoModalPatrocinador}
+          cambiarEstadoPatrocinador={cambiarEstadoModalPatrocinador}
+          estadoAnuncio={estadoModalAnuncio}
+          cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+        />
         <div className="registroUsuarioDinamico">
           <div className="textoEvento-user">
             <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>
@@ -223,7 +255,7 @@ function FormRegistroUsuarioDinamico() {
                   id="inputRegistro-user"
                   type="number"
                   name="ci"
-                  placeholder="Ingrese su DI"
+                  placeholder="Ingrese su DNI"
                   onChange={handleChange}
                 />
               </div>
