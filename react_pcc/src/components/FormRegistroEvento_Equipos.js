@@ -103,7 +103,7 @@ function FormRegistroEvento_Equipos(){
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_equipo)) {
-      validationErrors.nombre_equipo = "Ingrese un nombre valido";
+      validationErrors.nombre_equipo = "Ingrese un nombre válido";
     }else if(nombres_equipos_registrados.includes(values.nombre_equipo)){
       validationErrors.nombre_equipo = "Este nombre ya se encuentra registrado en el evento";
     }
@@ -120,7 +120,7 @@ function FormRegistroEvento_Equipos(){
       }else if(id_registrados.includes(parseInt(evento.value))){
         validationErrors[evento.name] = "Este participante ya se encuentra participando en el evento";
       } else if (!/^[1-9][0-9]{5,11}$/.test(evento.value)){
-        validationErrors[evento.name] = "Ingrese un DNI valido";
+        validationErrors[evento.name] = "Ingrese un DNI válido";
       }
       dni_ingresados.push(evento.value)
     })

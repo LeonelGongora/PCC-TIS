@@ -64,7 +64,7 @@ function ModalWindowOrganizadores({estadoOrganizador, cambiarEstadoModalOrganiza
             validationErrors.nombre_organizador = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_organizador)){
-            validationErrors.nombre_organizador = "Ingrese un nombre valido"
+            validationErrors.nombre_organizador = "Ingrese un nombre válido"
         }else{
             for (let index = 0; index < organizadores.length; index++) {
 

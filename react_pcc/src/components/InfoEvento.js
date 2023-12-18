@@ -67,9 +67,9 @@ function InfoEvento({props}){
                 <div className='contenedorInf'>
                     <div className='infoTextoEvento'>
                         <div className='descrGeneral'>
-                            <h2>Informacion del evento</h2>
+                            <h2>Información del evento</h2>
                             <div className='descripcionEvento'>
-                                <h3>Descripcion</h3>
+                                <h3>Descripción</h3>
                                 <p>{event.descripcion}</p>
                             </div>
                             <div className='descripcionEvento tipMod'>
@@ -153,7 +153,7 @@ function InfoEvento({props}){
                                     </div>
                                 </div>
                                 <div className='descripcionEvento descripcionActividad'>
-                                    <h3>Descripcion</h3>
+                                    <h3>Descripción</h3>
                                     <p>{a.descripcion_actividad}</p>
                                 </div>
                             </div>);

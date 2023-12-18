@@ -65,7 +65,7 @@ function ModalWindowPatrocinadores({estadoPatrocinador, cambiarEstadoModalPatroc
             validationErrors.nombre_patrocinador = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,58}[A-Za-zÑñáéíóú]$/.test(values.nombre_patrocinador)){
-            validationErrors.nombre_patrocinador = "Ingrese un nombre valido"
+            validationErrors.nombre_patrocinador = "Ingrese un nombre válido"
         }else{
             for (let index = 0; index < patrocinadores.length; index++) {
 
