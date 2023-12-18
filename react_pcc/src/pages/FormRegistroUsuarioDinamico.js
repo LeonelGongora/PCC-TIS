@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import FormUserInput from "../stylesheets/FormUserDinamico.css";
-import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Cookies from 'universal-cookie';
 import {URL_API} from '../const';
+import NavbarAdmin from "../components/NavBars/NavbarAdmin";
 const cookies = new Cookies();
 
 
@@ -180,7 +180,7 @@ function FormRegistroUsuarioDinamico() {
     <div className="App">
       <div className="background-image"></div>
       <div className="content">
-        <NavbarCreateEvent/>
+        <NavbarAdmin/>
         <div className="registroUsuarioDinamico">
           <div className="textoEvento-user">
             <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>

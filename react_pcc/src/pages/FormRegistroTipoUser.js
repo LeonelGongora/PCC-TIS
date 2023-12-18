@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import "../stylesheets/TipoDeUsuarioStyles.css";
-import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
+import NavbarAdmin from '../components/NavBars/NavbarAdmin';
 import Cookies from 'universal-cookie';
 import {URL_API} from '../const';
 
@@ -134,7 +134,7 @@ function FormRegistroTipoUser() {
     <div className="App">
       <div className="background-image"></div>
       <div className="content">
-        <NavbarCreateEvent/>
+        <NavbarAdmin/>
         <div className="registroTipoUsuario">
           <div className="textoEvento-user">
             <p className="textoRegistro-user">Registro Tipo de Usuario</p>
