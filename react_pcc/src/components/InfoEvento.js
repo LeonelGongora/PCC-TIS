@@ -10,6 +10,7 @@ import imgFondo from '../images/FondoInfoEve.jpeg';
 import img from '../images/afiche.png';
 import ImagenAmpliable from './ModalWindows/ImagenAmpliable';
 import {URL_IMG} from '../const';
+import NavbarAdmin from './NavBars/NavbarAdmin';
 
 const cookies = new Cookies();
 
