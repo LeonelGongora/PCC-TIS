@@ -8,6 +8,7 @@
     margin-top: 5vh;
     display: flex;
     min-height: 70vh;
+    justify-content: center;
 
 }
 .pestanasEventos{
