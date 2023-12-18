@@ -99,3 +99,8 @@
 .paginas button:hover{
     background-color: rgb(190, 160, 23);
 }
+.errorDescarga{
+    color:red;
+    font-size: 0.9vw;
+    margin-inline: 34.85vw;
+}

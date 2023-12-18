@@ -628,7 +628,7 @@ function Reportes() {
                     const worksheet = XLSX.utils.json_to_sheet(datas);
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-                    XLSX.writeFile(workbook, "data.xlsx");
+                    XLSX.writeFile(workbook, "Reporte.xlsx");
                   }else{
                     const validationErrors = {};
                     validationErrors.error_descarga = "Debe seleccionar un tipo de reporte"
@@ -639,10 +639,10 @@ function Reportes() {
               >
                 Descargar
               </button>
-              {errors.error_descarga && (
-                <span className="span1Modal">{errors.error_descarga}</span>
-              )}
             </div>
+            {errors.error_descarga && (
+                <span className="errorDescarga">{errors.error_descarga}</span>
+              )}
           </div>
         </div>
       </div>
