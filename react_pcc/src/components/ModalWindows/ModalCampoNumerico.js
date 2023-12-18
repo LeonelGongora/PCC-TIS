@@ -67,7 +67,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             validationErrors.nombre_atributo = "Este campo es obligatorio"
 
         }else if(!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_atributo)){
-            validationErrors.nombre_atributo = "Ingrese un nombre valido"
+            validationErrors.nombre_atributo = "Ingrese un nombre válido"
         }else{/* 
             for (let index = 0; index < atributos.length; index++) {
 
@@ -91,10 +91,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                 if (parseInt(values.rango_bajo) > parseInt(values.rango_alto)) {
 
                     validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
-                    validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
+                    
                 }
             } else if (!/^(?!-)(?:[0-9]|\d\d)$/.test(values.rango_bajo)) {
-                validationErrors.rango_bajo = "Ingrese un número valido"
+                validationErrors.rango_bajo = "Ingrese un número válido"
             }
 
             if(!values.rango_alto.trim()){
@@ -103,11 +103,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
             }else if(values.rango_bajo){
                 if(parseInt(values.rango_bajo) > parseInt(values.rango_alto)){
 
-                    validationErrors.rango_bajo = "El limite inferior no puede ser mayor al superior"
-                    validationErrors.rango_alto = "El limite inferior no puede ser mayor al superior"
+                    validationErrors.rango_alto = "El limite superior no puede ser menor al inferior"
                 }
             } else if (!/^(?!-)(?:[0-9]|\d\d)$/.test(values.rango_bajo)) {
-                validationErrors.rango_bajo = "Ingrese un número valido"
+                validationErrors.rango_bajo = "Ingrese un número válido"
             }
             
         }
@@ -153,7 +152,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir campo numerico</h1>
+                    <h1>Añadir campo numérico</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}
@@ -183,10 +182,10 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                                 onChange={changeChecked}
                                 defaultChecked = {true}
                             />
-                            <span id="tituloIndividualAdd">Sin resticcion</span>
+                            <span id="tituloIndividualAdd">Sin restricción</span>
                         </div>
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite inferior*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Límite inferior*</p>
                         <input
                             type="number"
                             name="rango_bajo"
@@ -199,7 +198,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                         <span className="span1Modal">{errors.rango_bajo}</span>
                         )}
 
-                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Limite superior*</p>
+                        <p id={isChecked ? "textoCuadroAtributo-campNumerico" : "textoCuadroAtributo"}>Límite superior*</p>
                         <input
                             type="number"
                             name="rango_alto"

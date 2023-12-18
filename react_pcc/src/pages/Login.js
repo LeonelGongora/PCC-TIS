@@ -105,7 +105,7 @@ function Login (){
                         <p>Ingrese sus datos</p>
                         <input
                             type='text'
-                            placeholder='Username'
+                            placeholder='Documento de Identidad'
                             className='input-text'
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -123,7 +123,7 @@ function Login (){
                         {errors.password && (
                             <span className='error-message'>{errors.password}</span>
                         )}
-                        <a href='#' onClick={handleClick}>Olvido su contraseña?</a>
+                        
                         <input type='Submit' defaultValue='Ingresar' className='buttonLogin'/>
                         <p>Aún no se ha registrado? 
                             <span id='registrarse' onClick={redireccionVisualizarEventos} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Registrarse</span>

@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import FormUserInput from "../stylesheets/FormUserDinamico.css";
-import NavbarCreateEvent from '../components/NavBars/NavBarCreateEvent';
 import Cookies from 'universal-cookie';
+import {URL_API} from '../const';
+import NavbarAdmin from "../components/NavBars/NavbarAdmin";
+import ModalWindow from "../components/ModalWindows/ModalWindow";
+import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
+import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
+import ModalAnuncio from "../components/ModalWindows/ModalAnuncio";
 const cookies = new Cookies();
 
 
@@ -18,7 +23,10 @@ function FormRegistroUsuarioDinamico() {
     telefono: '',
 
   })
-
+  const [estadoModal, cambiarEstadoModal] = useState(false);
+  const [estadoModalOrganizador, cambiarEstadoModalOrganizador] = useState(false);
+  const [estadoModalPatrocinador, cambiarEstadoModalPatrocinador] = useState(false);
+  const [estadoModalAnuncio, cambiarEstadoModalAnuncio] = useState(false);
   const [errors, setErrors] = useState({})
   const [usuarios, setUsuarios] = useState({})
   const [tipos, setTipos] = useState([])
@@ -34,13 +42,13 @@ function FormRegistroUsuarioDinamico() {
   }
   
   const getUsuarios = async (e) => {
-    const url = "http://127.0.0.1:8000/api/get-user-information"; 
+    const url = `${URL_API}/get-user-information`; 
     const respuesta = await axios.get(url);
     setUsuarios(respuesta.data.usuarios);
   }
 
   const getTipos = async (e) => {
-    const url = "http://127.0.0.1:8000/api/tipos"; 
+    const url = `${URL_API}/tipos`; 
     const respuesta = await axios.get(url);
     setTipos(respuesta.data)
   }
@@ -63,7 +71,7 @@ function FormRegistroUsuarioDinamico() {
 
 
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.nombre)) {
-      validationErrors.nombre = "Ingrese nombre(s) valido";
+      validationErrors.nombre = "Ingrese nombre(s) válido";
     }
 
     if (!formData.apellido.trim()) {
@@ -72,7 +80,7 @@ function FormRegistroUsuarioDinamico() {
     } else if (
       !/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s]{1,60}[A-Za-zÑñáéíóú]$/.test(formData.apellido)
     ) {
-      validationErrors.apellido = "Ingrese apellido(s) valido(s)";
+      validationErrors.apellido = "Ingrese apellido(s) válido(s)";
     }
 
     if (!formData.ci.trim()) {
@@ -91,7 +99,7 @@ function FormRegistroUsuarioDinamico() {
         console.log(typeof(nuevo_ci))
 
         if(ci == nuevo_ci){
-            validationErrors.ci = "Ya existe un usuario registrado con este CI"
+            validationErrors.ci = "Ya existe un usuario registrado con este DNI"
             break;
         }
       }
@@ -101,7 +109,7 @@ function FormRegistroUsuarioDinamico() {
       validationErrors.email = "Este campo es obligatorio"
 
     } else if (!/^[A-Za-z0-9-._]+@[A-Za-z0-9]+\.[A-Za-z]{2,5}(\.[A-Za-z]{2,5})?(\.[A-Za-z]{2,5})?$/.test(formData.email)) {
-      validationErrors.email = "Ingrese correo valido";
+      validationErrors.email = "Ingrese correo válido";
     }else{
       for (let index = 0; index < usuarios.length; index++) {
 
@@ -116,15 +124,15 @@ function FormRegistroUsuarioDinamico() {
     }
 
     if (formData.password !== formData.confirmarPassword) {
-      validationErrors.password = "Las contraseñas debe coincidir"
-      validationErrors.confirmarPassword = "Las contraseñas debe coincidir"
+      validationErrors.password = "Las contraseñas deben coincidir"
+      validationErrors.confirmarPassword = "Las contraseñas deben coincidir"
     }
 
     if (!formData.password.trim()) {
       validationErrors.password = "Este campo es obligatorio"
 
     } else if (!/^\S[A-Z|a-z|0-9|áéíóú]{3,70}\S$/.test(formData.password)) {
-      validationErrors.password = "Ingrese una contraseña valida"
+      validationErrors.password = "Ingrese una contraseña válida"
     }else{
       
     }
@@ -138,15 +146,15 @@ function FormRegistroUsuarioDinamico() {
     if (!formData.telefono.trim()) {
       validationErrors.telefono = "Este campo es obligatorio"
 
-    } else if (!/^[7|6][0-9]{8}$/.test(formData.telefono)) {
-      validationErrors.telefono = "Ingrese un numero valido"
+    } else if (!/^\+?[1-9][0-9]{7,11}$/.test(formData.telefono)) {
+      validationErrors.telefono = "Ingrese un número válido"
     }
 
 
     setErrors(validationErrors)
 
     if (Object.keys(validationErrors).length === 0) {
-      const url = "http://127.0.0.1:8000/api/add-user-information";
+      const url = `${URL_API}/add-user-information`;
 
       const data = new FormData();
       data.append('nombre', formData.nombre)
@@ -161,7 +169,7 @@ function FormRegistroUsuarioDinamico() {
         // console.log(res)
         // console.log(res.data.ultimo_id)
         // cookies.set('id_usuario', res.data.ultimo_id, { path: "/" });
-        const u = "http://127.0.0.1:8000/api/tipousers";
+        const u = `${URL_API}/tipousers`;
         axios.post(u, {
           tipo_id: tipo,
           user_id: res.data.ultimo_id
@@ -177,9 +185,34 @@ function FormRegistroUsuarioDinamico() {
 
   return (
     <div className="App">
+      <ModalWindow
+        estado1={estadoModal}
+        cambiarEstado1={cambiarEstadoModal}
+      />
+      <ModalWindowOrganizadores
+        estadoOrganizador={estadoModalOrganizador}
+        cambiarEstadoModalOrganizador={cambiarEstadoModalOrganizador}
+      />
+      <ModalWindowPatrocinadores
+        estadoPatrocinador={estadoModalPatrocinador}
+        cambiarEstadoModalPatrocinador={cambiarEstadoModalPatrocinador}
+      />
+      <ModalAnuncio
+        estadoAnuncio={estadoModalAnuncio}
+        cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+      />
       <div className="background-image"></div>
       <div className="content">
-        <NavbarCreateEvent/>
+        <NavbarAdmin
+          estado1={estadoModal}
+          cambiarEstado1={cambiarEstadoModal}
+          estadoOrganizador={estadoModalOrganizador}
+          cambiarEstadoOrganizador={cambiarEstadoModalOrganizador}
+          estadoPatrocinador={estadoModalPatrocinador}
+          cambiarEstadoPatrocinador={cambiarEstadoModalPatrocinador}
+          estadoAnuncio={estadoModalAnuncio}
+          cambiarEstadoAnuncio={cambiarEstadoModalAnuncio}
+        />
         <div className="registroUsuarioDinamico">
           <div className="textoEvento-user">
             <p className="textoRegistro-user" id ="titulo-userPriv">Registro de Usuario Privilegiado</p>
@@ -222,7 +255,7 @@ function FormRegistroUsuarioDinamico() {
                   id="inputRegistro-user"
                   type="number"
                   name="ci"
-                  placeholder="Ingrese su DI"
+                  placeholder="Ingrese su DNI"
                   onChange={handleChange}
                 />
               </div>
@@ -276,12 +309,12 @@ function FormRegistroUsuarioDinamico() {
               )}
 
               <div id="entrada-userPriv">
-                <p id="textoCuadro-user">Telefono*</p>
+                <p id="textoCuadro-user">Teléfono*</p>
                 <input
                   id="inputRegistro-user"
                   type="number"
                   name="telefono"
-                  placeholder="Ingrese su telefono"
+                  placeholder="Ingrese su teléfono"
                   onChange={handleChange}
                 />
               </div>

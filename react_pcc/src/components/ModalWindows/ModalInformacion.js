@@ -44,7 +44,7 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
             validationErrors.nombre_informacion = "Este campo es obligatorio"
 
         } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_informacion)){
-            validationErrors.nombre_informacion = "Ingrese un nombre valido"
+            validationErrors.nombre_informacion = "Ingrese un nombre válido"
         }
 
         if(!values.contenido_informacion.trim()){
@@ -83,7 +83,7 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
               <div className="ContenedorModal">
                 <div className="EncabezadoModal">
                   <div className="tituloEvento">
-                    <h1>Añadir Seccion de Informacion</h1>
+                    <h1>Añadir Sección de Información</h1>
                   </div>
                   <button
                     onClick={salirVentanaModal}

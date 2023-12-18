@@ -105,7 +105,7 @@ function FormRegistroEvento_Equipos(){
     if (!values.nombre_equipo.trim()) {
       validationErrors.nombre_equipo = "Este campo es obligatorio";
     } else if (!/^[A-Za-zÑñáéíóú][A-Za-zÑñáéíóú\s0-9]{1,60}[A-Za-zÑñáéíóú0-9]$/.test(values.nombre_equipo)) {
-      validationErrors.nombre_equipo = "Ingrese un nombre valido";
+      validationErrors.nombre_equipo = "Ingrese un nombre válido";
     }else if(nombres_equipos_registrados.includes(values.nombre_equipo)){
       validationErrors.nombre_equipo = "Este nombre ya se encuentra registrado en el evento";
     }
@@ -159,7 +159,7 @@ function FormRegistroEvento_Equipos(){
       data.append('id_coach', idu)
 
       let id_equipo = 0;
-      axios.post('http://127.0.0.1:8000/api/add-team', data)
+      axios.post(`${URL_API}/add-team`, data)
       .then(res=>{ 
         if(res.data.status === 200){
           id_equipo = res.data.ultimo_id_equipo
@@ -188,7 +188,7 @@ function FormRegistroEvento_Equipos(){
               data.append('team_id', id_equipo)
               data.append('user_id', id_registrados[indice])
     
-              const res = axios.post('http://127.0.0.1:8000/api/add-team_user', data);
+              const res = axios.post(`${URL_API}/add-team_user`, data);
             }else{
 
               console.log("DNI NO REGISTRADO")
