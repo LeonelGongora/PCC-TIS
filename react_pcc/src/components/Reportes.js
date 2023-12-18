@@ -609,7 +609,7 @@ function Reportes() {
                     Página Siguiente
                 </button>
                 <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-                    última Página
+                    Última Página
                 </button>
             </div>
 
@@ -628,7 +628,8 @@ function Reportes() {
                     const worksheet = XLSX.utils.json_to_sheet(datas);
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-                    XLSX.writeFile(workbook, "Reporte.xlsx");
+                    const nombreArchivo = nombreDeReporte || 'Reporte';
+                    XLSX.writeFile(workbook, `${nombreArchivo}.xlsx`);
                   }else{
                     const validationErrors = {};
                     validationErrors.error_descarga = "Debe seleccionar un tipo de reporte"
