@@ -56,6 +56,7 @@ function Reportes() {
     const [nombreDeReporte, setNombreDeReporte] = useState("");
     const [nombreDeEvento, setNombreDeEvento] = useState("");
     const [nombreDeReporteEspecifico, setNombreDeReporteEspecifico] = useState("");
+    const [errors, setErrors] = useState({});
 
     const cambioReporteGeneral = (e) => {
         if (e.target.value === "Eventos") {
@@ -81,7 +82,7 @@ function Reportes() {
         } else {
             const keys = Object.keys(eventos[0]);
             console.log(keys);
-            let claves = keys.slice(0, 10);
+            let claves = keys.slice(1, 7);
 
             //const streetAddress = addy.substring(0, addy.indexOf(","));
             for (let i = 0; i < eventos.length; i++) {
@@ -179,7 +180,7 @@ function Reportes() {
             //let fecha_creacion = ""
             //fecha_creacion = keys[9];
 
-            let claves = keys.slice(0, 8);
+            let claves = keys.slice(1, 7);
             //claves.push()
 
             let columnasActuales = [];
@@ -387,8 +388,13 @@ function Reportes() {
         setNombreDeReporte(nombre_Reporte)
     };
 
-    const reporteEquiposEvento = (e) => {
-        if (evento_actual.teams.length === 0) {
+    const reporteEquiposEvento = async (e) => {
+      ///get-team-1/{event_id}
+      
+      const res = await axios.get(`${URL_API}/get-team-1/${evento_actual.id}`);
+      console.log(res)
+
+        if (res.data.length === 0) {
             console.log("NULO Equipos");
             let columna = [
                 {
@@ -403,7 +409,7 @@ function Reportes() {
             setDataTabla(fila);
             setColumnas(columna);
         } else {
-            const keys = Object.keys(evento_actual.teams[0]);
+            const keys = Object.keys(res.data[0]);
             //let fecha_creacion = ""
             //fecha_creacion = keys[9];
 
@@ -423,7 +429,7 @@ function Reportes() {
                 //const element = array[i];
             }
 
-            setDataTabla(evento_actual.teams);
+            setDataTabla(res.data);
             setColumnas(columnasActuales);
             setCantidadRegistros(dataTabla.length);
         }
@@ -616,15 +622,26 @@ function Reportes() {
             <div className="paginas">
               <button
                 onClick={() => {
-                  const datas = dataTabla?.length ? dataTabla : [];
-                  const worksheet = XLSX.utils.json_to_sheet(datas);
-                  const workbook = XLSX.utils.book_new();
-                  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-                  XLSX.writeFile(workbook, "data.xlsx");
+                  if(dataTabla.length > 0){
+                    setErrors({});
+                    const datas = dataTabla?.length ? dataTabla : [];
+                    const worksheet = XLSX.utils.json_to_sheet(datas);
+                    const workbook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+                    XLSX.writeFile(workbook, "data.xlsx");
+                  }else{
+                    const validationErrors = {};
+                    validationErrors.error_descarga = "Debe seleccionar un tipo de reporte"
+                    setErrors(validationErrors);
+                  }
+                  
                 }}
               >
                 Descargar
               </button>
+              {errors.error_descarga && (
+                <span className="span1Modal">{errors.error_descarga}</span>
+              )}
             </div>
           </div>
         </div>

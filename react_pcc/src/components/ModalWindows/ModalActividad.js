@@ -179,6 +179,7 @@ function ModalActividad({estadoActividad, cambiarEstadoModalActividad, id_evento
                     fecha_fin_actividad : "",
                     descripcion_actividad : "",
                 });
+                cookies.set('posicion_pestaña', 3, {path: "/"});
                 window.location.reload();
             }
         }

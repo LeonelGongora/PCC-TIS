@@ -85,6 +85,7 @@ function ModalWindowAtributo({estadoAtributo, cambiarEstadoModalAtributo, id_eve
                 setValues({
                     nombre_atributo : '',
                 });
+                cookies.set('posicion_pestaña', 0, {path: "/"});
                 window.location.reload();
             }
         }

@@ -4,7 +4,9 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {URL_API} from '../../const';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
 
 function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_evento, atributos}){
@@ -61,6 +63,7 @@ function ModalWindowRequisito({estadoAtributo, cambiarEstadoModalAtributo, id_ev
                 setValues({
                     contenido_requisito : '',
                 });
+                cookies.set('posicion_pestaña', 2, {path: "/"});
                 window.location.reload();
             }
         }

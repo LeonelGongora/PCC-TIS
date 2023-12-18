@@ -84,6 +84,7 @@ function ModalCampoFecha({estadoCampoFecha, cambiarEstadoCampoFecha, id_evento, 
                 setValues({
                     nombre_atributo : '',
                 });
+                cookies.set('posicion_pestaña', 0, {path: "/"});
                 window.location.reload();
             }
         }

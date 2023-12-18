@@ -113,7 +113,7 @@ function ModalEleccionTipoCampo({estadoEleccion, cambiarEstadoModalEleccion,
               <div className='contAnuncioEditCampos'>
                 <span className="anuncioNoEditCampos">{errors.error_eleccion}</span>
               </div>
-              )}
+            )}
           </div>
         </div>
       )

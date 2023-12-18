@@ -4,8 +4,10 @@ import '../../stylesheets/ModalWindowStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import {URL_API} from '../../const';
+import Cookies from 'universal-cookie';
 
 const salir = <FontAwesomeIcon icon={faCircleXmark} />
+const cookies = new Cookies();
 
 function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_evento, atributos}){
 
@@ -72,6 +74,7 @@ function ModalInformacion({estadoInformacion, cambiarEstadoModalInformacion, id_
                     nombre_informacion : "",
                     contenido_informacion : '',
                 });
+                cookies.set('posicion_pestaña', 1, {path: "/"});
                 window.location.reload();
             }
         }

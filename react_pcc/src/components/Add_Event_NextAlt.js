@@ -20,6 +20,7 @@ const cookies = new Cookies();
 class Add_Event_NextAlt extends Component{
 
     id = cookies.get('ultimo_id_evento');
+    posicion_pestaña = cookies.get('posicion_pestaña');
 
     componentDidMount(){
         this.getEvento();
@@ -28,8 +29,13 @@ class Add_Event_NextAlt extends Component{
         if (cadena != undefined){
             this.setState({ cadenaPrivilegio: cadena });
         }
-        console.log(this.state.cadenaPrivilegio)
-        
+        if(this.posicion_pestaña){
+
+            let nuevasPestañas = [false, false, false, false, false, false]
+            nuevasPestañas[this.posicion_pestaña] = true;
+
+           this.setState({ pestañas: nuevasPestañas });
+        }
     }
 
     constructor(props) {

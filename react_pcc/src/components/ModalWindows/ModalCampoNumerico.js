@@ -141,6 +141,7 @@ function ModalCampoNumerico({estadoCampoNumerico, cambiarEstadoCampoNumerico, id
                     rango_alto : "",
                     con_rango: 0,
                 });
+                cookies.set('posicion_pestaña', 0, {path: "/"});
                 window.location.reload();
             }
         }

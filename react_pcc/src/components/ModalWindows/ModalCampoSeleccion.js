@@ -123,6 +123,7 @@ function ModalCampoSeleccion({estadoCampoSeleccion, cambiarEstadoCampoSeleccion,
                 setValues({
                     nombre_atributo : '',
                 });
+                cookies.set('posicion_pestaña', 0, {path: "/"});
                 window.location.reload();
             }
         }
