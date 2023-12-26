@@ -196,17 +196,19 @@ function FormRegistroEvento_Equipos(){
             }
 
             console.log(dni_no_registrados.length)
-            if(dni_no_registrados.length > 0){
-              cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
-              cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
-              cookies.set('indice_dni_no_registrados', 0, {path: "/"});
-            }else{
-              window.location.href='./paginaRegistrarseEventos';
-            }
             
-            cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
+            //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
             
           }
+
+          if(dni_no_registrados.length > 0){
+            cambiarEstadoModalWarningDNI(!formData.estadoModalWarningDNI)
+            cookies.set('dni_no_registrados', dni_no_registrados, {path: "/"});
+            cookies.set('indice_dni_no_registrados', 0, {path: "/"});
+          }else{
+            window.location.href='./paginaRegistrarseEventos';
+          }
+
         }
       })
       })
