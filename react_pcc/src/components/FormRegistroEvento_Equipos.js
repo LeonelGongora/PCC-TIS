@@ -204,7 +204,7 @@ function FormRegistroEvento_Equipos(){
               window.location.href='./paginaRegistrarseEventos';
             }
             
-            //cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
+            cambiarEstadoModalEquipos(!formData.estadoModalEquipos)
             
           }
         }
