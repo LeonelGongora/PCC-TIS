@@ -510,7 +510,6 @@ function Reportes() {
                   Seleccione un tipo
                 </option>
                 <option value="Eventos">Eventos</option>
-                <option value="Tipos de Evento">Tipos de Evento</option>
               </select>
 
               <select onChange={cambioEventoActual}>
