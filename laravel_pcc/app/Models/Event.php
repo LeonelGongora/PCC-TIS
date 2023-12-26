@@ -45,7 +45,7 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class, 'evento_user', 'event_id', 'user_id');
     }
-
+    
     public function teams()
     {
         return $this->hasMany(Team::class, 'event_id', 'id');

@@ -47,7 +47,6 @@ class EventController extends Controller
             $name = time().'.'.$image->getClientOriginalExtension();
             $image->move('images/', $name);
 
-            
             $evento-> name = $name;
             $evento-> save();
             $evento->id;

@@ -200,7 +200,6 @@ function InfoEvento({props}){
                                 return (
                             <div className='organizadores'>
                                 
-
                                 {p.pivot.categoria === "Gold" ? (
                                     <>
                                     <div className='patrocinadoresGold'>
@@ -226,7 +225,6 @@ function InfoEvento({props}){
                                     <div></div>
                                     </>
                                 )}
-
                                 
                                 {p.pivot.categoria === "Bronce" ? (
                                     <>
@@ -247,7 +245,6 @@ function InfoEvento({props}){
                         ):(
                             <div></div>
                         )}
-                        
                     </div>
                 </div>
             </div>

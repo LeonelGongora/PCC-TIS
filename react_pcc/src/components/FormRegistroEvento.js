@@ -10,6 +10,7 @@ import ModalWarning from './ModalWindows/ModalWarning';
 import ModalRegistroUsuario from './ModalWindows/ModalRegistroUsuario';
 import {URL_API} from '../const';
 import ModalAutentificacion from './ModalWindows/ModalAutentificacion';
+//import {URL_API} from '../../const';
 
 const cookies = new Cookies();
 
@@ -51,19 +52,19 @@ function FormRegistroEvento(){
 
     e.preventDefault();
     const validationErrors = {};
+
     console.log(se_Registro)
 
     document.querySelectorAll(".input-Formulario-Registro-Evento").forEach(input =>{
-      
-      if(input.type != "file"){
-        console.log(input)
 
-        console.log(input.value === "Seleccione una opcion")
+      if(input.type != "file"){
 
         if(!input.value.trim() || input.value === "Seleccione una opcion"){
           validationErrors[input.name] = "Este campo es obligatorio";
         }else{
+
           if(input.type == "number"){
+            
             if(input.id){
               console.log("Hay limites")
               let restriccion_id = input.id;
@@ -122,8 +123,17 @@ function FormRegistroEvento(){
     }
 
     setErrors(validationErrors);
-
+    
     if(Object.keys(validationErrors).length === 0){
+
+      //add-attribute_user
+      //'attribute_id',
+      //'user_id',
+      //'contenido_atributo'
+      
+      
+      
+      //`${URL_API}/add-team`
       
       if(mostrarRequisitos){
 
@@ -138,24 +148,26 @@ function FormRegistroEvento(){
             requisitoZip: urli,
             solicitud : "0"
           }).then(response=>{
+            
             window.location.href='./paginaRegistrarseEventos';
             console.log(response)
           })
         })
       }else{
+
         axios.post(EventoUsuario_Api_Url, {
           event_id: id_evento,
           user_id: id_usuario,
           //requisitoZip: urli,
           solicitud : "1"
         }).then(response=>{
+          
           window.location.href='./paginaRegistrarseEventos';
           console.log(response)
         })
-
       }
-      
     }
+    
   }
 
   const handleChange = (e) => {
@@ -278,17 +290,17 @@ function FormRegistroEvento(){
               {atributo.esSelect ? (
                 <div className='desplegable-Formulario'>
                   <p id="textoCuadro">{atributo.nombre_atributo}</p>
-                  <select id="desplegable" className="input-Formulario-Registro-Evento" name={atributo.nombre_atributo}>
+                  <select id="desplegable" className="input-Formulario-Registro-Evento" name={atributo.id}>
                     <option disabled selected> 
                       Seleccione una opcion
                     </option>
                     {atributo.restriccion.map((evento, id) => {
-                      return <option>{evento}</option>;
+                      return <option id={atributo.id} >{evento}</option>;
                     })}
                   </select>
-                  {errors[atributo.nombre_atributo] && (
+                  {errors[atributo.id] && (
                     <span className="advertencia">
-                      {errors[atributo.nombre_atributo]}
+                      {errors[atributo.id]}
                     </span>
                   )}
                 </div>
@@ -299,14 +311,14 @@ function FormRegistroEvento(){
                           id={atributo.restriccion}
                           className="input-Formulario-Registro-Evento"
                           type={atributo.tipo_dato_atributo}
-                          name={atributo.nombre_atributo}
-                          placeholder="Ingrese nombre"
+                          name={atributo.id}
+                          placeholder="Ingrese sus datos"
                           restriccion = {atributo.restriccion}
                         />
                       </div>
-                      {errors[atributo.nombre_atributo] && (
+                      {errors[atributo.id] && (
                       <span className="advertencia">
-                        {errors[atributo.nombre_atributo]}
+                        {errors[atributo.id]}
                       </span>
                       )}
                     </>

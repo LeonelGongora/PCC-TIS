@@ -162,6 +162,7 @@ function Reportes() {
     const reporteParticipantes = (e) => {
         console.log(evento_actual.users);
 
+
         if (evento_actual.users.length === 0) {
             let columna = [
                 {
@@ -176,9 +177,12 @@ function Reportes() {
             setDataTabla(fila);
             setColumnas(columna);
         } else {
+
             const keys = Object.keys(evento_actual.users[0]);
             //let fecha_creacion = ""
             //fecha_creacion = keys[9];
+            console.log("llaves")
+            console.log(keys)
 
             let claves = keys.slice(1, 7);
             //claves.push()
@@ -617,7 +621,6 @@ function Reportes() {
                     <div>
                     </div>
             )}
-
              
             <div className="paginas">
               <button

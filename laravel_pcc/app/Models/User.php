@@ -24,10 +24,12 @@ class User extends Authenticatable
         'nombre', 'apellido', 'ci', 'pais','telefono','email', 'password', 'auxinoti',
     ];
 
+
     public function events()
     {
         return $this->belongsToMany(Event::class, 'evento_user', 'user_id','event_id');
     }
+
 
     public function tipos(){
         return $this->belongsToMany(Tipo::class, 'tipo_user');
@@ -36,6 +38,8 @@ class User extends Authenticatable
     public function notifications(){
         return $this->belongsToMany(Notification::class, 'notification_user');
     }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

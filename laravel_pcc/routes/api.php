@@ -32,6 +32,7 @@ use App\Http\Controllers\NotificationUserController;
 use App\Http\Controllers\EventNotificationController;
 use App\Http\Controllers\NotificationTeamController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\Attribute_UserController;
 
 use App\Http\Controllers\MailController;
 
@@ -52,11 +53,11 @@ Route::post('/add-activity', [ActivityController::class, 'store']);
 Route::delete('/delete-activity/{id}', [ActivityController::class, 'destroy']);
 
 Route::get('type-events', [EventTypeController::class, 'get']);
-Route::post('/add-event_type', [EventTypeController::class, 'store']);
+Route::post('/add-event_type', [EventTypeController::class, 'store']);  
 
-Route::get('events', [EventController::class, 'get']);
-Route::post('/add-event', [EventController::class, 'store']);
-Route::post('/update-event/{id}', [EventController::class, 'update']);
+Route::get('events', [EventController::class, 'get']);   
+Route::post('/add-event', [EventController::class, 'store']);  
+Route::post('/update-event/{id}', [EventController::class, 'update']);   
 Route::get('/register-to-events/{id}', [EventController::class, 'getNo']);
 Route::get('/get-event-by-date/{fecha}', [EventController::class, 'getByDate']);
 
@@ -74,18 +75,18 @@ Route::get('/get-notices', [NoticeController::class, 'get']);
 
 Route::post('/enviar-correo', [MailController::class, 'enviarCorreo']);
 
-Route::post('/add-organizador', [OrganizerController::class, 'store']);
+Route::post('/add-organizador', [OrganizerController::class, 'store']); 
 Route::get('/get-organizador', [OrganizerController::class, 'get']);
 Route::delete('/delete-organizador/{id}', [OrganizerController::class, 'destroy']);
 
-Route::post('/add-patrocinador', [SponsorController::class, 'store']);
+Route::post('/add-patrocinador', [SponsorController::class, 'store']); 
 Route::get('/get-patrocinador', [SponsorController::class, 'get']);
 Route::delete('/delete-patrocinador/{id}', [SponsorController::class, 'destroy']);
 
 Route::post('/add-requirement', [RequirementController::class, 'store']);
 Route::delete('/delete-requirement/{id}', [RequirementController::class, 'destroy']);
 
-Route::post('/add-user-information', [UserController::class, 'store']);
+Route::post('/add-user-information', [UserController::class, 'store']);    
 Route::get('/get-user-information', [UserController::class, 'get']);
 Route::get('/get-user-by-dni/{numero_documento}', [UserController::class, 'getIdbyDNI']);
 Route::get('/get-user-1/{event_id}', [UserController::class, 'getUser1']);
@@ -94,26 +95,24 @@ Route::get('/get-user/{id}', [UserController::class, 'getbyId']);
 Route::post('/add-team', [TeamController::class, 'store']);
 Route::get('/get-team-0/{event_id}', [TeamController::class, 'getTeams0']);
 Route::get('/get-team-1/{event_id}', [TeamController::class, 'getTeams1']);
-
 Route::post('/add-team_user', [Team_UserController::class, 'store']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::resource('eventos', EventController::class);
+Route::resource('eventos', EventController::class);      
 Route::resource('eventousuarios', EventoUserController::class);
-
-Route::post('upload', [ArchivoController::class, 'upload']);
-
-Route::resource('usuarios', UserController::class);
-Route::post('download', [ArchivoController::class, 'download']);
 Route::resource('eventoabiertos', EventoAbiertoController::class);
 Route::resource('eventocerrados', EventoCerradoController::class);
-
 Route::resource('estareguserevent', EstaRegUserEventController::class);
 Route::resource('eventuser2', EventUser2Controller::class);
 Route::resource('eventuser3', EventUser3Controller::class);
+
+Route::post('upload', [ArchivoController::class, 'upload']);
+Route::resource('usuarios', UserController::class);
+Route::post('download', [ArchivoController::class, 'download']);
+
 Route::resource('tipos', TipoController::class);
 Route::resource('tipousers', TipoUserController::class);
 Route::resource('login', LoginController::class);

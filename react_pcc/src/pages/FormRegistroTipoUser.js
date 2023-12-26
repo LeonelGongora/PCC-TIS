@@ -55,6 +55,7 @@ function FormRegistroTipoUser() {
 
   const saveTipo = async (e) => {
     e.preventDefault();
+    console.log("ASDS")
 
     const url = `${URL_API}/tipos`;
     axios.post(url, {
@@ -62,7 +63,7 @@ function FormRegistroTipoUser() {
       privilegio: privilegio
     }).then(response=>{
       console.log("exito")
-      // window.location.href = './login';
+      window.location.href = './login';
     })
   }
 
@@ -134,6 +135,7 @@ function FormRegistroTipoUser() {
     if (generalreport==1) setGeneralreport(0)
     else setGeneralreport(1)
   };
+
   const reiniciarPagina = () => {
     window.location.href='./FormRegistroTipoUser';
   };
@@ -345,7 +347,7 @@ function FormRegistroTipoUser() {
                   </div>
                 </div>
               <div className="botonEnviar-user">
-                <button className="botonRegistrar-user" type="submit" onClick={reiniciarPagina}>
+                <button className="botonRegistrar-user" type="submit" onClick={saveTipo}>
                   {" "} Registrar</button>
               </div>
             </form>
