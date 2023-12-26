@@ -130,8 +130,8 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
 
             let nuevo_correo = {"email": values.email}
 
-            let nuevos_usuarios = usuarios.push(nuevo_correo)
-            cookies.set('usuarios', nuevos_usuarios, {path: "/"});
+            //let nuevos_usuarios = usuarios.push(nuevo_correo)
+            //cookies.set('usuarios', nuevos_usuarios, {path: "/"});
 
             let id_usuario = 0
 
