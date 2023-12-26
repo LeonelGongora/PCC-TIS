@@ -497,7 +497,7 @@ function Reportes() {
                 type="text"
                 value={filtering}
                 onChange={(e) => setFiltering(e.target.value)}
-                placeholder="Buscar evento por nombre o descripción"
+                placeholder="Buscar por nombre o descripción"
               />
               <span id="botonBuscar-admin">{buscar}</span>
             </div>
@@ -604,16 +604,16 @@ function Reportes() {
             {true ? (
                 <div className='paginas'>
                 <button onClick={() => table.setPageIndex(0)}>
-                    Primera Pagina
+                    Primera Página
                 </button>
                 <button  onClick={() => table.previousPage()}>
-                    Pagina anterior 
+                    Página Anterior 
                 </button>
                 <button  onClick={() => table.nextPage()}>
-                    Pagina siguiente
+                    Página Siguiente
                 </button>
                 <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-                    Ultima Pagina
+                    Última Página
                 </button>
             </div>
 
@@ -631,7 +631,8 @@ function Reportes() {
                     const worksheet = XLSX.utils.json_to_sheet(datas);
                     const workbook = XLSX.utils.book_new();
                     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-                    XLSX.writeFile(workbook, "data.xlsx");
+                    const nombreArchivo = nombreDeReporte || 'Reporte';
+                    XLSX.writeFile(workbook, `${nombreArchivo}.xlsx`);
                   }else{
                     const validationErrors = {};
                     validationErrors.error_descarga = "Debe seleccionar un tipo de reporte"
@@ -642,10 +643,10 @@ function Reportes() {
               >
                 Descargar
               </button>
-              {errors.error_descarga && (
-                <span className="span1Modal">{errors.error_descarga}</span>
-              )}
             </div>
+            {errors.error_descarga && (
+                <span className="errorDescarga">{errors.error_descarga}</span>
+              )}
           </div>
         </div>
       </div>

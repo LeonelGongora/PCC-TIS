@@ -114,11 +114,11 @@ function ModalEliminarActividad({estadoActividad, cambiarEstadoModalActividad}){
                       </div>
                       <div className="fechasActividadModif">
                         <div className="cuadroFechasActModif">
-                          <div className="fechaActModif">
+                          <div className="fechaActModif fechaActModifModal">
                             <h4>Fecha inicio</h4>
                             <p>{actividad.fecha_inicio_actividad}</p>
                           </div>
-                          <div className="fechaActModif">
+                          <div className="fechaActModif fechaActModifModal">
                             <h4>Fecha fin</h4>
                             <p>{actividad.fecha_fin_actividad}</p>
                           </div>
