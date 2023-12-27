@@ -71,9 +71,21 @@ function DropdownNotification({setOpenDropFath, isOpen}) {
         }
       });
       //fin
+      console.log(r)
+      
+      for (let i = 0; i < r.length; i++) {
+        const fecha1 = r[i].created_at.split(' ')[0]
+        const hora = r[i].created_at.split(' ')[1]
+        let fecha = new Date(fecha1);
+        var dia = fecha.getDate() + 1;
+        var mes = fecha.getMonth() + 1;
+        let format4 = dia + "-" + mes + "-" + fecha.getFullYear();
+        r[i].created_at = format4 + " " + hora ;
+      }
 
       // console.log(r)
       setNotification(r);
+      
       setNotificationlength(r.length);
 
       // console.log(r.length)
