@@ -144,10 +144,10 @@ function Requisitos({estadoRequisitos, cambiarEstadoRequisitos, requisitos}){
             <h2>Requisitos</h2>
             <div className='seccionCampo'>
               <div className='seccionesExtra'>
-                 {requisitos.map((requisito) => ( 
+                 {requisitos.map((requisito, id) => ( 
                 <div className="campo-cont requisito-cont">
                   <div id="entradaEveNex">
-                    <p id="textoCuadro" className='cuadroRequisito'>Requisito 1</p>
+                    <p id="textoCuadro" className='cuadroRequisito'>Requisito {id}</p>
                     <textarea
                       name="contenido_anuncio"
                       className="inputRequisitoOp"

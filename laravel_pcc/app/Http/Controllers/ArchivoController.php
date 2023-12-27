@@ -20,7 +20,7 @@ class ArchivoController extends Controller
         if ( $request -> hasFile('file'))
         {
             $file = $request->file('file');
-            $basic_url ='http://localhost:8000/';
+            $basic_url ='http://blackcloud.tis.cs.umss.edu.bo/';
             $destinationPath = 'imagen/';
             $filename = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $request->file('file')->move($destinationPath, $filename);

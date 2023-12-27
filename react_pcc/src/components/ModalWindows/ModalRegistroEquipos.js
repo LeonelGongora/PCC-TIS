@@ -170,7 +170,6 @@ function ModalRegistroEquipos({estadoEquipos, cambiarEstadoModalEquipos,cambiarE
                       console.log("No hay campos adicionales")
                     }
                     
-                    
                     //fin noti
 
                     setValues({

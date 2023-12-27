@@ -73,7 +73,6 @@ function ModalCamposEquipo({estadoActividad, cambiarEstadoModalActividad, id_eve
                   }
                 }
     
-        
               }else if(input.type  == "select"){
         
               }else if(input.type  == "date"){
