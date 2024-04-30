@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import FormUserInput from "../stylesheets/FormUserDinamico.css";
 import Cookies from 'universal-cookie';
 import {URL_API} from '../const';
 import NavbarAdmin from "../components/NavBars/NavbarAdmin";
@@ -98,7 +97,7 @@ function FormRegistroUsuarioDinamico() {
         console.log(typeof(ci))
         console.log(typeof(nuevo_ci))
 
-        if(ci == nuevo_ci){
+        if(ci === nuevo_ci){
             validationErrors.ci = "Ya existe un usuario registrado con este DNI"
             break;
         }

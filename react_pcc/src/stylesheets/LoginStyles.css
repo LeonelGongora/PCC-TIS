@@ -1,6 +1,7 @@
 .contenedorLogin{
     display: flex;
     height: 93vh;
+    width: 100%;
     position: absolute;
     background: url('../images/homepage1.png') right bottom/cover no-repeat;
     background-size: 55% 55%;

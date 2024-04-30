@@ -67,14 +67,22 @@ function NavbarUserDinamico({
     <>
       <nav>
         <div className="logoName">
-          <h1 className="name">PCC</h1>
-          <a href="">
+          <a href="./home">
             <img
-              className="imageNav"
-              src={require("../../images/logo512.png")}
-              alt="Logo del sistema"
+              className="imageUmss"
+              src={require("../../images/logo512Umss.png")}
+              alt="Logo Umss"
+              style={{ maxHeight: "64px" }}
             />
+
           </a>
+          <h1 className="name">SanSi Cup</h1>
+
+          <img
+            className="imageNav"
+            src={require("../../images/logo512.png")}
+            alt="Logo del sistema"
+          />
         </div>
         <div className="navbarRight">
           <div className="desplegable1">

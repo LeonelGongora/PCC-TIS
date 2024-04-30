@@ -1,9 +1,9 @@
 nav{
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content:left;
     background-color: #14365C;
-    padding-left: 30px;
+    padding-left: 20px;
     padding-bottom: 5px;
     padding-top: 5px;
     z-index: 100;
@@ -16,6 +16,7 @@ nav{
 .logoName{
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     width: 140px;
 }
@@ -25,7 +26,8 @@ nav{
 .name{
     font-family: 'Roboto', sans-serif;
     color: #f6f6f6;
-    font-size: 2.1rem;
+    font-size: 1.6rem;
+    white-space: nowrap;
 }
 #navbar{
     display: flex;
@@ -65,7 +67,7 @@ nav{
     justify-content: space-between;
     width: 100%;
     margin-right: 1vw;
-    margin-left: 3vw;
+    margin-left: 9vw;
     align-items: center;
     border-width: 5px;
     border-color: #f6f6f6;

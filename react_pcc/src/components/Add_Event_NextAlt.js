@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../stylesheets/Add_Event_NextAlt.css'
 import "../stylesheets/RegisterEventAdminStyles.css";
-import NavbarCreateEvent from './NavBars/NavBarCreateEvent';
 import configApi from '../configApi/configApi'
 import axios from 'axios'
 import Cookies from 'universal-cookie';
@@ -26,7 +25,7 @@ class Add_Event_NextAlt extends Component{
         this.getEvento();
         console.log(this.id)
         const cadena = cookies.get('login_userPrivilegio');
-        if (cadena != undefined){
+        if (cadena !== undefined){
             this.setState({ cadenaPrivilegio: cadena });
         }
         if(this.posicion_pestaña){
@@ -102,7 +101,7 @@ class Add_Event_NextAlt extends Component{
                     <p className="tituloEvento-home">DATOS DEL EVENTO</p>
                     <div className='contenedorInfoPestana'>
                         <div className='pestanasEventos'>
-                            {this.state.cadenaPrivilegio.charAt(14) == 1 || this.state.cadenaPrivilegio == 'admin'? (
+                            {this.state.cadenaPrivilegio.charAt(14) === 1 || this.state.cadenaPrivilegio === 'admin'? (
                                 <div className={`campoPestana cmp${pestañas[0] ? ' activo' : ''} bordePersonalizado`} onClick={() =>this.cambiarEstadoPestaña(0)}>
                                     <h3>Campos</h3>
                                 </div>
@@ -113,7 +112,7 @@ class Add_Event_NextAlt extends Component{
                             <div className={`campoPestana req${pestañas[2] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(2)}>
                                 <h3>Requisitos</h3>
                             </div>
-                            {this.state.cadenaPrivilegio.charAt(10) == 1 || this.state.cadenaPrivilegio == 'admin'? (
+                            {this.state.cadenaPrivilegio.charAt(10) === 1 || this.state.cadenaPrivilegio === 'admin'? (
                                 <div className={`campoPestana act${pestañas[3] ? ' activo' : ''}`} onClick={() =>this.cambiarEstadoPestaña(3)}>
                                     <h3>Actividades</h3>
                                 </div>

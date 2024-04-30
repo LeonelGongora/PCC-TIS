@@ -6,7 +6,7 @@ import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ModalWindowOrganizadores from '../components/ModalWindows/ModalWindowOrganizadores';
 import ModalWindowPatrocinadores from '../components/ModalWindows/ModalWindowPatrocinadores';
@@ -66,7 +66,7 @@ class VisualizarEquipos extends Component {
     // console.log(this.coach)
     const listacoa = this.coach.join("");
     // console.log(listacoa)
-    const rescoach = await axios.post(`${URL_API}/arrcoach`, {
+    await axios.post(`${URL_API}/arrcoach`, {
       arregloCoach: listacoa,
       lonarr: this.coach.length
     })

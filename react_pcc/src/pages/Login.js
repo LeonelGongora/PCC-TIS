@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import NavbarUser from '../components/NavBars/NavBarCreateEvent';
 import "../stylesheets/LoginStyles.css";
 import '../App.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import configApi from '../configApi/configApi'
 import {URL_API} from '../const';
 
@@ -76,9 +75,6 @@ function Login (){
         }
     };
 
-    const handleClick = () => {
-        console.log("Al hacer clic en el enlace");
-    };
 
     const handleMouseEnter = () => {
         setShowMessage(true);
@@ -136,11 +132,11 @@ function Login (){
                     </form>  
                 </div>
                 <div className='presentacionlogin'>
-                    <h3 className='titlePCC'>Programming Competition Community</h3>
-                    <img className="logoPCC" src={require("../images/logo512.png")}
+                    <h3 className='titlePCC'>SanSi Cup</h3>
+                    <img className="logoPCC" src={require("../images/logo512cup.png")}
                     alt='Logo del sistema'/>
-                    <p className='descriptionPCC'>PCC es un sistema que permite ayudar a las fases 
-                    administrativas de los eventos de competencias de programación en la UMSS</p>
+                    <p className='description'>Competencia Universitaria de Programación.</p>
+                    <p className='description'>"El trabajo duro supera al talento cuando el talento no trabaja duro"(Tim Notke)</p>
                 </div>
             </div>
         </div>
