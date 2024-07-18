@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import configApi from '../configApi/configApi'
 import {URL_API} from '../const';
+import CryptoJS from 'crypto-js';
 
 const cookies = new Cookies();
 
@@ -32,7 +33,7 @@ function Login (){
         if (Object.keys(validationErrors).length === 0) {
         await axios.post(login, {
             email: username,
-            password: password
+            password: CryptoJS.MD5(password).toString()
         })
         .then(response=>{
         // console.log(response.data[0].id)

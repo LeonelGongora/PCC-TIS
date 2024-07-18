@@ -7,6 +7,8 @@ import ModalWindow from "../components/ModalWindows/ModalWindow";
 import ModalWindowOrganizadores from "../components/ModalWindows/ModalWindowOrganizadores";
 import ModalWindowPatrocinadores from "../components/ModalWindows/ModalWindowPatrocinadores";
 import ModalAnuncio from "../components/ModalWindows/ModalAnuncio";
+import CryptoJS from 'crypto-js';
+
 const cookies = new Cookies();
 
 
@@ -154,7 +156,7 @@ function FormRegistroUsuarioDinamico() {
 
     if (Object.keys(validationErrors).length === 0) {
       const url = `${URL_API}/add-user-information`;
-
+      const contraseña_encriptada = CryptoJS.MD5(formData.password).toString();
       const data = new FormData();
       data.append('nombre', formData.nombre)
       data.append('apellido', formData.apellido)
@@ -162,7 +164,7 @@ function FormRegistroUsuarioDinamico() {
       data.append('pais', 'Bolivia')
       data.append('telefono', formData.telefono)
       data.append('email', formData.email)
-      data.append('password', formData.password)
+      data.append('password', contraseña_encriptada)
 
       axios.post(url, data).then(res => {
         // console.log(res)
