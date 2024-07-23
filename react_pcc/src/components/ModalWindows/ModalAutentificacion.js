@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faUser } from '@fortawesome/free-regular-svg-icons';
 import Cookies from 'universal-cookie';
 import {URL_API} from '../../const';
+import CryptoJS from 'crypto-js';
 
 const cookies = new Cookies();
 
@@ -21,6 +22,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
       contraseña: "",
       contraseña_encontrada: "",
       id_usuario: "",
+      usuario_autent: "",
     });
 
     const [errors, setErrors] = useState({});
@@ -30,6 +32,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     const [contraVisible, setContraVisible] = useState(false);
 
     const [infoVisible, setInfoVisible] = useState(false);
+    const [usuario_autent, setUsuarioAutent] = useState({});
 
     const handleInput = (e) => {
         const {name, value} = e.target;
@@ -60,8 +63,9 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
     const buscarContraseña = async (e) => {
 
       const validationErrors = {};
+      let contraseña_encriptada = CryptoJS.MD5(values.contraseña).toString();
 
-      if(values.contraseña !== values.contraseña_encontrada){
+      if(contraseña_encriptada !== values.contraseña_encontrada){
         validationErrors.contraseña = "Contraseña incorrecta"
       }
       setErrors(validationErrors);
@@ -78,7 +82,9 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
         cookies.set('id_usuario', values.id_usuario, {path: "/"});
         cookies.set('ci_nuevo_usuario', values.ci, {path: "/"});
         cookies.set('se_Registro', true, {path: "/"});
-        cambiarEstado1(false);
+        cambiarEstado1(false); 
+        let response = usuario_autent;
+        localStorage.setItem('authToken', response.data.token);
         window.location.reload();
       }
     }
@@ -108,6 +114,7 @@ function ModalAutentificacion({estado1, cambiarEstado1, cambiarEstadoModalRegist
               seEncontro = 1;
               let url = `${URL_API}/get-user-by-dni/${nuevo_ci}`
               const respuesta = await axios.get(url);
+              setUsuarioAutent(respuesta);
 
               setValues({
                 ...values,

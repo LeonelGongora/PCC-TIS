@@ -8,6 +8,7 @@ import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { faArrowUpFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'universal-cookie';
 import {URL_API} from '../../const';
+import CryptoJS from 'crypto-js';
 
 const cookies = new Cookies();
 
@@ -121,8 +122,21 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
 
             const url = `${URL_API}/add-user-information`;
             const url_correo = `${URL_API}/enviar-correo`;
-            let contraseña_generada = ci_nuevo_usuario + values.pais
-            console.log(contraseña_generada)
+
+            const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*_+:;?,.';
+            const longitudParteAleatoria = 8;
+
+            let parteAleatoria = '';
+            for (let i = 0; i < longitudParteAleatoria; i++) {
+                const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+                parteAleatoria += caracteres[indiceAleatorio];
+            }
+
+            let contraseña_generada = ci_nuevo_usuario + values.pais + parteAleatoria;
+            console.log(contraseña_generada);
+
+            const contraseña_encriptada = CryptoJS.MD5(contraseña_generada).toString();
+            console.log("Contraseña encriptada: ", contraseña_encriptada);
 
             const data = new FormData();
 
@@ -131,7 +145,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
             data.append('ci', ci_nuevo_usuario)
             data.append('pais', values.pais)
             data.append('email', values.email)
-            data.append('password', contraseña_generada)
+            data.append('password', contraseña_encriptada)
             data.append('telefono', values.telefono)
 
             //cambiarDatosCoach(values.nombre, values.apellido, ci_nuevo_usuario);
@@ -154,6 +168,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                   .then((response) => {
                     console.log(response.data.mensaje);
                     cambiarEstadoModalRegistroUsuario(false);
+                    localStorage.setItem('authToken', response.data.token);
                     window.location.reload();
                   });
             })

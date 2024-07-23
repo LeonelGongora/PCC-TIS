@@ -31,6 +31,9 @@ function NavbarUserDinamico({
       console.log(key)
       cookies.remove(key);
     });
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userPermissions');
     window.location.href='./login';
   }
 

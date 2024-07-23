@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import configApi from '../configApi/configApi'
 import {URL_API} from '../const';
+import CryptoJS from 'crypto-js';
 
 const cookies = new Cookies();
 
@@ -32,7 +33,7 @@ function Login (){
         if (Object.keys(validationErrors).length === 0) {
         await axios.post(login, {
             email: username,
-            password: password
+            password: CryptoJS.MD5(password).toString()
         })
         .then(response=>{
         // console.log(response.data[0].id)
@@ -49,8 +50,13 @@ function Login (){
         cookies.set('se_Registro', true, {path: "/"});   
     
         const usu = response.data[0].cargo;
+        console.log(response.data[0].cargo)
+        
         switch (usu){
             case "Administrador" :
+                localStorage.setItem('authToken', response.data.token);
+                localStorage.setItem('userRole', response.data[0].privilegio);
+                console.log(response.data[0].privilegio);
                 window.location.href='./home-admin';
             break;
             case "Participante":
@@ -60,6 +66,9 @@ function Login (){
                 window.location.href='./home-participant';
             break; 
             default :
+                localStorage.setItem('authToken', response.data.token);
+                localStorage.setItem('userPermissions', response.data[0].privilegio);
+                console.log(localStorage.getItem('userPermissions'));
                 window.location.href='./home-admin';
             break; 
         }  

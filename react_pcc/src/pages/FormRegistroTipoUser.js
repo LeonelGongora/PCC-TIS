@@ -63,7 +63,7 @@ function FormRegistroTipoUser() {
       privilegio: privilegio
     }).then(response=>{
       console.log("exito")
-      window.location.href = './login';
+      window.location.href = './FormRegistroTipoUser';
     })
   }
 
@@ -136,9 +136,6 @@ function FormRegistroTipoUser() {
     else setGeneralreport(1)
   };
 
-  const reiniciarPagina = () => {
-    window.location.href='./FormRegistroTipoUser';
-  };
 
   return (
     <div className="App">
