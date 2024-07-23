@@ -168,6 +168,7 @@ function ModalRegistroUsuario({estadoRegistroUsuario, cambiarEstadoModalRegistro
                   .then((response) => {
                     console.log(response.data.mensaje);
                     cambiarEstadoModalRegistroUsuario(false);
+                    localStorage.setItem('authToken', response.data.token);
                     window.location.reload();
                   });
             })

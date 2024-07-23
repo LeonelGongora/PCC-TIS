@@ -13,11 +13,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $table = 'users';
 
     protected $fillable = [
@@ -39,24 +34,37 @@ class User extends Authenticatable
         return $this->belongsToMany(Notification::class, 'notification_user');
     }
 
-
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function hasPermission($permissionIndex)
+    {
+        $tipos = $this->tipos;
+        foreach ($tipos as $tipo) {
+            if ($tipo && isset($tipo->privilegio)) {
+                $privilegio = $tipo->privilegio;
+
+                $permissions = explode(',', $privilegio);
+                if (isset($permissions[$permissionIndex]) && $permissions[$permissionIndex] == '1') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public function hasAdminRole()
+    {
+        $tipos = $this->tipos;
+        foreach ($tipos as $tipo) {
+            if ($tipo && isset($tipo->privilegio) && $tipo->privilegio === 'admin') {
+                return true;
+            }
+        }
+        return false;
+    }
 }
